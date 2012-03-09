@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+
+.button-bar {
+  text-align: center;
+  padding-bottom: 12px;
+  float: right;
+  padding:20px 20px 0 0;
+}
+.copyright {
+  text-align: center;
+  color: #67737a;
+  font-size: 11px;
+}
+.leftBox{
+	height:430px;
+}
+.leftBox .arrows{
+	height:130px;
+	float:left;
+	width:95%;
+	padding:0 0 0 20px;
+	background-image:url(../img/arrows_bg.png);
+	background-repeat:no-repeat;
+}
+.leftBox .arrows h1{
+    font-size: 35px;
+	font-weight:normal;
+	margin-top:27px;
+	color:#fff;
+    line-height: 36px;
+}
+.leftBox .arrows h1 a{
+	color:#80cedc;
+	text-decoration:underline;
+}
+.leftBox .arrows h1 a:hover{
+	color:#fff;
+}
+.leftBox .points{
+	height:68px;
+	clear:both;
+	float:left;
+	color:#67737a;
+	padding:20px 20px 0 20px;
+}
+.leftBox .points h2{
+	color:#67737a;
+	font-size:20px;
+}
+.leftBox .points .icon{
+	float:left;
+	width:15%;
+}
+.leftBox .points .picon{
+	float:left;
+	width:85%;
+}
+.rightBox{
+	height:430px;
+}
+.rightBox h3{
+	font-weight:normal;
+}
+.tab-content span{
+	color:#cf2200;
+}
