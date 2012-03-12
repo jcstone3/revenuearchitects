@@ -51,17 +51,8 @@
                              
                             <div class="tab-content">
                             <div class="tab-pane active" id="home">
-                                <h3>Name<span>*</span></h3>
-                                <input type="text" class="span3" placeholder="Full Name"><br>
-                                <h3>Company Email<span>*</span></h3>
-								<input type="text" class="span3" placeholder="yourname@company.com"><br>
-                                <h3>Your Website URL<span>*</span><h3>
-                                <input type="text" class="span3" placeholder="www.yourcompanyurl.com"><br>
-								<label class="checkbox">
-                                <input type="checkbox" checked> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader. <a href="#">Privacy Policy</a></p>
-                              </label>
-								<a href="#" class="btn btn-primary btn-large" ><strong>Sign Up and Get Started!</strong></a>
-								<p style="font-size:11px; color:#67737a; margin:10px 0 0 0;">We will keep your personal information strictly confidential</p>
+                                <%= render :partial=> "devise/registrations/new"%>
+
                             </div>
                             <div class="tab-pane" id="twitter">Twitter login screen</div>
                             <div class="tab-pane" id="facebook">Facebook login screen</div>

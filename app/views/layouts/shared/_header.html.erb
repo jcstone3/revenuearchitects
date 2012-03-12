@@ -1,3 +1,5 @@
+
+
 <div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container" style="background-color:#fff;">
@@ -7,7 +9,11 @@
 					</div>
 					<div class="row-fluid">
 						<div class="button-bar">
+							<% if user_signed_in?%>
+							<a href="#" class="btn">Logout</a>
+							<%else%>
 							<a href="#" class="btn">Login</a> <a href="#" class="btn btn-primary">Sign Up</a>
+							<%end%>
 						</div>
 					</div>
 				</div>

@@ -1,4 +1,6 @@
 RevenueGrader::Application.routes.draw do
+  #setting up user registeration
+  devise_for :users, :path => "accounts", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
