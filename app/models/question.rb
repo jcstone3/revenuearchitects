@@ -1,4 +1,4 @@
 class Question < ActiveRecord::Base
 	belongs_to :sub_section
-	has_many :responses
+	has_one :responses
 end

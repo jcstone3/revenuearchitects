@@ -1,4 +1,4 @@
 class SubSection < ActiveRecord::Base
-	belongs_to :sub_section
+	belongs_to :section
 	has_many :questions
 end

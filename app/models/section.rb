@@ -1,4 +1,4 @@
 class Section < ActiveRecord::Base
-	belongs_to :questionnire
+	belongs_to :questionnaire
 	has_many :sub_sections
 end
