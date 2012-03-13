@@ -6,13 +6,19 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username
-
+  
+  #assocciation
   has_many :authorizations, :dependent => :destroy
+  
+  #validations
+  validates :username, :presence => true, :length =>{:maximum => 20}
+  validates :password, :presence => true, :length =>{:minimum => 4, :maximum => 10}
+  validates :email, :presence => true
 
   def apply_omniauth(omniauth)
-  self.email = omniauth['user_info']['email'] if email.blank?
-  authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-end
+     self.email = omniauth['user_info']['email'] if email.blank?
+     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+  end
 
 #def password_required?
 #  (authentications.empty? || !password.blank?) && super

@@ -1,0 +1,26 @@
+<br>
+<div class="container" style="margin-top:25;">
+  <div class="row-fluid">
+        <div class="span8 leftBox">
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true ) do |f| %>
+  <%= devise_error_messages! %>
+
+  <h3><%= f.label :username %><span>*</span></h3>
+  <%= f.text_field :username, :validate =>{:presence => true} %><br>
+
+  <h3><%= f.label :email %><span>*</span></h3>
+  <%= f.email_field :email, :validate => { :presence => true, :uniqueness => false}  %><br>
+
+  <h3><%= f.label :password %><span>*</span></h3>
+  <%= f.password_field :password, :validate => { :presence => true, :confirmation => false} %><br>
+
+  <%#= f.label :password_confirmation %><br />
+  <%#= f.password_field :password_confirmation %>
+  <label class="checkbox">
+     <input type="checkbox" checked> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader. <a href="#">Privacy Policy</a></p>
+  </label>
+  <%= f.submit "Sign up and Get Started!" %>
+<% end %>
+</div><%#= render "links" %>
+</div>
+</div>

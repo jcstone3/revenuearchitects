@@ -1,6 +1,11 @@
 RevenueGrader::Application.routes.draw do
   #setting up user registeration
-  devise_for :users, :path => "accounts", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  devise_for :users, :path => "accounts", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions" } do
+      get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
+      get 'sign_out', :to => 'users/sessions#destroy', :as => :destroy_user_session
+      get 'accounts/sign_up', :to => 'users/registrations#new', :as => :new_user_registration
+  end  
+  resources :companies
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

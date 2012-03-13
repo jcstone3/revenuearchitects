@@ -1,9 +1,10 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  
+
+ #users/registration/new.html.erb
   def new
     resource = build_resource({})
     respond_with resource
-  end 
+  end
 
 	#create new user
 	def create
@@ -31,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
    private
   
-  def build_resource(*args)    
+  def build_resource(*args)
     super
     if session[:omniauth]
       @user.apply_omniauth(session[:omniauth])
