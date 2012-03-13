@@ -1,4 +1,7 @@
 class Section < ActiveRecord::Base
+	validates :name, :presence => true
+	validates :questionnaire_id, :presence => true	
+
 	belongs_to :questionnaire
 	has_many :sub_sections
 end

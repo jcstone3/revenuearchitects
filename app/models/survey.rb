@@ -1,4 +1,10 @@
 class Survey < ActiveRecord::Base
+	validates :size, :presence => true
+	validates :revenue, :presence => true
+	validates :start_date, :presence => true
+	validates :end_date, :presence => true
+    validates :company_id, :presence => true	
+    
 	belongs_to :company
 	has_many :responses
 end

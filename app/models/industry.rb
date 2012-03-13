@@ -1,4 +1,7 @@
 class Industry < ActiveRecord::Base
+	validates :name, :presence => true
+	validates :value, :presence => true
+
 	has_many :companies
 	has_many :questionnaires
 end

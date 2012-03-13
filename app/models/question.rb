@@ -1,4 +1,7 @@
 class Question < ActiveRecord::Base
+	validates :name, :presence => true
+	validates :sub_section_id, :presence => true
+
 	belongs_to :sub_section
 	has_one :response
 end
