@@ -11,9 +11,11 @@ class User < ActiveRecord::Base
   has_many :authorizations, :dependent => :destroy
   
   #validations
-  validates :username, :presence => true, :length =>{:maximum => 20}
-  validates :password, :presence => true, :length =>{:minimum => 4, :maximum => 10}
-  validates :email, :presence => true
+  validates_presence_of :username, :message => "username cannot be blank"
+  validates_length_of :username, :within => 4..20, :message => "username should be greater than 4 and less than 20"
+  validates_presence_of :password, :message => "password cannot be blank"
+  validates_length_of :password,  :within => 4..10, :message => "password should be greater than 4 and less than 10"
+  validates_presence_of :email, :message => "email cannot be blank"
 
   def apply_omniauth(omniauth)
      self.email = omniauth['user_info']['email'] if email.blank?
