@@ -9,6 +9,7 @@ gem "client_side_validations"
 gem 'settingslogic'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.0.3'
+gem 'populator'
 
 group :development do 
   gem "annotate", "~>2.4.1.beta1"
