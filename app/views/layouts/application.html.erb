@@ -7,14 +7,16 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
+
 		<!-- Le styles -->
-		<%= stylesheet_link_tag "bootstrap-responsive", "bootstrap", "style", :media => "all" %>		
+		<%= stylesheet_link_tag "bootstrap", "style",  :media => "all" %>		
         <%= javascript_include_tag "rails.validations"%>
 		<style>
 			body {
 				padding-top: 80px; /* 60px to make the container go all the way to the bottom of the topbar */
 			}
-		</style>		
+		</style>
+		<%= stylesheet_link_tag	 "bootstrap-responsive"   %>	
 	</head>
 
 	<body>
@@ -34,7 +36,7 @@
 				});
 			})
 		</script>
-		<%= javascript_include_tag "bootstrap-tab", "bootstrap", "jquery" %>        
+		<%= javascript_include_tag  "jquery" ,  "bootstrap", "bootstrap-tab" %>        
 
 	</body>
 </html>

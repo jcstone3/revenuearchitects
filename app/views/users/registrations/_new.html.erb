@@ -1,26 +1,39 @@
-<br>
-<div class="container" style="margin-top:25;">
+<!-- <div class="container" style="margin-top:20;">
   <div class="row-fluid">
-        <div class="span8 leftBox">
+        <div class="span8 leftBox"> -->
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true ) do |f| %>
   <%= devise_error_messages! %>
 
-  <h3><%= f.label :username %><span>*</span></h3>
-  <%= f.text_field :username, :validate =>{:presence => true} %><br>
 
-  <h3><%= f.label :email %><span>*</span></h3>
-  <%= f.email_field :email, :validate => { :presence => true, :uniqueness => false}  %><br>
 
-  <h3><%= f.label :password %><span>*</span></h3>
-  <%= f.password_field :password, :validate => { :presence => true, :confirmation => false} %><br>
+<h3>User Name<span>*</span></h3>
+                                <input type="text" class="span3" placeholder="Full Name"><br>
+                                <h3>Company Email<span>*</span></h3>
+                <input type="text" class="span3" placeholder="yourname@company.com"><br>
+                                <h3>Your Website URL<span>*</span><h3>
+                                <input type="text" class="span3" placeholder="www.yourcompanyurl.com"><br>
+                <label class="checkbox">
+                                <input type="checkbox" checked> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader. <a href="#">Privacy Policy</a></p>
+                              </label>
+                <a href="#" class="btn btn-primary btn-large" ><strong>Sign Up and Get Started!</strong></a>
+                <p style="font-size:11px; color:#67737a; margin:10px 0 0 0;">We will keep your personal information strictly confidential</p>
+
+
+  <!-- <%#= f.text_field :username, :validate =>{:presence => true} %><br>
+
+  <h3><%#= f.label :email %><span>*</span></h3>
+  <%#= f.email_field :email, :validate => { :presence => true, :uniqueness => false}  %><br>
+
+  <h3><%#= f.label :password %><span>*</span></h3>
+  <%#= f.password_field :password, :validate => { :presence => true, :confirmation => false} %><br>
 
   <%#= f.label :password_confirmation %><br />
   <%#= f.password_field :password_confirmation %>
   <label class="checkbox">
      <input type="checkbox" checked> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader. <a href="#">Privacy Policy</a></p>
-  </label>
-  <%= f.submit "Sign up and Get Started!" %>
+  </label> -->
+  <%#= f.submit "Sign up and Get Started!" %>
 <% end %>
-</div><%#= render "links" %>
+<!-- </div><%#= render "links" %>
 </div>
-</div>
+</div> -->

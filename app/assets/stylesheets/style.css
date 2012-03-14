@@ -20,7 +20,7 @@
 	float:left;
 	width:95%;
 	padding:0 0 0 20px;
-	background-image:url(../img/arrows_bg.png);
+	background-image:url(/assets/arrows_bg.png);
 	background-repeat:no-repeat;
 }
 .leftBox .arrows h1{
