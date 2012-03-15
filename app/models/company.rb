@@ -2,7 +2,7 @@ class Company < ActiveRecord::Base
 	validates :name, :presence => true
 	validates :website, :presence => true
 	validates :user_id, :presence => true
-    validates :industry_id, :presence => true
+    validates :industry_id, :presence => true, :numericality => true
     
 	belongs_to :user
 	belongs_to :industry

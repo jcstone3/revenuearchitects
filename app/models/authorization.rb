@@ -1,18 +1,10 @@
 class Authorization < ActiveRecord::Base
 	belongs_to :user
 
-	def provider_name
-  	  if provider == 'open_id'
-         "OpenID"
-      else
-         provider.titleize
-      end
-    end
+	# Maybe we'll cover twitter in another post?
+  scope :twitter, where(:provider => 'twitter')
+  scope :facebook, where(:provider => 'facebook')
 
-    protected
-	def handle_unverified_request
-  	  true
-	end
 end
 # == Schema Information
 #

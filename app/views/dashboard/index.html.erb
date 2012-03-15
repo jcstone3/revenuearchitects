@@ -41,8 +41,12 @@
                             :alt=>"home" %><strong>Sign Up with us</strong></a></li>
                             <li><a href="#twitter" data-toggle="tab" style="background-color:#53b1f0;">
                                 <%= image_tag "twitter_icon.png", :alt=>"twitter" %></a></li>
-                            <li><a href="#facebook" data-toggle="tab" style="background-color:#3b5998;">
-                                <%= image_tag "facebook_icon.png", :alt=>"facebook"%></a></li>
+                                <li>
+                                <%= link_to image_tag("facebook_icon.png", :alt=>"facebook"), 
+                                 user_omniauth_authorize_path(:facebook), :style=>"background-color:#3b5998;"
+                                  %></li>
+                            <!--<li><a href="#facebook" data-toggle="tab" style="background-color:#3b5998;">
+                                <%#= image_tag "facebook_icon.png", :alt=>"facebook"%></a></li> -->
                             <li><a href="#plus" data-toggle="tab" style="background-color:#bb2a0b;">
                                 <%= image_tag "plus_icon.png", :alt=>"plus" %></a></li>
                             <li><a href="#linkedin" data-toggle="tab" style="background-color:#006695;">

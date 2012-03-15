@@ -28,6 +28,7 @@ GEM
     activesupport (3.2.2)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.2.7)
     annotate (2.4.1.beta1)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
@@ -50,8 +51,15 @@ GEM
     erubis (2.7.0)
     execjs (1.3.0)
       multi_json (~> 1.0)
+<<<<<<< HEAD
     faker (1.0.1)
       i18n (~> 0.4)
+=======
+    faraday (0.7.6)
+      addressable (~> 2.2)
+      multipart-post (~> 1.1)
+      rack (~> 1.1)
+>>>>>>> 997c785d284f44fa14ced26ddc13a0e508b78d4e
     hashie (1.2.0)
     highline (1.6.11)
     hike (1.2.1)
@@ -68,9 +76,31 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.1.0)
+    multipart-post (1.1.5)
+    oauth (0.4.5)
+    oauth2 (0.5.2)
+      faraday (~> 0.7)
+      multi_json (~> 1.0)
     omniauth (1.0.3)
       hashie (~> 1.2)
       rack
+    omniauth-facebook (1.2.0)
+      omniauth-oauth2 (~> 1.0.0)
+    omniauth-google-apps (0.0.1)
+      omniauth (~> 1.0)
+      omniauth-openid (~> 1.0)
+      ruby-openid-apps-discovery (~> 1.2.0)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-oauth2 (1.0.0)
+      oauth2 (~> 0.5.0)
+      omniauth (~> 1.0)
+    omniauth-openid (1.0.1)
+      omniauth (~> 1.0)
+      rack-openid (~> 1.3.1)
+    omniauth-twitter (0.0.8)
+      omniauth-oauth (~> 1.0)
     orm_adapter (0.0.6)
     pg (0.13.2)
     polyglot (0.3.3)
@@ -79,6 +109,9 @@ GEM
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-openid (1.3.1)
+      rack (>= 1.1.0)
+      ruby-openid (>= 2.1.8)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.1)
@@ -109,6 +142,9 @@ GEM
     random_data (1.5.2)
     rdoc (3.12)
       json (~> 1.4)
+    ruby-openid (2.1.8)
+    ruby-openid-apps-discovery (1.2.0)
+      ruby-openid (>= 2.1.7)
     sass (3.1.15)
     sass-rails (3.2.4)
       railties (~> 3.2.0)
@@ -131,6 +167,7 @@ GEM
     uglifier (1.2.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    uuidtools (2.1.2)
     warden (1.1.1)
       rack (>= 1.0)
 
@@ -146,7 +183,11 @@ DEPENDENCIES
   faker
   highline
   jquery-rails
+  oauth2
   omniauth
+  omniauth-facebook
+  omniauth-google-apps
+  omniauth-twitter
   pg
   populator3
   rails (= 3.2.2)
@@ -156,3 +197,4 @@ DEPENDENCIES
   settingslogic
   therubyracer
   uglifier (>= 1.0.3)
+  uuidtools

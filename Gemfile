@@ -4,6 +4,10 @@ gem 'rails', '3.2.2'
 gem 'pg'
 gem 'devise'
 gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'oauth2'
+gem 'omniauth-google-apps'
 gem 'jquery-rails'
 gem "client_side_validations"
 gem 'settingslogic'
@@ -16,6 +20,9 @@ gem "random_data"
 gem 'database_cleaner'
 gem 'faker'
 
+group :development do
+gem 'populator'
+gem 'uuidtools'
 group :development do
   gem "annotate", "~>2.4.1.beta1"
   gem "rails_best_practices"
