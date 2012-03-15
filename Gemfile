@@ -21,11 +21,9 @@ gem 'database_cleaner'
 gem 'faker'
 
 group :development do
-gem 'populator'
 gem 'uuidtools'
-group :development do
-  gem "annotate", "~>2.4.1.beta1"
-  gem "rails_best_practices"
+gem "annotate", "~>2.4.1.beta1"
+gem "rails_best_practices"
 end
 
 # Gems used only for assets and not required
