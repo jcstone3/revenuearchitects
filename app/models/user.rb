@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :omniauthable,
+
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
@@ -12,20 +13,29 @@ class User < ActiveRecord::Base
   
   #validations
   validates_presence_of :username, :message => "username cannot be blank"
-  validates_length_of :username, :within => 4..20, :message => "username should be greater than 4 and less than 20"
   validates_presence_of :password, :message => "password cannot be blank"
-  validates_length_of :password,  :within => 4..10, :message => "password should be greater than 4 and less than 10"
+  validates_length_of :password,  :within => 4..30, :message => "password should be greater than 4 and less than 30"
   validates_presence_of :email, :message => "email cannot be blank"
 
-  def apply_omniauth(omniauth)
-     self.email = omniauth['user_info']['email'] if email.blank?
-     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+ 
+
+#facebook authentication
+def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+    data = access_token.extra.raw_info
+    if user = User.where(:email => data.email).first      
+      user
+    else # Create a user with a stub password.              
+      User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.id)       
+    end
   end
 
-#def password_required?
-#  (authentications.empty? || !password.blank?) && super
-#end
-
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"]
+      end
+    end
+  end
 
 end
 # == Schema Information
