@@ -7,6 +7,7 @@ class CompaniesController < ApplicationController
     #new#company
 	def new
 		@company = Company.new
+		@industry = Industry.all
 	end
 	
 	#crating new company

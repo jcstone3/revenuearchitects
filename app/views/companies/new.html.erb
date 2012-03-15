@@ -17,8 +17,9 @@
 				  <h3><%= f.label :website %></h3>
 				  <%= f.text_field :website  %><br>
 
-				  <h3><%= f.label :industry %></h3>
-				  <%= f.text_field :industry_id %><br>				  
+				  <h3><%= f.label :industry %></h3>				  
+                 <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>
+                <br>    
 				  <%= f.submit "Continue to Survey" %>
 				<% end %>
                  </div>  

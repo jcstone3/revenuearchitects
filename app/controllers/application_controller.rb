@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if resource.is_a? User
       #user already has company, then redirect to survey page	
       if current_user.companies.first
-     	new_survey_url
+     	new_survey_path
      #redirect to create a new company	
       else      	
         new_company_url

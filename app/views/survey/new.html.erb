@@ -3,14 +3,12 @@
 				<div class="span8 leftBox" style="height:auto;background-color:#ffffff;padding-left:8px">
 					<div class="question">
                         <h1>
-                            Please give your company details
+                            Please give your company survey details
                         </h1>
                        
                     </div><br/>
                     <div style="padding-left:20px;">
-	               <%= form_for(:survey) do |f| %>
-	  				
-
+	               <%= form_for(@survey, :url=>{:action => "create"}) do |f| %>
 				  <h3><%= f.label :size %></h3>
 				  <%= f.text_field :size %><br>
 
