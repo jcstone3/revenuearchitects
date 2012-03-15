@@ -7,12 +7,12 @@
 
 
                 <h3>User Name<span>*</span></h3>
-                            <%= f.text_field :username, :validate =>{:presence => true}, :class=>"span3", 
+                            <%= f.text_field :username,  :class=>"span3", 
                                 :placeholder=>"Full Name" %><br>
                                 <h3>Email<span>*</span></h3>
-                <%= f.email_field :email, :validate => { :presence => true, :uniqueness => false}, :class=>"span3" , :placeholder=>"test@gmail.com"  %><br>
+                <%= f.email_field :email, :class=>"span3" , :placeholder=>"test@gmail.com"  %><br>
                                 <h3>Password<span>*</span><h3>
-                                <%= f.password_field :password, :validate => { :presence => true, :confirmation => false},  :class=>"span3", :placeholder=>"Password for the site" %><br>
+                                <%= f.password_field :password,  :class=>"span3", :placeholder=>"Password for the site" %><br>
                 <label class="checkbox">
                                 <input type="checkbox" checked> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader. <a href="#">Privacy Policy</a></p>
                               </label>

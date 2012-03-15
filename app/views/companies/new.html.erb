@@ -9,21 +9,18 @@
                     </div><br/>
                     <div style="padding-left:20px;">
                    <%= form_for(@company) do |f| %>
-                    
+                    <%= @company_error_messages %>
 
                   <h3><%= f.label :name %></h3>
                   <%= f.text_field :name, :validate =>{:presence => true} %><br>
 
                   <h3><%= f.label :website %></h3>
-                  <%= f.email_field :website, :validate => { :presence => true, :uniqueness => false}  %><br>
+                  <%= f.text_field :website, :validate => { :presence => true, :uniqueness => false}  %><br>
 
-                  <h3><%= f.label :industry %></h3>
-                  <%= f.password_field :industry_id, :validate => { :presence => true, :confirmation => false} %><br>
-
-                  <%#= f.label :password_confirmation %><br />
-                  <%#= f.password_field :password_confirmation %>
-                  <a href="#" class="btn btn-large btn-info" style="float:left; margin-right:20px;margin-bottom:20px;"><i class="icon-folder-close icon-white"></i> Continue to Survey</a>
-                  <!--<%= f.submit "Continue to Survey",cls:"btn btn-info"%>-->
+                  <h3><%= f.label :industry %></h3>                                
+                 <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>
+                <br>    
+                  <%= f.submit "Continue to Survey" %>
                 <% end %>
 
 				
