@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   
   #assocciation
   has_many :authorizations, :dependent => :destroy
+  has_many :companies
   
   #validations
   validates_presence_of :username, :message => "username cannot be blank"

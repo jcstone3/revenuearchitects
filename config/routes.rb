@@ -9,6 +9,7 @@ RevenueGrader::Application.routes.draw do
    
   resources :companies
   resources :authorizations
+  resources :survey
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

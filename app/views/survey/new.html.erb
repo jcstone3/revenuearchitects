@@ -1,1 +1,63 @@
-new survey page
+		<div class="container" style="margin-top:20px;">
+			<div class="row-fluid">
+				<div class="span8 leftBox" style="height:auto;background-color:#ffffff;padding-left:8px">
+					<div class="question">
+                        <h1>
+                            Please give your company details
+                        </h1>
+                       
+                    </div><br/>
+                    <div style="padding-left:20px;">
+	               <%= form_for(:survey) do |f| %>
+	  				
+
+				  <h3><%= f.label :size %></h3>
+				  <%= f.text_field :size %><br>
+
+				  <h3><%= f.label :revenue %></h3>
+				  <%= f.text_field :revenue  %><br>
+			 				  
+				  <%= f.submit "Start Survey" %>
+				<% end %>
+                 </div>  
+                    
+				</div>
+
+
+				<div class="span3 rightBox" style="height:auto;">
+                	<div class="processIcons">
+                    	<span>
+                       <%= image_tag "1point.png", :alt=>"qa" %>
+                        <p style="color:#525c62;">Q&amp;A</p>
+                        </span>
+                    	<span>
+                        <%= image_tag "2point.png", :alt=>"icon" %>
+                        <p style="color:#c56d2b;">Processing</p>
+                        </span>
+                    	<span>
+                         <%= image_tag "3point.png", :alt=>"icon"%>
+                        <p style="color:#116094;">Download</p>
+                        </span>
+                    </div>
+                    <div class="scoreBoard">
+                    	<div class="head">Total score for this section </div>
+                            <div class="score"><br>
+                            80/<span style="font-size:30px;">300</span> <br>
+                            <span>POINTS</span>
+                            </div>
+                    </div>
+                <div class="tips">
+                    	<div class="head"> <%= image_tag "info.png", :alt=>"icon"%>Tips from Revenizer </div>
+                            <div class="text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. <br><br>
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. <br>
+<br>
+
+                            </div>
+                    </div>
+				</div>
+				
+			</div>
+		</div> 

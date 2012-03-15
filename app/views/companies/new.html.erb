@@ -12,17 +12,13 @@
 	  				
 
 				  <h3><%= f.label :name %></h3>
-				  <%= f.text_field :name, :validate =>{:presence => true} %><br>
+				  <%= f.text_field :name %><br>
 
 				  <h3><%= f.label :website %></h3>
-				  <%= f.email_field :website, :validate => { :presence => true, :uniqueness => false}  %><br>
+				  <%= f.text_field :website  %><br>
 
 				  <h3><%= f.label :industry %></h3>
-				  <%= f.password_field :industry_id, :validate => { :presence => true, :confirmation => false} %><br>
-
-				  <%#= f.label :password_confirmation %><br />
-				  <%#= f.password_field :password_confirmation %>
-				  
+				  <%= f.text_field :industry_id %><br>				  
 				  <%= f.submit "Continue to Survey" %>
 				<% end %>
                  </div>  
