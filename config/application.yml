@@ -1,0 +1,26 @@
+#Configuration for different environments
+
+defaults: &defaults
+    app_name: RevenueGrader
+    short_app_name: RevenueGrader
+    host: www.revenuegrader.com
+    domain_host: revenuegrader.com
+    support_email: support@revenuegrader.com
+
+development:
+    <<: *defaults
+    host:  dev.revenue-grader.com
+    facebook_app_id: '389187014443203'
+    facebook_secret_key: '3f0e1b1d0965ad0a8d4a0694677ddf2f'
+
+staging:
+    <<: *defaults
+    host: stage.revenue-grader.com
+    facebook_app_id: ''
+    facebook_secret_key: ''
+
+production:
+    <<: *defaults
+    host: www.revenuegrader.com
+    facebook_app_idd: ''
+    facebook_secret_key: ''  

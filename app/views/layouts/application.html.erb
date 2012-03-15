@@ -11,7 +11,7 @@
 		<!-- Le styles -->
 
 		<%= stylesheet_link_tag "bootstrap", "style",  :media => "all" %>
-        <%= javascript_include_tag "rails.validations"%>
+       
 		<style>
 			body {
 				padding-top: 80px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -30,14 +30,14 @@
 		<!-- Le javascript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-        <script>
+      
+		<%= javascript_include_tag  "application" %>        
+ 		 <script>
 			$(function () {
 			$('.tabs').click(function(){
 					alert($(this).attr('id'));
 				});
 			})
 		</script>
-		<%= javascript_include_tag  "jquery" ,  "bootstrap", "bootstrap-tab" %>        
-
 	</body>
 </html>

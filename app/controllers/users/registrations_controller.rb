@@ -6,11 +6,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
     respond_with resource
   end
 
-	#create new user
-	def create
-      super
-      session[:omniauth] = nil unless @user.new_record?
-    end
+#create new user
+  def create
+     #build_resource # Here's where the autofill magic happens
+     #super
+      #if resource.save
+      #resource.set_token_from_hash(session['devise.omniauth_info']) if session['devise.omniauth_info'].present?
+      #if resource.active?
+      #  set_flash_message :notice, :signed_up
+      #  sign_in_and_redirect(resource_name, resource)
+      #else
+      #  set_flash_message :notice, :inactive_signed_up, :reason => resource.inactive_message.to_s
+      #  expire_session_data_after_sign_in!
+      #  redirect_to after_inactive_sign_up_path_for(resource)
+      #end
+    #else
+     # clean_up_passwords(resource)
+     # render_with_scope :new
+     super
+    session[:omniauth] = nil unless @user.new_record?
+    
+  end
 
 	def update
     if params[resource_name][:password].blank?

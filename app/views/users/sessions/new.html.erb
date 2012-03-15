@@ -41,8 +41,9 @@
                             :alt=>"home" %><strong>Sign Up with us</strong></a></li>
                             <li><a href="#twitter" data-toggle="tab" style="background-color:#53b1f0;">
                                 <%= image_tag "twitter_icon.png", :alt=>"twitter" %></a></li>
-                            <li><a href="#facebook" data-toggle="tab" style="background-color:#3b5998;">
-                                <%= image_tag "facebook_icon.png", :alt=>"facebook"%></a></li>
+                            <li><%= link_to image_tag("facebook_icon.png", :alt=>"facebook"), 
+                                 user_omniauth_authorize_path(:facebook), :style=>"background-color:#3b5998;"
+                                  %></li>
                             <li><a href="#plus" data-toggle="tab" style="background-color:#bb2a0b;">
                                 <%= image_tag "plus_icon.png", :alt=>"plus" %></a></li>
                             <li><a href="#linkedin" data-toggle="tab" style="background-color:#006695;">
@@ -52,14 +53,15 @@
                             <div class="tab-content">
                             <div class="tab-pane active" id="home">
                               <br> <br> <br>
+                              <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true) do |f| %>
                                 <h3>Email<span>*</span></h3>
-                                <input type="text" class="span3" placeholder="Full Name"><br> <br> 
-                                <h3>Password<span>*</span></h3>
-                <input type="password" class="span3" placeholder="Password"><br> <br> <br> <br>
-                               
+                                <%= f.email_field :email, :validate => { :presence => true, :uniqueness => false}, :class=>"span3", :placeholder=>"Your Email id"  %><br> <br> 
+                                <h3>Password<span>*</span></h3><%= f.password_field :password, :validate => { :presence => true, :confirmation => false}, :class=>"span3", :placeholder=>"Password"  %>
  
-                <a href="#" class="btn btn-primary btn-large" ><strong>Login</strong></a> &nbsp;
-               <span> or </span> &nbsp; <span> <a  href="#"> Register </a></span>
+                <%= f.submit "Login", :class=>"btn btn-primary btn-large" %>
+               <span> or </span> &nbsp; <span> <%= link_to "Register", new_user_registration_path%></span>
+               
+               <%end%>
                             </div>
                             <div class="tab-pane" id="twitter">Twitter login screen</div>
                             <div class="tab-pane" id="facebook">Facebook login screen</div>

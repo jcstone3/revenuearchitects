@@ -4,8 +4,12 @@ RevenueGrader::Application.routes.draw do
       get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
       get 'sign_out', :to => 'users/sessions#destroy', :as => :destroy_user_session
       get 'accounts/sign_up', :to => 'users/registrations#new', :as => :new_user_registration
-  end  
+      get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+  end 
+   
   resources :companies
+  resources :authorizations
+  resources :survey
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

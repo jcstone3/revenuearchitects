@@ -11,6 +11,7 @@
                    <%= form_for(@company) do |f| %>
                     
 
+<<<<<<< HEAD
                   <h3><%= f.label :name %></h3>
                   <%= f.text_field :name, :validate =>{:presence => true} %><br>
 
@@ -25,6 +26,18 @@
                   <a href="#" class="btn btn-large btn-info" style="float:left; margin-right:20px;margin-bottom:20px;"><i class="icon-folder-close icon-white"></i> Continue to Survey</a>
                   <!--<%= f.submit "Continue to Survey",cls:"btn btn-info"%>-->
                 <% end %>
+=======
+				  <h3><%= f.label :name %></h3>
+				  <%= f.text_field :name %><br>
+
+				  <h3><%= f.label :website %></h3>
+				  <%= f.text_field :website  %><br>
+
+				  <h3><%= f.label :industry %></h3>
+				  <%= f.text_field :industry_id %><br>				  
+				  <%= f.submit "Continue to Survey" %>
+				<% end %>
+>>>>>>> 99ce73db92b955802f349bbe5503f3a734767af0
                  </div>  
                     
                 </div>
