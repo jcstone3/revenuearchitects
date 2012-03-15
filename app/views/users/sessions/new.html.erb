@@ -55,8 +55,8 @@
                               <br> <br> <br>
                               <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true) do |f| %>
                                 <h3>Email<span>*</span></h3>
-                                <%= f.email_field :email, :validate => { :presence => true, :uniqueness => false}, :class=>"span3", :placeholder=>"Your Email id"  %><br> <br> 
-                                <h3>Password<span>*</span></h3><%= f.password_field :password, :validate => { :presence => true, :confirmation => false}, :class=>"span3", :placeholder=>"Password"  %>
+                                <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id"  %><br> <br> 
+                                <h3>Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password"  %>
  
                 <%= f.submit "Login", :class=>"btn btn-primary btn-large" %>
                <span> or </span> &nbsp; <span> <%= link_to "Register", new_user_registration_path%></span>

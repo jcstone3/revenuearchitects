@@ -8,7 +8,7 @@
                        
                     </div><br/>
                     <div style="padding-left:20px;">
-                   <%= form_for(@company) do |f| %>
+                   <%= form_for(@company, :validate => true) do |f| %>
                     <%= @company_error_messages %>
 
                   <h3><%= f.label :name %></h3>

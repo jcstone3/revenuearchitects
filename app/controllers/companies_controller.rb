@@ -17,10 +17,13 @@ class CompaniesController < ApplicationController
 			flash[:notice] = "Company created successfully"
 			redirect_to new_survey_url
 		else
-		  flash[:error] = "Sorry could not create company"
-		  render "new"
+		 # flash[:error] = "Sorry could not create company"
+		  render :new
 		end  	
 	end
+
+   def show
+   end 
 
    #edit#company
     def edit

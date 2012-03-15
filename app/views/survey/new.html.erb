@@ -8,7 +8,7 @@
                        
                     </div><br/>
                     <div style="padding-left:20px;">
-	               <%= form_for(@survey, :url=>{:action => "create"}) do |f| %>
+	               <%= form_for(@survey, :url=>{:action => "create"}, :validate => true) do |f| %>
 				  <h3><%= f.label :size %></h3>
 				  <%= f.text_field :size %><br>
 
