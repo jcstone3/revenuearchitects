@@ -9,9 +9,14 @@ gem "client_side_validations"
 gem 'settingslogic'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.0.3'
-gem 'populator'
+# Gem used for creating sample data
+gem 'populator3'
+gem 'highline'
+gem "random_data"
+gem 'database_cleaner'
+gem 'faker'
 
-group :development do 
+group :development do
   gem "annotate", "~>2.4.1.beta1"
   gem "rails_best_practices"
 end
@@ -22,7 +27,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
- 
+
 end
 
 
@@ -41,3 +46,4 @@ end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+

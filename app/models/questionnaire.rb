@@ -1,9 +1,9 @@
 class Questionnaire < ActiveRecord::Base
 	validates :name, :presence => true
 	validates :description, :presence => true
-	validates :industry_id, :presence => true
+	#validates :industry_id, :presence => true
 
-	belongs_to :industry
+	#belongs_to :industry
 	has_many :sections
 end
 # == Schema Information
