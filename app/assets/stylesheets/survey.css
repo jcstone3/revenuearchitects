@@ -453,3 +453,25 @@ tips
     margin-right: 10px;
 }
 
+/* css for slider on question page */
+.ui-corner-all {
+                border-radius: 4px 4px 4px 4px;
+            }
+            
+            .ui-widget-content {
+                background: url("../../assets/slide_bg.png") repeat-y scroll 50% top #EEEEEE;
+                width:580px;
+                border: 1px solid #DDDDDD;
+                color: #333333;
+            }
+
+
+            .ui-slider { position: relative; text-align: left; margin-left:15px; }
+            .ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 24px; height: 25px; cursor: default; background: url("../../assets/slider_handle.png") repeat-x scroll 50% top; }
+            .ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
+            
+            .ui-slider-horizontal { height: .8em; }
+            .ui-slider-horizontal .ui-slider-handle { top: -.5em; margin-left: -.6em; }
+            .ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+            .ui-slider-horizontal .ui-slider-range-min { left: 0; }
+            .ui-slider-horizontal .ui-slider-range-max { right: 0; }
