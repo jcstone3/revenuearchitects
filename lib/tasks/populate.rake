@@ -95,7 +95,7 @@ namespace :app do
     #Create Sections in the Database
       Section.reset_column_information
       puts "Adding Sections for Application"
-        Section.populate(1..10) do |section|          
+        Section.populate(3) do |section|          
           section.created_at = Time.now
           section.updated_at = Time.now 
           section.questionnaire_id = Random.number(1..100)
@@ -105,7 +105,7 @@ namespace :app do
     #Create Sub_sections in the Database
       SubSection.reset_column_information
       puts "Adding Sub_sections for Application"
-        SubSection.populate(5) do |sub_section|
+        SubSection.populate(4) do |sub_section|
           sub_section.name = Populator.words(3)
           sub_section.description = Populator.sentences(3)
           sub_section.section_id = Random.number(1..100)  
@@ -119,11 +119,12 @@ namespace :app do
     #Create Questions in the Database
       Question.reset_column_information
       puts "Adding Questions for Application"
-        Question.populate(10) do |question|
+        Question.populate(25) do |question|
           question.name = Populator.words(3)          
           question.sequence = Random.number(1..100)                   
           question.is_active   = Random.boolean
           question.sub_section_id = Random.number(1..100)
+          question.points = ["5","10","20"]
           question.created_at = Time.now
           question.updated_at = Time.now    
             puts "Questions '#{question.name}' has been created"
@@ -131,6 +132,12 @@ namespace :app do
 
       end
     end # End of Namespace demo
+
+  desc "Reset the database and reload demo data along with default application settings"
+    task :reload => :environment do
+      Rake::Task["db:migrate:reset"].invoke
+      Rake::Task["app:demo:load"].invoke
+    end  
 
 end # End of Namespace app
 
