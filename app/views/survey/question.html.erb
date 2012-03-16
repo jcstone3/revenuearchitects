@@ -33,16 +33,28 @@
                //hide priority option on load
                $('#priority_option').hide();  
 
-                //show priority option on click of add to plan
-                $('#add_to_plan').click(function(){
-                   $('#priority_option').show();
-                });
-
+                
+               //For the Add to Plan options
                 $('#option').click(function(e){
-                  //alert('in option');
-                  // alert(e.target.className);
+                    //set the add to plan options 
+                    $('#response_answer_2').val(e.target.id); 
+                    
+                    //if Add to Plan is clicked the show the priority tab
+                    if(e.target.id == "add_to_plan"){
+                      $('#priority_option').show();                      
+                    }
+                    else{
+                      $('#priority_option').hide();  
+                    }
                 });
 
+                //For the Priority options
+                $('#priority_option').click(function(e){
+                    $('#response_answer_3').val(e.target.id); 
+                    // e.target.addClass('btn form btn-success priorityTip');
+                });
+               
+                
                 $(".priorityTip").tooltip({
                     placement: 'bottom' 
                 }); 
