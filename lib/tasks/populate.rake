@@ -69,18 +69,21 @@ namespace :app do
     #Create Industries in the Database
       puts "Adding Industries in the application"
       industries = ["Finance","Health Care","Retail","Services","Manufacturing","Comunications"]
-      Industry.reset_column_information
-      industries.split(",")[0].each_with_index do |industry_name,count|        
-       Industry.populate(1) do |industry|
-        industry.name     = industry_name
-        industry.value    = industry_name
-        industry.created_at = Time.now
-        industry.updated_at = Time.now
-        puts "Industry '#{industry_name}' has been created \n"
-       end
-      end
+      # Reload the class since we've added new fields in migrations.
+        Industry.reset_column_information
+        industries.split(",")[0].each_with_index do |industry_name,count|        
+         Industry.populate(1) do |industry|
+          industry.name     = industry_name
+          industry.value    = industry_name
+          industry.created_at = Time.now
+          industry.updated_at = Time.now
+          puts "Industry '#{industry_name}' has been created \n"
+         end
+        end
 
     #Create Questionnaires in the Database
+
+    # Reload the class since we've added new fields in migrations.
       Questionnaire.reset_column_information
       puts "Adding Questionnaires for Application"
         Questionnaire.populate(1) do |questionnaire|
@@ -90,7 +93,7 @@ namespace :app do
           questionnaire.created_at = Time.now
           questionnaire.updated_at = Time.now    
             puts "Questionnaire '#{questionnaire.name}' has been created"
-        end
+        
 
     #Create Sections in the Database
       Section.reset_column_information
@@ -98,9 +101,9 @@ namespace :app do
         Section.populate(3) do |section|          
           section.created_at = Time.now
           section.updated_at = Time.now 
-          section.questionnaire_id = Random.number(1..100)
+          section.questionnaire_id = questionnaire.id
             puts "Section has been created"
-        end
+        
 
     #Create Sub_sections in the Database
       SubSection.reset_column_information
@@ -108,14 +111,13 @@ namespace :app do
         SubSection.populate(4) do |sub_section|
           sub_section.name = Populator.words(3)
           sub_section.description = Populator.sentences(3)
-          sub_section.section_id = Random.number(1..100)  
+          sub_section.section_id = section.id  
           sub_section.order = Populator.words(5)        
           sub_section.is_active   = Random.boolean
           sub_section.created_at = Time.now
           sub_section.updated_at = Time.now    
             puts "SubSection '#{sub_section.name}' has been created"
-        end
-
+         
     #Create Questions in the Database
       Question.reset_column_information
       puts "Adding Questions for Application"
@@ -123,21 +125,19 @@ namespace :app do
           question.name = Populator.words(3)          
           question.sequence = Random.number(1..100)                   
           question.is_active   = Random.boolean
-          question.sub_section_id = Random.number(1..100)
+          question.sub_section_id = sub_section.id
           question.points = ["5","10","20"]
           question.created_at = Time.now
           question.updated_at = Time.now    
             puts "Questions '#{question.name}' has been created"
+         end
         end
+       end
+      end
+
 
       end
-    end # End of Namespace demo
-
-  desc "Reset the database and reload demo data along with default application settings"
-    task :reload => :environment do
-      Rake::Task["db:migrate:reset"].invoke
-      Rake::Task["app:demo:load"].invoke
-    end  
-
+    end # End of Namespace demo 
+  
 end # End of Namespace app
 
