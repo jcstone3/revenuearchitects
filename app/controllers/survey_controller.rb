@@ -26,11 +26,25 @@ def question
 	@response = Response.new
 end	
 
-def add_response
+def create_response
+	@response = Response.new
+	@survey = Survey.find(params[:id])
+	params[:response].merge!(:question_id => params[:question_id], :answer_1 => params[:answer_1], :name =>params[:response][:answer_2])
+	@response = @survey.responses.create!(params[:response])
+	redirect_to questions_url(@survey, params[:question_id].to_i+1 )
 end
 
 #report of a particular survey
 def report	
 end	
+
+def previous_question
+	@survey = Survey.find(params[:id])
+	@question = Question.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+end
+
+def update_question
+   
+end
 
 end
