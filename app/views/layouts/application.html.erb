@@ -18,6 +18,13 @@
 
 	<body>
 		<%= render "/layouts/shared/header" %>
+		<div class="container">
+		<div id="alert">
+		   <% flash.each do |key, value| %>
+             <%= content_tag :div, value, :class => "alert alert-#{key}" unless value.blank? %>
+           <% end %>
+        </div>
+    </div>
 		<%= yield%>		
 		<%= render "/layouts/shared/footer" %>
 		

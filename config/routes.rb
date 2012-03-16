@@ -15,6 +15,7 @@ RevenueGrader::Application.routes.draw do
 
   get 'survey/:id/question/:question_id' => 'survey#question', :as => 'questions'
   get 'survey/:id/report/' => 'survey#report', :as => 'reports'
+  post 'survey/:id/question/:question_id' => 'survey#create_response', :as=> 'reponses'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
