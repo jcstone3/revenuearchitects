@@ -1,13 +1,13 @@
 		<div class="container" style="margin-top:20px;">
 			<div class="row-fluid">
-				<div class="span8 leftBox" style="height:auto;background-color:#ffffff;padding-left:8px">
-                    <div class="head">
-                        <h3>
-                            Company Details
-                        </h3>
+				<div class="span9 leftBox" style="height:auto;background-color:#ffffff">
+                    
+                        <div class="question">
+                          <h1> Company Details </h1>
+                              </div>
                        
-                    </div><br/>
-                    <div style="padding-left:20px;">
+                    <br/>
+                    <div style="padding-left:20px; padding-top:20px; margin-top:40px">
                    <%= form_for(@company, :validate => true) do |f| %>
                     <%= @company_error_messages %>
 
@@ -20,7 +20,7 @@
                   <h3><%= f.label :industry %></h3>                                
                  <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>
                 <br>    
-                  <%= f.submit "Continue to Survey" %>
+                  <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary" %>
                 <% end %>
 
 				
