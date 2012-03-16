@@ -1,7 +1,6 @@
 class SurveyController < ApplicationController
 
-def show
-end
+
 
 #new survey
 def new
@@ -14,7 +13,7 @@ def create
 	@survey = @company.surveys.create!(params[:survey])
 	if @survey
 	   flash[:notice] = "Survey created successfully"
-	   redirect_to question_url
+	   redirect_to questions_url(@survey, 1)
 	else
 	   flash[:error] = "Sorry could not create the survey"
 	   render "new"
@@ -23,9 +22,11 @@ end
 
 #question for the survey	
 def question
+	@question = Question.find(params[:question_id])
 end	
 
 #report of a particular survey
-def report
+def report	
 end	
+
 end

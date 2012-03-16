@@ -11,7 +11,8 @@ RevenueGrader::Application.routes.draw do
   resources :authorizations
   resources :survey
   resources :industries
-  match 'question' => 'survey#question'
+  get 'survey/:id/question/:question_id' => 'survey#question', :as => 'questions'
+  get 'survey/:id/report/' => 'survey#report', :as => 'reports'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
