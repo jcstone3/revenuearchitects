@@ -1,22 +1,26 @@
 
-                     
+                   <%= form_for(@response) do |f|%>  
                     <div class="points1" style="padding-top:20px;">
                         <div class="option">
                         <h2>Rate Your Current Maturity Level</h2>
                         <div style="clear:both"></div>
                         <br>
+
                         <div class="slabels"><span>Weak</span> <span style="margin-left:98px;">Basic</span> <span style="margin-left:80px;">Developing</span> <span style="margin-left:45px;">Differentiated</span> <span style="margin-left:45px;">World Class</span></div>
                        <div id="slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" ><a href="#" class="ui-slider-handle ui-state-default ui-corner-all"  data-original-title="" title=""></a><br>
-<br>
-</div>
+                        <br>
+                        <%= hidden_field_tag('answer_1', '10')%>
+
+                    </div>
                         </div>
                     </div>
                     <div class="points1" style="padding-top:20px;">
-                        <div class="option">
+                        <div class="option" id="option">
                         <h2>Add to Plan?</h2>
                         <a href="#" rel="tooltip" class="btn priorityTip" data-original-title="first tooltip"><span><i class="icon-ok icon-white"></i></span> <strong>In Our Plan</strong></a>
-                        <a href="#" rel="tooltip" id ="add_to_plan" class="btn form btn-success priorityTip" data-original-title="second tooltip"><span><i class="icon-plus icon-white"></i></span> <strong>Add to Plan</strong></a>
+                        <a href="#" rel="tooltip" id ="add_to_plan" class="btn priorityTip" data-original-title="second tooltip"><span><i class="icon-plus icon-white"></i></span> <strong>Add to Plan</strong></a>
                         <a href="#" rel="tooltip" class="btn form priorityTip" data-original-title="third tooltip"><span><i class="icon-remove icon-white"></i></span> <strong>Not Applicable</strong></a>
+                        <%= f.hidden_field 'answer_2'%>
                         </div>
                     </div>
                     <div class="points1" style="padding-top:20px; height:auto;">
@@ -25,10 +29,12 @@
                         <a href="#" rel="tooltip" class="btn priorityTip" data-original-title="first tooltip"><span><i class="icon-ok icon-white"></i></span> <strong>Must Do</strong></a>
                         <a href="#" rel="tooltip" class="btn form btn-success priorityTip" data-original-title="second tooltip"><span><i class="icon-plus icon-white"></i></span> <strong>Should Do</strong></a>
                         <a href="#" rel="tooltip" class="btn form priorityTip" data-original-title="third tooltip"><span><i class="icon-check icon-white"></i></span> <strong>Could Do</strong></a>
+                        <%= f.hidden_field 'answer_3'%>
                         </div>
                     </div>
                     <p style="clear:both; margin:40px 0 40px 20px; float:left; height:auto; width:97%;">
-                        <a href="#" class="btn btn-success"><i class="icon-ok icon-white"></i> Confirm Answer</a>
+                        <a href="#" class="btn btn-success"><i class="icon-ok icon-white"></i> <%= f.submit 
+                        'Confirm Answer'%></a>
                         <a href="#" class="btn"><i class="icon-chevron-left"></i> Previous question</a>
                         <a href="#" class="btn btn-small btn-info" style="float:right; margin-right:20px;"><i class="icon-folder-close icon-white"></i> Save Work</a>
                       </p>
@@ -78,6 +84,7 @@
                             <span>POINTS</span>
                             </div>
                     </div>
+                    <%end%>
                 <div class="tips">
                         <div class="head"><%= image_tag "info.png",:width=>"40",:height=>"37",:align=>"absmiddle"%>Tips from Revenizer </div>
                             <div class="text">

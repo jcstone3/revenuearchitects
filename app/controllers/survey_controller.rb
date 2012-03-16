@@ -23,7 +23,11 @@ end
 #question for the survey	
 def question
 	@question = Question.find(params[:question_id])
+	@response = Response.new
 end	
+
+def add_response
+end
 
 #report of a particular survey
 def report	
