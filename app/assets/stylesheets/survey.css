@@ -442,5 +442,14 @@ tips
     
 	
 }
-
+.field_with_errors > .message {
+    color: #D00;
+    font-size: 14px;
+    padding-left: 5px;
+}
+.field_with_errors > input {
+    float: left;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
 
