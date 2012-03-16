@@ -1,6 +1,6 @@
 class Industry < ActiveRecord::Base
 	validates :name, :presence => true
-	validates :value, :presence => true, :numericality => {:greater_than => 0}
+	validates :value, :presence => true #, :numericality => {:greater_than => 0}
 
 	has_many :companies
 	has_many :questionnaires
