@@ -9,9 +9,9 @@ defaults: &defaults
 
 development:
     <<: *defaults
-    host:  dev.revenue-grader.com
-    facebook_app_id: '389187014443203'
-    facebook_secret_key: '3f0e1b1d0965ad0a8d4a0694677ddf2f'
+    host:  dev.revenuegrader.com
+    facebook_app_id: '367975119899698'
+    facebook_secret_key: '340c1331cddc687ce7085d849424eece'
     twitter_api_id: '0MCcStPgM8eAvlIpDZEU5g'
     twitter_secret_key: 'NTxxbMxIXqsj2m3DWBAiosJPQp7IcDtLBd4l9nKOY'
     google_api_id: '687896268286.apps.googleusercontent.com'
