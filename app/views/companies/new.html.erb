@@ -11,17 +11,35 @@
                    <%= form_for(@company, :validate => true) do |f| %>
                     <%= @company_error_messages %>
 
-                  <h3><%= f.label :name %></h3>
-                  <%= f.text_field :name, :validate =>{:presence => true} %><br>
 
-                  <h3><%= f.label :website %></h3>
-                  <%= f.text_field :website, :validate => { :presence => true, :uniqueness => false}  %><br>
+                    <div class="points" style="padding-top:5px;">
+                        <div class="option">
+                      <h2>Your Company Name</h2>
+                        <%= f.text_field :name, :validate =>{:presence => true} %>
 
-                  <h3><%= f.label :industry %></h3>                                
-                 <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>
-                <br>    
-                  <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary" %>
+                        </div>
+                    </div>
+
+      
+                  <div class="points" style="padding-top:5px;">
+                        <div class="option">
+                  <h2>Website</h2>
+                  <%= f.text_field :website, :validate => { :presence => true, :uniqueness => false}  %>
+                </div>
+                </div>
+                <div class="points" style="padding-top:5px;">
+                        <div class="option">
+
+                  <h2>Industry</h2>                                
+                 <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
+                  </div>
+            </div>
+                   <div class="points" style="padding-top:15px;">
+                  <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white" %>
+                 
                 <% end %>
+              </div>
+
 
 				
                  </div>  

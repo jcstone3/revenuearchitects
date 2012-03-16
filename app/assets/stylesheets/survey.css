@@ -8,9 +8,11 @@
   padding:20px 20px 0 0;
 }
 .copyright {
-  text-align: center;
+  
   color: #67737a;
   font-size: 11px;
+  margin-left:110px;
+
 }
 .leftBox{
 	height:430px;
