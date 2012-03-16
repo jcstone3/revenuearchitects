@@ -44,7 +44,7 @@
 	float:left;
 	width:95%;
 	padding:0 0 0 20px;
-	background-image:url(../img/arrows_bg.png);
+	background-image:url(/assets/arrows_bg.png);
 	background-repeat:no-repeat;
 }
 .leftBox .arrows h1{
@@ -157,7 +157,7 @@
 	height:60px;
 	color:#67737a;
 	background-color:#636e75;
-	background-image:url(../img/qdots_bg.png)
+	background-image:url(/assets/qdots_bg.png)
 }
 .leftBox .qdots span{
 	padding:6px;
@@ -209,46 +209,7 @@
 
 
 
-.scoreBoard2{
-	float:left;
-	clear:both;
-	margin-top:40px;
-	width:90%;
-}
-.scoreBoard2 .head2{
-	float:left;
-	background-color:#2f3941;
-	width:200px;
-	color:#fff;
-	border-top-right-radius: 20px; 
-	clear:both;
-	padding:4px;
-	width:80%;
-	text-align:center;
-}
-.scoreBoard2 .score2{
-	float:left;
-	background-color:#404b54;
-	width:100%;
-	color:#9ddaba;
-	clear:both;
-	font-size:60px;
-	height:90px;
-	border-bottom-right-radius: 20px;
-	border-bottom-left-radius: 20px; 
-	font-family:Tahoma, Geneva, sans-serif;
-	padding:15px 4px 5px 4px;
-	text-shadow: 1px 1px 1px #000;
-	text-align:center;
-	width:80%;
-}
-.scoreBoard2 .score2 span{
-	color:#acb2b5;
-	clear:both;
-	font-size:15px;
-	text-align:center;
-	text-shadow:none;
-}
+
 
 
 
