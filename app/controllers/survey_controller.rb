@@ -26,8 +26,8 @@ def question
 	@survey = current_user.companies.first.surveys.find_all_by_id(params[:id])
 	if @survey
 	 @question = Question.find(params[:question_id])
-	 @sub_section = SubSection.find(@question.sub_section_id)
-	 @section = Section.find(@sub_section.section_id)
+	 #@sub_section = SubSection.find(@question.sub_section_id)
+	 #@section = Section.find(@sub_section.section_id)
 	 @response = Response.new
     else
      new_survey_path 	
