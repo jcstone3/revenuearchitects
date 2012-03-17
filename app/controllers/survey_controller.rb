@@ -1,6 +1,7 @@
 class SurveyController < ApplicationController
 
-
+before_filter :authenticate_user!
+before_filter :check_company
 
 #new survey
 def new
@@ -21,9 +22,16 @@ def create
 end
 
 #question for the survey	
-def question
-	@question = Question.find(params[:question_id])
-	@response = Response.new
+def question	
+	@survey = current_user.companies.first.surveys.find_all_by_id(params[:id])
+	if @survey
+	 @question = Question.find(params[:question_id])
+	 @sub_section = SubSection.find(@question.sub_section_id)
+	 @section = Section.find(@sub_section.section_id)
+	 @response = Response.new
+    else
+     new_survey_path 	
+    end
 end	
 
 def create_response
@@ -46,5 +54,12 @@ end
 def update_question
    
 end
+
+private
+def check_company
+  if !current_user.companies.first
+     redirect_to new_company_url
+  end
+end	
 
 end

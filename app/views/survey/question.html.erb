@@ -38,7 +38,20 @@
                 $('#option').click(function(e){
                     //set the add to plan options 
                     $('#response_answer_2').val(e.target.id); 
+                    //make option as grey
+                    $('#option').find('a#in_our_plan').removeClass($('#option').find('a#in_our_plan').
+                        attr('class'));
+                    $('#option').find('a#add_to_plan').removeClass($('#option').find('a#add_to_plan').
+                        attr('class'));
+                    $('#option').find('a#not_applicable').removeClass($('#option').find('a#not_applicable').attr('class'));                    
                     
+                    $('#option').find('a#in_our_plan').addClass('btn form priorityTip');
+                    $('#option').find('a#add_to_plan').addClass('btn form priorityTip');
+                    $('#option').find('a#not_applicable').addClass('btn form priorityTip');
+                    
+                    //make the selected to green
+                    $('#option').find('a#'+e.target.id+'').removeClass('btn form priorityTip');
+                    $('#option').find('a#'+e.target.id+'').addClass('btn form btn-success priorityTip');
                     //if Add to Plan is clicked the show the priority tab
                     if(e.target.id == "add_to_plan"){
                       $('#priority_option').show();                      
@@ -50,8 +63,22 @@
 
                 //For the Priority options
                 $('#priority_option').click(function(e){
-                    $('#response_answer_3').val(e.target.id); 
-                    // e.target.addClass('btn form btn-success priorityTip');
+                    $('#response_answer_3').val(e.target.id);                     
+                    
+                    //make all option as grey
+                    $('#priority_option').find('a#must_do').removeClass($('#option').find('a#must_do').
+                        attr('class'));
+                    $('#priority_option').find('a#should_do').removeClass($('#option').find('a#should_do').
+                        attr('class'));
+                    $('#priority_option').find('a#could_do').removeClass($('#option').find('a#could_do').attr('class'));
+                    
+                    $('#priority_option').find('a#must_do').addClass('btn form priorityTip');
+                    $('#priority_option').find('a#should_do').addClass('btn form priorityTip');
+                    $('#priority_option').find('a#could_do').addClass('btn form priorityTip');
+
+                    //make selected option as green                    
+                    $('#priority_option').find('a#'+e.target.id+'').removeClass('btn form priorityTip');
+                    $('#priority_option').find('a#'+e.target.id+'').addClass('btn form btn-success priorityTip');
                 });
                
                 

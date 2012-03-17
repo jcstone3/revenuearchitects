@@ -2,19 +2,36 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  #to set the redirect path after sign in/ registration
   def after_sign_in_path_for(resource)
     if resource.is_a? User
-      #user already has company, then redirect to survey page	
-      if current_user.companies.first
-     	new_survey_path
-     #redirect to create a new company	
-      else      	
-        new_company_url
-      end
+      redirect_path_for_user      
     else #resource is an admin
       admin_root_path
     end
   end 
 
-  	
+#to authenticate the user for login
+ def authenticate_user!
+  if current_user.nil?
+    redirect_to new_user_session_url, :alert => "You must first log in to access this page"
+  end
+end
+
+def error_handle404
+    if current_user.nil?
+     redirect_to new_user_session_url, :alert => "You must first log in to access this page"
+    else
+       redirect_path_for_user 
+    end
+end
+
+ def redirect_path_for_user
+   if current_user.companies.first      
+      new_survey_path     ##user already has company, then redirect to survey page      
+   else        
+      new_company_url   #redirect to create a new company  
+   end
+ end 
+
 end
