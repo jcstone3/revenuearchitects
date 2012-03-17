@@ -39,10 +39,13 @@
 					        <ul class="nav nav-tabs">
                             <li class="active"><a href="#home" data-toggle="tab"><%= image_tag "rg_icon.png", 
                             :alt=>"home" %><strong>Sign Up with us</strong></a></li>
-                            <li><a href="#twitter" data-toggle="tab" style="background-color:#53b1f0;">
-                                <%= image_tag "twitter_icon.png", :alt=>"twitter" %></a></li>
-                                <li>
-                                <%= link_to image_tag("facebook_icon.png", :alt=>"facebook"), 
+                            
+                            
+
+                            <li><%= link_to image_tag("twitter_icon.png" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter), :data_toggle=>"tab",
+                             :style=>"background-color:#53b1f0;"
+                                  %></li>   
+                            <li><%= link_to image_tag("facebook_icon.png", :alt=>"facebook"), 
                                  user_omniauth_authorize_path(:facebook), :style=>"background-color:#3b5998;"
                                   %></li>
                             <!--<li><a href="#facebook" data-toggle="tab" style="background-color:#3b5998;">

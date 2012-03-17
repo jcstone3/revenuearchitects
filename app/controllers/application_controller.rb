@@ -5,7 +5,11 @@ class ApplicationController < ActionController::Base
   #to set the redirect path after sign in/ registration
   def after_sign_in_path_for(resource)
     if resource.is_a? User
-      redirect_path_for_user      
+       if current_user.companies.first          
+          new_survey_url  #user already has company, then redirect to survey page               
+       else
+          new_company_url   #redirect to create a new company  
+       end     
     else #resource is an admin
       admin_root_path
     end
@@ -27,10 +31,8 @@ def error_handle404
 end
 
  def redirect_path_for_user
-   if current_user.companies.first      
-      new_survey_path     ##user already has company, then redirect to survey page      
-   else        
-      new_company_url   #redirect to create a new company  
+   if current_user.companies.first          
+     redirect_to new_survey_path  #user already has company, then redirect to survey page              
    end
  end 
 

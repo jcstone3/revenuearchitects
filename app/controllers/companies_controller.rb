@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
 	before_filter :authenticate_user!
+    before_filter :redirect_path_for_user
 
 	layout "application"
 
