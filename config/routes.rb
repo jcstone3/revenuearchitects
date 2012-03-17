@@ -13,7 +13,8 @@ RevenueGrader::Application.routes.draw do
   resources :industries
   resources :responses
 
-  get 'survey/:id/question/:question_id' => 'survey#question', :as => 'questions'
+  get 'survey/:id/question/:question_id' => 'survey#question', :as => 'questions' 
+  get 'survey/:id/question/:question_id' => 'survey#previous_question', :as => 'previous_question' 
   get 'survey/:id/report/' => 'survey#report', :as => 'reports'
   post 'survey/:id/question/:question_id' => 'survey#create_response', :as=> 'reponses'
   # The priority is based upon order of creation:

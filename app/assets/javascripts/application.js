@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require rails.validations
+//= jquery-ui-1.8.18.custom.min
 //= require bootstrap
 //= require bootstrap.min
 //= require bootstrap-tab
