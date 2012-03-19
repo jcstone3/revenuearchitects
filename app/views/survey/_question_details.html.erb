@@ -1,30 +1,36 @@
-         <% if(params[:question_id] > '1')%>
-                        <a href="#" class="btn"><i class="icon-chevron-left"></i><%= link_to 'Previous question', previous_question_url(params[:id], params[:question_id].to_i - 1)%></a>
-                        <%end%>
-                        <a href="#" class="btn btn-small btn-info" style="float:right; margin-right:20px;"><i class="icon-folder-close icon-white"></i> Save Work</a>
-                      </p>
+         
                     <div class="qdots" id="qdots">
-                        <a href="#"><span style="padding-left:20px;"><i class="icon-ok icon-white"></i></span></a>
-                        <a href="#"><span><i class="icon-ok icon-white"></i></span></a>
-                        <a href="#"><span><i class="icon-ok icon-white"></i></span></a>
-                        <a href="#"><span><i class="icon-ok icon-white"></i></span></a>
-                        <a href="#"><span><i class="icon-ok icon-white"></i></span></a>
-                        <a href="#"><span><i class="icon-ok-circle icon-white"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
-                        <a href="#"><span><i class="icon-ban-circle"></i></span></a>
+                        <%if @section.id == 1%>
+                        <% j = 1 %>
+                        <% k = 100%>
+                        <% elsif @section.id == 2%>
+                        <% j = 101 %>
+                        <% k = 200%>
+                        <%else%>
+                        <% j = 201%>
+                        <% k = 300%>
+                        <%end%>
+                        <% for i in j..k %> 
+                           <% if i < @question.id %> 
+                                <%= link_to("#", :id=>"question_#{i}") do %>                           
+                                <span style="padding-left:20px;">
+                                    <i class="icon-ok icon-white"></i>
+                                </span>
+                                <% end %>
+                            <%elsif i == @question.id%>
+                                <%= link_to("#", :id=>"question_#{i}") do %>                           
+                                <span style="padding-left:20px;">
+                                    <i class="icon-ok-circle icon-white"></i>
+                                </span>
+                                <% end %>
+                            <%else%>
+                                <%= link_to("#", :id=>"question_#{i}") do %>                           
+                                <span style="padding-left:20px;">
+                                   <i class="icon-ban-circle"></i>
+                                </span>
+                               <% end %>
+                            <%end%>   
+                        <%end%>
                     </div>
                 </div>
                 <div class="span3 rightBox" style="height:auto;">
@@ -45,18 +51,18 @@
                     <div class="scoreBoard">
                         <div class="head">Total score for this section </div>
                             <div class="score"><br>
-                            80/<span style="font-size:30px;">300</span> <br>
+                            <%= @total_score%>/<span style="font-size:30px;"><%= @section.total_points%>
+                            </span> <br>
                             <span>POINTS</span>
                             </div>
                     </div>
                 <div class="tips">
                         <div class="head"><%= image_tag "info.png",:width=>"40",:height=>"37",:align=>"absmiddle"%>Tips from Revenizer </div>
                             <div class="text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. <br><br>
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. <br>
-<br>
-
+                                <%= @question.name%><br>
+                                <%= @question.name%><br>
+                                <%= @question.name%><br>
+                                <%= @question.name%><br>
+                                <br>
                             </div>
                     </div>

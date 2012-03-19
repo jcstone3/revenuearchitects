@@ -1,0 +1,15 @@
+<div class="container" style="margin-top:20px;">
+            <div class="span9" style="margin:0; background-color:#505b62;">
+                  <ul class="nav nav-pills">
+                   <% @allSection.each do |section| %>
+                        <li class="on" id="section_<%=section.id%>">
+                        <%= link_to("#") do %>
+                            <%= section.name%>
+                            <span><%= section.question_count%></span>
+                        <% end %>                    
+                        <%end%>                    
+                    <li class="next" id ="final_result"><a href="#">Final Result</a></li>
+                    <%= hidden_field_tag('section', @section.id)%>                    
+                  </ul>
+            </div>
+        </div>
