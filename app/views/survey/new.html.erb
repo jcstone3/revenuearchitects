@@ -11,7 +11,9 @@
               <div class="points" style="padding-top:20px;">
                 <div class="option">
                   <h2>What is your firm size?</h2>
-                    <%= f.text_field :size ,:class=>"span3", :placeholder=>"size"%><br>
+                    <%#= f.text_field :size ,:class=>"span3", :placeholder=>"size"%>
+                    <%= f.select :size, [['10 - 20'],['21 - 50'],['51 - 100']],:class=>"span3" %>
+                    <br>
                 </div>
               </div>
               <div class="points1" style="padding-top:20px;">

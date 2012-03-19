@@ -37,9 +37,13 @@ end
 def create_response
 	@response = Response.new
 	@survey = Survey.find(params[:id])
-	params[:response].merge!(:question_id => params[:question_id], :answer_1 => params[:answer_1], :name =>params[:response][:answer_2])
+	params[:response].merge!(:question_id => params[:question_id], :name =>params[:response][:answer_2])
 	@response = @survey.responses.create!(params[:response])
-	redirect_to questions_url(@survey, params[:question_id].to_i+1 )
+	if @response
+	  redirect_to questions_url(@survey, params[:question_id].to_i+1 )
+	else
+	 # render   
+    end
 end
 
 #report of a particular survey
@@ -48,11 +52,17 @@ end
 
 def previous_question
 	@survey = Survey.find(params[:id])
-	@question = Question.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+	@question = Question.find(params[:question_id])
+	@response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
 end
 
-def update_question
-   
+def update_response
+   @survey = Survey.find(params[:id])	
+   @response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+   params[:response].merge!(:name =>params[:response][:answer_2])
+   @response.update_attributes(params[:response])
+   @survey_response = Response.find_last_by_survey_id(params[:id])
+   redirect_to questions_url(@survey, @survey_response.question_id.to_i+1 )
 end
 
 private

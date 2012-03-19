@@ -1,5 +1,5 @@
 class Survey < ActiveRecord::Base
-	validates :size, :presence => true, :numericality => {:greater_than => 0}
+	validates :size, :presence => true #,:numericality => {:greater_than => 0}
 	validates :revenue, :presence => true #, :numericality => {:greater_than => 0}
 	#validates :start_date, :presence => true
 	#validates :end_date, :presence => true

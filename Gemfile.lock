@@ -74,6 +74,7 @@ GEM
     mime-types (1.17.2)
     multi_json (1.1.0)
     multipart-post (1.1.5)
+    nokogiri (1.5.2)
     oauth (0.4.5)
     oauth2 (0.5.2)
       faraday (~> 0.7)
@@ -142,6 +143,8 @@ GEM
     ruby-openid (2.1.8)
     ruby-openid-apps-discovery (1.2.0)
       ruby-openid (>= 2.1.7)
+    rubyXL (1.2.5)
+    rubyzip (0.9.6.1)
     sass (3.1.15)
     sass-rails (3.2.4)
       railties (~> 3.2.0)
@@ -180,6 +183,7 @@ DEPENDENCIES
   faker
   highline
   jquery-rails
+  nokogiri
   oauth2
   omniauth
   omniauth-facebook
@@ -190,6 +194,8 @@ DEPENDENCIES
   rails (= 3.2.2)
   rails_best_practices
   random_data
+  rubyXL (= 1.2.5)
+  rubyzip
   sass-rails (~> 3.2.3)
   settingslogic
   therubyracer

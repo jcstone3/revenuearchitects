@@ -3,4 +3,6 @@ Run "rake doc:app" to generate API documentation for your models, controllers, h
 
 Added name and count fields for section table
 Integrated Twitter authentication 
+
+Adding reponse and updating previous response and highlighting the selected values in previous reponse done and after updating the previous reponse goes back to the next question in the sequence to be answered
  
