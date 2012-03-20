@@ -11,3 +11,7 @@ Highlighting the section for the question with white and completed with green an
 Added name column to response table
 Created methods for calculating the response score 
 Displaying the current question on the questions page with the tick icon 
+
+User on login will start with an active survey remaining questions if exists any else will be allowed to start a new survey.
+
+ 

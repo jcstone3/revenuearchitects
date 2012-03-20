@@ -5,12 +5,21 @@ before_filter :check_company
 
 #new survey
 def new
-	@survey = Survey.new
+  #if any active survey exists then user will get redirected to the active survey questions
+  @active_survey = current_user.companies.first.surveys.find(:first, :conditions=>["is_active=?", true])
+	if @active_survey
+   @response = @active_survey.responses.last 
+   redirect_to questions_url(@active_survey, @response.question_id+1)
+  else
+   #start with a new survey
+   @survey = Survey.new
+  end 
 end	
 
 #create new survey
 def create
-	@company = current_user.companies.first
+	@company = current_user.companies.fir@active_surveyst
+  params[:survey].merge!(:start_date => Time.now, :is_active => true)
 	@survey = @company.surveys.create!(params[:survey])
 	if @survey
 	   flash[:notice] = "Survey created successfully"
@@ -25,15 +34,22 @@ end
 def question	
 	@survey = current_user.companies.first.surveys.find_all_by_id(params[:id])	
 	if @survey
-	 @question = Question.find(params[:question_id])
-	 @sub_section = SubSection.find(@question.sub_section_id)
-	 @section = Section.find(@sub_section.section_id)
-	 @allSection = Section.all
-	 @response = Response.new
-	 @total_score = calculate_response_for_section(params[:id], @section.id)
-    else
-     new_survey_path 	
+	   @question = Question.find(params[:question_id])
+	   if @question 
+        @survey_response = Response.find_last_by_survey_id(params[:id])
+        if(@survey_response.question_id < @question.id) 
+          @sub_section = SubSection.find(@question.sub_section_id)
+    	    @section = Section.find(@sub_section.section_id)
+    	    @allSection = Section.all
+    	    @response = Response.new
+          @total_score = calculate_response_for_section(params[:id], @section.id)
+        else   
+  	    redirect_to previous_question_url(params[:id], params[:question_id])
+        end
     end
+  else
+    new_survey_path 	
+  end
 end	
 
 def create_response
@@ -41,6 +57,7 @@ def create_response
 	@survey = Survey.find(params[:id])
 	params[:response].merge!(:question_id => params[:question_id], :name =>params[:response][:answer_2])	
 	@response = @survey.responses.create!(params[:response])	
+  @question = Question.find(@response.question_id)
 	@sub_section = SubSection.find(@question.sub_section_id)
 	@section = Section.find(@sub_section.section_id)
 	@total_score = calculate_response_for_section(params[:id], @section.id)
@@ -69,7 +86,7 @@ def update_response
    @survey_response = Response.find_last_by_survey_id(params[:id])
    @sub_section = SubSection.find(@question.sub_section_id)
    @section = Section.find(@sub_section.section_id)
-   @total_score = calculate_response_for_section(params[:id],  @section.id)
+   @total_score = calculate_response_for_section(params[:id], @section.id)
    redirect_to questions_url(@survey, @survey_response.question_id.to_i+1 )
 end
 
