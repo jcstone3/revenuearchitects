@@ -9,16 +9,21 @@ def new
   @active_survey = current_user.companies.first.surveys.find(:first, :conditions=>["is_active=?", true])
 	if @active_survey
    @response = @active_survey.responses.last 
-   redirect_to questions_url(@active_survey, @response.question_id+1)
+   if  @response
+     redirect_to questions_url(@active_survey, @response.question_id+1)
+   else
+     redirect_to questions_url(@active_survey, 1)
+   end
   else
    #start with a new survey
+   @previous_surveys = current_user.companies.first.surveys.find(:all, :conditions=>["is_active=?", false])
    @survey = Survey.new
   end 
 end	
 
 #create new survey
 def create
-	@company = current_user.companies.fir@active_surveyst
+	@company = current_user.companies.first
   params[:survey].merge!(:start_date => Time.now, :is_active => true)
 	@survey = @company.surveys.create!(params[:survey])
 	if @survey
@@ -36,16 +41,19 @@ def question
 	if @survey
 	   @question = Question.find(params[:question_id])
 	   if @question 
-        @survey_response = Response.find_last_by_survey_id(params[:id])
-        if(@survey_response.question_id < @question.id) 
-          @sub_section = SubSection.find(@question.sub_section_id)
-    	    @section = Section.find(@sub_section.section_id)
-    	    @allSection = Section.all
-    	    @response = Response.new
-          @total_score = calculate_response_for_section(params[:id], @section.id)
+        @survey_response = Response.find_last_by_survey_id_and_question_id(params[:id], params[:question_id])
+        if @survey_response
+          redirect_to previous_question_url(params[:id], params[:question_id])
+        # if(@survey_response.question_id < @question.id)          
         else   
-  	    redirect_to previous_question_url(params[:id], params[:question_id])
+  	      @sub_section = SubSection.find(@question.sub_section_id)
+          @section = Section.find(@sub_section.section_id)
+          @allSection = Section.all
+          @response = Response.new
+          @total_score = calculate_response_for_section(params[:id], @section.id)
         end
+     else
+      redirect_to  new_survey_path  
     end
   else
     new_survey_path 	
@@ -65,17 +73,45 @@ def create_response
 end
 
 #report of a particular survey
-def report	
+def report
+  @survey = Survey.find(params[:id])
+  @section_total = []
+  @subsection_total = []
+  @questions_score = []	  
+  @sections = Section.find(:all) 
+  @sections.each do |section|
+     @section_total << calculate_response_for_section(params[:id], section.id)
+     section.sub_sections.each do |sub_section|
+     #sub_section.questions.each do |quest|
+     #  @question_response = @survey.responses.find_by_question_id(quest.id)
+     #  @questions_score << get_individual_response_score(@question_response.id, quest)
+     #end 
+     @subsection_total << calculate_response_for_subsection(params[:id], sub_section.id)
+    end
+  end
+
+  render :layout =>"reports"
 end	
 
 def previous_question
 	@survey = Survey.find(params[:id])
 	@question = Question.find(params[:question_id])
-	@sub_section = SubSection.find(@question.sub_section_id)
-	@section = Section.find(@sub_section.section_id)
-	@allSection = Section.all
-	@response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])	
-	@total_score = calculate_response_for_section(params[:id], @section.id)
+	if @question
+    @survey_response = Response.find_by_question_id(params[:question_id])
+    if @survey_response
+      @sub_section = SubSection.find(@question.sub_section_id)
+  	  @section = Section.find(@sub_section.section_id)
+  	  @allSection = Section.all
+  	  @response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])	
+  	  @total_score = calculate_response_for_section(params[:id], @section.id)
+    else
+     @response = @survey.responses.last 
+     redirect_to questions_url(@survey, @response.question_id.to_i+1) 
+  end 
+  else
+    @response = @survey.responses.last 
+    redirect_to questions_url(@survey, @response.question_id.to_i+1) 
+  end 
 end
 
 def update_response
@@ -105,22 +141,34 @@ def calculate_response_for_section(survey_id, section_id)
        questions << q.id
      end
 	end
-    @survey = Survey.find(survey_id)
+  @survey = Survey.find(survey_id)
 	@sur_responses = @survey.responses.find_all_by_question_id(questions)	
 	calculate_response(@sur_responses)
 end	
 
+def calculate_response_for_subsection(survey_id, sub_section_id)
+  questions = []  
+  @sub_section = SubSection.find(sub_section_id)
+  @sub_section.questions.each do |q|
+       questions << q.id
+  end
+  @survey = Survey.find(survey_id)
+  @sur_responses = @survey.responses.find_all_by_question_id(questions) 
+  calculate_response(@sur_responses)
+end 
+
 
 def calculate_response(survey_response)
-    @total_score = 0 
+  @question_score = []
+  @total_score = 0 
 	score = 0
     survey_response.each do |res|
-       question = Question.find(res.question_id)      
+       question = Question.find(res.question_id)  
        
        case question.points
         when 5 
           if res.answer_1 == "1"
-          	score = -1
+          	score = -1            
           end
            if res.answer_1 == "2"
           	score = 0
@@ -168,12 +216,12 @@ def calculate_response(survey_response)
            if res.answer_1 == "5"
           	score = 20
           end
-        end 
-
+        end        
        @total_score += score
     end	
 
     return @total_score
  end
 
+  
 end

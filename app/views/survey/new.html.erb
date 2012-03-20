@@ -1,6 +1,6 @@
 		<div class="container" style="margin-top:20px;">
 			<div class="row-fluid">
-				<div class="span6 leftBox" style="height:auto">
+				<div class="span9 leftBox" style="height:auto">
           <div class="question">
             <h1>
               Give us some details for the survey
@@ -28,49 +28,53 @@
               </p>
         <% end %>
        	</div>
-
-        <div class="span6 rightBox" style="height:auto;">
-             <h2 style=" margin-left:10px;padding-top:10px;color:#0086AC; font-family: Tahoma,Geneva,sans-serif;font-weight: normal;">Previous Survey Details </h2>
-                            
-                    <div class="scoreBoard2">
-                      <div class="row pull-left">
-                      
-                            <div class="span2">
-                              <img src="http://placehold.it/75x75" alt="logo" style="vertical-align: top;">
-                            </div>
-                            <div class="span3">
-                              <a style="color:#c56d2b;font-style=bold; font-size:25px">January 2011 </a><br>
-                              15-1-2011
-                            </div>
-                            <div class="scorebg">
-
-                              <h1 style="font-size:30px ;vertical-align: middle;color:#9ddaba ;padding-top:18px;">700 </h1>
-                              <!-- <img src="http://placehold.it/60x60" alt="logo" style="vertical-align: top;"> -->
-                            </div>
+<% if @previous_surveys.present?%>
+       <div class="span3 rightBox" >
+                  
+                        <h2 style=" text-align:center;padding-top:10px;color:#0086AC; padding-bottom:10px;font-family: 'Telex',sans-serif;font-weight: normal;">Previous Survey  </h2>
+                    
+                    <div class="Baloon" style="margin-top:20px;">
+                        <div class="head1"><h1>January 2011 </h1>
+                    
                         </div>
+                            <div class="score1">
+                            <span>700</span>
+                            </div>
                     </div>
-                    <div class="scoreBoard2">
-                        <div class="row pull-left">
 
-                            <div class="span2">
-                              <img src="http://placehold.it/75x75" alt="logo" style="vertical-align: top;">
+                    <div class="Baloon" style="margin-top:20px;">
+                        <div class="head1"><h1>March 2012 </h1></div>
+                            <div class="score1">
+                            <span>600</span>
                             </div>
-                            <div class="span3">
-                              <a style="color:#c56d2b;font-style=bold; font-size:25px">March 2012 </a><br>
-                              15-3-2012
-                            </div>
-                            <div class="scorebg">
+                </div>
 
-                              <h1 style="font-size:30px ;vertical-align: middle;color:#9ddaba ;padding-top:18px;">600 </h1>
-                              <!-- <img src="http://placehold.it/60x60" alt="logo" style="vertical-align: top;"> -->
-                            </div>
+                </div>
+
+	         <%else%>
+           <div class="span3 rightBox" >
+                  
+                        <h2 style=" text-align:center;padding-top:10px;color:#0086AC; padding-bottom:10px;font-family: 'Telex',sans-serif;font-weight: normal;">Previous Survey  </h2>
+                    
+                    <div class="Baloon" style="margin-top:20px;">
+                        <div class="head1"><h1>January 2011 </h1>
+                    
                         </div>
+                            <div class="score1">
+                            <span>700</span>
+                            </div>
                     </div>
-                    <div class="tips2">
-                        Tip Based on the result of previous surveys
-                    </div>
-        </div>
 
-	
+                    <div class="Baloon" style="margin-top:20px;">
+                        <div class="head1"><h1>March 2012 </h1></div>
+                            <div class="score1">
+                            <span>600</span>
+                            </div>
+                </div>
+
+                </div>
+
+
+          <%end%>
 			</div>
 		</div> 

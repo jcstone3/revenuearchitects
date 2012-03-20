@@ -9,6 +9,24 @@
 
 
 		<!-- Le styles -->
+        <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+         <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'> 
+        <link href='http://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Advent+Pro' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Jura' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Marvel' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Asul' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Enriqueta' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+		<!--end for fonts-->
 
 		<%= stylesheet_link_tag "bootstrap","survey","report", :media => "all" %>
        
@@ -34,13 +52,15 @@
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
       
-		<%= javascript_include_tag  "application" %>        
+		<%= javascript_include_tag  "application" %> 
+		<%= javascript_include_tag("jquery.raty.min")%>
+       
  		 <script>
 			$(function () {
 			$('.tabs').click(function(){
 					alert($(this).attr('id'));
 				});
 			})
-		</script>
+		</script>		
 	</body>
 </html>

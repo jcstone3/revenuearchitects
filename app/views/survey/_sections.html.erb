@@ -1,15 +1,19 @@
 <div class="container" style="margin-top:20px;">
-            <div class="span9" style="margin:0; background-color:#505b62;">
+            <div id="backcolor" class="span12" style="margin:0; background-color:#505b62;">
                   <ul class="nav nav-pills">
                    <% @allSection.each do |section| %>
-                        <li class="on" id="section_<%=section.id%>">
+                        <li class="next" id="section_<%=section.id%>">
                         <%= link_to("#") do %>
                             <%= section.name%>
-                            <span><%= section.question_count%></span>
+                            <span id ="span_<%=section.id%>" class="red">
+                              <%= section.question_count%>
+                            </span>
                         <% end %>                    
                         <%end%>                    
-                    <li class="next" id ="final_result"><a href="#">Final Result</a></li>
+                    <li class="next" id ="final_result"><%= link_to 'Final Result', reports_url%>
+                    </li>
                     <%= hidden_field_tag('section', @section.id)%>                    
                   </ul>
             </div>
         </div>
+

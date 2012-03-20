@@ -1,52 +1,15 @@
-        
-        <%= javascript_include_tag 'jquery'%>
-        <%= render "sections"%>
-        <div class="container" style="margin-top:20px;">
-            <div class="row-fluid">
-                <div class="span9 leftBox" style="height:auto;background-color:#ffffff">
-                    <div class="question">
-                        <h1>                            
-                            <%= @question.name%>
-                        </h1>
-                        <h2>
-                            Q<%= @question.id %> 
-                            <%#= @question.point for setting the point for each question %>                           
-                        </h2>
-                    </div>
-                    <%= form_for(@response, :url=>reponses_update_url) do |f|%>  
-                    <%= render "questions_set", :f => f%>
-                    <%end%>
-                    <%= render "question_details"%>
-                </div>
-            </div>
-        </div> 
-
-
-
-          <script>
-        $(document).ready(function(){ 
-            // alert('in previous');
-             //to set the value in slider
-              var response_answer1 = $('#response_answer_1').val(); 
-               
-               //to set the options selected
-               var response_answer2 = $('#response_answer_2').val();
-                $('#option').find('a#'+response_answer2+'').removeClass('btn form priorityTip');
-                $('#option').find('a#'+response_answer2+'').addClass('btn form btn-success priorityTip');
-
-               //hide priority option on load
-               if(response_answer2 == "add_to_plan"){
-                  var response_answer3 = $('#response_answer_3').val();
-                  $('#priority_option').find('a#'+response_answer3+'').removeClass('btn form priorityTip');
-                $('#priority_option').find('a#'+response_answer3+'').addClass('btn form btn-success priorityTip');
-                $('#priority_option').show();
-
-               }
-               else{
-                $('#priority_option').hide();
-               }
-                 
-                //highlight the section currently on
+ <script>
+         $(document).ready(function(){ 
+             
+               //to set the slider value 
+               if $('#response_answer_1').val() != ""){
+               var response_answer1 = $('#response_answer_1').val(); 
+                }
+                else
+                {
+                 var response_answer1  = 0; 
+                }
+                  //highlight the section currently on
                 var section_id_val = $('#section').val();
                 $('#section_'+section_id_val).removeClass($('#section_'+section_id_val).attr('class'));
                 $('#section_'+section_id_val).addClass('dropdown on');
@@ -83,9 +46,28 @@
                  $('#span_2').addClass('green');
                  $('#span_3').show();                     
                 }
-  
 
-                //For the Add to Plan options
+               //hide priority option on load
+               if($('#response_answer_2').val() == "add_to_plan"){
+                var response_answer3 = $('#response_answer_3').val();
+                $('#priority_option').find('a#'+response_answer3+'').removeClass('btn form priorityTip');
+                $('#priority_option').find('a#'+response_answer3+'').addClass('btn form btn-success priorityTip');
+                $('#priority_option').show();
+               }
+               else{
+                $('#priority_option').hide();
+               }
+                var response_answer2 = $('#response_answer_2').val();
+                $('#option').find('a#'+response_answer2+'').removeClass('btn form priorityTip');
+                $('#option').find('a#'+response_answer2+'').addClass('btn form btn-success priorityTip');
+              
+                //post form
+                $('#confirm_answer').click(function(e){                   
+                    $('form').submit();
+                    return false;
+                }); 
+                              
+               //For the Add to Plan options
                 $('#option').click(function(e){
                     //set the add to plan options 
                     $('#response_answer_2').val(e.target.id); 
@@ -115,7 +97,7 @@
                 //For the Priority options
                 $('#priority_option').click(function(e){
                     $('#response_answer_3').val(e.target.id);                     
-                   
+                    
                     //make all option as grey
                     $('#priority_option').find('a#must_do').removeClass($('#option').find('a#must_do').
                         attr('class'));
@@ -132,12 +114,7 @@
                     $('#priority_option').find('a#'+e.target.id+'').addClass('btn form btn-success priorityTip');
                 });
                
-                 //post form
-                $('#confirm_answer').click(function(e){                   
-                    $('form').submit();
-                    return false;
-                });
-
+                
                 $(".priorityTip").tooltip({
                     placement: 'bottom' 
                 }); 

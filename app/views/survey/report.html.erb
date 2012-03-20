@@ -1,234 +1,51 @@
 <div class="container" style="margin-top:20px;">
-        	<div class="span9" style="margin:0; background-color:#505b62; width:100%;">
+        	<div class="spa@section_total.inspectn9" style="margin:0; background-color:#505b62; width:100%;">
                    <ul class="nav nav-pills">
-                    <li class="done"><a href="#">Strategy <span>24</span></a></li>
-                    <li class="done"><a href="#">Systems <span>80</span></a></li>
-                    <li class="done"><a href="#">Programs <span>120</span> </a></li>
-                    <li class="on"><a href="#">Final Result <span style="background-color:#00A54F;">224</span> </a></li>
+                    <li class="done"><a href="#">Strategy <span><%= @sections[0].total_points %></span></a></li>
+                    <li class="done"><a href="#">Systems <span><%= @sections[1].total_points%></span></a></li>
+                    <li class="done"><a href="#">Programs <span><%= @sections[2].total_points%></span> </a></li>
+                    <li class="on"><a href="#">Final Result <span style="background-color:#00A54F;"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span> </a></li>
                   </ul>
             </div>
         </div>
 		<div class="container" style="margin-top:20px;">
 			<div class="row-fluid" style="margin-left: 0;">
-				<div class="span4" style="background-color: white;width: 28.91%;">
-					<h2>Strategy</h2>
-                    <div>
-                   <div id="accordion1" class="pageAccordion">
-	<h3><a href="#">Sub Category 1</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-	<h3><a href="#">Sub Category 2</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-	<h3><a href="#">Sub Category 3</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-	<h3><a href="#">Sub Category 4</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-    <h3><a href="#">Sub Category 5</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-    <h3><a href="#">Sub Category 6</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-</div>
-<br>
-<br>
-<br>
-
-
-                    </div>
-                    <div class="scoreBox">
-                    <div class="finalScore">
-                    TOTAL
-                    <span>260
-                    <i>POINTS</i></span>
-                    </div>
-                    </div>
-				</div>
-                <div class="plus">+</div>
+				
+             <%@sections.each do |section|%>
                 <div class="span4" style="background-color: white;width: 28.91%;">
-                	<h2>Systems</h2>
+                    <h2><%= section.name%></h2>
                     <div>
-                    <div id="accordion1" class="pageAccordion">
-	<h3><a href="#">Sub Category 1</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-	<h3><a href="#">Sub Category 2</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-	<h3><a href="#">Sub Category 3</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-	<h3><a href="#">Sub Category 4</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-    <h3><a href="#">Sub Category 5</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-    <h3><a href="#">Sub Category 6</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-</div><br>
-<br>
-<br>
-
+                        <div id="accordion1" class="pageAccordion">
+                        <% section.sub_sections.each do |sub_section|%>                     
+                            <h3><a href="#"><%= sub_section.name%></a><i>
+                                <%= @subsection_total[sub_section.id - 1]%></i></h3>
+                            <div>
+                              <p>
+                                <% sub_section.questions.each do |question| %>
+                                    <div class="ques"><span>
+                                        <%= question.id%>.<%= question.name%></span>
+                                        <i><%= question.points%></i>
+                                    </div>
+                                <%end%>            
+                              </p>
+                            </div>
+                        <%end%>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
                     </div>
                     <div class="scoreBox">
                     <div class="finalScore">
                     TOTAL
-                    <span>320
+                    <span><%= @section_total[section.id - 1]%>
                     <i>POINTS</i></span>
                     </div>
                     </div>
-				</div>
-                <div class="plus">+</div>
-                <div class="span4" style="background-color: white;width: 28.91%;">
-                	<h2>Programs</h2>
-                    <div>
-                   <div id="accordion1" class="pageAccordion">
-	<h3><a href="#">Sub Category 1</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-	<h3><a href="#">Sub Category 2</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-	<h3><a href="#">Sub Category 3</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-	<h3><a href="#">Sub Category 4</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-    <h3><a href="#">Sub Category 5</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-    <h3><a href="#">Sub Category 6</a><i>214</i></h3>
-	<div>
-		<p>
-            <div class="ques"><span>1. Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span><i>14</i></div>
-            <div class="ques"><span>2. ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span><i>14</i></div>
-            <div class="ques"><span>3. amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span><i>14</i></div>
-            <div class="ques"><span>4. odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span><i>14</i></div>
-		</p>
-	</div>
-</div>
-<br>
-<br>
-<br>
-                    </div>
-                    <div class="scoreBox">
-                    <div class="finalScore">
-                    TOTAL
-                    <span>420
-                    <i>POINTS</i></span>
-                    </div>
-                    </div>
-				</div>
-			</div>
-		</div> 
+               </div>
+            <div class="plus">+</div>
+        <%end%>                
+		
         <div class="container" style="margin-top:20px;">
 			<div class="row-fluid">
 				<div class="span7" style="text-align:center;height:170px;background-color:white;">
@@ -267,5 +84,6 @@
 			</div>
 		</div>
 
-		
+
+
 		  

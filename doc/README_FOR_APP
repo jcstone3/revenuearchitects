@@ -13,5 +13,7 @@ Created methods for calculating the response score
 Displaying the current question on the questions page with the tick icon 
 
 User on login will start with an active survey remaining questions if exists any else will be allowed to start a new survey.
+Question and Survey page new css integrated
+Report page shows the total score in each section, remaining with displaying with individual response score
 
  
