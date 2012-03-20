@@ -3,7 +3,7 @@ require 'rubyXL'
 task :parse_XL  => :environment do 	
 
     	workbook = RubyXL::Workbook.new
-    	workbook = RubyXL::Parser.parse("/home/icicle/Downloads/Score Bord.xlsx")
+    	workbook = RubyXL::Parser.parse("/home/icicle/Revenue_Grader_Scorecard.xlsx")
 
     ActiveRecord::Base.transaction do
       

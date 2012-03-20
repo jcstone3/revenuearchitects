@@ -1,24 +1,15 @@
         <%= javascript_include_tag 'jquery'%>
-        <div class="container" style="margin-top:20px;">
-            <div class="span9" style="margin:0; background-color:#505b62;">
-                   <ul class="nav nav-pills">
-                    <li class="done"><a href="#">Strategy <span>24</span></a></li>
-                    <li class="on"><a href="#">Systems <span>80</span></a></li>
-                    <li class="next"><a href="#">Programs </a></li>
-                    <li class="next"><a href="#">Final Result</a></li>
-                  </ul>
-            </div>
-        </div>
+        <%= render "sections"%>
         <div class="container" style="margin-top:20px;">
             <div class="row-fluid">
                 <div class="span9 leftBox" style="height:auto;background-color:#ffffff">
                     <div class="question">
                         <h1>                            
-                            <%= @question.name%>
+                            <%= @question.name%>                            
                         </h1>
                         <h2>
-                            Q5
-                            
+                            Q<%= @question.id %> 
+
                             <%#= @question.point for setting the point for each question %>
                         </h2>
                     </div>
@@ -36,8 +27,38 @@
          $(document).ready(function(){ 
                //hide priority option on load
                $('#priority_option').hide();  
+               //highlight the section currently on
+                var section_id_val = $('#section').val();
+                $('#section_'+section_id_val).removeClass($('#section_'+section_id_val).attr('class'));
+                $('#section_'+section_id_val).addClass('on');
 
-                
+                if(section_id_val == "1"){
+                 $('#section_2').removeClass($('#section_2').attr('class'));
+                 $('#section_2').addClass('next'); 
+                 $('#section_3').removeClass($('#section_2').attr('class'));
+                 $('#section_3').addClass('next');   
+                }
+
+                 if(section_id_val == "2"){
+                 $('#section_1').removeClass($('#section_2').attr('class'));
+                 $('#section_1').addClass('done'); 
+                 $('#section_3').removeClass($('#section_2').attr('class'));
+                 $('#section_3').addClass('next');                    
+                }
+
+               if(section_id_val == "3"){                
+                 $('#section_1').removeClass($('#section_1').attr('class'));
+                 $('#section_1').addClass('done'); 
+                 $('#section_2').removeClass($('#section_2').attr('class'));
+                 $('#section_2').addClass('done');                    
+                }
+
+                //post form
+                $('#confirm_answer').click(function(e){                   
+                    $('form').submit();
+                    return false;
+                });
+               
                //For the Add to Plan options
                 $('#option').click(function(e){
                     //set the add to plan options 
