@@ -21,12 +21,21 @@ class User < ActiveRecord::Base
  
 
 #facebook authentication
-def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
     data = access_token.extra.raw_info
-    if user = User.where(:email => data.email).first      
+    if provider == "facebook"
+        user = User.where(:email => data.email).first      
+    else
+        user = User.where(:username => data.name).first 
+    end
+    if user 
       user
-    else # Create a user with a stub password.              
-      User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.id)       
+    else # Create a user with a stub password. 
+      if provider == "facebook"             
+       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.id)  
+      else
+       User.create!(:email => "no_email@test.com", :password => Devise.friendly_token[0,20], :username => data.name)
+      end     
     end
   end
 

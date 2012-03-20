@@ -14,7 +14,8 @@
                                 <h3>Password<span>*</span><h3>
                                 <%= f.password_field :password,  :class=>"span3", :placeholder=>"Password for the site" %><br>
                 <label class="checkbox">
-                                <input type="checkbox" checked> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader. <a href="#">Privacy Policy</a></p>
+                                <input type="checkbox" checked> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader.
+                                 <%= link_to 'Privacy Policy', privacy_policy_url%></p>
                               </label>
                               <%= f.submit "Sign up and Get Started!", :class=>"btn btn-primary btn-large"  %>
                 <p style="font-size:11px; color:#67737a; margin:10px 0 0 0;">We will keep your personal information strictly confidential</p>

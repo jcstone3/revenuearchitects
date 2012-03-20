@@ -18,12 +18,11 @@
                         </h1>
                         <h2>
                             Q5
-                            
-                            <%#= @question.point for setting the point for each question %>
+                            <%#= @question.point for setting the point for each question %>                           
                         </h2>
                     </div>
-                    <%= form_for(@response, :url=>reponses_url) do |f|%>  
-                     <%= render "questions_set", :f => f%>
+                    <%= form_for(:response, :url=>reponses_update_url) do |f|%>  
+                    <%= render "questions_set", :f => f%>
                     <%end%>
                     <%= render "question_details"%>
                 </div>
@@ -34,10 +33,25 @@
 
           <script>
          $(document).ready(function(){ 
-               //hide priority option on load
-               $('#priority_option').hide();  
+             
+               //to set the slider value 
+               var response_answer1 = $('#response_answer_1').val(); 
 
-                
+               //hide priority option on load
+               if($('#response_answer_2').val() == "add_to_plan"){
+                var response_answer3 = $('#response_answer_3').val();
+                $('#priority_option').find('a#'+response_answer3+'').removeClass('btn form priorityTip');
+                $('#priority_option').find('a#'+response_answer3+'').addClass('btn form btn-success priorityTip');
+                $('#priority_option').show();
+               }
+               else{
+                $('#priority_option').hide();
+               }
+                var response_answer2 = $('#response_answer_2').val();
+                $('#option').find('a#'+response_answer2+'').removeClass('btn form priorityTip');
+                $('#option').find('a#'+response_answer2+'').addClass('btn form btn-success priorityTip');
+              
+                              
                //For the Add to Plan options
                 $('#option').click(function(e){
                     //set the add to plan options 
@@ -93,7 +107,7 @@
                 
                 
                 $( "#slider" ).slider({
-                    value:0,
+                    value:response_answer1,
                     min: 1,
                     max: 5,
                     step: 1,
@@ -111,8 +125,8 @@
                 });
 
                 $("#slider").slider({
-                   change: function(event, ui) {                    
-                    $( "#response_answer_1" ).val( $( "#slider" ).slider( "value" ));
+                   change: function(event, ui) {
+                    $( "#answer_1" ).val( $( "#slider" ).slider( "value" ) );
                 }
                 });
                 

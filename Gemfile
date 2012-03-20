@@ -19,7 +19,9 @@ gem 'highline'
 gem "random_data"
 gem 'database_cleaner'
 gem 'faker'
-
+gem 'rubyXL', '1.2.5'
+gem 'nokogiri'
+gem 'rubyzip'
 group :development do
 gem 'uuidtools'
 gem "annotate", "~>2.4.1.beta1"

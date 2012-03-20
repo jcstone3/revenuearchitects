@@ -1,10 +1,18 @@
 RevenueGrader::Application.routes.draw do
+  get "site/index"
+
+  get "site/aboutUs"
+
+  get "site/contactUs"
+
+  get "site/privacy_policy"
+
   #setting up user registeration
   devise_for :users, :path => "accounts", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions" } do
       get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
       get 'sign_out', :to => 'users/sessions#destroy', :as => :destroy_user_session
       get 'accounts/sign_up', :to => 'users/registrations#new', :as => :new_user_registration
-      get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+      get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru' #third party authentication
   end 
    
   resources :companies
@@ -14,9 +22,18 @@ RevenueGrader::Application.routes.draw do
   resources :responses
 
   get 'survey/:id/question/:question_id' => 'survey#question', :as => 'questions' 
-  get 'survey/:id/question/:question_id' => 'survey#previous_question', :as => 'previous_question' 
+  get 'survey/:id/previous_question/:question_id' => 'survey#previous_question', :as => 'previous_question' 
   get 'survey/:id/report/' => 'survey#report', :as => 'reports'
   post 'survey/:id/question/:question_id' => 'survey#create_response', :as=> 'reponses'
+  post 'survey/:id/update_question/:question_id' => 'survey#update_response', :as=> 'reponses_update'
+
+  #site controller maps about us, contact us privacy policy
+  match "aboutUs" =>'site#aboutUs', :as => 'aboutUs'
+  match "contactUs" =>'site#conactUs', :as => 'contactUs'
+  match "privacy_policy" =>'site#privacy_policy', :as => 'privacy_policy'
+
+  #defalut error page
+  match "*path" => 'dashboard#error_handle404', :as => 'error_handle404'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -66,7 +83,7 @@ RevenueGrader::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-    root :to => 'dashboard#index'
+    root :to => 'site#index'
 
   # See how all your routes lay out with "rake routes"
 
