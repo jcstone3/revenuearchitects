@@ -39,22 +39,26 @@ end
 def question	
 	@survey = current_user.companies.first.surveys.find_all_by_id(params[:id])	
 	if @survey
-	   @question = Question.find(params[:question_id])
-	   if @question 
-        @survey_response = Response.find_last_by_survey_id_and_question_id(params[:id], params[:question_id])
-        if @survey_response
-          redirect_to previous_question_url(params[:id], params[:question_id])
-        # if(@survey_response.question_id < @question.id)          
-        else   
-  	      @sub_section = SubSection.find(@question.sub_section_id)
-          @section = Section.find(@sub_section.section_id)
-          @allSection = Section.all
-          @response = Response.new
-          @total_score = calculate_response_for_section(params[:id], @section.id)
-        end
-     else
-      redirect_to  new_survey_path  
-    end
+       if @survey.responses.count == Question.all.count
+         redirect_to reports_url(@survey)
+  	   else
+           @question = Question.find(params[:question_id])     
+      	      if @question 
+                @survey_response = Response.find_last_by_survey_id_and_question_id(params[:id], params[:question_id])
+                if @survey_response
+                  redirect_to previous_question_url(params[:id], params[:question_id])
+                # if(@survey_response.question_id < @question.id)          
+                else   
+          	      @sub_section = SubSection.find(@question.sub_section_id)
+                  @section = Section.find(@sub_section.section_id)
+                  @allSection = Section.all
+                  @response = Response.new
+                  @total_score = calculate_response_for_section(params[:id], @section.id)
+                end
+             else
+               redirect_to  new_survey_path  
+             end
+         end
   else
     new_survey_path 	
   end
@@ -118,7 +122,8 @@ def previous_question
 end
 
 def update_response
-   @survey = Survey.find(params[:id])   	
+   @survey = Survey.find(params[:id])
+   @question = Question.find(params[:question_id])   	
    @response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
    params[:response].merge!(:name =>params[:response][:answer_2])
    @response.update_attributes(params[:response])

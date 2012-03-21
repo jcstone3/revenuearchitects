@@ -9,8 +9,9 @@
                               <%= section.question_count%>
                             </span>
                         <% end %>                    
-                        <%end%>                    
-                    <li class="next" id ="final_result"><%= link_to 'Final Result', reports_url%>
+                        <%end%> 
+
+                    <li class="next" id ="final_result"><%= link_to 'Final Result'%>
                     </li>
                     <%= hidden_field_tag('section', @section.id)%>                    
                   </ul>

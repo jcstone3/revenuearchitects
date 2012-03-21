@@ -60,7 +60,7 @@
  
                 <%= f.submit "Login", :class=>"btn btn-primary btn-large" %>
                <span> or </span> &nbsp; <span> <%= link_to "Register", new_user_registration_path%></span>
-               
+               <%= hidden_field_tag('login', "yes")%>
                <%end%>
                             </div>
                             <div class="tab-pane" id="twitter">Twitter login screen</div>

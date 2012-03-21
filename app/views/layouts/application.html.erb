@@ -60,6 +60,23 @@
 					alert($(this).attr('id'));
 				});
 			})
+		</script>
+		<script>
+			$(document).ready(function(){
+			//to hide and show login and signup	
+			$('#signup_user').hide();
+			//alert($('#login').val());
+			var login_val = $('#login').val();
+			
+			if(login_val == "yes"){
+             $('#signup_user').show();
+             $('#login_user').hide();
+			}
+			else{
+			  $('#signup_user').hide();	
+			  $('#login_user').show();
+			}			
+			});
 		</script>		
 	</body>
 </html>

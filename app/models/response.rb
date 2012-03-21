@@ -1,5 +1,5 @@
 class Response < ActiveRecord::Base
-	validates :name, :presence => true
+	#validates :name, :presence => true
 	validates :answer_1, :presence => true
     validates :survey_id, :presence => true
     validates :question_id, :presence => true

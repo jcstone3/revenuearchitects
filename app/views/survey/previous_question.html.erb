@@ -13,7 +13,7 @@
                             <%#= @question.point for setting the point for each question %>                           
                         </h2>
                     </div>
-                    <%= form_for(@response, :url=>reponses_update_url) do |f|%>  
+                    <%= form_for(:response, :url=>reponses_update_url) do |f|%>  
                     <%= render "questions_set", :f => f%>
                     <%end%>
                     <%= render "question_details"%>
@@ -140,7 +140,7 @@
 
                /* $(".priorityTip").tooltip({
                     placement: 'bottom' 
-                }); */
+                });*/ 
                 
                 
                 
@@ -164,7 +164,7 @@
 
                 $("#slider").slider({
                    change: function(event, ui) {
-                    $( "#answer_1" ).val( $( "#slider" ).slider( "value" ) );
+                    $( "#response_answer_1" ).val( $( "#slider" ).slider( "value" ));
                 }
                 });
                 

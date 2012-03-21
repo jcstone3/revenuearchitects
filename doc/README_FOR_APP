@@ -20,3 +20,5 @@ Report page shows the total score in each section, remaining with displaying wit
 Added individual score for questions on report page 
 Report page jquery issue resolved
 Added validation for user and company and survey
+Added the toggle for login and signup buttons
+Added migration to change the datatype for surveys size and revenue columns to be string
