@@ -14,10 +14,12 @@ class User < ActiveRecord::Base
   
   #validations
   validates_presence_of :username, :message => "username cannot be blank"
-  validates_presence_of :password, :message => "password cannot be blank"
-  validates_length_of :password,  :within => 4..30, :message => "password should be greater than 4 and less than 30"
-  validates_presence_of :email, :message => "email cannot be blank"
+  validates_format_of :username, :with =>/^[a-zA-Z][a-zA-Z0-9_]*$/, :message => "should start with a letter"
 
+  validates_presence_of :password, :message => "cannot be blank"
+  validates_length_of :password,  :within => 4..30, :message => "should be greater than 4 and less than 30"
+  validates_presence_of :email, :message => "email cannot be blank"
+  validates_uniqueness_of :email
  
 
 #facebook authentication
