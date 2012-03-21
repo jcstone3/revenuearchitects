@@ -528,8 +528,15 @@ box-shadow: inner 0px 0px 2px #575f64;*/
             .ui-slider-horizontal .ui-slider-range-max { right: 0; }
 
 
-
-
-
+/* css for client side validation error*/
+.field_with_errors {  
+  display: inline;  
+}  
+  
+.field_with_errors .message {  
+  color: black;  
+  padding-left: 5px;  
+  font-size: 12px;  
+}  
 
 

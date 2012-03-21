@@ -24,7 +24,8 @@
                                 <% sub_section.questions.each do |question| %>
                                     <div class="ques"><span>
                                         <%= question.id%>.<%= question.name%></span>
-                                        <i><%= question.points%></i>
+                                        <i><%= @questions_score[question.id - 1] ? 
+                                            @questions_score[question.id - 1] : '--' %></i>
                                     </div>
                                 <%end%>            
                               </p>
@@ -51,7 +52,7 @@
 				<div class="span7" style="text-align:center;height:170px;background-color:white;">
                 	<div style="padding:15px;">
                         <h3 style="color: #00A54F;">Thank you for taking the survey.</h3><br>
-                        <h2 style="color: #0086AC;">Your Final Score is <span>1000 points</span></h2><br>
+                        <h2 style="color: #0086AC;">Your Final Score is <span><%= @final_score%> points</span></h2><br>
 						<a href="#" class="btn btn-small btn-info"><i class="icon-info-sign icon-white"></i> Tips and tricks to improve score</a>
                     </div>
 				</div>
@@ -62,7 +63,9 @@
                             <h2 class="revenue">Revenue<br>
                             <span>Grade</span><br>
 							<!--<img src="img/stars.png" alt="stars">-->
-							<div id="fixed"></div>
+							<div id="fixed">
+
+                            </div>
                             </h2>
                         </div>
                         <div class="grade">

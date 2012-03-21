@@ -10,7 +10,7 @@
 
 		<!-- Le styles -->
 
-		<%= stylesheet_link_tag "bootstrap","survey","report", :media => "all" %>
+		<%= stylesheet_link_tag "bootstrap", "report",:media => "all" %>
        
 	
 		<%= stylesheet_link_tag	 "bootstrap-responsive"   %>	
@@ -34,29 +34,29 @@
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
      
-		<%= javascript_include_tag  "jquery", "bootstrap", "bootstrap-tooltip", "jquery-ui-1.8.18.custom.min",
-		 "jquery.raty.min"%>
+		
+		<%= javascript_include_tag "application"%>
+       
 		<script>
         $(document).ready(function(){
             
-$(".pageAccordion").accordion({
-	autoHeight: false,
-	navigation: true
-	});
-	}); 
+		$(".pageAccordion").accordion({
+		autoHeight: false,
+		navigation: true
+		});
+		}); 
         
-  </script>
+ 		</script>
 
        <script>
-
-$(function() {
-$('#default').raty();
-$('#fixed').raty({
-readOnly: true,
-start: 3
-});
-}); 
-</script>	
+		$(function() {
+		$('#default').raty();
+		$('#fixed').raty({
+		readOnly: true,
+		start: 3
+		});
+		}); 
+		</script>	
  		 		
 	</body>
 </html>

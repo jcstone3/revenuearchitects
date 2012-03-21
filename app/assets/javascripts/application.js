@@ -17,4 +17,6 @@
 //= require bootstrap
 //= require bootstrap.min
 //= require bootstrap-tab
+//= require jquery-ui-1.8.18.custom.min
+//= require jquery.raty.min
 //= require_tree .

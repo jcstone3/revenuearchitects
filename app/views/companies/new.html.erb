@@ -1,70 +1,55 @@
 		<div class="container" style="margin-top:20px;">
 			<div class="row-fluid">
-				<div class="span9 leftBox" style="height:auto;background-color:#ffffff">
-                    
-                        <div class="question">
-                          <h1> Company Details </h1>
-                              </div>
-                       
-                    <br/>
-                    <div style="padding-left:20px; padding-top:20px; margin-top:40px">
-                   <%= form_for(@company, :validate => true) do |f| %>
-                    <%= @company_error_messages %>
-
-
-                    <div class="points" style="padding-top:5px;">
+				<div class="span9 leftBox" style="height:auto;background-color:#ffffff">                  
+          <div class="question">
+            <h1> Company Details </h1>
+          </div>
+                     
+           <br/>
+           <div style="padding-left:20px; padding-top:20px; margin-top:40px">
+              <%= form_for(@company, :validate => true) do |f| %>
+                 <%= @company_error_messages %>
+                     <div class="points" style="padding-top:5px;">
                         <div class="option">
-                      <h2>Your Company Name</h2>
-                        <%= f.text_field :name, :validate =>{:presence => true} %>
-
+                        <h2>Your Company Name</h2>
+                        <%= f.text_field :name, :maxlength=>"40", :validate =>{:presence => true} %>
                         </div>
-                    </div>
-
-      
-                  <div class="points" style="padding-top:5px;">
+                     </div>      
+                     <div class="points" style="padding-top:5px;">
                         <div class="option">
-                  <h2>Website</h2>
-                  <%= f.text_field :website, :validate => { :presence => true, :uniqueness => false}  %>
-                </div>
-                </div>
-                <div class="points" style="padding-top:5px;">
+                           <h2>Website</h2>
+                           <%= f.text_field :website, :maxlength=>"40", :validate =>
+                                           { :presence => true, :uniqueness => true}  %>
+                        </div>
+                     </div>
+                     <div class="points" style="padding-top:5px;">
                         <div class="option">
-
-                  <h2>Industry</h2>                                
-                 <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
-                  </div>
-            </div>
-                   <div class="points" style="padding-top:15px;">
-                  <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white" %>
-                 
+                          <h2>Industry</h2>                                
+                          <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
+                        </div>
+                     </div>
+                     <div class="points" style="padding-top:15px;">
+                     <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white" %>                 
                 <% end %>
-              </div>
-
-
-				
-                 </div>  
-                    
-                </div>
-
-				<div class="span3 rightBox" >
-                    <div class="scoreBoard" style="margin-top:2px;">
-                        <div class="head">About Revenue Grader </div>
-                            <div class="score">
-                            <span>Some notes on revenue grader</span>
-                            </div>
-                </div>
-
-                <div class="scoreBoard">
-                        <div class="head">About Revenue Architects </div>
-                            <div class="score">
+              </div>				
+             </div>  
+           </div>
+				   <div class="span3 rightBox" >
+               <div class="scoreBoard" style="margin-top:2px;">
+                  <div class="head">About Revenue Grader </div>
+                     <div class="score">
+                        <span>Some notes on revenue grader</span>
+                     </div>
+                  </div>
+                  <div class="scoreBoard">
+                     <div class="head">About Revenue Architects </div>
+                        <div class="score">
                             <span>Some notes on revenue architects</span>
-                            </div>
-                </div>
-
-				</div>
-				
-			</div>
-		</div> 
+                        </div>
+                     </div>
+				          </div>			
+          			</div>
+		          </div> 
 
 
 
