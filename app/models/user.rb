@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   
   #validations
   validates_presence_of :username, :message => "username cannot be blank"
-  validates_format_of :username, :with =>/^[a-zA-Z][a-zA-Z0-9_]*$/, :message => "should start with a letter"
+  validates_format_of :username, :with =>/[a-z A-Z][a-z A-Z 0-9_]*$/, :message => "should start with a letter"
 
   validates_presence_of :password, :message => "cannot be blank"
   validates_length_of :password,  :within => 4..30, :message => "should be greater than 4 and less than 30"
