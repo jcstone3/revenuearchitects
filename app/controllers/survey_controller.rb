@@ -116,28 +116,6 @@ def previous_question
   end 
 end
 
-
-def reports2131
-@survey = Survey.find(1)
-  @section_total = []
-  @subsection_total = []
-  @questions_score = [] 
-  @questions_score = []  
-  @sections = Section.find(:all) 
-  #score for each section and subsection
-  @sections.each do |section|
-     @section_total << calculate_response_for_section(section.id)
-     section.sub_sections.each do |sub_section|     
-     @subsection_total << calculate_response_for_subsection(@survey.id, sub_section.id)
-    end
-  end
-  @final_score = @section_total[0]+@section_total[1]+@section_total[2]
-  #get the individual response score
-  @survey.responses.each do |response|
-    #@questions_score << get_individual_response_score(response.id, response.question_id)
-  end  
-end
-
 def update_response
    @survey = Survey.find(params[:id])
    @question = Question.find(params[:question_id])   	
@@ -151,24 +129,56 @@ def update_response
    redirect_to questions_url(@survey, @survey_response.question_id.to_i+1 )
 end
 
+#to download in pdf/xls format
 def download_result
   require 'spreadsheet'
-  @questions_score = []
-  @sections = Section.all 
   @survey = Survey.find(params[:id])
+  @section_total = []
+  @subsection_total = []
+  @questions_score = [] 
+  @questions_score = []  
+  @sections = Section.find(:all) 
+  #score for each section and subsection
+  @sections.each do |section|
+     @section_total << calculate_response_for_section(params[:id], section.id)
+     section.sub_sections.each do |sub_section|     
+     @subsection_total << calculate_response_for_subsection(params[:id], sub_section.id)
+    end
+  end
+  @final_score = @section_total[0]+@section_total[1]+@section_total[2]
+  #get the individual response score
   @survey.responses.each do |response|
     @questions_score << get_individual_response_score(response.id, response.question_id)
-  end
+  end  
+
   respond_to do |format|
       format.pdf {
-        html = render_to_string(:layout => false , :action => "show.html")
-        kit = PDFKit.new(html)
-        #kit.stylesheets << "#{Rails.root}/public/stylesheets/screen.css"
+        html = render_to_string(:layout => false , :action => "reports.html")
+        kit = PDFKit.new(html)        
         send_data(kit.to_pdf, :filename => "survey.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }
 
-      
+      format.xls {
+        result = Spreadsheet::Workbook.new
+        list = result.create_worksheet :name => "response" 
+        list.row(0).concat %w{Section Subsection Questions QuestionPoints Score}
+        @sections.each { |section|
+           section.sub_sections.each { |subsection|
+           subsection.questions.each { |question|
+            list.row(question.id+1).push section.name, subsection.name, question.name, section.total_points,
+            question.points, @questions_score[question.id]
+          }           
+         }
+        }
+        header_format = Spreadsheet::Format.new :color =>"green", :weight =>"bold"
+        list.row(0).default_format = header_format
+        #output to blob object
+        blob = StringIO.new("")
+        result.write blob
+        #respond with blob object as a file
+        send_data blob.string, :type =>:xls, :filename =>"result.xls"#; &quot;client_list.xls&quot;
+      }
   end    
 end
 

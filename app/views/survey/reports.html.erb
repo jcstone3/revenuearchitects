@@ -1,5 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Revenue Grader - Sign Up</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+
+        <!-- Le styles -->
+
+        <%= stylesheet_link_tag "bootstrap", "report",:media => "all" %>
+       
+    
+        <%= stylesheet_link_tag  "bootstrap-responsive"   %>    
+    </head>
+
+    <body>
+        <%= render "/layouts/shared/header" %>
+        <div class="container">
+        <div id="alert">
+           <% flash.each do |key, value| %>
+             <%= content_tag :div, value, :class => "alert alert-#{key}" unless value.blank? %>
+           <% end %>
+        </div>
+    </div>
 <div class="container" style="margin-top:20px;">
-        	<div class="spa@section_total.inspectn9" style="margin:0; background-color:#505b62; width:100%;">
+            <div class="spa@section_total.inspectn9" style="margin:0; background-color:#505b62; width:100%;">
                    <ul class="nav nav-pills">
                     <li class="done"><a href="#">Strategy <span><%= @sections[0].total_points %></span></a></li>
                     <li class="done"><a href="#">Systems <span><%= @sections[1].total_points%></span></a></li>
@@ -9,8 +36,8 @@
             </div>
 </div>
 <div class="container" style="margin-top:20px;">
-	<div class="row-fluid" style="margin-left: 0;">
-				
+    <div class="row-fluid" style="margin-left: 0;">
+                
              <%@sections.each do |section|%>
                 <div class="span4" style="background-color: white;width: 28.91%;">
                     <h2><%= section.name%></h2>
@@ -48,27 +75,27 @@
                 <div class="plus">+</div>
             <%end%>
         <%end%>                
-	</div>
+    </div>
 </div>
-
+    
         <div class="container" style="margin-top:20px;">
-			<div class="row-fluid">
-				<div class="span7" style="text-align:center;height:170px;background-color:white;">
-                	<div style="padding:15px;">
+            <div class="row-fluid">
+                <div class="span7" style="text-align:center;height:170px;background-color:white;">
+                    <div style="padding:15px;">
                         <h3 style="color: #00A54F;">Thank you for taking the survey.</h3><br>
                         <h2 style="color: #0086AC;">Your Final Score is <span><%= @final_score%> points</span></h2><br>
-						<a href="#" class="btn btn-small btn-info"><i class="icon-info-sign icon-white"></i> Tips and tricks to improve score</a>
+                        <a href="#" class="btn btn-small btn-info"><i class="icon-info-sign icon-white"></i> Tips and tricks to improve score</a>
                     </div>
-				</div>
+                </div>
                 <div class="span3" style="margin-left:0; padding-right:10px;padding-left:10px;background-color:#394247;
                 height:170px;">
-                	<div style="padding:10px;">
+                    <div style="padding:10px;">
                         <div style="float:left; width:82px;">
                             <h2 class="revenue">Revenue<br>
                             <span>Grade</span><br>
-							<!--<img src="img/stars.png" alt="stars">-->
+                            <!--<img src="img/stars.png" alt="stars">-->
                             <%#= image_tag("star-on.png")%>
-							<div id="fixed">
+                            <div id="fixed">
 
                             </div>
                             </h2>
@@ -77,21 +104,44 @@
                         <span>Grade CODE</span>
                         </div>
                     </div>
-				</div>
-                <div class="span2" style="margin-left:0; padding-right:10px;padding-left:10px;text-align:center;height:170px;background-color:#0086ac;color:#fff;"><br>
-                    <br>
-                    <a href="#" style="color:#fff;">
-                    <%= link_to image_tag("download_icon.png"),download_url(request.parameters.merge({:format => :pdf})), :class => "downloadIcon" %>
-                    Download
-                    <br>
-                    Result</a><br>                
-                                        
-                    <br>
-					<button class="btn btn-small">Compare with<br>Benchmark</button>
-				</div>
-			</div>
-		</div>
+                </div>
+                
+            </div>
+        </div>
+<%= render "/layouts/shared/footer" %>
+        
+        <!-- /container -->
+
+        <!-- Le javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+     
+        
+        <%= javascript_include_tag "application"%>
+       
+        <script>
+        $(document).ready(function(){
+            
+        $(".pageAccordion").accordion({
+        autoHeight: false,
+        navigation: true
+        });
+        }); 
+        
+        </script>
+
+       <script>
+        $(function() {
+        //$('#default').raty();
+        $('#fixed').raty({
+        readOnly: true,
+        start: 3
+        });
+        }); 
+        </script>   
+                
+    </body>
+</html>
 
 
-
-		  
+          

@@ -23,5 +23,7 @@ Added validation for user and company and survey
 Added the toggle for login and signup buttons
 Added migration to change the datatype for surveys size and revenue columns to be string
 
-Installed gems gem 'wkhtmltopdf-binary', gem 'pdfkit' for pdf generation and 
-gem "spreadsheet", "0.6.5.8", gem "to_xls" for xls generation and downloading the format
+Installed gems gem 'wkhtmltopdf-binary', gem 'pdfkit' for pdf generation and gem "spreadsheet",
+ "0.6.5.8", gem "to_xls" for xls generation and created methods for downloading the pdf and xls format for survey result.
+
+ 
