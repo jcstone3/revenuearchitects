@@ -13,6 +13,11 @@ gem "client_side_validations"
 gem 'settingslogic'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.0.3'
+#Gems used for pdf and xls generation
+gem 'wkhtmltopdf-binary'
+gem 'pdfkit'
+gem "spreadsheet", "0.6.5.8"
+gem "to_xls", :git => "https://github.com/dblock/to_xls.git", :branch => "to-xls-on-models"
 # Gem used for creating sample data
 gem 'populator3'
 gem 'highline'

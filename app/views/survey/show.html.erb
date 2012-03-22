@@ -10,15 +10,16 @@
         </div>
 		<div class="container" style="margin-top:20px;">
 			<div class="row-fluid" style="margin-left: 0;">
-				
+			<%= @section_total.inspect%>	
+            <%= @questions_score.inspect%>
              <%@sections.each do |section|%>
                 <div class="span4" style="background-color: white;width: 28.91%;">
                     <h2><%= section.name%></h2>
                     <div>
-                        <div id="accordion1" class="pageAccordion">
+                        <div>
                         <% section.sub_sections.each do |sub_section|%>                     
                             <h3><a href="#"><%= sub_section.name%></a><i>
-                                <%= @subsection_total[sub_section.id - 1]%></i></h3>
+                                <%#= @subsection_total[sub_section.id - 1]%></i></h3>
                             <div>
                               <p>
                                 <% sub_section.questions.each do |question| %>
@@ -39,7 +40,7 @@
                     <div class="scoreBox">
                     <div class="finalScore">
                     TOTAL
-                    <span><%= @section_total[section.id - 1]%>
+                    <span><%= @final_score%>gdfgdfg<%#= @section_total[section.id - 1]%>
                     <i>POINTS</i></span>
                     </div>
                     </div>
@@ -82,11 +83,10 @@
                     <%= image_tag "download_icon.png",:class => "downloadIcon" %>
                     
                                      <%#= link_to 'Download', download_url(request.parameters.merge({:format => :xls})), :style=>"color:#fff;" %>
-                                       <%= link_to 'Download', download_url(request.parameters.merge({:format => :pdf})), :style=>"color:#fff;" %>
+                                       <%= link_to 'Download', download_url, :style=>"color:#fff;" %>
                                         <br>
                                         Result</a><br>                
-                                        
-                    <br>
+                                                            <br>
 					<button class="btn btn-small">Compare with<br>Benchmark</button>
 				</div>
 			</div>
