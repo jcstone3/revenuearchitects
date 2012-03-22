@@ -111,7 +111,7 @@ body {
   line-height: 18px;
   color: #333333;
   background-color: #1f2c34;
-  background-image:url(../img/bg_img.png);
+  background-image:url(bg_img.png);
 }
 a {
   color: #0088cc;
@@ -1178,7 +1178,7 @@ table .span12 {
   height: 14px;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../img/glyphicons-halflings.png");
+  background-image: url("glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   *margin-right: .3em;
@@ -1187,7 +1187,7 @@ table .span12 {
   *margin-left: 0;
 }
 .icon-white {
-  background-image: url("../img/glyphicons-halflings-white.png");
+  background-image: url("glyphicons-halflings-white.png");
 }
 .icon-glass {
   background-position: 0      0;
@@ -2190,7 +2190,7 @@ button.btn.small, input[type="submit"].btn.small {
 }
 .nav > li > a:hover {
   text-decoration: none;
-  background-color: #eeeeee;
+ /* background-color: #eeeeee;*//*custom change*/
 }
 .nav .nav-header {
   display: block;
@@ -2286,6 +2286,7 @@ button.btn.small, input[type="submit"].btn.small {
   color: #ffffff;
   background-color: #0088cc;
 }
+
 .nav-stacked > li {
   float: none;
 }
@@ -3499,3 +3500,4 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
+
