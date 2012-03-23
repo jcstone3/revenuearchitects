@@ -11,6 +11,7 @@ gem 'oauth2'
 gem 'omniauth-google-apps'
 gem "oa-openid"
 gem 'omniauth-openid'
+gem 'uuidtools'
 #gem "omniauth-linkedin", "~> 0.0.6"
 #gem "linkedin"
 gem 'jquery-rails'
@@ -33,7 +34,6 @@ gem 'rubyXL', '1.2.5'
 gem 'nokogiri'
 gem 'rubyzip'
 group :development do
-gem 'uuidtools'
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
 end
