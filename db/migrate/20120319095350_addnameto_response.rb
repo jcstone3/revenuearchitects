@@ -1,9 +1,9 @@
 class AddnametoResponse < ActiveRecord::Migration
   def up
-  	#add_column :response, :name, :string
+  	add_column :response, :name, :string
   end
 
   def down
-  	#remove_column :response, :name
+  	remove_column :response, :name
   end
 end

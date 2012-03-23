@@ -27,3 +27,5 @@ Installed gems gem 'wkhtmltopdf-binary', gem 'pdfkit' for pdf generation and gem
  "0.6.5.8", gem "to_xls" for xls generation and created methods for downloading the pdf and xls format for survey result.
 
  
+Change border color of the active tab for login's
+Google apps integration for login  

@@ -11,13 +11,13 @@
                  <%= @company_error_messages %>
                      <div class="points" style="padding-top:5px;">
                         <div class="option">
-                        <h2>Your Company Name</h2>
+                        <h2>Your Company Name<span style="color:red;">*</span></h2>
                         <%= f.text_field :name, :maxlength=>"40", :validate =>{:presence => true} %>
                         </div>
                      </div>      
                      <div class="points" style="padding-top:5px;">
                         <div class="option">
-                           <h2>Website</h2>
+                           <h2>Website<span style="color:red;">*</span></h2>
                            <%= f.text_field :website, :maxlength=>"40", :validate =>
                                            { :presence => true, :uniqueness => true}  %>
                         </div>

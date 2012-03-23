@@ -3,11 +3,16 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.2'
 gem 'pg'
 gem 'devise'
+#gem 'oa-oauth', :require => 'omniauth/oauth'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'oauth2'
 gem 'omniauth-google-apps'
+gem "oa-openid"
+gem 'omniauth-openid'
+#gem "omniauth-linkedin", "~> 0.0.6"
+#gem "linkedin"
 gem 'jquery-rails'
 gem "client_side_validations"
 gem 'settingslogic'

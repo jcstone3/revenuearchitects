@@ -16,6 +16,8 @@ development:
     twitter_secret_key: 'NTxxbMxIXqsj2m3DWBAiosJPQp7IcDtLBd4l9nKOY'
     google_api_id: '687896268286.apps.googleusercontent.com'
     google_secret_key: 'qJ3gKLSbbeAT3-ZShMsArias'
+    linkedin_api_key: 'dt67gevhr7lv'
+    linkedin_secret_key: 'mIc7DHX0CquGm8jt'
 
 staging:
     <<: *defaults

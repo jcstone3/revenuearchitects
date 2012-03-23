@@ -36,37 +36,70 @@
                     </div>
         </div>
         <div class="span4 rightBox">
-                  <ul class="nav nav-tabs">
-                            <li class="active"><a href="#home" data-toggle="tab"><%= image_tag "rg_icon.png", 
-                            :alt=>"home" %><strong>Sign Up with us</strong></a></li>
-                            <li><a href="#twitter" data-toggle="tab" style="background-color:#53b1f0;">
-                                <%= image_tag "twitter_icon.png", :alt=>"twitter" %></a></li>
-                            <li><%= link_to image_tag("facebook_icon.png", :alt=>"facebook"), 
-                                 user_omniauth_authorize_path(:facebook), :style=>"background-color:#3b5998;"
-                                  %></li>
-                            <li><a href="#plus" data-toggle="tab" style="background-color:#bb2a0b;">
-                                <%= image_tag "plus_icon.png", :alt=>"plus" %></a></li>
-                            <li><a href="#linkedin" data-toggle="tab" style="background-color:#006695;">
-                                <%= image_tag "linkedin_icon.png", :alt=>"linkedin" %></a></li>
+                 <ul class="nav nav-tabs">
+                            <li class="active">
+                               <a href="#home" data-toggle="tab"><%= image_tag "rg_icon.png", :alt=>"home" %><strong>Sign Up with us</strong></a>
+                            </li>                            
+                            <li>
+                               <a href="#twitter" data-toggle="tab" style="background-color:#53b1f0;" id="twitter_click" >
+                                   <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
+                               </a>
+                            </li>
+                            <li>
+                                <a href="#facebook" data-toggle="tab" style="background-color:#3b5998;" id="facebook_click">
+                                   <%= image_tag "facebook_icon.png", :alt=>"facebook", :id=>"facebook_click"%>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#plus" data-toggle="tab" style="background-color
+                                :#bb2a0b;" id="google_click">
+                                   <%= image_tag "plus_icon.png", :alt=>"plus", :id=>"google_click" %>
+                                 </a>
+                             </li>
+                             <li>
+                                <a href="#linkedin" data-toggle="tab" style="background-color:#006695;", id="linkedin_click">
+                                   <%= image_tag "linkedin_icon.png", :alt=>"linkedin", :id=>"linkedin_click" %>
+                                 </a>
+                             </li>
                             </ul>
                              
-                            <div class="tab-content">
+                            <div class="tab-content" id="tab-content">
                             <div class="tab-pane active" id="home">
-                              <br> <br> <br>
-                              <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true) do |f| %>
+
+                                <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true) do |f| %>
                                 <h3>Email<span>*</span></h3>
                                 <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id"  %><br> <br> 
                                 <h3>Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password"  %>
  
-                <%= f.submit "Login", :class=>"btn btn-primary btn-large" %>
-               <span> or </span> &nbsp; <span> <%= link_to "Register", new_user_registration_path%></span>
-               <%= hidden_field_tag('login', "yes")%>
-               <%end%>
+                                <%= f.submit "Login", :class=>"btn btn-primary btn-large" %>
+                               <span> or </span> &nbsp; <span> <%= link_to "Register", new_user_registration_path%></span>
+                               <%= hidden_field_tag('login', "yes")%>
+                               
+                               <%end%>
                             </div>
-                            <div class="tab-pane" id="twitter">Twitter login screen</div>
-                            <div class="tab-pane" id="facebook">Facebook login screen</div>
-                            <div class="tab-pane" id="plus">Google Plus login screen</div>
-                            <div class="tab-pane" id="linkedin">Linked in login screen</div>
+                            <div class="tab-pane" id="twitter">Login with Twitter
+                                <br>
+                                <%= link_to image_tag("twitter.jpeg" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter),
+                                                     :style=>"background-color:#53b1f0;" %>
+                            </div>   
+                            <div class="tab-pane" id="facebook">Login With Facebook 
+                            <br> 
+                                <%= link_to image_tag("facebook.jpeg", :alt=>"facebook"), 
+                                                     user_omniauth_authorize_path(:facebook),
+                                                     :style=>"background-color:#3b5998;"%>
+                            </div>
+                            <div class="tab-pane" id="plus">Login with Google Plus 
+                                <br>
+                                <%#= link_to image_tag("google.jpeg", :alt=>"google"), 
+                                                     user_omniauth_authorize_path(:google),
+                                                     :style=>"background-color:#bb2a0b;"%>
+                            </div>
+                            <div class="tab-pane" id="linkedin">Linked in login screen
+                                <br>
+                                <%#= link_to image_tag("linkedin_icon.png", :alt=>"linkedin"), 
+                                                     user_omniauth_authorize_path(:facebook),
+                                                     :style=>"background-color:#006695;"%>   
+                            </div>
                             </div>
         </div>
       </div>

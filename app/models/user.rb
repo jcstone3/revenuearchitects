@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   
   #validations
   validates_presence_of :username, :message => "username cannot be blank"
-  validates_format_of :username, :with =>/[a-z A-Z][a-z A-Z 0-9_]*$/, :message => "should start with a letter"
+  validates_format_of :username, :with =>/^[a-z A-Z][a-z A-Z 0-9_]*$/, :message => "should start with a letter and can have numbers and underscore and no other special characters"
 
   validates_presence_of :password, :message => "cannot be blank"
   validates_length_of :password,  :within => 4..30, :message => "should be greater than 4 and less than 30"
@@ -34,7 +34,7 @@ def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
       user
     else # Create a user with a stub password. 
       if provider == "facebook"             
-       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.id)  
+       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.first_name)  
       else
        User.create!(:email => "no_email@test.com", :password => Devise.friendly_token[0,20], :username => data.name)
       end     

@@ -508,15 +508,16 @@ font-family: 'Pontano Sans', sans-serif;
 
 /* css for client side validation error*/
 .field_with_errors {  
-  display: inline;  
+  display: inline; 
+  border:1px solid blue;
+  width:200px; 
 }  
   
 .field_with_errors .message {  
-  color: black;  
-  padding-left: 5px;  
+  color: #D00;  
+  padding-left: 15px;  
   font-size: 12px;  
 }  
-
 
 
 

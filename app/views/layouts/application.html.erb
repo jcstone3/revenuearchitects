@@ -64,18 +64,57 @@
 		<script>
 			$(document).ready(function(){
 			//to hide and show login and signup	
-			$('#signup_user').hide();
-			//alert($('#login').val());
-			var login_val = $('#login').val();
-			
-			if(login_val == "yes"){
-             $('#signup_user').show();
-             $('#login_user').hide();
-			}
-			else{
-			  $('#signup_user').hide();	
-			  $('#login_user').show();
-			}			
+				$('#signup_user').hide();
+				
+				var login_val = $('#login').val();
+				
+				if(login_val == "yes"){
+	             $('#signup_user').show();
+	             $('#login_user').hide();
+				}
+				else{
+				  $('#signup_user').hide();	
+				  $('#login_user').show();
+				}	
+            //----------end of hide n show----------------------------//
+            //to set the active tab to the color of the login type clicked
+				$('#twitter_click').click(function(){				
+					$('#tab-content').css({'border' :'2px solid #53b1f0'});
+					}, function () {
+	    			var cssObj = {
+	      			'border' : '2px solid #53b1f0'     			
+	   			 	}
+	    			$('#tab-content').css(cssObj);
+	 			 	});
+
+				$('#facebook_click').click(function(){				
+					$('#tab-content').css({'border' :'2px solid #3b5998'});
+					}, function () {
+	    			var cssObj = {
+	      			'border' : '2px solid #3b5998'     			
+	   			 	}
+	    			$('#tab-content').css(cssObj);
+	 			 	});
+
+				$('#google_click').click(function(){				
+					$('#tab-content').css({'border' :'2px solid #bb2a0b'});
+					}, function () {
+	    			var cssObj = {
+	      			'border' : '2px solid #bb2a0b'     			
+	   			 	}
+	    			$('#tab-content').css(cssObj);
+	 			 	});
+
+				$('#linkedin_click').click(function(){				
+					$('#tab-content').css({'border' :'2px solid #006695'});
+					}, function () {
+	    			var cssObj = {
+	      			'border' : '2px solid #006695'     			
+	   			 	}
+	    			$('#tab-content').css(cssObj);
+	 			 	});
+			//--------end-of-login-click ------------//
+
 			});
 		</script>		
 	</body>
