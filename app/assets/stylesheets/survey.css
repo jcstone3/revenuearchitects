@@ -508,8 +508,7 @@ font-family: 'Pontano Sans', sans-serif;
 
 /* css for client side validation error*/
 .field_with_errors {  
-  display: inline; 
-  border:1px solid blue;
+  display: inline;   
   width:200px; 
 }  
   
