@@ -22,6 +22,7 @@ gem 'settingslogic'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.0.3'
 #Gems used for pdf and xls generation
+gem "wkhtmltopdf-heroku"
 gem 'wkhtmltopdf-binary'
 gem 'pdfkit'
 gem "spreadsheet", "0.6.5.8"
