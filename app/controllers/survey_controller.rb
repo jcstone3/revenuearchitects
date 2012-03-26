@@ -73,7 +73,8 @@ end
 
 #report of a particular survey
 def report
-  @survey = Survey.find(params[:id])
+  @survey = current_user.companies.first.surveys.find_all_by_id(params[:id])
+  if @survey.present?
   @section_total = []
   @subsection_total = []
   @questions_score = []	
@@ -93,6 +94,10 @@ def report
   end  
   
   render :layout =>"reports"
+  else
+   flash[:notice] = "No survey exists"
+   redirect_to new_survey_path
+  end
 end	
 
 def previous_question
