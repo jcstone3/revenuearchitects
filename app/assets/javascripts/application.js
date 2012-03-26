@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require rails.validations
 //= jquery-ui-1.8.18.custom.min
 //= require bootstrap

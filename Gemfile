@@ -36,6 +36,10 @@ gem 'faker'
 gem 'rubyXL', '1.2.5'
 gem 'nokogiri'
 gem 'rubyzip'
+
+#bootstrap rails gem
+gem "twitter-bootstrap-rails"
+
 group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
