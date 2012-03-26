@@ -7,10 +7,12 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+#gem 'omniauth-google'
+gem 'omniauth-google-oauth2'
 gem 'oauth2'
-gem 'omniauth-google-apps'
-gem "oa-openid"
-gem 'omniauth-openid'
+#gem 'omniauth-google-apps'
+#gem "oa-openid"
+#gem 'omniauth-openid'
 gem 'uuidtools'
 #gem "omniauth-linkedin", "~> 0.0.6"
 #gem "linkedin"
