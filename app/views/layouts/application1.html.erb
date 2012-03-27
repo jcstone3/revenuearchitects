@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Revenue Grader - Sign Up</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+
+		<!-- Le styles -->
+        <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+         <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'> 
+        <link href='http://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Advent+Pro' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Jura' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Marvel' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Asul' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Enriqueta' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+		<!--end for fonts-->
+
+		<%= stylesheet_link_tag "bootstrap","survey", :media => "all" %>
+       
+	
+		<%= stylesheet_link_tag	 "bootstrap-responsive"   %>	
+	</head>
+
+	<body>
+		<%= render "/layouts/shared/header" %>
+		<div class="container">
+		<div id="alert">
+		   <% flash.each do |key, value| %>
+             <%= content_tag :div, value, :class => "alert alert-#{key}" unless value.blank? %>
+           <% end %>
+        </div>
+    </div>
+		<%= yield%>		
+		<%= render "/layouts/shared/footer" %>
+		
+		<!-- /container -->
+
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+      
+		<%= javascript_include_tag  "application" %> 
+		
+ 		 <script>
+			$(function () {
+			$('.tabs').click(function(){
+					alert($(this).attr('id'));
+				});
+			})
+		</script>
+		<script>
+			$(document).ready(function(){
+			//to hide and show login and signup	
+				$('#signup_user').hide();
+				
+				var login_val = $('#login').val();
+				
+				if(login_val == "yes"){
+	             $('#signup_user').show();
+	             $('#login_user').hide();
+				}
+				else{
+				  $('#signup_user').hide();	
+				  $('#login_user').show();
+				}	
+            //----------end of hide n show----------------------------//
+            //to set the active tab to the color of the login type clicked
+				$('#twitter_click').click(function(){				
+					$('#tab-content').css({'border' :'2px solid #53b1f0'});
+					}, function () {
+	    			var cssObj = {
+	      			'border' : '2px solid #53b1f0'     			
+	   			 	}
+	    			$('#tab-content').css(cssObj);
+	 			 	});
+
+				$('#facebook_click').click(function(){				
+					$('#tab-content').css({'border' :'2px solid #3b5998'});
+					}, function () {
+	    			var cssObj = {
+	      			'border' : '2px solid #3b5998'     			
+	   			 	}
+	    			$('#tab-content').css(cssObj);
+	 			 	});
+
+				$('#google_click').click(function(){				
+					$('#tab-content').css({'border' :'2px solid #bb2a0b'});
+					}, function () {
+	    			var cssObj = {
+	      			'border' : '2px solid #bb2a0b'     			
+	   			 	}
+	    			$('#tab-content').css(cssObj);
+	 			 	});
+
+				$('#linkedin_click').click(function(){				
+					$('#tab-content').css({'border' :'2px solid #006695'});
+					}, function () {
+	    			var cssObj = {
+	      			'border' : '2px solid #006695'     			
+	   			 	}
+	    			$('#tab-content').css(cssObj);
+	 			 	});
+			//--------end-of-login-click ------------//
+
+			});
+		</script>		
+	</body>
+</html>
