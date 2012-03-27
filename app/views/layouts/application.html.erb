@@ -23,11 +23,9 @@
   </head>
   <body>
     <div class="container" style="background-color:#fff;">
-          <a class="brand" href="#">
-<%#= image_tag('logo.png'), %>
-            <img src="assets/logo.png" alt="logo" style="vertical-align: top; margin-left:10px;"></a>
+          <%= link_to image_tag('logo.png', :alt=>"logo", :style=>"vertical-align: top; margin-left:10px;"),  show_url, :class=>"brand" %>
           <div class="ra">
-            brought to you by<a href="#" target="_blank"><img src="assets/ra_logo.png" alt="ra_logo" style="vertical-align: top; margin:-4px 0 0 4px;"></a>
+            brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo", :style=>"vertical-align: top; margin:-4px 0 0 4px;"), show_url %>
           </div>
           <div class="row-fluid">
             <div class="button-bar">
