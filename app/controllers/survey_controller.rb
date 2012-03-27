@@ -2,6 +2,7 @@ class SurveyController < ApplicationController
 
 before_filter :authenticate_user!
 before_filter :check_company
+layout "application"
 
 #new survey
 def new
@@ -10,6 +11,7 @@ def new
 	if @active_survey
    @response = @active_survey.responses.last 
    if  @response
+     flash[:success] = params[:flash] 
      redirect_to questions_url(@active_survey, @response.question_id+1)
    else
      redirect_to questions_url(@active_survey, 1)
@@ -27,7 +29,7 @@ def create
   params[:survey].merge!(:start_date => Time.now, :is_active => true)
 	@survey = @company.surveys.create!(params[:survey])
 	if @survey
-	   flash[:notice] = "Survey created successfully"
+	   flash[:success] = "Survey created successfully"
 	   redirect_to questions_url(@survey, 1)
 	else
 	   flash[:error] = "Sorry could not create the survey"

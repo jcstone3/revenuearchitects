@@ -28,4 +28,12 @@ Installed gems gem 'wkhtmltopdf-binary', gem 'pdfkit' for pdf generation and gem
 
  
 Change border color of the active tab for login's
-Google apps integration for login  
+
+
+Created layouts using twitter-bootstrap-rails gem 
+Integrated the css for the layouts
+Done with the success messages
+Validations for Survey website
+
+
+

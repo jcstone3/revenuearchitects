@@ -17,7 +17,7 @@ class CompaniesController < ApplicationController
 	def create
 		@company = current_user.companies.create!(params[:company])
 		if @company
-			flash[:notice] = "Company created successfully"
+			flash[:success] = "Company created successfully"
 			redirect_to new_survey_url
 		else
 		 # flash[:error] = "Sorry could not create company"
