@@ -2,7 +2,7 @@ class SurveyController < ApplicationController
 
 before_filter :authenticate_user!
 before_filter :check_company
-
+layout "application"
 #new survey
 def new
   #if any active survey exists then user will get redirected to the active survey questions

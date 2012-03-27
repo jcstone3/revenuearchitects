@@ -3,35 +3,37 @@
 				<div class="span9 leftBox" style="height:auto">
           <div class="question">
             <h1>
-              Give us some details for the survey
+              Company Survey Details
             </h1>
           </div>
-
+           <div style="padding-left:0px; padding-top:0px; margin-top:0px">   
           <%= form_for(@survey, :url=>{:action => "create"}, :validate => true) do |f| %>
-              <div class="points" style="padding-top:20px;">
-                <div class="option">
-                  <h2>What is your firm size?</h2>
+             <div class="points" style="margin-top:5px;">
+                        <div class="option">
+                          <h3>Industry Size</h3>
                     <%#= f.text_field :size ,:class=>"span3", :placeholder=>"size"%>
                     <%= f.select :size, [['10 - 20'],['21 - 50'],['51 - 100']],:class=>"span3" %>
+
                     <br>
                 </div>
               </div>
-              <div class="points1" style="padding-top:20px;">
+              <div class="points" style="margin-top: 40px;">
                 <div class="option">
-                  <h2>What is total revenue in last 12 months?</h2>
+                  <h3>What is total revenue in last 12 months?</h3>
                   <%= f.select :revenue, [['more then 500000'],['500000-1500000'],['1500000 and more']],:class=>"span3" %>
                 </div>
               </div>
 
-              <p style="clear:both; margin:40px 0 40px 20px; float:left; height:auto; width:97%;">
+              <p style="clear:both; margin:60px 0 40px 20px; float:left; height:auto; width:97%;">
                 <%= f.submit "Start Survey", :class=>"btn btn-small btn-info" ,:input_html =>{:style=>"float:left; margin-right:20px;"} %><i class="icon-folder-close icon-white"></i>
               </p>
         <% end %>
        	</div>
+        </div>
 <% if @previous_surveys.present?%>
        <div class="span3 rightBox" >
                   
-                        <h2 style=" text-align:center;padding-top:10px;color:#0086AC; padding-bottom:10px;font-family: 'Telex',sans-serif;font-weight: normal;">Previous Survey  </h2>
+                        <h2 style="  padding-top:10px;color:#0086AC; padding-bottom:10px;font-weight: 300;">Previous Survey  </h2>
                     
                     <div class="Baloon" style="margin-top:20px;">
                         <div class="head1"><h1>January 2011 </h1>
@@ -54,7 +56,7 @@
 	         <%else%>
            <div class="span3 rightBox" >
                   
-                        <h2 style=" text-align:center;padding-top:10px;color:#0086AC; padding-bottom:10px;font-family: 'Telex',sans-serif;font-weight: normal;">Previous Survey  </h2>
+                        <h2 style=" text-align:left;padding-top:10px;color:#0086AC; padding-bottom:10px;font-family: 'Telex',sans-serif;font-weight: normal;">Previous Survey  </h2>
                     
                     <div class="Baloon" style="margin-top:20px;">
                         <div class="head1"><h1>January 2011 </h1>

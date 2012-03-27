@@ -68,18 +68,18 @@ float: right;
 .leftBox .question{
 	float:left;
 	width:95%;
-	padding:0 0 0 20px;
+	margin-left:20px;
 }
 .leftBox .question h1{
     font-size: 40px;
 	font-weight: 300;
-	margin-top:20px;
-	font-family: @customFont;
+	margin-top:10px;
+	
 	color:#67737a;
 	width:80%;
 	float:left;
     line-height: 52px;
-    letter-spacing:-2px;
+    
 
 }
 .leftBox .question h2{
@@ -120,7 +120,9 @@ float: right;
 	float:left;
 	width:90%;
 	color:#67737a;
-	padding:20px 20px 0 20px;
+	margin-top:54px;
+	margin-left:20px;
+	/*padding:20px 20px 0 20px;*/
 }
 .leftBox .points h2{
 	color:#67737a;
@@ -138,12 +140,16 @@ float: right;
 	float:left;
 	width:100%;
 }
-.leftBox .points .option h2{
+.leftBox .points .option h3{
 	float:left;
 	color:#0086ac;
-	font-weight:normal;
+	font-weight:300;
 	font-size:23px;
 	width:100%;
+	
+	margin-top: 24px; 
+	margin-bottom: 18px;
+
 }
 .leftBox .points .option .btn{
 	-moz-border-radius: 25px;
@@ -261,10 +267,14 @@ font-family: 'Pontano Sans', sans-serif;
 	height:90px;
 	border-bottom-right-radius: 20px;
 	border-bottom-left-radius: 20px; 
-	font-family:Tahoma, Geneva, sans-serif;
 	padding:15px 4px 5px 4px;
 	text-shadow: 1px 1px 1px #000;
 	background-color:rgba(48,60,67,0.5);
+	box-shadow-top: -1px -0px 1px #000;
+	-moz-box-shadow: -1px 0px 1px #575f64 inset;
+    -webkit-box-shadow: -1px -0px 1px #575f64 inset;
+	box-shadow: -1px -0px 1px #575f64 inset;
+
 	text-align:center;
 	width:97%;
 }
@@ -278,7 +288,7 @@ font-family: 'Pontano Sans', sans-serif;
 .tips{
 	float:left;
 	clear:both;
-	width:170px;
+	
 	margin-top:40px;
 	background-color:rgba(48,60,67,0.5);
 	border-bottom-right-radius: 20px;
@@ -502,6 +512,7 @@ font-family: 'Pontano Sans', sans-serif;
 	width:97%;
 	text-align:left;
 	text-shadow: 1px 1px 1px #000000;
+	font-family:@baseFontFamily;
 }
 
 
@@ -521,7 +532,11 @@ font-family: 'Pontano Sans', sans-serif;
 
 .Baloon .score1{
 	float:left;
-	background-color:#404b54;
+	background-color:rgba(48,60,67,0.5);
+	box-shadow-top: -1px -0px 1px #000;
+	-moz-box-shadow: -1px 0px 1px #575f64 inset;
+    -webkit-box-shadow: -1px -0px 1px #575f64 inset;
+	box-shadow: -1px -0px 1px #575f64 inset;
 	width:100%;
 	color:#9ddaba;
 	clear:both;

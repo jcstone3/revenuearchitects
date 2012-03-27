@@ -6,29 +6,31 @@
           </div>
                      
            <br/>
-           <div style="padding-left:20px; padding-top:20px; margin-top:40px">
+           <div style="padding-left:0px; padding-top:0px; margin-top:0px">
               <%= form_for(@company, :validate => true) do |f| %>
                  <%= @company_error_messages %>
-                     <div class="points" style="padding-top:5px;">
-                        <div class="option">
-                        <h2>Your Company Name<span style="color:red;">*</span></h2>
-                        <%= f.text_field :name, :maxlength=>"40", :validate =>{:presence => true} %>
+                     <div class="points" style="margin-top:5px" >
+                        <div class="option" >
+                        <h3>Your Company Name<span style="color:red;">*</span></h3>
+                        <%= f.text_field :name, :maxlength=>"40", :validate =>{:presence => true}, :class=> "input-xlarge" %><br/>
+                        <small>Your Company Name</small>
                         </div>
                      </div>      
-                     <div class="points" style="padding-top:5px;">
-                        <div class="option">
-                           <h2>Website<span style="color:red;">*</span></h2>
+                     <div class="points" >
+                        <div class="option" >
+                           <h3>Website<span style="color:red;">*</span></h3>
                            <%= f.text_field :website, :maxlength=>"40", :validate =>
-                                           { :presence => true, :uniqueness => true}  %>
+                                           { :presence => true, :uniqueness => true} ,:class=> "input-xlarge" %><br/>
+                                           <small>www.example.com</small>
                         </div>
                      </div>
-                     <div class="points" style="padding-top:5px;">
-                        <div class="option">
-                          <h2>Industry</h2>                                
+                     <div class="points" >
+                        <div class="option ">
+                          <h3>Industry</h3>                                
                           <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
                         </div>
                      </div>
-                     <div class="points" style="padding-top:15px;">
+                     <div class="points" style="margin-top:60px;">
                      <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white" %>                 
                 <% end %>
               </div>				
