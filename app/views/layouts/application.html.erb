@@ -23,41 +23,100 @@
   </head>
   <body>
     <div class="container" style="background-color:#fff;">
-          
-            <%= link_to image_tag('logo.png', :alt=>"logo", :style=>"vertical-align: top; margin-left:10px;"),  show_url, :class=>"brand" %>
-            
+          <a class="brand" href="#">
+<%#= image_tag('logo.png'), %>
+            <img src="assets/logo.png" alt="logo" style="vertical-align: top; margin-left:10px;"></a>
           <div class="ra">
-            brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo", :style=>"vertical-align: top; margin:-4px 0 0 4px;"), show_url %></a>
+            brought to you by<a href="#" target="_blank"><img src="assets/ra_logo.png" alt="ra_logo" style="vertical-align: top; margin:-4px 0 0 4px;"></a>
           </div>
           <div class="row-fluid">
             <div class="button-bar">
-             <% if user_signed_in?%>
-              <%= "#{current_user.username}" %>
-              <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
-              <%else%>
-              <%= link_to "Login", new_user_session_path, :class=>"btn", :id=>"login_user"%>
-              <%= link_to "Sign Up", new_user_registration_path, :class=>"btn btn-primary", :id=>"signup_user"%>
-              <%end%>
+              <a href="#" class="btn">Login</a> <a href="#" class="btn btn-primary">Sign Up</a>
             </div>
           </div>
         </div>
     <div class="container" style="margin-top:20px;">
-      <div id="alert">
-       <% flash.each do |key, value| %>
-             <%= content_tag :div, value, :class => "alert alert-#{key}" unless value.blank? %>
-           <% end %>
+      <div class="row-fluid">
+        <div class="span8 leftBox">
+          <div class="arrows">
+                        <h1>
+                            Assess your <br />
+                            <strong>Revenue Potential <a href="#">now</a></strong>
+                        </h1>
+                    </div>
+                    <div class="points" style="padding-top:20px;">
+                      <div class="icon">
+                          <img src="assets/1point.png" alt="icon">
+                        </div>
+                        <div class="picon">
+                      <h2>1. Rate yourself on key revenue drivers</h2>
+                        <p style="color:#000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. </p>
+                        </div>
+                    </div>
+                    <div class="points">
+                      <div class="icon">
+                        <img src="assets/2point.png" alt="icon">
+                        </div>
+                        <div class="picon">
+                      <h2 style="color:#c56d2b;">2. We instantly process the results</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. </p>
+                        </div>
+                    </div>
+                    <div class="points">
+                      <div class="icon">
+                        <img src="assets/3point.png" alt="icon">
+                        </div>
+                        <div class="picon">
+                      <h2 style="color:#bff0f7;">3. Download your report</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. </p>
+                        </div>
+                    </div>
         </div>
-    <%= yield%>
-
+        <div class="span4 rightBox">
+                  <ul class="nav nav-tabs">
+                            <li class="active"><a style="background-color:#ffffff;" href="#home" data-toggle="tab"><img src="assets/rg_icon.png" alt="home"><strong>Sign Up with us</strong></a></li>
+                            <li><a href="#twitter" data-toggle="tab" style="background-color:#53b1f0;"><img src="assets/twitter_icon.png" alt="twitter"></a></li>
+                            <li><a href="#facebook" data-toggle="tab" style="background-color:#3b5998;"><img src="assets/facebook_icon.png" alt="facebook"></a></li>
+                            <!-- <li><a href="#plus" data-toggle="tab" style="background-color:#bb2a0b;"><img src="img/plus_icon.png" alt="plus"></a></li>
+                            <li><a href="#linkedin" data-toggle="tab" style="background-color:#006695;"><img src="img/linkedin_icon.png" alt="linkedin"></a></li> -->
+                            </ul>
+                             
+                            <div class="tab-content">
+                            <div class="tab-pane active" id="home">
+                                <h3  style="padding-left: 16px;">Name<span>*</span></h3>
+                                <input type="text" class="span3" style="margin-left: 16px; margin-bottom: 18px;" placeholder="Full Name"><br>
+                                <h3 style="padding-left: 16px;">Company Email<span>*</span></h3>
+                <input type="text" class="span3"  style="margin-left: 16px; margin-bottom: 18px;" placeholder="yourname@company.com"><br>
+                                <h3 style="padding-left: 16px;">Your Website URL<span>*</span><h3>
+                                <input type="text" class="span3" style="margin-left: 16px; margin-bottom: 18px;" placeholder="www.yourcompanyurl.com"><br>
+                <label class="checkbox" style="padding-left: 16px;">
+                                <input type="checkbox" checked style="margin-left: 0px;"> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader. <a href="#">Privacy Policy</a></p>
+                              </label>
+                <a href="#" class="btn btn-primary btn-large" style="padding-left: 16px; margin-left: 15px;" ><strong>Sign Up and Get Started!</strong></a>
+                <p style="font-size:11px; color:#67737a;  margin: 10px 0pt 18px; padding-left: 16px;">We will keep your personal information strictly confidential</p>
+                            </div>
+                            <div class="tab-pane" id="twitter">Twitter login screen</div>
+                            <div class="tab-pane" id="facebook">Facebook login screen</div>
+                            <div class="tab-pane" id="plus">Google Plus login screen</div>
+                            <div class="tab-pane" id="linkedin">Linked in login screen</div>
+                            </div>
+        </div>
+      </div>
     </div> 
     <%= render '/layouts/shared/footer'%>
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-   
+   <script>
+      $(function () {
+      $('.tabs').click(function(){
+          alert($(this).attr('id'));
+        });
+      })
+    </script>
     <%= javascript_include_tag "application" %>
- 
+
 
   </body>
 </html>
