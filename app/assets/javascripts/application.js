@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require rails.validations
+//= jquery-ui-1.8.18.custom.min
 //= require twitter/bootstrap
 //= require bootstrap
 //= require_tree .
@@ -178,9 +179,9 @@ $(document).ready(function(){
                 });
                
                 
-               /* $(".priorityTip").tooltip({
+                $(".priorityTip").tooltip({
                     placement: 'bottom' 
-                });*/ 
+                }); 
                 
                 
                 
@@ -191,11 +192,11 @@ $(document).ready(function(){
                     step: 1,
                     slide: function( event, ui ) {
                         switch(ui.value){
-                            case 1 :  $("a.ui-slider-handle").attr('data-original-title', 'Please Fill Text 0'); break;
-                            case 2 :  $("a.ui-slider-handle").attr('data-original-title', 'Please Fill Text 25'); break;
-                            case 3 :  $("a.ui-slider-handle").attr('data-original-title', 'Please Fill Text 50'); break;
-                            case 4 :  $("a.ui-slider-handle").attr('data-original-title', 'Please Fill Text 75'); break;
-                            case 5 :  $("a.ui-slider-handle").attr('data-original-title', 'Please Fill Text 100'); break;
+                            case 1 :  $("a.ui-slider-handle").attr('data-original-title', 'Weak'); break;
+                            case 2 :  $("a.ui-slider-handle").attr('data-original-title', 'Basic'); break;
+                            case 3 :  $("a.ui-slider-handle").attr('data-original-title', 'Developing'); break;
+                            case 4 :  $("a.ui-slider-handle").attr('data-original-title', 'Differntiated'); break;
+                            case 5 :  $("a.ui-slider-handle").attr('data-original-title', 'World Class'); break;
                         }
   
 
