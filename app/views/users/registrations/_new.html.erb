@@ -1,14 +1,13 @@
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true ) do |f| %>
   <%#= devise_error_messages! %>
-      <h3>User Name<span>*</span></h3>
-      <%= f.text_field :username,  :class=>"span3", :maxlength => "30", 
-                       :placeholder=>"Full Name", :validate =>{:presence => true} %><br>
-      <h3>Email<span>*</span></h3>
-      <%= f.email_field :email, :class=>"span3" , :placeholder=>"test@gmail.com", :validate =>
+      <h3 style="padding-left: 16px;">User Name<span>*</span></h3>
+      <%= f.text_field :username,  :class=>"span3", :maxlength => "30", :style=>"margin-left: 16px; margin-bottom: 18px;", :placeholder=>"Full Name", :validate =>{:presence => true} %><br>
+      <h3 style="padding-left: 16px;">Email<span>*</span></h3>
+      <%= f.email_field :email, :class=>"span3" , :style=>"margin-left: 16px; margin-bottom: 18px;",:placeholder=>"test@gmail.com", :validate =>
                         {:presence => true, :uniqueness => true}  %><br>
-      <h3>Password<span>*</span><h3>
-      <%= f.password_field :password,  :class=>"span3", :maxlength => "30", :placeholder=>"Password for the site", :validate =>{:presence => true} %><br>
+      <h3 style="padding-left: 16px;">Password<span>*</span><h3>
+      <%= f.password_field :password,  :class=>"span3", :maxlength => "30", :style=>"margin-left: 16px; margin-bottom: 18px;",:placeholder=>"Password for the site", :validate =>{:presence => true} %><br>
       <label class="checkbox">
       <input type="checkbox" checked> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader.
       <%= link_to 'Privacy Policy', privacy_policy_url%></p>
