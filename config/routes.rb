@@ -33,7 +33,7 @@ RevenueGrader::Application.routes.draw do
   match "aboutUs" =>'site#aboutUs', :as => 'aboutUs'
   match "contactUs" =>'site#conactUs', :as => 'contactUs'
   match "privacy_policy" =>'site#privacy_policy', :as => 'privacy_policy'
-
+  match "show" =>'site#show', :as => 'show'
   #defalut error page
   match "*path" => 'dashboard#error_handle404', :as => 'error_handle404'
   # The priority is based upon order of creation:
