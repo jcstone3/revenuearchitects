@@ -4,7 +4,7 @@ class Company < ActiveRecord::Base
 
     
 	validates :website, :presence => true, :length => { :maximum => 40 },
-			  :format => {:with => /^[a-zA-Z\d:\.\/]*$/i,:message =>"Invalid url"} 
+			  :format => {:with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)*$/i,:message =>"Invalid url"} 
 	
 	validates :user_id, :presence => true
     validates :industry_id, :presence => true, :numericality => true

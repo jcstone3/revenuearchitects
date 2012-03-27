@@ -9,11 +9,11 @@
       <h3 style="padding-left: 16px;">Password<span>*</span><h3>
       <%= f.password_field :password,  :class=>"span3", :maxlength => "30", :style=>"margin-left: 16px; margin-bottom: 18px;",:placeholder=>"Password for the site", :validate =>{:presence => true} %><br>
       <label class="checkbox">
-      <input type="checkbox" checked> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader.
+      <input type="checkbox" style="margin-left: 0px;" checked> <p style="font-size:11px; width:220px; margin:10px 0 20px 0;">Please send me updates and tips from Revenue Grader.
       <%= link_to 'Privacy Policy', privacy_policy_url%></p>
       </label>
-      <%= f.submit "Sign up and Get Started!", :class=>"btn btn-primary btn-large"  %>
-      <p style="font-size:11px; color:#67737a; margin:10px 0 0 0;">
+      <%= f.submit "Sign up and Get Started!", :class=>"btn btn-primary btn-large", :style=>"padding-left: 16px; margin-left: 15px;" %>
+      <p style="font-size:11px; color:#67737a;  margin: 10px 0pt 18px; padding-left: 16px;">
         We will keep your personal information strictly confidential
       </p>
       <%= hidden_field_tag('login', "no")%>

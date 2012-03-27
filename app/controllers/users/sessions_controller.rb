@@ -9,7 +9,12 @@ class Users::SessionsController < Devise::SessionsController
 
 
 	def create
-	  super
+	  #super
+    resource = warden.authenticate!(auth_options)
+    set_flash_message(:success, :signed_in) if is_navigational_format?
+    #flash[:success] ='Welcome! You have signed in successfully.'
+    sign_in(resource_name, resource)
+    respond_with resource, :location => after_sign_in_path_for(resource)
 	end 
 	
 	def destroy
