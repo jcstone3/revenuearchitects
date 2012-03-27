@@ -4,7 +4,7 @@
           <div class="arrows">
                         <h1>
                             Assess your <br />
-                            <strong>Revenue Potential <a href="#">now</a></strong>
+                            <strong>Revenue Potential <%= link_to 'now', new_user_session_path %></strong>
                         </h1>
                     </div>
                     <div class="points" style="padding-top:20px;">
@@ -38,8 +38,8 @@
         <div class="span4 rightBox">
                  <ul class="nav nav-tabs">
                             <li class="active">
-                               <a href="#home" data-toggle="tab"><%= image_tag "rg_icon.png", :alt=>"home" %><strong>Sign Up with us</strong></a>
-                            </li>                            
+                               <a style="background-color:#ffffff;" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png", 
+                            :alt=>"home")%><strong>Sign Up with us</strong></a></li>                
                             <li>
                                <a href="#twitter" data-toggle="tab" style="background-color:#53b1f0;" id="twitter_click" >
                                    <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
@@ -50,17 +50,17 @@
                                    <%= image_tag "facebook_icon.png", :alt=>"facebook", :id=>"facebook_click"%>
                                 </a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href="#plus" data-toggle="tab" style="background-color
                                 :#bb2a0b;" id="google_click">
-                                   <%= image_tag "plus_icon.png", :alt=>"plus", :id=>"google_click" %>
+                                   <%#= image_tag "plus_icon.png", :alt=>"plus", :id=>"google_click" %>
                                  </a>
                              </li>
                              <li>
                                 <a href="#linkedin" data-toggle="tab" style="background-color:#006695;", id="linkedin_click">
-                                   <%= image_tag "linkedin_icon.png", :alt=>"linkedin", :id=>"linkedin_click" %>
+                                   <%#= image_tag "linkedin_icon.png", :alt=>"linkedin", :id=>"linkedin_click" %>
                                  </a>
-                             </li>
+                             </li>-->
                             </ul>
                              
                             <div class="tab-content" id="tab-content">
