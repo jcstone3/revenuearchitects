@@ -83,10 +83,30 @@ $(document).ready(function(){
 			//--------end-of-login-click ------------//
 			//---- question js ---------------------//
 			//set defalut value for anwer1 
-               $( "#response_answer_1" ).val('1');
-
+                //to set the slider value 
+                
+               var response_answer1 = $('#response_answer_1').val();
+               if($('#response_answer_1').val() == ""){
+               var response_answer1  = 0; 
+                }
+                else
+                {
+                 
+                 var response_answer1 = $('#response_answer_1').val(); 
+                }
                //hide priority option on load
-               $('#priority_option').hide();  
+               if($('#response_answer_2').val() == "add_to_plan"){
+                var response_answer3 = $('#response_answer_3').val();
+                $('#option').find('a#'+response_answer2+'').removeClass('btn form priorityTip');
+                $('#option').find('a#'+response_answer2+'').addClass('btn form btn-success priorityTip');
+                $('#priority_option').find('a#'+response_answer3+'').removeClass('btn form priorityTip');
+                $('#priority_option').find('a#'+response_answer3+'').addClass('btn form btn-success priorityTip');
+                $('#priority_option').show();
+               }
+               else{
+                $('#priority_option').hide();
+               }
+                
                //highlight the section currently on
                 var section_id_val = $('#section').val();
                 $('#section_'+section_id_val).removeClass($('#section_'+section_id_val).attr('class'));
@@ -181,12 +201,11 @@ $(document).ready(function(){
                 
                 $(".priorityTip").tooltip({
                     placement: 'bottom' 
-                }); 
-                
+                });                 
                 
                 
                 $( "#slider" ).slider({
-                    value:0,
+                    value:response_answer1,
                     min: 1,
                     max: 5,
                     step: 1,

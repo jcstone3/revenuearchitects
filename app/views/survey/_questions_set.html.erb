@@ -34,16 +34,23 @@
                         <%= f.hidden_field :answer_3%>
                         </div>
                     </div>
-                    <p style="clear:both; margin:40px 0 40px 20px; float:left; height:auto; width:97%;">                        
-                      <%= link_to("", :class=>"btn btn-success", :id=>"confirm_answer") do %>
+                    <p style="clear:both; margin:40px 0 40px 20px; float:right; height:auto; width:97%;">                        
+                       
+                        
+                        <%= link_to("", :class=>"btn btn-success", :id=>"confirm_answer", :style=>"float:right;margin-right:10px;") do %>
                             <i class="icon-ok icon-white">
                             </i>Confirm Answer
-                       <% end %> 
-                        <% if(params[:question_id] > '1')%>
-                        <%= link_to(previous_question_url(params[:id], params[:question_id].to_i - 1), :class=>"btn") do %>
+                       <% end %>
+                       <% if(params[:question_id] > '1')%>
+                        <%= link_to(previous_question_url(params[:id], params[:question_id].to_i - 1), :class=>"btn", :style=>"float:right;margin-right:10px;") do %>
                             <i class="icon-chevron-left">
                             </i>Previous Question
-                       <% end %>                      
+                       <% end %>
+                       <%else%>
+                         <%= link_to(previous_question_url(params[:id], params[:question_id].to_i - 1), :class=>"btn large disabled", :style=>"float:right;margin-right:10px;") do %>
+                            <i class="icon-chevron-left">
+                            </i>Previous Question
+                       <% end %>                    
                         <%end%>
                         <!--<a href="#" class="btn btn-small btn-info" style="float:right; margin-right:20px;"><i class="icon-folder-close icon-white"></i> Save Work</a>-->
                       </p> 
