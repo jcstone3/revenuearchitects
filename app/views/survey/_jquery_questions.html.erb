@@ -70,7 +70,9 @@
                //For the Add to Plan options
                 $('#option').click(function(e){
                     //set the add to plan options 
-                    $('#response_answer_2').val(e.target.id); 
+                    $('#response_answer_2').val(e.target.id);
+                  //   event.preventDefault();
+ 
                     //make option as grey
                     $('#option').find('a#in_our_plan').removeClass($('#option').find('a#in_our_plan').
                         attr('class'));

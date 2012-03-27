@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
     if resource.is_a? User
        flash[:success] = "Welcome! You have signed up successfully." 
        if current_user.companies.first  
-
           new_survey_url  #user already has company, then redirect to survey page               
        else
           new_company_url   #redirect to create a new company  

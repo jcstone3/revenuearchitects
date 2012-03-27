@@ -10,8 +10,7 @@ def new
   @active_survey = current_user.companies.first.surveys.find(:first, :conditions=>["is_active=?", true])
 	if @active_survey
    @response = @active_survey.responses.last 
-   if  @response
-     flash[:success] = params[:flash] 
+   if  @response     
      redirect_to questions_url(@active_survey, @response.question_id+1)
    else
      redirect_to questions_url(@active_survey, 1)
