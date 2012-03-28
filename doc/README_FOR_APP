@@ -37,3 +37,10 @@ Validations for Survey website
 Included the js for questions page in application.js
 Validations set correctly for survey and company
 
+
+Merged test branch with master(updated with changed layouts)
+Added pagination for questions page
+Added tooltip on questions page
+
+
+Content needed for tooltip

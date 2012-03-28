@@ -211,11 +211,11 @@ $(document).ready(function(){
                     step: 1,
                     slide: function( event, ui ) {
                         switch(ui.value){
-                            case 1 :  $("a.ui-slider-handle").attr('data-original-title', 'Weak'); break;
-                            case 2 :  $("a.ui-slider-handle").attr('data-original-title', 'Basic'); break;
-                            case 3 :  $("a.ui-slider-handle").attr('data-original-title', 'Developing'); break;
-                            case 4 :  $("a.ui-slider-handle").attr('data-original-title', 'Differntiated'); break;
-                            case 5 :  $("a.ui-slider-handle").attr('data-original-title', 'World Class'); break;
+                            case 1 :  $("a.ui-slider-handle").attr('data-original-title', 'We are not engaging in this activity today.'); break;
+                            case 2 :  $("a.ui-slider-handle").attr('data-original-title', 'We are inconsistent with our approach and level of activity.'); break;
+                            case 3 :  $("a.ui-slider-handle").attr('data-original-title', 'We are currently ad hoc but building this capability.'); break;
+                            case 4 :  $("a.ui-slider-handle").attr('data-original-title', 'We do this on a regular basis and differentiate from competitors.'); break;
+                            case 5 :  $("a.ui-slider-handle").attr('data-original-title', 'We do this consistently and effectively for market advantage.'); break;
                         }
   
 
@@ -233,7 +233,7 @@ $(document).ready(function(){
                 $("div#slider a.ui-slider-handle").tooltip({
                     placement: 'bottom' 
                 });
-                $("a.ui-slider-handle").attr('data-original-title', 'Please Fill Text 0');
+                $("a.ui-slider-handle").attr('data-original-title', 'We are not engaging in this activity today');
 
 
 			//------------end of question page js ---- //
