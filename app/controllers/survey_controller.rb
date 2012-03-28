@@ -41,10 +41,19 @@ def question
 	@survey = current_user.companies.first.surveys.find_all_by_id(params[:id])	
 	if @survey      
        @question = Question.find(params[:question_id])           
-       
+        
       if @question 
-        #@questions = Question.find(:all)
-         @questions = Question.paginate(:page => params[:page])
+       ########for pagination ############
+         @question_all = Question.count
+         if(params[:question_id].to_i < 6)
+            @questions = Question.find(:all, :offset=> 0, :limit=>10) 
+         elsif(params[:question_id].to_i > @question_all - 5)  
+            @questions = Question.find(:all, :offset=> (@question_all - 10), :limit=>10)
+         else
+            @questions = Question.find(:all, :offset=> (params[:question_id].to_i - 5), :limit=>10)
+         end 
+      ######### end of pagination logic ########## 
+
          @survey_response = Response.find_last_by_survey_id_and_question_id(params[:id], params[:question_id])
          if @survey_response
             redirect_to previous_question_url(params[:id], params[:question_id])
@@ -108,6 +117,17 @@ def previous_question
 	@survey = Survey.find(params[:id])
 	@question = Question.find(params[:question_id])
 	if @question
+    ########for pagination ############
+        @question_all = Question.count
+         if(params[:question_id].to_i < 6)
+            @questions = Question.find(:all, :offset=> 0, :limit=>10) 
+         elsif(params[:question_id].to_i > @question_all - 5)  
+            @questions = Question.find(:all, :offset=> (@question_all - 10), :limit=>10)
+         else
+            @questions = Question.find(:all, :offset=> (params[:question_id].to_i - 5), :limit=>10)
+         end 
+    ######### end of pagination logic ########## 
+    
     @survey_response = Response.find_by_question_id(params[:question_id])
     if @survey_response
       @sub_section = SubSection.find(@question.sub_section_id)

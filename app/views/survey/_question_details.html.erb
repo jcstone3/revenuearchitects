@@ -1,9 +1,40 @@
-         
                     <div class="qdots" id="qdots"> 
-                    <div style="background-color:'#FFF';">                    
-                       <%= will_paginate(@questions, :renderer => WillPaginate::ActionView::  LinkRenderer) %>  
+                      <div class="pagination">
+                        <ul>    
+                            <%if(params[:question_id].to_i == 1)%>                     
+                                <li class="disabled">                              
+                                  <%= link_to 'Prev'%>
+                                </li>  
+                            <%else%>
+                                <li>
+                                 <%= link_to 'Prev', questions_url(params[:id],
+                                    params[:question_id].to_i - 1)%>
+                                 </li>   
+                             <%end%>
+                            
+                            <% @questions.each do |question|%>
+                                <% if (question.id == params[:question_id].to_i) %>
+                                    <li class="active">
+                                      <%= link_to question.id, questions_url(params[:id],question.id)%>
+                                    </li>
+                                <%else%>
+                                    <li>
+                                      <%= link_to question.id, questions_url(params[:id],question.id)%>
+                                    </li>
+                                <%end%>
+                            <%end%>
+                             <%if(params[:question_id].to_i == @question_all)%>
+                               <li class ="disabled">
+                                <%= link_to 'Next'%>
+                              </li>
+                             <%else%> 
+                              <li>
+                                <%= link_to 'Next', questions_url(params[:id],params[:question_id].to_i + 1)%>
+                              </li>
+                            <%end%>
+                        </ul>
+                      </div>
                     </div>
-                   </div>
                 </div>
                 <div class="span3 rightBox" style="height:auto;">
                     <div class="processIcons">
