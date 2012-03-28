@@ -72,8 +72,8 @@
                                 <h3 style="padding-left: 16px;">Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password", :style=>"margin-left: 16px; margin-bottom: 18px;"  %>
                                 <br>
                                 <%= f.submit "Login", :class=>"btn btn-primary btn-large", 
-                                :style=>"padding-left: 16px; margin-left: 15px;" %>
-                               <span> or </span> &nbsp; <span> <%= link_to "Register", new_user_registration_path%></span>
+                                :style=>"padding-left: 16px;margin-left: 15px;" %>
+                               <span style="padding-left:10px;"> or </span> &nbsp; <span> <%= link_to "Register", new_user_registration_path%></span>
                                <%= hidden_field_tag('login', "yes")%>
                                
                                <%end%>
