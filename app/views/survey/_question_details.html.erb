@@ -14,12 +14,22 @@
                             
                             <% @questions.each do |question|%>
                                 <% if (question.id == params[:question_id].to_i) %>
-                                    <li class="active">
-                                      <%= link_to question.id, questions_url(params[:id],question.id)%>
+                                    <li>
+                                      <%= link_to questions_url(params[:id],question.id) do%>
+                                      <i class="icon-ok-circle icon-white"></i>
+                                      <%end%>
+                                    </li>
+                                 <%elsif (question.id < params[:question_id].to_i)%>       
+                                    <li>
+                                      <%= link_to questions_url(params[:id],question.id) do%>
+                                      <i class="icon-ok icon-white"></i>
+                                      <%end%>
                                     </li>
                                 <%else%>
                                     <li>
-                                      <%= link_to question.id, questions_url(params[:id],question.id)%>
+                                      <%= link_to questions_url(params[:id],question.id) do%>
+                                      <i class="icon-ban-circle"></i>
+                                      <%end%>
                                     </li>
                                 <%end%>
                             <%end%>
