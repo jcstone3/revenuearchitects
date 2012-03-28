@@ -39,9 +39,12 @@ end
 #question for the survey	
 def question	
 	@survey = current_user.companies.first.surveys.find_all_by_id(params[:id])	
-	if @survey
-      @question = Question.find(params[:question_id])     
+	if @survey      
+       @question = Question.find(params[:question_id])           
+       
       if @question 
+        #@questions = Question.find(:all)
+         @questions = Question.paginate(:page => params[:page])
          @survey_response = Response.find_last_by_survey_id_and_question_id(params[:id], params[:question_id])
          if @survey_response
             redirect_to previous_question_url(params[:id], params[:question_id])
@@ -94,7 +97,7 @@ def report
     @questions_score << get_individual_response_score(response.id, response.question_id)
   end  
   
-  render :layout =>"reports"
+  render :layout =>"report"
   else
    flash[:notice] = "No survey exists"
    redirect_to new_survey_path

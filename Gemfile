@@ -14,8 +14,8 @@ gem 'oauth2'
 #gem "oa-openid"
 #gem 'omniauth-openid'
 gem 'uuidtools'
-#gem "omniauth-linkedin", "~> 0.0.6"
-#gem "linkedin"
+gem 'will_paginate', '~> 3.0'
+gem 'bootstrap-will_paginate'
 gem 'jquery-rails'
 gem "client_side_validations"
 gem 'settingslogic'

@@ -4,6 +4,8 @@ class Question < ActiveRecord::Base
 
 	belongs_to :sub_section
 	has_one :response
+
+	self.per_page = 10
 end
 # == Schema Information
 #
