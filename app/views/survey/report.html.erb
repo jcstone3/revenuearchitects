@@ -1,10 +1,10 @@
 <div class="container" style="padding-top:20px;">
         	<div class="spa@section_total.inspectn9" style="margin:0; background-color:#505b62; width:100%;">
                    <ul class="nav nav-pills">
-                    <li class="done"><a href="#">Strategy <span><%= @sections[0].total_points %></span></a></li>
-                    <li class="done"><a href="#">Systems <span><%= @sections[1].total_points%></span></a></li>
-                    <li class="done"><a href="#">Programs <span><%= @sections[2].total_points%></span> </a></li>
-                    <li class="on"><a href="#">Final Result <span style="background-color:#00A54F;"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span> </a></li>
+                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Strategy <span class="red"><%= @sections[0].total_points %></span></a></li>
+                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Systems <span class="red"><%= @sections[1].total_points%></span></a></li>
+                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Programs <span class="red"><%= @sections[2].total_points%></span> </a></li>
+                    <li class="next"><a href="#"><%= image_tag "shoulddo.png",:width=>"16px",:height=>"16px",:style=>"margin-top:-5px;border-radius:20px;"%>&nbsp;&nbsp;Final Result <span class="green"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span> </a></li>
                   </ul>
             </div>
 </div>
@@ -12,7 +12,7 @@
 	<div class="row-fluid" style="margin-left: 0;">
 				
              <%@sections.each do |section|%>
-                <div class="span4" style="background-color: white;width:28%;">
+                <div class="span4" style="background-color: white;width:28.91%;">
                     <h2><%= section.name%></h2>
                  <div>
                     <div id="accordion1" class="pageAccordion">
