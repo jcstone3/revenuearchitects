@@ -62,20 +62,34 @@
                         </span>
                     </div>
                     <div class="scoreBoard">
-                        <div class="head">Total score for this section </div>
+                        <div class="head" >
+                          <p style="margin:0px;padding-left:5px">Total score for this section</p> </div>
                             <div class="score"><br>
-                            <%= @total_score%>/<span style="font-size:30px;"><%= @section.total_points%>
+                           <%= @total_score%>/<span style="font-size:30px;"><%= @section.total_points%>
                             </span> <br>
                             <span>POINTS</span>
+
                             </div>
                     </div>
-                <div class="tips">
-                        <!-- <div class="head"><%#= image_tag "info.png",:width=>"40",:height=>"37",:align=>"absmiddle"%>Tips from Revenizer </div> -->
-                            <div class="text">
-                                <%= @question.name%><br>
+
+                     <div class="scoreBoard">
+                        <div class="head">
+                          <p style="margin:0px;padding-left:5px">About Questions</p>
+                        </div>
+                            <div class="text1"><br>
+
+                              <%= @question.name%><br>
                                 <%= @question.name%><br>
                                 <%= @question.name%><br>
                                 <%= @question.name%><br>
                                 <br>
-                            </div>
+                              
+                            </div> 
+                             
                     </div>
+
+
+
+
+             
+ 
