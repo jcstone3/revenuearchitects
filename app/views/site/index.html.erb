@@ -52,18 +52,18 @@
                             <div class="tab-pane active" id="home">
                                 <%= render :partial=> "users/registrations/new"%>
                             </div>
-                            <div class="tab-pane" id="twitter">Login with Twitter
+                            <div class="tab-pane" id="twitter"><p style="margin-left:10px;">Login with Twitter</p>
                                 <br>
-                                <%= link_to image_tag("twitter.jpeg" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter),
+                                <%= link_to image_tag("twitter-button1.png" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter),
                                                      :style=>"background-color:#53b1f0;" %>
                             </div>   
-                            <div class="tab-pane" id="facebook">Login With Facebook 
+                            <div class="tab-pane" id="facebook"><p style="margin-left:10px;">Login With Facebook</p>
                             <br> 
-                                <%= link_to image_tag("facebook.jpeg", :alt=>"facebook"), 
+                                <%= link_to image_tag("facebook-button2.png", :alt=>"facebook"), 
                                                      user_omniauth_authorize_path(:facebook),
                                                      :style=>"background-color:#3b5998;"%>
                             </div>
-                            <div class="tab-pane" id="plus">Login with Google Plus 
+                            <div class="tab-pane" id="plus" >Login with Google Plus 
                                 <br>
                                 <%= link_to image_tag("google.jpeg", :alt=>"google"), 
                                                      user_omniauth_authorize_path(:google_oauth2),

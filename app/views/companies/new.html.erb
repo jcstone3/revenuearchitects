@@ -4,33 +4,42 @@
           <div class="question">
             <h1> Company Details </h1>
           </div>
-                     
-           <br/>
-           <div style="padding-left:0px; padding-top:0px; margin-top:0px">
+
+          <div class="text" >
+          <p style="margin-left:25px; padding-top:70px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+          Aenean eu erat et velit dapibus bibendum id quis quam.<br>
+          Sed quis suscipit tortor.
+          </p>
+          </div>
+          
+         
+           <div style="padding-left:0px; padding-top:0px; margin-top:0px;">
               <%= form_for(@company, :validate => true) do |f| %>
                  <%= @company_error_messages %>
-                     <div class="points" style="margin-top:5px; padding-top:0px" >
-                        <div class="option" >
+                     <div class="points" style="margin-top:5px; padding-top:0px;" >
+                        <div class="option" style="margin-top:5px;padding-top:0px;" >
                         <h3>Your Company Name<span style="color:red;">*</span></h3>
-                        <%= f.text_field :name, :maxlength=>"40", :validate =>{:presence => true}, :class=> "input-xlarge" %><br/>
-                        <small>Your Company Name</small>
-                        </div>
-                     </div>      
-                     <div class="points" style="margin-top:45px" >
+                        
+                        <%= f.text_field :name, :maxlength=>"40", :validate =>{:presence => true}, :class=> "input-xlarge", :placeholder=>"Company Name" %>
+                      </div>
+
+                      </div>
+                          
+                     <div class="points" style="margin-top:5px" >
                         <div class="option" >
                            <h3>Website<span style="color:red;">*</span></h3>
                            <%= f.text_field :website, :maxlength=>"40", :validate =>
-                                           { :presence => true, :uniqueness => true} ,:class=> "input-xlarge" %><br/>
-                                           <small>www.example.com</small>
+                                           { :presence => true, :uniqueness => true} ,:class=> "input-xlarge", :placeholder=>"http://example.com or www.example.com" %><br/>
+                                           
                         </div>
                      </div>
-                     <div class="points" style="margin-top:45px" >
+                     <div class="points" style="margin-top:5px" >
                         <div class="option ">
                           <h3>Industry</h3>                                
                           <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
                         </div>
                      </div>
-                     <div class="points" style="margin-top:60px;">
+                     <div class="points" style="margin-top:5px;">
                      <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white" %>                 
                 <% end %>
               </div>				
