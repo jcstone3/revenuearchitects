@@ -85,14 +85,14 @@ $(document).ready(function(){
 			//set defalut value for anwer1 
                 //to set the slider value 
                 
-               var response_answer1 = $('#response_answer_1').val();
-               if($('#response_answer_1').val() == ""){
-               var response_answer1  = 0; 
+                var response_answer1 = $('#response_answer_1').val();
+                if($('#response_answer_1').val() == ""){                            
+                    var response_answer1  = 1; 
+                    $('#response_answer_1').val('1');
                 }
                 else
-                {
-                 
-                 var response_answer1 = $('#response_answer_1').val(); 
+                {                               
+                    var response_answer1 = $('#response_answer_1').val(); 
                 }
                //hide priority option on load
                if($('#response_answer_2').val() == "add_to_plan"){

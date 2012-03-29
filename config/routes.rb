@@ -8,10 +8,10 @@ RevenueGrader::Application.routes.draw do
   get "site/privacy_policy"
 
   #setting up user registeration
-  devise_for :users, :path => "accounts", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions" } do
-      get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
-      get 'sign_out', :to => 'users/sessions#destroy', :as => :destroy_user_session
-      get 'accounts/sign_up', :to => 'users/registrations#new', :as => :new_user_registration
+  devise_for :users, :path => "", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions" } do
+      get '/login' =>'users/sessions#new', :as => :new_user_session
+      get '/logout' => 'users/sessions#destroy', :as => :destroy_user_session
+      get '/signup' => 'users/registrations#new', :as => :new_user_registration
       get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru' #third party authentication
   end 
    
@@ -34,6 +34,12 @@ RevenueGrader::Application.routes.draw do
   match "contactUs" =>'site#conactUs', :as => 'contactUs'
   match "privacy_policy" =>'site#privacy_policy', :as => 'privacy_policy'
   match "show" =>'site#show', :as => 'show'
+
+
+  #namespace :admin do
+    get 'dashboard' => 'admin/dashboard#index', :as=>'dashboard'
+  #end
+
   #defalut error page
   match "*path" => 'dashboard#error_handle404', :as => 'error_handle404'
   # The priority is based upon order of creation:

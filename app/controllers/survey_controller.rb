@@ -116,8 +116,11 @@ end
 def previous_question
 	@survey = Survey.find(params[:id])
 	@question = Question.find(params[:question_id])
-	if @question
-    ########for pagination ############
+	if @question    
+    
+    @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+    if @survey_response
+       ########for pagination ############
         @question_all = Question.count
          if(params[:question_id].to_i < 6)
             @questions = Question.find(:all, :offset=> 0, :limit=>10) 
@@ -126,10 +129,7 @@ def previous_question
          else
             @questions = Question.find(:all, :offset=> (params[:question_id].to_i - 5), :limit=>10)
          end 
-    ######### end of pagination logic ########## 
-    
-    @survey_response = Response.find_by_question_id(params[:question_id])
-    if @survey_response
+    ######### end of pagination logic ##########      
       @sub_section = SubSection.find(@question.sub_section_id)
   	  @section = Section.find(@sub_section.section_id)
   	  @allSection = Section.all
@@ -137,11 +137,19 @@ def previous_question
   	  @total_score = calculate_response_for_section(params[:id], @section.id)
     else
      @response = @survey.responses.last 
-     redirect_to questions_url(@survey, @response.question_id.to_i+1) 
+     if @response
+      redirect_to questions_url(@survey, @response.question_id.to_i+1) 
+     else
+      redirect_to questions_url(@survey, params[:question_id]) 
+     end 
   end 
   else
     @response = @survey.responses.last 
-    redirect_to questions_url(@survey, @response.question_id.to_i+1) 
+    if @response
+      redirect_to questions_url(@survey, @response.question_id.to_i+1) 
+     else
+      redirect_to questions_url(@survey, params[:question_id]) 
+     end 
   end 
 end
 
@@ -155,7 +163,7 @@ def update_response
    @sub_section = SubSection.find(@question.sub_section_id)
    @section = Section.find(@sub_section.section_id)
    @total_score = calculate_response_for_section(params[:id], @section.id)
-   redirect_to questions_url(@survey, @survey_response.question_id.to_i+1 )
+   redirect_to questions_url(@survey, @survey.responses.last.question_id.to_i+1 )
 end
 
 #to download in pdf/xls format
