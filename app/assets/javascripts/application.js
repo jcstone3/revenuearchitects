@@ -30,15 +30,14 @@ $(document).ready(function(){
 				}	
             //----------end of hide n show----------------------------//
             //to set the active tab to the color of the login type clicked
-                $('#home_click').click(function(){	
-                	alert('hi');
+                $('#home_click').click(function(){	                	
 					$('#tab-content').css({'background-color' :'#fff'});
 					}, function () {
 	    			var cssObj = {
 	      			'background-color' : '#fff' ,
 	      			'color': 'black'   			
-	   			 	}
-	    			$('#tab-content').css(cssObj);
+	   			 	}	    			
+                    $('#tab-content').css(cssObj);
 	 			 	});
 
 				$('#twitter_click').click(function(){		
@@ -48,8 +47,7 @@ $(document).ready(function(){
 	      			'background-color' : '#53b1f0', 
 	      			'color': '#fff'   			
 	   			 	}
-	    			$('#tab-content').css(cssObj);
-	 			 	});
+                    });
 
 				$('#facebook_click').click(function(){				
 					$('#tab-content').css({'background-color' :'#3b5998', 'color': '#fff'});
@@ -57,9 +55,9 @@ $(document).ready(function(){
 	    			var cssObj = {
 	      			'background-color' : '#3b5998', 
 	      			'color': '#fff'    			
-	   			 	}
-	    			$('#tab-content').css(cssObj);
-	 			 	});
+	   			 	}	    			                    
+	 			    $('#tab-content').css(cssObj);
+                 	});
 
 				$('#google_click').click(function(){				
 					$('#tab-content').css({'border' :'#bb2a0b', 'color': '#fff'});
@@ -238,12 +236,7 @@ $(document).ready(function(){
 
 			//------------end of question page js ---- //
 
-              $('#cross_btn').click(function(){
-                //alert('hello');
-                $('#flash_msg').fadeOut(1000);
-                return false;
-              });  
-              
+                            
              
       $(function () {
       $('.tabs').click(function(){
