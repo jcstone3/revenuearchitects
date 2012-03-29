@@ -43,6 +43,7 @@
                        <% end %>
                        <% if(params[:question_id] > '1')%>
                         <%= link_to(previous_question_url(params[:id], params[:question_id].to_i - 1), :class=>"btn", :style=>"float:right;margin-right:10px;") do %>
+                           <i class="icon-chevron-left">
                             </i>Previous Question
                        <% end %>
                        <%else%>
