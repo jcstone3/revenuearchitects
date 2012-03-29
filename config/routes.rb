@@ -1,13 +1,17 @@
-RevenueGrader::Application.routes.draw do
-  get "site/index"
+RevenueGrader::Application.routes.draw do 
 
-  get "site/aboutUs"
-
-  get "site/contactUs"
-
-  get "site/privacy_policy"
-
-  #setting up user registeration
+  #admin settings
+  namespace :admin do 
+   get '/dashboard' => 'admin/dashboard#show', :as=>'dashboard'
+   root :to =>  "dashboard#index"
+  end
+  devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations"} do 
+   get 'admin/login' => 'admin/sessions#new', :as => "new_admin_session"
+   get 'admin/logout' => 'admin/sessions#destroy', :as => "destroy_admin_session"
+   get 'admin/signup' => 'admin/registrations#new', :as => "new_admin_registration" 
+  end  
+  
+  #setting up user registration
   devise_for :users, :path => "", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions" } do
       get '/login' =>'users/sessions#new', :as => :new_user_session
       get '/logout' => 'users/sessions#destroy', :as => :destroy_user_session
@@ -36,12 +40,9 @@ RevenueGrader::Application.routes.draw do
   match "show" =>'site#show', :as => 'show'
 
 
-  #namespace :admin do
-    get 'dashboard' => 'admin/dashboard#index', :as=>'dashboard'
-  #end
-
+  
   #defalut error page
-  match "*path" => 'dashboard#error_handle404', :as => 'error_handle404'
+   match "*path" => 'dashboard#error_handle404', :as => 'error_handle404'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

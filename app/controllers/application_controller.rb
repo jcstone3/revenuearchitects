@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
           new_company_url   #redirect to create a new company            
        end     
     else #resource is an admin
-      admin_root_path
+      admin_dashboard_path
     end
   end 
 

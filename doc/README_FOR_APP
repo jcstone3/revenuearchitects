@@ -50,3 +50,8 @@ Changes in juery_ui file for accordian
 
 
 Content needed for tooltip
+
+
+Resolved bugs for question page 
+Added admin module
+Created controller Dashboard, Questions, Section, Settings, Users for admin module

@@ -38,6 +38,7 @@ $(document).ready(function(){
 	      			'color': 'black'   			
 	   			 	}	    			
                     $('#tab-content').css(cssObj);
+                    alert('in home');
 	 			 	});
 
 				$('#twitter_click').click(function(){		
@@ -47,6 +48,7 @@ $(document).ready(function(){
 	      			'background-color' : '#53b1f0', 
 	      			'color': '#fff'   			
 	   			 	}
+                    $('#tab-content').css(cssObj);
                     });
 
 				$('#facebook_click').click(function(){				
