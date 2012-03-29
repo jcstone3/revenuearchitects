@@ -1,3 +1,4 @@
+
 @import "twitter/bootstrap/bootstrap";
 body {  background-image:url(bg_img.png); }
 
@@ -78,7 +79,7 @@ float: right;
 	font-weight: 300;
 	margin-top:10px;
 	color:#67737a;
-	width:50%;
+	width:70%;
 	float:left;
     line-height: 52px;
 }
@@ -840,3 +841,60 @@ font-size: 42px;
 
 /*end
 */
+
+
+
+.pagination {
+    height: 30px;
+    margin: 10px 50px 21px 20px;
+}
+.pagination ul {
+   /* border-radius: 3px 3px 3px 3px;*/
+    box-shadow: none;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+.pagination li {
+    display: inline;
+}
+.pagination a {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: none;
+    border-style: none;
+    /*border-width: 1px 1px 1px 0;*/
+    float: center;
+    line-height: 34px;
+    padding: 0 18px;
+    text-decoration: none;
+    color:#ffffff;
+}
+.pagination a:hover, .pagination .active a {
+    background-color: transparent;
+}
+.pagination .active a {
+   color:transparent;
+    cursor: default;
+}
+.pagination .disabled span, .pagination .disabled a, .pagination .disabled a:hover {
+    background-color: transparent;
+    color: none;
+    cursor: default;
+}
+.pagination li:first-child a {
+ /*   border-left-width: 1px;
+    border-radius: 3px 0 0 3px;*/
+}
+.pagination li:last-child a {
+/*    border-radius: 0 3px 3px 0;*/
+}
+.pagination-centered {
+    text-align: center;
+}
+.pagination-right {
+    text-align: right;
+}
