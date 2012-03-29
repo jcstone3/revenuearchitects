@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if resource.is_a? User
        flash[:success] = "Welcome! You have signed up successfully." 
-       if current_user.companies.first  
+       if current_user.companies.first         
           new_survey_url  #user already has company, then redirect to survey page               
        else
-          new_company_url   #redirect to create a new company  
+          new_company_url   #redirect to create a new company            
        end     
     else #resource is an admin
       admin_root_path

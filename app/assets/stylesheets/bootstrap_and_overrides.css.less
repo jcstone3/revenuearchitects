@@ -871,6 +871,8 @@ font-size: 42px;
 
 
 
+
+/*pagination*/
 .pagination {
     height: 30px;
     margin: 10px 50px 21px 20px;
@@ -925,3 +927,367 @@ font-size: 42px;
 .pagination-right {
     text-align: right;
 }
+
+
+/*pagination end*/
+
+
+
+
+
+/*dashboard*/
+.nav-tabs2 > .active > a, .nav-tabs2 > .active > a:hover {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #0086AC;
+    border-color: #DDDDDD #DDDDDD transparent;
+    border-style: solid;
+    border-width: 1px;
+    color: #FFFFFF;
+    cursor: default;
+}
+.nav-tabs2 > li {
+    margin-bottom: -1px;
+}
+.nav-tabs2 > li > a, .nav-pills > li > a {
+    line-height: 14px;
+    margin-right: 2px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.nav-tabs2 > li a{
+	border-top-left-radius: 10px 5px;
+	border-bottom-right-radius: 10% 5%;
+	border-top-right-radius: 10px; 
+}
+.nav-tabs2 > li, .nav-pills > li {
+  float: right;
+}
+.nav-tabs2 > li > a {
+    background-color: #EDEDED;
+    border: 1px solid transparent;
+    padding-bottom: 9px;
+    padding-top: 9px;
+}
+
+.nav-tabs2 > li {
+    margin-bottom: -1px;
+}
+
+
+.tabHead{
+	width:100%;
+	background-color:#0086ac;
+	height:130px;
+}
+.tabHead h1{
+	color:#FFF;
+	float:left;
+	clear:both;
+	font-weight:400;
+	font-size:30px;
+	padding:25px 0 0 20px;
+}
+.tabHead h2{
+	color:#FFF;	
+	float:left;
+	clear:both;
+	font-size:25px;
+	padding:10px 0 0 20px;
+	font-weight:300;
+}
+.tabMid{
+	width:100%;
+	background-color:#fff;
+	height:130px;
+}
+.tabMid .activeUsers{
+	width:160px;
+	background-color:#d9dcde;
+	border-radius: 15px; 
+	height:80px;
+	float:left;
+	margin:20px 0 0 20px;
+}
+.tabMid .activeUsers h3{
+	width:70px;
+	font-size:50px;
+	color:#00a54f;
+	margin:28px 0 0 25px;
+	text-shadow: 1px 1px 1px #fff;
+	clear:both;
+	float:left;
+	font-weight:400;
+}
+.tabMid .activeUsers h4{
+	width:60px;
+	font-size:15px;
+	color:#182126;
+	margin:23px 0 0 0;
+	font-weight:normal;
+	text-shadow: 1px 1px 1px #fff;
+	float:left;
+}
+.tabMid .responses{
+	width:200px;
+	background-color:#d9dcde;
+	border-radius: 15px; 
+	height:80px;
+	float:left;
+	margin:20px 0 0 20px;
+}
+.tabMid .responses h3{
+	width:70px;
+	font-size:50px;
+	color:#2297bd;
+	margin:28px 0 0 25px;
+	text-shadow: 1px 1px 1px #fff;
+	clear:both;
+	float:left;
+	font-weight:400;
+}
+.tabMid .responses h4{
+	width:60px;
+	font-size:15px;
+	color:#182126;
+	margin:40px 0 0 0;
+	font-weight:300;
+	text-shadow: 1px 1px 1px #fff;
+	float:left;
+	font-weight:400;
+}
+.tabMid .average{
+	width:240px;
+	background-color:#d9dcde;
+	border-radius: 15px; 
+	height:80px;
+	float:left;
+	margin:20px 0 0 20px;
+}
+.tabMid .average h3{
+	width:120px;
+	font-weight:400;
+	font-size:50px;
+	color:#c56d2b;
+	margin:28px 0 0 25px;
+	text-shadow: 1px 1px 1px #fff;
+	clear:both;
+	float:left;
+}
+.tabMid .average h4{
+	width:60px;
+	font-size:15px;
+	color:#182126;
+	margin:23px 0 0 0;
+	font-weight:normal;
+	text-shadow: 1px 1px 1px #fff;
+	float:left;
+}
+.tabGraph{
+	width:100%;
+	background-color:#fff;
+	height:130px;
+}
+.tabGraph .box{
+	width:96%;
+	margin:0 0 0 20px;
+	background-color:#fff;
+	border:#999 solid 1px;
+	height:440px;
+}
+.tabGraph .box h1{
+	font-size:15px;
+	color:#707b82;
+	margin:13px 0 0 0;
+	width:100%;
+	text-align:center;
+	font-weight:normal;
+	text-shadow: 1px 1px 1px #fff;
+}
+
+dl#csschart, dl#csschart dt, dl#csschart dd{
+	margin:0;
+	padding:0;
+	} 	
+dl#csschart{
+	background:url(bg_chart.gif) no-repeat 0 0;
+	width:850px;
+	height:385px;
+	margin-left:20px;
+	} 
+dl#csschart dt{
+	display:none;
+	}
+dl#csschart dd{
+	position:relative;
+	float:left;
+	display:inline;
+	width:25px;
+	height:330px;
+	margin-top:22px;		
+	} 
+dl#csschart dd.first{
+	margin-left:43px;		
+	} 	
+dl#csschart span{
+	position:absolute;
+	display:block;
+	width:33px;	
+	bottom:0;
+	left:0;	
+	z-index:1;
+	color:#555;
+	text-decoration:none;
+	} 		
+dl#csschart span em{
+	display:block;
+	font-style:normal;
+	float:left;
+	line-height:200%;
+	background:#fff;
+	color:#555;
+	border:1px solid #b1b1b1;
+	position:absolute;
+	top:50%;
+	left:3px;
+	text-align:center;
+	width:23px;
+	} 		
+
+/* default column styling */		
+
+	dl#csschart span{
+		height:50%;
+		background:url(type1.gif) repeat-y;
+		} 
+
+/* // default column styling */		
+		
+/* column types */			
+
+	dl#csschart span.type1{
+		background:url(type1.gif) repeat-y;
+		} 
+	dl#csschart span.type2{
+		background:url(type2.gif) repeat-y;
+		} 
+	dl#csschart span.type3{
+		background:url(type3.gif) repeat-y;
+		} 
+	dl#csschart span.type4{
+		background:url(type4.gif) repeat-y;
+		} 
+	
+/* // column types */	
+
+/* percentages */
+
+	dl#csschart span.p0{height:0%;}
+	dl#csschart span.p1{height:1%;}
+	dl#csschart span.p2{height:2%;}
+	dl#csschart span.p3{height:3%;}
+	dl#csschart span.p4{height:4%;}
+	dl#csschart span.p5{height:5%;}
+	dl#csschart span.p6{height:6%;}
+	dl#csschart span.p7{height:7%;}
+	dl#csschart span.p8{height:8%;}
+	dl#csschart span.p9{height:9%;}
+	dl#csschart span.p10{height:10%;}
+	dl#csschart span.p11{height:11%;}
+	dl#csschart span.p12{height:12%;}
+	dl#csschart span.p13{height:13%;}
+	dl#csschart span.p14{height:14%;}
+	dl#csschart span.p15{height:15%;}
+	dl#csschart span.p16{height:16%;}
+	dl#csschart span.p17{height:17%;}
+	dl#csschart span.p18{height:18%;}
+	dl#csschart span.p19{height:19%;}
+	dl#csschart span.p20{height:20%;}
+	dl#csschart span.p21{height:21%;}
+	dl#csschart span.p22{height:22%;}
+	dl#csschart span.p23{height:23%;}
+	dl#csschart span.p24{height:24%;}
+	dl#csschart span.p25{height:25%;}
+	dl#csschart span.p26{height:26%;}
+	dl#csschart span.p27{height:27%;}
+	dl#csschart span.p28{height:28%;}
+	dl#csschart span.p29{height:29%;}
+	dl#csschart span.p30{height:30%;}
+	dl#csschart span.p31{height:31%;}
+	dl#csschart span.p32{height:32%;}
+	dl#csschart span.p33{height:33%;}
+	dl#csschart span.p34{height:34%;}
+	dl#csschart span.p35{height:35%;}
+	dl#csschart span.p36{height:36%;}
+	dl#csschart span.p37{height:37%;}
+	dl#csschart span.p38{height:38%;}
+	dl#csschart span.p39{height:39%;}
+	dl#csschart span.p40{height:40%;}
+	dl#csschart span.p41{height:41%;}
+	dl#csschart span.p42{height:42%;}
+	dl#csschart span.p43{height:43%;}
+	dl#csschart span.p44{height:44%;}
+	dl#csschart span.p45{height:45%;}
+	dl#csschart span.p46{height:46%;}
+	dl#csschart span.p47{height:47%;}
+	dl#csschart span.p48{height:48%;}
+	dl#csschart span.p49{height:49%;}
+	dl#csschart span.p50{height:50%;}
+	dl#csschart span.p51{height:51%;}
+	dl#csschart span.p52{height:52%;}
+	dl#csschart span.p53{height:53%;}
+	dl#csschart span.p54{height:54%;}
+	dl#csschart span.p55{height:55%;}
+	dl#csschart span.p56{height:56%;}
+	dl#csschart span.p57{height:57%;}
+	dl#csschart span.p58{height:58%;}
+	dl#csschart span.p59{height:59%;}
+	dl#csschart span.p60{height:60%;}
+	dl#csschart span.p61{height:61%;}
+	dl#csschart span.p62{height:62%;}
+	dl#csschart span.p63{height:63%;}
+	dl#csschart span.p64{height:64%;}
+	dl#csschart span.p65{height:65%;}
+	dl#csschart span.p66{height:66%;}
+	dl#csschart span.p67{height:67%;}
+	dl#csschart span.p68{height:68%;}
+	dl#csschart span.p69{height:69%;}
+	dl#csschart span.p70{height:70%;}
+	dl#csschart span.p71{height:71%;}
+	dl#csschart span.p72{height:72%;}
+	dl#csschart span.p73{height:73%;}
+	dl#csschart span.p74{height:74%;}
+	dl#csschart span.p75{height:75%;}
+	dl#csschart span.p76{height:76%;}
+	dl#csschart span.p77{height:77%;}
+	dl#csschart span.p78{height:78%;}
+	dl#csschart span.p79{height:79%;}
+	dl#csschart span.p80{height:80%;}
+	dl#csschart span.p81{height:81%;}
+	dl#csschart span.p82{height:82%;}
+	dl#csschart span.p83{height:83%;}
+	dl#csschart span.p84{height:84%;}
+	dl#csschart span.p85{height:85%;}
+	dl#csschart span.p86{height:86%;}
+	dl#csschart span.p87{height:87%;}
+	dl#csschart span.p88{height:88%;}
+	dl#csschart span.p89{height:89%;}
+	dl#csschart span.p90{height:90%;}
+	dl#csschart span.p91{height:91%;}
+	dl#csschart span.p92{height:92%;}
+	dl#csschart span.p93{height:93%;}
+	dl#csschart span.p94{height:94%;}
+	dl#csschart span.p95{height:95%;}
+	dl#csschart span.p96{height:96%;}
+	dl#csschart span.p97{height:97%;}
+	dl#csschart span.p98{height:98%;}
+	dl#csschart span.p99{height:99%;}
+	dl#csschart span.p100{height:100%;}
+
+
+
+/*dashboard end */
