@@ -238,6 +238,13 @@ $(document).ready(function(){
 
 			//------------end of question page js ---- //
 
+              $('#cross_btn').click(function(){
+                //alert('hello');
+                $('#flash_msg').fadeOut(1000);
+                return false;
+              });  
+              
+             
       $(function () {
       $('.tabs').click(function(){
           alert($(this).attr('id'));
