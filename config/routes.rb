@@ -2,8 +2,13 @@ RevenueGrader::Application.routes.draw do
 
   #admin settings
   namespace :admin do 
-   match '/dashboard' => "dashboard#index", :as => :dashboard 
+   match '/dashboard' => "dashboard#show", :as => :dashboard 
+   match '/users' => "users#index", :as => 'users'
+   get '/users/edit/:id' => "users#edit", :as => 'users_edit'
+   match '/users/update/:id' => "users#update", :as => 'users_update'
+   put '/users/:id' => "users#destroy", :as => 'users_delete'
    root :to =>  "dashboard#index"
+   resources :users
   end
   devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations"} do 
    get 'admins/login' => 'admin/sessions#new', :as => "new_admin_session"

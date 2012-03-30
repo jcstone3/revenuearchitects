@@ -237,12 +237,26 @@ $(document).ready(function(){
 
 			//------------end of question page js ---- //
 
-                            
+            //------------admin js -----------//
+              $('#company').change(function(){
+                var str = "";
+                $("select option:selected").each(function () {
+                    str += $(this).id() + " ";
+                });
+
+                alert(str);
+               // $.ajax({
+               //     url: 'admin/users/index/company_id=?',
+              //      type: "POST"
+                    
+              //  });
+              });           
              
-      $(function () {
-      $('.tabs').click(function(){
-          alert($(this).attr('id'));
-        });
-      })
+      
+            $(function () {
+             $('.tabs').click(function(){
+                alert($(this).attr('id'));
+             });
+            })
    
 });

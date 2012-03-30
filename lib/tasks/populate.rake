@@ -94,7 +94,8 @@ namespace :app do
           questionnaire.updated_at = Time.now    
             puts "Questionnaire '#{questionnaire.name}' has been created"
         
-
+     section_name = ['Strategy', 'Systems', 'Programs'] 
+     i = 0
     #Create Sections in the Database
       Section.reset_column_information
       puts "Adding Sections for Application"
@@ -102,7 +103,11 @@ namespace :app do
           section.created_at = Time.now
           section.updated_at = Time.now 
           section.questionnaire_id = questionnaire.id
-            puts "Section has been created"
+          section.name = section_name[i]
+          section.question_count = 100
+          section.total_points = 1000  
+          i = i + 1      
+          puts "Section has been created"
         
 
     #Create Sub_sections in the Database

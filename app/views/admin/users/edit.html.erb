@@ -1,0 +1,65 @@
+<div class="container" style="margin-top:20px;">
+            <div class="row-fluid">
+                <div class="span12">
+                            <ul class="nav nav-tabs2"> 
+                                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                                <li><a href="#questions" data-toggle="tab">Questions</a></li>
+                                <li><a href="#sections" data-toggle="tab">Sections</a></li>
+                                <li><a href="#reports" data-toggle="tab">Reports</a></li>
+                                <li class="active"><%= link_to 'Users', admin_users_url %></a>
+                                </li>                               
+                                <li ><%= link_to 'Dashboard', admin_root_url %></li>
+                            </ul>
+                             
+                            <div class="tab-content"style="padding-top:0px">
+                            <div class="tab-pane active" id="dashboard" style="height:730px;">
+                                <div class="tabHead">
+                                    <h1>User</h1>
+                                    <h2>User List</h2>
+                                </div>
+                                <div class="tabMid">
+                                    <div class="activeUsers">
+                                        <h3><%#= @users.count %></h3>
+                                        <h4>Total Users</h4>
+                                    </div>
+                                    <div class="responses">
+                                        <h3>50</h3>
+                                        <h4>Responses</h4>
+                                    </div>
+                                    <div class="average">
+                                        <h3>12%</h3>
+                                        <h4>Average Percentage</h4>
+                                    </div>
+                                    <div class="button-bar">
+                                    <div class="btn-group"  style="margin-top: 45px; width: 150px;">
+                                          <a href="#" class="btn"><i class="icon-calendar"></i> This Month</a>
+                                          <a href="#" data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></a>
+                                          <ul class="dropdown-menu">
+                                            <li><a href="#"><i class="icon-calendar"></i> Last Month</a></li>
+                                            <li><a href="#"><i class="icon-calendar"></i> Last Year</a></li>
+                                          </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tabGraph">
+                                    <div class="box">                                        
+                                       <h1>Edit User </h1>
+                                       <%= form_for(:user, :url => admin_users_update_url) do |f|%>     <%= hidden_field_tag(:id, @user.id)%>
+                                             <div><%= f.label :username %><br>
+                                              <%= f.text_field :username%></div>               
+                                             <div><%= f.label :email %><br>
+                                             <%= f.email_field :email%></div> 
+                                             <div><%= f.submit 'Update User'%></div>
+                                        <%end%>   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="users" style="height:500px;">Users</div>
+                            <div class="tab-pane" id="reports" style="height:500px;">Reports</div>
+                            <div class="tab-pane" id="sections" style="height:500px;">Sections</div>
+                            <div class="tab-pane" id="questions" style="height:500px;">Questions</div>
+                            <div class="tab-pane" id="settings" style="height:500px;">Settings</div>
+                            </div>
+                </div>
+            </div>
+        </div> 
