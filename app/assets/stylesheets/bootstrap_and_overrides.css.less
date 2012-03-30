@@ -940,7 +940,73 @@ font-size: 42px;
 
 
 /*dashboard*/
-.nav2-tabs2 > .active > a, .nav-tabs2 > .active > a:hover {
+
+.nav2-pills2 span {
+  color: #ffffff;
+  background-color: #333;
+  font-size:10px;
+  padding:2px;
+}
+.nav2-pills2 .done {
+  color: #ffffff;
+  background-color: #00a54f;
+}
+.nav2-pills2 .done a{
+  color: #ffffff;
+  background-color: #00a54f;
+}
+.nav2-pills2 .done a:hover{
+  color: #333;
+  background-color: #00a54f;
+}
+.nav2-pills2 .on {
+  color: #333;
+  background-color: #fff;
+}
+.nav2-pills2 .on a{
+  color: #333;
+  background-color: #fff;
+}
+.nav2-pills2 .on a:hover{
+  color: #00a54f;
+  background-color: #fff;
+}
+.nav2-pills2 .next {
+  color: #ffffff;
+  background-color: #647077;
+}
+.nav2-pills2 .next a{
+  color: #2f3941;
+  background-color: #647077;
+}
+.nav2-pills2 .next a:hover{
+  color: #333;
+  background-color: #647077;
+}
+.nav2-tabs2 > li a{
+	border-top-left-radius: 10px 5px;
+	border-bottom-right-radius: 10% 5%;
+	border-top-right-radius: 10px; 
+}
+.nav2-tabs2 > li, .nav2-pills2 > li {
+  float: right;
+}
+
+.nav2-tabs2:after2, .nav2-pills2:after {
+    clear: both;
+}
+
+.nav2-tabs2:before, .nav2-pills2:before, .nav2-tabs2:after, .nav2-pills2:after {
+    content: "";
+    display: table;
+}
+.nav2-tabs2:before, .nav2-pills2:before, .nav2-tabs2:after, .nav2-pills2:after {
+    content: "";
+    display: table;
+}
+
+
+.nav2-tabs2 > .active > a, .nav2-tabs2 > .active > a:hover {
     -moz-border-bottom-colors: none;
     -moz-border-image: none;
     -moz-border-left-colors: none;
@@ -956,7 +1022,7 @@ font-size: 42px;
 .nav2-tabs2 > li {
     margin-bottom: -1px;
 }
-.nav2-tabs2 > li > a, .nav-pills > li > a {
+.nav2-tabs2 > li > a, .nav2-pills2 > li > a {
     line-height: 14px;
     margin-right: 2px;
     padding-left: 12px;
@@ -968,8 +1034,8 @@ font-size: 42px;
 	border-bottom-right-radius: 10% 5%;
 	border-top-right-radius: 10px; 
 }
-.nav2-tabs2 > li, .nav-pills > li {
-  float: right;
+.nav2 > li > a {
+    display: block;
 }
 .nav2-tabs2 > li > a {
     background-color: #EDEDED;

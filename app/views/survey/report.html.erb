@@ -12,7 +12,7 @@
 	<div class="row-fluid" style="margin-left: 0;">
 				
              <%@sections.each do |section|%>
-                <div class="span4" style="background-color: white;width:28%;">
+                <div class="span4" style="background-color: white;">
                     <h2><%= section.name%></h2>
                  <div>
                     <div id="accordion1" class="pageAccordion">
@@ -45,7 +45,7 @@
                     </div>
                </div>
                <%if(section.id < 3)%>
-                <div class="plus">+</div>
+                
             <%end%>
         <%end%>                
 	</div>
