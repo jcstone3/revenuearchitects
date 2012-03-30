@@ -1,7 +1,7 @@
 #application controller
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
+  layout :layout_by_resource
   #to set the redirect path after sign in/ registration
   def after_sign_in_path_for(resource)
     if resource.is_a? User
@@ -40,5 +40,13 @@ end
 protected
 def handle_unverified_request
   true
+end
+
+def layout_by_resource
+  if devise_controller? && resource_name == :admin
+    "admin"
+  else
+    "application"
+  end
 end
 end

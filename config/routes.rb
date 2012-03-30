@@ -2,7 +2,7 @@ RevenueGrader::Application.routes.draw do
 
   #admin settings
   namespace :admin do 
-   get '/dashboard' => 'admin/dashboard#show', :as=>'dashboard'
+   match '/dashboard' => "dashboard#index", :as => :dashboard 
    root :to =>  "dashboard#index"
   end
   devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations"} do 

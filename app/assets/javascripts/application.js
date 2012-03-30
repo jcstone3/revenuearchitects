@@ -37,8 +37,7 @@ $(document).ready(function(){
 	      			'background-color' : '#fff' ,
 	      			'color': 'black'   			
 	   			 	}	    			
-                    $('#tab-content').css(cssObj);
-                    alert('in home');
+                    $('#tab-content').css(cssObj);                    
 	 			 	});
 
 				$('#twitter_click').click(function(){		
