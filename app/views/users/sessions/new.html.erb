@@ -67,12 +67,12 @@
                             <div class="tab-pane active" id="home">
 
                                 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true) do |f| %>
-                                <h3 style="padding-left: 16px;">Email<span>*</span></h3>
-                                <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id", :style=>"margin-left: 16px; margin-bottom: 18px;"  %><br> <br> 
-                                <h3 style="padding-left: 16px;">Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password", :style=>"margin-left: 16px; margin-bottom: 18px;"  %>
+                                <h3 style="padding-left: 16px;margin-top: 25px;">Email<span>*</span></h3>
+                                <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id", :style=>"margin-left: 16px; margin-bottom: 18px;margin-top: 5px;"  %><br> <br> 
+                                <h3 style="padding-left: 16px;margin-top: 10px;">Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password", :style=>"margin-left: 16px; margin-bottom: 18px;margin-top: 5px;"  %>
                                 <br>
                                 <%= f.submit "Login", :class=>"btn btn-primary btn-large", 
-                                :style=>"padding-left: 16px;margin-left: 15px;" %>
+                                :style=>"padding-left: 16px;margin-left: 15px;margin-left: 15px; margin-top: 20px; margin-bottom: 20px;" %>
                                <span style="padding-left:10px;"> or </span> &nbsp; <span> <%= link_to "Register", new_user_registration_path%></span>
                                <%= hidden_field_tag('login', "yes")%>
                                

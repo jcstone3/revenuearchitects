@@ -2,20 +2,20 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true ) do |f| %>
   <%#= devise_error_messages! %>
       <h3 style="padding-left: 16px;">Full Name<span>*</span></h3>
-      <%= f.text_field :username,  :class=>"span3", :maxlength => "30", :style=>"margin-left: 16px; margin-bottom: 5px;", :placeholder=>"Full Name", :validate =>{:presence => true} %>
+      <%= f.text_field :username,  :class=>"span3", :maxlength => "30", :style=>"margin-left: 16px; margin-bottom: 0px;", :placeholder=>"Full Name", :validate =>{:presence => true} %>
 
-      <h3 style="padding-left: 16px;">Email<span>*</span></h3>
+      <h3 style="padding-left: 16px;margin-top: 14px;position:relative;">Email<span>*</span></h3>
 
-      <%= f.email_field :email, :class=>"span3 " , :style=>"margin-left: 16px; margin-bottom: 5px;",:placeholder=>"test@gmail.com", :validate =>
+      <%= f.email_field :email, :class=>"span3 " , :style=>"margin-left: 16px; margin-bottom: 0px;",:placeholder=>"test@gmail.com", :validate =>
                         {:presence => true, :uniqueness => true}  %>
-      <h3 style="padding-left: 16px;">Password<span>*</span><h3>
-      <%= f.password_field :password,  :class=>"span3", :maxlength => "30", :style=>"margin-left: 16px; margin-bottom: 5px;",:placeholder=>"Password for the site", :validate =>{:presence => true} %>
+      <h3 style="padding-left: 16px;margin-top: 16px;">Password<span>*</span><h3>
+      <%= f.password_field :password,  :class=>"span3", :maxlength => "30", :style=>"margin-left: 16px; margin-bottom: 0px;",:placeholder=>"Password for the site", :validate =>{:presence => true} %>
       <label class="checkbox">
-      <input type="checkbox" style="margin-left: 0px;" checked> <p style="font-size:11px; width:220px; margin:10px 0 10px 0;">Please send me updates and tips from Revenue Grader.
+      <input type="checkbox" style="margin-left: 0px;" checked> <p style="font-size:11px; width:220px; margin:21px 0 10px 0;">Please send me updates and tips from Revenue Grader.
       <%= link_to 'Privacy Policy', privacy_policy_url%></p>
       </label>
-      <%= f.submit "Sign up and Get Started!", :class=>"btn btn-primary btn-large", :style=>"padding-left: 16px; margin-left: 15px;" %>
-      <p style="font-size:10px; color:#67737a;  margin: 3px 0pt 0px; padding-left: 16px;">
+      <%= f.submit "Sign up and Get Started!", :class=>"btn btn-primary btn-large", :style=>"padding-left: 16px; margin-left: 15px;margin-top: 13px;" %>
+      <p style="font-size:10px; color:#67737a;  margin: 10px 0pt 0px; padding-left: 16px;">
         We will keep your personal information strictly confidential
       </p>
       <%= hidden_field_tag('login', "no")%>
