@@ -55,3 +55,8 @@ Content needed for tooltip
 Resolved bugs for question page 
 Added admin module
 Created controller Dashboard, Questions, Section, Settings, Users for admin module
+Integrated the admin layout 
+
+
+Admin layout integration for user 
+User listing based on company and industry

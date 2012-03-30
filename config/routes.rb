@@ -4,9 +4,9 @@ RevenueGrader::Application.routes.draw do
   namespace :admin do 
    match '/dashboard' => "dashboard#show", :as => :dashboard 
    match '/users' => "users#index", :as => 'users'
-   get '/users/edit/:id' => "users#edit", :as => 'users_edit'
-   match '/users/update/:id' => "users#update", :as => 'users_update'
-   put '/users/:id' => "users#destroy", :as => 'users_delete'
+   #get '/users/edit/:id' => "users#edit", :as => 'users_edit'
+   match '/users/update_user/:company_id' => "users#update_user", :as => 'users_update_user'
+   #put '/users/:id' => "users#destroy", :as => 'users_delete'
    root :to =>  "dashboard#index"
    resources :users
   end

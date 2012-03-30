@@ -1,0 +1,18 @@
+   <h1><strong>List of users <%= @type_title%></strong></h1>
+    <table >
+     <tr><td>Name</td><td>Email</td><td colspan="2">Actions</td></tr>
+     <tr></td>&nbsp;</td></tr>
+     <tr><td>&nbsp;</td></tr>
+     <%@users.each do |user|%>
+  		<tr>
+    	<td><%= user.username%></td>
+    	<td><%= user.email%></td>
+    	<td>Activate/Deactivate</td>
+   		</tr>
+ 	<%end%>
+  </table>                            
+  <div style="background-color:black;">
+    <%= will_paginate(@users)%>
+  </div>
+
+

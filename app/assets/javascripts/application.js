@@ -237,22 +237,32 @@ $(document).ready(function(){
 
 			//------------end of question page js ---- //
 
-            //------------admin js -----------//
+            //------------admin user index js -----------//
               $('#company').change(function(){
-                var str = "";
-                $("select option:selected").each(function () {
-                    str += $(this).id() + " ";
+                var id = "";
+                $("#company option:selected").each(function () {
+                    id = $(this).val(); 
                 });
-
-                alert(str);
-               // $.ajax({
-               //     url: 'admin/users/index/company_id=?',
-              //      type: "POST"
-                    
-              //  });
+                //alert(id);                
+                $.ajax({
+                    url: '/admin/users?company_id='+id,
+                    type: "GET"                    
+                });
               });           
              
-      
+              $('#industry').change(function(){
+                var id = "";
+                $("#industry option:selected").each(function () {
+                    id = $(this).val(); 
+                });
+                //alert(id);                
+                $.ajax({
+                    url: '/admin/users?industry_id='+id,
+                    type: "GET"                    
+                });
+              });   
+           //--------------  end admin_user_index update -----------/    
+
             $(function () {
              $('.tabs').click(function(){
                 alert($(this).attr('id'));
