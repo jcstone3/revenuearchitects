@@ -68,9 +68,10 @@
                                 
                                 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true) do |f| %>
                                 <h3 style="padding-left: 16px;">Email<span>*</span></h3>
-                                <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id", :style=>"margin-left: 16px; margin-bottom: 18px;"  %><h5>Login with the registered email address</h5> 
-                                <h3 style="padding-left: 16px;">Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password", :style=>"margin-left: 16px; margin-bottom: 18px;"  %>
-                                <h4>Enter your valid password</h4>
+                                <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id", :style=>"margin-left: 16px; margin-bottom: 5px;"  %><h4 style="padding-left: 16px;padding-bottom:10px; font-weight:normal;font-weight:300;color:inherit;">Login with the registered email address</h4> 
+                                <h3 style="padding-left: 16px;">Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password", :style=>"margin-left: 16px; margin-bottom: 5px;"  %>
+                                <h4 style="padding-left: 16px;padding-bottom:10px; font-weight:normal;font-weight:300;color:inherit;">Enter your valid password</h4> 
+                                
                               
                                 <% if devise_mapping.rememberable? -%>
                                  <h3 style="padding-left: 16px;"><%= f.check_box :remember_me %> <%= f.label :remember_me, :style=>"margin-top:-21px;margin-left:20px;" %></h3>
