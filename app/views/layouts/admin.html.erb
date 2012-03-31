@@ -40,8 +40,11 @@
     <div class="container" style="margin-top:20px;">
        <div id="alert">
        <% flash.each do |key, value| %>
-             <%= content_tag :div, value, :class => "alert alert-#{key}" unless value.blank? %>
+             <%= content_tag :div, :id=>'flash_msg', :class => "alert alert-#{key}" do %>
+             <%= value unless value.blank? %>                         
+             <a class="close" data-dismiss="alert">×</a>
            <% end %>
+           <% end %>  
         </div>
         <%= yield%>
      </div>

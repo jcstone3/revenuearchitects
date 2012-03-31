@@ -6,6 +6,7 @@ RevenueGrader::Application.routes.draw do
    match '/users' => "users#index", :as => 'users'
    #get '/users/edit/:id' => "users#edit", :as => 'users_edit'
    match '/users/update_user/:company_id' => "users#update_user", :as => 'users_update_user'
+   match '/questions' => "questions#index", :as=>'questions'
    #put '/users/:id' => "users#destroy", :as => 'users_delete'
    root :to =>  "dashboard#index"
    resources :users

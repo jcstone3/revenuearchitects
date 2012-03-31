@@ -24,6 +24,14 @@ class ApplicationController < ActionController::Base
  # end
 #end
 
+def authenticate_admin!
+  if admin_signed_in?
+     admin_root_url
+   else 
+    redirect_to new_admin_session_url, :alert => "You must first log in to access this page"
+  end
+end  
+
 def error_handle404
     if current_user.nil?
      redirect_to new_user_session_url, :alert => "You must first log in to access this page"

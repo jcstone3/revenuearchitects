@@ -1,6 +1,6 @@
 class Admin::DashboardController < Admin::ApplicationController
    layout 'admin'
-   before_filter :authenticate_admin!, :except=> [:index]
+   before_filter :authenticate_admin!
 	def index
 	end	
 
