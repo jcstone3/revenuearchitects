@@ -18,10 +18,11 @@ RevenueGrader::Application.routes.draw do
   end  
   
   #setting up user registration
-  devise_for :users, :path => "", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions" } do
+  devise_for :users, :path => "", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions", :passwords => "users/passwords"} do
       get '/login' =>'users/sessions#new', :as => :new_user_session
       get '/logout' => 'users/sessions#destroy', :as => :destroy_user_session
       get '/signup' => 'users/registrations#new', :as => :new_user_registration
+      get '/password/new/:resource' => 'users/passwords#new', :as => :new_password
       get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru' #third party authentication
   end 
    

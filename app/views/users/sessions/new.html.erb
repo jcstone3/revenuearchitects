@@ -39,7 +39,7 @@
                  <ul class="nav nav-tabs">
                             <li class="active">
                                <a style="background-color:#ffffff;" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png", 
-                            :alt=>"home")%>Sign Up with us</a></li>                
+                            :alt=>"home")%>Sign In</a></li>                
                             <li>
                                <a href="#twitter" data-toggle="tab" style="background-color:#53b1f0;" id="twitter_click" >
                                    <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
@@ -65,17 +65,24 @@
                              
                             <div class="tab-content" id="tab-content">
                             <div class="tab-pane active" id="home">
-
+                                
                                 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true) do |f| %>
-                                <h3 style="padding-left: 16px;margin-top: 25px;">Email<span>*</span></h3>
-                                <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id", :style=>"margin-left: 16px; margin-bottom: 18px;margin-top: 5px;"  %><br> <br> 
-                                <h3 style="padding-left: 16px;margin-top: 10px;">Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password", :style=>"margin-left: 16px; margin-bottom: 18px;margin-top: 5px;"  %>
-                                <br>
+                                <h3 style="padding-left: 16px;">Email<span>*</span></h3>
+                                <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id", :style=>"margin-left: 16px; margin-bottom: 18px;"  %><h5>Login with the registered email address</h5> 
+                                <h3 style="padding-left: 16px;">Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password", :style=>"margin-left: 16px; margin-bottom: 18px;"  %>
+                                <h4>Enter your valid password</h4>
+                              
+                                <% if devise_mapping.rememberable? -%>
+                                 <h3 style="padding-left: 16px;"><%= f.check_box :remember_me %> <%= f.label :remember_me, :style=>"margin-top:-21px;margin-left:20px;" %></h3>
+                                <% end -%>
                                 <%= f.submit "Login", :class=>"btn btn-primary btn-large", 
-                                :style=>"padding-left: 16px;margin-left: 15px;margin-left: 15px; margin-top: 20px; margin-bottom: 20px;" %>
+                                :style=>"padding-left: 16px;margin-left: 15px;margin-left: 15px; margin-bottom: 20px;" %>
                                <span style="padding-left:10px;"> or </span> &nbsp; <span> <%= link_to "Register", new_user_registration_path%></span>
-                               <%= hidden_field_tag('login', "yes")%>
-                               
+                               <%= hidden_field_tag('login', "yes")%><br>
+                              <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+                               <h5 style="padding-left: 16px;"> <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+                                <% end -%></h5>
+
                                <%end%>
                             </div>
                             <div class="tab-pane" id="twitter"><p style="margin-left:10px;">Login with Twitter</p>
