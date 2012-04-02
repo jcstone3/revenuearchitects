@@ -6,7 +6,7 @@ layout "application"
 
 #new survey
 def new
-  #if any active survey exists then user will get redirected to the active survey questions
+  #if any active survey exists then user will get redirected to the active survey questions  
   @active_survey = current_user.companies.first.surveys.find(:first, :conditions=>["is_active=?", true])
 	if @active_survey
    @response = @active_survey.responses.last 

@@ -6,6 +6,11 @@
               Survey Details
             </h1>
           </div>
+          <div class="text" >
+          <p style="margin-left:25px; padding-top:70px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum <br>id quis quam.
+          Sed quis suscipit tortor.
+          </p>
+          </div>
            <div style="padding-left:0px; padding-top:0px; margin-top:0px">   
           <%= form_for(@survey, :url=>{:action => "create"}, :validate => true) do |f| %>
              <div class="points" style="margin-top:10px;padding-top:0px">
@@ -63,14 +68,14 @@
                     
                         </div>
                             <div class="score1">
-                            <span>700</span>
+                            <span><%= image_tag "sampletext.png"%></span>
                             </div>
                     </div>
 
                     <div class="Baloon" style="margin-top:20px;">
                         <div class="head1"><h1>March 2012 </h1></div>
                             <div class="score1">
-                            <span>600</span>
+                            <span><%= image_tag "sampletext.png"%></span>
                             </div>
                 </div>
 

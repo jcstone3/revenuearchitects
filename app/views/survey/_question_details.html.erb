@@ -2,8 +2,8 @@
                       <div class="pagination" >
                         <ul>    
                             <%if(params[:question_id].to_i == 1)%>                     
-                                <li class="disabled">                              
-                                  <%= link_to 'Prev',:style=>"border:0px none"%>
+                                <li class="disabled">   
+                                  <a style="border:0px none">Prev</a>                     
                                 </li>  
                             <%else%>
                                 <li>
@@ -78,11 +78,8 @@
                         </div>
                             <div class="text1"><br>
                               <p style="margin:0px;padding-left:10px;font-size:11px;">
-                              <%= @question.name%><br>
-                                <%= @question.name%><br>
-                                <%= @question.name%><br>
-                                <%= @question.name%><br>
-                                <br></p>
+                               <%= @question.name%>                               
+                                </p>
                               
                             </div> 
                              

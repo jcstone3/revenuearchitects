@@ -47,12 +47,9 @@
                             </i>Previous Question
                        <% end %>
                        <%else%>
-                         <%= link_to(previous_question_url(params[:id], params[:question_id].to_i - 1), :class=>"btn large disabled", :style=>"float:right;margin-right:10px;") do %>
-                            <i class="icon-chevron-left">
-                            </i>Previous Question
-                       <% end %>                    
+                        <a rel="tooltip" class="btn large disabled" style="float:right;margin-right:10px;"><i class="icon-chevron-left"></i>Previous Question</a>
                         <%end%>
-                        <!--<a href="#" class="btn btn-small btn-info" style="float:right; margin-right:20px;"><i class="icon-folder-close icon-white"></i> Save Work</a>-->
+                        <!--<a href="#" class="btn btn-small btn-info" style="float:right; margin-right:20px;"><i class="icon-chevron-left"></i> Save Work</a>-->
                       </p> 
                
 
