@@ -23,11 +23,14 @@
                                                                       
                                         
                                         <h1>Add new SubSection</h1>
-                                       <%= form_for @subsection, :url=>{:action =>:create_subsection} do |f|%>
+                                       <%= form_for @subsection, :url=>{:action =>:admin_create_subsection} do |f|%>
                                        <p><%= f.label :name%></p>
                                        <p><%= f.text_field :name%></p>
+                                       <p><%= f.label :description%></p>
+                                       <p><%= f.text_field :description%></p>
                                        <p>
-                                        
+                                        <%= select_tag(:section_id, options_for_select(@sections.collect{|x| [x.name,x.id]}))%>
+                                        <%#= select_tag(:section_id, options_for_select=>(@sections.collect{|x| [x.name, x.id]}))%>
                                        </p>
                                        <p><%= f.submit 'Add Section'%></p>
                                        <%end%>

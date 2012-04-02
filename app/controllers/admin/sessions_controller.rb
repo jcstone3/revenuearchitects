@@ -1,5 +1,6 @@
 class Admin::SessionsController < Devise::SessionsController
 	#users/sessions/new.html.erb
+  layout "admin"
   def new
     resource = build_resource
     clean_up_passwords(resource)
