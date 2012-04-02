@@ -2,6 +2,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout :layout_by_resource
+
+  before_filter :authenticate_user
+
   #before_filter :check_resource_type
   #to set the redirect path after sign in/ registration
   def after_sign_in_path_for(resource)
@@ -47,6 +50,15 @@ end
  end 
 
 protected
+
+def authenticate_user
+     if Rails.env.staging?
+        authenticate_or_request_with_http_basic do |username, password|
+          username == "survey" && password == "survey$33"
+        end
+    end
+end
+
 def handle_unverified_request
   true
 end
