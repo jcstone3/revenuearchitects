@@ -239,13 +239,13 @@ $(document).ready(function(){
 
             //------------admin user index js -----------//
               $('#company').change(function(){
-                var id = "";
+                var name = "";
                 $("#company option:selected").each(function () {
-                    id = $(this).val(); 
+                    name = $(this).text(); 
                 });
                 //alert(id);                
                 $.ajax({
-                    url: '/admin/users?company_id='+id,
+                    url: '/admin/users?company_name='+name,
                     type: "GET"                    
                 });
               });           

@@ -2,12 +2,17 @@ RevenueGrader::Application.routes.draw do
 
   #admin settings
   namespace :admin do 
-   match '/dashboard' => "dashboard#show", :as => :dashboard 
-   match '/users' => "users#index", :as => 'users'
-   #get '/users/edit/:id' => "users#edit", :as => 'users_edit'
-   match '/users/update_user/:company_id' => "users#update_user", :as => 'users_update_user'
-   match '/questions' => "questions#index", :as=>'questions'
-   #put '/users/:id' => "users#destroy", :as => 'users_delete'
+   get '/dashboard' => "dashboard#show", :as => :dashboard 
+   get '/users' => "users#index", :as => "users"   
+   get '/users/update_user/:company_id' => "users#update_user", :as => "users_update_user"
+   get '/questions' => "questions#index", :as=>"questions"
+   get '/sections' => "section#index", :as => "sections"
+   get '/section/new' => "section#new", :as => "new_section" 
+   get '/subsection/new' => "section#subsection_new", :as => "new_subsection"
+   post '/section/create' => "section#create", :as => "create_section"
+   post '/subsection/create' => "subsection#subsection_create", :as => "create_subsection"
+   get '/settings' => "settings#index", :as => "settings"   
+   get '/reports' => "section#reports_index", :as => "reports"
    root :to =>  "dashboard#index"
    resources :users
   end

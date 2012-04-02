@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
        else
           new_company_url   #redirect to create a new company            
        end     
-    else #resource is an admin
+    else #resource is an admin      
+      flash[:success] = "Welcome! You have signed up successfully." 
       admin_root_url
     end
   end 

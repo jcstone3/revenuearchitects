@@ -4,15 +4,15 @@ class Admin::UsersController < ApplicationController
 
    def index   		
    	    
-   	 @company = Company.find(:all)
+   	 @company = Company.find(:all, :select => 'DISTINCT name')
    	 @industry = Industry.find(:all)
-       if params[:company_id]
-   		   @company = Company.find(params[:company_id])
-   		   @users= User.paginate(:page=> params[:page], :per_page=>5)
+       if params[:company_name]
+   		   #@cmp = Company.find(params[:company_id])
+            @users = User.paginate(:include => :companies, :conditions=>{:companies => {:name => params[:company_name]}},:page=> params[:page], :per_page=>5)   		  
    		   @type_title = "By Company"
    	   elsif params[:industry_id]
-   	   	   @users= User.paginate(:page=> params[:page], :per_page=>7)
-   		   @industry = Industry.find(params[:industry_id])
+   	   	@users = User.paginate(:include => :companies, :conditions=>{:companies => {:industry_id => params[:industry_id]}},:page=> params[:page], :per_page=>5)           
+            @industry = Industry.find(params[:industry_id])
    		   @type_title = "By Industry"
    	  else
    	  	@users= User.paginate(:page=> params[:page], :per_page=>10)
