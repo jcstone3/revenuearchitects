@@ -6,7 +6,7 @@
 
       <h3 style="padding-left: 16px;margin-top: 3px;margin-bottom: 1px;">Email<span>*</span></h3>
 
-      <%= f.email_field :email, :class=>"span3 " , :style=>"margin-left: 16px; margin-bottom: 3px;",:placeholder=>"test@gmail.com", :validate =>
+      <%= f.email_field :email, :class=>"span3 " , :style=>"margin-left: 16px; margin-bottom: 3px;",:placeholder=>"test@gmail.com", :required=> true, :validate =>
                         {:presence => true, :uniqueness => true}  %>
       <h3 style="padding-left: 16px;margin-top: 3px;margin-bottom: 1px;">Password<span>*</span><h3>
       <%= f.password_field :password,  :class=>"span3", :maxlength => "30", :style=>"margin-left: 16px; margin-bottom: 3px;",:placeholder=>"Password for the site", :validate =>{:presence => true} %>
