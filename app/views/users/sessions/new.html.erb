@@ -68,20 +68,20 @@
                                 
                                 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true) do |f| %>
                                 <h3 style="padding-left: 16px;">Email<span>*</span></h3>
-                                <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id", :style=>"margin-left: 16px; margin-bottom: 5px;"  %><h4 style="padding-left: 16px;padding-bottom:10px; font-weight:normal;font-weight:300;color:inherit;">Login with the registered email address</h4> 
+                                <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id", :style=>"margin-left: 16px; margin-bottom: 5px;"  %><h4 style="padding-left: 16px;padding-bottom:10px; font-weight:normal;font-weight:300;color:inherit;font-size:11px">Login with the registered email address</h4> 
                                 <h3 style="padding-left: 16px;">Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password", :style=>"margin-left: 16px; margin-bottom: 5px;"  %>
-                                <h4 style="padding-left: 16px;padding-bottom:10px; font-weight:normal;font-weight:300;color:inherit;">Enter your valid password</h4> 
+                                <h4 style="padding-left: 16px;padding-bottom:10px; font-weight:normal;font-weight:300;color:inherit;font-size:11px">Enter your valid password</h4> 
                                 
                               
                                 <% if devise_mapping.rememberable? -%>
-                                 <h3 style="padding-left: 16px;"><%= f.check_box :remember_me %> <%= f.label :remember_me, :style=>"margin-top:-21px;margin-left:20px;" %></h3>
+                                 <h3 style="padding-left: 16px;padding-bottom:10px"><%= f.check_box :remember_me %> <%= f.label :remember_me, :style=>"margin-top:-21px;margin-left:20px;" %></h3>
                                 <% end -%>
                                 <%= f.submit "Login", :class=>"btn btn-primary btn-large", 
-                                :style=>"padding-left: 16px;margin-left: 15px;margin-left: 15px; margin-bottom: 20px;" %>
+                                :style=>"padding-left: 16px;margin-left: 15px;margin-top: 8px; margin-bottom: 20px;" %>
                                <span style="padding-left:10px;"> or </span> &nbsp; <span> <%= link_to "Register", new_user_registration_path%></span>
                                <%= hidden_field_tag('login', "yes")%><br>
                               <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-                               <h5 style="padding-left: 16px;"> <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+                               <h5 style="padding-left: 16px;font-weight:normal;"> <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
                                 <% end -%></h5>
 
                                <%end%>

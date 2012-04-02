@@ -1,16 +1,19 @@
 <div style="background-color:#fff;height:300px">
-	<div style="padding-left:10px">
-<h2>Forgot your password?</h2>
+	<div style="padding-left:16px;padding-top:10px;">
+<h3 style="font-weight:normal;padding-bottom:13px;color:inherit;font-family:Lato, sans-serif;">Forgot your password?</h3>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
+  <div><%= f.label :email%><br/>
   <%= f.email_field :email %></div>
 
-  <div><%= f.submit "Send me reset password instructions" %></div>
-<% end %>
+  <%= f.submit "Reset password", :class=>"btn", 
+                                :style=>"padding-left: 16px; margin-top: 13px;" %>
+  <!-- <div><%= f.submit "Reset Password" %></div> -->
 
+<% end %>
+<p style="font-family:Lato, sans-serif;font-size:10px">New password will be send to your email account</p>
 <%#= render "links" %>
 </div>
 </div>
