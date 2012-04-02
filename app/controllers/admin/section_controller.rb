@@ -26,12 +26,14 @@ class Admin::SectionController < ApplicationController
       @sections = Section.all
     end
     	
-    def subsection_create
-    	@subsection = SubSection.new(params[:subsection])
+    def create_subsection
+    	params[:sub_section].merge!(:section_id=>params[:section_id], :is_active=>true)
+    	@subsection = SubSection.new(params[:sub_section])
     	if @subsection.save    	
       	 flash[:success] = "Sub Section Added successfully!"
       	 redirect_to admin_sections_url
         else
+          @sections = Section.all	
          flash[:error] = "Section could not be added"	
          render :subsection_new
         end 

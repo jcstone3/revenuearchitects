@@ -10,7 +10,7 @@ RevenueGrader::Application.routes.draw do
    get '/section/new' => "section#new", :as => "new_section" 
    get '/subsection/new' => "section#subsection_new", :as => "new_subsection"
    post '/section/create' => "section#create", :as => "create_section"
-   post '/subsection/create' => "subsection#subsection_create", :as => "create_subsection"
+   post '/subsection/create' => "section#create_subsection", :as => "create_subsection"
    get '/settings' => "settings#index", :as => "settings"   
    get '/reports' => "section#reports_index", :as => "reports"
    root :to =>  "dashboard#index"

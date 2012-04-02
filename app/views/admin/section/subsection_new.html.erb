@@ -23,7 +23,7 @@
                                                                       
                                         
                                         <h1>Add new SubSection</h1>
-                                       <%= form_for @subsection, :url=>{:action =>:admin_create_subsection} do |f|%>
+                                       <%= form_for @subsection, :url=> admin_create_subsection_url do |f|%>
                                        <p><%= f.label :name%></p>
                                        <p><%= f.text_field :name%></p>
                                        <p><%= f.label :description%></p>
