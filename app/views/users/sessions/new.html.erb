@@ -1,4 +1,4 @@
-<div class="container" style="margin-top:25px;">
+<div class="container signup-left">
       <div class="row-fluid">
         <div class="span8 leftBox">
           <div class="arrows">
@@ -7,13 +7,13 @@
                             <strong>Revenue Potential <%= link_to 'now', new_user_session_path %></strong>
                         </h1>
                     </div>
-                    <div class="points" style="padding-top:20px;">
+                    <div class="points">
                       <div class="icon">
                           <%= image_tag "1point.png", :alt=>"icon" %>
                         </div>
                         <div class="picon">
                       <h2>1. Rate yourself on key revenue drivers</h2>
-                        <p style="color:#000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. </p>
+                        <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. </p>
                         </div>
                     </div>
                     <div class="points">
@@ -21,7 +21,7 @@
                         <%= image_tag "2point.png", :alt=>"icon" %>
                         </div>
                         <div class="picon">
-                      <h2 style="color:#c56d2b;">2. We instantly process the results</h2>
+                      <h2 class="point2">2. We instantly process the results</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. </p>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <%= image_tag "3point.png", :alt=>"icon"%>
                         </div>
                         <div class="picon">
-                      <h2 style="color:#bff0f7;">3. Download your report</h2>
+                      <h2 class="point3">3. Download your report</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. </p>
                         </div>
                     </div>
@@ -38,15 +38,15 @@
         <div class="span4 rightBox">
                  <ul class="nav nav-tabs">
                             <li class="active">
-                               <a style="background-color:#ffffff;" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png", 
+                               <a class="signuplink" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png", 
                             :alt=>"home")%>Sign In</a></li>                
                             <li>
-                               <a href="#twitter" data-toggle="tab" style="background-color:#53b1f0;" id="twitter_click" >
+                               <a class="twitterlink" href="#twitter" data-toggle="tab"  id="twitter_click" >
                                    <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
                                </a>
                             </li>
                             <li>
-                                <a href="#facebook" data-toggle="tab" style="background-color:#3b5998;" id="facebook_click">
+                                <a class="facebooklink" href="#facebook" data-toggle="tab" id="facebook_click">
                                    <%= image_tag "facebook_icon.png", :alt=>"facebook", :id=>"facebook_click"%>
                                 </a>
                             </li>
@@ -65,39 +65,39 @@
                              
                             <div class="tab-content" id="tab-content">
                             <div class="tab-pane active" id="home">
-                                
+                                <div class="rightboxName">
                                 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true) do |f| %>
-                                <h3 style="padding-left: 16px;">Email<span>*</span></h3>
-                                <%= f.email_field :email, :class=>"span3", :placeholder=>"Your Email id", :style=>"margin-left: 16px; margin-bottom: 5px;"  %><h4 style="padding-left: 16px;padding-bottom:10px; font-weight:normal;font-weight:300;color:inherit;font-size:11px">Login with the registered email address</h4> 
-                                <h3 style="padding-left: 16px;">Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password", :style=>"margin-left: 16px; margin-bottom: 5px;"  %>
-                                <h4 style="padding-left: 16px;padding-bottom:10px; font-weight:normal;font-weight:300;color:inherit;font-size:11px">Enter your valid password</h4> 
+                                <h3 >Email<span>*</span></h3>
+                                <%= f.email_field :email, :class=>"span3 logindetails", :placeholder=>"Your Email id" %><h4 class="loginheading">Login with the registered email address</h4> 
+                                <h3 >Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password"%>
+                                <h4 class="loginheading">Enter your valid password</h4> 
                                 
                               
                                 <% if devise_mapping.rememberable? -%>
-                                 <h3 style="padding-left: 16px;padding-bottom:10px"><%= f.check_box :remember_me %> <%= f.label :remember_me, :style=>"margin-top:-21px;margin-left:20px;" %></h3>
+                                 <h3 ><%= f.check_box :remember_me %> <%= f.label :remember_me, :class=>"checkRemember" %></h3>
                                 <% end -%>
-                                <%= f.submit "Login", :class=>"btn btn-primary btn-large", 
-                                :style=>"padding-left: 16px;margin-left: 15px;margin-top: 8px; margin-bottom: 10px;" %>                               
+                                <%= f.submit "Login", :class=>"btn btn-primary btn-large login" %>                               
                                <%= hidden_field_tag('login', "yes")%><br>
                               <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-                               <h5 style="padding-left: 16px;font-weight:normal;"> <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+                               <h5 > <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
                                 <% end -%></h5>
-                                <h5 style="padding-left: 16px;font-weight:normal;">
+                                <h5>
                                  <%= link_to "Sign up with us", new_user_registration_path %>
                                  <br />                      
                                 </h5>
                                <%end%>
+                               </div>
                             </div>
-                            <div class="tab-pane" id="twitter"><p style="margin-left:10px;">Login with Twitter</p>
+                            <div class="tab-pane" id="twitter"><p class="loginwith">Login with Twitter</p>
                                 <br>
-                                <%= link_to image_tag("twitter-button1.png" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter),
-                                                     :style=>"background-color:#53b1f0;" %>
+                                <%= link_to image_tag("twitter-button1.png" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter)
+                                                      %>
                             </div>   
-                            <div class="tab-pane" id="facebook"><p style="margin-left:10px;">Login With Facebook</p>
+                            <div class="tab-pane" id="facebook"><p class="loginwith">Login With Facebook</p>
                             <br> 
                                 <%= link_to image_tag("facebook-button2.png", :alt=>"facebook"), 
-                                                     user_omniauth_authorize_path(:facebook),
-                                                     :style=>"background-color:#3b5998;"%>
+                                                     user_omniauth_authorize_path(:facebook)
+                                                     %>
                             </div>
                             <div class="tab-pane" id="plus">Login with Google Plus 
                                 <br>
