@@ -1,5 +1,5 @@
-<div class="container" style="margin-top:20px;">
-            <div id="backcolor" class="span12" style="margin:0; background-color:#505b62;">
+<div class="container">
+            <div id="backcolor" class="span12 menucolor" >
                   <ul class="nav nav-pills">
                    <% @allSection.each do |section| %>
                         <li class="next" id="section_<%=section.id%>">
@@ -16,7 +16,7 @@
 
                     <li class="next" id ="final_result">
                       <%= link_to(reports_url) do %>
-                      <%= image_tag "icon_results.png", :width=>"16px", :height=>"16px", :style=>"margin-top:-5px;padding-bottom:0px;" %>&nbsp;
+                      <%= image_tag "icon_results.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;
                       Final Result
                       
                     <%#= link_to 'Final Result', reports_url%>
