@@ -1,18 +1,18 @@
-<div class="container" style="padding-top:20px;">
-        	<div class="spa@section_total.inspectn9" style="margin:0; background-color:#505b62; width:100%;">
+<div class="container report-top">
+        	<div class="spa@section_total.inspectn9 report-top1" >
                    <ul class="nav nav-pills">
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Strategy <span class="red"><%= @sections[0].total_points %></span></a></li>
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Systems <span class="red"><%= @sections[1].total_points%></span></a></li>
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Programs <span class="red"><%= @sections[2].total_points%></span> </a></li>
-                    <li class="next"><a href="#"><%= image_tag "shoulddo.png",:width=>"16px",:height=>"16px",:style=>"margin-top:-5px;border-radius:20px;"%>&nbsp;&nbsp;Final Result <span class="green"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span> </a></li>
+                    <li class="next"><a href="#"><%= image_tag "shoulddo.png",:width=>"16px",:height=>"16px",:class=>"finalmenu"%>&nbsp;&nbsp;Final Result <span class="green"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span> </a></li>
                   </ul>
             </div>
 </div>
-<div class="container" style="margin-top:20px;">
-	<div class="row-fluid" style="margin-left: 0;">
+<div class="container report-top" >
+	<div class="row-fluid">
 				
              <%@sections.each do |section|%>
-                <div class="span4" style="background-color: white;">
+                <div class="span4 report-body" >
                     <h2><%= section.name%></h2>
                  <div>
                     <div id="accordion1" class="pageAccordion">
@@ -51,19 +51,19 @@
 	</div>
 </div>
 
-        <div class="container" style="margin-top:20px;">
+        <div class="container report-top">
 			<div class="row-fluid">
-				<div class="span7" style="text-align:center;height:170px;background-color:white;">
-                	<div style="padding:15px;">
-                        <h3 style="color: #00A54F;">Thank you for taking the survey.</h3><br>
-                        <h2 style="color: #0086AC;">Your Final Score is <span><%= @final_score%> points</span></h2><br>
+				<div class="span7 report-footer" >
+                	<div class="report1">
+                        <h3 >Thank you for taking the survey.</h3><br>
+                        <h2 >Your Final Score is <span><%= @final_score%> points</span></h2><br>
 						<a href="#" class="btn btn-small btn-info"><i class="icon-info-sign icon-white"></i> Tips and tricks to improve score</a>
                     </div>
 				</div>
-                <div class="span3" style="margin-left:0; padding-right:10px;padding-left:10px;background-color:#394247;
-                height:170px;">
-                	<div style="padding:0px;">
-                        <div style="float:left; width:82px;">
+                <div class="reportcontainer">
+                <div class="span3 center-footer" >
+                	<div >
+                        <div class="center-footer1">
                             <h2 class="revenue">Revenue<br>
                             <span>Grade</span><br>
 							<!--<img src="img/stars.png" alt="stars">-->
@@ -78,9 +78,9 @@
                         </div>
                     </div>
 				</div>
-                <div class="span2" style="margin-left:0; padding-right:10px;padding-left:10px;text-align:center;height:170px;background-color:#0086ac;color:#fff;"><br>
+                <div class="span2 center-footer2" ><br>
                     <br>
-                    <a href="#" style="color:#fff;">
+                    <a href="#" >
                     <%= link_to image_tag("download_icon.png"),download_url(request.parameters.merge({:format => :pdf})), :class => "downloadIcon" %>
                     Download
                     <br>
@@ -91,7 +91,7 @@
 				</div>
 			</div>
 		</div>
-
+        <div>
 
 
 		  
