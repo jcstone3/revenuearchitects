@@ -1,30 +1,36 @@
 class SurveyController < ApplicationController
 
-before_filter :authenticate_user!
-before_filter :check_company
+before_filter :authenticate_user!, :check_company #check current_user & company
+ 
 layout "application"
 
 #new survey
 def new
-  #if any active survey exists then user will get redirected to the active survey questions  
-  @active_survey = current_user.companies.first.surveys.find(:first, :conditions=>["is_active=?", true])
-	if @active_survey
-   @response = @active_survey.responses.last 
-   if  @response     
-     redirect_to questions_url(@active_survey, @response.question_id+1)
-   else
-     redirect_to questions_url(@active_survey, 1)
-   end
+  @active_survey = []
+  @previous_surveys = []
+  if current_user.companies.present?#if no company details is provided
+        if check_existing_surveys #check if there exists previous surveys
+            current_user.companies.each do |cmpany|
+              @active_survey << cmpany.surveys.find(:all, :conditions=>["is_active=?", true])
+            end
+            flash[:notice] = "Please select survey to continue"
+            redirect_to continue_survey_url               
+        else
+          #list all the previous completed surveys & start a new survey
+          current_user.companies.each do |cmpany|
+            @previous_surveys << cmpany.surveys.find(:all, :conditions=>["is_active=?", false])
+          end       
+          @survey = Survey.new
+        end  
   else
-   #start with a new survey
-   @previous_surveys = current_user.companies.first.surveys.find(:all, :conditions=>["is_active=?", false])
-   @survey = Survey.new
-  end 
+    flash[:error] = "Please provide company details before proceeding"
+    redirect_to new_company_url  
+  end
 end	
 
 #create new survey
-def create
-	@company = current_user.companies.first
+def create  
+  @company = current_user.companies.first
   params[:survey].merge!(:start_date => Time.now, :is_active => true)
 	@survey = @company.surveys.create!(params[:survey])
 	if @survey
@@ -36,41 +42,97 @@ def create
 	end       	
 end
 
-#question for the survey	
-def question	
-	@survey = current_user.companies.first.surveys.find_all_by_id(params[:id])	
-	if @survey      
-       @question = Question.find(params[:question_id])           
-        
-      if @question 
-       ########for pagination ############
-         @question_all = Question.count
-         if(params[:question_id].to_i < 6)
-            @questions = Question.find(:all, :offset=> 0, :limit=>10) 
-         elsif(params[:question_id].to_i > @question_all - 5)  
-            @questions = Question.find(:all, :offset=> (@question_all - 10), :limit=>10)
-         else
-            @questions = Question.find(:all, :offset=> (params[:question_id].to_i - 5), :limit=>10)
-         end 
-      ######### end of pagination logic ########## 
+def get_response_status
+  if params[:id].present?
+    if params[:id].to_i > 0
+    if params[:id].to_i.is_a?(Numeric)
+          if check_user_surveys(params[:id])
+              response = []
+              questions= []
 
-         @survey_response = Response.find_last_by_survey_id_and_question_id(params[:id], params[:question_id])
-         if @survey_response
-            redirect_to previous_question_url(params[:id], params[:question_id])
-         else   
-            @sub_section = SubSection.find(@question.sub_section_id)
-            @section = Section.find(@sub_section.section_id)
-            @allSection = Section.all
-            @response = Response.new
-            @total_score = calculate_response_for_section(params[:id], @section.id)
-         end
-      else
-        redirect_to  new_survey_path  
-      end      
+              @survey = Survey.find(params[:id])
+              @response = @survey.responses
+              if @response.present?
+                 @response.each do |res|
+                   response << res.question_id   
+                 end 
+                 Question.all.each do |quest|
+                   questions << quest.id
+                 end
+                  res = questions - response
+                 flash[:success] = "Continue Survey" 
+                 redirect_to questions_url(@survey, res[0]) 
+              else
+               flash[:success] = "Start Survey" 
+               redirect_to questions_url(@survey, 1)   
+              end
+          else
+            flash[:error] = "Some thing went wrong please select a survey"
+            redirect_to continue_survey_url 
+          end      
   else
-    new_survey_path 	
-  end
+    flash[:error] = "Something went wrong please select a survey"
+    redirect_to continue_survey_url
+  end 
+   else
+    flash[:error] = "Something went wrong please select a survey"
+    redirect_to continue_survey_url
+  end 
+  else
+    flash[:error] = "Something went wrong please select a survey"
+    redirect_to continue_survey_url 
+ end
+end
+
+#lists all the active surveys 
+def show
+  @companies =  current_user.companies          
+end  
+
+#question for the survey	
+def question
+   if params[:id].present? && params[:question_id].present? 
+     if(params[:id].to_i > 0)
+       if check_user_surveys(params[:id])
+          @survey = Survey.find(params[:id])
+          @response = @survey.responses 
+           if(params[:question_id].to_i > 0)            
+             @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+              if @survey_response
+               redirect_to previous_question_url(params[:id], params[:question_id])
+              else
+                @question = Question.find(params[:question_id])
+                @sub_section = SubSection.find(@question.sub_section_id)
+                @section = Section.find(@sub_section.section_id)
+                @allSection = Section.all
+                @response = Response.new
+                @total_score = calculate_response_for_section(params[:id], @section.id)
+                ########for pagination ############
+                @question_all = Question.count
+                if(params[:question_id].to_i < 6)
+                @questions = Question.find(:all, :offset=> 0, :limit=>10) 
+                elsif(params[:question_id].to_i > @question_all - 5)  
+                @questions = Question.find(:all, :offset=> (@question_all - 10), :limit=>10)
+                else
+                @questions = Question.find(:all, :offset=> (params[:question_id].to_i - 5), :limit=>10)
+                end 
+                ######### end of pagination logic ########## 
+              end                       
+           end           
+      else
+       flash[:error] = "Something went wrong please select a survey"
+       redirect_to continue_survey_url   
+      end
+    else
+      flash[:error] = "Something went wrong please select a survey"
+      redirect_to continue_survey_url  
+    end  
+   else
+     flash[:error] = "Something went wrong please select a survey"
+     redirect_to continue_survey_url 
+   end 
 end	
+
 
 def create_response
 	@response = Response.new
@@ -222,10 +284,39 @@ end
 
 private
 def check_company
-  if !current_user.companies.first
+  if !current_user.companies
      redirect_to new_company_url
   end
 end	
+
+def check_existing_surveys
+  flag = false
+  if current_user.companies.present?
+     current_user.companies.each do |c|
+       if c.surveys.present?
+        flag = true      
+       end  
+     end 
+  end
+  return flag
+end
+
+def check_user_surveys(survey_id)
+   @survey = Survey.find(survey_id)
+   flag = false
+   if current_user.companies.present?
+     current_user.companies.each do |c|
+       if c.surveys.present?
+        c.surveys.each do |s| 
+          if(s.id == @survey.id)
+           flag = true      
+          end
+        end  
+       end 
+     end
+   end
+  return flag
+end  
 
 #total response for a section
 def calculate_response_for_section(survey_id, section_id)
