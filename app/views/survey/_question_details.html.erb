@@ -60,7 +60,7 @@
                         <p class="demographicstext">Demographics</p>
                         </span>
                         <span>
-                        <%= image_tag "download.png",:width=>"47px",:height=>"49px",:style=>"margin-left: 26px;" %>
+                        <%= image_tag "download.png",:width=>"47px",:height=>"49px",:class=>"report"%>
                         <p class="reporttext">Report</p>
                         </span>
                     </div>
@@ -68,7 +68,7 @@
                         <div class="head" >
                           <p class="scoretext">Total score for this section</p> </div>
                             <div class="score"><br>
-                           <%= @total_score%>/<span style="font-size:30px;"><%= @section.total_points%>
+                           <%= @total_score%>/<span class="totalpoints"><%= @section.total_points%>
                             </span> <br>
                             <span>POINTS</span>
 
