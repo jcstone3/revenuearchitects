@@ -3,7 +3,7 @@
                         <ul>    
                             <%if(params[:question_id].to_i == 1)%>                     
                                 <li class="disabled">   
-                                  <a style="border:0px none">Prev</a>                     
+                                  <a class="prev">Prev</a>                     
                                 </li>  
                             <%else%>
                                 <li>
@@ -38,7 +38,7 @@
                             <%end%>
                              <%if(params[:question_id].to_i == @question_all)%>
                                <li class ="disabled">
-                                 <a style="border:0px none">Next</a> 
+                                 <a class="next">Next</a> 
                               </li>
                              <%else%> 
                               <li>
@@ -49,24 +49,24 @@
                       </div>
                     </div>
                 </div>
-                <div class="span3 rightBox" style="height:auto;">
+                <div class="span3 rightBox rightBoxheight">
                     <div class="processIcons">
                         <span>
                         <%= image_tag "qa.png",:width=>"47px",:height=>"49px" %>
-                        <p style="color:#525c62;">Q&amp;A</p>
+                        <p class="qatext">Q&amp;A</p>
                         </span>
                         <span>
                         <%= image_tag "processing.png",:width=>"47px",:height=>"49px" %>
-                        <p style="color:#c56d2b;">Demographics</p>
+                        <p class="demographicstext">Demographics</p>
                         </span>
                         <span>
                         <%= image_tag "download.png",:width=>"47px",:height=>"49px",:style=>"margin-left: 26px;" %>
-                        <p style="color:#116094; margin-left: 30px">Report</p>
+                        <p class="reporttext">Report</p>
                         </span>
                     </div>
                     <div class="scoreBoard">
                         <div class="head" >
-                          <p style="margin:0px;padding-left:5px">Total score for this section</p> </div>
+                          <p class="scoretext">Total score for this section</p> </div>
                             <div class="score"><br>
                            <%= @total_score%>/<span style="font-size:30px;"><%= @section.total_points%>
                             </span> <br>
@@ -77,10 +77,10 @@
 
                      <div class="scoreBoard">
                         <div class="head">
-                          <p style="margin:0px;padding-left:5px">About Questions</p>
+                          <p class="abouttext">About Questions</p>
                         </div>
                             <div class="text1"><br>
-                              <p style="margin:0px;padding-left:10px;font-size:11px;">
+                              <p class="abouttextcontent">
                                <%= @question.name%>                               
                                 </p>
                               
