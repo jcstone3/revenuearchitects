@@ -4,6 +4,9 @@ before_filter :authenticate_user!, :check_company #check current_user & company
  
 layout "application"
 
+def index
+  redirect_to continue_survey_url
+end  
 #new survey
 def new
   @active_survey = []
@@ -134,16 +137,26 @@ def question
 end	
 
 
-def create_response
-	@response = Response.new
-	@survey = Survey.find(params[:id])
-	params[:response].merge!(:question_id => params[:question_id], :name =>params[:response][:answer_2])	
-	@response = @survey.responses.create!(params[:response])	
-  @question = Question.find(@response.question_id)
-	@sub_section = SubSection.find(@question.sub_section_id)
-	@section = Section.find(@sub_section.section_id)
-	@total_score = calculate_response_for_section(params[:id], @section.id)
-	redirect_to questions_url(@survey, params[:question_id].to_i+1)
+def create_response	
+  if params[:response].blank?  
+    flash[:error] = "Could not save response for some reason please try again"
+    redirect_to continue_survey_url
+  else
+   @response = Response.new 
+	 @survey = Survey.find(params[:response][:survey_id])
+	 params[:response].merge!(:name =>params[:response][:answer_2])	
+	 @response = @survey.responses.create!(params[:response])	
+   @question = Question.find(@response.question_id)
+   if @question.id < Question.last.id
+      @sub_section = SubSection.find(@question.sub_section_id)
+	    @section = Section.find(@sub_section.section_id)
+	    @total_score = calculate_response_for_section(@survey.id, @section.id)
+	    redirect_to questions_url(@survey, params[:response][:question_id].to_i+1)
+   else
+     flash[:notice] = "Report"     
+     redirect_to reports_url(@survey.id)
+   end
+  end
 end
 
 #report of a particular survey
@@ -176,56 +189,72 @@ def report
 end	
 
 def previous_question
-	@survey = Survey.find(params[:id])
-	@question = Question.find(params[:question_id])
-	if @question    
-    
-    @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
-    if @survey_response
-       ########for pagination ############
-        @question_all = Question.count
-         if(params[:question_id].to_i < 6)
-            @questions = Question.find(:all, :offset=> 0, :limit=>10) 
-         elsif(params[:question_id].to_i > @question_all - 5)  
-            @questions = Question.find(:all, :offset=> (@question_all - 10), :limit=>10)
-         else
-            @questions = Question.find(:all, :offset=> (params[:question_id].to_i - 5), :limit=>10)
-         end 
-    ######### end of pagination logic ##########      
-      @sub_section = SubSection.find(@question.sub_section_id)
-  	  @section = Section.find(@sub_section.section_id)
-  	  @allSection = Section.all
-  	  @response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])	
-  	  @total_score = calculate_response_for_section(params[:id], @section.id)
+  if params[:id].present? && params[:question_id].present? 
+     if(params[:id].to_i > 0)
+       if check_user_surveys(params[:id])
+          @survey = Survey.find(params[:id])
+          @response = @survey.responses 
+           if(params[:question_id].to_i > 0)            
+             @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+              if @survey_response
+
+                @question = Question.find(params[:question_id])
+                @sub_section = SubSection.find(@question.sub_section_id)
+                @section = Section.find(@sub_section.section_id)
+                @allSection = Section.all
+                @response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+                @total_score = calculate_response_for_section(params[:id], @section.id)
+                ########for pagination ############
+                @question_all = Question.count
+                if(params[:question_id].to_i < 6)
+                @questions = Question.find(:all, :offset=> 0, :limit=>10) 
+                elsif(params[:question_id].to_i > @question_all - 5)  
+                @questions = Question.find(:all, :offset=> (@question_all - 10), :limit=>10)
+                else
+                @questions = Question.find(:all, :offset=> (params[:question_id].to_i - 5), :limit=>10)
+                end 
+                ######### end of pagination logic ########## 
+              
+              else
+                redirect_to questions_url(@survey, params[:question_id])
+              end                       
+           end           
+      else
+       flash[:error] = "Something went wrong please select a survey"
+       redirect_to continue_survey_url   
+      end
     else
-     @response = @survey.responses.last 
-     if @response
-      redirect_to questions_url(@survey, @response.question_id.to_i+1) 
-     else
-      redirect_to questions_url(@survey, params[:question_id]) 
-     end 
-  end 
-  else
-    @response = @survey.responses.last 
-    if @response
-      redirect_to questions_url(@survey, @response.question_id.to_i+1) 
-     else
-      redirect_to questions_url(@survey, params[:question_id]) 
-     end 
-  end 
+      flash[:error] = "Something went wrong please select a survey"
+      redirect_to continue_survey_url  
+    end  
+   else
+     flash[:error] = "Something went wrong please select a survey"
+     redirect_to continue_survey_url 
+   end 
+	
 end
 
-def update_response
-   @survey = Survey.find(params[:id])
-   @question = Question.find(params[:question_id])   	
-   @response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+def update_response  
+  if params[:response].blank?  
+    flash[:error] = "Could not save response for some reason please try again"
+    redirect_to continue_survey_url
+  else
+   @survey = Survey.find(params[:response][:survey_id])
+   @response = Response.find_by_survey_id_and_question_id(params[:response][:survey_id], params[:response][:question_id])
    params[:response].merge!(:name =>params[:response][:answer_2])
    @response.update_attributes(params[:response])
-   @survey_response = Response.find_last_by_survey_id(params[:id])
-   @sub_section = SubSection.find(@question.sub_section_id)
-   @section = Section.find(@sub_section.section_id)
-   @total_score = calculate_response_for_section(params[:id], @section.id)
-   redirect_to questions_url(@survey, @survey.responses.last.question_id.to_i+1 )
+   @questions = Question.find(@response.question_id)
+   if @questions.id.to_i+1 < Question.last.id
+      @question = Question.find(@response.question_id.to_i + 1)
+      @sub_section = SubSection.find(@question.sub_section_id)
+      @section = Section.find(@sub_section.section_id)
+      @total_score = calculate_response_for_section(@survey.id, @section.id)      
+      redirect_to questions_url(@survey, @question.id)
+   else
+     flash[:notice] = "Report"     
+     redirect_to reports_url(@survey.id)
+   end
+  end
 end
 
 #to download in pdf/xls format

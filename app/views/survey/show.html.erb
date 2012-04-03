@@ -15,18 +15,17 @@
                      <% current_user.companies.each do |cmpany| %>      
                      <div class="points" style="margin-top:5px; padding-top:0px;" >
                         <div class="option" style="margin-top:5px;padding-top:0px;" >
-                        <h3>Listing surveys of <%= cmpany.name%></h3>
+                        <h3>Surveys of company <%= cmpany.name%></h3>
+
                          <%@active_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", true]) %>
                           <% if @active_survey.present?%>
                           <% @active_survey.each do |survey|%>
                               <%= link_to "Survey_#{survey.id}", get_response_status_url(survey)%>
                           <%end%>
-                          <% end %> 
-                                                  
+                          <% end %>                                                   
+                        </div>
                       </div>
-
-                      </div>
-                        <%end%>   
+                    <%end%>                      
                      
              </div>  
            </div>

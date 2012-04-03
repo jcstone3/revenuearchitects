@@ -13,7 +13,9 @@
                             <%#= @question.point for setting the point for each question %>
                         </h2>
                     </div>
-                    <%= form_for(@response, :url=>reponses_url) do |f|%>  
+                    <%= form_for(@response, :url=>reponses_url) do |f|%> 
+                     <%= f.hidden_field :survey_id, :value=>@survey.id%>
+                     <%= f.hidden_field :question_id, :value=>@question.id%> 
                      <%= render "questions_set", :f => f%>
                     <%end%>
                     <%= render "question_details"%>
