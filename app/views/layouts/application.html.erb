@@ -22,10 +22,10 @@
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
   <body>
-    <div class="container" style="background-color:#fff;">
-          <%= link_to image_tag('logo.png', :alt=>"logo", :style=>"vertical-align: top; margin-left:10px;"),  show_url, :class=>"brand" %>
+    <div class="container mainLeft" >
+          <%= link_to image_tag('logo.png', :alt=>"logo"),  show_url, :class=>"brand" %>
           <div class="ra">
-            brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo", :style=>"vertical-align: top; margin:-4px 0 0 4px;"), show_url %>
+            brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo", :class=>"headertext"), show_url %>
           </div>
           <div class="row-fluid">
             <div class="button-bar">
@@ -39,7 +39,7 @@
             </div>
           </div>
         </div>
-    <div class="container" style="margin-top:20px;">
+    <div class="container headerPopup" >
        <div id="alert">
        <% flash.each do |key, value| %>
              <%= content_tag :div, :id=>'flash_msg', :class => "alert alert-#{key}" do %>
