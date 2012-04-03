@@ -1,52 +1,52 @@
-		<div class="container" style="margin-top:20px;">
+		<div class="container headerPopup">
 			<div class="row-fluid">
-				<div class="span9 leftBox" style="height:auto;background-color:#ffffff">                  
+				<div class="span9 leftBox mainLeft">                  
           <div class="question">
             <h1> Company Details </h1>
           </div>
 
           <div class="text" >
-          <p style="margin-left:25px; padding-top:70px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
           Aenean eu erat et velit dapibus bibendum id quis quam.<br>
           Sed quis suscipit tortor.
           </p>
           </div>
           
          
-           <div style="padding-left:0px; padding-top:0px; margin-top:0px;">
+           <div class="companyLeft">
               <%= form_for(@company, :validate => true) do |f| %>
                  <%= @company_error_messages %>
-                     <div class="points" style="margin-top:5px; padding-top:0px;" >
-                        <div class="option" style="margin-top:5px;padding-top:0px;" >
-                        <h3>Your Company Name<span style="color:red;">*</span></h3>
+                     <div class="points" >
+                        <div class="option">
+                        <h3>Your Company Name<span class="star">*</span></h3>
                         
                         <%= f.text_field :name, :maxlength=>"40", :validate =>{:presence => true}, :class=> "input-xlarge", :placeholder=>"Company Name" %>
                       </div>
 
                       </div>
                           
-                     <div class="points" style="margin-top:5px" >
+                     <div class="points">
                         <div class="option" >
-                           <h3>Website<span style="color:red;">*</span></h3>
+                           <h3>Website<span class="star">*</span></h3>
                            <%= f.text_field :website, :maxlength=>"40", :validate =>
                                            { :presence => true, :uniqueness => true} ,:class=> "input-xlarge", :placeholder=>"http://example.com or www.example.com" %><br/>
                                            
                         </div>
                      </div>
-                     <div class="points" style="margin-top:5px" >
+                     <div class="points">
                         <div class="option ">
                           <h3>Industry</h3>                                
                           <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
                         </div>
                      </div>
-                     <div class="points" style="margin-top:5px;">
+                     <div class="points">
                      <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white" %>                 
                 <% end %>
               </div>				
              </div>  
            </div>
 				   <div class="span3 rightBox" >
-               <div class="scoreBoard" style="margin-top:2px;">
+               <div class="scoreBoard scoreboard1">
                   <div class="head">About Revenue Grader </div>
                      <div class="score">
                         <span>Some notes on revenue grader</span>
