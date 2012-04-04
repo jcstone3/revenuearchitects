@@ -6,7 +6,7 @@
           </div>
 
           <div class="text" >
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Aenean eu erat et velit dapibus bibendum id quis quam.<br>
           Sed quis suscipit tortor.
           </p>
@@ -32,7 +32,7 @@
                            <h3>Website<span class="star">*</span></h3></div>
                            <%= f.text_field :website, :maxlength=>"40", :validate =>
                                            { :presence => true, :uniqueness => true} ,:class=> "input-xlarge"%>
-                          <label class="lblCompanyname">http://example.com or www.example.com</label>               
+                          <label class="lblCompanyname"> www.example.com</label>               
                         </div>
                      </div>
                      <div class="points">
@@ -42,7 +42,7 @@
                           <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
                         </div>
                      </div>
-                     <div class="points" >
+                     <div class="pointsb" >
                      <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white btncontinue"%>                 
                 <% end %>
               </div>				

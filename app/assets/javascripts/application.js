@@ -271,7 +271,7 @@ $(document).ready(function(){
    
 
       $('#resultTable').dataTable( {
-            "bPaginate": false,
+            "bPaginate": true,
             "bLengthChange": false,
             "bFilter": true,
             "bSort": true,
