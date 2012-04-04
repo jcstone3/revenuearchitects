@@ -60,3 +60,7 @@ Integrated the admin layout
 
 Admin layout integration for user 
 User listing based on company and industry
+
+Added migration name for questions
+Checked for params validation on questions page
+Added migration is_active for user

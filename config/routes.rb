@@ -3,7 +3,9 @@ RevenueGrader::Application.routes.draw do
   #admin settings
   namespace :admin do 
    get '/dashboard' => "dashboard#show", :as => :dashboard 
-   get '/users' => "users#index", :as => "users"   
+   get '/users' => "users#index", :as => "users" 
+   get '/users/activate_user/:id' => "users#activate_user", :as => "users_active"  
+   get '/users/deactivate_user/:id' => "users#deactivate_user", :as => "users_deactive" 
    get '/users/update_user/:company_id' => "users#update_user", :as => "users_update_user"
    get '/questions' => "questions#index", :as=>"questions"
    get '/sections' => "section#index", :as => "sections"

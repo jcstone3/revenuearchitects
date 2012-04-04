@@ -26,24 +26,28 @@ class Admin::UsersController < ApplicationController
 
    end	
 
-   def edit
-   	@user = User.find(params[:id])
+   def activate_user
+   	@user = User.find_by_id(params[:id])
+      if @user.update_attribute(:is_active, true)   
+       flash[:success] = "User #{@user.username} activated successfully"
+       redirect_to admin_users_url
+      else
+       flash[:success] = "Sorry could not deactivated the user"  
+       redirect_to admin_users_url
+      end 
    end	
 
 
-   def update
-    @user = User.find(params[:id])     
-    if @user.update_attributes(params[:user])        	
-      flash[:success] = "User updated successfully"
+   def deactivate_user
+      @user = User.find_by_id(params[:id])
+     if @user.update_attribute(:is_active, false)      
+      flash[:success] = "User #{@user.username} deactivated successfully"
       redirect_to admin_users_url
-    else
-      flash[:error] = "Sorry user could not be updated"
-      render :edit  
-    end	
+      else
+       flash[:success] = "Sorry could not activated the user"  
+       redirect_to admin_users_url
+      end  
    end
 
-   def update_user
-   	
-   		
-    end	
+   
 end
