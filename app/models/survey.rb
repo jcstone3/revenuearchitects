@@ -7,6 +7,26 @@ class Survey < ActiveRecord::Base
     
 	belongs_to :company
 	has_many :responses
+
+
+    def self.check_numericality(params)
+    	params = params
+    	if params.to_i.is_a?(Integer) && params.to_i > 0
+    	 return true
+    	else
+    	 return false
+    	end 	
+    end
+   
+    def self.find_question(params)
+    	@question = Question.find_by_id(params)
+    	if @question.present?
+         return true
+    	else
+    	 return false
+        end
+    end	
+
 end
 # == Schema Information
 #

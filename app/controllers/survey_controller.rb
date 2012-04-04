@@ -16,7 +16,7 @@ def new
             current_user.companies.each do |cmpany|
               @active_survey << cmpany.surveys.find(:all, :conditions=>["is_active=?", true])
             end
-            flash[:notice] = "Please select survey to continue"
+            flash[:success] = "Please select survey to continue"
             redirect_to continue_survey_url               
         else
           #list all the previous completed surveys & start a new survey
@@ -95,11 +95,12 @@ end
 #question for the survey	
 def question
    if params[:id].present? && params[:question_id].present? 
-     if(params[:id].to_i > 0)
+     if((Survey.check_numericality(params[:id])) && (check_survey(params[:id])))
        if check_user_surveys(params[:id])
           @survey = Survey.find(params[:id])
           @response = @survey.responses 
-           if(params[:question_id].to_i > 0)            
+           if((Survey.check_numericality(params[:question_id])) && (check_question(params[:question_id])))          
+             
              @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
               if @survey_response
                redirect_to previous_question_url(params[:id], params[:question_id])
@@ -120,7 +121,10 @@ def question
                 @questions = Question.find(:all, :offset=> (params[:question_id].to_i - 5), :limit=>10)
                 end 
                 ######### end of pagination logic ########## 
-              end                       
+              end 
+           else
+            flash[:error] = "Something went wrong please select a survey"
+            redirect_to continue_survey_url
            end           
       else
        flash[:error] = "Something went wrong please select a survey"
@@ -190,11 +194,11 @@ end
 
 def previous_question
   if params[:id].present? && params[:question_id].present? 
-     if(params[:id].to_i > 0)
+     if((Survey.check_numericality(params[:id])) && (check_survey(params[:id])))
        if check_user_surveys(params[:id])
           @survey = Survey.find(params[:id])
           @response = @survey.responses 
-           if(params[:question_id].to_i > 0)            
+           if((Survey.check_numericality(params[:question_id])) && (check_question(params[:question_id])))          
              @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
               if @survey_response
 
@@ -213,12 +217,14 @@ def previous_question
                 else
                 @questions = Question.find(:all, :offset=> (params[:question_id].to_i - 5), :limit=>10)
                 end 
-                ######### end of pagination logic ########## 
-              
+                ######### end of pagination logic ##########               
               else
                 redirect_to questions_url(@survey, params[:question_id])
-              end                       
-           end           
+              end 
+           else
+            flash[:error] = "Something went wrong please select a survey"
+            redirect_to continue_survey_url
+           end      
       else
        flash[:error] = "Something went wrong please select a survey"
        redirect_to continue_survey_url   
@@ -330,8 +336,26 @@ def check_existing_surveys
   return flag
 end
 
+def check_survey(survey_id)
+  @survey = Survey.find_by_id(survey_id)
+  if @survey.present?
+    return true
+  else
+    return false
+  end    
+end
+
+def check_question(question_id)  
+  @question = Question.find_by_id(question_id)
+  if @question.present?
+    return true
+  else
+    return false
+  end    
+end  
+
 def check_user_surveys(survey_id)
-   @survey = Survey.find(survey_id)
+   @survey = Survey.find_by_id(survey_id)
    flag = false
    if current_user.companies.present?
      current_user.companies.each do |c|
