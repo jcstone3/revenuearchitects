@@ -20,27 +20,30 @@
                         <div class="option">
                         <h3>Your Company Name<span class="star">*</span></h3>
                         
-                        <%= f.text_field :name, :maxlength=>"40", :validate =>{:presence => true}, :class=> "input-xlarge", :placeholder=>"Company Name" %>
+                        <%= f.text_field :name, :maxlength=>"40", :validate =>{:presence => true}, :class=> "input-xlarge"%>
+                        <label class="lblCompanyname">Company Name</label>
                       </div>
 
                       </div>
                           
                      <div class="points">
                         <div class="option" >
-                           <h3>Website<span class="star">*</span></h3>
+                          <div class="heading1">
+                           <h3>Website<span class="star">*</span></h3></div>
                            <%= f.text_field :website, :maxlength=>"40", :validate =>
-                                           { :presence => true, :uniqueness => true} ,:class=> "input-xlarge", :placeholder=>"http://example.com or www.example.com" %><br/>
-                                           
+                                           { :presence => true, :uniqueness => true} ,:class=> "input-xlarge"%>
+                          <label class="lblCompanyname">http://example.com or www.example.com</label>               
                         </div>
                      </div>
                      <div class="points">
                         <div class="option ">
-                          <h3>Industry</h3>                                
+                          <div class="heading2">
+                          <h3>Industry</h3></div>                              
                           <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
                         </div>
                      </div>
-                     <div class="points">
-                     <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white" %>                 
+                     <div class="points" >
+                     <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white btncontinue"%>                 
                 <% end %>
               </div>				
              </div>  
