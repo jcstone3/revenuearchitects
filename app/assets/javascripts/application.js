@@ -269,4 +269,13 @@ $(document).ready(function(){
              });
             })
    
+
+      $('#resultTable').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } ); 
 });

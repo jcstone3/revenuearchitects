@@ -5,6 +5,9 @@
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Systems <span class="red"><%= @sections[1].total_points%></span></a></li>
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Programs <span class="red"><%= @sections[2].total_points%></span> </a></li>
                     <li class="next"><a href="#"><%= image_tag "shoulddo.png",:width=>"16px",:height=>"16px",:class=>"finalmenu"%>&nbsp;&nbsp;Final Result <span class="green"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span> </a></li>
+                    <li>Summary </li>
+                    <li><%= link_to 'Detailed', detailed_report_url(params[:id])%></li>
+                    <li>Export</li>
                   </ul>
             </div>
 </div>

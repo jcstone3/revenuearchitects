@@ -13,6 +13,7 @@
 
     <%#= stylesheet_link_tag "bootstrap", "report",:media => "all" %>
        <%= stylesheet_link_tag "application", :media => "all" %>
+       <%= stylesheet_link_tag "jquery.dataTables"%>
   
     <%#= stylesheet_link_tag  "bootstrap-responsive"   %>  
   </head>
@@ -54,15 +55,23 @@
      
     
     <%= javascript_include_tag "application"%>
-       
+    <%= javascript_include_tag "jquery.dataTables.min","jquery-ui-1.8.18.custom.min"%>  
     <script>
-        $(document).ready(function(){
+    $(document).ready(function(){
             
     $(".pageAccordion").accordion({
     autoHeight: false,
     navigation: true
     });
+
+ 
+
     }); 
+  
+  
+  
+
+
         
     </script>
 
@@ -73,7 +82,8 @@
     readOnly: true,
     start: 3
     });
-    }); 
+    });
+
     </script> 
         
   </body>

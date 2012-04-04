@@ -156,9 +156,8 @@ def create_response
 	    @section = Section.find(@sub_section.section_id)
 	    @total_score = calculate_response_for_section(@survey.id, @section.id)
 	    redirect_to questions_url(@survey, params[:response][:question_id].to_i+1)
-   else
-     flash[:notice] = "Report"     
-     redirect_to reports_url(@survey.id)
+   else    
+     redirect_to confirm_survey_url(@survey.id)
    end
   end
 end
@@ -256,12 +255,23 @@ def update_response
       @section = Section.find(@sub_section.section_id)
       @total_score = calculate_response_for_section(@survey.id, @section.id)      
       redirect_to questions_url(@survey, @question.id)
-   else
-     flash[:notice] = "Report"     
-     redirect_to reports_url(@survey.id)
+   else          
+     redirect_to confirm_survey_url(@survey.id)
    end
   end
 end
+
+def confirm_survey
+  @survey = Survey.find_by_id(params[:id])
+end
+
+def close_survey
+   redirect_to reports_url(params[:id])
+end
+
+def report_detailed
+@responses = Response.find(:all, :select => "questions.name,responses.answer_1, questions.points", :joins => "right outer join questions on responses.question_id = questions.id and responses.survey_id = 1")
+end  
 
 #to download in pdf/xls format
 def download_result

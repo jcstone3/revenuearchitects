@@ -53,7 +53,11 @@ RevenueGrader::Application.routes.draw do
   get 'survey/:id/reports' => 'survey#reports', :as=>'reports_show'
   get 'survey/show' =>'survey#show', :as=>'continue_survey'
   get 'survey/get_response_status/:id' => 'survey#get_response_status', :as=>'get_response_status'
-  
+  get 'survey/:id/report/detailed_view' => 'survey#report_detailed', :as=>'detailed_report'
+  get 'survey/:id/confirm_survey' => 'survey#confirm_survey', :as=>'confirm_survey'
+  get 'survey/:id/close_survey' => 'survey#close_survey', :as=>'close_survey'
+
+
   #site controller maps about us, contact us privacy policy
   match "aboutUs" =>'site#aboutUs', :as => 'aboutUs'
   match "contactUs" =>'site#conactUs', :as => 'contactUs'
