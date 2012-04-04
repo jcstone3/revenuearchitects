@@ -65,4 +65,5 @@ Added migration name for questions
 Checked for params validation on questions page
 Added migration is_active for user
 Added activate and deactivate links for user Admin Module
-
+Edit of section and subsection from Admin
+Add Question from Admin 

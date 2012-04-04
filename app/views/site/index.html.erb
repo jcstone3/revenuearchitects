@@ -1,3 +1,28 @@
+<% if user_signed_in? %>
+<div class="container" style="margin-top:20px;">
+      <div class="row-fluid">
+        <div class="span9 leftBox" style="height:auto;background-color:#ffffff">                  
+          <div class="question">
+            <h5> Want to continue back with survey </h5>
+            <p><%= link_to 'Survey', new_survey_url%></p>
+          </div>
+           </div>
+        </div>
+       </div> 
+
+<%elsif admin_signed_in?%>
+<div class="container" style="margin-top:20px;">
+      <div class="row-fluid">
+        <div class="span9 leftBox" style="height:auto;background-color:#ffffff">                  
+          <div class="question">
+            <h5> Admin  </h5>
+            <p><%= link_to 'admin', admin_root_url%></p>
+          </div>
+           </div>
+        </div>
+       </div> 
+
+<%else%>
 <div class="row-fluid headerPopup" >
         <div class="span8 leftBox">
           <div class="arrows">
@@ -75,4 +100,4 @@
                             </div>
         </div>
       </div>
-
+<%end%>

@@ -22,17 +22,19 @@
                                 <div class="tabGraph">
                                                                       
                                         
-                                        <h1>Section List</h1>
-                                        <% @sections.each do |section|%>
-                                        <p><strong><%= link_to section.name, admin_edit_section_url(section)%></strong></p>
-                                        <% section.sub_sections.each do |sub_section|%>
-                                         <p><%= link_to sub_section.name, admin_edit_subsection_url(sub_section)%></p>                                     
-                                        <%end%>
-                                        <br>
-                                        <%end%>
-                                      <p><%= link_to 'Add Section', admin_new_section_url%> / 
-                                         <%= link_to 'Add Sub Section', admin_new_subsection_url%></p>
-                                    
+                                        <h1>Edit SubSection</h1>
+                                       <%= form_for :subsection, :url=>{:action => 
+                                        :update_subsection, :id=> @subsection.id} do |f|%>
+                                       <p><%= f.label :name%></p>
+                                       <p><%= f.text_field :name%></p>
+                                       <p><%= f.label :description%></p>
+                                       <p><%= f.text_field :description%></p>
+                                       <p>
+                                        <%#= select_tag(:section_id, options_for_select(@sections.collect{|x| [x.name,x.id]}))%>
+                                        <%#= select_tag(:section_id, options_for_select=>(@sections.collect{|x| [x.name, x.id]}))%>
+                                       </p>
+                                       <p><%= f.submit 'Update SubSection'%></p>
+                                       <%end%>
                                 </div>
                             </div>
                             <div class="tab-pane" id="users" style="height:500px;">Users</div>

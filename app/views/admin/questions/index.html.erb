@@ -1,139 +1,26 @@
-	<div class="container" style="margin-top:20px;">
-			<div class="row-fluid">
-				<div class="span12">
-					        <ul class="nav2 nav2-tabs2"> 
-                                <li><a href="#settings" data-toggle="tab">Settings</a></li>
-                                <li><a href="#questions" data-toggle="tab">Questions</a></li>
-                                <li><a href="#sections" data-toggle="tab">Sections</a></li>
-                                <li><a href="#reports" data-toggle="tab">Reports</a></li>
-                                <li><a href="#users" data-toggle="tab">Users</a></li>
-                                <li class="active"><a href="#dashboard" data-toggle="tab">Dashboard</a></li>
+<div class="container" style="margin-top:20px;">
+            <div class="row-fluid">
+                <div class="span12">
+                            <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;"> 
+                                <li><%=link_to 'Settings', admin_settings_url%></li>
+                                <li class="active"><%= link_to 'Questions'%></a></li>
+                                <li><%=link_to 'Sections', admin_sections_url%>
+                                </li>
+                                <li><%= link_to 'Reports', admin_reports_url%></li>
+                                <li><%= link_to 'Users', admin_users_url%></li>
+                                 <li><%= link_to 'Dashboard', admin_root_url %></li>
                             </ul>
                              
-                            <div class="tab-content" style="padding-top:0px">
+                            <div class="tab-content"style="padding-top:0px">
                             <div class="tab-pane active" id="dashboard" style="height:730px;">
-								<div class="tabHead">
-                                	<h1>Dashboard</h1>
-                                    <h2>Overview about the user activity</h2>
-                                </div>
-                                <div class="tabMid">
-                                	<div class="activeUsers">
-                                        <h3>20</h3>
-                                        <h4>Active Users</h4>
-                                    </div>
-                                    <div class="responses">
-                                        <h3>50</h3>
-                                        <h4>Responses</h4>
-                                    </div>
-                                    <div class="average">
-                                        <h3>12%</h3>
-                                        <h4>Average Percentage</h4>
-                                    </div>
-                                    <div class="button-bar">
-                                    <div class="btn-group" style="margin-top:45px;">
-                                          <a href="#" class="btn"><i class="icon-calendar"></i> This Month</a>
-                                          <a href="#" data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></a>
-                                          <ul class="dropdown-menu">
-                                            <li><a href="#"><i class="icon-calendar"></i> Last Month</a></li>
-                                            <li><a href="#"><i class="icon-calendar"></i> Last Year</a></li>
-                                          </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tabGraph">
-                                    <div class="box">                                        
-                                        <h1>Responses in the current month <strong>March 2012</strong></h1>
-                                        <dl id="csschart">
-                                            
-                                            <dt>1</dt>
-                                            <dd class="first"><span class="type3 p36"></span></dd>
-                                            
-                                            <dt>2</dt>
-                                            <dd><span class="type3 p45"></span></dd>		
-                                            
-                                            <dt>3</dt>
-                                            <dd><span class="type3 p51"></span></dd>	
-                                            
-                                            <dt>4</dt>
-                                            <dd><span class="type3 p48"></span></dd>	
-                                            
-                                            <dt>5</dt>
-                                            <dd><span class="type3 p55"></span></dd>								
-                                            
-                                            <dt>6</dt>
-                                            <dd><span class="type3 p80"></span></dd>			
-                                            
-                                            <dt>7</dt>
-                                            <dd><span class="type3 p72"></span></dd>	
-                                            
-                                            <dt>8</dt>
-                                            <dd><span class="type3 p71"></span></dd>	
-                                            
-                                            <dt>9</dt>
-                                            <dd><span class="type3 p64"></span></dd>	
-                                            
-                                            <dt>10</dt>
-                                            <dd><span class="type3 p55"></span></dd>	
-                                            
-                                            <dt>11</dt>
-                                            <dd><span class="type3 p62"></span></dd>	
-                                            
-                                            <dt>12</dt>
-                                            <dd><span class="type3 p44"></span></dd>
-                                            
-                                            <dt>13</dt>
-                                            <dd><span class="type3 p45"></span></dd>		
-                                            
-                                            <dt>14</dt>
-                                            <dd><span class="type3 p51"></span></dd>	
-                                            
-                                            <dt>15</dt>
-                                            <dd><span class="type3 p48"></span></dd>	
-                                            
-                                            <dt>16</dt>
-                                            <dd><span class="type3 p55"></span></dd>								
-                                            
-                                            <dt>17</dt>
-                                            <dd><span class="type3 p80"></span></dd>			
-                                            
-                                            <dt>18</dt>
-                                            <dd><span class="type3 p72"></span></dd>	
-                                            
-                                            <dt>19</dt>
-                                            <dd><span class="type3 p71"></span></dd>	
-                                            
-                                            <dt>20</dt>
-                                            <dd><span class="type3 p64"></span></dd>	
-                                            
-                                            <dt>21</dt>
-                                            <dd><span class="type3 p55"></span></dd>	
-                                            
-                                            <dt>22</dt>
-                                            <dd><span class="type3 p62"></span></dd>	
-                                            
-                                            <dt>23</dt>
-                                            <dd><span class="type3 p44"></span></dd>		
-                                            
-                                            <dt>24</dt>
-                                            <dd><span class="type3 p55"></span></dd>								
-                                            
-                                            <dt>25</dt>
-                                            <dd><span class="type3 p80"></span></dd>												
-                                                    
-                                    </dl>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="users" style="height:500px;">Users</div>
-                            <div class="tab-pane" id="reports" style="height:500px;">Reports</div>
-                            <div class="tab-pane" id="sections" style="height:500px;">Sections</div>
-                            <div class="tab-pane" id="questions" style="height:500px;">
                                 <div class="tabHead">
                                         <h1>Questions</h1>
                                         <h2>Questions for the Survey</h2>
                                 </div>
-                                <div class="row-fluid">
-									<div class="span8" style="width:60.8%">
+                                
+                                <div class="tabGraph">
+                                 <div class="row-fluid">
+                                    <div class="span8" style="width:60.8%">
                                     <div class="accordHolder">
                                         <div id="accordion1" class="pageAccordion">
                                             <h3><a href="#">Strategy</a></h3>
@@ -142,38 +29,38 @@
                                                     <div class="ques"><span class="eachQues"><sub>1</sub>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Strategy1" class="switch on"></div>                                                    
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
+                                                    </div>
                                                     <div class="ques"><span><sub>2</sub>ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Strategy2" class="switch off"></div>                                                    
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                     <div class="ques"><span><sub>3</sub>amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
-                                                    <div id="Strategy3" class="switch on"></div>                                                    
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                    <div id="Strategy3" class="switch on"></div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                     <div class="ques"><span><sub>4</sub>odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Strategy4" class="switch on"></div>                                                   
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                     <div class="ques"><span><sub>5</sub>odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Strategy5" class="switch on"></div>                                                   
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                     <div class="ques"><span><sub>6</sub>odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Strategy6" class="switch on"></div>                                                    
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                 </p>
                                             </div>
@@ -183,26 +70,26 @@
                                                     <div class="ques"><span class="eachQues"><sub>1</sub>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Systems1" class="switch on"></div>
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
+                                                    </div>
                                                     <div class="ques"><span><sub>2</sub>ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Systems2" class="switch off"></div>
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                     <div class="ques"><span><sub>3</sub>amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Systems3" class="switch on"></div>
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                     <div class="ques"><span><sub>4</sub>odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Systems4" class="switch on"></div>
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                 </p>
                                             </div>
@@ -212,26 +99,26 @@
                                                     <div class="ques"><span class="eachQues"><sub>1</sub>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Programs1" class="switch on"></div>
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
+                                                    </div>
                                                     <div class="ques"><span><sub>2</sub>ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Programs2" class="switch off"></div>
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                     <div class="ques"><span><sub>3</sub>amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Programs3" class="switch on"></div>
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                     <div class="ques"><span><sub>4</sub>odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</span>
                                                     <div class="button-bar" style="float:left; padding-top:0;">
                                                     <div id="Programs4" class="switch on"></div>
-		                                               <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
-                                            		</div>
+                                                       <a href="#" class="btn" style="margin-left:30px;"><i class="icon-trash"></i> Delete</a>
+                                                    </div>
                                                     </div>
                                                 </p>
                                             </div>
@@ -244,30 +131,45 @@
                                                 <h1>Add a New Question</h1>
                                             </div>
                                             <div class="addForm">
+                                                <%= form_for @question, :url=>{:action => :create} do |f| %>
                                             <h3>Question<span>*</span></h3>
-                                            <textarea rows="3" id="textarea" class="input-xlarge" placeholder="Type new question here..." style="margin-bottom:9px"></textarea><br>
+                                           <%= f.text_area :name, :class=>"input-xlarge", 
+                                           :placeholder=>"Type new question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8%>
+                                            <h3>Description<span>*</span></h3>
+                                           <%= f.text_area :description, :class=>"input-xlarge", 
+                                           :placeholder=>"Type description for question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8%>
+                                             <%= f.hidden_field :is_active, :value=>true%>
                                             <h3>Section<span>*</span></h3>
-                                            <select id="select01">
-                                                <option>Select Section</option>
-                                                <option>Strategy</option>
-                                                <option>Systems</option>
-                                                <option>Programs</option>
-                                              </select>
-                                            <h3>Name<span>*</span></h3>
-                                				<input type="text" class="input-small" placeholder="Order No."><br>
-                                    		<br>
+                                            <%= select_tag(:sub_section_id, options_for_select(@subsection.collect{|x| [x.name,x.id]}))%>
+                                            
+                                            <h3>Points<span>*</span></h3>
+                                            <%= f.select :points, [5,10,20]%>
+                                            <br>
+                                            <br>
                                             <div class="button-bar" style="float:left;">
-                                               <a href="#" class="btn btn-primary">Save</a> 
-                                               <a href="#" class="btn btn-primary" style="margin-left:30px;">Save & New</a> 
-                                               <a href="#" class="btn" style="margin-left:30px;">Reset</a>
                                             </div>
+                                            <%= f.submit 'Save', :class=>"btn btn-primary"%>
+                                            <%= f.submit 'Save & New', :class=>"btn btn-primary",:style=>"margin-left:30px;"%>
+                                            <%= f.submit 'Reset', :class=>"btn",:style=>"margin-left:30px;"%>
+                                               
                                             </div>
-                                        </div>
+                                            <%end%>
+                                            </div>
+                                        </div>,
                                     </div>
                                 </div>
+                            </div>                                    
+                                        
+                                        
+                                    
+                                </div>
                             </div>
+                            <div class="tab-pane" id="users" style="height:500px;">Users</div>
+                            <div class="tab-pane" id="reports" style="height:500px;">Reports</div>
+                            <div class="tab-pane" id="sections" style="height:500px;">Sections</div>
+                            <div class="tab-pane" id="questions" style="height:500px;">Questions</div>
                             <div class="tab-pane" id="settings" style="height:500px;">Settings</div>
                             </div>
-				</div>
-			</div>
-		</div> 
+                </div>
+            </div>
+        </div> 

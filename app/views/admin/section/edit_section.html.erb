@@ -22,17 +22,14 @@
                                 <div class="tabGraph">
                                                                       
                                         
-                                        <h1>Section List</h1>
-                                        <% @sections.each do |section|%>
-                                        <p><strong><%= link_to section.name, admin_edit_section_url(section)%></strong></p>
-                                        <% section.sub_sections.each do |sub_section|%>
-                                         <p><%= link_to sub_section.name, admin_edit_subsection_url(sub_section)%></p>                                     
-                                        <%end%>
-                                        <br>
-                                        <%end%>
-                                      <p><%= link_to 'Add Section', admin_new_section_url%> / 
-                                         <%= link_to 'Add Sub Section', admin_new_subsection_url%></p>
-                                    
+                                        <h1>Edit Section</h1>
+                                       <%= form_for :section, :url=>{:action =>:update, :id=>
+                                       @section.id} do |f|%>
+                                       <p><%= f.label :name%></p>
+                                       <p><%= f.text_field :name%></p>
+                                       
+                                       <p><%= f.submit 'Update Section'%></p>
+                                       <%end%>
                                 </div>
                             </div>
                             <div class="tab-pane" id="users" style="height:500px;">Users</div>

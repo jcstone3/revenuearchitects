@@ -32,7 +32,7 @@ def authenticate_admin!
   if admin_signed_in?
      admin_root_url
    else 
-    redirect_to new_admin_session_url, :alert => "You must first log in to access this page"
+    redirect_to new_admin_session_url, :alert => "Admin, you must first log in, to access this page"
   end
 end  
 

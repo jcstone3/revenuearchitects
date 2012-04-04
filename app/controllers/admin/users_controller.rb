@@ -8,14 +8,13 @@ class Admin::UsersController < ApplicationController
    	 @industry = Industry.find(:all)
        if params[:company_name]
    		   #@cmp = Company.find(params[:company_id])
-            @users = User.paginate(:include => :companies, :conditions=>{:companies => {:name => params[:company_name]}},:page=> params[:page], :per_page=>5)   		  
+            @users = User.paginate(:include => :companies, :conditions=>{:companies => {:name => params[:company_name]}},:page=> params[:page], :per_page=>10, :order => "users.id ASC")   		  
    		   @type_title = "By Company"
    	   elsif params[:industry_id]
-   	   	@users = User.paginate(:include => :companies, :conditions=>{:companies => {:industry_id => params[:industry_id]}},:page=> params[:page], :per_page=>5)           
-            @industry = Industry.find(params[:industry_id])
-   		   @type_title = "By Industry"
+   	   	@users = User.paginate(:include => :companies, :conditions=>{:companies => {:industry_id => params[:industry_id]}},:page=> params[:page], :per_page=>10, :order => "users.id ASC")           
+            @type_title = "By Industry"
    	  else
-   	  	@users= User.paginate(:page=> params[:page], :per_page=>10)
+   	  	@users= User.paginate(:page=> params[:page], :per_page=>10, :order => "id ASC")
    	  	@type_title = "" 
    	  end   
    	respond_to do |format|
