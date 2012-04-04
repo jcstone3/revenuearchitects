@@ -30,6 +30,7 @@
           <div class="row-fluid">
             <div class="button-bar">
              <% if user_signed_in?%>
+              <%= image_tag "user1.jpg", :class=>"usericon" %>
               <%= "#{current_user.username}" %>
               <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
               <%else%>
