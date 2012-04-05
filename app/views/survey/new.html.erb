@@ -6,6 +6,11 @@
               Survey Details
             </h1>
           </div>
+          <div class="text2" >
+          <p>Survey on April 2012.
+          </p>
+          </div>
+
           <div class="text" >
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum <br>id quis quam.
           Sed quis suscipit tortor.
@@ -15,7 +20,7 @@
           <%= form_for(@survey, :url=>{:action => "create"}, :validate => true) do |f| %>
              <div class="points">
                         <div class="option">
-                          <h3>Industry Size</h3>
+                          <h3>Company Size</h3>
                     <%#= f.text_field :size ,:class=>"span3", :placeholder=>"size"%>
                     <%= f.select :size, [['10 - 20'],['21 - 50'],['51 - 100']],:class=>"span3" %>
 
@@ -29,9 +34,9 @@
                 </div>
               </div>
 
-              <p>
-                <%= f.submit "Start Survey", :class=>"btn btn-primary icon-remove icon-white" ,:input_html =>{:class=>"btnSurvey"} %><i class="icon-folder-close icon-white"></i>
-              </p>
+              <div class="gap">
+                <%= f.submit "Start Survey", :class=>"btn btn-primary icon-remove icon-white" ,:input_html =>{:class=>"btnSurvey"} %>
+              </div>
         <% end %>
        	</div>
         </div>
@@ -43,12 +48,12 @@
                         <p class="demographicstext">Demographics</p>
                         </span>
 
-                        <span>
+                        <span class="spacing">
                         <%= image_tag "qa_grey.png",:width=>"47px",:height=>"49px",:class=>"qa" %>
                         <p class="qatext">Q&amp;A</p>
                         </span>
                         
-                        <span>
+                        <span class="spacing">
                         <%= image_tag "download_grey.png",:width=>"47px",:height=>"49px",:class=>"reporticon"%>
                         <p class="reporttext">Report</p>
                         </span>
@@ -60,14 +65,14 @@
                     
                         </div>
                             <div class="score1">
-                            <span>700</span>
+                            <span><%= image_tag "sampletext.png"%></span>
                             </div>
                     </div>
 
                     <div class="Baloon">
                         <div class="head1"><h1>March 2012 </h1></div>
                             <div class="score1">
-                            <span>600</span>
+                            <span><%= image_tag "sampletext.png"%></span>
                             </div>
                 </div>
 
@@ -76,7 +81,7 @@
 	         <%else%>
            <div class="span3 rightBox" >
                   
-                        <h2 class="prevSurvey">Previous Survey  </h2>
+                        <h2 class="prevSurvey">Previous Surveys  </h2>
                     
                     <div class="Baloon surveyBaloon" >
                         <div class="head1"><h1>January 2011 </h1>

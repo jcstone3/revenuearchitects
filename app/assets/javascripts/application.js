@@ -15,7 +15,7 @@
 $(document).ready(function(){
   /* Your javascripts goes here... */
   //to hide and show login and signup	
-
+                 $("#flash_msg").fadeOut(6000);
 				$('#signup_user').hide();
 				
 				var login_val = $('#login').val();
@@ -31,33 +31,23 @@ $(document).ready(function(){
             //----------end of hide n show----------------------------//
             //to set the active tab to the color of the login type clicked
                 $('#home_click').click(function(){	                	
-					$('#tab-content').css({'background-color' :'#fff'});
-					}, function () {
-	    			var cssObj = {
-	      			'background-color' : '#fff' ,
-	      			'color': 'black'   			
-	   			 	}	    			
-                    $('#tab-content').css(cssObj);                    
+					$('#home_click').css({'background-color' :'#fff'});
+					$('#twitter_click').css({'background-color' :'#53b1f0'}); 
+                    $('#facebook_click').css({'background-color' :'#3b5998'});                 
 	 			 	});
 
-				$('#twitter_click').click(function(){		
-					$('#tab-content').css({'background-color' :'#53b1f0', 'color': '#fff'});
-					}, function () {
-	    			var cssObj = {
-	      			'background-color' : '#53b1f0', 
-	      			'color': '#fff'   			
-	   			 	}
-                    $('#tab-content').css(cssObj);
+				$('#twitter_click').click(function(){							
+                    $('#twitter_click').css({'background-color' :'#fff'});
+                    $('#home_click').css({'color' :'#555555'});
+                    $('#home_click').css({'background-color' :'#e3e3e3'});
+                    $('#facebook_click').css({'background-color' :'#3b5998'});
                     });
 
-				$('#facebook_click').click(function(){				
-					$('#tab-content').css({'background-color' :'#3b5998', 'color': '#fff'});
-					}, function () {
-	    			var cssObj = {
-	      			'background-color' : '#3b5998', 
-	      			'color': '#fff'    			
-	   			 	}	    			                    
-	 			    $('#tab-content').css(cssObj);
+				$('#facebook_click').click(function(){									    			                    
+	 			    $('#facebook_click').css({'background-color' :'#fff'});
+                     $('#home_click').css({'color' :'#555555'});
+                    $('#home_click').css({'background-color' :'#e3e3e3'});
+                    $('#twitter_click').css({'background-color' :'#53b1f0'});
                  	});
 
 				$('#google_click').click(function(){				
@@ -269,6 +259,8 @@ $(document).ready(function(){
              });
             })
    
+         
+
 
       $('#resultTable').dataTable( {
             "bPaginate": true,

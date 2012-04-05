@@ -9,14 +9,14 @@ class ApplicationController < ActionController::Base
   #to set the redirect path after sign in/ registration
   def after_sign_in_path_for(resource)
     if resource.is_a? User
-       flash[:success] = "Welcome! You have signed up successfully." 
+       flash[:success] = "Welcome! #{resource.username} You have signed up successfully." 
        if current_user.companies.first         
           new_survey_url  #user already has company, then redirect to survey page               
        else
           new_company_url   #redirect to create a new company            
        end     
     else #resource is an admin      
-      flash[:success] = "Welcome! You have signed up successfully." 
+      flash[:success] = "Welcome! #{resource.name} You have signed up successfully." 
       admin_root_url
     end
   end 

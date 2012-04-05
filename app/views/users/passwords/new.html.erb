@@ -4,10 +4,12 @@
           <div class="arrows">
                         <h1>
                             Assess your <br />
-                            <strong>Revenue Potential <%= link_to 'now', new_user_session_path %>
-                            </strong>
+                            Revenue Potential <%= link_to 'now', new_user_session_path %>
+                            
                         </h1>
                     </div>
+                                        <div class="arrows2"></div>
+                    <div class="arrowhead"></div>
                     <div class="points left" >
                       <div class="icon">
                           <%= image_tag "1point.png", :alt=>"icon" %>
@@ -40,7 +42,7 @@
                  <ul class="nav nav-tabs">
                             <li class="active">
                                <a class="signuplink" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png", 
-                            :alt=>"home")%>Sign Up with us</a></li>                          
+                            :alt=>"home")%>Forgot Password</a></li>                          
                             <li>
                                <a class="twitterlink" href="#twitter" data-toggle="tab"  id="twitter_click" >
                                    <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
@@ -85,15 +87,16 @@
 									<%= link_to "Sign In", new_user_session_path %>				
                                 </h5>
                             </div>
-                            <div class="tab-pane" id="twitter"><p class="loginlink" >Login with Twitter</p>
+                            <div class="tab-pane" id="twitter">
                                 <br>
-                                <%= link_to image_tag("twitter-button1.png" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter)
+                                <%= link_to image_tag("sign_in_with_twitter.png" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter)
                                                       %>
                             </div>   
-                            <div class="tab-pane" id="facebook"><p class="loginlink">Login With Facebook</p>
+                            <div class="tab-pane" id="facebook">
                             <br> 
-                                <%= link_to image_tag("facebook-button2.png", :alt=>"facebook"), 
-                                                     user_omniauth_authorize_path(:facebook)%>
+                                <%= link_to image_tag("sign_in_with_facebook.png", :alt=>"facebook"), 
+                                                     user_omniauth_authorize_path(:facebook)
+                                                     %>
                             </div>
 
                             <div class="tab-pane" id="plus">Login with Google Plus 

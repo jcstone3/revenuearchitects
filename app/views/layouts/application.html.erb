@@ -23,10 +23,17 @@
   </head>
   <body>
     <div class="container mainLeft" >
-          <%= link_to image_tag('logo.png', :alt=>"logo"),  show_url, :class=>"brand" %>
+          <% if user_signed_in?%>
+          <%= link_to image_tag('logo.png', :alt=>"logo"),  "", :class=>"brand" %>
           <div class="ra">
-            brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo", :class=>"headertext"), show_url %>
+            brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo", :class=>"headertext"), "" %>
           </div>
+          <%else%>
+          <%= link_to image_tag('logo.png', :alt=>"logo"),  new_user_session_path, :class=>"brand" %>
+          <div class="ra">
+            brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo", :class=>"headertext"), new_user_session_path %>
+          </div>
+          <%end%>
           <div class="row-fluid">
             <div class="button-bar">
              <% if user_signed_in?%>
@@ -46,6 +53,7 @@
              <%= content_tag :div, :id=>'flash_msg', :class => "alert alert-#{key}" do %>
              <%= value unless value.blank? %>                         
              <a class="close" data-dismiss="alert">×</a>
+              
            <% end %>
         <% end %>   
         </div>       
