@@ -15,7 +15,7 @@
 $(document).ready(function(){
   /* Your javascripts goes here... */
   //to hide and show login and signup	
-                 $("#flash_msg").fadeOut(6000);
+                 $("#flash_msg").fadeOut(13000);
 				$('#signup_user').hide();
 				
 				var login_val = $('#login').val();

@@ -267,6 +267,24 @@ end
 
 def confirm_survey
   @survey = Survey.find_by_id(params[:id])
+  @responses = @survey.responses
+ # if @response.present?
+  @response = []
+  @responses.each do |res|
+   @response << res.question_id 
+  end  
+  @section =[]  
+  @section1 = []
+  @section2=[]
+  @section3 = []
+  @sections = Section.all
+  @sections.each do |section|
+    @section  << get_question_ids(section.id)     
+  end
+
+  @section1 =  @section[0] -  @response
+  @section2 =  @section[1] -  @response
+  @section2 =  @section[2] -  @response
 end
 
 def close_survey
@@ -281,6 +299,26 @@ def close_survey
 end
 
 def report_detailed
+  @survey = current_user.companies.first.surveys.find_all_by_id(params[:id])
+  if @survey.present?
+  @section_total = []
+  @subsection_total = []
+  @questions_score = [] 
+  @questions_score = []  
+  @sections = Section.find(:all) 
+  #score for each section and subsection
+  @sections.each do |section|
+     @section_total << calculate_response_for_section(params[:id], section.id)
+     section.sub_sections.each do |sub_section|     
+     @subsection_total << calculate_response_for_subsection(params[:id], sub_section.id)
+    end
+  end
+  @final_score = @section_total[0]+@section_total[1]+@section_total[2]
+  #get the individual response score
+  @survey.responses.each do |response|
+    @questions_score << get_individual_response_score(response.id, response.question_id)
+  end  
+ end 
 @responses = Response.find(:all, :select => "questions.name,responses.answer_1, questions.points", :joins => "right outer join questions on responses.question_id = questions.id and responses.survey_id = 1")
 end  
 
@@ -432,6 +470,17 @@ def calculate_response(survey_response)
   end
     return @total_score
  end
+
+def get_question_ids(section)
+  section_questions =[]
+  section = Section.find(section)
+  section.sub_sections.each do |subsect|
+  subsect.questions.each do |q|
+       section_questions << q.id
+   end 
+ end
+   return section_questions
+end
 
 #individual score for each response
 def get_individual_response_score(response_id, response_question_id)
