@@ -16,7 +16,7 @@ def new
             current_user.companies.each do |cmpany|
               @active_survey << cmpany.surveys.find(:all, :conditions=>["is_active=?", true])
             end
-            flash[:success] = "Please select survey to continue"
+            flash[:success] = "Welcome back #{current_user.username}, please select a survey to continue"
             redirect_to continue_survey_url               
         else
           #list all the previous completed surveys & start a new survey
@@ -24,6 +24,7 @@ def new
             @previous_surveys << cmpany.surveys.find(:all, :conditions=>["is_active=?", false])
           end       
           @survey = Survey.new
+          @survey_date = Time.now.strftime('%B, %Y')
         end  
   else
     flash[:error] = "Please provide company details before proceeding"
@@ -37,7 +38,8 @@ def create
   params[:survey].merge!(:start_date => Time.now, :is_active => true)
 	@survey = @company.surveys.create!(params[:survey])
 	if @survey
-	   flash[:success] = "Survey created successfully"
+     @survey_name = @survey.created_at.strftime('%B,%Y')
+	   flash[:success] = "Survey #{@survey_name} created successfully"
 	   redirect_to questions_url(@survey, 1)
 	else
 	   flash[:error] = "Sorry could not create the survey"
@@ -62,11 +64,13 @@ def get_response_status
                  Question.all.each do |quest|
                    questions << quest.id
                  end
-                  res = questions - response
-                 flash[:success] = "Continue Survey" 
+                 res = questions - response
+                 @survey_name = @survey.created_at.strftime('%B,%Y')
+                 flash[:success] = "Continue Survey #{@survey_name}" 
                  redirect_to questions_url(@survey, res[0]) 
               else
-               flash[:success] = "Start Survey" 
+               @survey_name = @survey.created_at.strftime('%B,%Y') 
+               flash[:success] = "Start Survey #{@survey_name}" 
                redirect_to questions_url(@survey, 1)   
               end
           else
@@ -186,7 +190,7 @@ def report
   
   render :layout =>"report"
   else
-   flash[:notice] = "No survey exists"
+   flash[:notice] = "No such survey exists"
    redirect_to new_survey_path
   end
 end	
@@ -266,7 +270,14 @@ def confirm_survey
 end
 
 def close_survey
-   redirect_to reports_url(params[:id])
+   @survey = Survey.find_by_id(params[:id])
+   if @survey.update_attribute(:is_active, false)
+     flash[:success] = "Thank you for taking up the survey"
+     redirect_to reports_url(params[:id])
+   else
+     flash[:success] = "Thank you for taking up the survey"
+     redirect_to confirm_survey_url(@survey.id)
+   end 
 end
 
 def report_detailed
@@ -338,8 +349,12 @@ def check_existing_surveys
   flag = false
   if current_user.companies.present?
      current_user.companies.each do |c|
-       if c.surveys.present?
-        flag = true      
+       if c.surveys.present? 
+         c.surveys.each do |survey|
+         if survey.is_active == true       
+          flag = true      
+         end
+        end  
        end  
      end 
   end

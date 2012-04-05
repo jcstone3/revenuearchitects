@@ -28,7 +28,8 @@
           <div class="row-fluid">
             <div class="button-bar">
              <% if user_signed_in?%>
-              <%= "#{current_user.username}" %>
+             <i class="icon-user "></i>&nbsp; 
+              <%= "#{current_user.username}" %>&nbsp;
               <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
               <%else%>
               <%= link_to "Login", new_user_session_path, :class=>"btn", :id=>"login_user"%>
@@ -40,7 +41,7 @@
     <div class="container">
     <div id="alert">
        <% flash.each do |key, value| %>
-             <%= content_tag :div, value, :class => "alert alert-#{key}" unless value.blank? %>
+             <%= content_tag :div, value, :id=>"flash_msg", :class => "alert alert-#{key}" unless value.blank? %>
            <% end %>
         </div>
     </div>
