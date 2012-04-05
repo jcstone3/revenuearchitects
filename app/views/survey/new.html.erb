@@ -40,6 +40,7 @@
         <% end %>
        	</div>
         </div>
+       
 <% if @previous_surveys.present?%>
        <div class="span3 rightBox" >
                     <div class="processIcons">
@@ -58,7 +59,7 @@
                         <p class="reporttext">Report</p>
                         </span>
                     </div>
-                        <h2 class="previous">Previous Surveys  </h2>
+                        <h2 class="previous">Previous Surveys 333 </h2>
                     
                      <% current_user.companies.each do |cmpany| %>
                      <%@inactive_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", false]) %> 
