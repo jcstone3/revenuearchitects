@@ -11,17 +11,27 @@ end
 def new
   @active_survey = []
   @previous_surveys = []
+  @response = []
   if current_user.companies.present?#if no company details is provided
         if check_existing_surveys #check if there exists previous surveys
             current_user.companies.each do |cmpany|
-              @active_survey << cmpany.surveys.find(:all, :conditions=>["is_active=?", true])
+            cmpany.surveys.each do |survey|    
+                if survey.is_active == true                    
+                  @active_survey << survey.id
+                end  
+            end              
             end
             flash[:success] = "Welcome back #{current_user.username}, please select a survey to continue"
             redirect_to continue_survey_url               
         else
           #list all the previous completed surveys & start a new survey
           current_user.companies.each do |cmpany|
-            @previous_surveys << cmpany.surveys.find(:all, :conditions=>["is_active=?", false])
+            cmpany.surveys.each do |survey|    
+            if survey.is_active == false                    
+              @previous_surveys << survey.id
+              @response << get_response_score_for(survey.id)
+            end  
+          end
           end       
           @survey = Survey.new
           @survey_date = Time.now.strftime('%B, %Y')
@@ -319,7 +329,11 @@ def report_detailed
     @questions_score << get_individual_response_score(response.id, response.question_id)
   end  
  end 
-@responses = Response.find(:all, :select => "questions.name,responses.answer_1, questions.points", :joins => "right outer join questions on responses.question_id = questions.id and responses.survey_id = 1")
+
+@responses = Response.find(:all, 
+  :select => "questions.name,responses.answer_1, questions.points", 
+  :joins => "right outer join questions on responses.question_id = questions.id 
+   and responses.survey_id =28")
 end  
 
 #to download in pdf/xls format
@@ -481,6 +495,16 @@ def get_question_ids(section)
  end
    return section_questions
 end
+
+def get_response_score_for(survey_id)
+  @total = 0
+ @survey = Survey.find(survey_id) 
+ @survey.responses.each do |response|
+   @total += get_individual_response_score(response.id, response.question_id)
+ end
+ return @total
+end  
+
 
 #individual score for each response
 def get_individual_response_score(response_id, response_question_id)

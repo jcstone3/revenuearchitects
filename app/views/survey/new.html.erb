@@ -62,16 +62,16 @@
                         <h2 class="previous">Previous Surveys 333 </h2>
                     
                      <% current_user.companies.each do |cmpany| %>
-                     <%@inactive_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", false]) %> 
+                     <% @inactive_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", false], :limit=>2, :order=>'created_at Desc') %> 
                         <% if @inactive_survey.present?%>                     
-                          <% @inactive_survey.each do |survey|%>
+                          <% @inactive_survey.each_with_index do |survey, i|%>
 
                           <div class="Baloon surveyBaloon" >
                             <div class="head1"><h1>
-                              <%= link_to "Survey_#{survey.created_at.strftime('%B  %Y')}", reports_url(survey)%></h1>
+                              <%= link_to "#{survey.created_at.strftime('%B  %Y')}", reports_url(survey)%></h1>
                             </div>
-                             <div class="score1">
-                              <span>200</span>
+                             <div class="score1">                              
+                              <span><%= @response[i]%></span>
                             </div>
                           <%end%>
                           <% end %> 
