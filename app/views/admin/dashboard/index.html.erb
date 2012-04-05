@@ -36,9 +36,11 @@
                                         <dl id="csschart">
 
                                             <!-- TODO: retrieve no of days based on month   -->
+                                            <% if !@total_surveys.blank? %>
                                             <% (1..30).each do |day| %>
                                                   <dt><%= day %></dt>
                                                   <dd class="first"><span class="type3 p<%= @total_surveys.select { |sur| sur.survey_day == day.to_s }.blank? ? "0" : @total_surveys.select { |sur| sur.survey_day == day.to_s }.first.total %>"></span></dd>
+                                            <% end %>
                                             <% end %>
                                             
                                             												
