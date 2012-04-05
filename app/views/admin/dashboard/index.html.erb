@@ -15,99 +15,33 @@
                             <div class="tab-pane active" id="dashboard" style="height:730px;">
 								<div class="tabHead">
                                 	<h1>Dashboard</h1>
-                                    <h2>Overview about the user activity</h2>
+                                    <h2>Overview about the surveys in the current month</h2>
                                 </div>
                                 <div class="tabMid">
                                 	<div class="activeUsers">
-                                        <h3>20</h3>
-                                        <h4>Active Users in Last 30 days</h4>
+                                        <h3><%= @total %></h3>
+                                        <h4>Surveys in current month</h4>
                                     </div>
                                     <div class="responses">
                                         <h3>0</h3>
-                                        <h4>Leads</h4>
+                                        <h4>Leads (To Be Done)</h4>
+
                                     </div>
                                    
                                   
                                 </div>
                                 <div class="tabGraph">
                                     <div class="box">                                        
-                                        <h1>Responses in the current month <strong>March 2012</strong></h1>
+                                        <h1>Responses in the current month <strong><%= Time.now.strftime("%B-%Y") %> </strong></h1>
                                         <dl id="csschart">
+
+                                            <!-- TODO: retrieve no of days based on month   -->
+                                            <% (1..30).each do |day| %>
+                                                  <dt><%= day %></dt>
+                                                  <dd class="first"><span class="type3 p<%= @total_surveys.select { |sur| sur.survey_day == day.to_s }.blank? ? "0" : @total_surveys.select { |sur| sur.survey_day == day.to_s }.first.total %>"></span></dd>
+                                            <% end %>
                                             
-                                            <dt>1</dt>
-                                            <dd class="first"><span class="type3 p36"></span></dd>
-                                            
-                                            <dt>2</dt>
-                                            <dd><span class="type3 p45"></span></dd>		
-                                            
-                                            <dt>3</dt>
-                                            <dd><span class="type3 p51"></span></dd>	
-                                            
-                                            <dt>4</dt>
-                                            <dd><span class="type3 p48"></span></dd>	
-                                            
-                                            <dt>5</dt>
-                                            <dd><span class="type3 p55"></span></dd>								
-                                            
-                                            <dt>6</dt>
-                                            <dd><span class="type3 p80"></span></dd>			
-                                            
-                                            <dt>7</dt>
-                                            <dd><span class="type3 p72"></span></dd>	
-                                            
-                                            <dt>8</dt>
-                                            <dd><span class="type3 p71"></span></dd>	
-                                            
-                                            <dt>9</dt>
-                                            <dd><span class="type3 p64"></span></dd>	
-                                            
-                                            <dt>10</dt>
-                                            <dd><span class="type3 p55"></span></dd>	
-                                            
-                                            <dt>11</dt>
-                                            <dd><span class="type3 p62"></span></dd>	
-                                            
-                                            <dt>12</dt>
-                                            <dd><span class="type3 p44"></span></dd>
-                                            
-                                            <dt>13</dt>
-                                            <dd><span class="type3 p45"></span></dd>		
-                                            
-                                            <dt>14</dt>
-                                            <dd><span class="type3 p51"></span></dd>	
-                                            
-                                            <dt>15</dt>
-                                            <dd><span class="type3 p48"></span></dd>	
-                                            
-                                            <dt>16</dt>
-                                            <dd><span class="type3 p55"></span></dd>								
-                                            
-                                            <dt>17</dt>
-                                            <dd><span class="type3 p80"></span></dd>			
-                                            
-                                            <dt>18</dt>
-                                            <dd><span class="type3 p72"></span></dd>	
-                                            
-                                            <dt>19</dt>
-                                            <dd><span class="type3 p71"></span></dd>	
-                                            
-                                            <dt>20</dt>
-                                            <dd><span class="type3 p64"></span></dd>	
-                                            
-                                            <dt>21</dt>
-                                            <dd><span class="type3 p55"></span></dd>	
-                                            
-                                            <dt>22</dt>
-                                            <dd><span class="type3 p62"></span></dd>	
-                                            
-                                            <dt>23</dt>
-                                            <dd><span class="type3 p44"></span></dd>		
-                                            
-                                            <dt>24</dt>
-                                            <dd><span class="type3 p55"></span></dd>								
-                                            
-                                            <dt>25</dt>
-                                            <dd><span class="type3 p80"></span></dd>												
+                                            												
                                                     
                                     </dl>
                                     </div>
