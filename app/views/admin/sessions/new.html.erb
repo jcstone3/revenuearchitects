@@ -1,23 +1,28 @@
-<div class="container" style="margin-top:25px ;">
+<div class="container headerPopup">
 	<div class="row-fluid">
-        <div class="span8 leftBox">
-<h2>Sign in</h2>
+    <div class="span9 leftBox mainLeft">
+   <div class="adminHead">
+          <h1>Login Details</h1>
+   </div>       
+     <div class="clear"></div>
+      <div class="rightboxName">
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :class => "well") do |f| %>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+        <h3>Email</h3>
+        <%= f.email_field :email, :class=>"span3 logindetails", :placeholder=>"Your Email id" %><h4 class="loginheading">Enter your email address</h4> 
+        <h3 >Password</h3>
+        <%= f.password_field :password, :class=>"span3", :placeholder=>"Password"%>
+        <h4 class="loginheading">Enter your valid password</h4> 
+       
+        <% if devise_mapping.rememberable? -%>
+            <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+        <% end -%>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
+        <div><%= f.submit "Sign in" %></div>
+      <% end %>
+    </div>
 
 <%#= render "links" %>
-</div>
+    </div>
  </div>
  </div>

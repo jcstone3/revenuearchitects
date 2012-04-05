@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+#load seed admin user
+Admin.delete_all
+
+@admin = Admin.new
+@admin.email = "admin@revenuegrader.com"
+@admin.name = "admin"
+@admin.password = "revenue@123"
+@admin.password_confirmation = "revenue@123"
+@admin.save
