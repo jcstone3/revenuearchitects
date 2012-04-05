@@ -20,7 +20,8 @@
                          <%@active_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", true]) %>
                           <% if @active_survey.present?%>
                           <% @active_survey.each do |survey|%>
-                              <%= link_to "Survey_#{survey.id}", get_response_status_url(survey)%>
+                              <%= link_to "Survey_#{survey.created_at.strftime('%B  %Y')}", get_response_status_url(survey)%>
+                            </br>
                           <%end%>
                           <% end %>                                                   
                         </div>

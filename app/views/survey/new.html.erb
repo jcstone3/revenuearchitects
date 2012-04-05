@@ -7,7 +7,7 @@
             </h1>
           </div>
           <div class="text2" >
-          <p>Survey on April 2012.
+          <p>Survey on <%= @survey_date%>
           </p>
           </div>
 
@@ -22,7 +22,7 @@
                         <div class="option">
                           <h3>Company Size</h3>
                     <%#= f.text_field :size ,:class=>"span3", :placeholder=>"size"%>
-                    <%= f.select :size, [['10 - 20'],['21 - 50'],['51 - 100']],:class=>"span3" %>
+                    <%= f.select :size, [['0-10'],['11 - 20'],['21 - 50'],['51 - 100'],['101-300'],['301-500'],['above 500']],:class=>"span3" %>
 
                     <br>
                 </div>
@@ -30,7 +30,7 @@
               <div class="points totalrevenue">
                 <div class="option" >
                   <h3>What is total revenue in last 12 months?</h3>
-                  <%= f.select :revenue, [['more then 500000'],['500000-1500000'],['1500000 and more']],:class=>"span3" %>
+                  <%= f.select :revenue, [['0-10000'],['10001- 50000'],['50001 - 100000'],['100001-500000'],['more then 500000']],:class=>"span3" %>
                 </div>
               </div>
 
@@ -60,21 +60,24 @@
                     </div>
                         <h2 class="previous">Previous Surveys  </h2>
                     
-                    <div class="Baloon surveyBaloon" >
-                        <div class="head1"><h1>January 2011 </h1>
-                    
-                        </div>
-                            <div class="score1">
-                            <span><%= image_tag "sampletext.png"%></span>
-                            </div>
-                    </div>
+                     <% current_user.companies.each do |cmpany| %>
+                     <%@inactive_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", false]) %> 
+                        <% if @inactive_survey.present?%>                     
+                          <% @inactive_survey.each do |survey|%>
 
-                    <div class="Baloon">
-                        <div class="head1"><h1>March 2012 </h1></div>
-                            <div class="score1">
-                            <span><%= image_tag "sampletext.png"%></span>
+                          <div class="Baloon surveyBaloon" >
+                            <div class="head1"><h1>
+                              <%= link_to "Survey_#{survey.created_at.strftime('%B  %Y')}", reports_url(survey)%></h1>
                             </div>
-                </div>
+                             <div class="score1">
+                              <span>200</span>
+                            </div>
+                          <%end%>
+                          <% end %> 
+                          <%end%>
+                    </div>
+          
+                   
 
                 </div>
 
