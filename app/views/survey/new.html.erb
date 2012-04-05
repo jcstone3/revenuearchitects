@@ -6,6 +6,7 @@
               Survey Details
             </h1>
           </div>
+
           <div class="text" >
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum <br>id quis quam.
           Sed quis suscipit tortor.
@@ -15,7 +16,7 @@
           <%= form_for(@survey, :url=>{:action => "create"}, :validate => true) do |f| %>
              <div class="points">
                         <div class="option">
-                          <h3>Industry Size</h3>
+                          <h3>Company Size</h3>
                     <%#= f.text_field :size ,:class=>"span3", :placeholder=>"size"%>
                     <%= f.select :size, [['10 - 20'],['21 - 50'],['51 - 100']],:class=>"span3" %>
 
