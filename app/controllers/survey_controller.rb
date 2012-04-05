@@ -329,11 +329,19 @@ def report_detailed
     @questions_score << get_individual_response_score(response.id, response.question_id)
   end  
  end 
-
+ id = params[:id]
 @responses = Response.find(:all, 
-  :select => "questions.name,responses.answer_1, questions.points", 
+  :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
   :joins => "right outer join questions on responses.question_id = questions.id 
-   and responses.survey_id =28")
+             left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+             left outer join sections on sections.id = sub_sections.section_id   
+             and responses.survey_id =#{id}"  
+   )
+
+ 
+ 
+
+
 end  
 
 #to download in pdf/xls format
