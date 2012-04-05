@@ -38,8 +38,8 @@
                      <div class="points">
                         <div class="option ">
                           <div class="heading2">
-                          <h3>Industry</h3></div>                              
-                          <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}.insert(0, '')) %>  
+                          <h3>Industry <span class="star">*</span></h3></div>                              
+                          <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
                         </div>
                      </div>
                      <div class="pointsb" >
@@ -55,12 +55,12 @@
                         <p class="demographicstext">Demographics</p>
                         </span>
 
-                        <span>
+                        <span class="spacing">
                         <%= image_tag "qa_grey.png",:width=>"47px",:height=>"49px",:class=>"qa" %>
                         <p class="qatext">Q&amp;A</p>
                         </span>
                         
-                        <span>
+                        <span class="spacing">
                         <%= image_tag "download_grey.png",:width=>"47px",:height=>"49px",:class=>"reporticon"%>
                         <p class="reporttext">Report</p>
                         </span>
