@@ -1,18 +1,19 @@
 <div class="container" style="margin-top:20px;background:#FFFFFF;">
             <div class="row-fluid">
-                <div class="span9 leftBox" style="height:auto;background-color:#ffffff">
+                <div class="span9 leftBox" style="height:215px;background-color:#ffffff">
                     <div class="question">
-                        <h1>                            
-                            <p>Thank you for successfully completing the survey</p>
+                        <h1 style="font-size:25px;">                    
+                            Thank you for successfully completing the survey
                         </h1>                       
                     </div>
-                     <div>
-                        <p>Strategy</p>
-                        <p>Systems you have completed/</p> 
-                        <p>Programs </p> 
+                     <div class="questionsattemted">
+                        <p>Number of questions attempted in each section</p>
+                        <p>Strategy<span style="padding-left:200px;">15/1000 </span></p>
+                        <p>Systems you have completed <span style="padding-left:78px;">15/1000</span></p> 
+                        <p>Programs <span style="padding-left:190px;">15/1000</span></p> 
                      </div>
-                     <%= link_to 'Close Survey', close_survey_url(@survey)%>
-                     <%= link_to 'Go back', continue_survey_url(@survey)%>
+                     <%= link_to 'Go back', continue_survey_url(@survey) ,:class=>"btn btn-primary questionsattemted"%>
+                     <%= link_to 'Close Survey', close_survey_url(@survey) ,:class=>"btn btn-primary questionsattemted"%>
                 </div>
             </div>
         </div> 

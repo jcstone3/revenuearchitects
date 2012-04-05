@@ -15,7 +15,7 @@
                      <% current_user.companies.each do |cmpany| %>      
                      <div class="points">
                         <div class="option" >
-                        <h3>Surveys of company <%= cmpany.name%></h3>
+                        <h3>Company Name<%= cmpany.name%></h3>
 
                          <%@active_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", true]) %>
                           <% if @active_survey.present?%>
