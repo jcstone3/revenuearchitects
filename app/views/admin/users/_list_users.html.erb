@@ -1,5 +1,4 @@
-   <h1><strong>List of users <%= @type_title%></strong></h1>
-    <table >
+<table >
      <tr><td>Name</td><td>Email</td><td colspan="2">Actions</td></tr>
      <tr><td>&nbsp;</td></tr>
      <tr><td>&nbsp;</td></tr>
@@ -14,7 +13,8 @@
       <%end%>
    		</tr>
  	<%end%>
-  </table>                            
+
+</table>                            
   <div style="background-color:black;">
     <%= will_paginate(@users)%>
   </div>

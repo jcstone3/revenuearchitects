@@ -15,39 +15,17 @@
                             <div class="tab-pane active" id="dashboard" style="height:730px;">
                             <div class="tabHead">
                                   <h1>User</h1>
-                                    <h2>Overview about the user activity</h2>
+                                  <h2>Overview about the user activity</h2>
                                 </div>
-                                <div class="tabMid">
-                                  <div class="activeUsers">
-                                        <h3>20</h3>
-                                        <h4>Active Users</h4>
-                                    </div>
-                                    <div class="average">
-                                        <h5>Comp</h5>
-                                        <h4><%= select_tag(:company, options_for_select(@company.collect{|x| [x.name,x.id]}))%></h4>
-                                    </div>
-                                    <div class="average">
-                                        <h5>Industry</h5>
-                                        <h4><%= select_tag(:industry, options_for_select(@industry.collect{|x| [x.name,x.id]}))%></h4>
-                                    </div>
-                                    <div class="button-bar">
-                                    <div class="btn-group"  style="margin-top: 45px; width: 150px;">
-                                          <a href="#" class="btn"><i class="icon-calendar"></i> This Month</a>
-                                          <a href="#" data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></a>
-                                          <ul class="dropdown-menu">
-                                            <li><a href="#"><i class="icon-calendar"></i> Last Month</a></li>
-                                            <li><a href="#"><i class="icon-calendar"></i> Last Year</a></li>
-                                          </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                             
                                 <div class="tabGraph">
-                                    <div class="box" id="box">
+                                    <div id="box">
                                              <%= render :partial =>'list_users'%>
                                       
                                     </div>
                                
                             </div>
+
                             <div class="tab-pane" id="users" style="height:500px;"></div>
                             <div class="tab-pane" id="reports" style="height:500px;">Reports</div>
                             <div class="tab-pane" id="sections" style="height:500px;">Sections</div>
