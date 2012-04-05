@@ -37,8 +37,23 @@
         </div>
 <% if @previous_surveys.present?%>
        <div class="span3 rightBox" >
-                  
-                        <h2 class="previous">Previous Survey  </h2>
+                    <div class="processIcons">
+                        <span>
+                        <%= image_tag "processing.png",:width=>"47px",:height=>"49px" %>
+                        <p class="demographicstext">Demographics</p>
+                        </span>
+
+                        <span>
+                        <%= image_tag "qa_grey.png",:width=>"47px",:height=>"49px",:class=>"qa" %>
+                        <p class="qatext">Q&amp;A</p>
+                        </span>
+                        
+                        <span>
+                        <%= image_tag "download_grey.png",:width=>"47px",:height=>"49px",:class=>"reporticon"%>
+                        <p class="reporttext">Report</p>
+                        </span>
+                    </div>
+                        <h2 class="previous">Previous Surveys  </h2>
                     
                     <div class="Baloon surveyBaloon" >
                         <div class="head1"><h1>January 2011 </h1>

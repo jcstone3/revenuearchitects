@@ -72,9 +72,9 @@
                                 <%= render "new"%>
 
                             </div>
-                            <div class="tab-pane" id="twitter"><p class="loginlink">Login with Twitter</p>
+                            <div class="tab-pane" id="twitter">
                                 <br>
-                                <%= link_to image_tag("twitter-button1.png" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter) %>
+                                <%= link_to image_tag("sign_in_with_twitter.png" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter) %>
                             </div>   
                             <div class="tab-pane" id="facebook">
                             <br> 
