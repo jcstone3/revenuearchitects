@@ -4,19 +4,27 @@ class Admin::UsersController < ApplicationController
 
    def index   		
    	    
-   	 @company = Company.find(:all, :select => 'DISTINCT name')
-   	 @industry = Industry.find(:all)
-       if params[:company_name]
-   		   #@cmp = Company.find(params[:company_id])
-            @users = User.paginate(:include => :companies, :conditions=>{:companies => {:name => params[:company_name]}},:page=> params[:page], :per_page=>10, :order => "users.id ASC")   		  
-   		   @type_title = "By Company"
-   	   elsif params[:industry_id]
-   	   	@users = User.paginate(:include => :companies, :conditions=>{:companies => {:industry_id => params[:industry_id]}},:page=> params[:page], :per_page=>10, :order => "users.id ASC")           
-            @type_title = "By Industry"
-   	  else
-   	  	@users= User.paginate(:page=> params[:page], :per_page=>10, :order => "id ASC")
-   	  	@type_title = "" 
-   	  end   
+   	 # @company = Company.find(:all, :select => 'DISTINCT name')
+   	 # @industry = Industry.find(:all)
+     #   if params[:company_name]
+   		#    #@cmp = Company.find(params[:company_id])
+     #        @users = User.paginate(:include => :companies, :conditions=>{:companies => {:name => params[:company_name]}},:page=> params[:page], :per_page=>10, :order => "users.id ASC")   		  
+   		#    @type_title = "By Company"
+   	 #   elsif params[:industry_id]
+   	 #   	@users = User.paginate(:include => :companies, :conditions=>{:companies => {:industry_id => params[:industry_id]}},:page=> params[:page], :per_page=>10, :order => "users.id ASC")           
+     #        @type_title = "By Industry"
+   	 #  else
+   	 #  	@users= User.paginate(:page=> params[:page], :per_page=>10, :order => "id ASC")
+   	 #  	@type_title = "" 
+   	 #  end   
+       @user_surveys = User.find(:all,
+                       :select => "users.name, users.email, companies.name as company_name, surveys.size, industries.name as industry_name, surveys.start_date",
+                       :joins => "left outer join companies on users.id = companies.user_id left outer
+                                 join surveys on companies.id = surveys.company_id inner join industries on
+                                 companies.industry_id = industries.id" ,
+                       :order => "start_date desc" )
+
+
    	respond_to do |format|
    		format.js {render :layout => false}
    		format.html 

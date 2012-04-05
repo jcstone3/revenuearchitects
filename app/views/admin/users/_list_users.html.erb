@@ -1,22 +1,25 @@
-<table >
-     <tr><td>Name</td><td>Email</td><td colspan="2">Actions</td></tr>
-     <tr><td>&nbsp;</td></tr>
-     <tr><td>&nbsp;</td></tr>
-     <%@users.each do |user|%>
-  		<tr>
-    	<td><%= user.username%></td>
-    	<td><%= user.email%></td>
-      <% if user.is_active?%>
-    	 <td><%= link_to 'Deactivate', admin_users_deactive_url(user) %></td>
-      <%else%>
-      <td><%= link_to 'Activate', admin_users_active_url(user) %></td>
-      <%end%>
-   		</tr>
- 	<%end%>
+<table cellpadding="1" cellspacing="1" id="user_table" class="report-body"> 
+          <thead>
+            <tr>
+              <th><h3>Name</h3></th>
+              <th><h3>Email</h3></th>
+              <th><h3>Company</h3></th>
+              <th><h3>Size</h3></th>
+              <th><h3>Type</h3></th>
+              <th><h3>Survey</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @user_surveys.each do |user_survey| %>
+                <tr>
+                    <td><%= user_survey.name %></td>
+                    <td><%= user_survey.email %></td>
+                    <td><%= user_survey.company_name %></td>
+                    <td><%= user_survey.size %></td>
+                    <td><%= user_survey.industry_name %></td>
+                    <td><%= user_survey.start_date.to_date.strftime("%B %Y") if !user_survey.start_date.blank? %></td>
+                </tr>
+            <% end %>
 
-</table>                            
-  <div style="background-color:black;">
-    <%= will_paginate(@users)%>
-  </div>
-
-
+          </tbody>        
+</table>      

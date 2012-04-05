@@ -258,9 +258,7 @@ $(document).ready(function(){
                 alert($(this).attr('id'));
              });
             })
-   
-         
-
+    
 
       $('#resultTable').dataTable( {
             "bPaginate": true,
@@ -270,4 +268,16 @@ $(document).ready(function(){
             "bInfo": false,
             "bAutoWidth": true
         } ); 
+
+      $('#user_table').dataTable( {
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } ); 
+
+
+      
 });
