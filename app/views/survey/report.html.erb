@@ -1,13 +1,17 @@
 <div class="container report-top">
         	<div class="spa@section_total.inspectn9 report-top1" >
                    <ul class="nav nav-pills">
-                    <li class="surveyname">&nbsp;Survey Name</li>
+                    <li class="surveyname">&nbsp;Survey_<%= @survey.created_at.strftime("%B  %Y")%></li>
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Strategy <span class="red"><%= @sections[0].total_points %></span></a></li>
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Systems <span class="red"><%= @sections[1].total_points%></span></a></li>
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Programs <span class="red"><%= @sections[2].total_points%></span> </a></li>
-                    <li class="on"><a href="#"><%= image_tag "shoulddo.png",:width=>"16px",:height=>"16px",:class=>"finalmenu"%>&nbsp;&nbsp;Final Result <span class="green"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span>  <i class="icon-chevron-right icon-white"></i></a></li>
-                    <li class="on2"><a href="#"><%= image_tag "glyphicons_151_edit.png" ,:width=>"13px",:height=>"13px" %>&nbsp;Summary </a></li>
-
+                    <li class="on"><a href=""><%= image_tag "shoulddo.png",:width=>"16px",:height=>"16px",:class=>"finalmenu"%>&nbsp;&nbsp;Final Result <span class="green"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span>  <i class="icon-chevron-right icon-white"></i></a></li>
+                    <li class="on2">
+                        <%= link_to(reports_url(params[:id])) do %>
+                            <i class="icon-edit">
+                            </i>&nbsp;Summary
+                       <% end %>
+                   </li>
                     <li class="next2">
                      <%= link_to(detailed_report_url(params[:id])) do %>
                             <i class="icon-ok icon-white answer">

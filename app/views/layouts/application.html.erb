@@ -39,13 +39,14 @@
              <div class= "useralign">
              <% if user_signed_in?%>
               <i class="icon-user "></i>&nbsp; 
-              <%= "#{current_user.username}" %>&nbsp;</div>
+              <%= "#{current_user.username}" %>&nbsp;<br/>
              
-              <div class="userbtn">
+              
               <% if current_user.companies.present? %>
+              <i class="icon-home "></i>&nbsp;
                <%= "#{current_user.companies.first.name}"%>
-               <%end%> 
-                            
+               <%end%> </div>
+               <div class="userbtn">              
               <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
               <%else%>
               <%= link_to "Login", new_user_session_path, :class=>"btn btn-primary", :id=>"login_user"%>
