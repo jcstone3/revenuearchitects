@@ -39,10 +39,11 @@
              <div class= "useralign">
              <% if user_signed_in?%>
               <i class="icon-user "></i>&nbsp; 
-              <%= "#{current_user.username}" %>&nbsp;</div>
+              <%= "#{current_user.username}" %>&nbsp;</div><br/>
              
-              <div class="userbtn">
+              <div class="userbtn"> 
               <% if current_user.companies.present? %>
+              <i class="icon-user "></i>&nbsp;
                <%= "#{current_user.companies.first.name}"%>
                <%end%> 
                             
