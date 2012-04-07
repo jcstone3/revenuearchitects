@@ -1,38 +1,46 @@
 <div class="container" style="margin-top:20px;">
 			<div class="row-fluid">
 				<div class="span12">
-					        <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;"> 
-                                <li><%=link_to 'Settings'%></li>
+					        <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;">
                                 <li><%= link_to 'Questions', admin_questions_url%></a></li>
                                 <li class="active"><%=link_to 'Sections', admin_sections_url%>
                                 </li>
-                                <li><%= link_to 'Reports', admin_reports_url%></li>
                                 <li><%= link_to 'Users', admin_users_url%></li>
-                                <!--<li><a href="" data-toggle="tab">Users</a></li> -->
-                                 <li><%= link_to 'Dashboard', admin_root_url %></li>
+                                <li><%= link_to 'Dashboard', admin_root_url %></li>
                             </ul>
                              
                             <div class="tab-content"style="padding-top:0px">
                             <div class="tab-pane active" id="dashboard" style="height:730px;">
 								<div class="tabHead">
-                                	<h1>Section</h1>
+                                	<h1>Sections</h1>
                                     
                                 </div>
                                 
                                 <div class="tabGraph">
-                                                                      
-                                        
-                                        <h1>Section List</h1>
-                                        <% @sections.each do |section|%>
-                                        <p><strong><%= link_to section.name, admin_edit_section_url(section)%></strong></p>
-                                        <% section.sub_sections.each do |sub_section|%>
-                                         <p><%= link_to sub_section.name, admin_edit_subsection_url(sub_section)%></p>                                     
-                                        <%end%>
-                                        <br>
-                                        <%end%>
-                                      <p><%= link_to 'Add Section', admin_new_section_url%> / 
-                                         <%= link_to 'Add Sub Section', admin_new_subsection_url%></p>
-                                    
+                                     <div id="box">
+                                  <table cellpadding="1" cellspacing="1" id="user_table" class="report-body"> 
+                                  <thead>
+                                    <tr>
+                                      <th><h3>Name</h3></th>
+                                      <th><h3>Subsection Name</h3></th>
+                                      <th><h3>Description</h3></th>
+                                                                         
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <% @sections.each do |section| %>
+                                        <tr>
+                                            <td><%= section.name %></td>
+                                            <td><%= section.subsection_name %></td>           
+                                            <td><%= section.subsection_desc %></td>               
+                                        </tr>
+                                    <% end %>
+                                    </tbody>        
+                                </table> 
+                                <br />
+                                <p><%= link_to 'Add Section', admin_new_section_url%> / 
+                                         <%= link_to 'Add Sub Section', admin_new_subsection_url%></p>    
+                                </div>
                                 </div>
                             </div>
                             <div class="tab-pane" id="users" style="height:500px;">Users</div>

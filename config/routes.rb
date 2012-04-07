@@ -8,6 +8,7 @@ RevenueGrader::Application.routes.draw do
    get '/users/deactivate_user/:id' => "users#deactivate_user", :as => "users_deactive" 
    get '/users/update_user/:company_id' => "users#update_user", :as => "users_update_user"
    get '/questions' => "questions#index", :as=>"questions"
+   get '/questions/new' => "questions#new", :as=>"new_questions"
    post '/questions/create' => "questions#create", :as=>"create_question"
    get '/sections' => "section#index", :as => "sections"
    get '/section/new' => "section#new", :as => "new_section" 
@@ -22,6 +23,7 @@ RevenueGrader::Application.routes.draw do
    get '/reports' => "section#reports_index", :as => "reports"
    root :to =>  "dashboard#index"
    resources :users
+
   end
   devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations"} do 
    get 'admins/login' => 'admin/sessions#new', :as => "new_admin_session"

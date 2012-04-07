@@ -1,8 +1,12 @@
 class Admin::SectionController < ApplicationController
    layout "admin"
 	def index
-	  @sections = Section.all(:order=>"id ASC")
-    @sub_sections = SubSection.all(:order=>"id ASC")
+    @sections =  Section.find(:all,
+                       :select => "sections.name, sub_sections.name as subsection_name, sub_sections.description as subsection_desc",
+                       :joins => "right outer join sub_sections on sections.id = sub_sections.section_id",
+                       :order =>"sections.id ASC")
+	  #@sections = Section.all(:order=>"id ASC")
+    #@sub_sections = SubSection.all(:order=>"id ASC")
 	end
 
     def new
