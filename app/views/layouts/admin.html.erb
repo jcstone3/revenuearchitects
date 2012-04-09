@@ -31,6 +31,7 @@
           <div class="row-fluid">
             <div class="button-bar">
              <% if admin_signed_in?%>
+             <i class="icon-user "></i>&nbsp; 
               <%= "#{current_admin.name}" %>
               <%= link_to "Logout", destroy_admin_session_path, :class=>"btn" %>              
               <%end%>
