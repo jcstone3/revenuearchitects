@@ -1,6 +1,6 @@
     <div class="container headerPopup">
       <div class="row-fluid">
-        <div class="span9 leftBox mainLeft">                  
+        <div class="span9 leftBox marginLeft">                  
           <div class="question">
             <h1> Existing Surveys </h1>
           </div>
@@ -15,13 +15,20 @@
                      <% current_user.companies.each do |cmpany| %>      
                      <div class="points">
                         <div class="option" >
-                        <h3><i class="icon-home" size="width:20px;"></i>&nbsp;<%= cmpany.name%></h3>
+                        <h3><i class="icon-home" style="width:20px; margin-top:10px"></i>&nbsp;<%= cmpany.name%></h3>
+                      </br>
 
                          <%@active_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", true]) %>
                           <% if @active_survey.present?%>
+                            <h4>
                           <% @active_survey.each do |survey|%>
                               <%= link_to "Survey for #{survey.created_at.strftime('%B  %Y')}", get_response_status_url(survey)%>
-                            </br>
+                            </h4>
+                          <p> Number of Questions Attempted:: </p>
+
+                            <%= "Created on #{survey.created_at.strftime('%d %m %Y')}"%>
+                          </br>
+                             
                           <%end%>
                           <% end %>                                                   
                         </div>
@@ -31,6 +38,22 @@
              </div>  
            </div>
            <div class="span3 rightBox" >
+            <div class="processIcons">
+                        <span>
+                        <%= image_tag "processing.png",:width=>"47px",:height=>"49px" %>
+                        <p class="demographicstext">Demographics</p>
+                        </span>
+
+                        <span class="spacing">
+                        <%= image_tag "qa_grey.png",:width=>"47px",:height=>"49px",:class=>"qa" %>
+                        <p class="qatext">Q&amp;A</p>
+                        </span>
+                        
+                        <span class="spacing">
+                        <%= image_tag "download_grey.png",:width=>"47px",:height=>"49px",:class=>"reporticon"%>
+                        <p class="reporttext">Report</p>
+                        </span>
+                    </div>
                <div class="scoreBoard scoreboard1">
                   <div class="head">About Revenue Grader </div>
                      <div class="score">
