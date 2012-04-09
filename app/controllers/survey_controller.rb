@@ -277,7 +277,17 @@ end
 
 def confirm_survey
   @survey = Survey.find_by_id(params[:id])
+  @allSection = Section.all
   @responses = @survey.responses
+   @section_total = []
+  @subsection_total = []
+  @allSection.each do |section|
+     @section_total << calculate_response_for_section(params[:id], section.id)
+     section.sub_sections.each do |sub_section|     
+     @subsection_total << calculate_response_for_subsection(params[:id], sub_section.id)
+    end
+  end
+  @final_score = @section_total[0]+@section_total[1]+@section_total[2]
  # if @response.present?
   @response = []
   @responses.each do |res|
