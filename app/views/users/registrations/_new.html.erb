@@ -11,8 +11,7 @@
       <h3 >Password<span>*</span><h3>
       <%= f.password_field :password,  :class=>"span3 righttextBox", :maxlength => "30", :placeholder=>"Password for the site", :validate =>{:presence => true} %>
       <label class="checkbox check1">
-      <input type="checkbox" checked> <p class="checkNotice">Please send me updates and tips from Revenue Grader.
-      <%= link_to 'Privacy Policy', privacy_policy_url%></p>
+      <input type="checkbox" checked> <p class="checkNotice">Please send me updates and tips from Revenue Grader. <%= link_to 'Privacy Policy', privacy_policy_url%></p>
       </label>
       <%= f.submit "Sign up and Get Started!", :class=>"btn btn-primary btn-large btnStart" %>
       <p class="confidential">

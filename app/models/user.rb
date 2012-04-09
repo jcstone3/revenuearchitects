@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable#, :validatable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username
@@ -14,11 +14,11 @@ class User < ActiveRecord::Base
   #validations
   validates_presence_of :username, :message => "Name can't' be blank"
   validates_format_of :username, :with =>/^[a-z A-Z][a-z A-Z 0-9_]*$/, :message => "Name should contain only alphabets"
-  #validates_presence_of :password, :presence => true, :message  => "Password can't be blank"
-  #validates_length_of :password,  :within => 4..30, :message => "Password should be greater than 4 and less than 30"
-  #validates_presence_of :email, :message => "Email can't be blank"
-  #validates_uniqueness_of :email,     :case_sensitive => false, :allow_blank => true, :if => :email_changed?, :message=> "Email address already taken"
-  #validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?, :message => "Invalid email address"
+  validates_presence_of :password, :presence => true, :message  => "Password can't be blank"
+  validates_length_of :password,  :within => 4..30, :message => "Password should be greater than 4 and less than 30"
+  validates_presence_of :email, :message => "Email can't be blank"
+  validates_uniqueness_of :email,     :case_sensitive => false, :allow_blank => true, :if => :email_changed?, :message=> "Email address already taken"
+  validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?, :message => "Invalid email address"
  
 
 #facebook authentication
