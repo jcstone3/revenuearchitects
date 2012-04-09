@@ -21,6 +21,8 @@ class ApplicationController < ActionController::Base
     end
   end 
 
+
+   
 #to authenticate the user for login
  #def authenticate_user!
  # if current_user.nil?

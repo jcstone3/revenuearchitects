@@ -28,7 +28,7 @@ RevenueGrader::Application.routes.draw do
   devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations"} do 
    get 'admins/login' => 'admin/sessions#new', :as => "new_admin_session"
    get 'admins/logout' => 'admin/sessions#destroy', :as => "destroy_admin_session"
-   get 'admins/signup' => 'admin/registrations#new', :as => "new_admin_registration" 
+   get 'admins/sign_up' => 'admin/sessions#new', :as => "new_admin_session" 
   end  
   
   #setting up user registration
