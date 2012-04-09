@@ -45,7 +45,7 @@
                        <% if(params[:question_id] > '1')%>
                         <%= link_to(previous_question_url(params[:id], params[:question_id].to_i - 1), :class=>"btn confprev") do %>
                            <i class="icon-chevron-left">
-                            </i>Previous Question
+                            </i> &nbsp;Previous Question
                        <% end %>
                        <%else%>
                         <a rel="tooltip" class="btn large disabled confprev"><i class="icon-chevron-left"></i>Previous Question</a>

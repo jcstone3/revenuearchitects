@@ -17,14 +17,14 @@
                                     <li>
                                       <%= link_to questions_url(params[:id],question.id), 
                                       :title=>"#{question.id}", :rel=>"tooltip" do%>
-                                      <i class="icon-ok-circle icon-white"></i>
+                                      <i class="icon-ok iconfont"></i>
                                       <%end%>
                                     </li>.
                                  <%elsif (question.id < params[:question_id].to_i)%>       
                                     <li>
                                       <%= link_to questions_url(params[:id],question.id), 
                                       :title=>"#{question.id}", :rel=>"tooltip" do%>
-                                      <i class="icon-ok icon-white"></i>
+                                      <i class="icon-ok iconfont"></i>
                                       <%end%>
                                     </li>
                                 <%else%>
