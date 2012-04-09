@@ -9,12 +9,13 @@
           <div class="text2" >
           <p>Survey on <%= @survey_date%>
           </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum <br>id quis quam.
+          Sed quis suscipit tortor.
+          </p>
           </div>
 
           <div class="text" >
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum <br>id quis quam.
-          Sed quis suscipit tortor.
-          </p>
+
           </div>
            <div class="revenuecontainer">   
           <%= form_for(@survey, :url=>{:action => "create"}, :validate => true) do |f| %>
