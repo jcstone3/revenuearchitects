@@ -22,6 +22,8 @@ table.dataTable thead th {
 	font-weight: bold;
 	cursor: pointer;
 	*cursor: hand;
+	text-align:left;
+
 }
 report-body dataTable
 table.dataTable tfoot th {
@@ -108,7 +110,7 @@ table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
  */
 .dataTables_filter {
 	float: right;
-	text-align: right;
+	text-align: left;
 }
 
 
