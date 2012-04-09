@@ -38,12 +38,12 @@
             <div class="button-bar">
              <div class= "useralign">
              <% if user_signed_in?%>
-              <i class="icon-user "></i>&nbsp; 
+              <i class="icon-user " style="font-size:20px"></i>&nbsp; 
               <%= "#{current_user.username}" %>&nbsp;<br/>
              
               
               <% if current_user.companies.present? %>
-              <i class="icon-home "></i>&nbsp;
+              <i class="icon-bar-chart " style="font-size:20px"></i>&nbsp;
                <%= "#{current_user.companies.first.name}"%>
                <%end%> </div>
                <div class="userbtn">              

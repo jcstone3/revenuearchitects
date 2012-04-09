@@ -36,13 +36,14 @@
                                         </tr>
                                     <% end %>
                                     </tbody>        
-                                </table> 
-                                
+                                </table> <br/>
+                                    <p class="btn-admin"><%= link_to 'Add Section', admin_new_section_url, :class=>"btn"%>  
+                                         <%= link_to 'Add Sub Section', admin_new_subsection_url, :class=>"btn"%></p> 
                                    
                                 </div>
-                                <p class="btn-admin"><%= link_to 'Add Section', admin_new_section_url, :class=>"btn"%>  
-                                         <%= link_to 'Add Sub Section', admin_new_subsection_url, :class=>"btn"%></p> 
+                                
                                 </div>
+
                             </div>
 <!--                             <div class="tab-pane" id="users" >Users</div>
                             <div class="tab-pane" id="reports" >Reports</div>
