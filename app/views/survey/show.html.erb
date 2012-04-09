@@ -15,7 +15,7 @@
                      <% current_user.companies.each do |cmpany| %>      
                      <div class="points">
                         <div class="option" >
-                        <h3><i class="icon-home" style="width:20px; margin-top:10px"></i>&nbsp;<%= cmpany.name%></h3>
+                        <h3><i class="icon-bar-chart" style="font-size:20px; margin-top:10px"></i>&nbsp;<%= cmpany.name%></h3>
                       </br>
 
                          <%@active_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", true]) %>
