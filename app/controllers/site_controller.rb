@@ -9,10 +9,10 @@ class SiteController < ApplicationController
     end  
   end
 
-  def aboutUs
+  def about_us
   end
 
-  def contactUs
+  def contact_us
   end
 
   def privacy_policy
