@@ -23,7 +23,13 @@ table.dataTable thead th {
 	cursor: pointer;
 	*cursor: hand;
 	text-align:left;
+	width:5px;
 
+}
+
+table.dataTable thead h3{
+
+	font-weight:400;
 }
 report-body dataTable
 table.dataTable tfoot th {

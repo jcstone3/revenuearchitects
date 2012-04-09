@@ -9,8 +9,8 @@
                                 <li><%= link_to 'Dashboard', admin_root_url %></li>
                             </ul>
                              
-                            <div class="tab-content"style="padding-top:0px">
-                            <div class="tab-pane active" id="dashboard" style="height:730px;">
+                            <div class="tab-content2"style="padding-top:0px">
+                            <div class="tab-pane active" id="dashboard" >
 								<div class="tabHead">
                                 	<h1>Sections</h1>
                                     
@@ -21,9 +21,9 @@
                                   <table cellpadding="1" cellspacing="1" id="user_table" class="report-body dataTable2"> 
                                   <thead>
                                     <tr>
-                                      <th style= "width:125px;"><h3>Name</h3></th>
-                                      <th style= "width:175px;"><h3>Subsection Name</h3></th>
-                                      <th style= "width:800px;"><h3>Description</h3></th>
+                                      <th><h3>Name</h3></th>
+                                      <th><h3>Subsection Name</h3></th>
+                                      <th><h3>Description</h3></th>
                                                                          
                                     </tr>
                                   </thead>
@@ -32,22 +32,23 @@
                                         <tr>
                                             <td><%= section.name %></td>
                                             <td><%= section.subsection_name %></td>           
-                                            <td><%= section.subsection_desc %></td>               
+                                            <td><%#= section.subsection_desc %></td>               
                                         </tr>
                                     <% end %>
                                     </tbody>        
                                 </table> 
-                                <br />
-                                <p class="btn-admin"><%= link_to 'Add Section', admin_new_section_url, :class=>"btn-adminprimary"%> / 
-                                         <%= link_to 'Add Sub Section', admin_new_subsection_url, :class=>"btn-adminprimary"%></p>    
+                                
+                                   
                                 </div>
+                                <p class="btn-admin"><%= link_to 'Add Section', admin_new_section_url, :class=>"btn"%>  
+                                         <%= link_to 'Add Sub Section', admin_new_subsection_url, :class=>"btn"%></p> 
                                 </div>
                             </div>
-                            <div class="tab-pane" id="users" style="height:500px;">Users</div>
-                            <div class="tab-pane" id="reports" style="height:500px;">Reports</div>
-                            <div class="tab-pane" id="sections" style="height:500px;">Sections</div>
-                            <div class="tab-pane" id="questions" style="height:500px;">Questions</div>
-                            <div class="tab-pane" id="settings" style="height:500px;">Settings</div>
+<!--                             <div class="tab-pane" id="users" >Users</div>
+                            <div class="tab-pane" id="reports" >Reports</div>
+                            <div class="tab-pane" id="sections" >Sections</div>
+                            <div class="tab-pane" id="questions">Questions</div>
+                            <div class="tab-pane" id="settings">Settings</div> -->
                             </div>
 				</div>
 			</div>

@@ -9,8 +9,8 @@
                                 <li class="active"><%= link_to 'Dashboard' %></li>
                             </ul>
                              
-                            <div class="tab-content"style="padding-top:0px">
-                            <div class="tab-pane active" id="dashboard" style="height:730px;">
+                            <div class="tab-content2"style="padding-top:0px">
+                            <div class="tab-pane active" id="dashboard" >
 								<div class="tabHead">
                                 	<h1>Dashboard</h1>
                                     <h2>Overview about the surveys in the current month</h2>
@@ -35,7 +35,7 @@
 
                                             <!-- TODO: retrieve no of days based on month   -->
                                             <% if !@total_surveys.blank? %>
-                                            <% (1..30).each do |day| %>
+                                            <% (1..12).each do |day| %>
                                                   <dt><%= day %></dt>
                                                   <dd class="first"><span class="type3 p<%= @total_surveys.select { |sur| sur.survey_day == day.to_s }.blank? ? "0" : @total_surveys.select { |sur| sur.survey_day == day.to_s }.first.total %>"></span></dd>
                                             <% end %>
@@ -47,11 +47,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="users" style="height:500px;">Users</div>
-                            <div class="tab-pane" id="reports" style="height:500px;">Reports</div>
-                            <div class="tab-pane" id="sections" style="height:500px;">Sections</div>
-                            <div class="tab-pane" id="questions" style="height:500px;">Questions</div>
-                            <div class="tab-pane" id="settings" style="height:500px;">Settings</div>
+                            <div class="tab-pane" id="users" >Users</div>
+                            <div class="tab-pane" id="reports" >Reports</div>
+                            <div class="tab-pane" id="sections" >Sections</div>
+                            <div class="tab-pane" id="questions" >Questions</div>
+                            <div class="tab-pane" id="settings" >Settings</div>
                             </div>
 				</div>
 			</div>

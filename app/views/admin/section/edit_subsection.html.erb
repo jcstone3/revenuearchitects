@@ -12,8 +12,8 @@
                                  <li><%= link_to 'Dashboard', admin_root_url %></li>
                             </ul>
                              
-                            <div class="tab-content"style="padding-top:0px">
-                            <div class="tab-pane active" id="dashboard" style="height:730px;">
+                            <div class="tab-content2"style="padding-top:0px">
+                            <div class="tab-pane active" id="dashboard">
 								<div class="tabHead">
                                 	<h1>Section</h1>
                                     
@@ -33,15 +33,15 @@
                                         <%#= select_tag(:section_id, options_for_select(@sections.collect{|x| [x.name,x.id]}))%>
                                         <%#= select_tag(:section_id, options_for_select=>(@sections.collect{|x| [x.name, x.id]}))%>
                                        </p>
-                                       <p><%= f.submit 'Update SubSection'%></p>
+                                       <p><%= f.submit 'Update SubSection', :class=> "btn"%></p>
                                        <%end%>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="users" style="height:500px;">Users</div>
-                            <div class="tab-pane" id="reports" style="height:500px;">Reports</div>
-                            <div class="tab-pane" id="sections" style="height:500px;">Sections</div>
-                            <div class="tab-pane" id="questions" style="height:500px;">Questions</div>
-                            <div class="tab-pane" id="settings" style="height:500px;">Settings</div>
+                            <div class="tab-pane" id="users" >Users</div>
+                            <div class="tab-pane" id="reports" >Reports</div>
+                            <div class="tab-pane" id="sections" >Sections</div>
+                            <div class="tab-pane" id="questions" >Questions</div>
+                            <div class="tab-pane" id="settings">Settings</div>
                             </div>
 				</div>
 			</div>

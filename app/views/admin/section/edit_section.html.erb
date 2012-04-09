@@ -9,8 +9,8 @@
                                  <li><%= link_to 'Dashboard', admin_root_url %></li>
                             </ul>
                              
-                            <div class="tab-content"style="padding-top:0px">
-                            <div class="tab-pane active" id="dashboard" style="height:730px;">
+                            <div class="tab-content2"style="padding-top:0px">
+                            <div class="tab-pane active" id="dashboard">
                 <div class="tabHead">
                                   <h1>Section</h1>
                                     
@@ -26,21 +26,21 @@
                                                    <%= form_for :section, :url=>{:action =>:update, :id=>@section.id}, :validate=>true do |f|%>
                                             <h3>Name<span>*</span></h3>
                                             <%= f.text_field :name%>
-                                            <%= f.submit 'Edit Section', :class=>"btn btn-primary"%>
+                                            <%= f.submit 'Edit Section', :class=>"btn"%>
                                                            
                                             </div>
                                             <%end%>
-                                             <p class="btn-admin">  <%= link_to "back", admin_sections_url, :class=>"btn-adminprimary" %></p> 
+                                             <p class="btn-admin">  <%= link_to "back", admin_sections_url, :class=>"btn" %></p> 
                                             </div>  
 
                                 </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="users" style="height:500px;">Users</div>
-                            <div class="tab-pane" id="reports" style="height:500px;">Reports</div>
-                            <div class="tab-pane" id="sections" style="height:500px;">Sections</div>
-                            <div class="tab-pane" id="questions" style="height:500px;">Questions</div>
-                            <div class="tab-pane" id="settings" style="height:500px;">Settings</div>
+                            <div class="tab-pane" id="users">Users</div>
+                            <div class="tab-pane" id="reports">Reports</div>
+                            <div class="tab-pane" id="sections">Sections</div>
+                            <div class="tab-pane" id="questions">Questions</div>
+                            <div class="tab-pane" id="settings">Settings</div>
                             </div>
         </div>
       </div>
