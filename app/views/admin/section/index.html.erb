@@ -32,7 +32,7 @@
                                         <tr>
                                             <td><%= section.name %></td>
                                             <td><%= section.subsection_name %></td>           
-                                            <td><%#= section.subsection_desc %></td>               
+                                            <td><%= truncate(section.subsection_desc, :length=>140) %></td>               
                                         </tr>
                                     <% end %>
                                     </tbody>        
