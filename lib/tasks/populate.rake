@@ -66,20 +66,20 @@ namespace :app do
       $stdout.sync = true
       puts "Setting up Development or demo Database"
 
-    #Create Industries in the Database
-      puts "Adding Industries in the application"
-      industries = ["Finance","Health Care","Retail","Services","Manufacturing","Comunications"]
-      # Reload the class since we've added new fields in migrations.
-        Industry.reset_column_information
-        industries.split(",")[0].each_with_index do |industry_name,count|        
-         Industry.populate(1) do |industry|
-          industry.name     = industry_name
-          industry.value    = industry_name
-          industry.created_at = Time.now
-          industry.updated_at = Time.now
-          puts "Industry '#{industry_name}' has been created \n"
-         end
-        end
+    # #Create Industries in the Database
+    #   puts "Adding Industries in the application"
+    #   industries = ["Finance","Health Care","Retail","Services","Manufacturing","Comunications"]
+    #   # Reload the class since we've added new fields in migrations.
+    #     Industry.reset_column_information
+    #     industries.split(",")[0].each_with_index do |industry_name,count|        
+    #      Industry.populate(1) do |industry|
+    #       industry.name     = industry_name
+    #       industry.value    = industry_name
+    #       industry.created_at = Time.now
+    #       industry.updated_at = Time.now
+    #       puts "Industry '#{industry_name}' has been created \n"
+    #      end
+    #     end
 
     #Create Questionnaires in the Database
 

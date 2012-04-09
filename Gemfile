@@ -17,7 +17,7 @@ gem 'uuidtools'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 gem 'jquery-rails'
-gem "client_side_validations"
+gem "client_side_validations", '~>3.1.4'
 gem 'settingslogic'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.0.3'

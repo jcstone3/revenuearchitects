@@ -15,3 +15,11 @@ Admin.delete_all
 @admin.password = "revenue@123"
 @admin.password_confirmation = "revenue@123"
 @admin.save
+
+Industry.delete_all
+ ['Agriculture','Business & Professional Services', 'Construction','Consumer Services', 'Education', 'Energy Utilities & Waste',
+  'Banking','Wealth Management','Insurance','Legal Services','Manufacturing','Media & Entertainment','Metals & Mining','Organizations',
+  'Real Estate','Retail','Technology and Software','Telecommunications','Transportation','Health Care & Life Sciences',
+  'Hospitality','Other'].each do |industry|    	  
+    Industry.create!(:name=>industry, :value=>industry)        
+ end  
