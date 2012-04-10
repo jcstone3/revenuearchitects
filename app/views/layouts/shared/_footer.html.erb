@@ -1,6 +1,7 @@
 <div class="container footer" >
 	<div class="row-fluid" >
-<div class="span6 copyright"><a href="http://www.icicletech.com/" target="_self"><i class="icon-pencil"></i> About Us</a> &nbsp; <a href="http://www.icicletech.com/" target="_self"> <i class="icon-map-marker"></i> Contact Us</a><br />Copyright &copy; 2012, Revenue Grader. All rights reserved.</div><div class="span6 developed"><br /><a href="http://www.icicletech.com/" target="_blank">Software Developed </a>By Icicle Technologies
+<div class="span6 copyright"><%= link_to aboutus_url() do%><i class="icon-pencil"></i> About Us &nbsp; <%end%> <%= link_to contactus_url() do%> <i class="icon-map-marker"></i> Contact Us <%end%><br />Copyright &copy; 2012, Revenue Grader. All rights reserved.</div><div class="span6 developed"><br /><a href="http://www.icicletech.com/" target="_blank">Software Developed </a>By Icicle Technologies
 </div>
 </div>
 </div>
+contactus_url
