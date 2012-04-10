@@ -106,7 +106,7 @@ margin-left:50px;
 	font-weight: 300;
 	margin-top:10px;
 	color:#67737a;
-	width:500px;
+	width:auto;
 	float:left;
     line-height: 52px;
 }
@@ -997,11 +997,9 @@ background-color:#AAB0B4;
 	font-family:@baseFontFamily;
 }
 .lblCompanyname{
-	margin-top:8px;
+	
 	color:inherit;
-	margin-left:20px;
-	color:#67737A;
-	font-weight:300;
+	margin-left:2px;
 }
 .heading1{
 	margin-top:15px;
@@ -1487,7 +1485,6 @@ font-size: 42px;
     border-width: 1px;
     color: #FFFFFF;
     cursor: default;
-    text-decoration:none;
 }
 .nav2-tabs2 > li {
     margin-bottom: -1px;
@@ -2384,9 +2381,12 @@ border:0px none;
 	text-shadow:none;
 }
 
+<<<<<<< HEAD
+=======
 
 .signinbtn{
 
 	margin-top:100px;
 	margin-left:60px;
 }
+>>>>>>> site changes
