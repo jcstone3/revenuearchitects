@@ -4,12 +4,12 @@
                     <li class="surveyname">&nbsp;Survey_<%= @survey.created_at.strftime("%B  %Y")%></li>
                    <% @allSection.each do |section| %>
                         <li class="next" id="section_<%=section.id%>">
-                        <%= link_to("#") do %>
+                        <%= link_to("") do %>
                             <%= image_tag "icon_cat.png" %>
-                            <%= section.name%>
-                            <span id ="span_<%=section.id%>" class="red">
+                            <%= section.name %>
+                            <span id ="span_<%=section.id%>" class="red" title ="total number of questions", rel="tooltip">
 
-                              <%= section.question_count%>
+                              <%= section.question_count  %>
                             </span>
                         <% end %> 
                         </li>              
