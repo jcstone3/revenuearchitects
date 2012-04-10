@@ -72,22 +72,22 @@
                                 <%= render "new"%>
 
                             </div>
-                            <div class="tab-pane" id="twitter">
+                            <div class="tab-pane signinbtn" id="twitter">
                                 <br>
                                 <%= link_to image_tag("sign_in_with_twitter.png" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter) %>
                             </div>   
-                            <div class="tab-pane" id="facebook">
+                            <div class="tab-pane signinbtn" id="facebook">
                             <br> 
                                 <%= link_to image_tag("sign_in_with_facebook.png", :alt=>"facebook"), 
                                                      user_omniauth_authorize_path(:facebook)%>
                             </div>
-                            <div class="tab-pane" id="plus">Login with Google Plus 
+                            <div class="tab-pane signinbtn" id="plus">Login with Google Plus 
                                 <br>
                                 <%#= link_to image_tag("google.jpeg", :alt=>"google"), 
                                                      user_omniauth_authorize_path(:google),
                                                      :style=>"background-color:#bb2a0b;"%>
                             </div>
-                            <div class="tab-pane" id="linkedin">Linked in login screen
+                            <div class="tab-pane signinbtn" id="linkedin">Linked in login screen
                                 <br>
                                 <%#= link_to image_tag("linkedin_icon.png", :alt=>"linkedin"), 
                                                      user_omniauth_authorize_path(:facebook),

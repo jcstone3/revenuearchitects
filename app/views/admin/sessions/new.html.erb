@@ -17,10 +17,10 @@
         <h4 class="loginheading">Enter your valid password</h4> 
        
         <% if devise_mapping.rememberable? -%>
-            <div><span><%= f.check_box :remember_me %> </span><span><%= f.label :remember_me %></span></div>
+            <label class="checkbox check1"><%= f.check_box :remember_me %> <p class="checkNotice2"><%= f.label :remember_me %></p></label>
         <% end -%>
 
-        <div><%= f.submit "Sign in",  :class=>"btn"%></div>
+        <div><%= f.submit "Sign in",  :class=>"btn btn-primary"%></div>
       <% end %>
     </div>
 
