@@ -21,7 +21,7 @@ development:
 
 staging:
     <<: *defaults
-    host: stage.revenue-grader.com
+    host: stage.revenuegrader.com
     facebook_app_id: '208616319240040'
     facebook_secret_key: '907b9b8444f129d1dc6d8da744bfa781'
     twitter_api_id: ''
