@@ -64,7 +64,9 @@ RevenueGrader::Application.routes.draw do
   match "about-us" =>'site#aboutus', :as => 'aboutus'
   match "contactus" =>'site#conactus', :as => 'contactus'
   match "privacy_policy" =>'site#privacy_policy', :as => 'privacy_policy'
-  
+  match "show" =>'site#show', :as => 'show'
+
+
   
   #defalut error page
    match "*path" => 'dashboard#error_handle404', :as => 'error_handle404'
