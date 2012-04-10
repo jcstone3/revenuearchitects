@@ -69,12 +69,13 @@
                             <div class="tab-content" id="tab-content">
                             <div class="tab-pane active" id="home">
                                 <div class="rightboxName">
-                                <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  								<%= devise_error_messages! %>
+                                <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }, :validate=>true) do |f| %>
+  								<%#= devise_error_messages! %>
                                 
   								<h3>Email<span class="star">*</span></h3>
                   
-  								<%= f.email_field :email, :class=>"span3 logindetails" %>
+  								<%= f.email_field :email, :class=>"span3 logindetails", :validate =>
+                        {:presence => true, :uniqueness => true}  %> 
                                  <p class="lefttextbox">
                                  Enter your email address registered with the<br/> Revenue Grader</p>
   								<%= f.submit "Reset Password", :class=>"btn btn-primary btn-large reset" %> 
