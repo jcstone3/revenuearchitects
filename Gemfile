@@ -36,6 +36,7 @@ gem 'faker'
 gem 'rubyXL', '1.2.5'
 gem 'nokogiri'
 gem 'rubyzip'
+gem 'newrelic_rpm'
 
 #bootstrap rails gem
 gem "twitter-bootstrap-rails"
