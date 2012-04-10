@@ -1,6 +1,6 @@
 RevenueGrader::Application.routes.draw do 
 
-  #admin settings
+  #admin settingss
   namespace :admin do 
    get '/dashboard' => "dashboard#show", :as => :dashboard 
    get '/users' => "users#index", :as => "users" 
@@ -36,7 +36,7 @@ RevenueGrader::Application.routes.draw do
       get '/login' =>'users/sessions#new', :as => :new_user_session
       get '/logout' => 'users/sessions#destroy', :as => :destroy_user_session
       get '/signup' => 'users/registrations#new', :as => :new_user_registration
-      get '/forgot_password/:resource' => 'users/passwords#new', :as => :new_password
+      get '/forgot-password/:resource' => 'users/passwords#new', :as => :new_password
       get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru' #third party authentication
   end 
    
@@ -47,23 +47,23 @@ RevenueGrader::Application.routes.draw do
   resources :responses
 
   get 'survey/:id/question/:question_id' => 'survey#question', :as => 'questions' 
-  get 'survey/:id/previous_question/:question_id' => 'survey#previous_question', :as => 'previous_question' 
+  get 'survey/:id/previous-question/:question_id' => 'survey#previous_question', :as => 'previous_question' 
   get 'survey/:id/report/' => 'survey#report', :as => 'reports'
   post 'survey/:id/question/:question_id' => 'survey#create_response', :as=> 'reponses'
-  post 'survey/:id/update_question/:question_id' => 'survey#update_response', :as=> 'reponses_update'
+  post 'survey/:id/update-question/:question_id' => 'survey#update_response', :as=> 'reponses_update'
   get 'survey/:id/download' => 'survey#download_result', :as=>'download'
   get 'survey/:id/reports' => 'survey#reports', :as=>'reports_show'
   get 'survey/show' =>'survey#show', :as=>'continue_survey'
-  get 'survey/get_response_status/:id' => 'survey#get_response_status', :as=>'get_response_status'
-  get 'survey/:id/report/detailed_view' => 'survey#report_detailed', :as=>'detailed_report'
-  get 'survey/:id/confirm_survey' => 'survey#confirm_survey', :as=>'confirm_survey'
-  get 'survey/:id/close_survey' => 'survey#close_survey', :as=>'close_survey'
+  get 'survey/get-response-status/:id' => 'survey#get_response_status', :as=>'get_response_status'
+  get 'survey/:id/report/detailed-view' => 'survey#report_detailed', :as=>'detailed_report'
+  get 'survey/:id/confirm-survey' => 'survey#confirm_survey', :as=>'confirm_survey'
+  get 'survey/:id/close-survey' => 'survey#close_survey', :as=>'close_survey'
 
 
   #site controller maps about us, contact us privacy policy
   match "aboutus" =>'site#aboutus', :as => 'aboutus'
   match "contactus" =>'site#contactus', :as => 'contactus'
-  match "privacy_policy" =>'site#privacy_policy', :as => 'privacy_policy'
+  match "privacy-policy" =>'site#privacy_policy', :as => 'privacy_policy'
   match "show" =>'site#show', :as => 'show'
 
 
