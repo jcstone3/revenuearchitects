@@ -76,12 +76,12 @@ end
 
 #update question count and points in sections table
 
-@sections = Sections.find :all
+# @sections = Section.find :all
 
-@sections.each do |section|
-	
+# @sections.each do |section|
 
-end
+
+# end
 
 	
 end
