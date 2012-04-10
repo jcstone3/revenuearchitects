@@ -74,5 +74,14 @@ open("#{Rails.root}/db/questions.csv") do |questions|
  end
 end
 
+#update question count and points in sections table
+
+@sections = Sections.find :all
+
+@sections.each do |section|
+	
+
+end
+
 	
 end
