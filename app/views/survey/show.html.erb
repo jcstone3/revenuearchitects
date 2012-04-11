@@ -24,8 +24,10 @@
                           <% @active_survey.each do |survey|%>
                               <%= link_to "Survey for #{survey.created_at.strftime('%B  %Y')}", get_response_status_url(survey)%>
                             </h4>
-                          <p> Number of Questions Attempted:: </p>
-
+                            <% @response_count= survey.responses.present? ? survey.responses.count : 0 %>
+                            
+                          <p> Number of Questions Attempted:: <%= @response_count %> </p>
+                          
                             <%= "Created on #{survey.created_at.strftime('%d %m %Y')}"%>
                           </br>
                              

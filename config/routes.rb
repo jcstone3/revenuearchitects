@@ -64,7 +64,7 @@ RevenueGrader::Application.routes.draw do
   match "aboutus" =>'site#aboutus', :as => 'aboutus'
   match "contactus" =>'site#contactus', :as => 'contactus'
   match "privacy-policy" =>'site#privacy_policy', :as => 'privacy_policy'
-  match "show" =>'site#show', :as => 'show'
+  match "show" =>'site#index', :as => 'show'
 
 
   
