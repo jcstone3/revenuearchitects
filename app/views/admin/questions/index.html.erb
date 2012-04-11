@@ -24,7 +24,8 @@
                                       <th><h3>Name</h3></th>
                                       <th><h3>Description</h3></th>
                                       <th><h3>Section :: SubSection</h3></th>
-                                      <th><h3>Points</h3></th>                                     
+                                      <th><h3>Points</h3></th>
+                                      <th><h3>Actions</h3></th>                                    
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -34,7 +35,10 @@
                                             <td><%= question.description %></td>
                                            
                                             <td><%= question.section_name %> :: <%= question.subsection_name%></td>
-                                            <td><%= question.points %></td>            
+                                            <td><%= question.points %></td>
+                                            <td><%= link_to 'Edit', admin_edit_questions_url()%> /
+                                            <%= link_to 'Delete', admin_delete_questions_url()%></td>
+                                        
                                         </tr>
                                             <% end %>
 
@@ -50,14 +54,7 @@
                                     
                                 </div>
                             </div>
-                            <!--
-                            <div class="tab-pane" id="users" style="height:500px;">Users</div>
-                            <div class="tab-pane" id="reports" style="height:500px;">Reports</div>
-                            <div class="tab-pane" id="sections" style="height:500px;">Sections</div>
-                            <div class="tab-pane" id="questions" style="height:500px;">Questions</div>
-                            <div class="tab-pane" id="settings" style="height:500px;">Settings</div>
-                            </div>
-                          -->
+                           
                 </div>
             </div>
         </div> 

@@ -377,11 +377,20 @@ def download_result
   end  
 
   respond_to do |format|
+      #format.html
       format.pdf {
-        html = render_to_string(:layout => false , :action => "reports.html")
-        kit = PDFKit.new(html)        
-        send_data(kit.to_pdf, :filename => "survey.pdf", :type => 'application/pdf')
-        return # to avoid double render call
+    html = render_to_string(:layout => false , :action => "reports.html")
+    kit = PDFKit.new(html)
+    send_data(kit, :filename => "test.pdf", :type => "application/pdf", :disposition => 'attachment')
+  
+
+      #format.pdf {
+       # html = render_to_string(:layout => false , :action => "reports.html")
+        #@html = render_to_string("reports.html")
+        #kit = PDFKit.new(html)        
+        #send_data kit, :filename => "survey.pdf",
+         #       :type => "application/pdf",
+          #      :disposition  => "inline"
       }
 
       format.xls {

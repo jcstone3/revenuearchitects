@@ -27,4 +27,26 @@ class Admin::QuestionsController < ApplicationController
          render :index
         end 
 	end	
+ 
+ def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+  @question = Question.find(params[:id])
+   respond_to do |format|
+    if @question.update_attributes(params[:question])
+    format.html (redirect_to (@question))
+    else 
+      format.html (render :action => 'edit')
+    end
+   end 
+  end
+
+  def destroy
+    @question = Question.find(params[:id])
+    @question.delete
+  end
+
+ 
 end
