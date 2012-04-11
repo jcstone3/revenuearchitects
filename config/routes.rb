@@ -31,14 +31,14 @@ RevenueGrader::Application.routes.draw do
   devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations"} do 
    get 'admins/login' => 'admin/sessions#new', :as => "new_admin_session"
    get 'admins/logout' => 'admin/sessions#destroy', :as => "destroy_admin_session"
-   get 'admins/sign_up' => 'admin/sessions#new', :as => "new_admin_session" 
+   get 'admins/sign-up' => 'admin/sessions#new', :as => "new_admin_session" 
   end  
   
   #setting up user registration
-  devise_for :users, :path => "", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions", :passwords => "users/passwords"} do
+  devise_for :users, :path => "",:path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'register' } , :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions", :passwords => "users/passwords"} do
       get '/login' =>'users/sessions#new', :as => :new_user_session
       get '/logout' => 'users/sessions#destroy', :as => :destroy_user_session
-      get '/signup' => 'users/registrations#new', :as => :new_user_registration
+      get '/register' => 'users/registrations#new', :as => :new_user_registration
       get '/forgot-password/:resource' => 'users/passwords#new', :as => :new_password
       get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru' #third party authentication
   end 
@@ -64,8 +64,8 @@ RevenueGrader::Application.routes.draw do
 
 
   #site controller maps about us, contact us privacy policy
-  match "aboutus" =>'site#aboutus', :as => 'aboutus'
-  match "contactus" =>'site#contactus', :as => 'contactus'
+  match "about-us" =>'site#aboutus', :as => 'aboutus'
+  match "contact-us" =>'site#contactus', :as => 'contactus'
   match "privacy-policy" =>'site#privacy_policy', :as => 'privacy_policy'
   match "show" =>'site#index', :as => 'show'
 

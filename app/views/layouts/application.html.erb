@@ -29,19 +29,20 @@
             brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo", :class=>"headertext"), "" %>
           </div>
           <%else%>
+        
           <%= link_to image_tag('logo.png', :alt=>"logo"),  new_user_session_path, :class=>"brand" %>
           <div class="ra">
             brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo", :class=>"headertext"), new_user_session_path %>
           </div>
           <%end%>
           
+
+
             <div class="button-bar">
              <div class= "useralign">
              <% if user_signed_in?%>
               <i class="icon-user " style="font-size:20px"></i>&nbsp; 
               <%= "#{current_user.username}" %>&nbsp;<br/>
-             
-              
               <% if current_user.companies.present? %>
               <i class="icon-home " style="font-size:20px"></i>&nbsp;
                <%= "#{current_user.companies.first.name}"%>
@@ -49,9 +50,16 @@
                <div class="userbtn">              
               <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
               <%else%>
+
+               <%= link_to "Home", root_url, :class=>"header_link" %>
+               <%= link_to "About Us", aboutus_url, :class=>"header_link" %>
+               <%= link_to "Contact Us", contactus_url, :class=>"header_link" %>
+              
+
               <%= link_to "Login", new_user_session_path, :class=>"btn btn-primary", :id=>"login_user"%>
               <%= link_to "Sign Up", new_user_registration_path, :class=>"btn btn-primary", :id=>"signup_user"%>
               <%end%></div>
+
             </div>
           </div>
         </div>

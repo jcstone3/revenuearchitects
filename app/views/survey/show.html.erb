@@ -15,20 +15,17 @@
                      <% current_user.companies.each do |cmpany| %>      
                      <div class="points">
                         <div class="option" >
-                        <h3><i class="icon-bar-chart" style="font-size:20px; margin-top:10px"></i>&nbsp;<%= cmpany.name%></h3>
-                      </br>
-
+                        
                          <%@active_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", true]) %>
                           <% if @active_survey.present?%>
                             <h4>
                           <% @active_survey.each do |survey|%>
-                              <%= link_to "Survey for #{survey.created_at.strftime('%B  %Y')}", get_response_status_url(survey)%>
+                              <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Survey for #{survey.created_at.strftime('%B  %Y')}", get_response_status_url(survey)%></h3>                          
+                             
                             </h4>
                             <% @response_count= survey.responses.present? ? survey.responses.count : 0 %>
                             
-                          <p> Number of Questions Attempted:: <%= @response_count %> </p>
-                          
-                            <%= "Created on #{survey.created_at.strftime('%d %m %Y')}"%>
+                            <h4> <%= "Total Completed Questions" %> <span class="red"> <%= "  #{@response_count}/100" %> </span>  </h4 
                           </br>
                              
                           <%end%>
