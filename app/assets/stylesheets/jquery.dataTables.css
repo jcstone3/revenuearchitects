@@ -15,7 +15,7 @@ table.dataTable thead th {
   	background-image: -webkit-linear-gradient(top, #4e5960, #647077);
   	background-image: -o-linear-gradient(top, #4e5960, #647077);
   	background-image: linear-gradient(top, #4e5960, #647077);*/
-  	background-color:#5d6062;
+  	background-color:#909090;
 	padding: 3px 18px 3px 10px;
 	border-bottom: 1px solid black;
 	color:#ffffff;
@@ -47,15 +47,15 @@ table.dataTable td.dataTables_empty {
 	text-align: center;
 }
 
-table.dataTable tr.odd { background-color: #919191; }
-table.dataTable tr.even { background-color: #b0b0b0; }
+table.dataTable tr.odd { background-color: #BDBDBD; }
+table.dataTable tr.even { background-color: #E9E9E9; }
 
-table.dataTable tr.odd td.sorting_1 { background-color: #919191; }
-table.dataTable tr.odd td.sorting_2 { background-color: #919191; }
-table.dataTable tr.odd td.sorting_3 { background-color: #919191; }
-table.dataTable tr.even td.sorting_1 { background-color: #b0b0b0; }
-table.dataTable tr.even td.sorting_2 { background-color: #b0b0b0; }
-table.dataTable tr.even td.sorting_3 { background-color: #b0b0b0; }
+table.dataTable tr.odd td.sorting_1 { background-color: #BDBDBD; }
+table.dataTable tr.odd td.sorting_2 { background-color: #BDBDBD; }
+table.dataTable tr.odd td.sorting_3 { background-color: #BDBDBD; }
+table.dataTable tr.even td.sorting_1 { background-color: #E9E9E9; }
+table.dataTable tr.even td.sorting_2 { background-color: #E9E9E9; }
+table.dataTable tr.even td.sorting_3 { background-color: #E9E9E9; }
 
 .tablestyle{
 	text-align:center ;
