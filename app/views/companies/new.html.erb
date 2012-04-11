@@ -29,17 +29,17 @@
                           
                      <div class="points">
                         <div class="option" >
-                          <div class="heading1">
+                          <div>
                            <h3>Website<span class="star">*</span></h3></div>
                            <%= f.text_field :website, :maxlength=>"40", :validate =>
                                            { :presence => true, :uniqueness => true} ,:class=> "input-xlarge"%>
                                         
                         </div>
-                     </div><br/><br/><br/><br/><br/>
+                     </div><br/><br/><br/><br/>
                      <label class="lblCompanyname"> www.example.com</label> 
                      <div class="points">
                         <div class="option ">
-                          <div class="heading2">
+                          <div>
                           <h3>Industry <span class="star">*</span></h3></div>                              
                           <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
                         </div>
