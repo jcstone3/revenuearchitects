@@ -391,9 +391,9 @@ def download_result
   respond_to do |format|
       format.html{}
       format.pdf {
-        html = render_to_string(:layout => false , :action => "reports.html")
-        kit = PDFKit.new(html)
-        send_data(kit, :filename => "revenue-grader-survey.pdf", :type => "application/pdf")
+       html = render_to_string(:layout => false , :action => "reports.html")
+       kit = PDFKit.new(html)
+       send_data(kit.to_pdf, :filename => "survey.pdf", :type => "application/pdf")
       }
       format.xls {
         result = Spreadsheet::Workbook.new
