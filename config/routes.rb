@@ -9,9 +9,9 @@ RevenueGrader::Application.routes.draw do
    get '/users/update_user/:company_id' => "users#update_user", :as => "users_update_user"
    get '/questions' => "questions#index", :as=>"questions"
    get '/questions/new' => "questions#new", :as=>"new_questions"
-   get '/questions/edit' => "questions#edit", :as=>"edit_questions"
-   get '/questions/delete' => "questions#destroy", :as=>"delete_questions"
-   post 'questions/update' => "questions#update", :as=>"update_questions"
+   #get '/questions/edit' => "questions#edit", :as=>"edit_questions"
+   #get '/questions/delete' => "questions#destroy", :as=>"delete_questions"
+   #post 'questions/update' => "questions#update", :as=>"update_questions"
    post '/questions/create' => "questions#create", :as=>"create_question"
    get '/sections' => "section#index", :as => "sections"
    get '/section/new' => "section#new", :as => "new_section" 
@@ -61,7 +61,7 @@ RevenueGrader::Application.routes.draw do
   get 'survey/:id/report/detailed-view' => 'survey#report_detailed', :as=>'detailed_report'
   get 'survey/:id/confirm-survey' => 'survey#confirm_survey', :as=>'confirm_survey'
   get 'survey/:id/close-survey' => 'survey#close_survey', :as=>'close_survey'
-
+  get 'survey/:id/compare' => 'survey#compare', :as=>'compare'
 
   #site controller maps about us, contact us privacy policy
   match "about-us" =>'site#aboutus', :as => 'aboutus'
