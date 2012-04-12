@@ -351,6 +351,7 @@ def report_detailed
 end  
 
 def compare
+  
 
 end  
 

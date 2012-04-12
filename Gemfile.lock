@@ -69,6 +69,7 @@ GEM
       addressable (~> 2.2)
       multipart-post (~> 1.1)
       rack (~> 1.1)
+    googlecharts (1.6.8)
     hashie (1.2.0)
     highline (1.6.11)
     hike (1.2.1)
@@ -202,6 +203,7 @@ DEPENDENCIES
   database_cleaner
   devise
   faker
+  googlecharts
   highline
   jquery-rails
   newrelic_rpm
