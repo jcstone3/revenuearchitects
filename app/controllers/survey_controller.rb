@@ -348,9 +348,9 @@ def report_detailed
              and responses.survey_id =#{id}"  
    )
 
- 
- 
+end  
 
+def compare
 
 end  
 
