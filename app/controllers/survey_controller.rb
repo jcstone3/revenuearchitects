@@ -393,6 +393,7 @@ def download_result
       format.pdf {
        html = render_to_string(:layout => false , :action => "reports.html")
        kit = PDFKit.new(html)
+       #kit.stylesheets << File.join( RAILS_ROOT, "assets", "stylesheets", "application.css" )
        send_data(kit.to_pdf, :filename => "survey.pdf", :type => "application/pdf")
       }
       format.xls {

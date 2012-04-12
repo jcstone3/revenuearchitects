@@ -2,143 +2,38 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Revenue Grader - Sign Up</title>
+        <title>Revenue Grader - Survey Reports</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-
+       </head> 
 
         <!-- Le styles -->
 
-        <%= stylesheet_link_tag "bootstrap", "report",:media => "all" %>
-       
-    
-        <%= stylesheet_link_tag  "bootstrap-responsive"   %>    
-    </head>
+        <%= stylesheet_link_tag "application",:media => "all" %>
+        <div style="page-break-after:always;">
+            <h1>Revenue Grader</h1><br/>
+            <h1>Report 2012</h1><br/>
+            <h1>for company revenue</h1>
 
-    <body>
-        <%= render "/layouts/shared/header" %>
-        <div class="container">
-        <div id="alert">
-           <% flash.each do |key, value| %>
-             <%= content_tag :div, value, :class => "alert alert-#{key}" unless value.blank? %>
-           <% end %>
         </div>
-    </div>
-<div class="container" style="margin-top:20px;">
-            <div class="spa@section_total.inspectn9" style="margin:0; background-color:#505b62; width:100%;">
-                   <ul class="nav nav-pills">
-                    <li class="done"><a href="#">Strategy <span><%= @sections[0].total_points %></span></a></li>
-                    <li class="done"><a href="#">Systems <span><%= @sections[1].total_points%></span></a></li>
-                    <li class="done"><a href="#">Programs <span><%= @sections[2].total_points%></span> </a></li>
-                    <li class="on"><a href="#">Final Result <span style="background-color:#00A54F;"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span> </a></li>
-                  </ul>
-            </div>
-</div>
-<div class="container" style="margin-top:20px;">
-    <div class="row-fluid" style="margin-left: 0;">
-                
-             <%@sections.each do |section|%>
-                <div class="span4" style="background-color: white;width: 28.91%;">
-                    <h2><%= section.name%></h2>
-                 <div>
-                    <div id="accordion1" class="pageAccordion">
-                        <% section.sub_sections.each do |sub_section|%>                     
-                            <h3><a href="#"><%= sub_section.name%></a><i>
-                                <%= @subsection_total[sub_section.id - 1]%></i></h3>
-                            <div>
-                              <p>
-                                <% sub_section.questions.each do |question| %>
-                                    <div class="ques"><span>
-                                        <%= question.id%>.<%= question.name%></span>
-                                        <i><%= @questions_score[question.id - 1] ? 
-                                            @questions_score[question.id - 1] : '--' %></i>
-                                    </div>
-                                   <%end%>            
-                                </p>
-                             </div>
-                        <%end%>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                    </div>
-                    <div class="scoreBox">
-                    <div class="finalScore">
-                    TOTAL
-                    <span><%= @section_total[section.id - 1]%>
-                    <i>POINTS</i></span>
-                    </div>
-                    </div>
-               </div>
-               <%if(section.id < 3)%>
-                <div class="plus">+</div>
-            <%end%>
-        <%end%>                
-    </div>
-</div>
-    
-        <div class="container" style="margin-top:20px;">
-            <div class="row-fluid">
-                <div class="span7" style="text-align:center;height:170px;background-color:white;">
-                    <div style="padding:15px;">
-                        <h3 style="color: #00A54F;">Thank you for taking the survey.</h3><br>
-                        <h2 style="color: #0086AC;">Your Final Score is <span><%= @final_score%> points</span></h2><br>
-                        <a href="#" class="btn btn-small btn-info"><i class="icon-info-sign icon-white"></i> Tips and tricks to improve score</a>
-                    </div>
-                </div>
-                <div class="span3" style="margin-left:0; padding-right:10px;padding-left:10px;background-color:#394247;
-                height:170px;">
-                    <div style="padding:10px;">
-                        <div style="float:left; width:82px;">
-                            <h2 class="revenue">Revenue<br>
-                            <span>Grade</span><br>
-                            <!--<img src="img/stars.png" alt="stars">-->
-                            <%#= image_tag("star-on.png")%>
-                            <div id="fixed">
 
-                            </div>
-                            </h2>
-                        </div>
-                        <div class="grade">
-                        <span>Grade CODE</span>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
+        <div style="page-break-after:always;">
+             <h1>Revenue Grader</h1><br/>
+            <h1>Report 2012</h1><br/>
+            <h1>for company revenue</h1>
         </div>
-<%= render "/layouts/shared/footer" %>
-        
-        <!-- /container -->
 
-        <!-- Le javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-     
-        
-        <%= javascript_include_tag "application"%>
-       
-        <script>
-        $(document).ready(function(){
-            
-        $(".pageAccordion").accordion({
-        autoHeight: false,
-        navigation: true
-        });
-        }); 
-        
-        </script>
+        <div style="page-break-after:always;">
+             <h1>Revenue Grader</h1><br/>
+            <h1>Report 2012</h1><br/>
+            <h1>for company revenue</h1>
+        </div> 
+    
+         
+    
 
-       <script>
-        $(function() {
-        //$('#default').raty();
-        $('#fixed').raty({
-        readOnly: true,
-        start: 3
-        });
-        }); 
-        </script>   
+    
                 
     </body>
 </html>
