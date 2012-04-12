@@ -62,6 +62,9 @@ RevenueGrader::Application.routes.draw do
   get 'survey/:id/confirm-survey' => 'survey#confirm_survey', :as=>'confirm_survey'
   get 'survey/:id/close-survey' => 'survey#close_survey', :as=>'close_survey'
   get 'survey/:id/compare' => 'survey#compare', :as=>'compare'
+  get 'survey/:id/compare-strategy' => 'survey#compare_strategy', :as=>'compare_strategy'
+  get 'survey/:id/compare-system' => 'survey#compare_system', :as=>'compare_system'
+  get 'survey/:id/compare-programs' => 'survey#compare_programs', :as=>'compare_programs'
 
   #site controller maps about us, contact us privacy policy
   match "about-us" =>'site#aboutus', :as => 'aboutus'

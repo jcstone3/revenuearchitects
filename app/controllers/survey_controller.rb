@@ -354,6 +354,18 @@ def compare
 
 end  
 
+def compare_survey
+
+end  
+
+def compare_strategy
+
+end  
+
+def compare_programs
+
+end  
+
 #to download in pdf/xls format
 def download_result
   require 'spreadsheet'
@@ -377,22 +389,12 @@ def download_result
   end  
 
   respond_to do |format|
-      #format.html
+      format.html{}
       format.pdf {
-    html = render_to_string(:layout => false , :action => "reports.html")
-    kit = PDFKit.new(html)
-    send_data(kit, :filename => "test.pdf", :type => "application/pdf", :disposition => 'attachment')
-  
-
-      #format.pdf {
-       # html = render_to_string(:layout => false , :action => "reports.html")
-        #@html = render_to_string("reports.html")
-        #kit = PDFKit.new(html)        
-        #send_data kit, :filename => "survey.pdf",
-         #       :type => "application/pdf",
-          #      :disposition  => "inline"
+        html = render_to_string(:layout => false , :action => "reports.html")
+        kit = PDFKit.new(html)
+        send_data(kit, :filename => "revenue-grader-survey.pdf", :type => "application/pdf")
       }
-
       format.xls {
         result = Spreadsheet::Workbook.new
         list = result.create_worksheet :name => "response" 

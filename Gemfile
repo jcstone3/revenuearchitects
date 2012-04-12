@@ -22,7 +22,6 @@ gem 'settingslogic'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.0.3'
 #Gems used for pdf and xls generation
-gem "wkhtmltopdf-heroku"
 gem 'wkhtmltopdf-binary'
 gem 'pdfkit'
 gem "spreadsheet", "0.6.5.8"
@@ -46,6 +45,10 @@ gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
 end
 
+#wkhtmltopdf for test, stage and production enviornments
+group :test, :stage, :production do 
+	gem "wkhtmltopdf-heroku"
+end	
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

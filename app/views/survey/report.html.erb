@@ -7,19 +7,19 @@
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Programs <span class="green"><%= @sections[2].total_points%></span> </a></li>
                     <li class="on"><a href=""><%= image_tag "shoulddo.png",:width=>"16px",:height=>"16px",:class=>"finalmenu"%>&nbsp;&nbsp;Final Result <span class="green"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span>  <i class="icon-chevron-right icon-white"></i></a></li>
                     <li class="on2">
-                        <%= link_to(reports_url(params[:id])) do %>
+                        <%= link_to(reports_url(params[:id]), :rel=>"tooltip") do %>
                             <i class="icon-edit icon-white">
                             </i>&nbsp;Summary
                        <% end %>
                    </li>
                     <li class="next2">
-                     <%= link_to(detailed_report_url(params[:id])) do %>
+                     <%= link_to(detailed_report_url(params[:id]), :rel=>"tooltip") do %>
                             <i class="icon-file" style="color:#000000;text-shadow : none ;font-size:15px">
                             </i>&nbsp;Detailed
                        <% end %>
                      </li>
                      <li class="next2">
-                     <%= link_to(compare_url(params[:id])) do %>
+                     <%= link_to(compare_url(params[:id]), :rel=>"tooltip") do %>
                             <i class="icon-file" style="color:#000000;text-shadow : none ;font-size:15px">
                             </i>&nbsp;Compare
                        <% end %>
