@@ -126,12 +126,7 @@ def question
                 @response = Response.new
                 @total_score = calculate_response_for_section(params[:id], @section.id)
                 ########for pagination ############
-                # User.find(:all,
-                #        :select => "questions.id, responses.question_id as response_quest_id",
-                #        :joins => "left outer join responses on responses.question_id = questions.id", 
-                #        :order => "start_date desc",
-                #        :offset=> (params[:question_id].to_i - 5), :limit=>10)
-
+               
                 @question_all = Question.count
                 if(params[:question_id].to_i < 6)
                 @questions = Question.find(:all,
@@ -242,11 +237,23 @@ def previous_question
                 ########for pagination ############
                 @question_all = Question.count
                 if(params[:question_id].to_i < 6)
-                @questions = Question.find(:all, :offset=> 0, :limit=>10) 
+                @questions = Question.find(:all,
+                       :select => "questions.id, responses.question_id as response_quest_id",
+                       :joins => "left outer join responses on responses.question_id = questions.id", 
+                       :offset=> 0, :limit=>10 )
+
                 elsif(params[:question_id].to_i > @question_all - 5)  
-                @questions = Question.find(:all, :offset=> (@question_all - 10), :limit=>10)
+                @questions = Question.find(:all,
+                       :select => "questions.id, responses.question_id as response_quest_id",
+                       :joins => "left outer join responses on responses.question_id = questions.id", 
+                       
+                       :offset=> (@question_all - 10), :limit=>10 )
                 else
-                @questions = Question.find(:all, :offset=> (params[:question_id].to_i - 5), :limit=>10)
+                @questions = find(:all,
+                       :select => "questions.id, responses.question_id as response_quest_id",
+                       :joins => "left outer join responses on responses.question_id = questions.id", 
+                       
+                       :offset=> (params[:question_id].to_i - 5), :limit=>10)
                 end 
                 ######### end of pagination logic ##########               
               else
