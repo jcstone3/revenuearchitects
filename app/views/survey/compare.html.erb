@@ -42,10 +42,23 @@
         <div class="span12">
                   <ul class="nav3-tabs3 usercompare"> 
                                 <li class="active"><a href="#overall" data-toggle="tab">Overall</a></li>
-                                <li><a href="#strategy" data-toggle="tab">Strategy</a></li>
+                                <li><%= link_to(compare_strategy_url(params[:id])) do %>
+                                    Strategy
+                                     <% end %> 
+                                 </li>
+                                 <li><%= link_to(compare_system_url(params[:id])) do %>
+                                    System
+                                     <% end %> 
+                                 </li>
+                                 <li><%= link_to(compare_programs_url(params[:id])) do %>
+                                    Programs
+                                     <% end %> 
+                                 </li>
+                                
+                                <!--
                                 <li><a href="#systems" data-toggle="tab">Systems</a></li>
                                 <li><a href="#programs" data-toggle="tab">Programs</a></li>
-                                <!-- <li><a href="#reports" data-toggle="tab">Reports</a></li>
+                                 <li><a href="#reports" data-toggle="tab">Reports</a></li>
                                 <li><a href="#users" data-toggle="tab">Users</a></li> -->
                                 
                             </ul>
