@@ -55,12 +55,12 @@
                         <p>Strategy<span style="padding-left:200px;"><%= @section1.count%>/<%= @sections[0].question_count%> </span></p>
                         <p>Systems  <span style="padding-left:200px;"><%= @section2.count%>/<%= @sections[1].question_count%></span></p> 
                         <p>Programs <span style="padding-left:190px;"><%= @section3.count%>/
-                            <%= @sections[0].question_count %></span></p> 
-                      <div class="footer">
+                            <%= @sections[0].question_count %></span></p> -->
+                      <div class="footerconfirm" >
                      <%= link_to 'Go back', continue_survey_url(@survey) ,:class=>"btn btn-primary questionsattemted"%>
-                     <%= link_to 'Close Survey', close_survey_url(@survey) ,:class=>"btn btn-primary questionsattemted"%></div>
-                    </div>-->
-                   </div>
+                     <%= link_to 'Complete Survey', close_survey_url(@survey) ,:class=>"btn btn-primary questionsattemted"%></div>
+                    </div>
+                   
                 
                 </div>
                     <div class="span3 rightBox rightBoxheight">
