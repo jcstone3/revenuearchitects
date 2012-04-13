@@ -46,7 +46,7 @@ gem "rails_best_practices"
 end
 
 #wkhtmltopdf for test, stage and production enviornments
-group :test, :stage, :production do 
+group :test, :staging, :production do 
 	gem "wkhtmltopdf-heroku"
 end	
 # Gems used only for assets and not required
