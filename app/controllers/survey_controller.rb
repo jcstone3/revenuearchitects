@@ -141,7 +141,7 @@ def question
                        
                        :offset=> (@question_all - 10), :limit=>10 )
                 else
-                @questions = find(:all,
+                @questions = Question.find(:all,
                        :select => "questions.id, responses.question_id as response_quest_id",
                        :joins => "left outer join responses on responses.question_id = questions.id", 
                        
@@ -249,7 +249,7 @@ def previous_question
                        
                        :offset=> (@question_all - 10), :limit=>10 )
                 else
-                @questions = find(:all,
+                @questions = Question.find(:all,
                        :select => "questions.id, responses.question_id as response_quest_id",
                        :joins => "left outer join responses on responses.question_id = questions.id", 
                        
