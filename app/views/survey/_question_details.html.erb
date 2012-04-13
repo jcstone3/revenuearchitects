@@ -10,30 +10,23 @@
                                  <%= link_to 'Prev', questions_url(params[:id],
                                     params[:question_id].to_i - 1)%>
                                  </li>   
-                             <%end%>
-                            
+                             <%end%>                            
                             <% @questions.each do |question|%>
-                                <% if (question.id == params[:question_id].to_i) %>
+
+                                <% if (question.response_quest_id.present?) %>
                                     <li>
                                       <%= link_to questions_url(params[:id],question.id), 
                                       :title=>"#{question.id}", :rel=>"tooltip" do%>
                                       <i class="icon-ok iconfont"></i>
                                       <%end%>
                                     </li>.
-                                 <%elsif (question.id < params[:question_id].to_i)%>       
-                                    <li>
-                                      <%= link_to questions_url(params[:id],question.id), 
-                                      :title=>"#{question.id}", :rel=>"tooltip" do%>
-                                      <i class="icon-ok iconfont"></i>
-                                      <%end%>
-                                    </li>
-                                <%else%>
+                                 <%else%>       
                                     <li>
                                       <%= link_to questions_url(params[:id],question.id), 
                                       :title=>"#{question.id}", :rel=>"tooltip" do%>
                                       <i class="icon-ban-circle"></i>
                                       <%end%>
-                                    </li>
+                                    </li>                               
                                 <%end%>
                             <%end%>
                              <%if(params[:question_id].to_i == @question_all)%>

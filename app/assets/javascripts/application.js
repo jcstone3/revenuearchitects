@@ -108,18 +108,28 @@ $(document).ready(function(){
                  $('#section_2').addClass('next'); 
                  $('#section_3').removeClass($('#section_2').attr('class'));
                  $('#section_3').addClass('next');
-                 $('#span_2').hide();
-                 $('#span_3').hide();
+                 //for questions count
+                 $('#span_2').removeClass($('#span_'+section_id_val).attr('class'));
+                 $('#span_3').removeClass($('#span_'+section_id_val).attr('class'));
+                 $('#span_2').addClass('red');
+                 $('#span_3').addClass('red');
+                
                 }
 
                  if(section_id_val == "2"){
-                 $('#section_1').removeClass($('#section_2').attr('class'));
+                 $('#section_1').removeClass($('#section_1').attr('class'));
                  $('#section_1').addClass('done'); 
                  $('#section_3').removeClass($('#section_2').attr('class'));
                  $('#section_3').addClass('next');  
                  $('#span_1').removeClass($('#span_'+section_id_val).attr('class'));
                  $('#span_1').addClass('green');
-                 $('#span_3').hide();                
+                 //for questions count
+                 $('#span_1').removeClass($('#span_'+section_id_val).attr('class'));
+                 $('#span_2').removeClass($('#span_'+section_id_val).attr('class'));
+                 $('#span_3').removeClass($('#span_'+section_id_val).attr('class'));
+                 $('#span_1').addClass('green');                 
+                 $('#span_2').addClass('red');
+                 $('#span_3').addClass('red');               
                 }
 
                if(section_id_val == "3"){                
@@ -129,9 +139,11 @@ $(document).ready(function(){
                  $('#section_2').addClass('done');
                  $('#span_1').removeClass($('#span_'+section_id_val).attr('class'));
                  $('#span_2').removeClass($('#span_'+section_id_val).attr('class'));
+                 $('#span_3').removeClass($('#span_'+section_id_val).attr('class')); 
                  $('#span_1').addClass('green');
                  $('#span_2').addClass('green');
-                 $('#span_3').show();                     
+                    
+                 $('#span_3').addClass('red');                 
                 }
 
                 //post form
