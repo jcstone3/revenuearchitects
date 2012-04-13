@@ -1,1 +1,211 @@
-<h2>Compare Strategy </h2>
+<div class="container report-top">
+          <div class="spa@section_total.inspectn9 report-top1" >
+                   <ul class="nav nav-pills">
+                    <li class="surveyname">&nbsp;Survey Name 2012</li>
+                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Strategy <span class="green">100</span></a></li>
+                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Systems <span class="green">100</span></a></li>
+                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Programs <span class="green">100</span> </a></li>
+                    <li class="on" id ="final_result">
+                      <%= link_to(reports_url) do %>
+                      <%= image_tag "shoulddo.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;&nbsp;
+                      Final Result
+                      <span class="green">200<%#= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span>  <i class="icon-chevron-right icon-white"></i>                    
+                     <%end%>
+                    </li>
+                    
+                    <li class="next2">
+                    <%= link_to(reports_url(params[:id])) do %>
+                            <i class="icon-edit iconfont">
+                            </i> &nbsp;Summary
+                       <% end %>	
+                     </li>  
+                    <li class="on2">
+                     <%= link_to(detailed_report_url(params[:id])) do %>
+                            <i class="icon-file" style="color:#ffffff;text-shadow : none ;font-size:15px">
+                            </i>Detailed
+                       <% end %>
+                     </li>
+
+                     <li class="next2">
+                     <%= link_to(compare_url(params[:id])) do %>
+                            <i class="icon-file" style="color:#000000;text-shadow : none ;font-size:15px">
+                            </i>&nbsp;Compare
+                       <% end %>
+                     </li>
+
+                    <li class="next2"><a href="#"><%= image_tag "glyphicons_152_new_window.png" ,:width=>"13px",:height=>"13px" %> &nbsp;Download</a></li>
+                  </ul>
+            </div>
+</div>
+<div class="container" style="margin-top:20px;">
+      <div class="row-fluid">
+        <div class="span12">
+                  <ul class="nav3-tabs3 usercompare"> 
+                                <li><a>Overall</a></li>
+                                <li  class="active" href="#strategy" data-toggle="tab"><%= link_to(compare_strategy_url(params[:id])) do %>
+                                    Strategy
+                                     <% end %> 
+                                 </li>
+                                 <li><%= link_to(compare_system_url(params[:id])) do %>
+                                    System
+                                     <% end %> 
+                                 </li>
+                                 <li><%= link_to(compare_programs_url(params[:id])) do %>
+                                    Programs
+                                     <% end %> 
+                                 </li>
+                                
+                                <!--
+                                <li><a href="#systems" data-toggle="tab">Systems</a></li>
+                                <li><a href="#programs" data-toggle="tab">Programs</a></li>
+                                 <li><a href="#reports" data-toggle="tab">Reports</a></li>
+                                <li><a href="#users" data-toggle="tab">Users</a></li> -->
+                                
+                            </ul>
+                             
+                            <div class="tab-content3 dash"  style="height:auto;">
+                            <div class="tab-pane active" id="strategy" style="height:730px;">
+                <div class="tabHead">
+                                  <h1>Strategy</h1>
+                                   
+                                </div>
+                                
+                                <div class="tabGraph">
+                                    <div class="box">                                        
+                                        <h1>Responses in the current month <strong>March 2012</strong></h1>
+                                        <dl id="csschart">
+                                            
+                                            <dt>1</dt>
+                                            <dd class="first"><span class="type3 p36"></span></dd>
+                                            
+                                            <dt>2</dt>
+                                            <dd><span class="type3 p45"></span></dd>    
+                                            
+                                            <dt>3</dt>
+                                            <dd><span class="type3 p51"></span></dd>  
+                                            
+                                            <dt>4</dt>
+                                            <dd><span class="type3 p48"></span></dd>  
+                                            
+                                            <dt>5</dt>
+                                            <dd><span class="type3 p55"></span></dd>                
+                                            
+                                            <dt>6</dt>
+                                            <dd><span class="type3 p80"></span></dd>      
+                                            
+                                            <dt>7</dt>
+                                            <dd><span class="type3 p72"></span></dd>  
+                                            
+                                            <dt>8</dt>
+                                            <dd><span class="type3 p71"></span></dd>  
+                                            
+                                            <dt>9</dt>
+                                            <dd><span class="type3 p64"></span></dd>  
+                                            
+                                            <dt>10</dt>
+                                            <dd><span class="type3 p55"></span></dd>  
+                                            
+                                            <dt>11</dt>
+                                            <dd><span class="type3 p62"></span></dd>  
+                                            
+                                            <dt>12</dt>
+                                            <dd><span class="type3 p44"></span></dd>
+                                            
+                                            <dt>13</dt>
+                                            <dd><span class="type3 p45"></span></dd>    
+                                            
+                                            <dt>14</dt>
+                                            <dd><span class="type3 p51"></span></dd>  
+                                            
+                                            <dt>15</dt>
+                                            <dd><span class="type3 p48"></span></dd>  
+                                            
+                                            <dt>16</dt>
+                                            <dd><span class="type3 p55"></span></dd>                
+                                            
+                                            <dt>17</dt>
+                                            <dd><span class="type3 p80"></span></dd>      
+                                            
+                                            <dt>18</dt>
+                                            <dd><span class="type3 p72"></span></dd>  
+                                            
+                                            <dt>19</dt>
+                                            <dd><span class="type3 p71"></span></dd>  
+                                            
+                                            <dt>20</dt>
+                                            <dd><span class="type3 p64"></span></dd>  
+                                            
+                                            <dt>21</dt>
+                                            <dd><span class="type3 p55"></span></dd>  
+                                            
+                                            <dt>22</dt>
+                                            <dd><span class="type3 p62"></span></dd>  
+                                            
+                                            <dt>23</dt>
+                                            <dd><span class="type3 p44"></span></dd>    
+                                            
+                                            <dt>24</dt>
+                                            <dd><span class="type3 p55"></span></dd>                
+                                            
+                                            <dt>25</dt>
+                                            <dd><span class="type3 p80"></span></dd>                        
+                                                    
+                                    </dl>
+                                    </div>
+                                     <!--table goes here-->
+                                     <div class="container report-top">
+                                        <div class="row-fluid">
+                                          <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2"> 
+                                                <thead>
+                                                  <tr>
+                                                    <th><h3>Questions</h3></th>
+                                                    <th><h3>Group</h3></th>
+                                                    <th><h3>Score</h3></th>
+                                                    <th><h3>In Plan</h3></th>
+                                                    <th><h3>Priority</h3></th>
+                                                    <th><h3>Points</h3></th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>Questions</td>
+                                                    <td>Group></td>
+                                                    <td>Score</td>
+                                                    <td>In Plan</td>
+                                                    <td>Priority</td>
+                                                    <td>Points</td>
+                                                  </tr>
+
+                                                </tbody>        
+                                          </table>      
+
+                                        </div>
+                                      </div>
+
+
+
+
+                                  <!--end table-->    
+
+
+
+
+
+
+                                </div>
+                            </div>
+                            
+        </div>
+
+        <!--second tab-->
+                        
+
+      </div>
+    </div> 
+    <script>
+            $(function () {
+            $('.tabs').click(function(){
+                    alert($(this).attr('id'));
+                });
+            })
+    </script>
