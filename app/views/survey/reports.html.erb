@@ -24,6 +24,20 @@
              text-align:left;
         }
 
+        .overall h1{
+            text-align: right;
+            display: block; 
+            font-family: "Lato", sans-serif;
+            color: #0086AC;
+            font-weight:bold;
+            padding-top:50px;
+            padding-bottom: 30px;
+        }
+
+        .graph{
+            padding-top: 30px;
+        }
+
     .tabGraph{
     width:100%;
     background-color:#fff;
@@ -253,13 +267,89 @@ dl#csschart span em{
             <h1>Revenue Grader</h1>
             <h1>Report 2012</h1>
             <h1>for company revenue</h1>
+        </div>
 
+        <div class="overall" style="page-break-after:always;">
+           <h1>Overall Graph</h1>
+          <div class="graph">
+             <img src="<%=Gchart.line(:size => '600x500', 
+            :title => "example title",
+            :bg => 'efefef',
+            :legend => ['first data set label'],
+            :data => [10, 30, 120, 45, 72])%>"/>
+          </div>
         </div>
 
         <div class="content" style="page-break-after:always;">
              <h1>Strategy</h1>
         </div>
 
+        <div class="content" style="page-break-after:always;">
+          <div class="graph">
+            <h4>Strategy Graph</h4>
+             <img src="<%=Gchart.line(:data => [0, 40, 10, 70, 20])%>"/>
+          </div>
+          <div class="textbox">
+            <h5>Text </h5>
+          </div> 
+        </div>
+
+
+        <div class="content" style="page-break-after:always;">
+             <h1>System</h1>
+        </div>
+
+        <div class="content" style="page-break-after:always;">
+          <div class="graph">
+             <h4>System Graph</h4>
+             <img src="<%=Gchart.line(:data => [0, 40, 10, 70, 20])%>"/>
+          </div>
+          <div class="textbox">
+            <h5>Text </h5>
+          </div> 
+        </div>
+
+
+        <div class="content" style="page-break-after:always;">
+             <h1>Programs</h1>
+        </div>
+
+        <div class="content" style="page-break-after:always;">
+          <div class="graph">
+             <h4>Programs Graph</h4>
+             <img src="<%=Gchart.line(:data => [0, 40, 10, 70, 20])%>"/>
+          </div>
+          <div class="textbox">
+              <h5>Text </h5>
+          </div> 
+        </div>
+
+
+        <div class="content" style="page-break-after:always;">
+             <h1>Actions</h1>
+        </div>
+
+        <div class="content" style="page-break-after:always;">
+             <h1>Must Do</h1>
+        </div>
+
+        <div class="content" style="page-break-after:always;">
+             <h1>Should Do</h1>
+        </div>
+
+
+        <div class="content" style="page-break-after:always;">
+             <h1>Could Do</h1>
+        </div>
+
+        <div class="content" style="page-break-after:always;">
+             <h2>About Revenue Grader</h2>
+             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Aenean eu erat et velit dapibus bibendum id quis quam.
+          Sed quis suscipit tortor.</p>
+        </div>
+
+<!--
         <div class="content2" style="page-break-after:always;">
              <div class="tabGraph">
              <div class="box">
@@ -345,7 +435,7 @@ dl#csschart span em{
                                     </div>
              </div>
         </div> 
-    
+ -->   
          
     
 
