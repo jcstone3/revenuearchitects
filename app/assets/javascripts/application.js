@@ -279,5 +279,21 @@ $(document).ready(function(){
         } ); 
 
 
-      
+       $('#resultTable1').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } );
+
+        $('#resultTable2').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } ); 
 });

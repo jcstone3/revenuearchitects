@@ -7,21 +7,29 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+        <%#= javascript_include_tag "jquery.dataTables.min","jquery-ui-1.8.18.custom.min"%>  
         <style type="text/css">
-        .content{
-            text-align:right;
+        .content{  
+           font-weight:bold;     
 
 
         }
         .content h1{
+            text-align:right;
             display: block; 
             font-family: "Lato", sans-serif;
             color: #0086AC;
             font-weight:300;
-            line-height:3px;
+            line-height:25px;
         }
         .content2{
              text-align:left;
+        }
+        .content h2{   
+          text-align:right; 
+          font-weight:200;   
+          color: #0086AC;
+
         }
 
         .overall h1{
@@ -36,8 +44,10 @@
 
         .graph{
             padding-top: 30px;
+            padding-bottom: 20px;
         }
 
+        
     .tabGraph{
     width:100%;
     background-color:#fff;
@@ -250,7 +260,260 @@ dl#csschart span em{
 
 /* // percentages */                
     
+  /*  */
+
+
+/*
+ * Table
+ */
+table.dataTable {
     
+    clear: both;
+    width: 600px;
+
+}
+
+/*table.dataTable thead th {
+/*  background-image: -moz-linear-gradient(top, #4e5960, #647077);
+    background-image: -ms-linear-gradient(top, #4e5960, #647077);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e5960), to(#647077));
+    background-image: -webkit-linear-gradient(top, #4e5960, #647077);
+    background-image: -o-linear-gradient(top, #4e5960, #647077);
+    background-image: linear-gradient(top, #4e5960, #647077);*/
+   /* background-color:#909090;
+    padding: 3px 18px 3px 10px;
+    border-bottom: 1px solid black;
+    color:#ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    *cursor: hand;
+    text-align:left;
+    width:5px;
+
+}*/
+
+
+
+
+
+
+/*report-body dataTable4
+table.dataTable4 tfoot th {
+    padding: 3px 18px 3px 10px;
+    border-top: 1px solid black;
+    font-weight: bold;
+}
+
+table.dataTable4 td {
+    padding: 3px 10px;
+}
+
+table.dataTable4 td.center,
+table.dataTable4 td.dataTables_empty {
+    text-align: center;
+}
+
+table.dataTable4 tr.odd { background-color: #E6F3F7; }
+table.dataTable4 tr.even { background-color: #80C2D6; }
+
+table.dataTable4 tr.odd td.sorting_1 { background-color: #E6F3F7; }
+table.dataTable4 tr.odd td.sorting_2 { background-color: #E6F3F7; }
+table.dataTable4 tr.odd td.sorting_3 { background-color: #E6F3F7; }
+table.dataTable4 tr.even td.sorting_1 { background-color: #80C2D6; }
+table.dataTable4 tr.even td.sorting_2 { background-color: #80C2D6; }
+table.dataTable4 tr.even td.sorting_3 { background-color: #80C2D6; }
+*/
+
+/*.tablestyle{
+    text-align:center ;
+    color:white;
+}*/
+
+/*
+ * Table wrapper
+ */
+/*.dataTables_wrapper {
+    position: relative;
+    clear: both;
+    *zoom: 1;
+}*/
+
+
+/*
+ * Page length menu
+ */
+.dataTables_length {
+    float: left;
+}
+
+
+/*
+ * Filter
+ */
+.dataTables_filter {
+    float: right;
+    text-align: left;
+}
+
+
+/*
+ * Table information
+ */
+.dataTables_info {
+    clear: both;
+    float: left;
+}
+
+
+/*
+ * Pagination
+ *//*
+.dataTables_paginate {
+    float: right;
+    text-align: right;
+}
+
+/* Two button pagination - previous / next */
+/*.paginate_disabled_previous,
+.paginate_disabled_next
+ {
+    height: 19px;
+    float: left;
+    cursor: default;
+    *cursor: hand;
+    color: #111 !important;
+}
+
+.paginate_enabled_previous,
+.paginate_enabled_next {
+    height: 19px;
+    float: left;
+    cursor: pointer;
+    *cursor: hand;
+    color: #111 !important;
+}
+.paginate_disabled_previous:hover,
+.paginate_enabled_previous:hover,
+.paginate_disabled_next:hover,
+.paginate_enabled_next:hover {
+    text-decoration: none !important;
+}
+.paginate_disabled_previous:active,
+.paginate_enabled_previous:active,
+.paginate_disabled_next:active,
+.paginate_enabled_next:active {
+    outline: none;
+}
+
+.paginate_disabled_previous,
+.paginate_disabled_next {
+    color: #666 !important;
+}
+.paginate_disabled_previous,
+.paginate_enabled_previous {
+    padding-left: 23px;
+}
+.paginate_disabled_next,
+.paginate_enabled_next {
+    padding-right: 23px;
+    margin-left: 10px;
+}
+
+.paginate_enabled_previous { background: url('../images/back_enabled.png') no-repeat top left; }
+.paginate_enabled_previous:hover { background: url('../images/back_enabled_hover.png') no-repeat top left; }
+.paginate_disabled_previous { background: url('../images/back_disabled.png') no-repeat top left; }
+
+.paginate_enabled_next { background: url('../images/forward_enabled.png') no-repeat top right; }
+.paginate_enabled_next:hover { background: url('../images/forward_enabled_hover.png') no-repeat top right; }
+.paginate_disabled_next { background: url('../images/forward_disabled.png') no-repeat top right; }*/*/
+
+/* Full number pagination */
+/*.paging_full_numbers {
+    height: 22px;
+    line-height: 22px;
+}
+.paging_full_numbers a:active {
+    outline: none
+}
+.paging_full_numbers a:hover {
+    text-decoration: none;
+}
+
+.paging_full_numbers a.paginate_button,
+.paging_full_numbers a.paginate_active {
+    border: 1px solid #aaa;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 2px 5px;
+    margin: 0 3px;
+    cursor: pointer;
+    *cursor: hand;
+    color: #333 !important;
+}
+
+.paging_full_numbers a.paginate_button {
+    background-color: #ddd;
+}
+
+.paging_full_numbers a.paginate_button:hover {
+    background-color: #ccc;
+    text-decoration: none !important;
+}
+
+.paging_full_numbers a.paginate_active {
+    background-color: #99B3FF;
+}
+*/
+
+/*
+ * Processing indicator
+ */
+/*.dataTables_processing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 30px;
+    margin-left: -125px;
+    margin-top: -15px;
+    padding: 14px 0 2px 0;
+    border: 1px solid #ddd;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    background-color: white;
+}*/
+
+
+/*
+ * Sorting
+ */
+/*.sorting { background: url('../images/sort_both.png') no-repeat center right; }
+.sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
+.sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
+
+.sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
+.sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }
+ 
+table.dataTable th:active {
+    outline: none;
+}*/
+
+
+/*
+ * Scrolling
+ */
+/*.dataTables_scroll {
+    clear: both;
+}
+
+.dataTables_scrollBody {
+    *margin-top: -1px;
+}*/
+
+
+/* --- */  
     
     
     
@@ -258,15 +521,15 @@ dl#csschart span em{
 
         </style>
        </head> 
-
+       
         <!-- Le styles -->
 
         <%= stylesheet_link_tag "application",:media => "all" %>
-
+        <%#= stylesheet_link_tag "jquery.dataTables"%>
         <div class="content" style="page-break-after:always;">
             <h1>Revenue Grader</h1>
             <h1>Report 2012</h1>
-            <h1>for company revenue</h1>
+            <h1>For Test-Company</h1>
         </div>
 
         <div class="overall" style="page-break-after:always;">
@@ -287,10 +550,61 @@ dl#csschart span em{
         <div class="content" style="page-break-after:always;">
           <div class="graph">
             <h4>Strategy Graph</h4>
-             <img src="<%=Gchart.line(:data => [0, 40, 10, 70, 20])%>"/>
+             <img src="<%=Gchart.line(:size => '600x300', 
+            :title => "Strategy Chart",
+            :bg => 'e3e3e3',
+            :legend => ['first data set label'],
+            :data => [10, 30, 120, 45, 72],:line_colors => "FF0000")%>"/>
           </div>
           <div class="textbox">
-            <h5>Text </h5>
+            <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable"> 
+          <thead >
+            <tr>
+              <th><h3>Questions</h3></th>
+              <th><h3>Group</h3></th>
+              <th><h3>Score</h3></th>
+              <th><h3>In Plan</h3></th>
+              <th><h3>Priority</h3></th>
+              <th><h3>Points</h3></th>
+              </tr>
+          </thead>
+          <tbody>
+            
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                
+          </tbody>        
+    </table>
           </div> 
         </div>
 
@@ -302,10 +616,59 @@ dl#csschart span em{
         <div class="content" style="page-break-after:always;">
           <div class="graph">
              <h4>System Graph</h4>
-             <img src="<%=Gchart.line(:data => [0, 40, 10, 70, 20])%>"/>
+             <img src="<%=Gchart.line(:size => '600x300', 
+            :title => "System Graph",
+            :bg => 'e3e3e3',
+            :legend => ['first data set label'],
+            :data => [10, 30, 120, 45, 72])%>"/>
           </div>
           <div class="textbox">
-            <h5>Text </h5>
+            <table cellpadding="1" cellspacing="1" id="resultTable1" class="report-body dataTable"> 
+          <thead >
+            <tr>
+              <th><h3>Questions</h3></th>
+              <th><h3>Group</h3></th>
+              <th><h3>Score</h3></th>
+              <th><h3>In Plan</h3></th>
+              <th><h3>Priority</h3></th>
+              <th><h3>Points</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+          </tbody>        
+    </table>
           </div> 
         </div>
 
@@ -315,12 +678,65 @@ dl#csschart span em{
         </div>
 
         <div class="content" style="page-break-after:always;">
-          <div class="graph">
-             <h4>Programs Graph</h4>
-             <img src="<%=Gchart.line(:data => [0, 40, 10, 70, 20])%>"/>
+          <div class="graph1">
+             <h4>Program  Graph</h4>
+             <img src="<%=Gchart.line(:size => '600x300', 
+            :title => "System Graph",
+            :bg => 'e3e3e3',
+            :legend => ['first data set label'],
+            :data => [10, 30, 120, 45, 72])%>"/>
           </div>
           <div class="textbox">
-              <h5>Text </h5>
+              
+        <table cellpadding="1" cellspacing="1" id="resultTable2" class="report-body dataTable"> 
+          <thead >
+            <tr>
+              <th><h3>Questions</h3></th>
+              <th><h3>Group</h3></th>
+              <th><h3>Score</h3></th>
+              <th><h3>In Plan</h3></th>
+              <th><h3>Priority</h3></th>
+              <th><h3>Points</h3></th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                <tr>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                    <td>Giri</td>
+                </tr>
+                
+          </tbody>        
+    </table>
           </div> 
         </div>
 
@@ -434,11 +850,23 @@ dl#csschart span em{
                                     </dl>
                                     </div>
              </div>
-        </div> 
- -->   
-         
+        </div> -->
+   
+     <script>     
     
+      $('#resultTable').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } );
 
+       
+
+    </script>
+    
     
                 
     </body>
