@@ -24,7 +24,7 @@
                                             </div>
                                             <div class="rightboxName">
                                                 <%= form_for @section, :url=>{:action =>:create}, :validate=>true do |f|%>
-                                            <h3>Name<span>*</span></h3>
+                                            <h3>Name<span class="star">*</span></h3>
                                            <%= f.text_field :name%>
                                             <p>
                                              <%= f.hidden_field :total_points, :value=> 0%>
