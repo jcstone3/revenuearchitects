@@ -4,7 +4,7 @@
             <div id="backcolor" class="span12 menucolor" >
                   <ul class="nav nav-pills">
                    
-                    <li class="surveyname">&nbsp;Survey_<%= @survey.created_at.strftime("%B  %Y")%></li>
+                    <li class="surveyname">&nbsp;Survey <%= @survey.created_at.strftime("%B  %Y")%></li>
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Strategy <span class="green"><%= @sections[0].total_points %></span></a></li>
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Systems <span class="green"><%= @sections[1].total_points%></span></a></li>
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Programs <span class="green"><%= @sections[2].total_points%></span> </a></li>

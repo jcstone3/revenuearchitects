@@ -40,12 +40,13 @@
                      <div class="points">
                         <div class="option ">
                           <div>
-                          <h3>Industry <span class="star">*</span></h3></div>                              
-                          <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}) %>  
+                          <h3>Industry <span class="star">*</span></h3></div>    
+                          <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}.insert(0, 'Select Industry')) %>  
+                          <span id="industry_error"></span>
                         </div>
                      </div>
                      <div class="pointsb" >
-                     <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white btncontinue"%>                 
+                     <%= f.submit "Continue to Survey" ,:class =>"btn btn-primary icon-remove icon-white btncontinue", :id=>"company_submit"%>                 
                 <% end %>
               </div>				
              </div>  

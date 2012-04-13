@@ -23,20 +23,21 @@
                         <div class="option">
                           <h3>Company Size</h3>
                     <%#= f.text_field :size ,:class=>"span3", :placeholder=>"size"%>
-                    <%= f.select :size, [['1 -99'],['100 - 499'],['500-5000'],['5000 and above']],:class=>"span3" %>
-
+                    <%= f.select :size, [['Select'],['1 -99'],['100 - 499'],['500-5000'],['5000 and above']],:class=>"span3" %>
+                  <span id="size_error"></span>
                     <br>
                 </div>
               </div>
               <div class="points totalrevenue">
                 <div class="option" >
                   <h3>What is total revenue in last 12 months?</h3>
-                  <%= f.select :revenue, [['below $1M'],['$1M-10M'],['$10M-$100M'],['$100M-$1B'],['above $1B']],:class=>"span3" %>
+                  <%= f.select :revenue, [['Select'],['below $1M'],['$1M-10M'],['$10M-$100M'],['$100M-$1B'],['above $1B']],:class=>"span3" %>
+                  <span id="revenue_error"></span>
                 </div>
               </div>
 
               <div class="gap">
-                <%= f.submit "Start Survey", :class=>"btn btn-primary icon-remove icon-white" ,:input_html =>{:class=>"btnSurvey"} %>
+                <%= f.submit "Start Survey", :class=>"btn btn-primary icon-remove icon-white" ,:input_html =>{:class=>"btnSurvey"}, :id=>"survey_submit" %>
               </div>
         <% end %>
        	</div>
@@ -86,23 +87,23 @@
 	         <%else%>
            <div class="span3 rightBox" >
                   
-                        <h2 class="prevSurvey">Previous Surveys  </h2>
+                        <h2 class="prevSurvey">No Previous Surveys  </h2>
                     
-                    <div class="Baloon surveyBaloon" >
+                    <!-- <div class="Baloon surveyBaloon" >
                         <div class="head1"><h1>January 2011 </h1>
                     
                         </div>
                             <div class="score1">
-                            <span><%= image_tag "sampletext.png"%></span>
+                            <span><%#= image_tag "sampletext.png"%></span>
                             </div>
-                    </div>
+                    </div> -->
 
-                    <div class="Baloon surveyBaloon" >
+                    <!-- <div class="Baloon surveyBaloon" >
                         <div class="head1"><h1>March 2012 </h1></div>
                             <div class="score1">
-                            <span><%= image_tag "sampletext.png"%></span>
+                            <span><%#= image_tag "sampletext.png"%></span>
                             </div>
-                </div>
+                </div> -->
 
                 </div>
 

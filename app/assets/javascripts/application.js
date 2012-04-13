@@ -238,7 +238,84 @@ $(document).ready(function(){
                     url: '/admin/users?company_name='+name,
                     type: "GET"                    
                 });
-              });           
+              });  
+
+               $('#company_submit').click(function(){
+                if($('#company_industry_id').val()=="Select Industry"){
+                  $('#industry_error').html('Please select industry');
+                  return false;
+               }
+               else{
+                 $('#industry_error').html('');
+               }
+              });
+
+
+
+
+              $('#survey_submit').click(function(){
+                if($('#survey_size').val()=="Select"){
+                  $('#size_error').html('Please select Company Size');
+                  return false;
+               }
+               else{
+                 $('#size_error').html('');
+               }
+
+               if($('#survey_revenue').val()=="Select"){
+                  $('#revenue_error').html('Please select Total Revenue');
+                  return false;
+               }
+               else{
+                 $('#revenue_error').html('');
+               }
+
+              }); 
+              
+
+
+
+
+              $('#company_submit').click(function(){
+                if($('#company_industry_id').val()=="Select Industry"){
+                  $('#industry_error').html('Please select industry');
+                  return false;
+               }
+               else{
+                 $('#industry_error').html('');
+               }
+              });
+
+            $('#company_industry_id').change(function(){
+                if($('#company_industry_id').val()=="Select Industry"){
+                  $('#industry_error').html('Please select industry');
+               }
+               else{
+                 $('#industry_error').html('');
+               }
+              });  
+
+              $('#survey_size').change(function(){
+                if($('#survey_size').val()=="Select"){
+                  $('#size_error').html('Please select industry');
+               }
+               else{
+                 $('#size_error').html('');
+               }
+              });
+
+              $('#survey_revenue').change(function(){
+                if($('#survey_revenue').val()=="Select"){
+                  $('#revenue_error').html('Please select industry');
+               }
+               else{
+                 $('#revenue_error').html('');
+               }
+              });
+
+
+
+
              
               $('#industry').change(function(){
                 var id = "";
