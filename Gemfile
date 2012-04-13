@@ -22,7 +22,6 @@ gem 'settingslogic'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.0.3'
 #Gems used for pdf and xls generation
-gem 'wkhtmltopdf-binary'
 gem 'pdfkit'
 gem "spreadsheet", "0.6.5.8"
 gem "to_xls", :git => "https://github.com/dblock/to_xls.git", :branch => "to-xls-on-models"
@@ -43,6 +42,7 @@ gem "twitter-bootstrap-rails"
 group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
+gem 'wkhtmltopdf-binary'
 end
 
 #wkhtmltopdf for test, stage and production enviornments

@@ -33,7 +33,12 @@
                        <% end %>
                      </li>
 
-                    <li class="next2"><a href="#"><%= image_tag "glyphicons_152_new_window.png" ,:width=>"13px",:height=>"13px" %> &nbsp;Download</a></li>
+                     <li class="next2">
+                     <%= link_to(download_url(request.parameters.merge({:format => :pdf})), :rel=>"tooltip") do %>
+                           <i class="icon-share" style="color:#000000;text-shadow : none ;font-size:15px"></i>
+                            Download
+                       <% end %>
+                     </li> 
                   </ul>
             </div>
 </div>
