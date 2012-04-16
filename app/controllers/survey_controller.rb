@@ -131,19 +131,19 @@ def question
                 if(params[:question_id].to_i < 6)
                 @questions = Question.find(:all,
                        :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id", 
+                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
                        :offset=> 0, :limit=>10 )
 
                 elsif(params[:question_id].to_i > @question_all - 5)  
                 @questions = Question.find(:all,
                        :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id", 
+                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
                        
                        :offset=> (@question_all - 10), :limit=>10 )
                 else
                 @questions = Question.find(:all,
                        :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id", 
+                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
                        
                        :offset=> (params[:question_id].to_i - 5), :limit=>10)
                 end 
@@ -239,19 +239,19 @@ def previous_question
                 if(params[:question_id].to_i < 6)
                 @questions = Question.find(:all,
                        :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id", 
+                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
                        :offset=> 0, :limit=>10 )
 
                 elsif(params[:question_id].to_i > @question_all - 5)  
                 @questions = Question.find(:all,
                        :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id", 
+                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
                        
                        :offset=> (@question_all - 10), :limit=>10 )
                 else
                 @questions = Question.find(:all,
                        :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id", 
+                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
                        
                        :offset=> (params[:question_id].to_i - 5), :limit=>10)
                 end 
