@@ -18,7 +18,7 @@
                                 
                                 <div class="tabGraph">
                                      <div id="box">
-                                     <div class="quesMain">
+                                     <div class="quesMain" style="height:auto;">
                                             <div class="addQuesHead">
                                                 <h1>Add New Question</h1>
                                             </div>
@@ -36,11 +36,11 @@
                                             
                                             <h3>Points<span class="star">*</span></h3>
                                             <%= f.select :points, [5,10,20]%>
-                                            <br>
-                                            <br>
-                                            <div class="button-bar" style="float:left;">
-                                            </div>
-                                            <%= f.submit 'Save', :class=>"btn btn-primary"%>
+                                            <br/>
+                                            
+                                                <%= f.submit 'Save', :class=>"btn btn-primary"%>
+                                            <br/>
+                                            
                                             <%#= f.submit 'Save & New', :class=>"btn ",:style=>"margin-left:30px;"%>
                                             <%#= f.submit 'Reset', :class=>"btn",:style=>"margin-left:30px;"%>
                                                
