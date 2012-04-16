@@ -42,7 +42,7 @@
                           <div>
                           <h3>Industry <span class="star">*</span></h3></div>    
                           <%= f.select "industry_id", options_for_select(@industry.collect{|x| [x.name,x.id]}.insert(0, 'Select Industry')) %>  
-                          <span id="industry_error"></span>
+                          <span id="industry_error" class="custom_error"></span>
                         </div>
                      </div>
                      <div class="pointsb" >

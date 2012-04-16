@@ -24,7 +24,7 @@
                           <h3>Company Size</h3>
                     <%#= f.text_field :size ,:class=>"span3", :placeholder=>"size"%>
                     <%= f.select :size, [['Select'],['1 -99'],['100 - 499'],['500-5000'],['5000 and above']],:class=>"span3" %>
-                  <span id="size_error"></span>
+                  <span id="size_error" class="custom_error"></span>
                     <br>
                 </div>
               </div>
@@ -32,7 +32,7 @@
                 <div class="option" >
                   <h3>What is total revenue in last 12 months?</h3>
                   <%= f.select :revenue, [['Select'],['below $1M'],['$1M-10M'],['$10M-$100M'],['$100M-$1B'],['above $1B']],:class=>"span3" %>
-                  <span id="revenue_error"></span>
+                  <span id="revenue_error" class="custom_error"></span>
                 </div>
               </div>
 
