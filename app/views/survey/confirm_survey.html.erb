@@ -31,31 +31,26 @@
                         <div class="confirmSurvey">                                
                             Thank you for successfully completing the survey                           
                         </div>
-                       
-                        
+                                             
 
                     <h5  style="text-align:center;">Number of questions attempted in each section</h5><br/>
 
 
                         <table class="table table-bordered" style="width:40%;margin:auto;">
                           <tr>
-                            <td>Strategy</td><td><span class="tblendstyle"><%= @section1.count%>/<%= @sections[0].question_count%> </span></td>
+                            <td>Strategy</td><td><span class="tblendstyle"><%= @section1%>/<%= @sections[0].question_count%> </span></td>
                           </tr>
 
                           <tr>
-                            <td>Systems</td><td><span class="tblendstyle"><%= @section2.count%>/<%= @sections[1].question_count%></span></td>
+                            <td>Systems</td><td><span class="tblendstyle"><%= @section2%>/<%= @sections[1].question_count%></span></td>
                           </tr>
 
                            <tr>
-                            <td>Programs</td><td><span class="tblendstyle"><%= @section3.count%>/
+                            <td>Programs</td><td><span class="tblendstyle"><%= @section3%>/
                             <%= @sections[0].question_count %></span></td>
                           </tr>
                        </table>
-                      <!-- <div class="report">
-                        <p>Strategy<span style="padding-left:200px;"><%= @section1.count%>/<%= @sections[0].question_count%> </span></p>
-                        <p>Systems  <span style="padding-left:200px;"><%= @section2.count%>/<%= @sections[1].question_count%></span></p> 
-                        <p>Programs <span style="padding-left:190px;"><%= @section3.count%>/
-                            <%= @sections[0].question_count %></span></p> -->
+                     
                       <div class="footerconfirm" >
                      <%= link_to 'Go back', continue_survey_url(@survey) ,:class=>"btn btn-primary questionsattemted"%>
                      <%= link_to 'Complete Survey', close_survey_url(@survey) ,:class=>"btn btn-primary questionsattemted"%></div>

@@ -301,6 +301,7 @@ def update_response
 end
 
 def confirm_survey
+  @questions=[]
   @survey = Survey.find_by_id(params[:id])
   @allSection = Section.all
   @responses = @survey.responses
@@ -310,26 +311,24 @@ def confirm_survey
      @section_total << calculate_response_for_section(params[:id], section.id)
      section.sub_sections.each do |sub_section|     
      @subsection_total << calculate_response_for_subsection(params[:id], sub_section.id)
+   
+  @questions  << Section.find(:all,
+                       :select => "responses.id",
+                       :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on responses.question_id = questions.id 
+                                  where responses.survey_id=#{params[:id]} and sections.id = '#{section.id}' and sub_sections.id = '#{sub_section.id}'",
+                       :group => "responses.id")
     end
   end
   @final_score = @section_total[0]+@section_total[1]+@section_total[2]
- # if @response.present?
-  @response = []
-  @responses.each do |res|
-   @response << res.question_id 
-  end  
   @section =[]  
-  @section1 = []
-  @section2=[]
-  @section3 = []
   @sections = Section.all
   @sections.each do |section|
-    @section  << get_question_ids(section.id)     
+   @section  << get_question_ids(section.id)     
   end
 
-  @section1 =  @section[0] -  @response
-  @section2 =  @section[1] -  @response
-  @section2 =  @section[2] -  @response
+  @section1 = @questions[0].count + @questions[1].count + @questions[2].count + @questions[3].count  
+  @section2 = @questions[4].count + @questions[5].count + @questions[6].count + @questions[7].count 
+  @section3 = @questions[8].count + @questions[9].count + @questions[10].count + @questions[11].count 
 end
 
 def close_survey
