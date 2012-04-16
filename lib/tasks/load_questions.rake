@@ -82,6 +82,11 @@ end
 
 
 # end
-
+@section = Section.find(1)
+@section.update_attributes(:question_count=>30, :total_points=>100) 
+@section = Section.find(2)
+@section.update_attributes(:question_count=>40, :total_points=>100)
+@section = Section.find(3)
+@section.update_attributes(:question_count=>30, :total_points=>100)
 	
 end
