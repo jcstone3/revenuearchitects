@@ -18,4 +18,10 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
   else
     %{<div class="field_with_errors">#{html_tag}</div>}.html_safe
   end
+
+end
+
+def select_with_client_side_validations(method, choices, options = {}, html_options = {})
+  apply_client_side_validators(method, html_options)
+  select_without_client_side_validations(method, choices, options, html_options)
 end

@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
-	validates :name, :presence =>{:message=>"Question can't be blank"}
-	validates :sub_section_id, :presence => true
-
+	validates :name, :on=>:update, :presence =>{:message=>"Question can't be blank"}
+	validates :description, :on=>:update,:presence =>{:message=>"Description can't be blank"}
+	validates :sub_section_id, :on=>:update, :presence =>{:message=>"Section can't be blank"}
 	belongs_to :sub_section
 	has_one :response
 

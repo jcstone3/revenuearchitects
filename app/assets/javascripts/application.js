@@ -73,8 +73,9 @@ $(document).ready(function(){
 			//---- question js ---------------------//
 			//set defalut value for anwer1 
                 //to set the slider value 
-                
+                //alert('hi');
                 var response_answer1 = $('#response_answer_1').val();
+                //alert(response_answer1);
                 if($('#response_answer_1').val() == ""){                            
                     var response_answer1  = 1; 
                     $('#response_answer_1').val('1');
@@ -284,9 +285,7 @@ $(document).ready(function(){
 
               }); 
               
-
-
-
+            
 
               $('#company_submit').click(function(){
                 if($('#company_industry_id').val()=="Select Industry"){
@@ -305,7 +304,16 @@ $(document).ready(function(){
                else{
                  $('#industry_error').html('');
                }
-              });  
+              }); 
+
+               $('#questn_save').click(function(){ 
+                if($('#sub_section_id').val()=="Select Section"){                  
+                 $('#section_error').html('Please select Section');
+                  return false;
+                }else{                  
+                  $('#section_error').html('');
+                }
+              }); 
 
               $('#survey_size').change(function(){
                 if($('#survey_size').val()=="Select"){
@@ -324,10 +332,6 @@ $(document).ready(function(){
                  $('#revenue_error').html('');
                }
               });
-
-
-
-
              
               $('#industry').change(function(){
                 var id = "";

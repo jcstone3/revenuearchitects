@@ -4,11 +4,12 @@ class Admin::QuestionsController < ApplicationController
 		#@question = Question.new
     @questions = Question.paginate(:page=> params[:page], :per_page=>10)
    @questions  =  Question.find(:all,
-                       :select => "questions.name, questions.description, questions.points, sub_sections.name as subsection_name, sections.name as section_name",
+                       :select => "questions.name, questions.description, questions.id, questions.points, sub_sections.name as subsection_name, sections.name as section_name",
                        :joins => "left outer join sub_sections on questions.sub_section_id = sub_sections.id left outer join
-                                  sections on sections.id = sub_sections.section_id")
+                                  sections on sections.id = sub_sections.section_id",
+                       :order => "questions.id ASC"          )
 
-		#@subsection = SubSection.find(:all, :order=>"id ASC")		
+				
 	end	
 
     def new
@@ -28,24 +29,39 @@ class Admin::QuestionsController < ApplicationController
         end 
 	end	
  
- def edit
-    @question = Question.find(params[:id])
+ def edit  
+    @question = Question.find_by_id(params[:id])
+    @subsection = SubSection.find(:all, :order=>"id ASC")
+    respond_to do |format|
+      format.html
+    end  
   end
 
   def update
-  @question = Question.find(params[:id])
-   respond_to do |format|
+   @question = Question.find(params[:id])
+   params[:question].merge!(:sub_section_id => params[:sub_section_id])
+   
+
     if @question.update_attributes(params[:question])
-    format.html (redirect_to (@question))
+      flash[:success] = "Question Created successfully"
+          redirect_to :action => 'index'
+    #format.html (redirect_to (@question))
     else 
-      format.html (render :action => 'edit')
-    end
+      @subsection = SubSection.find(:all, :order=>"id ASC")
+      flash[:error] = "Question could not updated"
+      render :action => 'edit'
+   
    end 
   end
 
   def destroy
     @question = Question.find(params[:id])
-    @question.delete
+    if @question.destroy
+      flash[:success] = "Question Created successfully"         
+    else
+      flash[:success] = "Question Created successfully"          
+    end   
+     redirect_to :action => 'index'   
   end
 
  

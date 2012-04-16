@@ -23,24 +23,33 @@
                                                 <h1>Add New Question</h1>
                                             </div>
                                             <div class="rightboxName">
-                                                <%= form_for :question, :url=>{:action => :update, :id=>@question.id}, :validate=>true do |f| %>
-                                            <h3>Question<span>*</span></h3>
+                                                <%= form_for :question, :url=>{:action => :update}  do |f| %>
+                                                 
+
+                                            <h3>Question<span class="star">*</span></h3>
                                            <%= f.text_area :name, :class=>"input-xlarge", 
-                                           :placeholder=>"Type new question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8%>
-                                            
+                                           :placeholder=>"Type new question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8, :validate=>true%>
+                                           
+                                          <h3>Description<span class="star">*</span></h3>
+                                           <%= f.text_area :description, :class=>"input-xlarge", 
+                                           :placeholder=>"Type description for question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8, :validate=>true%>
+                                          
                                              <%= f.hidden_field :is_active, :value=>true%>
-                                            <h3>Section<span>*</span></h3>
-                                            <%= select_tag(:sub_section_id, options_for_select(@subsection.collect{|x| [x.name,x.id]}))%>
-                                            
-                                            <h3>Points<span>*</span></h3>
+                                            <h3>Section<span class="star">*</span></h3>
+                                            <%= select_tag(:sub_section_id, options_for_select(@subsection.collect{|x| [x.name,x.id]}.insert(0,
+                                             "Select Section")), :selected=>@question.sub_section_id)%>
+                                             <br/>
+                                            <span id="section_error" style="color:red;"></span>
+                                            <h3>Points<span class="star">*</span></h3>
                                             <%= f.select :points, [5,10,20]%>
                                             <br>
                                             <br>
                                             <div class="button-bar" style="float:left;">
+                                                <%= f.submit 'Save', :class=>"btn btn-primary", :id=>"questn_save"%>
                                             </div>
-                                            <%= f.submit 'Save', :class=>"btn "%>
-                                            <%= f.submit 'Save & New', :class=>"btn ",:style=>"margin-left:30px;"%>
-                                            <%= f.submit 'Reset', :class=>"btn",:style=>"margin-left:30px;"%>
+                                            
+                                            <%#= f.submit 'Save & New', :class=>"btn ",:style=>"margin-left:30px;"%>
+                                            <%#= f.submit 'Reset', :class=>"btn",:style=>"margin-left:30px;"%>
                                                
                                             </div>
                                             <%end%>

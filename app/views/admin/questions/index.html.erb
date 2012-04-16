@@ -39,9 +39,9 @@
                                             <td><%= question.section_name %> :: <%= question.subsection_name%></td>
                                             <td><%= question.points %></td>
                                             
-                                            <td><%= link_to 'Edit', admin_edit_questions_url %> /
-                                            <%= link_to 'Delete', admin_delete_questions_url  %></td>
-                                        
+                                            <td><%= link_to 'Edit', admin_edit_questions_url(question.id)%> /
+                                            <%= link_to 'Delete', admin_delete_questions_url(question.id), :confirm => 'Are you sure?'%></td>
+                                            
                                         </tr>
                                             <% end %>
 

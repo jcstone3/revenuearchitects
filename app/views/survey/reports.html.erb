@@ -286,14 +286,14 @@ table.dataTable {
 
 }
 
-/*table.dataTable thead th {
+table.dataTable thead th {
 /*  background-image: -moz-linear-gradient(top, #4e5960, #647077);
     background-image: -ms-linear-gradient(top, #4e5960, #647077);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e5960), to(#647077));
     background-image: -webkit-linear-gradient(top, #4e5960, #647077);
     background-image: -o-linear-gradient(top, #4e5960, #647077);
     background-image: linear-gradient(top, #4e5960, #647077);*/
-   /* background-color:#909090;
+   background-color:#909090;
     padding: 3px 18px 3px 10px;
     border-bottom: 1px solid black;
     color:#ffffff;
@@ -303,14 +303,14 @@ table.dataTable {
     text-align:left;
     width:5px;
 
-}*/
+}
 
 
 
 
 
 
-/*report-body dataTable4
+report-body dataTable2
 table.dataTable4 tfoot th {
     padding: 3px 18px 3px 10px;
     border-top: 1px solid black;
@@ -335,21 +335,20 @@ table.dataTable4 tr.odd td.sorting_3 { background-color: #E6F3F7; }
 table.dataTable4 tr.even td.sorting_1 { background-color: #80C2D6; }
 table.dataTable4 tr.even td.sorting_2 { background-color: #80C2D6; }
 table.dataTable4 tr.even td.sorting_3 { background-color: #80C2D6; }
-*/
 
-/*.tablestyle{
+.tablestyle{
     text-align:center ;
     color:white;
-}*/
+}
 
 /*
  * Table wrapper
  */
-/*.dataTables_wrapper {
+.dataTables_wrapper {
     position: relative;
     clear: both;
     *zoom: 1;
-}*/
+}
 
 
 /*
@@ -380,14 +379,14 @@ table.dataTable4 tr.even td.sorting_3 { background-color: #80C2D6; }
 
 /*
  * Pagination
- *//*
+ */
 .dataTables_paginate {
     float: right;
     text-align: right;
 }
 
 /* Two button pagination - previous / next */
-/*.paginate_disabled_previous,
+.paginate_disabled_previous,
 .paginate_disabled_next
  {
     height: 19px;
@@ -441,7 +440,7 @@ table.dataTable4 tr.even td.sorting_3 { background-color: #80C2D6; }
 .paginate_disabled_next { background: url('../images/forward_disabled.png') no-repeat top right; }*/*/
 
 /* Full number pagination */
-/*.paging_full_numbers {
+.paging_full_numbers {
     height: 22px;
     line-height: 22px;
 }
@@ -482,7 +481,7 @@ table.dataTable4 tr.even td.sorting_3 { background-color: #80C2D6; }
 /*
  * Processing indicator
  */
-/*.dataTables_processing {
+.dataTables_processing {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -502,7 +501,7 @@ table.dataTable4 tr.even td.sorting_3 { background-color: #80C2D6; }
 /*
  * Sorting
  */
-/*.sorting { background: url('../images/sort_both.png') no-repeat center right; }
+.sorting { background: url('../images/sort_both.png') no-repeat center right; }
 .sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
 .sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
 
@@ -517,13 +516,13 @@ table.dataTable th:active {
 /*
  * Scrolling
  */
-/*.dataTables_scroll {
+.dataTables_scroll {
     clear: both;
 }
 
 .dataTables_scrollBody {
     *margin-top: -1px;
-}*/
+}
 
 
 /* --- */  
@@ -570,9 +569,9 @@ table.dataTable th:active {
             :data => [10, 30, 120, 45, 72],:line_colors => "FF0000")%>"/>
           </div>
           <div class="textbox">
-            <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable" border="1"> 
+            <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2" > 
           <thead >
-            <tr>
+            <tr style="background-color: #E6F3F7;" >
               <th><h3>Questions</h3></th>
               <th><h3>Group</h3></th>
               <th><h3>Score</h3></th>
@@ -636,7 +635,7 @@ table.dataTable th:active {
             :data => [10, 30, 120, 45, 72])%>"/>
           </div>
           <div class="textbox">
-            <table cellpadding="1" cellspacing="1" id="resultTable1" class="report-body dataTable" border="1"> 
+            <table cellpadding="1" cellspacing="1" id="resultTable1" class="report-body dataTable2" border="1"> 
           <thead >
             <tr>
               <th><h3>Questions</h3></th>
@@ -701,7 +700,7 @@ table.dataTable th:active {
           </div>
           <div class="textbox">
               
-        <table cellpadding="1" cellspacing="1" id="resultTable2" class="report-body dataTable" border="1"> 
+        <table cellpadding="1" cellspacing="1" id="resultTable2" class="report-body dataTable2" border="1"> 
           <thead >
             <tr>
               <th><h3>Questions</h3></th>
