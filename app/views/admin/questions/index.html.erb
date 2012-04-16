@@ -25,6 +25,7 @@
                                       <th><h3>Description</h3></th>
                                       <th><h3>Section :: SubSection</h3></th>
                                       <th><h3>Points</h3></th>
+                                      <th><h3>Actions</h3></th>
                                       
                                                                           
                                     </tr>
@@ -37,10 +38,10 @@
                                            
                                             <td><%= question.section_name %> :: <%= question.subsection_name%></td>
                                             <td><%= question.points %></td>
-                                            <!--
-                                            <td><%#= link_to 'Edit', admin_edit_questions_url()%> /
-                                            <%#= link_to 'Delete', question, admin_delete_questions_url(), :method => 'Delete'%></td>
-                                            -->
+                                            
+                                            <td><%= link_to 'Edit', admin_edit_questions_url %> /
+                                            <%= link_to 'Delete', admin_delete_questions_url  %></td>
+                                        
                                         </tr>
                                             <% end %>
 

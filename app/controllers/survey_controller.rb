@@ -375,20 +375,77 @@ def report_detailed
 end  
 
 def compare
-  
-
+ require 'rubygems'
+    require 'googlecharts'
+  @questions = Question.find(:all,
+   :select => "questions.id, responses.question_id as response_quest_id",
+   :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}")
+  @response_all = []
+  @questions.each do |q|
+  @response = Response.find_by_question_id(q.id)
+    if @response  
+    @response_all << get_individual_response_score(@response.id, @response.question_id)
+    else 
+    @response_all << 0
+    end        
+  end
+  # GoogleChart::LineChart.new('600x400', "Line Chart", false) do |lc|
+  #     lc.data "Trend 1", [5,4,3,1,3,5,6], '0000ff'
+  #     lc.show_legend = true
+  #     lc.data "Trend 2", [1,2,3,4,5,6], '00ff00'
+  #     lc.data "Trend 3", [6,5,4,3,2,1], 'ff0000'
+  #     lc.axis :y, :range => [0,6], :color => 'ff00ff', :font_size => 16, :alignment => :center
+  #     lc.axis :x, :range => [0,6], :color => '00ffff', :font_size => 16, :alignment => :center
+  #     lc.grid :x_step => 100.0/6.0, :y_step => 100.0/6.0, :length_segment => 1, :length_blank => 0
+  #     # puts "\nLine Chart"
+  #     # puts lc.to_url
+  #  end 
 end  
 
-def compare_survey
-
+def compare_system
+  @questions = Question.find(:all,
+   :select => "questions.id, responses.question_id as response_quest_id",
+   :joins => "left outer join responses on responses.question_id = questions.id  left outer join subsection on question.subsection_id = subsection.id left outer join sections on subsection.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 1")
+    @response_all = []
+    @questions.each do |q|
+    @response = Response.find_by_question_id(q.id)
+    if @response  
+    @response_all << get_individual_response_score(@response.id, @response.question_id)
+    else 
+    @response_all << 0
+    end        
+  end  
+  
 end  
 
 def compare_strategy
-
+  @questions = Question.find(:all,
+   :select => "questions.id, responses.question_id as response_quest_id",
+   :joins => "left outer join responses on responses.question_id = questions.id  left outer join subsection on question.subsection_id = subsection.id left outer join sections on subsection.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 2")
+    @response_all = []
+    @questions.each do |q|
+    @response = Response.find_by_question_id(q.id)
+    if @response  
+    @response_all << get_individual_response_score(@response.id, @response.question_id)
+    else 
+    @response_all << 0
+    end        
+  end
 end  
 
 def compare_programs
-
+  @questions = Question.find(:all,
+   :select => "questions.id, responses.question_id as response_quest_id",
+   :joins => "left outer join responses on responses.question_id = questions.id  left outer join subsection on question.subsection_id = subsection.id left outer join sections on subsection.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 3")
+    @response_all = []
+    @questions.each do |q|
+    @response = Response.find_by_question_id(q.id)
+    if @response  
+    @response_all << get_individual_response_score(@response.id, @response.question_id)
+    else 
+    @response_all << 0
+    end        
+  end
 end  
 
 #to download in pdf/xls format
