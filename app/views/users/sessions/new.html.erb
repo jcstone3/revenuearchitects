@@ -1,41 +1,7 @@
 <div class="container signup-left">
       <div class="row-fluid">
         <div class="span8 leftBox">
-          <div class="arrows">
-                        <h1>
-                            Assess your<br />
-                            Revenue Potential <%= link_to 'now', new_user_session_path %>
-                        </h1>
-                    </div>
-                    <div class="arrows2"></div>
-                    <div class="arrowhead"></div>
-                    <div class="points left">
-                      <div class="icon">
-                          <%= image_tag "1point.png", :alt=>"icon" %>
-                        </div>
-                        <div class="picon ">
-                      <h2>1. Rate yourself on key revenue drivers</h2>
-                        <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. </p>
-                        </div>
-                    </div>
-                    <div class="points left">
-                      <div class="icon">
-                        <%= image_tag "2point.png", :alt=>"icon" %>
-                        </div>
-                        <div class="picon ">
-                      <h2 class="point2">2. We instantly process the results</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. </p>
-                        </div>
-                    </div>
-                    <div class="points left">
-                      <div class="icon">
-                        <%= image_tag "3point.png", :alt=>"icon"%>
-                        </div>
-                        <div class="picon">
-                      <h2 class="point3">3. Download your report</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor. </p>
-                        </div>
-                    </div>
+         <%= render :partial => "users/left_box" %>
         </div>
         <div class="span4 rightBox">
                  <ul class="nav nav-tabs">
