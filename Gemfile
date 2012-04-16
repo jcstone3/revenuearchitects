@@ -35,7 +35,9 @@ gem 'rubyXL', '1.2.5'
 gem 'nokogiri'
 gem 'rubyzip'
 gem 'newrelic_rpm'
-gem "googlecharts", :require => "gchart"
+#google charts
+gem "googlecharts"
+gem "gchartrb"
 #bootstrap rails gem
 gem "twitter-bootstrap-rails"
 

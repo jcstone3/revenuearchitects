@@ -1,3 +1,4 @@
+
 <div class="container report-top">
           <div class="spa@section_total.inspectn9 report-top1" >
                    <ul class="nav nav-pills">
@@ -44,7 +45,7 @@
                   </ul>
             </div>
 </div>
-<%= @questions.inspect %>
+<%#= @questions.inspect %>
 
 <div class="container left">
       <div class="row-fluid">
@@ -76,8 +77,15 @@
                                 <div class="tabGraph">
                                     <div class="box">                                        
                                         <h1>Responses in the current month <strong>March 2012</strong></h1>
+                                        <img src="<%= @line_graph%>">
+<!-- <div id='chart'></div>
+<%#= render_chart(@chart, 'chart') %>  -->
+                                 <!--  <img src="<%#=Gchart.line( :data => [17, 17, 11, 8, 2], 
+              # :axis_with_labels => ['x', 'y'], 
+              # :axis_labels => [['J', 'F', 'M', 'A', 'M']], 
+              # :axis_range => [nil, ['1','2','3','4','5']]) %>"/>
+ -->
 
-<%#= lc.to_url%>
                                     </div>
                                           
                                 </div>
@@ -93,10 +101,4 @@
 
       </div>
     </div> 
-    <script>
-            $(function () {
-            $('.tabs').click(function(){
-                    alert($(this).attr('id'));
-                });
-            })
-    </script>
+   

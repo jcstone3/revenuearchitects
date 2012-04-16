@@ -301,7 +301,6 @@ def update_response
 end
 
 def confirm_survey
-  @questions=[]
   @survey = Survey.find_by_id(params[:id])
   @allSection = Section.all
   @responses = @survey.responses
@@ -311,24 +310,26 @@ def confirm_survey
      @section_total << calculate_response_for_section(params[:id], section.id)
      section.sub_sections.each do |sub_section|     
      @subsection_total << calculate_response_for_subsection(params[:id], sub_section.id)
-   
-  @questions  << Section.find(:all,
-                       :select => "responses.id",
-                       :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on responses.question_id = questions.id 
-                                  where responses.survey_id=#{params[:id]} and sections.id = '#{section.id}' and sub_sections.id = '#{sub_section.id}'",
-                       :group => "responses.id")
     end
   end
   @final_score = @section_total[0]+@section_total[1]+@section_total[2]
+ # if @response.present?
+  @response = []
+  @responses.each do |res|
+   @response << res.question_id 
+  end  
   @section =[]  
+  @section1 = []
+  @section2=[]
+  @section3 = []
   @sections = Section.all
   @sections.each do |section|
-   @section  << get_question_ids(section.id)     
+    @section  << get_question_ids(section.id)     
   end
 
-  @section1 = @questions[0].count + @questions[1].count + @questions[2].count + @questions[3].count  
-  @section2 = @questions[4].count + @questions[5].count + @questions[6].count + @questions[7].count 
-  @section3 = @questions[8].count + @questions[9].count + @questions[10].count + @questions[11].count 
+  @section1 =  @section[0] -  @response
+  @section2 =  @section[1] -  @response
+  @section2 =  @section[2] -  @response
 end
 
 def close_survey
@@ -376,30 +377,57 @@ end
 
 def compare
  require 'rubygems'
-    require 'googlecharts'
-  @questions = Question.find(:all,
-   :select => "questions.id, responses.question_id as response_quest_id",
-   :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}")
+require 'google_chart'
+
+
+ @question_ids = []
+   @questions = Question.find(:all,
+    :select => "questions.id, responses.question_id as response_quest_id",
+    :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}")
+  Question.all.each do |qst|
+   @question_ids << "#{qst.id}"
+   end   
   @response_all = []
   @questions.each do |q|
-  @response = Response.find_by_question_id(q.id)
+  @response = Response.find_by_question_id_and_survey_id(q.id,params[:id])
     if @response  
-    @response_all << get_individual_response_score(@response.id, @response.question_id)
-    else 
-    @response_all << 0
+     @response_all << get_individual_response_score(@response.id, @response.question_id)    
     end        
   end
-  # GoogleChart::LineChart.new('600x400', "Line Chart", false) do |lc|
-  #     lc.data "Trend 1", [5,4,3,1,3,5,6], '0000ff'
-  #     lc.show_legend = true
-  #     lc.data "Trend 2", [1,2,3,4,5,6], '00ff00'
-  #     lc.data "Trend 3", [6,5,4,3,2,1], 'ff0000'
-  #     lc.axis :y, :range => [0,6], :color => 'ff00ff', :font_size => 16, :alignment => :center
-  #     lc.axis :x, :range => [0,6], :color => '00ffff', :font_size => 16, :alignment => :center
-  #     lc.grid :x_step => 100.0/6.0, :y_step => 100.0/6.0, :length_segment => 1, :length_blank => 0
-  #     # puts "\nLine Chart"
-  #     # puts lc.to_url
-  #  end 
+  #Average response for all survey
+  @survey = Survey.find(params[:id])
+  @company = Company.find(@survey.company_id)
+  @industry  = Industry.find(@company.industry_id)
+  @companies = Company.find(:all, 
+   :select => "industries.id, companies.id",
+   :joins =>"right outer join industries on companies.industry_id = industries.id    
+   where industries.id = '1' and companies.id !=#{@survey.company_id}"
+   )
+
+  #@responses_kk =  Responses.find(:all, 
+ #:select =>
+  #  ) 
+  @responses_average = []
+  response_total = 0
+  @companies.each do |cmp|
+    cmp.surveys.each do |survey|
+      survey.responses.each do |responses|        
+        response_total += responses.answer_1.to_i 
+      end
+      @responses_average << response_total 
+    end  
+  end  
+  
+  GoogleChart::LineChart.new("700x300", "Overall", false) do |lc|
+  lc.data "Line green", @response_all, '00ff00'
+  lc.data "Line red", @responses_average, 'ff0000'
+  lc.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
+  lc.axis :x, :range =>@question_ids, :font_size =>10, :alignment =>:center
+  lc.show_legend = false
+  lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 10
+  @line_graph =  lc.to_url
+  end
+
 end  
 
 def compare_system
@@ -410,9 +438,7 @@ def compare_system
     @questions.each do |q|
     @response = Response.find_by_question_id(q.id)
     if @response  
-    @response_all << get_individual_response_score(@response.id, @response.question_id)
-    else 
-    @response_all << 0
+     @response_all << get_individual_response_score(@response.id, @response.question_id)
     end        
   end  
   

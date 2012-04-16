@@ -1,8 +1,3 @@
-<!--
-<img src="<%#=GChart.line(:data=>["#{(@section.question_count.to_f / total_count)*100).to_i}% "])%>"/>
--->
-                                      
-
 <div class="container report-top">
           <div class="spa@section_total.inspectn9 report-top1" >
                    <ul class="nav nav-pills">
@@ -65,21 +60,20 @@
                             <div class="tab-pane active userTable" id="systems" style="auto;">
                 <div class="tabHead">
                                   <h1>Systems</h1>
-                                   
+
+                                 <img src="<%= @graph %>"/>  
+   
+            <%# line_chart( { :height => 300, :is3D => true }, { :id => "question" } ) do |c| -%>
+
+            <%= @responses_average%>
+
                                 </div>
                                 
                                 <div class="tabGraph">
                                     <div class="box">                                        
                                         <h1>Responses in the current month <strong>March 2012</strong></h1>
                                      <div class="graph">
-                                        
-                                        <img src="<%=Gchart.line(:size =>'600x400',
-                                        :title => "Systems",            
-                                        :legend => ['first data set label'],
-                                        :data => [10, 30, 120, 45, 72], 
-                                        :line_colors => "0000FFFF",
-                                        :axis_with_labels => ['x','y'] )%>"/>
-                                      
+                                        <%= lc.to_url%>
                                       </div>
                                     </div>
                                 </div>
