@@ -1,17 +1,11 @@
 
 @import "twitter/bootstrap/bootstrap";
-body {  background-image:url(bg_img.png);
-	    background-color: #333333;
-
- }
-
 @import "font-awesome.css";
-
 @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths
-@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
-@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+// @iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+// @iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
 
 // Your custom LESS stylesheets goes here
 //
@@ -29,13 +23,150 @@ body {  background-image:url(bg_img.png);
 @baseFontFamily:"Lato", sans-serif;
 @customFont: "Poiret One", cursive;
 
-/*header*/
-.button-bar {
-	float: right;
-    padding: 20px 20px 0 0;
-    text-align: left;
-    width:auto;
+// New CSS code, 
+
+body {  
+    background-image:url(bg_img.png);
+    background-color: #333333;
+ }
+
+.top-bar {
+  background: #FFF ;
+  padding: 20px 5px 5px 5px  ;
 }
+
+.content-section {
+  margin-top: 20px ;
+  margin-bottom: 20px;
+}
+
+.main-content {
+  background: #FFF;
+  padding-top: 0px;
+}
+
+.main-content-header {
+    background-color:#0086ac;
+    margin: 0px;
+    height: 130px ;
+    padding: 0px ;
+
+}
+
+.main-content-header .heading {
+  float: left ;
+  width: auto;
+  height: 130px;
+  padding: 0px;
+}
+
+.main-content-header .arrow {
+  float: right ;
+  padding:0px;
+  width: 145px ;
+  height: 130px;
+  background-image:url(arrowhead.png);
+}
+
+.main-content-header h1{
+    font-size: 34px;
+    font-weight:300;
+    margin-top:16px;
+    color:#fff;
+    line-height: 36px;
+}
+
+
+.main-content .points .icon{
+  float:left;
+  width: 80px;
+}
+.main-content .points .picon{
+  float:left;
+  width:85%;
+}
+
+h2{
+  font-size:25px;  
+  font-weight:400;
+}
+
+h2.point1 {
+  color:#67737a;
+}
+
+h2.point2{
+  color:#c56d2b;
+}
+
+h2.point3{
+  color:#74d1de;
+}
+
+// .side-content {
+//   background: #FFF ;
+// }
+
+.footer {
+  color: #67737a;
+  font-size: 11px;
+}
+
+// .leftBox .arrows{
+//   height:130px;
+//   float:left;
+//   /*width:55%;*/
+//   padding:0 0 0 20px;
+//   background-image:url(arrowbg.png);
+//   background-repeat:no-repeat;
+// }
+// .leftBox .arrows2{
+//   height:130px;
+//   float:left;
+//   width:15%;
+//   padding:0 0 0 20px;
+//   background-color:#0086ac;
+//   background-repeat:no-repeat;
+// }
+// .leftBox .arrowhead{
+//   height:130px;
+//   float:left;
+//   width:21%;
+//   padding:0 0 0 20px;
+//   background-image:url(arrowhead.png);
+//   background-repeat:no-repeat;
+// }
+// .leftBox .arrows h1{
+//     font-size: 34px;
+//   font-weight:300;
+//   margin-top:16px;
+//   color:#fff;
+//     line-height: 36px;
+// }
+// .leftBox .arrows h1 a{
+//   color:#80cedc;
+//   text-decoration:underline;
+// }
+// .leftBox .arrows h1 a:hover{
+//   color:#fff;
+// }
+
+
+// .footer{
+//   margin-top:10px;
+//   padding-bottom:10px;
+// }
+
+// End of new CSS code 
+
+
+/*header*/
+// .button-bar {
+// 	float: right;
+//     padding: 20px 20px 0 0;
+//     text-align: left;
+//     width:auto;
+// }
 .useralign{
 margin-left:50px;
 	float:left;
@@ -84,19 +215,19 @@ margin-left:50px;
 	color:#555555;
 }
 
-.ra {
-    color: #67737A;
-    display: block;
-    float: left;
-    font-size: 12px;
-    font-weight: 200;
-    line-height: 1;
-    padding: 46px 20px 12px 0;}
+// .ra {
+//     color: #67737A;
+//     display: block;
+//     float: left;
+//     font-size: 12px;
+//     font-weight: 200;
+//     line-height: 1;
+//     padding: 46px 20px 12px 0;}
     
- .ra .headertext{
- 	vertical-align: top; 
- 	margin:-4px 0 0 4px;
- }
+//  .ra .headertext{
+//  	vertical-align: top; 
+//  	margin:-4px 0 0 4px;
+//  }
 
 .useralign a:first-child {
 border-left: none;
@@ -114,18 +245,7 @@ font-size: 16px;
 
 /*End of header*/
 
-/*copyright*/
-.copyright {
-  text-align: left;
-  color: #67737a;
-  font-size: 11px;
-}
-.developed{
-	text-align: right;
-	color: #67737a;
-  font-size: 11px;
-}
-/*End of copyright*/
+
 
 /*left box*/
 .leftBox{
@@ -211,44 +331,7 @@ font-size: 16px;
     /*width: 37%;*/
 	margin-top: 30px;
 }
-.leftBox .arrows{
-	height:130px;
-	float:left;
-	/*width:55%;*/
-	padding:0 0 0 20px;
-	background-image:url(arrowbg.png);
-	background-repeat:no-repeat;
-}
-.leftBox .arrows2{
-	height:130px;
-	float:left;
-	width:15%;
-	padding:0 0 0 20px;
-	background-color:#0086ac;
-	background-repeat:no-repeat;
-}
-.leftBox .arrowhead{
-	height:130px;
-	float:left;
-	width:21%;
-	padding:0 0 0 20px;
-	background-image:url(arrowhead.png);
-	background-repeat:no-repeat;
-}
-.leftBox .arrows h1{
-    font-size: 34px;
-	font-weight:300;
-	margin-top:16px;
-	color:#fff;
-    line-height: 36px;
-}
-.leftBox .arrows h1 a{
-	color:#80cedc;
-	text-decoration:underline;
-}
-.leftBox .arrows h1 a:hover{
-	color:#fff;
-}
+
 
 .report {
 	margin-top: 15px;
@@ -331,14 +414,7 @@ font-size: 16px;
 	color:#000 ;
 	font-weight:300;
 }
-.leftBox .points .picon .point2{
-	font-size:25px;
-	color:#c56d2b;
-}
-.leftBox .points .picon .point3{
-	font-size:25px;
-	color:#74d1de;
-}
+
 .leftBox .points .option{
 	float:left;
 	width:100%;
@@ -394,9 +470,9 @@ font-size: 16px;
 .mainHeader{
 	background-color:#fff;
 }
-.headerPopup{
-	margin-top:20px;
-}
+// .headerPopup{
+// 	margin-top:20px;
+// }
 .menucolor{
 	margin:0; 
 	background-color:#505b62;
@@ -405,19 +481,16 @@ font-size: 16px;
 	margin-top:-5px;
 	padding-bottom:0px;
 }
-.headerPopup1{
-	margin-top:40px;
-}
-.footer{
-	margin-top:10px;
-	padding-bottom:10px;
-}
-.footerconfirm{
-	margin:2% 0 0 38%;
-}
-.container .signup-left{
-	margin-top:25px ;
-}
+// .headerPopup1{
+// 	margin-top:40px;
+// }
+
+// .footerconfirm{
+// 	margin:2% 0 0 38%;
+// }
+// .container .signup-left{
+// 	margin-top:25px ;
+// }
 .checkRemember{
 	margin-top:-21px;
 	margin-left:20px;
@@ -1069,10 +1142,10 @@ background-color:#AAB0B4;
 .star{
 	color:red;
 }
-.mainLeft{
-	height:auto;
-	background-color:#ffffff
-}
+// .mainLeft{
+// 	height:auto;
+// 	background-color:#ffffff
+// }
 .confirmsurvey{
 
 
@@ -1080,17 +1153,17 @@ background-color:#AAB0B4;
 	background-color:#ffffff
 
 }
-.mainLeft .text p{
-	/*margin-left:25px; */
-	padding-top:70px;
-}
+// .mainLeft .text p{
+// 	/*margin-left:25px; */
+// 	padding-top:70px;
+// }
 
 
-.mainLeft .companyLeft{
-	padding-left:5px; 
-	padding-top:0px;
-	margin-top:-15px;
-}
+// .mainLeft .companyLeft{
+// 	padding-left:5px; 
+// 	padding-top:0px;
+// 	margin-top:-15px;
+// }
 
 .Baloon{
 	float:left;

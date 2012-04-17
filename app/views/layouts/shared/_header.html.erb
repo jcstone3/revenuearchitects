@@ -1,23 +1,33 @@
-<div class="navbar ">
-			<div class="navbar-inner">
-				<div class="container mainLeft">
-					<a class="brand" href="#"><%= image_tag "logo.png", :alt=>"logo"%></a>
-					<div class="ra">
-						brought to you by<a href="#" target="_blank"><%= image_tag "ra_logo.png", :alt=>"ra_logo", :class=>"headertext" %></a>
-					</div>
-					<div class="row-fluid">
-						<div class="button-bar">
-							<% if user_signed_in?%>
-							<%#= link_to "#{current_user.username}", destroy_user_session_path, :class=>"btn" %>
-							<%= link_to "Logout", destroy_user_session_url, :class=>"btn" %>
-							<%else%>
-							<%= link_to "Login", new_user_registration_url, :class=>"btn", :id=>"login_user"%>
-							<%= link_to "Sign Up", new_user_registration_url, :class=>"btn btn-primary", :id=>"signup_user"%>
+   <div class="span6">
+           <% logo_link_path =( user_signed_in? ?  new_user_session_path : root_path )%>
+            <%= link_to image_tag('logo.png', :alt=>"logo"), logo_link_path %>
+            <div >
+              brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo"), logo_link_path %>
+            </div>
 
-							<%end%>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        </div>
+        <div class="span6">
+             <% if user_signed_in? %>
+                <i class="icon-user "></i>&nbsp; 
+                <%= "#{current_user.username}" %>&nbsp;<br/>
+                <% if current_user.companies.present? %>
+                <i class="icon-home "></i>&nbsp;
+                 <%= "#{current_user.companies.first.name}"%>
+                 <%end%>     
+                <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
+          
+              <%else%>
 
+              <ul class="nav nav-pills pull-right">
+                <!-- #TODO: Find active path -->
+                <li><%= link_to "Home", root_path %></li>
+                <li><%= link_to "About Us", aboutus_path %></li>
+                <li><%= link_to "Contact Us", contactus_path %></li>
+              </ul><!-- / -->
+              <div class="nav pull-right">
+                  <%= link_to "Login", new_user_session_path, :class=>"btn btn-primary" %>
+                  <%= link_to "Sign Up", new_user_registration_path, :class=>"btn btn-primary"%>
+              </div><!-- / -->
+                
+              <%end%>
+        </div><!-- /  end of right span6-->
