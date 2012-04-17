@@ -17,8 +17,7 @@ class Admin::QuestionsController < ApplicationController
 	    @subsection = SubSection.find(:all, :order=>"id ASC")
     end	
 
-	def create
-		params[:question].merge!(:sub_section_id => params[:sub_section_id])
+	def create		
 		@question = Question.new(params[:question])		
         if @question.save
           @sub_section = SubSection.find(@question.sub_section_id)
@@ -48,9 +47,14 @@ class Admin::QuestionsController < ApplicationController
 
   def update
    @question = Question.find(params[:id])
-   params[:question].merge!(:sub_section_id => params[:sub_section_id])   
-
+   
     if @question.update_attributes(params[:question])
+       @questions =   Question.find(:all, :select => "sum(questions.points) as question_points, count(*) as question_count, sections.name", :joins => "inner join sub_sections on questions.sub_section_id = sub_sections.id inner join sections on sections.id = sub_sections.section_id", :group => "sections.name")
+       @sections = Section.all
+        @sections.each_with_index do |section, i|
+          section.update_attributes(:total_points=> @questions[i].question_points, :question_count=>@questions[i].question_count)
+        end 
+         
       flash[:success] = "Question Created successfully"
           redirect_to :action => 'index'
     #format.html (redirect_to (@question))

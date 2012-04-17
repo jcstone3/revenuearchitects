@@ -103,7 +103,7 @@ end
 
 #lists all the active surveys 
 def show
-  @companies =  current_user.companies  
+  @companies =  current_user.companies          
 end  
 
 #question for the survey	
@@ -305,29 +305,17 @@ end
 def confirm_survey
   @questions=[]
   @section =[]
-  @survey = Survey.find_by_id(params[:id])
-  @allSection = Section.all
-  @responses = @survey.responses
-   @section_total = []
-  @subsection_total = []
-   @allSection.each do |section|
-      @section_total << calculate_response_for_section(params[:id], section.id)
-      section.sub_sections.each do |sub_section|     
-         @subsection_total << calculate_response_for_subsection(params[:id], sub_section.id)
-         @questions  << Section.find(:all,
-                           :select => "responses.id",
+  @survey = Survey.find_by_id(params[:id])   
+  @questions  = Section.find(:all,
+                           :select => "count(*) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on responses.question_id = questions.id 
-                                      where responses.survey_id=#{params[:id]} and sections.id = '#{section.id}' and sub_sections.id = '#{sub_section.id}'",
-                           :group => "responses.id")
-      end
-   end
-  
-   @sections = Section.all   
- 
-  @section1 = @questions[0].count + @questions[1].count + @questions[2].count + @questions[3].count  
-  @section2 = @questions[4].count + @questions[5].count + @questions[6].count + @questions[7].count 
-  @section3 = @questions[8].count + @questions[9].count + @questions[10].count + @questions[11].count 
-  @final_score = @section1 + @section2 + @section3
+                                      where responses.survey_id=#{params[:id]}",
+                           :group => "sections.id")
+  @sections = Section.all
+  @section1 = @questions[0].question_attempted
+  @section2 = @questions[1].question_attempted
+  @section3 = @questions[2].question_attempted
+  @final_score = @section1.to_i + @section2.to_i + @section3.to_i
  end
  
 
@@ -376,7 +364,7 @@ end
 
 def compare
  require 'rubygems'
- require 'google_chart'
+require 'google_chart'
 
  @question_ids = []
    @questions = Question.find(:all,
@@ -399,31 +387,34 @@ def compare
   @companies = Company.find(:all, 
    :select => "industries.id, companies.id",
    :joins =>"right outer join industries on companies.industry_id = industries.id    
-   where industries.id = '1' and companies.id !=#{@survey.company_id}"
+   where industries.id = #{@company.industry_id} and companies.id !=#{@survey.company_id}"
    )
+
+  #get all the surveys for the industry 
 
   #@responses_kk =  Responses.find(:all, 
  #:select =>
   #  ) 
-  @responses_average = []
-  response_total = 0
-  @companies.each do |cmp|
-    cmp.surveys.each do |survey|
-      survey.responses.each do |responses|        
-        response_total += responses.answer_1.to_i 
-      end
-      @responses_average << response_total 
-    end  
-  end  
+  # @responses_average = []
+  # response_total = 0
+  # @companies.each do |cmp|
+  #   cmp.surveys.each do |survey|
+  #     survey.responses.each do |responses|        
+  #       response_total += responses.answer_1.to_i 
+  #     end
+  #     @responses_average << response_total 
+  #   end  
+  # end  
   
-  @lc = GoogleChart::LineChart.new("400x200", "My Results", false)
-@lc.data "Line green", [3,5,1,9,0,2], '00ff00'
-@lc.data "Line red", [2,4,0,6,9,3], 'ff0000'
-@lc.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-@lc.show_legend = false
-@lc.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
-  @line_graph =  @lc.to_url
-  
+  GoogleChart::LineChart.new("700x300", "Overall", false) do |lc|
+  lc.data "Line green", ['2','3'], '00ff00'
+  lc.data "Line red", @responses_average, 'ff0000'
+  lc.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
+  lc.axis :x, :range =>@question_ids, :font_size =>10, :alignment =>:center
+  lc.show_legend = false
+  lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 10
+  @line_graph =  lc.to_url
+  end
 
 end  
 
@@ -575,33 +566,32 @@ def download_result
 
   respond_to do |format|
       format.html{}
-      format.png{}
       format.pdf {
        html = render_to_string(:layout => false , :action => "reports.html")
        kit = PDFKit.new(html)
        #kit.stylesheets << File.join( RAILS_ROOT, "assets", "stylesheets", "application.css" )
        send_data(kit.to_pdf, :filename => "survey.pdf", :type => "application/pdf")
       }
-      # format.xls {
-      #   result = Spreadsheet::Workbook.new
-      #   list = result.create_worksheet :name => "response" 
-      #   list.row(0).concat %w{Section Subsection Questions QuestionPoints Score}
-      #   @sections.each { |section|
-      #      section.sub_sections.each { |subsection|
-      #      subsection.questions.each { |question|
-      #       list.row(question.id+1).push section.name, subsection.name, question.name, section.total_points,
-      #       question.points, @questions_score[question.id]
-      #     }           
-      #    }
-      #   }
-      #   header_format = Spreadsheet::Format.new :color =>"green", :weight =>"bold"
-      #   list.row(0).default_format = header_format
-      #   #output to blob object
-      #   blob = StringIO.new("")
-      #   result.write blob
-      #   #respond with blob object as a file
-      #   send_data blob.string, :type =>:xls, :filename =>"result.xls"#; &quot;client_list.xls&quot;
-     # }
+      format.xls {
+        result = Spreadsheet::Workbook.new
+        list = result.create_worksheet :name => "response" 
+        list.row(0).concat %w{Section Subsection Questions QuestionPoints Score}
+        @sections.each { |section|
+           section.sub_sections.each { |subsection|
+           subsection.questions.each { |question|
+            list.row(question.id+1).push section.name, subsection.name, question.name, section.total_points,
+            question.points, @questions_score[question.id]
+          }           
+         }
+        }
+        header_format = Spreadsheet::Format.new :color =>"green", :weight =>"bold"
+        list.row(0).default_format = header_format
+        #output to blob object
+        blob = StringIO.new("")
+        result.write blob
+        #respond with blob object as a file
+        send_data blob.string, :type =>:xls, :filename =>"result.xls"#; &quot;client_list.xls&quot;
+      }
   end    
 end
 

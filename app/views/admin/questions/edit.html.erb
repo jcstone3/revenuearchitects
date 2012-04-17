@@ -38,8 +38,8 @@
                                           </span>
                                              <%= f.hidden_field :is_active, :value=>true%>
                                             <h3>Section<span class="star">*</span></h3>
-                                            <%= select_tag(:sub_section_id, options_for_select(@subsection.collect{|x| [x.name,x.id]}.insert(0,
-                                             "Select Section")), :selected=>@question.sub_section_id)%>
+                                            <%= f.select "sub_section_id", options_for_select(@subsection.collect{|x| [x.name,x.id]}.insert(0,
+                                             "Select Section"),@question.sub_section_id)%>
                                              <span id="section_error" class="custom_error"></span>
                                              <br/>
                                             
