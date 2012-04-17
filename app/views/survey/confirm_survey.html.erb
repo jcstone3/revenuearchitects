@@ -50,7 +50,7 @@
                             <%= @sections[0].question_count %></span></td>
                           </tr>
                           <tr>
-                            <td>Total</td><td><span class="tblendstyle red"><%= @section1 + @section2 + @section3%>/
+                            <td>Total</td><td><span class="tblendstyle red"><%=  @final_score%>/
                             <%= @sections[0].question_count + @sections[1].question_count + @sections[2].question_count%></span></td>
                           </tr>
                        </table>
@@ -82,7 +82,7 @@
                     <div class="scoreBoard">
                         <div class="head" >
                           <p class="scoretext">Total score </p> </div>
-                            <div class="score3"><br><%= @final_score%>/<span class="totalpoints">1000
+                            <div class="score3"><br><%= @final_score%>/<span class="totalpoints"><%= @sections[0].question_count + @sections[1].question_count + @sections[2].question_count%>
                             </span> <br>
                             <span>POINTS</span>
 
@@ -91,11 +91,12 @@
 
                      <div class="scoreBoard">
                         <div class="head">
-                          <p class="abouttext">About Questions</p>
+                          <p class="abouttext">About Revenue Grader</p>
                         </div>
                             <div class="text1"><br>
                               <p class="abouttextcontent">
-                               <%#= @question.name%>                               
+                              
+                        Revenue Grader is a diagnostic tool developed by the team at Revenue Architects.  Revenue Grader helps you quickly assess and plan your revenue growth strategy.                            
                                 </p>
                               
                             </div> 
