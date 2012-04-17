@@ -41,7 +41,10 @@
       <div class="row-fluid">
         <div class="span12">
                   <ul class="nav3-tabs3 usercompare"> 
-                                <li><a>Overall</a></li>
+                                <li><%= link_to(compare_url(params[:id])) do %>
+                                    Overall
+                                     <% end %> 
+                                 </li>
                                 <li><%= link_to(compare_strategy_url(params[:id])) do %>
                                     Strategy
                                      <% end %> 
@@ -65,14 +68,15 @@
                                 
                                 <div class="tabGraph">
                                     <div class="box">                                        
-                                        <h1>Responses in the current month <strong>March 2012</strong></h1>
-                                        <div class="graph">
-             <img src="<%=Gchart.line(:size => '600x400', 
+                                      <h1>Responses in the current month <strong>March 2012</strong></h1>
+                                      <div class="graph">
+                                      <img src="<%= @line_graph_program%>">
+             <!-- <img src="<%#=Gchart.line(:size => '600x400', 
             :title => "Programs",            
             :legend => ['first data set label'],
             :data => [10, 30, 120, 45, 72], :line_colors => "BDBDBD"
-            )%>"/>
-          </div>
+            )%>"/> -->
+                                      </div>
                                     </div>
               <!--table goes here-->
 
@@ -90,89 +94,18 @@
                                                   </tr>
                                                 </thead>
                                                 <tbody>
-                                                  <tr>
-                                                    <td>Questions</td>
-                                                    <td>Group</td>
-                                                    <td>Score</td>
-                                                    <td>In Plan</td>
-                                                    <td>Priority</td>
-                                                    <td>Points</td>
-                                                  </tr>
-
-                                                  <tr>
-                                                    <td>Questions1</td>
-                                                    <td>Group1</td>
-                                                    <td>Score1</td>
-                                                    <td>In Plan1</td>
-                                                    <td>Priority1</td>
-                                                    <td>Points1</td>
-                                                  </tr>
-
-                                                  <tr>
-                                                    <td>Questions2</td>
-                                                    <td>Group2</td>
-                                                    <td>Score2</td>
-                                                    <td>In Plan2</td>
-                                                    <td>Priority2</td>
-                                                    <td>Points2</td>
-                                                  </tr>
-
-                                                  <tr>
-                                                    <td>Questions3</td>
-                                                    <td>Group3</td>
-                                                    <td>Score3</td>
-                                                    <td>In Plan3</td>
-                                                    <td>Priority3</td>
-                                                    <td>Points3</td>
-                                                  </tr>
-<tr>
-                                                    <td>Questions3</td>
-                                                    <td>Group3</td>
-                                                    <td>Score3</td>
-                                                    <td>In Plan3</td>
-                                                    <td>Priority3</td>
-                                                    <td>Points3</td>
-                                                  </tr>
-
-<tr>
-                                                    <td>Questions3</td>
-                                                    <td>Group3</td>
-                                                    <td>Score3</td>
-                                                    <td>In Plan3</td>
-                                                    <td>Priority3</td>
-                                                    <td>Points3</td>
-                                                  </tr>
-
-<tr>
-                                                    <td>Questions3</td>
-                                                    <td>Group3</td>
-                                                    <td>Score3</td>
-                                                    <td>In Plan3</td>
-                                                    <td>Priority3</td>
-                                                    <td>Points3</td>
-                                                  </tr>
-
-<tr>
-                                                    <td>Questions3</td>
-                                                    <td>Group3</td>
-                                                    <td>Score3</td>
-                                                    <td>In Plan3</td>
-                                                    <td>Priority3</td>
-                                                    <td>Points3</td>
-                                                  </tr>
-
-<tr>
-                                                    <td>Questions3</td>
-                                                    <td>Group3</td>
-                                                    <td>Score3</td>
-                                                    <td>In Plan3</td>
-                                                    <td>Priority3</td>
-                                                    <td>Points3</td>
-                                                  </tr>
-
-
-
-                                                </tbody>        
+                                                
+                                        <% @responses.each do |response| %>
+                                            <tr>
+                                                <td><%= response.name %></td>
+                                                <td><%= response.section_name%><%= response.sub_sect_name%></td>
+                                                <td><%= response.answer_1 %></td>
+                                                <td><%= "Y" %></td>
+                                                <td><%= "Must" %></td>
+                                                <td><%= response.points %></td>
+                                            </tr>
+                                        <% end %>
+                                          </tbody>        
                                           </table>      
                                        
                                         </div>

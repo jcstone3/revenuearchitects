@@ -546,12 +546,10 @@ table.dataTable th:active {
 
         <div class="overall" style="page-break-after:always;">
            <h1>Overall Graph</h1>
-          <div class="graph">
-             <img src="<%=Gchart.line(:size => '600x500', 
-            :title => "example title",
-            :bg => 'efefef',
-            :legend => ['first data set label'],
-            :data => [10, 30, 120, 45, 72])%>"/>
+          <div class="graph" style="background-color:#FFF;">
+            
+            <img src="<%= @line_graph %>">
+             
           </div>
         </div>
 
@@ -562,11 +560,8 @@ table.dataTable th:active {
         <div class="content" style="page-break-after:always;">
           <div class="graph">
             <h1>Strategy Graph</h1>
-             <img src="<%=Gchart.line(:size => '600x300', 
-            :title => "Strategy Chart",
-            :bg => 'e3e3e3',
-            :legend => ['first data set label'],
-            :data => [10, 30, 120, 45, 72],:line_colors => "FF0000")%>"/>
+            <img src="<%= @line_graph_strategy %>"/>
+              
           </div>
           <div class="textbox">
             <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2" > 
@@ -598,22 +593,6 @@ table.dataTable th:active {
                     <td>Giri</td>
                     <td>Giri</td>
                 </tr>
-                <tr>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                </tr>
-                <tr>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                </tr>
                 
           </tbody>        
     </table>
@@ -628,11 +607,9 @@ table.dataTable th:active {
         <div class="content" style="page-break-after:always;">
           <div class="graph">
              <h1>System Graph</h1>
-             <img src="<%=Gchart.line(:size => '600x300', 
-            :title => "System Graph",
-            :bg => 'e3e3e3',
-            :legend => ['first data set label'],
-            :data => [10, 30, 120, 45, 72])%>"/>
+
+            <img src="<%= @line_graph_system %>"/>
+            
           </div>
           <div class="textbox">
             <table cellpadding="1" cellspacing="1" id="resultTable1" class="report-body dataTable2" border="1"> 
@@ -663,22 +640,7 @@ table.dataTable th:active {
                     <td>Giri</td>
                     <td>Giri</td>
                 </tr>
-                <tr>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                </tr>
-                <tr>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                    <td>Giri</td>
-                </tr>
+               
           </tbody>        
     </table>
           </div> 
@@ -692,12 +654,8 @@ table.dataTable th:active {
         <div class="content" style="page-break-after:always;">
           <div class="graph1">
              <h1>Program  Graph</h1>
-             <img src="<%=Gchart.line(:size => '600x300', 
-            :title => "System Graph",
-            :bg => 'e3e3e3',
-            :legend => ['first data set label'],
-            :data => [10, 30, 120, 45, 72])%>"/>
-          </div>
+             <img src="<%= @line_graph_program%>"/>
+             </div>
           <div class="textbox">
               
         <table cellpadding="1" cellspacing="1" id="resultTable2" class="report-body dataTable2" border="1"> 
@@ -864,20 +822,7 @@ table.dataTable th:active {
              </div>
         </div> -->
    
-     <script>     
-    
-      $('#resultTable').dataTable( {
-            "bPaginate": false,
-            "bLengthChange": false,
-            "bFilter": false,
-            "bSort": true,
-            "bInfo": false,
-            "bAutoWidth": true
-        } );
-
-       
-
-    </script>
+     
     
     
                 

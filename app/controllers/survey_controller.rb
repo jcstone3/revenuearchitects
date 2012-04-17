@@ -103,7 +103,7 @@ end
 
 #lists all the active surveys 
 def show
-  @companies =  current_user.companies          
+  @companies =  current_user.companies  
 end  
 
 #question for the survey	
@@ -191,6 +191,8 @@ end
 
 #report of a particular survey
 def report
+  require 'rubygems'
+ require 'google_chart'
   @survey = current_user.companies.first.surveys.find_all_by_id(params[:id])
   if @survey.present?
   @section_total = []
@@ -377,8 +379,7 @@ end
 
 def compare
  require 'rubygems'
-require 'google_chart'
-
+ require 'google_chart'
 
  @question_ids = []
    @questions = Question.find(:all,
@@ -418,22 +419,26 @@ require 'google_chart'
     end  
   end  
   
-  GoogleChart::LineChart.new("700x300", "Overall", false) do |lc|
-  lc.data "Line green", @response_all, '00ff00'
-  lc.data "Line red", @responses_average, 'ff0000'
-  lc.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
-  lc.axis :x, :range =>@question_ids, :font_size =>10, :alignment =>:center
-  lc.show_legend = false
-  lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 10
-  @line_graph =  lc.to_url
-  end
+  @lc = GoogleChart::LineChart.new("400x200", "My Results", false)
+@lc.data "Line green", [3,5,1,9,0,2], '00ff00'
+@lc.data "Line red", [2,4,0,6,9,3], 'ff0000'
+@lc.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+@lc.show_legend = false
+@lc.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+  @line_graph =  @lc.to_url
+  
 
 end  
 
 def compare_system
+  require 'rubygems'
+ require 'google_chart'
+
   @questions = Question.find(:all,
    :select => "questions.id, responses.question_id as response_quest_id",
-   :joins => "left outer join responses on responses.question_id = questions.id  left outer join subsection on question.subsection_id = subsection.id left outer join sections on subsection.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 1")
+   :joins => "left outer join responses on responses.question_id = questions.id  
+   left outer join sub_sections on questions.sub_section_id = sub_sections.id left outer 
+   join sections on sub_sections.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 1")
     @response_all = []
     @questions.each do |q|
     @response = Response.find_by_question_id(q.id)
@@ -441,13 +446,32 @@ def compare_system
      @response_all << get_individual_response_score(@response.id, @response.question_id)
     end        
   end  
+  @lcp = GoogleChart::LineChart.new("400x200", "My Results", false)
+  @lcp.data "Line green", [3,5,1,9,0,2], '00ff00'
+  @lcp.data "Line red", [2,4,0,6,9,3], 'ff0000'
+  @lcp.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+  @lcp.show_legend = false
+  @lcp.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+  @line_graph_system =  @lcp.to_url
   
+  @responses = Response.find(:all, 
+  :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+  :joins => "right outer join questions on responses.question_id = questions.id 
+             left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+             left outer join sections on sections.id = sub_sections.section_id   
+             and responses.survey_id =#{params[:id]}"  
+   )
 end  
 
 def compare_strategy
+  require 'rubygems'
+ require 'google_chart'
+
   @questions = Question.find(:all,
    :select => "questions.id, responses.question_id as response_quest_id",
-   :joins => "left outer join responses on responses.question_id = questions.id  left outer join subsection on question.subsection_id = subsection.id left outer join sections on subsection.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 2")
+   :joins => "left outer join responses on responses.question_id = questions.id  
+   left outer join sub_sections on questions.sub_section_id = sub_sections.id left outer 
+   join sections on sub_sections.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 2")
     @response_all = []
     @questions.each do |q|
     @response = Response.find_by_question_id(q.id)
@@ -457,12 +481,32 @@ def compare_strategy
     @response_all << 0
     end        
   end
+  @lc = GoogleChart::LineChart.new("400x200", "My Results", false)
+  @lc.data "Line green", [3,5,1,9,0,2], '00ff00'
+  @lc.data "Line red", [2,4,0,6,9,3], 'ff0000'
+  @lc.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+  @lc.show_legend = false
+  @lc.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+  @line_graph_strategy = @lc.to_url
+  
+  @responses = Response.find(:all, 
+  :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+  :joins => "right outer join questions on responses.question_id = questions.id 
+             left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+             left outer join sections on sections.id = sub_sections.section_id   
+             and responses.survey_id =#{params[:id]}"  
+   )
 end  
 
 def compare_programs
+  require 'rubygems'
+  require 'google_chart'
+
   @questions = Question.find(:all,
    :select => "questions.id, responses.question_id as response_quest_id",
-   :joins => "left outer join responses on responses.question_id = questions.id  left outer join subsection on question.subsection_id = subsection.id left outer join sections on subsection.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 3")
+   :joins => "left outer join responses on responses.question_id = questions.id  
+   left outer join sub_sections on questions.sub_section_id = sub_sections.id left outer 
+   join sections on sub_sections.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 3")
     @response_all = []
     @questions.each do |q|
     @response = Response.find_by_question_id(q.id)
@@ -472,11 +516,47 @@ def compare_programs
     @response_all << 0
     end        
   end
+ @lc = GoogleChart::LineChart.new("400x200", "My Results", false)
+@lc.data "Line green", [3,5,1,9,0,2], '00ff00'
+@lc.data "Line red", [2,4,0,6,9,3], 'ff0000'
+@lc.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+@lc.show_legend = false
+@lc.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+ @line_graph_program = @lc.to_url
+  
+   @responses = Response.find(:all, 
+  :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+  :joins => "right outer join questions on responses.question_id = questions.id 
+             left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+             left outer join sections on sections.id = sub_sections.section_id   
+             and responses.survey_id =#{params[:id]}"  
+   )
 end  
 
 #to download in pdf/xls format
 def download_result
-  require 'spreadsheet'
+
+  logger.debug "&&&&&&& download_result start"
+  require 'rubygems'
+ require 'google_chart'
+  #require 'spreadsheet'
+
+  #  GoogleChart::LineChart.new("400x300", "Overall", false) do |lc|
+  # lc.data "Line green", [1,2,3,4,5], '00ff00'
+  # lc.axis :y, :range =>['0','5','10','15','20'], :font_size =>10, :alignment =>:center
+  # lc.axis :x, :range =>[2,4,6,8.10], :font_size =>10, :alignment =>:center
+  # lc.show_legend = false
+  # lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
+  # @line_graph =  lc.to_url
+  # end
+
+  @lc = GoogleChart::LineChart.new("400x200", "My Results", false)
+@lc.data "Line green", [3,5,1,9,0,2], '00ff00'
+@lc.data "Line red", [2,4,0,6,9,3], 'ff0000'
+@lc.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+@lc.show_legend = false
+@lc.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+@line_graph = @lc.to_url
   @survey = Survey.find(params[:id])
   @section_total = []
   @subsection_total = []
@@ -498,32 +578,33 @@ def download_result
 
   respond_to do |format|
       format.html{}
+      format.png{}
       format.pdf {
        html = render_to_string(:layout => false , :action => "reports.html")
        kit = PDFKit.new(html)
        #kit.stylesheets << File.join( RAILS_ROOT, "assets", "stylesheets", "application.css" )
        send_data(kit.to_pdf, :filename => "survey.pdf", :type => "application/pdf")
       }
-      format.xls {
-        result = Spreadsheet::Workbook.new
-        list = result.create_worksheet :name => "response" 
-        list.row(0).concat %w{Section Subsection Questions QuestionPoints Score}
-        @sections.each { |section|
-           section.sub_sections.each { |subsection|
-           subsection.questions.each { |question|
-            list.row(question.id+1).push section.name, subsection.name, question.name, section.total_points,
-            question.points, @questions_score[question.id]
-          }           
-         }
-        }
-        header_format = Spreadsheet::Format.new :color =>"green", :weight =>"bold"
-        list.row(0).default_format = header_format
-        #output to blob object
-        blob = StringIO.new("")
-        result.write blob
-        #respond with blob object as a file
-        send_data blob.string, :type =>:xls, :filename =>"result.xls"#; &quot;client_list.xls&quot;
-      }
+      # format.xls {
+      #   result = Spreadsheet::Workbook.new
+      #   list = result.create_worksheet :name => "response" 
+      #   list.row(0).concat %w{Section Subsection Questions QuestionPoints Score}
+      #   @sections.each { |section|
+      #      section.sub_sections.each { |subsection|
+      #      subsection.questions.each { |question|
+      #       list.row(question.id+1).push section.name, subsection.name, question.name, section.total_points,
+      #       question.points, @questions_score[question.id]
+      #     }           
+      #    }
+      #   }
+      #   header_format = Spreadsheet::Format.new :color =>"green", :weight =>"bold"
+      #   list.row(0).default_format = header_format
+      #   #output to blob object
+      #   blob = StringIO.new("")
+      #   result.write blob
+      #   #respond with blob object as a file
+      #   send_data blob.string, :type =>:xls, :filename =>"result.xls"#; &quot;client_list.xls&quot;
+     # }
   end    
 end
 

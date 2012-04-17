@@ -12,7 +12,9 @@
                                  </li>   
                              <%end%>                            
                             <% @questions.each do |question|%>
-
+                               <%if (question.id == params(question.id)%>
+                                <i class="icon-ok circle icon-white"></i>
+                                
                                 <% if (question.response_quest_id.present?) %>
                                     <li>
                                       <%= link_to questions_url(params[:id],question.id), 
@@ -29,6 +31,7 @@
                                     </li>                               
                                 <%end%>
                             <%end%>
+
                              <%if(params[:question_id].to_i == @question_all)%>
                                <li class ="disabled">
                                  <a class="next">Next</a> 
@@ -83,8 +86,3 @@
                              
                     </div>
 
-
-
-
-             
- 

@@ -12,16 +12,14 @@
           
          
            <div class="surveyDone">
-                     <% current_user.companies.each do |cmpany| %>      
-                     <div class="points">
-                        <div class="option" >
-                        
-                         <%@active_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", true]) %>
+              <% current_user.companies.each do |cmpany| %>      
+                  <div class="points">
+                     <div class="option" >
+                       <%@active_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", true]) %>
                           <% if @active_survey.present?%>
                             <h4>
                           <% @active_survey.each do |survey|%>
-                              <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Survey for #{survey.created_at.strftime('%B  %Y')}", get_response_status_url(survey)%></h3>                          
-                             
+                              <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Survey for #{survey.created_at.strftime('%B  %Y')}", get_response_status_url(survey)%></h3>                           
                             </h4>
                             <% @response_count= survey.responses.present? ? survey.responses.count : 0 %>
                             
@@ -29,13 +27,44 @@
                           </br>
                              
                           <%end%>
-                          <% end %>                                                   
+                          <% end %> 
+                          </div>
+                      </div>
+                    
+
+          <div class="survey">
+             <div class="question1" >
+                  <h1>  Previous Survey </h1>
+                  </div>
+                 
+                 <% current_user.companies.each do |cmpany| %>      
+                    <div class="points">
+                        <div class="option" >
+                        <% @inactive_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", false], :limit=>2, :order=>'created_at Desc') %> 
+                        <% if @inactive_survey.present?%>                     
+                      <h4> <% @inactive_survey.each_with_index do |survey, i|%>
+                         <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Survey for #{survey.created_at.strftime('%B  %Y')}", reports_url(survey)%></h3>                          
+                      </h4>
+                            <% @response_count= survey.responses.present? ? survey.responses.count : 0 %>
+                            
+                            <h4> <%= "Total Completed Questions" %> <span class="green"> <%= "  #{@response_count}/100" %> </span>  </h4>
+                          </br>
+
+                          <%end%>
+                          <%else%>
+                            <h3> No previoue Survey </h3>
+                          
+                          <% end %>
                         </div>
                       </div>
-                    <%end%>                      
+                    <%end%>  
+                </div>
+                                                             
+              <%end%>                      
                      
              </div>  
            </div>
+
            <div class="span3 rightBox">
             <div class="processIcons">
                         <span class"leftflt">

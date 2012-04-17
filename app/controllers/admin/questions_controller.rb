@@ -21,8 +21,17 @@ class Admin::QuestionsController < ApplicationController
 		params[:question].merge!(:sub_section_id => params[:sub_section_id])
 		@question = Question.new(params[:question])		
         if @question.save
+          @sub_section = SubSection.find(@question.sub_section_id)
+          @section = Section.find(@sub_section.section_id)
+          @section_question = @section.question_count += 1
+          @section_total = @section.total_points += @question.points
+          if @section.update_attributes(:question_count => @section_question ,:total_points => @section_total)
           flash[:success] = "Question Created successfully"
           redirect_to :action => 'index'
+          else
+            flash[:success] = "Question Created successfully"
+            redirect_to :action => 'index'
+          end  
         else
           flash[:error] = "Question could not be created"
          render :index
@@ -39,8 +48,7 @@ class Admin::QuestionsController < ApplicationController
 
   def update
    @question = Question.find(params[:id])
-   params[:question].merge!(:sub_section_id => params[:sub_section_id])
-   
+   params[:question].merge!(:sub_section_id => params[:sub_section_id])   
 
     if @question.update_attributes(params[:question])
       flash[:success] = "Question Created successfully"
