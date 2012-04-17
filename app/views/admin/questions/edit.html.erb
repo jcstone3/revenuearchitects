@@ -29,17 +29,20 @@
                                             <h3>Question<span class="star">*</span></h3>
                                            <%= f.text_area :name, :class=>"input-xlarge", 
                                            :placeholder=>"Type new question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8, :validate=>true%>
-                                           
+                                           <span id="question_name_error"  class="custom_error">
+                                           </span>
                                           <h3>Description<span class="star">*</span></h3>
                                            <%= f.text_area :description, :class=>"input-xlarge", 
                                            :placeholder=>"Type description for question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8, :validate=>true%>
-                                          
+                                          <span id="description_error"  class="custom_error">
+                                          </span>
                                              <%= f.hidden_field :is_active, :value=>true%>
                                             <h3>Section<span class="star">*</span></h3>
                                             <%= select_tag(:sub_section_id, options_for_select(@subsection.collect{|x| [x.name,x.id]}.insert(0,
                                              "Select Section")), :selected=>@question.sub_section_id)%>
+                                             <span id="section_error" class="custom_error"></span>
                                              <br/>
-                                            <span id="section_error" style="color:red;"></span>
+                                            
                                             <h3>Points<span class="star">*</span></h3>
                                             <%= f.select :points, [5,10,20]%>
                                             <br>

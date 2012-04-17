@@ -35,9 +35,14 @@
   <body>
     <div class="container mainLeft" >
           <% if user_signed_in?%>
-          <%= link_to image_tag('logo.png', :alt=>"logo"),  "", :class=>"brand" %>
+          <a class="brand">
+          <img src="/assets/logo.png" alt="logo">
+          </a>          
           <div class="ra">
-            brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo", :class=>"headertext"), "" %>
+            brought to you by<a class="headertext">
+            <img src="/assets/ra_logo.png" alt="ra_logo.png">
+            </a>
+
           </div>
           <%else%>
         
