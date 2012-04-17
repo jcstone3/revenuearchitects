@@ -1,10 +1,5 @@
-<div class="container signup-left">
-      <div class="row-fluid">
-        <div class="span8 leftBox">
-         <%= render :partial => "users/left_box" %>
-        </div>
-        <div class="span4 rightBox">
-                 <ul class="nav nav-tabs">
+<% content_for :side_content do -%> 
+         <ul class="nav nav-tabs">
                             <li class="active">
                                <a class="signuplink" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png", 
                             :alt=>"home")%>Sign In</a></li>                
@@ -18,17 +13,7 @@
                                    <%= image_tag "facebook_icon.png", :alt=>"facebook", :id=>"facebook_click"%>
                                 </a>
                             </li>
-                            <!--<li>
-                                <a href="#plus" data-toggle="tab" style="background-color
-                                :#bb2a0b;" id="google_click">
-                                   <%#= image_tag "plus_icon.png", :alt=>"plus", :id=>"google_click" %>
-                                 </a>
-                             </li>
-                             <li>
-                                <a href="#linkedin" data-toggle="tab" style="background-color:#006695;", id="linkedin_click">
-                                   <%#= image_tag "linkedin_icon.png", :alt=>"linkedin", :id=>"linkedin_click" %>
-                                 </a>
-                             </li>-->
+
                             </ul>
                              
                             <div class="tab-content" id="tab-content">
@@ -67,19 +52,24 @@
                                                      user_omniauth_authorize_path(:facebook)
                                                      %>
                             </div>
-                            <div class="tab-pane signinbtn" id="plus">Login with Google Plus 
-                                <br>
-                                <%#= link_to image_tag("google.jpeg", :alt=>"google"), 
-                                                     user_omniauth_authorize_path(:google),
-                                                     :style=>"background-color:#bb2a0b;"%>
+ 
                             </div>
-                            <div class="tab-pane" id="linkedin">Linked in login screen
-                                <br>
-                                <%#= link_to image_tag("linkedin_icon.png", :alt=>"linkedin"), 
-                                                     user_omniauth_authorize_path(:facebook),
-                                                     :style=>"background-color:#006695;"%>   
-                            </div>
-                            </div>
-        </div>
-      </div>
-    </div> 
+ <% end -%> 
+
+
+<% content_for :main_content do -%> 
+    <div class="main-content-header">
+          <div class="heading">
+            <h1>Assess your <br />
+            Revenue Potential <%= link_to 'now', new_user_session_path %>
+            </h1>
+          </div><!-- / -->
+          <div class="arrow">
+            &nbsp;
+          </div><!-- / -->
+    </div><!-- / -->
+
+       <div class="main-content-content">
+             <%= render "/site/index_content" -%> 
+       </div>
+<% end -%> 

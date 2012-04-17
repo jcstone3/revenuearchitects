@@ -39,18 +39,18 @@
           <%= render  "/layouts/shared/header" -%> 
       </div><!-- / end of row -->
 
-
     <% if !flash.blank? -%> 
-    <div class="row-fluid" >
-             <div class="alert">
-               <% flash.each do |key, value| %>
+      <div class="row-fluid">
+                 <% flash.each do |key, value| %>
                      <%= content_tag :div, :id=>'flash_msg', :class => "alert alert-#{key}" do %>
                         <%= value unless value.blank? %>                         
                           <a class="close" data-dismiss="alert">×</a>   
                     <% end %>
                 <% end %>   
-      </div><!-- / end of flash div -->
+      </div><!-- / -->
       <% end -%> 
+
+
      <div class="row-fluid content-section" >
         <div class="span8 main-content"> 
           <%= yield :main_content %>
