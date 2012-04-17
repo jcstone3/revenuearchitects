@@ -103,7 +103,9 @@ end
 
 #lists all the active surveys 
 def show
-  @companies =  current_user.companies          
+  @companies =  current_user.companies  
+  @sections= Section.all  
+  @total_questions = @sections[0].question_count+@sections[1].question_c+@sections[2].question_countount      
 end  
 
 #question for the survey	
@@ -360,59 +362,62 @@ def report_detailed
              and responses.survey_id =#{id}"  
    )
 
-end  
+end 
 
 def compare
  require 'rubygems'
-require 'google_chart'
-
- @question_ids = []
-   @questions = Question.find(:all,
-    :select => "questions.id, responses.question_id as response_quest_id",
-    :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}")
-  Question.all.each do |qst|
-   @question_ids << "#{qst.id}"
-   end   
+ require 'google_chart'
+   
+ @survey = Survey.find(params[:id])
+  @question_count =Question.all.count
+  @response = Response.find(:all,
+  :select =>"responses.answer_1, questions.id",
+  :joins=>"right outer join questions on questions.id=responses.question_id where responses.survey_id=#{@survey.id}"
+    )
   @response_all = []
-  @questions.each do |q|
-  @response = Response.find_by_question_id_and_survey_id(q.id,params[:id])
-    if @response  
-     @response_all << get_individual_response_score(@response.id, @response.question_id)    
-    end        
-  end
+  
   #Average response for all survey
   @survey = Survey.find(params[:id])
   @company = Company.find(@survey.company_id)
   @industry  = Industry.find(@company.industry_id)
-  @companies = Company.find(:all, 
+  @companies = Company.find(:all,
    :select => "industries.id, companies.id",
-   :joins =>"right outer join industries on companies.industry_id = industries.id    
-   where industries.id = #{@company.industry_id} and companies.id !=#{@survey.company_id}"
+   :joins =>"right outer join industries on companies.industry_id = industries.id   
+   where industries.id = '1' and companies.id !=#{@survey.company_id}"
    )
-
-  #get all the surveys for the industry 
-
-  #@responses_kk =  Responses.find(:all, 
- #:select =>
-  #  ) 
-  # @responses_average = []
-  # response_total = 0
-  # @companies.each do |cmp|
-  #   cmp.surveys.each do |survey|
-  #     survey.responses.each do |responses|        
-  #       response_total += responses.answer_1.to_i 
-  #     end
-  #     @responses_average << response_total 
-  #   end  
-  # end  
-  
+  if @companies.present?
+  @response_all = Response.find(:all,
+     :select=>"sum(responses.answer_1), questions.id, surveys.id",
+     :joins =>"right outer join questions on questions.id=responses.question_id
+              left outer join surveys on  surveys.company_id in [#{@companies}] where responses.survey_id!=#{@survey.id}",
+     :group=>"surveys.id"    
+     )
+  else
+    @response_all = Response.find(:all,
+     :select=>"count(*), responses.answer_1, questions.id",
+     :joins =>"right outer join questions on questions.id=responses.question_id
+              left outer join surveys on responses.survey_id = surveys.id where responses.survey_id!=#{@survey.id}",
+     :group=>"questions.id, responses.answer_1"    
+     )
+  end  
+  @responses_average = []
+  response_total = 0
+  @companies.each do |cmp|
+    cmp.surveys.each do |survey|
+      survey.responses.each do |responses|       
+        response_total += responses.answer_1.to_i
+      end
+      @responses_average << response_total
+    end 
+  end 
+ 
   GoogleChart::LineChart.new("700x300", "Overall", false) do |lc|
-  lc.data "Line green", ['2','3'], '00ff00'
-  lc.data "Line red", @responses_average, 'ff0000'
+  lc.data "Line green", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
+  lc.data "Line red", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
   lc.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
-  lc.axis :x, :range =>@question_ids, :font_size =>10, :alignment =>:center
+  lc.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
   lc.show_legend = false
-  lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 10
+  lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
   @line_graph =  lc.to_url
   end
 

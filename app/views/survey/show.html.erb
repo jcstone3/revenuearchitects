@@ -23,7 +23,7 @@
                             </h4>
                             <% @response_count= survey.responses.present? ? survey.responses.count : 0 %>
                             
-                            <h4> <%= "Total Completed Questions" %> <span class="red"> <%= "  #{@response_count}/100" %> </span>  </h4 
+                            <h4> <%= "Total Completed Questions" %> <span class="red"> <%= @response_count%>/<%= @total_questions}%> </span>  </h4 
                           </br>
                              
                           <%end%>
