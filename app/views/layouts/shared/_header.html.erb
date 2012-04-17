@@ -1,8 +1,8 @@
    <div class="span6">
            <% logo_link_path =( user_signed_in? ?  new_user_session_path : root_path )%>
-            <%= link_to image_tag('logo.png', :alt=>"logo"), logo_link_path %>
-            <div >
-              brought to you by<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo"), logo_link_path %>
+            <%= link_to image_tag('logo.png', :alt=>"logo", :class=>"pull-left"), logo_link_path %>
+            <div class="pull-left brand-name">
+              brought to you by&nbsp;<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo",:class=>"brand-image"), logo_link_path %>
             </div>
 
         </div>
@@ -17,8 +17,8 @@
                 <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
           
               <%else%>
-
-              <ul class="nav nav-pills pull-right">
+            <div class="top-links">
+              <ul class="nav nav-pills">
                 <!-- #TODO: Find active path -->
                 <li><%= link_to "Home", root_path %></li>
                 <li><%= link_to "About Us", aboutus_path %></li>
@@ -30,4 +30,5 @@
               </div><!-- / -->
                 
               <%end%>
+          </div>
         </div><!-- /  end of right span6-->

@@ -21,16 +21,6 @@
           <%= link_to image_tag("login-w-fb.gif", :alt=>"facebook"), 
                                user_omniauth_authorize_path(:facebook)%>
       </div>
-      <div class="tab-pane" id="plus" >Login with Google Plus 
-          <br>
-          <%= link_to image_tag("google.jpeg", :alt=>"google"), 
-                               user_omniauth_authorize_path(:google_oauth2)%>
-      </div>
-      <div class="tab-pane " id="linkedin">Linked in login screen
-          <br>
-          <%#= link_to image_tag("linkedin_icon.png", :alt=>"linkedin"), 
-                               user_omniauth_authorize_path(:facebook),
-                               :style=>"background-color:#006695;"%>   
-      </div>
+    
       </div>
 </div>

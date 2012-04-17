@@ -32,8 +32,19 @@ body {
 
 .top-bar {
   background: #FFF ;
-  padding: 20px 5px 5px 5px  ;
-  margin-bottom: 10px ;
+  padding: 5px 5px 5px 5px  ;
+  margin-bottom:10px;
+}
+.brand-name{
+	margin-top:34px;
+	color: #67737A;
+	font-weight:200;
+	font-size:12px;
+	margin-right:4px;
+}
+.brand-image{
+	
+	margin-top:-5px;
 }
 
 .content-section {
@@ -43,7 +54,8 @@ body {
 
 .main-content {
   background: #FFF;
-  padding-top: 0px;
+  padding-bottom: 17px;
+  height:auto;
 }
 
 .main-content-header {
@@ -58,7 +70,7 @@ body {
   float: left ;
   width: auto;
   height: 130px;
-  padding: 0px;
+  padding-left: 6px;
 }
 
 .main-content-header .arrow {
@@ -76,7 +88,9 @@ body {
     color:#fff;
     line-height: 36px;
 }
-
+.main-content-header h1 a{
+	color:#80CEDC;
+}
 
 .main-content .points .icon{
   float:left;
@@ -86,7 +100,11 @@ body {
   float:left;
   width:85%;
 }
+.picon p{
+	font-size:12px;
+  color:#67737A;
 
+}
 h2{
   font-size:25px;  
   font-weight:400;
@@ -103,15 +121,122 @@ h2.point2{
 h2.point3{
   color:#74d1de;
 }
+/*Nav Tabs  styling*/
+.nav {
+    list-style: none outside none;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+.nav-tabs  .active .signuplink {
+	background-color:#ffffff;
+}
 
-// .side-content {
-//   background: #FFF ;
-// }
+.nav-tabs  .twitterlink {
+	background-color:#53b1f0;
+}
+
+.nav-tabs  .facebooklink {
+	background-color:#3b5998;
+}
+
+.tab-content{
+    background-color: #FFFFFF;
+    width: 95%;
+    height:362px;
+    overflow: hidden;
+    padding-top:20px;
+    padding-left:15px;
+}
+
+.tab-content h3{
+	font-weight:300;
+
+}
+.tab-content h5{
+	font-weight:300;
+	font-size:10px;
+
+}
+
+.tab-content p{
+	font-size:12px;
+	font-weight:300;
+	margin-right:8px;
+
+}
+.signintweet{
+	margin-top:100px;
+	margin-left:25px;
+}
+
+.signinbtn{
+
+	margin-top:100px;
+	margin-left:60px;
+}
+
+
+
+
+
+
+
+
+/*end of Nav Tabs*/
+/*about us css*/
+.aboutus{
+	margin-left:20px;
+	margin-right:40px;
+
+}
+.aboutus h2{
+	color:#C56D2B;
+	font-weight:400;
+}
+.aboutus h4{
+	color:#000;
+	font-weight:400;
+}
+
+.aboutus p{
+	line-height:1.6em;
+	font-size:12px;
+	color:#555555;
+}
+.aboutus  ul{
+	line-height:1.6em;
+	font-size:12px;
+	color:#555555;
+}
+/*end*/
+.contact{
+
+	margin-left:20px;
+	margin-right:40px;
+}
+
+.contact p{
+	line-height:1.6em;
+	font-size:12px;
+	margin-bottom: 190px; 
+	padding-top: 24px;
+	color:#555555;
+}
+
+
+
+
+
 
 .footer {
   color: #67737a;
   font-size: 11px;
 }
+
+
+
+
+
 
 // .leftBox .arrows{
 //   height:130px;
@@ -192,29 +317,7 @@ margin-left:50px;
 	vertical-align: top; 
 	margin:-4px 0 0 4px;
 }
-.aboutus{
-	margin-left:20px;
-	margin-right:40px;
 
-}
-.aboutus h2{
-	color:#C56D2B;
-	font-weight:500;
-}
-.aboutus h3{
-	color:#555555;
-	font-weight:500;
-}
-.aboutus p{
-	line-height:1.6em;
-	font-size:14px;
-	color:#555555;
-}
-.aboutus p ul{
-	line-height:1.6em;
-	font-size:14px;
-	color:#555555;
-}
 
 // .ra {
 //     color: #67737A;
@@ -482,16 +585,14 @@ font-size: 16px;
 	margin-top:-5px;
 	padding-bottom:0px;
 }
-// .headerPopup1{
+/*// .headerPopup1{
 // 	margin-top:40px;
 // }
 
 // .footerconfirm{
 // 	margin:2% 0 0 38%;
-// }
-// .container .signup-left{
-// 	margin-top:25px ;
-// }
+// }*/
+
 .checkRemember{
 	margin-top:-21px;
 	margin-left:20px;
@@ -502,7 +603,7 @@ font-size: 16px;
 	margin-top: 8px;
 	margin-bottom: 10px;
 }
-.rightBox{
+/*.rightBox{
 	height:440px;
 	bottom: auto;	
 }
@@ -518,8 +619,8 @@ font-size: 16px;
 .rightboxName h3{
 		font-weight:300;
 	
-}
-.check1{
+}*/
+/*.check1{
 	margin-top:-5px;
 }
 .rightboxName .lefttextbox{
@@ -527,7 +628,7 @@ font-size: 16px;
 	font-weight:300;
 	color:inherit;
 	font-size:11px;
-}
+}*/
 .commonLeftRight{
 	margin-left: 16px;
 	font-weight:normal;
@@ -619,55 +720,12 @@ font-size: 16px;
 .rightboxName .forgotpw{
 	
 }
-.nav {
-    list-style: none outside none;
-    margin-bottom: 0;
-    margin-left: 0;
-}
-.nav-tabs  .active .signuplink {
-	background-color:#ffffff;
-}
-.nav-tabs  .signuplink {
-	background-color:#ffffff;
-}
-.nav-tabs  .active .twitterlink {
-	background-color:#53b1f0;
-}
-.nav-tabs  .active .twitterlink:hover {
-	background-color:#53b1f0;
-}
-.nav-tabs  .twitterlink {
-	background-color:#53b1f0;
-}
-.nav-tabs  .twitterlink:hover{
-	background-color:#53b1f0;
-}
-.nav-tabs  .facebooklink {
-	background-color:#3b5998;
-}
-.nav-tabs  .facebooklink:hover {
-	background-color:#3b5998;
-}
-.nav-tabs  .active .facebooklink {
-	background-color:#3b5998;
-}
-.nav-tabs  .active .facebooklink:hover {
-	background-color:#3b5998;
-}
 
-.tab-content{
-    background-color: #FFFFFF;
-    width: 100%;
-    height:401px;
-    overflow: hidden;
-    padding-top:20px;
-}
+
 .tab-content span{
 	color:#cf2200;}
 
-.tab-pane .loginlink{
-	margin-left:10px;
-}
+
 .processIcons span{
 	float:left;
 	width:70px;
