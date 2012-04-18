@@ -473,11 +473,12 @@ def compare_system
     @line_graph_system =  line_gph.to_url
   end
   @responses = Response.find(:all, 
-  :select => "questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+  :select => "questions.id,questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score", 
   :joins => "right outer join questions on responses.question_id = questions.id 
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
-             and responses.survey_id =#{params[:id]} and sections.id=2"  
+             and responses.survey_id =#{params[:id]} and sections.id=2",
+  :group => "questions.id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"                         
    )
 end  
 
@@ -539,11 +540,12 @@ def compare_strategy
     @line_graph_strategy =  line_gph.to_url
   end
   @responses = Response.find(:all, 
-  :select => "questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+  :select => "questions.id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score ", 
   :joins => "right outer join questions on responses.question_id = questions.id 
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
-             and responses.survey_id =#{params[:id]} and sections.id=1"  
+             and responses.survey_id =#{params[:id]} and sections.id=1",
+   :group => "questions.id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"            
    ) 
 end  
 
@@ -604,11 +606,12 @@ def compare_programs
     @line_graph_programs =  line_gph.to_url
   end
   @responses = Response.find(:all, 
-  :select => "questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+  :select => "questions.id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score", 
   :joins => "right outer join questions on responses.question_id = questions.id 
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
-             and responses.survey_id =#{params[:id]} and sections.id=3"  
+             and responses.survey_id =#{params[:id]} and sections.id=3",
+  :group => "questions.id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"                         
    ) 
 end  
 
