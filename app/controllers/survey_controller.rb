@@ -372,7 +372,8 @@ def compare
   @question_count =Question.all.count
   @response = Response.find(:all,
   :select =>"responses.answer_1, questions.id",
-  :joins=>"right outer join questions on questions.id=responses.question_id where responses.survey_id=#{@survey.id}"
+  :joins=>"right outer join questions on questions.id=responses.question_id 
+           where responses.survey_id=#{@survey.id}"
     )
   @response_all = []
   
@@ -385,147 +386,230 @@ def compare
    :joins =>"right outer join industries on companies.industry_id = industries.id   
    where industries.id = '1' and companies.id !=#{@survey.company_id}"
    )
-  if @companies.present?
+   if @companies.present?
+  @company_ids=@companies.map(&:id)
   @response_all = Response.find(:all,
      :select=>"sum(responses.answer_1), questions.id, surveys.id",
      :joins =>"right outer join questions on questions.id=responses.question_id
-              left outer join surveys on  surveys.company_id in [#{@companies}] where responses.survey_id!=#{@survey.id}",
-     :group=>"surveys.id"    
+              left outer join surveys on  surveys.company_id in (3,11,13)
+              where responses.survey_id!=#{@survey.id}",
+     :group=>"surveys.id, responses.answer_1, questions.id"    
      )
   else
     @response_all = Response.find(:all,
      :select=>"count(*), responses.answer_1, questions.id",
      :joins =>"right outer join questions on questions.id=responses.question_id
-              left outer join surveys on responses.survey_id = surveys.id where responses.survey_id!=#{@survey.id}",
+              left outer join surveys on responses.survey_id = surveys.id where 
+              responses.survey_id!=#{@survey.id}",
      :group=>"questions.id, responses.answer_1"    
      )
   end  
-  @responses_average = []
-  response_total = 0
-  @companies.each do |cmp|
-    cmp.surveys.each do |survey|
-      survey.responses.each do |responses|       
-        response_total += responses.answer_1.to_i
-      end
-      @responses_average << response_total
-    end 
-  end 
- 
-  GoogleChart::LineChart.new("700x300", "Overall", false) do |lc|
-  lc.data "Line green", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
-  lc.data "Line red", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
-  lc.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
-  lc.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
-  lc.show_legend = false
-  lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
-  @line_graph =  lc.to_url
+  
+  GoogleChart::LineChart.new("700x300", "Overall", false) do |line_graph|
+    line_graph.data "Line green", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
+    line_graph.data "Line red", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
+    line_graph.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
+    line_graph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
+    line_graph.show_legend = false
+    line_graph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
+    @line_graph =  line_graph.to_url
   end
-
-end  
+end 
 
 def compare_system
   require 'rubygems'
  require 'google_chart'
-
-  @questions = Question.find(:all,
-   :select => "questions.id, responses.question_id as response_quest_id",
-   :joins => "left outer join responses on responses.question_id = questions.id  
-   left outer join sub_sections on questions.sub_section_id = sub_sections.id left outer 
-   join sections on sub_sections.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 1")
-    @response_all = []
-    @questions.each do |q|
-    @response = Response.find_by_question_id(q.id)
-    if @response  
-     @response_all << get_individual_response_score(@response.id, @response.question_id)
-    end        
-  end  
-  lcc = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcc|
-  lcc.data "Line green", [3,5,1,9,0,2], '00ff00'
-  lcc.data "Line red", [2,4,0,6,9,3], 'ff0000'
-  lcc.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-  lcc.show_legend = false
-  lcc.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
-  @line_graph_system =  lcc.to_url
-  end
+   
+ @survey = Survey.find(params[:id])
+  @question_count =Question.all.count
+  @response = Response.find(:all,
+  :select =>"responses.answer_1, questions.id",
+  :joins=>"right outer join questions on questions.id=responses.question_id 
+           left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+           inner join sections on sections.id = sub_sections.section_id
+           where responses.survey_id=#{@survey.id} and sections.id = 2",
+   :order => "questions.id ASC")
+  @response_all = []
   
+  #Average response for all survey
+  @survey = Survey.find(params[:id])
+  @company = Company.find(@survey.company_id)
+  
+  @companies = Company.find(:all,
+   :select => "industries.id, companies.id",
+   :joins =>"right outer join industries on companies.industry_id = industries.id   
+   where industries.id = #{@company.industry_id} and companies.id !=#{@survey.company_id}"
+   )
+  if @companies.present?
+  @company_ids=@companies.map(&:id)
+  @response_all = Response.find(:all,
+     :select=>"count(*),responses.answer_1, questions.id, surveys.id",
+     :joins =>"right outer join questions on questions.id=responses.question_id
+              left outer join surveys on  surveys.company_id IN (3,11,13) 
+              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+              inner join sections on sections.id = sub_sections.section_id
+              where responses.survey_id!=#{@survey.id} and sections.id = 2",
+     :group=>"surveys.id, responses.answer_1, questions.id"    
+     )
+  else
+    @response_all = Response.find(:all,
+     :select=>"count(*), responses.answer_1, questions.id",
+     :joins =>"right outer join questions on questions.id=responses.question_id
+              left outer join surveys on responses.survey_id = surveys.id 
+              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+              inner join sections on sections.id = sub_sections.section_id
+              where responses.survey_id!=#{@survey.id} and sections.id = 2",
+     :group=>"questions.id, responses.answer_1"    
+     )
+  end  
+  
+  GoogleChart::LineChart.new("700x300", "Systems", false) do |line_gph|
+    line_gph.data "Line green", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
+    line_gph.data "Line red", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
+    line_gph.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
+    line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
+    line_gph.show_legend = false
+    line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
+    @line_graph_system =  line_gph.to_url
+  end
   @responses = Response.find(:all, 
-  :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+  :select => "questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
   :joins => "right outer join questions on responses.question_id = questions.id 
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
-             and responses.survey_id =#{params[:id]}"  
+             and responses.survey_id =#{params[:id]} and sections.id=2"  
    )
 end  
 
 def compare_strategy
-  require 'rubygems'
+ require 'rubygems'
  require 'google_chart'
+   
+ @survey = Survey.find(params[:id])
+  @question_count =Question.all.count
+  @response = Response.find(:all,
+  :select =>"responses.answer_1, questions.id",
+  :joins=>"right outer join questions on questions.id=responses.question_id 
+           left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+           inner join sections on sections.id = sub_sections.section_id
+           where responses.survey_id=#{@survey.id} and sections.id = 1",
+   :order => "questions.id ASC")
+  @response_all = []
+  
+  #Average response for all survey
+  @survey = Survey.find(params[:id])
+  @company = Company.find(@survey.company_id)
+  
+  @companies = Company.find(:all,
+   :select => "companies.id",
+   :joins =>"right outer join industries on companies.industry_id = industries.id   
+   where industries.id = #{@company.industry_id} and companies.id !=#{@survey.company_id}"
+   )
 
-  @questions = Question.find(:all,
-   :select => "questions.id, responses.question_id as response_quest_id",
-   :joins => "left outer join responses on responses.question_id = questions.id  
-   left outer join sub_sections on questions.sub_section_id = sub_sections.id left outer 
-   join sections on sub_sections.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 2")
-    @response_all = []
-    @questions.each do |q|
-    @response = Response.find_by_question_id(q.id)
-    if @response  
-    @response_all << get_individual_response_score(@response.id, @response.question_id)
-    else 
-    @response_all << 0
-    end        
-  end
-  lcs = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcs|
-  lcs.data "Line green", [3,5,1,9,0,2], '00ff00'
-  lcs.data "Line red", [2,4,0,6,9,3], 'ff0000'
-  lcs.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-  lcs.show_legend = false
-  lcs.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
-  @line_graph_strategy = lcs.to_url
+  if @companies.present?
+    @company_ids = @companies.map(&:id)
+    @response_all = Response.find(:all,
+     :select=>"count(*),responses.answer_1, questions.id, surveys.id",
+     :joins =>"right outer join questions on questions.id=responses.question_id
+              left outer join surveys on  surveys.company_id IN (3,11,13)  
+              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+              inner join sections on sections.id = sub_sections.section_id
+              where responses.survey_id!=#{@survey.id} and sections.id = 1",
+     :group=>"surveys.id, responses.answer_1, questions.id"    
+     )
+  else
+    @response_all = Response.find(:all,
+     :select=>"count(*), responses.answer_1, questions.id",
+     :joins =>"right outer join questions on questions.id=responses.question_id
+              left outer join surveys on responses.survey_id = surveys.id 
+              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+              inner join sections on sections.id = sub_sections.section_id
+              where responses.survey_id!=#{@survey.id} and sections.id = 1",
+     :group=>"questions.id, responses.answer_1"    
+     )
+  end  
+  
+  GoogleChart::LineChart.new("700x300", "Strategy", false) do |line_gph|
+    line_gph.data "Line green", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
+    line_gph.data "Line red", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
+    line_gph.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
+    line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
+    line_gph.show_legend = false
+    line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
+    @line_graph_strategy =  line_gph.to_url
   end
   @responses = Response.find(:all, 
-  :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+  :select => "questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
   :joins => "right outer join questions on responses.question_id = questions.id 
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
-             and responses.survey_id =#{params[:id]}"  
-   )
+             and responses.survey_id =#{params[:id]} and sections.id=1"  
+   ) 
 end  
 
 def compare_programs
   require 'rubygems'
-  require 'google_chart'
-
-  @questions = Question.find(:all,
-   :select => "questions.id, responses.question_id as response_quest_id",
-   :joins => "left outer join responses on responses.question_id = questions.id  
-   left outer join sub_sections on questions.sub_section_id = sub_sections.id left outer 
-   join sections on sub_sections.section_id = sections.id where responses.survey_id=#{params[:id]} and sections.id = 3")
-    @response_all = []
-    @questions.each do |q|
-    @response = Response.find_by_question_id(q.id)
-    if @response  
-    @response_all << get_individual_response_score(@response.id, @response.question_id)
-    else 
-    @response_all << 0
-    end        
-  end
-  lcp = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcp|
-  lcp.data "Line green", [3,5,1,9,0,2], '00ff00'
-  lcp.data "Line red", [2,4,0,6,9,3], 'ff0000'
-  lcp.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-  lcp.show_legend = false
-  lcp.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
-  @line_graph_programs = lcp.to_url
-  end
+ require 'google_chart'
+   
+ @survey = Survey.find(params[:id])
+  @question_count =Question.all.count
+  @response = Response.find(:all,
+  :select =>"responses.answer_1, questions.id",
+  :joins=>"right outer join questions on questions.id=responses.question_id 
+           left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+           inner join sections on sections.id = sub_sections.section_id
+           where responses.survey_id=#{@survey.id} and sections.id = 3",
+   :order => "questions.id ASC")
+  @response_all = []
   
-   @responses = Response.find(:all, 
-  :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+  #Average response for all survey
+  @survey = Survey.find(params[:id])
+  @company = Company.find(@survey.company_id)
+  @industry  = Industry.find(@company.industry_id)
+  @companies = Company.find(:all,
+   :select => "industries.id, companies.id",
+   :joins =>"right outer join industries on companies.industry_id = industries.id   
+   where industries.id = #{@company.industry_id} and companies.id !=#{@survey.company_id}"
+   )
+  if @companies.present?
+  @company_ids = @companies.map(&:id)  
+  @response_all = Response.find(:all,
+     :select=>"responses.answer_1, questions.id, surveys.id",
+     :joins =>"right outer join questions on questions.id=responses.question_id
+              left outer join surveys on  surveys.company_id in (3,11,13) 
+              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+              inner join sections on sections.id = sub_sections.section_id
+              where responses.survey_id!=#{@survey.id} and sections.id = 3",
+     :group=>"surveys.id,responses.answer_1, questions.id"    
+     )
+  else
+    @response_all = Response.find(:all,
+     :select=>"count(*), responses.answer_1, questions.id",
+     :joins =>"right outer join questions on questions.id=responses.question_id
+              left outer join surveys on responses.survey_id = surveys.id 
+              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+              inner join sections on sections.id = sub_sections.section_id
+              where responses.survey_id!=#{@survey.id} and sections.id = 3",
+     :group=>"questions.id, responses.answer_1"    
+     )
+  end  
+  
+  GoogleChart::LineChart.new("700x300", "Programs", false) do |line_gph|
+    line_gph.data "Line green", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
+    line_gph.data "Line red", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
+    line_gph.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
+    line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
+    line_gph.show_legend = false
+    line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
+    @line_graph_programs =  line_gph.to_url
+  end
+  @responses = Response.find(:all, 
+  :select => "questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
   :joins => "right outer join questions on responses.question_id = questions.id 
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
-             and responses.survey_id =#{params[:id]}"  
-   )
+             and responses.survey_id =#{params[:id]} and sections.id=3"  
+   ) 
 end  
 
   def reports
