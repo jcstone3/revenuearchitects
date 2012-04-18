@@ -21,7 +21,9 @@
                     <td><%= user_survey.industry_name %></td>
                     <td><%= user_survey.size %></td>
                     <td><%= user_survey.revenue %></td>
-                    <td><%= user_survey.start_date.to_date.strftime("%B %Y") if !user_survey.start_date.blank? %></td>
+                    <%if !user_survey.start_date.blank?%>
+                    <td><%= link_to user_survey.start_date.to_date.strftime("%B %Y"), admin_users_survey_report_url(user_survey.survey_id)  %></td>
+                    <%end%>
                 </tr>
             <% end %>
 
