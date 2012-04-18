@@ -18,7 +18,7 @@ class Admin::UsersController < ApplicationController
    	 #  	@type_title = "" 
    	 #  end   
        @user_surveys = User.find(:all,
-                       :select => "users.name, users.email, companies.name as company_name, surveys.size, industries.name as industry_name, surveys.start_date",
+                       :select => "users.id,users.username, users.email, companies.name as company_name, companies.website as company_website, surveys.size, industries.name as industry_name, surveys.revenue, surveys.start_date",
                        :joins => "left outer join companies on users.id = companies.user_id left outer
                                  join surveys on companies.id = surveys.company_id inner join industries on
                                  companies.industry_id = industries.id" ,
@@ -56,5 +56,8 @@ class Admin::UsersController < ApplicationController
       end  
    end
 
+  def survey_report
+    @user = User.find_by_id(params[:id])
+  end
    
 end

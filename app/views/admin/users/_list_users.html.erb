@@ -1,22 +1,26 @@
 <table cellpadding="1" cellspacing="1" id="user_table" class="report-body dataTable2"> 
           <thead>
-            <tr>
-              <th><h3>Name</h3></th>
-              <th><h3>Email</h3></th>
-              <th><h3>Company</h3></th>
-              <th><h3>Size</h3></th>
-              <th><h3>Type</h3></th>
-              <th><h3>Survey</h3></th>
-            </tr>
+                <tr>              
+                  <th><h3>Name</h3></th>
+                  <th><h3>Company</h3></th>
+                  <th><h3>Email</h3></th>
+                  <th><h3>Website</h3></th>
+                  <th><h3>Type</h3></th>
+                  <th><h3>Size</h3></th>
+                  <th><h3>Revenue</h3></th>
+                  <th><h3>Survey</h3></th>
+                </tr>
           </thead>
           <tbody>
             <% @user_surveys.each do |user_survey| %>
-                <tr>
-                    <td><%= user_survey.name %></td>
-                    <td><%= user_survey.email %></td>
+                <tr>                 
+                    <td><%= user_survey.username %></td>
                     <td><%= user_survey.company_name %></td>
-                    <td><%= user_survey.size %></td>
+                    <td><%= user_survey.email %></td>
+                    <td><%= user_survey.company_website%></td>
                     <td><%= user_survey.industry_name %></td>
+                    <td><%= user_survey.size %></td>
+                    <td><%= user_survey.revenue %></td>
                     <td><%= user_survey.start_date.to_date.strftime("%B %Y") if !user_survey.start_date.blank? %></td>
                 </tr>
             <% end %>

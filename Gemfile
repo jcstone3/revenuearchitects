@@ -38,7 +38,7 @@ gem 'newrelic_rpm'
 #google charts
 gem "googlecharts"
 gem "gchartrb"
-gem "google_charts"
+#gem "google_charts"
 #bootstrap rails gem
 gem "twitter-bootstrap-rails"
 
