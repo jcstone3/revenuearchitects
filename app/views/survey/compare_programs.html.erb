@@ -1,3 +1,4 @@
+<% content_for :main_content do -%> 
 <div class="container report-top">
           <div class="spa@section_total.inspectn9 report-top1" >
                    <ul class="nav nav-pills">
@@ -70,7 +71,7 @@
                                     <div class="box">                                        
                                       <h1>Responses in the current month <strong>March 2012</strong></h1>
                                       <div class="graph">
-                                      <img src="<%= @line_graph_program%>">
+                                      <img src="<%= @line_graph_programs%>">
              <!-- <img src="<%#=Gchart.line(:size => '600x400', 
             :title => "Programs",            
             :legend => ['first data set label'],
@@ -87,27 +88,31 @@
                                                   <tr>
                                                     <th><h3>Questions</h3></th>
                                                     <th><h3>Group</h3></th>
+                                                    <th><h3>Points</h3></th>
+                                                    <th><h3>Average Points</h3></th>
                                                     <th><h3>Score</h3></th>
                                                     <th><h3>In Plan</h3></th>
                                                     <th><h3>Priority</h3></th>
-                                                    <th><h3>Points</h3></th>
+                                                    
                                                   </tr>
                                                 </thead>
                                                 <tbody>
-                                                
                                         <% @responses.each do |response| %>
                                             <tr>
                                                 <td><%= response.name %></td>
                                                 <td><%= response.section_name%><%= response.sub_sect_name%></td>
-                                                <td><%= response.answer_1 %></td>
-                                                <td><%= "Y" %></td>
-                                                <td><%= "Must" %></td>
                                                 <td><%= response.points %></td>
-                                            </tr>
+                                                <td><%= "Average"%> </td>
+                                                <td><%= response.answer_1 %></td>
+                                                
+                                                <td><%= "Y" %></td>
+                                                <td><%= "Must" %></td> 
+                                                </tr>
                                         <% end %>
-                                          </tbody>        
+                                        
+                                                </tbody>           
                                           </table>      
-                                       
+                                          
                                         </div>
                                       </div>
               <!--end table-->    
@@ -127,3 +132,4 @@
                 });
             })
     </script>
+    <%end%>

@@ -1,50 +1,47 @@
                     <div class="qdots" id="qdots"> 
                       <div class="pagination" >
                         <ul>    
-                            <%if(params[:question_id].to_i == 1)%>                     
+                            <%if(params[:question_id].to_i == 1)%>
                                 <li class="disabled">   
-                                  <a class="prev">Prev</a>                     
+                                  <a class="prev">Prev</a>                  
                                 </li>  
-                            <%else%>
+                                <%else%>
                                 <li>
                                  <%= link_to 'Prev', questions_url(params[:id],
                                     params[:question_id].to_i - 1)%>
                                  </li>   
                              <%end%>                            
                             <% @questions.each do |question|%>
-                               <%if (question.id == params(question.id)%>
-                                <i class="icon-ok circle icon-white"></i>
-                                
-                                <% if (question.response_quest_id.present?) %>
+                               
+                                  <% if (question.response_quest_id.present?) %>
                                     <li>
                                       <%= link_to questions_url(params[:id],question.id), 
                                       :title=>"#{question.id}", :rel=>"tooltip" do%>
                                       <i class="icon-ok iconfont"></i>
                                       <%end%>
-                                    </li>.
-                                 <%else%>       
+                                    </li>
+                                  <%else%>       
                                     <li>
                                       <%= link_to questions_url(params[:id],question.id), 
-                                      :title=>"#{question.id}", :rel=>"tooltip" do%>
+                                      :title=>"#{question.id}", :rel=>"tooltip" do %>
                                       <i class="icon-ban-circle"></i>
-                                      <%end%>
+                                  <%end%>
                                     </li>                               
-                                <%end%>
-                            <%end%>
-
+                                 <%end%>
                              <%if(params[:question_id].to_i == @question_all)%>
                                <li class ="disabled">
                                  <a class="next">Next</a> 
-                              </li>
+                               </li>
                              <%else%> 
                               <li>
                                 <%= link_to 'Next', questions_url(params[:id],params[:question_id].to_i + 1)%>
                               </li>
+                              <%end%>
                             <%end%>
                         </ul>
                       </div>
                     </div>
-                </div>
+                
                 <div class="span3 rightBox rightBoxheight">
                     <div class="processIcons">
                         <span class="leftflt">
@@ -64,25 +61,23 @@
                     </div>
                     <div class="scoreBoard">
                         <div class="head" >
-                          <p class="scoretext">Total score for this section</p> </div>
-                            <div class="score3"><br>
-                           <%= @total_score%>/<span class="totalpoints"><%= @section.total_points%>
+                          <p class="scoretext">Total score for this section</p> 
+                        </div>
+                        <div class="score3"><br>
+                            <%= @total_score%>/<span class="totalpoints"><%= @section.total_points%>
                             </span> <br>
                             <span>POINTS</span>
 
-                            </div>
+                         </div>
                     </div>
-
                      <div class="scoreBoard">
                         <div class="head">
                           <p class="abouttext">About Questions</p>
                         </div>
                             <div class="text1"><br>
                               <p class="abouttextcontent">
-                               <%= @question.name%>                               
+                               <%= @question.name%>           
                                 </p>
-                              
-                            </div> 
-                             
-                    </div>
-
+                             </div> 
+                           </div>
+                   </div>

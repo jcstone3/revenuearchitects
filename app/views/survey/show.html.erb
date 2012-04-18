@@ -1,3 +1,4 @@
+<% content_for :main_content do -%> 
     <div class="container headerPopup">
       <div class="row-fluid">
         <div class="span9 leftBox1 marginLeft">                  
@@ -23,7 +24,7 @@
                             </h4>
                             <% @response_count= survey.responses.present? ? survey.responses.count : 0 %>
                             
-                            <h4> <%= "Total Completed Questions" %> <span class="red"> <%= @response_count%>/<%= @total_questions}%> </span>  </h4 
+                            <h4> <%= "Total Completed Questions" %> <span class="red"> <%= @response_count%>/<%= @total_questions%> </span>  </h4 >
                           </br>
                              
                           <%end%>
@@ -97,3 +98,4 @@
                   </div>      
                 </div>
               </div> 
+              <%end%>

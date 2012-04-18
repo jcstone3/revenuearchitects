@@ -1,3 +1,4 @@
+<% content_for :main_content do -%> 
 <div class="container report-top">
           <div class="spa@section_total.inspectn9 report-top1" >
                    <ul class="nav nav-pills">
@@ -84,10 +85,12 @@
                                                   <tr>
                                                     <th><h3>Questions</h3></th>
                                                     <th><h3>Group</h3></th>
+                                                    <th><h3>Points</h3></th>
+                                                    <th><h3>Average Points</h3></th>
                                                     <th><h3>Score</h3></th>
                                                     <th><h3>In Plan</h3></th>
                                                     <th><h3>Priority</h3></th>
-                                                    <th><h3>Points</h3></th>
+                                                    
                                                   </tr>
                                                 </thead>
                                                 <tbody>
@@ -95,11 +98,13 @@
                                             <tr>
                                                 <td><%= response.name %></td>
                                                 <td><%= response.section_name%><%= response.sub_sect_name%></td>
-                                                <td><%= response.answer_1 %></td>
-                                                <td><%= "Y" %></td>
-                                                <td><%= "Must" %></td>
                                                 <td><%= response.points %></td>
-                                            </tr>
+                                                <td><%= "Average"%> </td>
+                                                <td><%= response.answer_1 %></td>
+                                                
+                                                <td><%= "Y" %></td>
+                                                <td><%= "Must" %></td> 
+                                                </tr>
                                         <% end %>
                                         
                                                 </tbody>           
@@ -124,3 +129,4 @@
                 });
             })
     </script>
+    <%end%>

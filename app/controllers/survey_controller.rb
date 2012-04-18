@@ -105,7 +105,7 @@ end
 def show
   @companies =  current_user.companies  
   @sections= Section.all  
-  @total_questions = @sections[0].question_count+@sections[1].question_c+@sections[2].question_countount      
+  @total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count     
 end  
 
 #question for the survey	
@@ -439,13 +439,14 @@ def compare_system
      @response_all << get_individual_response_score(@response.id, @response.question_id)
     end        
   end  
-  @lcp = GoogleChart::LineChart.new("400x200", "My Results", false)
-  @lcp.data "Line green", [3,5,1,9,0,2], '00ff00'
-  @lcp.data "Line red", [2,4,0,6,9,3], 'ff0000'
-  @lcp.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-  @lcp.show_legend = false
-  @lcp.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
-  @line_graph_system =  @lcp.to_url
+  lcc = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcc|
+  lcc.data "Line green", [3,5,1,9,0,2], '00ff00'
+  lcc.data "Line red", [2,4,0,6,9,3], 'ff0000'
+  lcc.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+  lcc.show_legend = false
+  lcc.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+  @line_graph_system =  lcc.to_url
+  end
   
   @responses = Response.find(:all, 
   :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
@@ -474,14 +475,14 @@ def compare_strategy
     @response_all << 0
     end        
   end
-  @lc = GoogleChart::LineChart.new("400x200", "My Results", false)
-  @lc.data "Line green", [3,5,1,9,0,2], '00ff00'
-  @lc.data "Line red", [2,4,0,6,9,3], 'ff0000'
-  @lc.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-  @lc.show_legend = false
-  @lc.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
-  @line_graph_strategy = @lc.to_url
-  
+  lcs = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcs|
+  lcs.data "Line green", [3,5,1,9,0,2], '00ff00'
+  lcs.data "Line red", [2,4,0,6,9,3], 'ff0000'
+  lcs.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+  lcs.show_legend = false
+  lcs.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+  @line_graph_strategy = lcs.to_url
+  end
   @responses = Response.find(:all, 
   :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
   :joins => "right outer join questions on responses.question_id = questions.id 
@@ -509,13 +510,14 @@ def compare_programs
     @response_all << 0
     end        
   end
- @lc = GoogleChart::LineChart.new("400x200", "My Results", false)
-@lc.data "Line green", [3,5,1,9,0,2], '00ff00'
-@lc.data "Line red", [2,4,0,6,9,3], 'ff0000'
-@lc.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-@lc.show_legend = false
-@lc.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
- @line_graph_program = @lc.to_url
+  lcp = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcp|
+  lcp.data "Line green", [3,5,1,9,0,2], '00ff00'
+  lcp.data "Line red", [2,4,0,6,9,3], 'ff0000'
+  lcp.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+  lcp.show_legend = false
+  lcp.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+  @line_graph_programs = lcp.to_url
+  end
   
    @responses = Response.find(:all, 
   :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
@@ -526,30 +528,37 @@ def compare_programs
    )
 end  
 
+  def reports
+  require 'rubygems'
+  require 'google_chart'
+  @responses = Response.find(:all, 
+  :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+  :joins => "right outer join questions on responses.question_id = questions.id 
+             left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+             left outer join sections on sections.id = sub_sections.section_id   
+             and responses.survey_id =#{params[:id]}" 
+             )
+
+  lcs = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcs|
+  lcs.data "Line green", [3,5,1,9,0,2], '00ff00'
+  lcs.data "Line red", [2,4,0,6,9,3], 'ff0000'
+  lcs.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+  lcs.show_legend = false
+  lcs.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+  @line_graph = lcs.to_url
+  @line_graph_strategy = lcs.to_url
+  @line_graph_system = lcs.to_url
+  @line_graph_programs = lcs.to_url
+  end
+  end   
+
 #to download in pdf/xls format
 def download_result
-
-  logger.debug "&&&&&&& download_result start"
   require 'rubygems'
- require 'google_chart'
-  #require 'spreadsheet'
-
-  #  GoogleChart::LineChart.new("400x300", "Overall", false) do |lc|
-  # lc.data "Line green", [1,2,3,4,5], '00ff00'
-  # lc.axis :y, :range =>['0','5','10','15','20'], :font_size =>10, :alignment =>:center
-  # lc.axis :x, :range =>[2,4,6,8.10], :font_size =>10, :alignment =>:center
-  # lc.show_legend = false
-  # lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
-  # @line_graph =  lc.to_url
-  # end
-
-  @lc = GoogleChart::LineChart.new("400x200", "My Results", false)
-@lc.data "Line green", [3,5,1,9,0,2], '00ff00'
-@lc.data "Line red", [2,4,0,6,9,3], 'ff0000'
-@lc.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-@lc.show_legend = false
-@lc.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
-@line_graph = @lc.to_url
+  require 'google_chart'
+  require 'spreadsheet'
+  
+   
   @survey = Survey.find(params[:id])
   @section_total = []
   @subsection_total = []
@@ -572,7 +581,7 @@ def download_result
   respond_to do |format|
       format.html{}
       format.pdf {
-       html = render_to_string(:layout => false , :action => "reports.html")
+       html = render_to_string(:layout => false , :action => "reports.html.erb")
        kit = PDFKit.new(html)
        #kit.stylesheets << File.join( RAILS_ROOT, "assets", "stylesheets", "application.css" )
        send_data(kit.to_pdf, :filename => "survey.pdf", :type => "application/pdf")
@@ -597,6 +606,25 @@ def download_result
         #respond with blob object as a file
         send_data blob.string, :type =>:xls, :filename =>"result.xls"#; &quot;client_list.xls&quot;
       }
+  @responses = Response.find(:all, 
+      :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+      :joins => "right outer join questions on responses.question_id = questions.id 
+                 left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+                 left outer join sections on sections.id = sub_sections.section_id   
+                 and responses.survey_id =#{params[:id]}" 
+                 )
+
+  lcs = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcs|
+  lcs.data "Line green", [3,5,1,9,0,2], '00ff00'
+  lcs.data "Line red", [2,4,0,6,9,3], 'ff0000'
+  lcs.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+  lcs.show_legend = false
+  lcs.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+  @line_graph = lcs.to_url
+  @line_graph_strategy = lcs.to_url
+  @line_graph_system = lcs.to_url
+  @line_graph_programs = lcs.to_url
+  end
   end    
 end
 
