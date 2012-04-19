@@ -12,9 +12,10 @@
        </head> 
        
         <!-- Le styles -->
-<%#= content_for :main_content do%>
-        <%#= stylesheet_link_tag "application",:media => "all" %>
+<%= content_for :main_content do%>
+        <%= stylesheet_link_tag "application",:media => "all" %>
         <%#= stylesheet_link_tag "jquery.dataTables"%>
+        <%= render :partial=>"reports_css"%>
         <div class="content" style="page-break-after:always;">
             <h1>Revenue Grader</h1>
             <h1>Report 2012</h1>
@@ -41,9 +42,54 @@
               
           </div>
           <div class="textbox">
-            <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2" > 
+             <%#= render :partial=>"report_response_table"%>
+             <table cellpadding="1" cellspacing="1" id="resultTable2" class=" dataTable2" border="1"> 
           <thead >
-            <tr style="background-color: #E6F3F7;" >
+            <tr>
+             <th><h3>Questions</h3></th>
+            <th><h3>Group</h3></th>
+            <th><h3>Points</h3></th>
+            <th><h3>Average Points</h3></th>
+            <th><h3>Score</h3></th>
+            <th><h3>In Plan</h3></th>
+            <th><h3>Priority</h3></th>
+          </tr>
+          </thead>
+          <tbody>
+
+            <% @responses.each do |response| %>
+        <tr>
+            <td><%= response.name %></td>
+            <td><%= response.section_name%><%= response.sub_sect_name%></td>
+            <td><%= response.points %></td>
+            <td><%= "Average"%> </td>
+            <td><%= response.answer_1 %></td>
+            <td><%= "Y" %></td>
+            <td><%= "Must" %></td> 
+        </tr>
+       <% end %>
+      </tbody>
+    </table> 
+          </div> 
+        </div>
+
+
+        <div class="content" style="page-break-after:always;">
+             <h1>System</h1>
+        </div>
+
+        <div class="content" style="page-break-after:always;">
+          <div class="graph">
+             <h1>System Graph</h1>
+
+            <img src="<%= @line_graph_system %>"/>
+            
+          </div>
+          <div class="textbox">
+            <%#= render :partial=>"report_response_table"%>
+            <table cellpadding="1" cellspacing="1" id="resultTable1" class=" dataTable2" border="1"> 
+          <thead >
+            <tr>
             <th><h3>Questions</h3></th>
             <th><h3>Group</h3></th>
             <th><h3>Points</h3></th>
@@ -64,52 +110,6 @@
             <td><%= response.answer_1 %></td>
             <td><%= "Y" %></td>
             <td><%= "Must" %></td> 
-            </tr>
-    <% end %>
-    
-            </tbody>           
-                            
-             </table>
-          </div> 
-        </div>
-
-
-        <div class="content" style="page-break-after:always;">
-             <h1>System</h1>
-        </div>
-
-        <div class="content" style="page-break-after:always;">
-          <div class="graph">
-             <h1>System Graph</h1>
-
-            <img src="<%= @line_graph_system %>"/>
-            
-          </div>
-          <div class="textbox">
-            <table cellpadding="1" cellspacing="1" id="resultTable1" class="report-body dataTable2" border="1"> 
-          <thead >
-            <tr>
-              <th><h3>Questions</h3></th>
-              <th><h3>Group</h3></th>
-              <th><h3>Score</h3></th>
-              <th><h3>In Plan</h3></th>
-              <th><h3>Priority</h3></th>
-              <th><h3>Points</h3></th>
-            </tr>
-          </thead>
-          <tbody>
-
-         <% @responses.each do |response| %>
-          <tr>
-            <td><%= response.name %></td>
-            <td><%= response.section_name%><%= response.sub_sect_name%></td>
-            <td><%= response.points %></td>
-            <td><%= "Average"%> </td>
-            <td><%= response.answer_1 %></td>
-            
-            <td><%= "Y" %></td>
-            <td><%= "Must" %></td> 
-            </tr>
         <% end %>
 </tbody>
           
@@ -123,25 +123,27 @@
         </div>
 
         <div class="content" style="page-break-after:always;">
-          <div class="graph1">
+          <div class="graph">
              <h1>Program  Graph</h1>
              <img src="<%= @line_graph_programs%>"/>
           </div>
           <div class="textbox">
-          <table cellpadding="1" cellspacing="1" id="resultTable2" class="report-body dataTable2" border="1"> 
+            <%#= render :partial=>"report_response_table"%>
+          <table cellpadding="1" cellspacing="1" id="resultTable2" class=" dataTable2" border="1"> 
           <thead >
             <tr>
-              <th><h3>Questions</h3></th>
-              <th><h3>Group</h3></th>
-              <th><h3>Score</h3></th>
-              <th><h3>In Plan</h3></th>
-              <th><h3>Priority</h3></th>
-              <th><h3>Points</h3></th>
-             </tr>
+             <th><h3>Questions</h3></th>
+            <th><h3>Group</h3></th>
+            <th><h3>Points</h3></th>
+            <th><h3>Average Points</h3></th>
+            <th><h3>Score</h3></th>
+            <th><h3>In Plan</h3></th>
+            <th><h3>Priority</h3></th>
+          </tr>
           </thead>
           <tbody>
 
-        <% @responses.each do |response| %>
+            <% @responses.each do |response| %>
         <tr>
             <td><%= response.name %></td>
             <td><%= response.section_name%><%= response.sub_sect_name%></td>
@@ -181,7 +183,7 @@
           Aenean eu erat et velit dapibus bibendum id quis quam.
           Sed quis suscipit tortor.</p>
         </div>
-<%#end%>
+<%end%>
    
     </body>
 </html>

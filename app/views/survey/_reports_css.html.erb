@@ -29,6 +29,12 @@
             font-weight:300;
             line-height:25px;
         }
+
+        .content p{  
+           font-weight:100;     
+           
+
+        }
         .overall h1{
             text-align: right;
             display: block; 
@@ -276,7 +282,7 @@ table.dataTable {
 
 }
 
-table.dataTable thead th {
+.textbox table thead th {
 /*  background-image: -moz-linear-gradient(top, #4e5960, #647077);
     background-image: -ms-linear-gradient(top, #4e5960, #647077);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e5960), to(#647077));
@@ -295,36 +301,34 @@ table.dataTable thead th {
 
 }
 
-
-
-
-
-
-report-body dataTable2
-table.dataTable4 tfoot th {
-    padding: 3px 18px 3px 10px;
-    border-top: 1px solid black;
-    font-weight: bold;
+.textbox table tbody tr {
+    font-weight: 100;
+    font-family: "Lato", sans-serif;
+    font-size: 10px;
 }
 
-table.dataTable4 td {
+
+
+
+
+table.dataTable2 td {
     padding: 3px 10px;
 }
 
-table.dataTable4 td.center,
-table.dataTable4 td.dataTables_empty {
+table.dataTable2 td.center,
+table.dataTable2 td.dataTables_empty {
     text-align: center;
 }
 
-table.dataTable4 tr.odd { background-color: #E6F3F7; }
-table.dataTable4 tr.even { background-color: #80C2D6; }
+table.dataTable2 tr.odd { background-color: #E6F3F7; }
+table.dataTable2 tr.even { background-color: #80C2D6; }
 
-table.dataTable4 tr.odd td.sorting_1 { background-color: #E6F3F7; }
-table.dataTable4 tr.odd td.sorting_2 { background-color: #E6F3F7; }
-table.dataTable4 tr.odd td.sorting_3 { background-color: #E6F3F7; }
-table.dataTable4 tr.even td.sorting_1 { background-color: #80C2D6; }
-table.dataTable4 tr.even td.sorting_2 { background-color: #80C2D6; }
-table.dataTable4 tr.even td.sorting_3 { background-color: #80C2D6; }
+table.dataTable2 tr.odd td.sorting_1 { background-color: #E6F3F7; }
+table.dataTable2 tr.odd td.sorting_2 { background-color: #E6F3F7; }
+table.dataTable2 tr.odd td.sorting_3 { background-color: #E6F3F7; }
+table.dataTable2 tr.even td.sorting_1 { background-color: #80C2D6; }
+table.dataTable2 tr.even td.sorting_2 { background-color: #80C2D6; }
+table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
 
 .tablestyle{
     text-align:center ;
@@ -443,9 +447,9 @@ table.dataTable4 tr.even td.sorting_3 { background-color: #80C2D6; }
 
 .paging_full_numbers a.paginate_button,
 .paging_full_numbers a.paginate_active {
-    border: 1px solid #aaa;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+    /*border: 1px solid #aaa;*/
+   /* -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;*/
     border-radius: 5px;
     padding: 2px 5px;
     margin: 0 3px;
@@ -518,7 +522,4 @@ table.dataTable th:active {
 /* --- */  
     
     
-    
-    
-
         </style>
