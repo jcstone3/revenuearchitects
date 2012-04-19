@@ -307,10 +307,9 @@ def confirm_survey
   @section =[]
   @survey = Survey.find_by_id(params[:id])   
   @questions  = Section.find(:all,
-                           :select => "count(*) as question_attempted",
-                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on responses.question_id = questions.id 
-                                      where responses.survey_id=#{params[:id]}",
-                           :group => "sections.id")
+                           :select => "count(responses.question_id) as question_attempted",
+                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
+                           :group => "sections.id", :order => "sections.id")
   @sections = Section.all
   @section1 = @questions[0].question_attempted
   @section2 = @questions[1].question_attempted
@@ -393,7 +392,7 @@ def compare_system
  @sections = Section.all  
  @survey = Survey.find(params[:id])
   @question_count = Question.find(:all,
-    :select=>"count(*)",
+    :select=>"count(*) as system_count",
     :joins=>"right outer join sub_sections on questions.sub_section_id = sub_sections.id 
              inner join sections on sections.id = sub_sections.section_id where sections.id =2")
   @response = Response.find(:all,
@@ -441,7 +440,7 @@ def compare_system
     line_gph.data "Your Response", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
     line_gph.data "Overall Response", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
     line_gph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
-    line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
+    line_gph.axis :x, :range =>[0,@question_count.first.system_count], :font_size =>10, :alignment =>:center
     line_gph.show_legend = true
     line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
     #line_gph.fill :background, :gradient, :angle=>0, :color=>[['FFFFFF', 1], ['76A4FA', 0]]
@@ -450,10 +449,10 @@ def compare_system
   end
   @responses = Response.find(:all, 
   :select => "questions.id as questions_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score", 
-  :joins => "left outer join questions on responses.question_id = questions.id 
+  :joins => "right outer join questions on (responses.question_id = questions.id and responses.survey_id =#{params[:id]} )
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
-             left outer join sections on sections.id = sub_sections.section_id   
-             where responses.survey_id =#{params[:id]} and sections.id=2",
+             inner join sections on sections.id = sub_sections.section_id   
+             where sections.id=2",
   :group => "questions.id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"                         
    )
 end  
@@ -464,7 +463,7 @@ def compare_strategy
   @sections = Section.all 
   @survey = Survey.find(params[:id])
   @question_count = Question.find(:all,
-    :select=>"count(*)",
+    :select=>"count(*) as strategy_count",
     :joins=>"right outer join sub_sections on questions.sub_section_id = sub_sections.id
              inner join sections on sections.id = sub_sections.section_id where sections.id =1")
   @response = Response.find(:all,
@@ -513,7 +512,7 @@ def compare_strategy
     line_gph.data "Your Response", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
     line_gph.data "Overall Response", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
     line_gph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
-    line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
+    line_gph.axis :x, :range =>[0,@question_count.first.strategy_count], :font_size =>10, :alignment =>:center
     line_gph.show_legend = true
     line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
     line_gph.grid :x_step => 100.0/10, :y_step=>100.0/10, :length_segment =>1, :length_blank => 0
@@ -521,10 +520,10 @@ def compare_strategy
   end
   @responses = Response.find(:all, 
   :select => "questions.id as questions_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score ", 
-  :joins => "right outer join questions on responses.question_id = questions.id 
+  :joins => "right outer join questions on (responses.question_id = questions.id and responses.survey_id =#{params[:id]})
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
-             where responses.survey_id =#{params[:id]} and sections.id=1",
+             where sections.id=1",
    :group => "questions.id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"            
    ) 
 end  
@@ -535,7 +534,7 @@ def compare_programs
  @sections = Section.all  
  @survey = Survey.find(params[:id])
   @question_count = Question.find(:all,
-    :select=>"count(*)",
+    :select=>"count(*) as program_count",
     :joins=>"right outer join sub_sections on questions.sub_section_id = sub_sections.id 
              inner join sections on sections.id = sub_sections.section_id where sections.id =3")
   @response = Response.find(:all,
@@ -583,7 +582,7 @@ def compare_programs
     line_gph.data "Your Response", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
     line_gph.data "Overall Response", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
     line_gph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
-    line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
+    line_gph.axis :x, :range =>[0,@question_count.first.program_count], :font_size =>10, :alignment =>:center
     line_gph.show_legend = true
     line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
     line_gph.grid :x_step => 100.0/10, :y_step=>100.0/10, :length_segment =>1, :length_blank => 0
@@ -591,10 +590,10 @@ def compare_programs
   end
   @responses = Response.find(:all, 
   :select => "questions.id as questions_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score", 
-  :joins => "right outer join questions on responses.question_id = questions.id 
+  :joins => "right outer join questions on (responses.question_id = questions.id and responses.survey_id =#{params[:id]})
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
-             where responses.survey_id =#{params[:id]} and sections.id=3",
+             where  sections.id=3",
   :group => "questions.id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"                         
    ) 
 end  
