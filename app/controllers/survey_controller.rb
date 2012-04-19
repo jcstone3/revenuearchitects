@@ -448,12 +448,12 @@ def compare_system
     @line_graph_system =  line_gph.to_url
   end
   @responses = Response.find(:all, 
-  :select => "questions.id as questions_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score", 
+  :select => "questions.id as questions_id, sections.id as section_id, responses.id as response_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score, responses.survey_id as survey_id", 
   :joins => "right outer join questions on (responses.question_id = questions.id and responses.survey_id =#{params[:id]} )
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              inner join sections on sections.id = sub_sections.section_id   
              where sections.id=2",
-  :group => "questions.id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"                         
+  :group => "questions.id,responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"                         
    )
 end  
 
@@ -519,12 +519,12 @@ def compare_strategy
     @line_graph_strategy =  line_gph.to_url
   end
   @responses = Response.find(:all, 
-  :select => "questions.id as questions_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score ", 
+  :select => "questions.id as questions_id,responses.id as response_id, sections.id as section_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score, responses.survey_id as survey_id ", 
   :joins => "right outer join questions on (responses.question_id = questions.id and responses.survey_id =#{params[:id]})
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
              where sections.id=1",
-   :group => "questions.id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"            
+   :group => "questions.id, responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"            
    ) 
 end  
 
@@ -589,12 +589,12 @@ def compare_programs
     @line_graph_programs =  line_gph.to_url
   end
   @responses = Response.find(:all, 
-  :select => "questions.id as questions_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score", 
+  :select => "questions.id as questions_id, sections.id as section_id, responses.id as response_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score, responses.survey_id as survey_id", 
   :joins => "right outer join questions on (responses.question_id = questions.id and responses.survey_id =#{params[:id]})
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
-             where  sections.id=3",
-  :group => "questions.id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"                         
+             where sections.id=3",
+  :group => "questions.id, responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"                         
    ) 
 end  
 

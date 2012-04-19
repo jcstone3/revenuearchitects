@@ -84,26 +84,27 @@ def self.get_response_score_for(survey_id)
  return @total
 end 
 
-def get_avg_calculated_score(response_survey_id, response_questions_id, section_id)
+def self.get_average_calculated_score(response_survey_id, response_questions_id, section_id)
  @avg_response_score = 0
+ total_score = 0
  survey = self.find(response_survey_id)
  company = Company.find(survey.company_id)
  
- company_all = Company.find(:all, conditions=>"industry_id=#{company.industry.id} 
+ company_all = Company.find(:all, :conditions=>"industry_id=#{company.industry.id} 
                                               and id !=#{company.id} ")
  if company_all
-    response = Response.find(:all, :select =>"responses.question_id, responses.answer_1",
-               :joins=>"left outer join questions where questions.id = responses.question_id 
+    response = Response.find(:all, :select =>"responses.id, responses.question_id, responses.answer_1",
+               :joins=>"left outer join questions on questions.id = responses.question_id 
                         left outer join sub_sections on sub_sections.id = questions.sub_section_id
                         inner join sections on sections.id = sub_sections.section_id
-                        where sections_id=1")
+                        where sections.id=#{section_id}")
     response.each do |res|
-      @score =  get_individual_response_score(response_id, response_question_id)
+      @score =  get_individual_response_score(res.id, res.question_id)
       total_score += @score 
     end  
-    @avg_response_score = (total_score/response.count)
+    avg_response_score = (total_score/response.count)
   end  
-    return @avg_response_score
+    return avg_response_score
 end    
 
 #individual score for each response

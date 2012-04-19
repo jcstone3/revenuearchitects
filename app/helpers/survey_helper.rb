@@ -4,7 +4,7 @@ module SurveyHelper
 	 @response_score = Survey.get_individual_response_score(response_id, response_question_id)
 	end
 
-    def get_avg_calculated_score(response_survey_id, response_questions_id)
-       @avg_response_score = Survey.get_avg_calculated_score(response_survey_id, response_questions_id)
+    def get_avg_calculated_score(response_survey_id, response_questions_id, section_id)
+       @avg_response_score = Survey.get_average_calculated_score(response_survey_id, response_questions_id, section_id)
     end 	
 end
