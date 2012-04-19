@@ -467,7 +467,7 @@ def compare_system
   GoogleChart::LineChart.new("700x300", "Systems", false) do |line_gph|
     line_gph.data "Line green", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
     line_gph.data "Line red", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
-    line_gph.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
+    line_gph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
     line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
     line_gph.show_legend = false
     line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
@@ -535,7 +535,7 @@ def compare_strategy
   GoogleChart::LineChart.new("700x300", "Strategy", false) do |line_gph|
     line_gph.data "Line green", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
     line_gph.data "Line red", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
-    line_gph.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
+    line_gph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
     line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
     line_gph.show_legend = false
     line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
@@ -602,7 +602,7 @@ def compare_programs
   GoogleChart::LineChart.new("700x300", "Programs", false) do |line_gph|
     line_gph.data "Line green", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
     line_gph.data "Line red", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
-    line_gph.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
+    line_gph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
     line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
     line_gph.show_legend = false
     line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
