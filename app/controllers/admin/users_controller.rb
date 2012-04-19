@@ -11,13 +11,10 @@ class Admin::UsersController < ApplicationController
                                  companies.industry_id = industries.id" ,
                        :order => "start_date desc" )
 
-
    	respond_to do |format|
    		format.js {render :layout => false}
    		format.html 
-   	end	
-   	 
-
+   	end
    end	
 
    def activate_user
@@ -45,6 +42,28 @@ class Admin::UsersController < ApplicationController
 
   def survey_report
     @user = User.find_by_id(params[:id])
-  end
-   
+    @survey = Survey.find(params[:survey_id])
+    if @survey.present?
+      @section_total = []
+      @subsection_total = []
+      @questions_score = [] 
+      @questions_score = []  
+      @sections = Section.find(:all) 
+      #score for each section and subsection
+      @sections.each do |section|
+         @section_total << Survey.calculate_response_for_section(params[:survey_id], section.id)
+         section.sub_sections.each do |sub_section|     
+         @subsection_total << Survey.calculate_response_for_subsection(params[:survey_id], sub_section.id)
+        end
+      end
+      @final_score = @section_total[0]+@section_total[1]+@section_total[2]
+      #get the individual response score
+      @survey.responses.each do |response|
+        @questions_score << Survey.get_individual_response_score(response.id, response.question_id)
+      end        
+       
+    else
+     redirect_to :index     
+    end
+ end  
 end

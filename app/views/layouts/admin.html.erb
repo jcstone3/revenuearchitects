@@ -59,7 +59,17 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "application"%>
+    <%= javascript_include_tag "jquery.dataTables.min","jquery-ui-1.8.18.custom.min"%>  
+    <script>
+    $(document).ready(function(){
+          
+    $(".pageAccordion").accordion({
+    autoHeight: false,
+    navigation: true
+    });
 
+    }); 
+    </script>
   </body>
 </html>

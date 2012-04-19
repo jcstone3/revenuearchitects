@@ -7,7 +7,7 @@ RevenueGrader::Application.routes.draw do
    get '/users/activate_user/:id' => "users#activate_user", :as => "users_active"  
    get '/users/deactivate_user/:id' => "users#deactivate_user", :as => "users_deactive" 
    get '/users/update_user/:company_id' => "users#update_user", :as => "users_update_user"
-   get '/users/survey-report/:id' => "users#survey_report", :as => "users_survey_report"
+   get '/users/:id/survey-report/:survey_id' => "users#survey_report", :as => "users_survey_report"
    get '/questions' => "questions#index", :as=>"questions"
    get '/questions/new' => "questions#new", :as=>"new_questions"
    get '/questions/edit/:id' => "questions#edit", :as=>"edit_questions"

@@ -48,7 +48,7 @@ def self.calculate_response_for_subsection(survey_id, sub_section_id)
   @sub_section.questions.each do |q|
        questions << q.id
   end
-  @survey = Survey.find(survey_id)
+  @survey = self.find(survey_id)
   @sur_responses = @survey.responses.find_all_by_question_id(questions) 
   calculate_response(@sur_responses)
 end 

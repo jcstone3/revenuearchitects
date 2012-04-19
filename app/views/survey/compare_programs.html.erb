@@ -1,35 +1,7 @@
 <% content_for :main_content do -%> 
 <div class="container report-top">
-          <div class="spa@section_total.inspectn9 report-top1" >
-                   <ul class="nav nav-pills">
-                    <li class="surveyname">&nbsp;Survey Name 2012</li>
-                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Strategy <span class="green"><%= @sections[0].question_count%></span></a></li>
-                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Systems <span class="green"><%= @sections[1].question_count%></span></a></li>
-                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Programs <span class="green"><%= @sections[2].question_count%></span> </a></li>
-                    <li class="on" id ="final_result">
-                      <%= link_to(reports_url) do %>
-                      <%= image_tag "shoulddo.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;&nbsp;
-                      Final Result
-                      <i class="icon-chevron-right icon-white"></i>                     
-                     <%end%>
-                    </li>
-                    
-                    <li class="next2">
-                    <%= link_to(reports_url(params[:id])) do %>
-                            <i class="icon-edit iconfont">
-                            </i> &nbsp;Summary
-                       <% end %>	
-                     </li>  
-                    
-                     <li class="on2">
-                     <%= link_to(compare_url(params[:id])) do %>
-                            <i class="icon-file iconOn">
-                            </i>&nbsp;Compare
-                       <% end %>
-                     </li>
-
-                    <li class="next2"><a href="#"><%= image_tag "glyphicons_152_new_window.png" ,:width=>"13px",:height=>"13px" %> &nbsp;Download</a></li>
-                  </ul>
+          <div class="span9 report-top1" >
+                <%= render :partial=>"sections_nav"%>       
             </div>
 </div>
 <div class="container left">
@@ -66,57 +38,21 @@
                                       <h1>Responses in the current month <strong>March 2012</strong></h1>
                                       <div class="graph">
                                       <img src="<%= @line_graph_programs%>">
-             <!-- <img src="<%#=Gchart.line(:size => '600x400', 
-            :title => "Programs",            
-            :legend => ['first data set label'],
-            :data => [10, 30, 120, 45, 72], :line_colors => "BDBDBD"
-            )%>"/> -->
+            
                                       </div>
                                     </div>
-              <!--table goes here-->
 
                                      <div class="container report-top">
                                         <div class="row-fluid">
-                                          <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2"> 
-                                               <thead>
-                                                  <tr>
-                                                    <th><h3>Questions</h3></th>
-                                                    <th><h3>Group</h3></th>
-                                                    <th><h3>Points</h3></th>          
-                                                    <th><h3>Score</h3></th>
-                                                    <th><h3>Average Score</h3></th>
-                                                    <th><h3>In Plan</h3></th>
-                                                    <th><h3>Priority</h3></th>        
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                        <% @responses.each do |response| %>
-                                            <tr>
-                                                <td><%= response.name %></td>
-                                                <td><%= response.sub_sect_name%></td>
-                                                <td><%= response.points %></td> 
-                                                <td><%= response.score %></td>
-                                                 <td><%= response.avg_score.to_f()%> </td>
-                                                <% if(response.in_plan == "in_our_plan") %>
-                                                    <td><%= 'Yes'%></td>
-                                               <%else%>
-                                                    <td><%= '-'%></td>
-                                               <%end %>
-                                                <td><%= response.answer_3 %></td> 
-                                                </tr>
-                                        <% end %>
-                                        
-                                                </tbody>           
-                                          </table>      
-                                          
+                                          <%= render :partial=>"report_response_table"%>
                                         </div>
                                       </div>
-              <!--end table-->    
+             
                                 </div>
                             </div>        
         </div>
 
-        <!--second tab-->
+       
                         
 
       </div>
