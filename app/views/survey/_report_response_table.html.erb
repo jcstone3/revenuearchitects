@@ -7,6 +7,7 @@
                                                     <th><h3>Points</h3></th>          
                                                     <th><h3>Score</h3></th>
                                                     <th><h3>Average Score</h3></th>
+                                                    <th><h3>Calculated Score</h3></th>
                                                     <th><h3>In Plan</h3></th>
                                                     <th><h3>Priority</h3></th>        
                                                   </tr>
@@ -19,7 +20,9 @@
                                                 <td><%= response.sub_sect_name%></td>
                                                 <td><%= response.points %></td> 
                                                 <td><%= response.score %></td>
-                                                 <td><%= response.avg_score.to_f()%> </td>
+                                                <td><%= response.avg_score.to_f()%> </td>  
+                                                <td><%= get_calculated_score(response.response_id, response.questions_id)%></td>
+                                                <td><%= get_avg_calculated_score(response.survey_id, response.questions_id)%>
                                                 <% if(response.in_plan == "in_our_plan") %>
                                                     <td><%= 'Yes'%></td>
                                                <%else%>

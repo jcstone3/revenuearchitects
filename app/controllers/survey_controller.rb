@@ -560,7 +560,7 @@ def compare_programs
   @response_all = Response.find(:all,
      :select=>"responses.answer_1, questions.id, surveys.id",
      :joins =>"right outer join questions on questions.id=responses.question_id
-              left outer join surveys on  surveys.company_id in (3,11,13) 
+              left outer join surveys on surveys.company_id in (3,11,13) 
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 
               inner join sections on sections.id = sub_sections.section_id
               where responses.survey_id!=#{@survey.id} and sections.id = 3",

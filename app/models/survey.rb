@@ -36,7 +36,7 @@ def self.calculate_response_for_section(survey_id, section_id)
        questions << q.id
      end
     end
-  @survey = Survey.find(survey_id)
+  @survey = self.find(survey_id)
     @sur_responses = @survey.responses.find_all_by_question_id(questions)   
     calculate_response(@sur_responses)
 end   
@@ -77,12 +77,34 @@ end
 
 def self.get_response_score_for(survey_id)
   @total = 0
- @survey = Survey.find(survey_id) 
+ @survey = self.find(survey_id) 
  @survey.responses.each do |response|
    @total += get_individual_response_score(response.id, response.question_id)
  end
  return @total
 end 
+
+def get_avg_calculated_score(response_survey_id, response_questions_id, section_id)
+ @avg_response_score = 0
+ survey = self.find(response_survey_id)
+ company = Company.find(survey.company_id)
+ 
+ company_all = Company.find(:all, conditions=>"industry_id=#{company.industry.id} 
+                                              and id !=#{company.id} ")
+ if company_all
+    response = Response.find(:all, :select =>"responses.question_id, responses.answer_1",
+               :joins=>"left outer join questions where questions.id = responses.question_id 
+                        left outer join sub_sections on sub_sections.id = questions.sub_section_id
+                        inner join sections on sections.id = sub_sections.section_id
+                        where sections_id=1")
+    response.each do |res|
+      @score =  get_individual_response_score(response_id, response_question_id)
+      total_score += @score 
+    end  
+    @avg_response_score = (total_score/response.count)
+  end  
+    return @avg_response_score
+end    
 
 #individual score for each response
 def self.get_individual_response_score(response_id, response_question_id)
@@ -91,53 +113,53 @@ def self.get_individual_response_score(response_id, response_question_id)
   response = Response.find(response_id)
   case question.points
         when 5 
-          if response.answer_1 == "1"
+          if response.answer_1 == 1
             score = -1            
           end
-           if response.answer_1 == "2"
+           if response.answer_1 == 2
             score = 0
           end 
-           if response.answer_1 == "3"
+           if response.answer_1 == 3
             score = 1
           end
-           if response.answer_1 == "4"
+           if response.answer_1 == 4
             score = 3
           end
-           if response.answer_1 == "5"
+           if response.answer_1 == 5
             score = 5
           end         
 
        when 10 
-          if response.answer_1 == "1"
+          if response.answer_1 == 1
             score = -2
           end
-           if response.answer_1 == "2"
+           if response.answer_1 == 2
             score = 0
           end 
-           if response.answer_1 == "3"
+           if response.answer_1 == 3
             score = 2
           end
-           if response.answer_1 == "4"
+           if response.answer_1 == 4
             score = 6
           end
-           if response.answer_1 == "5"
+           if response.answer_1 == 5
             score = 10
           end          
 
         when 20 
-          if response.answer_1 == "1"
+          if response.answer_1 == 1
             score = -4
           end
-           if response.answer_1 == "2"
+           if response.answer_1 == 2
             score = 0
           end 
-           if response.answer_1 == "3"
+           if response.answer_1 == 3
             score = 4
           end
-           if response.answer_1 == "4"
+           if response.answer_1 == 4
             score = 12
           end
-           if response.answer_1 == "5"
+           if response.answer_1 == 5
             score = 20
           end
         end        
