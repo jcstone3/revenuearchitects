@@ -3,14 +3,14 @@
           <div class="spa@section_total.inspectn9 report-top1" >
                    <ul class="nav nav-pills">
                     <li class="surveyname">&nbsp;Survey Name 2012</li>
-                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Strategy <span class="green">100</span></a></li>
-                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Systems <span class="green">100</span></a></li>
-                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Programs <span class="green">100</span> </a></li>
+                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Strategy <span class="green"><%= @sections[0].question_count%></span></a></li>
+                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Systems <span class="green"><%= @sections[1].question_count%></span></a></li>
+                    <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;Programs <span class="green"><%= @sections[2].question_count%></span> </a></li>
                     <li class="on" id ="final_result">
                       <%= link_to(reports_url) do %>
                       <%= image_tag "shoulddo.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;&nbsp;
                       Final Result
-                      <span class="green">200</span>  <i class="icon-chevron-right icon-white"></i>                    
+                      <i class="icon-chevron-right icon-white"></i>                     
                      <%end%>
                     </li>
                     

@@ -365,8 +365,8 @@ end
 def compare
  require 'rubygems'
  require 'google_chart'
-   
- @survey = Survey.find(params[:id])
+  @sections = Section.all  
+  @survey = Survey.find(params[:id])
   @question_count =Question.all.count
   @response = Response.find(:all,
   :select =>"responses.answer_1, questions.id",
@@ -374,7 +374,7 @@ def compare
            where responses.survey_id=#{@survey.id}"
     )
   @response_all = []
-  
+  @sections = Section.all
   #Average response for all survey
   @survey = Survey.find(params[:id])
   @company = Company.find(@survey.company_id)
@@ -418,9 +418,10 @@ def compare
 end 
 
 def compare_system
-  require 'rubygems'
+ require 'rubygems'
  require 'google_chart'
-   
+ 
+ @sections = Section.all  
  @survey = Survey.find(params[:id])
   @question_count =Question.all.count
   @response = Response.find(:all,
@@ -487,8 +488,8 @@ end
 def compare_strategy
  require 'rubygems'
  require 'google_chart'
-   
- @survey = Survey.find(params[:id])
+  @sections = Section.all 
+  @survey = Survey.find(params[:id])
   @question_count =Question.all.count
   @response = Response.find(:all,
   :select =>"responses.answer_1, questions.id",
@@ -555,7 +556,7 @@ end
 def compare_programs
   require 'rubygems'
  require 'google_chart'
-   
+ @sections = Section.all  
  @survey = Survey.find(params[:id])
   @question_count =Question.all.count
   @response = Response.find(:all,
@@ -671,11 +672,12 @@ def download_result
 
   respond_to do |format|
       format.html{}
-      format.pdf {
-       html = render_to_string(:layout => false , :action => "reports.html.erb")
-       kit = PDFKit.new(html)
-       #kit.stylesheets << File.join( RAILS_ROOT, "assets", "stylesheets", "application.css" )
-       send_data(kit.to_pdf, :filename => "survey.pdf", :type => "application/pdf")
+       format.pdf {
+        html = render_to_string(:layout => false , :action => "reports.html")
+        kit = PDFKit.new(html)    
+        kit.stylesheets << Rails.root.join("app/assets/stylesheets/jquery.dataTables.css")    
+        send_data(kit.to_pdf, :filename => "survey.pdf", :type => 'application/pdf')
+        return # to avoid double render call
       }
       format.xls {
         result = Spreadsheet::Workbook.new
