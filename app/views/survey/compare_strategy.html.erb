@@ -92,7 +92,8 @@
                                                 <td><%= response.sub_sect_name%></td>
                                                 <td><%= response.points %></td> 
                                                 <td><%= response.score %></td>
-                                                <td><%= response.avg_score%> </td>
+                                                <td><%= response.avg_score.to_f()   
+                                                      %> </td>
                                                 <% if(response.in_plan == "in_our_plan") %>
                                                     <td><%= 'Yes'%></td>
                                                <%else%>

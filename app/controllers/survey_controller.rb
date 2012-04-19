@@ -192,9 +192,7 @@ def create_response
 end
 
 #report of a particular survey
-def report
-  require 'rubygems'
- require 'google_chart'
+def report  
   @survey = current_user.companies.first.surveys.find_all_by_id(params[:id])
   if @survey.present?
   @section_total = []
@@ -405,13 +403,16 @@ def compare
      )
   end  
   
-  GoogleChart::LineChart.new("700x300", "Overall", false) do |line_graph|
+  GoogleChart::LineChart.new("900x330", "Overall", false) do |line_graph|
     line_graph.data "Line green", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
     line_graph.data "Line red", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
     line_graph.axis :y, :range =>[0,5], :font_size =>10, :alignment =>:center
     line_graph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
     line_graph.show_legend = false
     line_graph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
+    line_graph.fill :background, :gradient, :angle=>0, :color=>[['FFFFFF', 1], ['76A4FA', 0]]
+    #line_graph.fill :chart, :gradient, :angle=>0, :color=>[['76A4FB', 1], ['FFFFFF', 0]]
+    #line_graph.grid :x_step => 100.0/6.0, :y_step=>100.0/6.0, :length_segment =>1, :length_blank => 0
     @line_graph =  line_graph.to_url
   end
 end 
@@ -470,6 +471,7 @@ def compare_system
     line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
     line_gph.show_legend = false
     line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
+    line_gph.fill :background, :gradient, :angle=>0, :color=>[['FFFFFF', 1], ['76A4FA', 0]]
     @line_graph_system =  line_gph.to_url
   end
   @responses = Response.find(:all, 
@@ -537,6 +539,7 @@ def compare_strategy
     line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
     line_gph.show_legend = false
     line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
+    line_gph.fill :background, :gradient, :angle=>0, :color=>[['FFFFFF', 1], ['76A4FA', 0]]
     @line_graph_strategy =  line_gph.to_url
   end
   @responses = Response.find(:all, 
@@ -603,6 +606,7 @@ def compare_programs
     line_gph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
     line_gph.show_legend = false
     line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
+    line_gph.fill :background, :gradient, :angle=>0, :color=>[['FFFFFF', 1], ['76A4FA', 0]]
     @line_graph_programs =  line_gph.to_url
   end
   @responses = Response.find(:all, 

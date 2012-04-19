@@ -20,12 +20,7 @@
                             </i> &nbsp;Summary
                        <% end %>	
                      </li>  
-                    <!-- <li class="next2">
-                     <%= link_to(detailed_report_url(params[:id])) do %>
-                            <i class="icon-file iconNext">
-                            </i>Detailed
-                       <% end %>
-                     </li> -->
+                    
 
                      <li class="on2">
                      <%= link_to(compare_url(params[:id])) do %>
@@ -107,7 +102,7 @@
                                                 <td><%= response.sub_sect_name%></td>
                                                 <td><%= response.points %></td> 
                                                 <td><%= response.score %></td>
-                                                 <td><%= response.avg_score%> </td>
+                                                 <td><%= response.avg_score.to_f()%> </td>
                                                 <% if(response.in_plan == "in_our_plan") %>
                                                     <td><%= 'Yes'%></td>
                                                <%else%>
