@@ -10,7 +10,7 @@
         </head> 
        
         <!-- Le styles -->
-<%#= content_for :main_content do%>
+<%= content_for :main_content do%>
        <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
         <%= render :partial=>"reports_css"%>
         <div class="content" style="page-break-after:always;">
@@ -20,16 +20,18 @@
         </div>
 
         <div class="content" style="page-break-after:always;">
-           <h1>Overall Graph</h1>
-          <div class="graph" style="background-color:#FFF;">
-            
+           <h1 class="position_header">Overall Graph</h1>
+         </div>  
+         <div class="content" style="page-break-after:always;">
+          <div class="graph">
+            <h1>Overall Graph</h1>
             <img src="<%= get_overallgraph(params[:id]) %>">
              
           </div>
         </div>
         <%@sections.each do |section| %>
         <div class="content" style="page-break-after:always;">
-             <h1><%= section.name%></h1>
+             <h1 class="position_header"><%= section.name.try(:capitalize)%></h1>
         </div>
 
         <div class="content" style="page-break-after:always;">
@@ -38,6 +40,7 @@
             <img src = "<%= get_graph(section.id, params[:id])%>"/>
               
           </div>
+          <br/>
           <div class="textbox">
              <% @responses = get_response_result(section.id, params[:id])%>
              <%= render :partial=>"report_response_table" %>            
@@ -46,11 +49,11 @@
         <%end%>        
 
         <div class="content" style="page-break-after:always;">
-             <h1>Actions</h1>
+             <h1 class="position_header">Actions</h1>
         </div>
 
         <div class="content" style="page-break-after:always;">
-             <h1>Must Do</h1>
+             <h1 class="position_header">Must Do</h1>
         </div>
         <div class="content" style="page-break-after:always;">
              <h1>Must Do</h1>
@@ -60,7 +63,7 @@
             </div> 
         </div>  
         <div class="content" style="page-break-after:always;">
-             <h1>Should Do</h1>
+             <h1 class="position_header">Should Do</h1>
         </div>
         <div class="content" style="page-break-after:always;">
              <h1>Should Do</h1>
@@ -71,7 +74,7 @@
         </div>  
 
         <div class="content" style="page-break-after:always;">
-             <h1>Could Do</h1>
+             <h1 class="position_header">Could Do</h1>
         </div>
         <div class="content" style="page-break-after:always;">
              <h1>Could Do</h1>
@@ -86,7 +89,7 @@
           Aenean eu erat et velit dapibus bibendum id quis quam.
           Sed quis suscipit tortor.</p>
         </div>
-<%#end%>
+<%end%>
    
     </body>
 </html>

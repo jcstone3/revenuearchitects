@@ -371,7 +371,7 @@ def download_result
   require 'google_chart'
   require 'spreadsheet'  
   
-  @sections = Section.find(:all) 
+  @sections = Section.find(:all, :order=>'id ASC') 
   @survey = Survey.find(params[:id])
   respond_to do |format|
       format.html{}

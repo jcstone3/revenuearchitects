@@ -86,6 +86,7 @@ $(document).ready(function(){
                 }
                //hide priority option on load
                if($('#response_answer_2').val() == "add_to_plan"){
+                var response_answer2 = $('#response_answer_2').val();
                 var response_answer3 = $('#response_answer_3').val();
                 $('#option').find('a#'+response_answer2+'').removeClass('btn form priorityTip');
                 $('#option').find('a#'+response_answer2+'').addClass('btn form btn-success priorityTip');
@@ -392,25 +393,6 @@ $(document).ready(function(){
             "bPaginate": true,
             "bLengthChange": false,
             "bFilter": true,
-            "bSort": true,
-            "bInfo": false,
-            "bAutoWidth": true
-        } ); 
-
-
-       $('#resultTable1').dataTable( {
-            "bPaginate": false,
-            "bLengthChange": false,
-            "bFilter": false,
-            "bSort": true,
-            "bInfo": false,
-            "bAutoWidth": true
-        } );
-
-        $('#resultTable2').dataTable( {
-            "bPaginate": false,
-            "bLengthChange": false,
-            "bFilter": false,
             "bSort": true,
             "bInfo": false,
             "bAutoWidth": true
