@@ -11,6 +11,10 @@ module SurveyHelper
     def get_graph(section_id, survey_id)
     	@line_graph = Survey.get_section_graph(section_id, survey_id)
     end	
+    
+    def get_overallgraph(survey_id)
+       @line_graph = Survey.get_overall_graph(survey_id)
+    end
 
     def get_response_result(section_id, surveyid)
     	@responses = Survey.get_result(section_id, surveyid)

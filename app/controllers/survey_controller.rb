@@ -331,60 +331,10 @@ def close_survey
 end
 
 
-def compare
- require 'rubygems'
- require 'google_chart'
-  @sections = Section.all  
+def compare   
   @allSection = Section.all 
   @survey = Survey.find(params[:id])
-  @question_count =Question.all.count
-  @response = Response.find(:all,
-  :select =>"responses.answer_1, questions.id as questions_id",
-  :joins=>"right outer join questions on questions.id=responses.question_id 
-           where responses.survey_id=#{@survey.id}"
-    )
-  @response_all = []
-  @sections = Section.all
-  #Average response for all survey
-  @survey = Survey.find(params[:id])
-  @company = Company.find(@survey.company_id)
-  @industry  = Industry.find(@company.industry_id)
-  @companies = Company.find(:all,
-   :select => "industries.id, companies.id",
-   :joins =>"right outer join industries on companies.industry_id = industries.id   
-   where industries.id = '1' and companies.id !=#{@survey.company_id}"
-   )
-   if @companies.present?
-  @company_ids=@companies.map(&:id)
-  @response_all = Response.find(:all,
-     :select=>"sum(responses.answer_1), questions.id, surveys.id",
-     :joins =>"right outer join questions on questions.id=responses.question_id
-              left outer join surveys on  surveys.company_id in (3,11,13)
-              where responses.survey_id!=#{@survey.id}",
-     :group=>"surveys.id, responses.answer_1, questions.id"    
-     )
-  else
-    @response_all = Response.find(:all,
-     :select=>"count(*), responses.answer_1, questions.id",
-     :joins =>"right outer join questions on questions.id=responses.question_id
-              left outer join surveys on responses.survey_id = surveys.id where 
-              responses.survey_id!=#{@survey.id}",
-     :group=>"questions.id, responses.answer_1"    
-     )
-  end  
-  
-  GoogleChart::LineChart.new("900x330", "Overall", false) do |line_graph|
-    line_graph.data "Your Response", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
-    line_graph.data "Overall Response", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
-    line_graph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
-    line_graph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
-    line_graph.show_legend = true
-    line_graph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 5
-    #line_graph.fill :background, :gradient, :angle=>0, :color=>[['FFFFFF', 1], ['76A4FA', 0]]
-    #line_graph.fill :chart, :gradient, :angle=>0, :color=>[['76A4FB', 1], ['FFFFFF', 0]]
-    line_graph.grid :x_step => 100.0/10, :y_step=>100.0/10, :length_segment =>1, :length_blank => 0
-    @line_graph =  line_graph.to_url
-  end
+  @line_graph = Survey.get_overall_graph(@survey.id)
 end 
 
 def compare_strategy
@@ -411,7 +361,8 @@ def compare_programs
 end  
 
   def reports
- 
+   @sections = Section.find(:all) 
+  @survey = Survey.find(params[:id])
   end   
 
 #to download in pdf/xls format
@@ -421,13 +372,14 @@ def download_result
   require 'spreadsheet'  
   
   @sections = Section.find(:all) 
- 
+  @survey = Survey.find(params[:id])
   respond_to do |format|
       format.html{}
        format.pdf {
         html = render_to_string(:layout => false , :action => "reports.html")
         kit = PDFKit.new(html)    
-        kit.stylesheets << Rails.root.join("app/assets/stylesheets/jquery.dataTables.css")    
+        kit.stylesheets << Rails.root.join("app/assets/stylesheets/jquery.dataTables.css") 
+        kit.stylesheets << Rails.root.join("app/assets/stylesheets/application.css")   
         send_data(kit.to_pdf, :filename => "survey.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }

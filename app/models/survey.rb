@@ -34,8 +34,8 @@ class Survey < ActiveRecord::Base
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
              where sections.id=#{section_id}",
-   :group => "questions.id, responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"            
-   ) 
+   :group => "questions.id, responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points",            
+   :order=>"questions.id") 
    return @responses
    end 
 
@@ -46,8 +46,8 @@ class Survey < ActiveRecord::Base
              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              left outer join sections on sections.id = sub_sections.section_id   
              where responses.survey_id =#{surveyid} and responses.answer_3 like'#{action}'",
-  :group => "questions.id, responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"                                      
-   ) 
+  :group => "questions.id, responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points",                                      
+   :order=>"questions.id") 
    return @responses
    end 
 
@@ -113,6 +113,65 @@ class Survey < ActiveRecord::Base
   end
    return @line_graph_programs
   end  
+
+def self.get_overall_graph(survey_id)
+  require 'rubygems'
+ require 'google_chart'
+  @sections = Section.all  
+  @allSection = Section.all 
+  @survey = Survey.find(survey_id)
+  @question_count =Question.all.count
+  @response = Response.find(:all,
+  :select =>"responses.answer_1, questions.id",
+  :joins=>"right outer join questions on questions.id=responses.question_id 
+           left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+           inner join sections on sections.id = sub_sections.section_id
+           where responses.survey_id=#{@survey.id}",
+   :order => "questions.id ASC")
+  @response_all = []
+  @sections = Section.all
+  #Average response for all survey 
+  @company = Company.find(@survey.company_id)  
+  @companies = Company.find(:all,
+   :select => "industries.id, companies.id",
+   :joins =>"right outer join industries on companies.industry_id = industries.id   
+   where industries.id = #{@company.industry_id} and companies.id !=#{@survey.company_id}"
+   )
+   if @companies.present?
+  @company_ids=@companies.map(&:id)
+  @response_all = Response.find(:all,
+     :select=>"responses.answer_1, questions.id, surveys.id",
+     :joins =>"right outer join questions on questions.id=responses.question_id
+              left outer join surveys on surveys.company_id in (3,11,13) 
+              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+              inner join sections on sections.id = sub_sections.section_id
+              where responses.survey_id!=#{@survey.id}",
+     :group=>"surveys.id,responses.answer_1, questions.id"    
+     )
+  else
+    @response_all = Response.find(:all,
+     :select=>"count(*), responses.answer_1, questions.id",
+     :joins =>"right outer join questions on (questions.id=responses.question_id
+              left outer join surveys on responses.survey_id = surveys.id 
+              left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+              inner join sections on sections.id = sub_sections.section_id
+              where responses.survey_id!=#{@survey.id}",
+     :group=>"questions.id, responses.answer_1"    
+     )
+  end  
+  
+  GoogleChart::LineChart.new("900x330", "Overall", false) do |line_graph|
+    line_graph.data "Your Response", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
+    line_graph.data "Overall Response", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
+    line_graph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
+    line_graph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
+    line_graph.show_legend = true
+    line_graph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 5
+    line_graph.grid :x_step => 100.0/10, :y_step=>100.0/10, :length_segment =>1, :length_blank => 0
+    @line_graph =  line_graph.to_url
+  end
+  return @line_graph
+end
 
   #total response for a section
 def self.calculate_response_for_section(survey_id, section_id)

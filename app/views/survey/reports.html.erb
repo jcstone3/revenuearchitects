@@ -7,12 +7,11 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
-               </head> 
+        </head> 
        
         <!-- Le styles -->
 <%#= content_for :main_content do%>
-        <%= stylesheet_link_tag "application",:media => "all" %>
-        
+       <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
         <%= render :partial=>"reports_css"%>
         <div class="content" style="page-break-after:always;">
             <h1>Revenue Grader</h1>
@@ -20,11 +19,11 @@
             <h1>For Test-Company</h1>
         </div>
 
-        <div class="overall" style="page-break-after:always;">
+        <div class="content" style="page-break-after:always;">
            <h1>Overall Graph</h1>
           <div class="graph" style="background-color:#FFF;">
             
-            <img src="<%#= @line_graph %>">
+            <img src="<%= get_overallgraph(params[:id]) %>">
              
           </div>
         </div>
@@ -35,7 +34,7 @@
 
         <div class="content" style="page-break-after:always;">
           <div class="graph">
-            <h1><%= section.name%></h1>
+            <h1><%= section.name.try(:capitalize)%></h1>
             <img src = "<%= get_graph(section.id, params[:id])%>"/>
               
           </div>
