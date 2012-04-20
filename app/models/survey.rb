@@ -57,15 +57,15 @@ class Survey < ActiveRecord::Base
  @section = Section.find(section_id)   
  @survey = Survey.find(survey_id)
  @question_count = Question.find(:all,
-    :select=>"count(*) as program_count",
+    :select=>"count(*) as question_count",
     :joins=>"right outer join sub_sections on questions.sub_section_id = sub_sections.id 
              inner join sections on sections.id = sub_sections.section_id where sections.id =#{section_id}")
  @response = Response.find(:all,
-  :select =>"responses.answer_1, questions.id",
-  :joins=>"right outer join questions on questions.id=responses.question_id 
+  :select =>"responses.answer_1, questions.id as question_id",
+  :joins=>"right outer join questions on (questions.id=responses.question_id and responses.survey_id=#{@survey.id})
            left outer join sub_sections on questions.sub_section_id = sub_sections.id 
            inner join sections on sections.id = sub_sections.section_id
-           where responses.survey_id=#{@survey.id} and sections.id = #{section_id}",
+           where sections.id = #{section_id}",
    :order => "questions.id ASC")
   @response_all = []
   
@@ -79,35 +79,38 @@ class Survey < ActiveRecord::Base
    where industries.id = #{@company.industry_id} and companies.id !=#{@survey.company_id}"
    )
   if @companies.present?
-  @company_ids = @companies.map(&:id)  
+  @company_ids=@companies.collect(&:id).join(', ')
   @response_all = Response.find(:all,
      :select=>"responses.answer_1, questions.id, surveys.id",
-     :joins =>"right outer join questions on questions.id=responses.question_id
-              left outer join surveys on surveys.company_id in (3,11,13) 
+     :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id!=#{@survey.id})
+              left outer join surveys on surveys.company_id in (#{@company_ids}) 
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 
               inner join sections on sections.id = sub_sections.section_id
-              where responses.survey_id!=#{@survey.id} and sections.id = #{section_id}",
-     :group=>"surveys.id,responses.answer_1, questions.id"    
+              where sections.id = #{section_id}",
+     :group=>"surveys.id,responses.answer_1, questions.id",
+     :order=>"questions.id"        
      )
   else
     @response_all = Response.find(:all,
      :select=>"count(*), responses.answer_1, questions.id",
-     :joins =>"right outer join questions on questions.id=responses.question_id
+     :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id!=#{@survey.id})
               left outer join surveys on responses.survey_id = surveys.id 
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 
               inner join sections on sections.id = sub_sections.section_id
-              where responses.survey_id!=#{@survey.id} and sections.id = #{section_id}",
-     :group=>"questions.id, responses.answer_1"    
+              where  sections.id = #{section_id}",
+     :group=>"questions.id, responses.answer_1",
+     :order=>"questions.id"        
      )
-  end  
+  end 
+  
   
   GoogleChart::LineChart.new("900x330", "#{@section.name}", false) do |line_gph|
     line_gph.data "Your Response", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
     line_gph.data "Overall Response", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
     line_gph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
-    line_gph.axis :x, :range =>[0,@question_count.first.program_count], :font_size =>10, :alignment =>:center
+    line_gph.axis :x, :range =>[0,@question_count.first.question_count], :font_size =>10, :alignment =>:center
     line_gph.show_legend = true
-    line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 4
+    line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 5
     line_gph.grid :x_step => 100.0/10, :y_step=>100.0/10, :length_segment =>1, :length_blank => 0
     @line_graph_programs =  line_gph.to_url
   end
@@ -123,10 +126,10 @@ def self.get_overall_graph(survey_id)
   @question_count =Question.all.count
   @response = Response.find(:all,
   :select =>"responses.answer_1, questions.id",
-  :joins=>"right outer join questions on questions.id=responses.question_id 
+  :joins=>"right outer join questions on (questions.id=responses.question_id and responses.survey_id=#{@survey.id})
            left outer join sub_sections on questions.sub_section_id = sub_sections.id 
            inner join sections on sections.id = sub_sections.section_id
-           where responses.survey_id=#{@survey.id}",
+           ",
    :order => "questions.id ASC")
   @response_all = []
   @sections = Section.all
@@ -138,25 +141,25 @@ def self.get_overall_graph(survey_id)
    where industries.id = #{@company.industry_id} and companies.id !=#{@survey.company_id}"
    )
    if @companies.present?
-  @company_ids=@companies.map(&:id)
+  @company_ids=@companies.collect(&:id).join(', ')
   @response_all = Response.find(:all,
      :select=>"responses.answer_1, questions.id, surveys.id",
-     :joins =>"right outer join questions on questions.id=responses.question_id
-              left outer join surveys on surveys.company_id in (3,11,13) 
+     :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id=#{@survey.id})
+              left outer join surveys on surveys.company_id in (#{@company_ids}) 
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 
-              inner join sections on sections.id = sub_sections.section_id
-              where responses.survey_id!=#{@survey.id}",
-     :group=>"surveys.id,responses.answer_1, questions.id"    
+              inner join sections on sections.id = sub_sections.section_id",
+     :group=>"surveys.id,responses.answer_1, questions.id",
+     :order=>"questions.id"        
      )
   else
     @response_all = Response.find(:all,
      :select=>"count(*), responses.answer_1, questions.id",
-     :joins =>"right outer join questions on (questions.id=responses.question_id
+     :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id=#{@survey.id})
               left outer join surveys on responses.survey_id = surveys.id 
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 
-              inner join sections on sections.id = sub_sections.section_id
-              where responses.survey_id!=#{@survey.id}",
-     :group=>"questions.id, responses.answer_1"    
+              inner join sections on sections.id = sub_sections.section_id",
+     :group=>"questions.id, responses.answer_1",
+     :order=>"questions.id"    
      )
   end  
   
