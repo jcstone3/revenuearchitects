@@ -38,6 +38,8 @@
       <div class="row-fluid top-bar">
           <%= render  "/layouts/shared/header" -%> 
       </div><!-- / end of row -->
+    
+    <%= yield :top_bar_content %>
 
     <% if !flash.blank? -%> 
       <div class="row-fluid">

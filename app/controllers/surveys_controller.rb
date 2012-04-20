@@ -5,9 +5,10 @@ before_filter :authenticate_user!, :check_company #check current_user & company
 layout "application"
 
 def index
-  redirect_to continue_survey_url
+  redirect_to continue_survey_path
 end  
 #new survey
+#TODO: This action is too complicated, need to simplify this
 def new
   @active_survey = []
   @previous_surveys = []
@@ -22,7 +23,7 @@ def new
             end              
             end
             flash[:success] = "Welcome back #{current_user.username}, please select a survey to continue"
-            redirect_to continue_survey_url               
+            redirect_to continue_survey_path               
         else
           #list all the previous completed surveys & start a new survey
           current_user.companies.each do |cmpany|
@@ -38,7 +39,7 @@ def new
         end  
   else
     flash[:error] = "Please provide company details before proceeding"
-    redirect_to new_company_url  
+    redirect_to new_company_path  
   end
 end 
 
@@ -46,13 +47,15 @@ end
 def create  
   @company = current_user.companies.first
   params[:survey].merge!(:start_date => Time.now, :is_active => true)
-  @survey = @company.surveys.create!(params[:survey])
-  if @survey
+  @survey = Survey.new(params[:survey])
+  @survey.company = @company
+#  @survey = @company.surveys.create!(params[:survey])
+  if @survey.save
      @survey_name = @survey.created_at.strftime('%B,%Y')
      flash[:success] = "Survey #{@survey_name} created successfully"
-     redirect_to questions_url(@survey, 1)
+     redirect_to questions_path(@survey, 1)
   else
-     flash[:error] = "Sorry could not create the survey"
+     flash[:error] = "Sorry could not create the Survey. Please try again."
      render "new"
   end         
 end
@@ -77,27 +80,27 @@ def get_response_status
                  res = questions - response
                  @survey_name = @survey.created_at.strftime('%B,%Y')
                  flash[:success] = "Continue Survey #{@survey_name}" 
-                 redirect_to questions_url(@survey, res[0]) 
+                 redirect_to questions_path(@survey, res[0]) 
               else
                @survey_name = @survey.created_at.strftime('%B,%Y') 
                flash[:success] = "Start Survey #{@survey_name}" 
-               redirect_to questions_url(@survey, 1)   
+               redirect_to questions_path(@survey, 1)   
               end
           else
             flash[:error] = "Some thing went wrong please select a survey"
-            redirect_to continue_survey_url 
+            redirect_to continue_survey_path 
           end      
   else
     flash[:error] = "Something went wrong please select a survey"
-    redirect_to continue_survey_url
+    redirect_to continue_survey_path
   end 
    else
     flash[:error] = "Something went wrong please select a survey"
-    redirect_to continue_survey_url
+    redirect_to continue_survey_path
   end 
   else
     flash[:error] = "Something went wrong please select a survey"
-    redirect_to continue_survey_url 
+    redirect_to continue_survey_path 
  end
 end
 
@@ -119,7 +122,7 @@ def question
              
              @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
               if @survey_response
-               redirect_to previous_question_url(params[:id], params[:question_id])
+               redirect_to previous_question_path(params[:id], params[:question_id])
               else
                 @question = Question.find(params[:question_id])
                 @sub_section = SubSection.find(@question.sub_section_id)
@@ -153,19 +156,19 @@ def question
               end 
            else
             flash[:error] = "Something went wrong please select a survey"
-            redirect_to continue_survey_url
+            redirect_to continue_survey_path
            end           
       else
        flash[:error] = "Something went wrong please select a survey"
-       redirect_to continue_survey_url   
+       redirect_to continue_survey_path   
       end
     else
       flash[:error] = "Something went wrong please select a survey"
-      redirect_to continue_survey_url  
+      redirect_to continue_survey_path  
     end  
    else
      flash[:error] = "Something went wrong please select a survey"
-     redirect_to continue_survey_url 
+     redirect_to continue_survey_path 
    end 
 end 
 
@@ -173,7 +176,7 @@ end
 def create_response 
   if params[:response].blank?  
     flash[:error] = "Could not save response for some reason please try again"
-    redirect_to continue_survey_url
+    redirect_to continue_survey_path
   else
    @response = Response.new 
    @survey = Survey.find(params[:response][:survey_id])
@@ -184,9 +187,9 @@ def create_response
       @sub_section = SubSection.find(@question.sub_section_id)
       @section = Section.find(@sub_section.section_id)
       @total_score = Survey.calculate_response_for_section(@survey.id, @section.id)
-      redirect_to questions_url(@survey, params[:response][:question_id].to_i+1)
+      redirect_to questions_path(@survey, params[:response][:question_id].to_i+1)
    else    
-     redirect_to confirm_survey_url(@survey.id)
+     redirect_to confirm_survey_path(@survey.id)
    end
   end
 end
@@ -259,23 +262,23 @@ def previous_question
                 end 
                 ######### end of pagination logic ##########               
               else
-                redirect_to questions_url(@survey, params[:question_id])
+                redirect_to questions_path(@survey, params[:question_id])
               end 
            else
             flash[:error] = "Something went wrong please select a survey"
-            redirect_to continue_survey_url
+            redirect_to continue_survey_path
            end      
       else
        flash[:error] = "Something went wrong please select a survey"
-       redirect_to continue_survey_url   
+       redirect_to continue_survey_path   
       end
     else
       flash[:error] = "Something went wrong please select a survey"
-      redirect_to continue_survey_url  
+      redirect_to continue_survey_path  
     end  
    else
      flash[:error] = "Something went wrong please select a survey"
-     redirect_to continue_survey_url 
+     redirect_to continue_survey_path 
    end 
   
 end
@@ -283,7 +286,7 @@ end
 def update_response  
   if params[:response].blank?  
     flash[:error] = "Could not save response for some reason please try again"
-    redirect_to continue_survey_url
+    redirect_to continue_survey_path
   else
    @survey = Survey.find(params[:response][:survey_id])
    @response = Response.find_by_survey_id_and_question_id(params[:response][:survey_id], params[:response][:question_id])
@@ -295,9 +298,9 @@ def update_response
       @sub_section = SubSection.find(@question.sub_section_id)
       @section = Section.find(@sub_section.section_id)
       @total_score = Survey.calculate_response_for_section(@survey.id, @section.id)      
-      redirect_to questions_url(@survey, @question.id)
+      redirect_to questions_path(@survey, @question.id)
    else          
-     redirect_to confirm_survey_url(@survey.id)
+     redirect_to confirm_survey_path(@survey.id)
    end
   end
 end
@@ -323,10 +326,10 @@ def close_survey
    @survey = Survey.find_by_id(params[:id])
    if @survey.update_attribute(:is_active, false)
      flash[:success] = "Thank you for taking up the survey"
-     redirect_to reports_url(params[:id])
+     redirect_to reports_path(params[:id])
    else
      flash[:success] = "Sorry could not close the survey"
-     redirect_to confirm_survey_url(@survey.id)
+     redirect_to confirm_survey_path(@survey.id)
    end 
 end
 
@@ -410,7 +413,7 @@ end
 private
 def check_company
   if !current_user.companies
-     redirect_to new_company_url
+     redirect_to new_company_path
   end
 end 
 
