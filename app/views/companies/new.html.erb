@@ -5,13 +5,19 @@
           
       <%= simple_form_for(@company, :validate => true, :class => "well") do |f| %>
 
-        <%= f.input :name, :label => "Your Company Name",  :input_html => { :class => 'input-xlarge' }, :label_html => { :class => '' } -%> 
-        <%= f.input :website,  :input_html => { :class => 'input-xlarge' } -%>
-        <%= f.association :industry, :prompt => "Select Industry",  :input_html => { :class => 'input-xlarge' }   -%>  
+        <%= f.input :name, 
+                    :label => "Your Company Name",  
+                    :input_html => { :class => 'input-xlarge' }, 
+                    :label_html => { :class => '' } -%> 
+        <%= f.input :website,  
+                    :input_html => { :class => 'input-xlarge' } -%>
+        <%= f.association :industry, 
+                      :prompt => "Select Industry",  
+                      :input_html => { :class => 'input-xlarge' }   -%>  
 
          <div class="form-actions">
             <%= f.button :submit, "Continue to Survey", :class => 'btn-primary' %>
-            </div>
+          </div>
     <% end -%> 
       
     </div><!-- / end of content -->

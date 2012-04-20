@@ -1,17 +1,17 @@
 <% content_for :main_content do -%> 
     <div class="content">
-       <h1 class="question">Survey  <%= @survey_date%></h1>
+       <h1 class="question">Survey  <%= @survey_date%>: Enter Survey Details</h1>
       <p class="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor.</p>
           
       <%= simple_form_for(@survey, :validate => true, :class => "well") do |f| %>
 
-        <%= f.input :size, 
+        <%= f.collection :size, 
                       :collection => [ ['1 -99'],['100 - 499'],['500-5000'],['5000 and above'] ] , 
                       :prompt => "Select Company Size",  
                       :label => "Company Size",  
                       :input_html => { :class => 'input-xlarge' }, 
                       :label_html => { :class => '' } -%> 
-        <%= f.input :revenue, 
+        <%= f.collection :revenue, 
                       :collection => [['below $1M'],['$1M-10M'],['$10M-$100M'],['$100M-$1B'],['above $1B']], 
                       :prompt => "Select Revenue",  
                       :label => "Revenue Last 12 Months",  
