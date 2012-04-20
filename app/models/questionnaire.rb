@@ -11,9 +11,8 @@ end
 # Table name: questionnaires
 #
 #  id          :integer         not null, primary key
-#  name        :string(255)
-#  description :string(255)
-#  industry_id :integer
+#  name        :string(150)
+#  description :string(500)
 #  is_active   :boolean
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null

@@ -10,19 +10,21 @@ class CompaniesController < ApplicationController
     #new#company
 	def new
 		@company = Company.new
-		@industry = Industry.all
+		#@industries = Industry.all
 	end
 	
 	#crating new company
 	def create
-		@company = current_user.companies.create!(params[:company])
-		if @company
-			flash[:success] = "Company #{@company.name} created successfully"
-			redirect_to new_survey_url
-		else
-		 # flash[:error] = "Sorry could not create company"
-		  render :new
-		end  	
+      	@company = Company.new(params[:company])
+           @company.user = current_user 
+
+      	if @company.save
+      		flash[:success] = "Company #{@company.name} created successfully"
+      		redirect_to new_survey_url
+      	else
+      	 # flash[:error] = "Sorry could not create company"
+      	  render :new
+      	end  	
 	end
 
    def show

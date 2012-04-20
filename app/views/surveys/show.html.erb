@@ -1,0 +1,101 @@
+<% content_for :main_content do -%> 
+    <div class="container headerPopup">
+      <div class="row-fluid">
+        <div class="span9 leftBox1 marginLeft">                  
+          <div class="question1">
+            <h1> Existing Surveys </h1>
+          </div>
+
+          <div class="text" >
+          <p>Please select a survey to continue
+          </p>
+          </div>
+          
+         
+           <div class="surveyDone">
+              <% current_user.companies.each do |cmpany| %>      
+                  <div class="points">
+                     <div class="option" >
+                       <%@active_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", true]) %>
+                          <% if @active_survey.present?%>
+                            <h4>
+                          <% @active_survey.each do |survey|%>
+                              <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Survey for #{survey.created_at.strftime('%B  %Y')}", get_response_status_url(survey)%></h3>                           
+                            </h4>
+                            <% @response_count= survey.responses.present? ? survey.responses.count : 0 %>
+                            
+                            <h4> <%= "Total Completed Questions" %> <span class="red"> <%= @response_count%>/<%= @total_questions%> </span>  </h4 >
+                          </br>
+                             
+                          <%end%>
+                          <% end %> 
+                          </div>
+                      </div>
+                    
+
+          <div class="survey">
+             <div class="question1" >
+                  <h1>  Previous Survey </h1>
+                  </div>
+                 
+                 <% current_user.companies.each do |cmpany| %>      
+                    <div class="points">
+                        <div class="option" >
+                        <% @inactive_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", false], :limit=>2, :order=>'created_at Desc') %> 
+                        <% if @inactive_survey.present?%>                     
+                      <h4> <% @inactive_survey.each_with_index do |survey, i|%>
+                         <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Survey for #{survey.created_at.strftime('%B  %Y')}", reports_url(survey)%></h3>                          
+                      </h4>
+                            <% @response_count= survey.responses.present? ? survey.responses.count : 0 %>
+                            
+                            <h4> <%= "Total Completed Questions" %> <span class="green"> <%= "  #{@response_count}/100" %> </span>  </h4>
+                          </br>
+
+                          <%end%>
+                          <%else%>
+                            <h3> No previoue Survey </h3>
+                          
+                          <% end %>
+                        </div>
+                      </div>
+                    <%end%>  
+                </div>
+                                                             
+              <%end%>                      
+                     
+             </div>  
+           </div>
+
+           <div class="span3 rightBox">
+            <div class="processIcons">
+                        <span class"leftflt">
+                        <%= image_tag "processing.png",:width=>"47px",:height=>"49px" %>
+                        <p class="demographicstext">Demographics</p>
+                        </span>
+
+                        <span class="spacing">
+                        <%= image_tag "qa_grey.png",:width=>"47px",:height=>"49px",:class=>"qa" %>
+                        <p class="qatext">Q&amp;A</p>
+                        </span>
+                        
+                        <span class"rightflt">
+                        <%= image_tag "download_grey.png",:width=>"47px",:height=>"49px",:class=>"reporticon"%>
+                        <p class="reporttext">Report</p>
+                        </span>
+            </div>
+               <div class="scoreBoard scoreboard1">
+                  <div class="head">About Revenue Grader </div>
+                     <div class="score">
+                        <span>Revenue Grader is a diagnostic tool developed by the team at Revenue Architects.  Revenue Grader helps you quickly assess and plan your revenue growth strategy.</span>
+                     </div>
+                  </div>
+                  <div class="scoreBoard">
+                     <div class="head">About Revenue Architects </div>
+                        <div class="score">
+                            <span>Revenue Architects is a consulting agency that helps our clients drive revenue growth.</span>
+                        </div>
+                     </div>
+                  </div>      
+                </div>
+              </div> 
+              <%end%>

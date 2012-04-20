@@ -55,6 +55,15 @@ module RevenueGrader
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    #Devise Layout definition
+    config.to_prepare do
+        Devise::SessionsController.layout "website"
+        Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "website" }
+        Devise::ConfirmationsController.layout "website"
+        Devise::UnlocksController.layout "website"            
+        Devise::PasswordsController.layout "website"        
+    end
     
         
   end

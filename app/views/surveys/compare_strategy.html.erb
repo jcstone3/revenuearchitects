@@ -1,0 +1,70 @@
+<% content_for :main_content do -%> 
+<div class="container report-top">
+          <div class="span9 report-top1" >
+                    <%= render :partial=>"sections_nav"%>   
+            </div>
+</div>
+<div class="container left">
+      <div class="row-fluid">
+        <div class="span12">
+                  <ul class="nav3-tabs3 usercompare"> 
+                                <li><%= link_to(compare_url(params[:id])) do %>
+                                    Overall
+                                     <% end %> 
+                                 </li>
+                                <li  class="active" href="#strategy" data-toggle="tab"><%= link_to(compare_strategy_url(params[:id])) do %>
+                                    Strategy
+                                     <% end %> 
+                                 </li>
+                                 <li><%= link_to(compare_system_url(params[:id])) do %>
+                                    System
+                                     <% end %> 
+                                 </li>
+                                 <li><%= link_to(compare_programs_url(params[:id])) do %>
+                                    Programs
+                                     <% end %> 
+                                 </li>
+                            </ul>
+                             
+                            <div class="tab-content3 dash"  style="height:auto;">
+                            <div class="tab-pane active userTable" id="strategy" >
+                <div class="tabHead">
+                                  <h1>Strategy</h1>
+                                   
+                                </div>
+                                
+                                <div class="tabGraph">
+                                    <div class="box">                                        
+                                        <h1>Responses in the current month <strong>March 2012</strong></h1>
+                                        <div class="graph">
+                              <img src="<%= @line_graph_strategy %>"/>
+             
+             
+                                         </div>
+                                    </div>
+                                     <!--table goes here-->
+                                     <div class="container report-top">
+                                        <div class="row-fluid">
+                                       
+                                         <%= render :partial=>"report_response_table"%>
+                                           
+                                        </div>
+                                      </div>
+                                  <!--end table-->  
+                                </div>
+                            </div>         
+                  </div>
+
+        <!--second tab-->
+                        
+
+      </div>
+    </div> 
+    <script>
+            $(function () {
+            $('.tabs').click(function(){
+                    alert($(this).attr('id'));
+                });
+            })
+    </script>
+    <%end%>

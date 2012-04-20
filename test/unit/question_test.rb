@@ -14,7 +14,9 @@ end
 #  sequence       :integer
 #  is_active      :boolean
 #  sub_section_id :integer
+#  points         :integer
 #  created_at     :datetime        not null
 #  updated_at     :datetime        not null
+#  description    :string(255)
 #
 

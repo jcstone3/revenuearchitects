@@ -1,5 +1,6 @@
 class SiteController < ApplicationController
-	layout "application"
+	layout "website"
+  
   def index
     if user_signed_in?
      redirect_to new_survey_url  

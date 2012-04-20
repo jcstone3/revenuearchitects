@@ -17,6 +17,10 @@ gem 'uuidtools'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 gem 'jquery-rails'
+
+gem 'simple_form', "~> 2.0.1"
+
+
 gem "client_side_validations", '~>3.1.4'
 gem 'settingslogic'
 gem 'therubyracer'

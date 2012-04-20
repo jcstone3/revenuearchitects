@@ -46,26 +46,26 @@ RevenueGrader::Application.routes.draw do
    
   resources :companies
   resources :authorizations
-  resources :survey
+  resources :surveys
   resources :industries
   resources :responses
 
-  get 'survey/:id/question/:question_id' => 'survey#question', :as => 'questions' 
-  get 'survey/:id/previous-question/:question_id' => 'survey#previous_question', :as => 'previous_question' 
-  get 'survey/:id/report/' => 'survey#report', :as => 'reports'
-  post 'survey/:id/question/:question_id' => 'survey#create_response', :as=> 'reponses'
-  post 'survey/:id/update-question/:question_id' => 'survey#update_response', :as=> 'reponses_update'
-  get 'survey/:id/download' => 'survey#download_result', :as=>'download'
-  get 'survey/:id/reports' => 'survey#reports', :as=>'reports_show'
-  get 'survey/show' =>'survey#show', :as=>'continue_survey'
-  get 'survey/get-response-status/:id' => 'survey#get_response_status', :as=>'get_response_status'
-  get 'survey/:id/report/detailed-view' => 'survey#report_detailed', :as=>'detailed_report'
-  get 'survey/:id/confirm-survey' => 'survey#confirm_survey', :as=>'confirm_survey'
-  get 'survey/:id/close-survey' => 'survey#close_survey', :as=>'close_survey'
-  get 'survey/:id/compare' => 'survey#compare', :as=>'compare'
-  get 'survey/:id/compare-strategy' => 'survey#compare_strategy', :as=>'compare_strategy'
-  get 'survey/:id/compare-system' => 'survey#compare_system', :as=>'compare_system'
-  get 'survey/:id/compare-programs' => 'survey#compare_programs', :as=>'compare_programs'
+  get 'surveys/:id/question/:question_id' => 'surveys#question', :as => 'questions' 
+  get 'surveys/:id/previous-question/:question_id' => 'surveys#previous_question', :as => 'previous_question' 
+  get 'surveys/:id/report/' => 'surveys#report', :as => 'reports'
+  post 'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
+  post 'surveys/:id/update-question/:question_id' => 'surveys#update_response', :as=> 'reponses_update'
+  get 'surveys/:id/download' => 'surveys#download_result', :as=>'download'
+  get 'surveys/:id/reports' => 'surveys#reports', :as=>'reports_show'
+  get 'surveys/show' =>'surveys#show', :as=>'continue_surveys'
+  get 'surveys/get-response-status/:id' => 'surveys#get_response_status', :as=>'get_response_status'
+  get 'surveys/:id/report/detailed-view' => 'surveys#report_detailed', :as=>'detailed_report'
+  get 'surveys/:id/confirm-surveys' => 'surveys#confirm_surveys', :as=>'confirm_surveys'
+  get 'surveys/:id/close-surveys' => 'surveys#close_surveys', :as=>'close_surveys'
+  get 'surveys/:id/compare' => 'surveys#compare', :as=>'compare'
+  get 'surveys/:id/compare-strategy' => 'surveys#compare_strategy', :as=>'compare_strategy'
+  get 'surveys/:id/compare-system' => 'surveys#compare_system', :as=>'compare_system'
+  get 'surveys/:id/compare-programs' => 'surveys#compare_programs', :as=>'compare_programs'
 
   #site controller maps about us, contact us privacy policy
   match "about-us" =>'site#aboutus', :as => 'aboutus'

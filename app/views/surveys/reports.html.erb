@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Revenue Grader - Survey Reports</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+        </head> 
+       
+        <!-- Le styles -->
+<%#= content_for :main_content do%>
+       <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
+        <%= render :partial=>"reports_css"%>
+        <div class="content" style="page-break-after:always;">
+            <h1>Revenue Grader</h1>
+            <h1>Report 2012</h1>
+            <h1>For Test-Company</h1>
+        </div>
+
+        <div class="content" style="page-break-after:always;">
+           <h1>Overall Graph</h1>
+          <div class="graph" style="background-color:#FFF;">
+            
+            <img src="<%= get_overallgraph(params[:id]) %>">
+             
+          </div>
+        </div>
+        <%@sections.each do |section| %>
+        <div class="content" style="page-break-after:always;">
+             <h1><%= section.name%></h1>
+        </div>
+
+        <div class="content" style="page-break-after:always;">
+          <div class="graph">
+            <h1><%= section.name.try(:capitalize)%></h1>
+            <img src = "<%= get_graph(section.id, params[:id])%>"/>
+              
+          </div>
+          <div class="textbox">
+             <% @responses = get_response_result(section.id, params[:id])%>
+             <%= render :partial=>"report_response_table" %>            
+          </div> 
+        </div>
+        <%end%>        
+
+        <div class="content" style="page-break-after:always;">
+             <h1>Actions</h1>
+        </div>
+
+        <div class="content" style="page-break-after:always;">
+             <h1>Must Do</h1>
+        </div>
+        <div class="content" style="page-break-after:always;">
+             <h1>Must Do</h1>
+             <div class="textbox">
+             <% @responses = get_response_result_actions(params[:id], "must_do")%>
+             <%= render :partial=>"report_response_table" %>            
+            </div> 
+        </div>  
+        <div class="content" style="page-break-after:always;">
+             <h1>Should Do</h1>
+        </div>
+        <div class="content" style="page-break-after:always;">
+             <h1>Should Do</h1>
+             <div class="textbox">
+             <% @responses = get_response_result_actions(params[:id], "should_do")%>
+             <%= render :partial=>"report_response_table" %>            
+            </div> 
+        </div>  
+
+        <div class="content" style="page-break-after:always;">
+             <h1>Could Do</h1>
+        </div>
+        <div class="content" style="page-break-after:always;">
+             <h1>Could Do</h1>
+             <div class="textbox">
+             <% @responses = get_response_result_actions(params[:id], "could_do")%>
+             <%= render :partial=>"report_response_table" %>            
+            </div> 
+        </div> 
+        <div class="content" style="page-break-after:always;">
+             <h2>About Revenue Grader</h2>
+             <p class="aboutrevenue">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Aenean eu erat et velit dapibus bibendum id quis quam.
+          Sed quis suscipit tortor.</p>
+        </div>
+<%#end%>
+   
+    </body>
+</html>
+
+
+          

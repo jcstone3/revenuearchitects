@@ -321,8 +321,8 @@ end
 #
 #  id         :integer         not null, primary key
 #  company_id :integer
-#  size       :integer
-#  revenue    :integer
+#  size       :string(255)
+#  revenue    :string(255)
 #  start_date :date
 #  end_date   :date
 #  is_active  :boolean

@@ -1,5 +1,5 @@
 module ApplicationHelper
-	def resource_name
+  def resource_name
     :user
   end
 
@@ -12,7 +12,9 @@ module ApplicationHelper
   end
 
   def select_with_client_side_validations(method, choices, options = {}, html_options = {})
-  apply_client_side_validators(method, html_options)
-  select_without_client_side_validations(method, choices, options, html_options)
-end
+    apply_client_side_validators(method, html_options)
+    select_without_client_side_validations(method, choices, options, html_options)
+  end
+
+
 end

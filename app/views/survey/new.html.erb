@@ -1,115 +1,48 @@
-  <% content_for :main_content do -%> 
-		<div class="container surveymain">
-			<div class="row-fluid">
-				<div class="span9 leftBox surveyDetail">
-          <div class="question">
-            <h1>
-              Survey Details
-            </h1>
-          </div>
-          <div class="text2" >
-          <p>Survey on <%= @survey_date%>
-          </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum <br>id quis quam.
-          Sed quis suscipit tortor.
-          </p>
-          </div>
-
-          <div class="text" >
-
-          </div>
-           <div class="revenuecontainer">   
-          <%= form_for(@survey, :url=>{:action => "create"}, :validate => true) do |f| %>
-             <div class="points">
-                        <div class="option">
-                          <h3>Company Size<span class="star">*</span></h3>
-                    <%#= f.text_field :size ,:class=>"span3", :placeholder=>"size"%>
-                    <%= f.select :size, [['Select'],['1 -99'],['100 - 499'],['500-5000'],['5000 and above']],:class=>"span3" %>
-                  <span id="size_error" class="custom_error"></span>
-                    <br>
-                </div>
-              </div>
-              <div class="points totalrevenue">
-                <div class="option" >
-                  <h3>What is total revenue in last 12 months?<span class="star">*</span></h3>
-                  <%= f.select :revenue, [['Select'],['below $1M'],['$1M-10M'],['$10M-$100M'],['$100M-$1B'],['above $1B']],:class=>"span3" %>
-                  <span id="revenue_error" class="custom_error"></span>
-                </div>
-              </div>
-
-              <div class="gap">
-                <%= f.submit "Start Survey", :class=>"btn btn-primary icon-remove icon-white" ,:input_html =>{:class=>"btnSurvey"}, :id=>"survey_submit" %>
-              </div>
-        <% end %>
-       	</div>
-        </div>
-       
-<% if @previous_surveys.present?%>
-       <div class="span3 rightBox" >
-                    <div class="processIcons">
-                        <span class="leftflt">
-                        <%= image_tag "processing.png",:width=>"47px",:height=>"49px" %>
-                        <p class="demographicstext">Demographics</p>
-                        </span>
-
-                        <span class="spacing">
-                        <%= image_tag "qa_grey.png",:width=>"47px",:height=>"49px",:class=>"qa" %>
-                        <p class="qatext">Q&amp;A</p>
-                        </span>
-                        
-                        <span class="rightflt">
-                        <%= image_tag "download_grey.png",:width=>"47px",:height=>"49px",:class=>"reporticon"%>
-                        <p class="reporttext">Report</p>
-                        </span>
-                    </div>
-                        <h2 class="previous">Previous Surveys 333 </h2>
-                    
-                     <% current_user.companies.each do |cmpany| %>
-                     <% @inactive_survey = cmpany.surveys.find(:all, :conditions=>["is_active=?", false], :limit=>2, :order=>'created_at Desc') %> 
-                        <% if @inactive_survey.present?%>                     
-                          <% @inactive_survey.each_with_index do |survey, i|%>
-
-                          <div class="Baloon surveyBaloon" >
-                            <div class="head1"><h1>
-                              <%= link_to "#{survey.created_at.strftime('%B  %Y')}", reports_url(survey)%></h1>
-                            </div>
-                             <div class="score1">                              
-                              <span><%= @response[i]%></span>
-                            </div>
-                          <%end%>
-                          <% end %> 
-                          <%end%>
-                    </div>
+<% content_for :main_content do -%> 
+    <div class="content">
+       <h1 class="question">Survey  <%= @survey_date%>: Enter Survey Details</h1>
+      <p class="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor.</p>
           
-                   
+      <%= simple_form_for(@survey, :validate => true, :class => "well") do |f| %>
 
-                </div>
+        <%= f.collection :size, 
+                      :collection => [ ['1 -99'],['100 - 499'],['500-5000'],['5000 and above'] ] , 
+                      :prompt => "Select Company Size",  
+                      :label => "Company Size",  
+                      :input_html => { :class => 'input-xlarge' }, 
+                      :label_html => { :class => '' } -%> 
+        <%= f.collection :revenue, 
+                      :collection => [['below $1M'],['$1M-10M'],['$10M-$100M'],['$100M-$1B'],['above $1B']], 
+                      :prompt => "Select Revenue",  
+                      :label => "Revenue Last 12 Months",  
+                      :input_html => { :class => 'input-xlarge' }   -%>  
 
-	         <%else%>
-           <div class="span3 rightBox" >
-                  
-                        <h2 class="prevSurvey">No Previous Surveys  </h2>
-                    
-                    <!-- <div class="Baloon surveyBaloon" >
-                        <div class="head1"><h1>January 2011 </h1>
-                    
-                        </div>
-                            <div class="score1">
-                            <span><%#= image_tag "sampletext.png"%></span>
-                            </div>
-                    </div> -->
-
-                    <!-- <div class="Baloon surveyBaloon" >
-                        <div class="head1"><h1>March 2012 </h1></div>
-                            <div class="score1">
-                            <span><%#= image_tag "sampletext.png"%></span>
-                            </div>
-                </div> -->
-
-                </div>
-
-
-          <%end%>
-			</div>
-		</div> 
+         <div class="form-actions">
+            <%= f.button :submit, "Continue to Survey", :class => 'btn-primary' %>
+            </div>
     <% end -%> 
+      
+    </div><!-- / end of content -->
+     
+    <% end  -%> <!-- /end of main content --> 
+
+
+<% content_for :side_content do -%> 
+      <%= render "/shared/side_icons" -%> 
+      <div class="scoreboard">
+            <div class="head">About Revenue Grader </div>
+               <div class="score">
+                  <span>Revenue Grader is a diagnostic tool developed by the team at Revenue Architects.  Revenue Grader helps you quickly assess and plan your revenue growth strategy.</span>
+               </div>
+            </div>
+
+            <div class="scoreboard">
+             <div class="head">About Revenue Architects </div>
+                <div class="score">
+                    <span>Revenue Architects is a consulting agency that helps our clients drive revenue growth.</span>
+                </div>
+             </div>
+           </div>    
+
+
+<% end -%>  <!-- /end of side_content -->

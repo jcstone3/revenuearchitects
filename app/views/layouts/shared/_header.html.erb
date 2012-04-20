@@ -1,8 +1,8 @@
    <div class="span6">
            <% logo_link_path =( user_signed_in? ?  new_user_session_path : root_path )%>
-            <%= link_to image_tag('logo.png', :alt=>"logo", :class=>"pull-left"), logo_link_path %>
+            <%= link_to image_tag('logo.png', :alt=>"Revenue Grader", :class=>"pull-left" ), logo_link_path %>
             <div class="pull-left brand-name">
-              brought to you by&nbsp;<%= link_to image_tag("ra_logo.png", :alt=>"ra_logo",:class=>"brand-image"), logo_link_path %>
+              brought to you by&nbsp;<%= link_to image_tag("ra_logo.png", :alt=>"Revenue Architects Logo",:class=>"brand-image", :title => "Revenue Architects Website"), "http://www.revenuearchitects.com/", :target => "_blank" %>
             </div>
 
         </div>
@@ -21,12 +21,13 @@
               </div>
           
               <%else%>
-          
+
               <ul class="nav nav-pills top-links">
                 <!-- #TODO: Find active path -->
-                <li><%= link_to "Home", root_path %></li>
-                <li><%= link_to "About Us", aboutus_path %></li>
-                <li><%= link_to "Contact Us", contactus_path %></li>
+
+                <li class="<%= current_page?(:controller => 'site', :action => 'index') ? "active" : "" -%>"><%= link_to "Home", root_path  %></li>
+                <li class="<%= current_page?(:controller => 'site', :action => 'aboutus') ? "active" : "" -%>"><%= link_to "About Us", aboutus_path %></li>
+                <li class="<%= current_page?(:controller => 'site', :action => 'contactus') ? "active" : "" -%>"><%= link_to "Contact Us", contactus_path %></li>
               </ul><!-- / -->
               <div class="nav pull-right button-bar">
                   <%= link_to "Login", new_user_session_path, :class=>"btn btn-primary" %>
