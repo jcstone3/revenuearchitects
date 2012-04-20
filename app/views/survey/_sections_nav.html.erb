@@ -1,5 +1,5 @@
 <ul class="nav nav-pills">
-                    <li class="surveyname">&nbsp;Survey Name 2012</li>
+                    <li class="surveyname">&nbsp;Survey <%= @survey.created_at.strftime("%B  %Y")%></li>
                     <%@sections.each do |section|%>
                     <li class="next"><a href="#"><%= image_tag "icon_cat.png" %>&nbsp;<%= section.name.capitalize%> <span class="green"><%= section.question_count%></span></a></li>
                     <%end%>

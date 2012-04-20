@@ -529,7 +529,7 @@ def compare_strategy
 end  
 
 def compare_programs
-  require 'rubygems'
+ require 'rubygems'
  require 'google_chart'
  @sections = Section.all  
  @survey = Survey.find(params[:id])
@@ -599,35 +599,14 @@ def compare_programs
 end  
 
   def reports
-  require 'rubygems'
-  require 'google_chart'
-  @responses = Response.find(:all, 
-  :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
-  :joins => "right outer join questions on responses.question_id = questions.id 
-             left outer join sub_sections on questions.sub_section_id = sub_sections.id 
-             left outer join sections on sections.id = sub_sections.section_id   
-             and responses.survey_id =#{params[:id]}" 
-             )
-
-  lcs = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcs|
-  lcs.data "Line green", [3,5,1,9,0,2], '00ff00'
-  lcs.data "Line red", [2,4,0,6,9,3], 'ff0000'
-  lcs.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-  lcs.show_legend = false
-  lcs.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
-  @line_graph = lcs.to_url
-  @line_graph_strategy = lcs.to_url
-  @line_graph_system = lcs.to_url
-  @line_graph_programs = lcs.to_url
-  end
+  
   end   
 
 #to download in pdf/xls format
 def download_result
   require 'rubygems'
   require 'google_chart'
-  require 'spreadsheet'
-  
+  require 'spreadsheet'  
    
   @survey = Survey.find(params[:id])
   @section_total = []
@@ -647,7 +626,28 @@ def download_result
   @survey.responses.each do |response|
     @questions_score << Survey.get_individual_response_score(response.id, response.question_id)
   end  
+  #----graphs and response table-----#
+    @responses = Response.find(:all, 
+      :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
+      :joins => "right outer join questions on responses.question_id = questions.id 
+                 left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+                 left outer join sections on sections.id = sub_sections.section_id   
+                 and responses.survey_id =#{params[:id]}" 
+                 )
 
+  lcs = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcs|
+  lcs.data "Line green", [3,5,1,9,0,2], '00ff00'
+  lcs.data "Line red", [2,4,0,6,9,3], 'ff0000'
+  lcs.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
+  lcs.show_legend = false
+  lcs.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
+  @line_graph = lcs.to_url
+  @line_graph_strategy = lcs.to_url
+  @line_graph_system = lcs.to_url
+  @line_graph_programs = lcs.to_url
+  end
+   
+  ####---------------------############
   respond_to do |format|
       format.html{}
        format.pdf {
@@ -676,26 +676,7 @@ def download_result
         result.write blob
         #respond with blob object as a file
         send_data blob.string, :type =>:xls, :filename =>"result.xls"#; &quot;client_list.xls&quot;
-      }
-  @responses = Response.find(:all, 
-      :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
-      :joins => "right outer join questions on responses.question_id = questions.id 
-                 left outer join sub_sections on questions.sub_section_id = sub_sections.id 
-                 left outer join sections on sections.id = sub_sections.section_id   
-                 and responses.survey_id =#{params[:id]}" 
-                 )
-
-  lcs = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcs|
-  lcs.data "Line green", [3,5,1,9,0,2], '00ff00'
-  lcs.data "Line red", [2,4,0,6,9,3], 'ff0000'
-  lcs.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-  lcs.show_legend = false
-  lcs.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
-  @line_graph = lcs.to_url
-  @line_graph_strategy = lcs.to_url
-  @line_graph_system = lcs.to_url
-  @line_graph_programs = lcs.to_url
-  end
+      } 
   end    
 end
 
