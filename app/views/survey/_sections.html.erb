@@ -1,29 +1,7 @@
 <div class="container">
             <div id="backcolor" class="span12 menucolor" >
                   <ul class="nav nav-pills">
-                    <li class="surveyname">&nbsp;Survey <%= @survey.created_at.strftime("%B  %Y")%></li>
-                   <% @allSection.each do |section| %>
-                        <li class="next" id="section_<%=section.id%>">
-                        <%= link_to("") do %>
-                            <%= image_tag "icon_cat.png" %>
-                            <%= section.name %>
-                            <span id ="span_<%=section.id%>" class="red" title ="Total number of questions", rel="tooltip">
-
-                              <%= section.question_count  %>
-                            </span>
-                        <% end %> 
-                        </li>              
-                        <%end%> 
-
-                    <li class="next" id ="final_result">
-                      <%= link_to(reports_url) do %>
-                      <%= image_tag "icon_results.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;
-                      Final Result
-                      
-                    <%#= link_to 'Final Result', reports_url%>
-                  <%end%>
-                    </li>
-
+                    <%= render "section"%>
                     <%= hidden_field_tag('section', @section.id)%>                    
                   </ul>
             </div>

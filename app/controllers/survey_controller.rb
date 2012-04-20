@@ -199,9 +199,9 @@ def report
   @subsection_total = []
   @questions_score = []	
   @questions_score = []  
-  @sections = Section.find(:all) 
+  @allSection = Section.find(:all) 
   #score for each section and subsection
-  @sections.each do |section|
+  @allSection.each do |section|
      @section_total << Survey.calculate_response_for_section(params[:id], section.id)
      section.sub_sections.each do |sub_section|     
      @subsection_total << calculate_response_for_subsection(params[:id], sub_section.id)
@@ -304,17 +304,18 @@ end
 
 def confirm_survey
   @questions=[]
-  @section =[]
+  @final_score = 0
+  @total_question_count = 0
   @survey = Survey.find_by_id(params[:id])   
   @questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
                            :group => "sections.id", :order => "sections.id")
-  @sections = Section.all
-  @section1 = @questions[0].question_attempted
-  @section2 = @questions[1].question_attempted
-  @section3 = @questions[2].question_attempted
-  @final_score = @section1.to_i + @section2.to_i + @section3.to_i
+  @allSection = Section.all
+  @allSection.each_with_index do |section,i|
+    @final_score += @questions[i].question_attempted.to_i
+    @total_question_count += section.question_count
+  end
  end
  
 

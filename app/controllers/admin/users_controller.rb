@@ -48,9 +48,9 @@ class Admin::UsersController < ApplicationController
       @subsection_total = []
       @questions_score = [] 
       @questions_score = []  
-      @sections = Section.find(:all) 
+      @allSection = Section.find(:all) 
       #score for each section and subsection
-      @sections.each do |section|
+      @allSection.each do |section|
          @section_total << Survey.calculate_response_for_section(params[:survey_id], section.id)
          section.sub_sections.each do |sub_section|     
          @subsection_total << Survey.calculate_response_for_subsection(params[:survey_id], sub_section.id)
