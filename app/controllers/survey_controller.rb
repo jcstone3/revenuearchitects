@@ -624,29 +624,21 @@ def download_result
   @final_score = @section_total[0]+@section_total[1]+@section_total[2]
   #get the individual response score
   @survey.responses.each do |response|
-    @questions_score << Survey.get_individual_response_score(response.id, response.question_id)
+  @questions_score << Survey.get_individual_response_score(response.id, response.question_id)
   end  
   #----graphs and response table-----#
-    @responses = Response.find(:all, 
-      :select => "questions.name,responses.answer_1, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name", 
-      :joins => "right outer join questions on responses.question_id = questions.id 
-                 left outer join sub_sections on questions.sub_section_id = sub_sections.id 
-                 left outer join sections on sections.id = sub_sections.section_id   
-                 and responses.survey_id =#{params[:id]}" 
-                 )
-
-  lcs = GoogleChart::LineChart.new("400x200", "My Results", false) do |lcs|
-  lcs.data "Line green", [3,5,1,9,0,2], '00ff00'
-  lcs.data "Line red", [2,4,0,6,9,3], 'ff0000'
-  lcs.axis :y, :range => [0,10], :font_size =>10, :alignment=>"center"
-  lcs.show_legend = false
-  lcs.shape_marker :circle, :color =>'0000ff', :data_set_index =>0, :data_point_index =>-1, :pixel_size =>10
-  @line_graph = lcs.to_url
-  @line_graph_strategy = lcs.to_url
-  @line_graph_system = lcs.to_url
-  @line_graph_programs = lcs.to_url
-  end
+   #-----------------Overall Compare ------------------#
    
+ @responses = Response.find(:all, 
+  :select => "questions.id as questions_id,responses.id as response_id, sections.id as section_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score, responses.survey_id as survey_id ", 
+  :joins => "right outer join questions on (responses.question_id = questions.id and responses.survey_id =#{params[:id]})
+             left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+             left outer join sections on sections.id = sub_sections.section_id   
+             where sections.id=1",
+   :group => "questions.id, responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points"            
+   ) 
+
+  
   ####---------------------############
   respond_to do |format|
       format.html{}
