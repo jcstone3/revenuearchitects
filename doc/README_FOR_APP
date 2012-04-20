@@ -72,3 +72,9 @@ Add Question from Admin
 Added 500, 404 error pages
 Resolved PDF issue
 Added Line break
+
+
+Included partials for section navigation
+Refactored the compare functions
+Added report page graphs and response table
+Admin User module survey report done

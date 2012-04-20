@@ -7,14 +7,12 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
-        <%#= javascript_include_tag "jquery.dataTables.min","jquery-ui-1.8.18.custom.min"%>  
-       <%#= render :partial=>"reports_css"%>
-       </head> 
+               </head> 
        
         <!-- Le styles -->
 <%#= content_for :main_content do%>
         <%= stylesheet_link_tag "application",:media => "all" %>
-        <%#= stylesheet_link_tag "jquery.dataTables"%>
+        
         <%= render :partial=>"reports_css"%>
         <div class="content" style="page-break-after:always;">
             <h1>Revenue Grader</h1>
@@ -30,54 +28,23 @@
              
           </div>
         </div>
-
+        <%@sections.each do |section| %>
         <div class="content" style="page-break-after:always;">
-             <h1>Strategy</h1>
+             <h1><%= section.name%></h1>
         </div>
 
         <div class="content" style="page-break-after:always;">
           <div class="graph">
-            <h1>Strategy Graph</h1>
-            <img src="<%#= @line_graph_strategy %>"/>
+            <h1><%= section.name%></h1>
+            <img src = "<%= get_graph(section.id, params[:id])%>"/>
               
           </div>
           <div class="textbox">
-             <%= render :partial=>"report_response_table"%>            
+             <% @responses = get_response_result(section.id, params[:id])%>
+             <%= render :partial=>"report_response_table" %>            
           </div> 
         </div>
-
-
-        <div class="content" style="page-break-after:always;">
-             <h1>System</h1>
-        </div>
-
-        <div class="content" style="page-break-after:always;">
-          <div class="graph">
-             <h1>System Graph</h1>
-
-            <img src="<%#= @line_graph_system %>"/>
-            
-          </div>
-          <div class="textbox">
-            <%= render :partial=>"report_response_table"%>
-                      </div> 
-        </div>
-
-
-        <div class="content" style="page-break-after:always;">
-             <h1>Programs</h1>
-        </div>
-
-        <div class="content" style="page-break-after:always;">
-          <div class="graph">
-             <h1>Program  Graph</h1>
-             <img src="<%#= @line_graph_programs%>"/>
-          </div>
-          <div class="textbox">
-            <%= render :partial=>"report_response_table"%>          
-          </div> 
-        </div>
-
+        <%end%>        
 
         <div class="content" style="page-break-after:always;">
              <h1>Actions</h1>
@@ -86,16 +53,34 @@
         <div class="content" style="page-break-after:always;">
              <h1>Must Do</h1>
         </div>
-
+        <div class="content" style="page-break-after:always;">
+             <h1>Must Do</h1>
+             <div class="textbox">
+             <% @responses = get_response_result_actions(params[:id], "must_do")%>
+             <%= render :partial=>"report_response_table" %>            
+            </div> 
+        </div>  
         <div class="content" style="page-break-after:always;">
              <h1>Should Do</h1>
         </div>
-
+        <div class="content" style="page-break-after:always;">
+             <h1>Should Do</h1>
+             <div class="textbox">
+             <% @responses = get_response_result_actions(params[:id], "should_do")%>
+             <%= render :partial=>"report_response_table" %>            
+            </div> 
+        </div>  
 
         <div class="content" style="page-break-after:always;">
              <h1>Could Do</h1>
         </div>
-
+        <div class="content" style="page-break-after:always;">
+             <h1>Could Do</h1>
+             <div class="textbox">
+             <% @responses = get_response_result_actions(params[:id], "could_do")%>
+             <%= render :partial=>"report_response_table" %>            
+            </div> 
+        </div> 
         <div class="content" style="page-break-after:always;">
              <h2>About Revenue Grader</h2>
              <p class="aboutrevenue">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
