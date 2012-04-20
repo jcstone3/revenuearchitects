@@ -12,7 +12,19 @@ class Company < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :industry
 	has_many :surveys
+
+	scope :get_all_companies, lambda{|survey_company_id, company_industry_id|{
+          :select => "industries.id, companies.id",
+   		  :joins =>"right outer join industries on companies.industry_id = industries.id",   
+          :conditions=>"industries.id = #{company_industry_id} and companies.id !=#{survey_company_id}"
+    }}
+   
+    scope :get_companies_belonging_to_same_industry, lambda{|company_industry_id,company_id|{
+    	  :conditions=>"industry_id=#{company_industry_id} and id !=#{company_id} "
+    	}}
+
 end
+
 # == Schema Information
 #
 # Table name: companies
