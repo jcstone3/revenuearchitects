@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
-  
+
 before_filter :authenticate_user!, :check_company #check current_user & company
  
 layout "application"
@@ -44,7 +44,6 @@ end
 
 #create new survey
 def create  
-  
   @company = current_user.companies.first
   params[:survey].merge!(:start_date => Time.now, :is_active => true)
   @survey = @company.surveys.create!(params[:survey])
@@ -372,7 +371,7 @@ def download_result
   require 'google_chart'
   require 'spreadsheet'  
   
-  @sections = Section.find(:all) 
+  @sections = Section.find(:all, :order=>'id ASC') 
   @survey = Survey.find(params[:id])
   respond_to do |format|
       format.html{}
@@ -479,5 +478,4 @@ def calculate_response_for_subsection(survey_id, sub_section_id)
   Survey.calculate_response(@sur_responses)
 end 
  
-  
 end
