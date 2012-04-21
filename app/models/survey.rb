@@ -234,6 +234,19 @@ def self.get_score_value(question_points, response_score)
           score = 10
         end 
 
+        when 15 
+          case response_score_int
+          when 1
+            score = -3
+          when 2
+            score = 0
+          when 3
+            score = 3
+          when 4
+            score = 9
+          when 5
+            score = 15
+          end
 
         when 20 
           case response_score_int
@@ -250,8 +263,8 @@ def self.get_score_value(question_points, response_score)
           end
 
         end        
-
-       return (score * question_points_int)
+      
+       return score 
 end
 
 
