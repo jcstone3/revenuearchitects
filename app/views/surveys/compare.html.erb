@@ -1,11 +1,8 @@
-<% content_for :main_content do -%> 
-<div class="container report-top">
-          <div class="span9 report-top1" >
-             <%= render :partial=>"sections_nav"%>     
-            </div>
-</div>
+<% content_for :top_bar_content do  -%> 
+        <%= render "sections_nav"%>
+<% end -%> 
 
-<div class="container left">
+<% content_for :main_content do -%> 
       <div class="row-fluid">
         <div class="span12">
                   <ul class="nav3-tabs3 usercompare"> 

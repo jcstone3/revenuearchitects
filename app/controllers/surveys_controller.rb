@@ -266,18 +266,27 @@ end
 
 #report of a particular survey
 def report  
-  @survey = current_user.companies.first.surveys.find_all_by_id(params[:id])
-  if @survey.present?
-  @section_total = []
-  @subsection_total = []
-  @questions_score = [] 
-  @questions_score = []  
-  @allSection = Section.find(:all) 
+  survey_id = params[:id]
+
+  #scoping the survey
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+
+
+  if @survey.blank?
+     flash[:notice] = "No such survey exists"
+     redirect_to new_survey_path and return 
+   else
+    @section_total = []
+    @subsection_total = []
+    @questions_score = [] 
+    @questions_score = []  
+
+  @all_sections = get_all_sections
   #score for each section and subsection
-  @allSection.each do |section|
-     @section_total << Survey.calculate_response_for_section(params[:id], section.id)
+  @all_sections.each do |section|
+     @section_total << Survey.calculate_response_for_section(survey_id, section.id)
      section.sub_sections.each do |sub_section|     
-     @subsection_total << calculate_response_for_subsection(params[:id], sub_section.id)
+     @subsection_total << calculate_response_for_subsection(survey_id, sub_section.id)
     end
   end
   @final_score = @section_total[0]+@section_total[1]+@section_total[2]
@@ -287,9 +296,7 @@ def report
   end  
   
   render :layout =>"report"
-  else
-   flash[:notice] = "No such survey exists"
-   redirect_to new_survey_path
+ 
   end
 end 
 
@@ -409,32 +416,87 @@ end
 
 
 def compare   
-  @allSection = Section.all 
-  @survey = Survey.find(params[:id])
-  @line_graph = Survey.get_overall_graph(@survey.id)
+  survey_id = params[:id]
+  @all_sections = get_all_sections
+  #check scope
+
+   #scoping the survey
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+
+
+  if @survey.blank?
+     flash[:notice] = "No such survey exists"
+     redirect_to new_survey_path and return 
+   else
+    @survey = Survey.find_by_id(survey_id)
+    @line_graph = Survey.get_overall_graph(survey_id)
+  end
+  render :layout =>"report"
 end 
 
 def compare_strategy
-  @allSection = Section.all 
+    survey_id = params[:id]
+  @all_sections = get_all_sections
+  #check scope
+
+   #scoping the survey
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+
+
+  if @survey.blank?
+     flash[:notice] = "No such survey exists"
+     redirect_to new_survey_path and return 
+   else
   @survey = Survey.find(params[:id])
-  @line_graph_strategy = Survey.get_section_graph(@allSection[0].id, @survey.id)
-  @responses = Survey.get_result(@allSection[0].id, @survey.id)
+  @line_graph_strategy = Survey.get_section_graph(@all_sections[0].id, @survey.id)
+  @responses = Survey.get_result(@all_sections[0].id, @survey.id)
+  end
+    render :layout =>"report"
+
 end  
 
 
 def compare_system
-  @allSection = Section.all 
+    survey_id = params[:id]
+  @all_sections = get_all_sections
+  #check scope
+
+   #scoping the survey
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+
+
+  if @survey.blank?
+     flash[:notice] = "No such survey exists"
+     redirect_to new_survey_path and return 
+   else
   @survey = Survey.find(params[:id])
-  @line_graph_system = Survey.get_section_graph(@allSection[1].id, @survey.id)
-  @responses = Survey.get_result(@allSection[1].id, @survey.id)
+  @line_graph_system = Survey.get_section_graph(@all_sections[1].id, @survey.id)
+  @responses = Survey.get_result(@all_sections[1].id, @survey.id)
+end
+    render :layout =>"report"
+
 end  
 
 
 def compare_programs
-  @allSection = Section.all 
-  @survey = Survey.find(params[:id])
-  @line_graph_programs = Survey.get_section_graph(@allSection[2].id, @survey.id)
-  @responses = Survey.get_result(@allSection[2].id, @survey.id)
+    survey_id = params[:id]
+  @all_sections = get_all_sections
+  #check scope
+
+   #scoping the survey
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+
+
+  if @survey.blank?
+     flash[:notice] = "No such survey exists"
+     redirect_to new_survey_path and return 
+   else
+  @survey = Survey.find(survey_id)
+  @line_graph_programs = Survey.get_section_graph(@all_sections[2].id, @survey.id)
+  @responses = Survey.get_result(@all_sections[2].id, @survey.id)
+end
+    render :layout =>"report"
+
 end  
 
   def reports

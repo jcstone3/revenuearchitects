@@ -1,24 +1,29 @@
-<ul class="nav nav-pills">
-                    <%= render "section"%>
-                    
-                    <li class="next2">
-                    <%= link_to(reports_url(params[:id])) do %>
+<div class="row-fluid">
+    <div id="backcolor" class="span12 menucolor" >
+          <ul class="nav nav-pills">
+            <%= render "section"%>
+             <li class="next2">
+                    <%= link_to(reports_path(params[:id])) do %>
                             <i class="icon-edit iconfont">
                             </i> &nbsp;Summary
-                       <% end %>	
+                       <% end %>  
                      </li>  
                     
                      <li class="on2">
-                     <%= link_to(compare_url(params[:id])) do %>
+                     <%= link_to(compare_path(params[:id])) do %>
                             <i class="icon-file iconOn">
                             </i>&nbsp;Compare
                        <% end %>
                      </li>
 
                     <li class="next2">
-                     <%= link_to(download_url(request.parameters.merge({:format => :pdf})), :rel=>"tooltip") do %>
+                     <%= link_to(download_path(request.parameters.merge({:format => :pdf})), :rel=>"tooltip") do %>
                            <i class="icon-share" style="color:#000000;text-shadow : none ;font-size:15px"></i>
                             Download
                        <% end %>
                      </li>         
-                  </ul>
+          </ul>
+    </div>
+</div>
+
+

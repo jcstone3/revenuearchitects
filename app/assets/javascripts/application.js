@@ -397,4 +397,11 @@ $(document).ready(function(){
             "bInfo": false,
             "bAutoWidth": true
         } ); 
+
+      /* report Tables */
+       $(".pageAccordion").accordion({
+      autoHeight: false,
+      navigation: true
+    });
+
 });
