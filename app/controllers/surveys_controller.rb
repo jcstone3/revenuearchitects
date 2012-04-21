@@ -1,7 +1,6 @@
 class SurveysController < ApplicationController
 
 before_filter :authenticate_user!, :check_company #check current_user & company
- 
 layout "application"
 
 def index
@@ -23,14 +22,14 @@ def new
             end              
             end
             flash[:success] = "Welcome back #{current_user.username}, please select a survey to continue"
-            redirect_to continue_survey_path               
+            redirect_to continue_survey_path  and return             
         else
           #list all the previous completed surveys & start a new survey
           current_user.companies.each do |cmpany|
             cmpany.surveys.each do |survey|    
             if survey.is_active == false                    
               @previous_surveys << survey.id
-              @response << get_response_score_for(survey.id)
+              @response << Survey.get_response_score_for(survey.id)
             end  
           end
           end       
@@ -39,7 +38,7 @@ def new
         end  
   else
     flash[:error] = "Please provide company details before proceeding"
-    redirect_to new_company_path  
+    redirect_to new_company_path  and return
   end
 end 
 
@@ -650,7 +649,13 @@ def get_question(question_id)
     questions = Question.select("questions.id, questions.name, questions.points, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).order("questions.sequence ASC")
     session[:questions] = questions
   end
-  question = questions.select { |question| question.id == question_id }
+  question = questions.select { |quest|  quest.id == question_id.to_i }
+
+  if question.present?
+    return question.first
+  else
+    return question
  end 
+end
  
 end
