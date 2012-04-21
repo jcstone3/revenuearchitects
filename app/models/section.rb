@@ -4,7 +4,7 @@ class Section < ActiveRecord::Base
 	has_many :sub_sections
 
   #Scopes
-  default_scope :order => :sequence
+  #default_scope :order => :sequence
 
   #Validations
   validates :name, :presence => {:message=> "Name can't be blank"}

@@ -1,98 +1,25 @@
-        
-       <%content_for :main_content do%> 
-        <div class="container">
-            <div id="backcolor" class="span12 menucolor" >
-                  <ul class="nav nav-pills">                   
-                   <%= render "section"%>
-                 </ul>
-            </div>
-        </div>
+    
+<% content_for :top_bar_content do  -%> 
+    <%= render "sections"%>
+<% end -%> 
+
+<%content_for :main_content do%> 
+          <div class="question">
+              <div class="confirmSurvey">                                
+                  Thank you for successfully completing the survey                           
+              </div>
+                                  
+            <div class="footerconfirm" >
+           <%= link_to 'Go back', continue_survey_path(@survey) ,:class=>"btn questionsattemted"%>
+           <%= link_to 'Complete Survey', close_survey_path(@survey) ,:class=>"btn btn-primary questionsattemted"%></div>
+          </div>
+  <% end -%> 
 
 
-        <div class="container headerPopup">
-            <div class="row-fluid">
-                <div class="span9 leftBox confirmsurvey" >
-                    <div class="question">
-                        <div class="confirmSurvey">                                
-                            Thank you for successfully completing the survey                           
-                        </div>
-                                             
-
-                    <h5  style="text-align:center;">Number of questions attempted in each section</h5><br/>
-
-
-                        <table class="table table-bordered" style="width:40%;margin:auto;">
-                          <%@allSection.each_with_index do |section,i| %>
-                            <tr>
-                              <td><%= section.name%></td><td><span class="tblendstyle">
-                                 <%= @questions[i].question_attempted%>/
-                                 <%= section.question_count%> </span>
-                              </td>
-                            </tr>
-                          <%end%>
-                          
-                          <tr>
-                            <td>Total</td>
-                            <td><span class="tblendstyle red">
-                                <%= @final_score%>/<%= @total_question_count%>
-                               </span>
-                            </td>
-                          </tr>
-                       </table>
-                     
-                      <div class="footerconfirm" >
-                     <%= link_to 'Go back', continue_survey_url(@survey) ,:class=>"btn questionsattemted"%>
-                     <%= link_to 'Complete Survey', close_survey_url(@survey) ,:class=>"btn btn-primary questionsattemted"%></div>
-                    </div>
-                   
-                
-                </div>
-                    <div class="span3 rightBox rightBoxheight">
-                    <div class="processIcons">
-                        <span class="leftflt">
-                        <%= image_tag "processing_grey.png",:width=>"47px",:height=>"49px" %>
-                        <p class="demographicstext2">Demographics</p>
-                        </span>
-
-                        <span class="spacing">
-                        <%= image_tag "qa.png",:width=>"47px",:height=>"49px",:class=>"qa" %>
-                        <p class="qatext2">Q&amp;A</p>
-                        </span>
-                        
-                        <span class="rightflt">
-                        <%= image_tag "download_grey.png",:width=>"47px",:height=>"49px",:class=>"reporticon"%>
-                        <p class="reporttext">Report</p>
-                        </span>
-                    </div>
-                    <div class="scoreBoard">
-                        <div class="head" >
-                          <p class="scoretext">Total score </p> </div>
-                            <div class="score3"><br><%= @final_score%>/<span class="totalpoints"><%= @total_question_count%>
-                            </span> <br>
-                            <span>POINTS</span>
-
-                            </div>
-                    </div>
-
-                     <div class="scoreBoard">
-                        <div class="head">
-                          <p class="abouttext">About Revenue Grader</p>
-                        </div>
-                            <div class="text1"><br>
-                              <p class="abouttextcontent">
-                              
-                        Revenue Grader is a diagnostic tool developed by the team at Revenue Architects.  Revenue Grader helps you quickly assess and plan your revenue growth strategy.                            
-                                </p>
-                              
-                            </div> 
-                             
-                    </div>
-
-                </div>
-            </div>
-        </div> 
-<%end%>
-
+  <% content_for :side_content do -%>
+    <%= render "confirm_side_details" -%> 
+<% end  -%>  
+      
 
           
          

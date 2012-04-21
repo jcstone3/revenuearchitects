@@ -121,7 +121,8 @@ def question
 
   #TODO: Check if input parameters are correct 
   if survey_id.blank? or question_id.blank?
-
+    flash[:warning] = "Could not form the question. Please try again"
+    redirect_to continue_survey_path and return
   end
 
 
@@ -135,7 +136,18 @@ def question
   # - Array for Pagination of Questions
   # - All Sections
   # - All Subsections
-  @question = Question.select("questions.id, questions.name, questions.points, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).order("questions.sequence ASC").find_by_id(question_id)
+  @question = get_question(question_id)
+
+  if @survey.blank? 
+    flash[:warning] = "Could not form the question. Please try again"
+    redirect_to continue_survey_path and return
+  end
+
+  if @question.blank?
+    redirect_to confirm_survey_path and return 
+  end
+
+
   @all_sections = get_all_sections
 
   #Getting the score to show on page
@@ -158,14 +170,10 @@ end
 def create_response 
   #Once the response is submitted, depending on whether Score exists, 
   # create or update the record
-  logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-  logger.debug " Inside create_response"
 
   response_params = params[:response]
 
   if response_params.blank?  
-    logger.debug "++++++++++++++++++++++++++++++"
-    logger.debug "Could not get the parameters"
     flash[:error] = "Could not save response. Please try again"
     redirect_to continue_survey_path and return
   end
@@ -372,15 +380,19 @@ def confirm_survey
   @final_score = 0
   @total_question_count = 0
   @survey = Survey.find_by_id(params[:id])   
-  @questions  = Section.find(:all,
+  @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id")
-  @allSection = Section.all
-  @allSection.each_with_index do |section,i|
-    @final_score += @questions[i].question_attempted.to_i
-    @total_question_count += section.question_count
-  end
+                           :group => "sections.sequence", :order => "sections.sequence")
+  
+  @all_sections = get_all_sections
+
+  # @all_sections.each_with_index do |section,i|
+  #   @final_score += @section_questions[i].question_attempted.to_i
+
+  #   @total_question_count += section.question_count
+  # end
+
  end
  
 
@@ -548,7 +560,7 @@ def get_all_sections
   all_sections = session[:all_sections]
 
   if all_sections.blank?
-    all_sections = Section.all
+    all_sections = Section.order(:sequence)
     session[:all_sections] = all_sections
   end
   all_sections
@@ -566,5 +578,17 @@ def get_current_survey
   
   current_survey
 end
+
+#Get the current question from Session
+# If Current Question is not found, run the query
+def get_question(question_id)
+  questions = session[:questions]
+
+  if questions.blank?
+    questions = Question.select("questions.id, questions.name, questions.points, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).order("questions.sequence ASC")
+    session[:questions] = questions
+  end
+  question = questions.select { |question| question.id == question_id }
+ end 
  
 end
