@@ -11,13 +11,13 @@ class ApplicationController < ActionController::Base
     if resource.is_a? User
        flash[:success] = "Welcome! #{resource.username} You have signed up successfully." 
        if current_user.companies.first         
-          new_survey_url  #user already has company, then redirect to survey page               
+          new_survey_path  #user already has company, then redirect to survey page               
        else
-          new_company_url   #redirect to create a new company            
+          new_company_path  #redirect to create a new company            
        end     
     else #resource is an admin      
       flash[:success] = "Welcome! #{resource.name} You have signed up successfully." 
-      admin_root_url
+      admin_root_path
     end
   end 
 
@@ -32,9 +32,9 @@ class ApplicationController < ActionController::Base
 
 def authenticate_admin!
   if admin_signed_in?
-     admin_root_url
+     admin_root_path
    else 
-    redirect_to new_admin_session_url, :alert => "Admin, you must first log in, to access this page"
+    redirect_to new_admin_session_path :alert => "You must first log in to access this page"
   end
 end  
 
@@ -57,7 +57,7 @@ end
 
  def redirect_path_for_user
    if current_user.companies.first          
-     redirect_to new_survey_path  #user already has company, then redirect to survey page              
+     redirect_to new_survey_path and return #user already has company, then redirect to survey page              
    end
  end 
 
