@@ -8,15 +8,16 @@
         </div>
         <div class="span6">
              <% if user_signed_in? %>
-             
+             <div class="user-name">
                 <i class="icon-user "></i>&nbsp; 
                 <%= "#{current_user.username}" %>&nbsp;<br/>
                 <% if current_user.companies.present? %>
                 <i class="icon-home "></i>&nbsp;
                  <%= "#{current_user.companies.first.name}"%>
                   <%end%> 
+              </div>
                  
-                 <div class="nav pull-right button-bar">    
+                 <div class="nav pull-right button-signin ">    
                 <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
               </div>
           

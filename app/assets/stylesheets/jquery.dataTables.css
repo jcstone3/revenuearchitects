@@ -29,7 +29,8 @@ table.dataTable thead th {
 
 table.dataTable thead h3{
 
-	font-weight:400;
+	font-weight:300;
+	font-size:18px;
 }
 report-body dataTable
 table.dataTable tfoot th {

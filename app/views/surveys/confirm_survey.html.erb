@@ -4,11 +4,27 @@
 <% end -%> 
 
 <%content_for :main_content do%> 
-          <div class="question">
-              <div class="confirmSurvey">                                
-                  Thank you for successfully completing the survey                           
-              </div>
-                                  
+          <div class="content">
+                                             
+                  <h1 class="question">Thank you for successfully completing the survey  </h1>          
+                  <p class="question">Number of questions attempted in each section</p>
+                      <table class="table table-bordered" >
+                          <tr>
+                            <td>Strategy</td><td><span class="tblendstyle">5/30 </span></td>
+                          </tr>
+
+                          <tr>
+                            <td>Systems</td><td><span class="tblendstyle">5/40</span></td>
+                          </tr>
+
+                           <tr>
+                            <td>Programs</td><td><span class="tblendstyle">10/30</span></td>
+                          </tr>
+                          <tr>
+                            <td>Total</td><td><span class="tblendstyle green">20/100</span></td>
+                          </tr>
+                       </table>     
+
             <div class="footerconfirm" >
            <%= link_to 'Go back', continue_survey_path(@survey) ,:class=>"btn questionsattemted"%>
            <%= link_to 'Complete Survey', close_survey_path(@survey) ,:class=>"btn btn-primary questionsattemted"%></div>
