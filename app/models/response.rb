@@ -105,11 +105,11 @@ end
 #  id          :integer         not null, primary key
 #  survey_id   :integer
 #  question_id :integer
-#  answer_1    :string(255)
 #  answer_2    :string(255)
 #  answer_3    :string(255)
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
 #  name        :string(255)
+#  answer_1    :integer
 #
 

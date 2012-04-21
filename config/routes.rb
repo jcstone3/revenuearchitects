@@ -51,13 +51,13 @@ RevenueGrader::Application.routes.draw do
   resources :responses
 
   get 'surveys/:id/question/:question_id' => 'surveys#question', :as => 'questions' 
-  get 'surveys/:id/previous-question/:question_id' => 'surveys#previous_question', :as => 'previous_question' 
+  #get 'surveys/:id/previous-question/:question_id' => 'surveys#previous_question', :as => 'previous_question' 
   get 'surveys/:id/report/' => 'surveys#report', :as => 'reports'
   post 'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
   post 'surveys/:id/update-question/:question_id' => 'surveys#update_response', :as=> 'reponses_update'
   get 'surveys/:id/download' => 'surveys#download_result', :as=>'download'
   get 'surveys/:id/reports' => 'surveys#reports', :as=>'reports_show'
-  get 'surveys/show' =>'surveys#show', :as=>'continue_surveys'
+  get 'surveys/show' =>'surveys#show', :as=>'continue_survey'
   get 'surveys/get-response-status/:id' => 'surveys#get_response_status', :as=>'get_response_status'
   get 'surveys/:id/report/detailed-view' => 'surveys#report_detailed', :as=>'detailed_report'
   get 'surveys/:id/confirm-surveys' => 'surveys#confirm_surveys', :as=>'confirm_surveys'

@@ -52,6 +52,9 @@ def create
 #  @survey = @company.surveys.create!(params[:survey])
   if @survey.save
      @survey_name = @survey.created_at.strftime('%B,%Y')
+     #TODO: Need to put the survey in session, even when accessing old survey
+     session[:survey] = @survey 
+
      flash[:success] = "Survey #{@survey_name} created successfully"
      redirect_to questions_path(@survey, 1)
   else
@@ -111,88 +114,147 @@ def show
   @total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count     
 end  
 
-#question for the survey  
+#Show the question and capture the reponse
 def question
-   if params[:id].present? && params[:question_id].present? 
-     if((Survey.check_numericality(params[:id])) && (check_survey(params[:id])))
-       if check_user_surveys(params[:id])
-          @survey = Survey.find(params[:id])
-          @response = @survey.responses 
-           if((Survey.check_numericality(params[:question_id])) && (check_question(params[:question_id])))          
-             
-             @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
-              if @survey_response
-               redirect_to previous_question_path(params[:id], params[:question_id])
-              else
-                @question = Question.find(params[:question_id])
-                @sub_section = SubSection.find(@question.sub_section_id)
-                @section = Section.find(@sub_section.section_id)
-                @allSection = Section.all
-                @response = Response.new
-                @total_score = Survey.calculate_response_for_section(params[:id], @section.id)
-                ########for pagination ############
-               
-                @question_all = Question.count
-                if(params[:question_id].to_i < 6)
-                @questions = Question.find(:all,
-                       :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
-                       :offset=> 0, :limit=>10 )
+  survey_id = params[:id]
+  question_id = params[:question_id]
 
-                elsif(params[:question_id].to_i > @question_all - 5)  
-                @questions = Question.find(:all,
-                       :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
-                       
-                       :offset=> (@question_all - 10), :limit=>10 )
-                else
-                @questions = Question.find(:all,
-                       :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
-                       
-                       :offset=> (params[:question_id].to_i - 5), :limit=>10)
-                end 
-                ######### end of pagination logic ########## 
-              end 
-           else
-            flash[:error] = "Something went wrong please select a survey"
-            redirect_to continue_survey_path
-           end           
-      else
-       flash[:error] = "Something went wrong please select a survey"
-       redirect_to continue_survey_path   
-      end
-    else
-      flash[:error] = "Something went wrong please select a survey"
-      redirect_to continue_survey_path  
-    end  
-   else
-     flash[:error] = "Something went wrong please select a survey"
-     redirect_to continue_survey_path 
-   end 
-end 
+  #TODO: Check if input parameters are correct 
+  if survey_id.blank? or question_id.blank?
 
-
-def create_response 
-  if params[:response].blank?  
-    flash[:error] = "Could not save response for some reason please try again"
-    redirect_to continue_survey_path
-  else
-   @response = Response.new 
-   @survey = Survey.find(params[:response][:survey_id])
-   params[:response].merge!(:name =>params[:response][:answer_2]) 
-   @response = @survey.responses.create!(params[:response]) 
-   @question = Question.find(@response.question_id)
-   if @question.id < Question.last.id
-      @sub_section = SubSection.find(@question.sub_section_id)
-      @section = Section.find(@sub_section.section_id)
-      @total_score = Survey.calculate_response_for_section(@survey.id, @section.id)
-      redirect_to questions_path(@survey, params[:response][:question_id].to_i+1)
-   else    
-     redirect_to confirm_survey_path(@survey.id)
-   end
   end
+
+
+  #Get current Survey
+  @survey = get_current_survey
+
+  #Check if the there is question in the survey. If question exists, get the following
+  # - Question
+  # - Current Section
+  # - Current Subsection
+  # - Array for Pagination of Questions
+  # - All Sections
+  # - All Subsections
+  @question = Question.select("questions.id, questions.name, questions.points, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).order("questions.sequence ASC").find_by_id(question_id)
+  @all_sections = get_all_sections
+
+  #Getting the score to show on page
+  @total_score = Survey.calculate_response_for_section(@survey.id, @question.section_id)
+
+  #Required for form. Select if the response already exists
+
+   @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
+
+   if @response.blank?
+    logger.debug "Creating New Response"
+    @response = Response.new
+  end
+
+  @response
 end
+
+
+#TODO: Check the logic here and optimize
+def create_response 
+  #Once the response is submitted, depending on whether Score exists, 
+  # create or update the record
+  logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+  logger.debug " Inside create_response"
+
+  response_params = params[:response]
+
+  if response_params.blank?  
+    logger.debug "++++++++++++++++++++++++++++++"
+    logger.debug "Could not get the parameters"
+    flash[:error] = "Could not save response. Please try again"
+    redirect_to continue_survey_path and return
+  end
+
+   #Create a response if new or update the existing record
+   survey_id = response_params[:survey_id]
+   question_id = response_params[:question_id]
+
+   @response = Response.find_by_survey_id_and_question_id(survey_id, question_id)
+
+   if @response.blank?
+    @response = Response.new
+  end
+
+   if @response.update_attributes(response_params)
+    #TODO: Redirect to next page. Issue with sequence.
+    #Find if the question is the last of the questions. If it is, then go to close survey, else go
+    #go to next question
+    redirect_to questions_path(survey_id, response_params[:question_id].to_i + 1) and return
+  else
+    flash[:error] = "Error in saving the Response. Please try again."
+    redirect_to questions_path(survey_id, question_id) and return
+  end
+
+end
+
+#question for the survey  
+# def question
+#    if params[:id].present? && params[:question_id].present? 
+#      if((Survey.check_numericality(params[:id])) && (check_survey(params[:id])))
+#        if check_user_surveys(params[:id])
+#           @survey = Survey.find(params[:id])
+#           @response = @survey.responses 
+#            if((Survey.check_numericality(params[:question_id])) && (check_question(params[:question_id])))          
+             
+#              @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+#               if @survey_response
+#                redirect_to previous_question_path(params[:id], params[:question_id])
+#               else
+#                 @question = Question.find(params[:question_id])
+#                 @sub_section = SubSection.find(@question.sub_section_id)
+#                 @section = Section.find(@sub_section.section_id)
+#                 @allSection = Section.all
+
+#                 @response = Response.new
+#                 @total_score = Survey.calculate_response_for_section(params[:id], @section.id)
+#                 ########for pagination ############
+               
+#                 @question_all = Question.count
+#                 if(params[:question_id].to_i < 6)
+#                 @questions = Question.find(:all,
+#                        :select => "questions.id, responses.question_id as response_quest_id",
+#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
+#                        :offset=> 0, :limit=>10 )
+
+#                 elsif(params[:question_id].to_i > @question_all - 5)  
+#                 @questions = Question.find(:all,
+#                        :select => "questions.id, responses.question_id as response_quest_id",
+#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
+                       
+#                        :offset=> (@question_all - 10), :limit=>10 )
+#                 else
+#                 @questions = Question.find(:all,
+#                        :select => "questions.id, responses.question_id as response_quest_id",
+#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
+                       
+#                        :offset=> (params[:question_id].to_i - 5), :limit=>10)
+#                 end 
+#                 ######### end of pagination logic ########## 
+#               end 
+#            else
+#             flash[:error] = "Something went wrong please select a survey"
+#             redirect_to continue_survey_path
+#            end           
+#       else
+#        flash[:error] = "Something went wrong please select a survey"
+#        redirect_to continue_survey_path   
+#       end
+#     else
+#       flash[:error] = "Something went wrong please select a survey"
+#       redirect_to continue_survey_path  
+#     end  
+#    else
+#      flash[:error] = "Something went wrong please select a survey"
+#      redirect_to continue_survey_path 
+#    end 
+# end 
+
+
 
 #report of a particular survey
 def report  
@@ -223,65 +285,65 @@ def report
   end
 end 
 
-def previous_question
-  if params[:id].present? && params[:question_id].present? 
-     if((Survey.check_numericality(params[:id])) && (check_survey(params[:id])))
-       if check_user_surveys(params[:id])
-          @survey = Survey.find(params[:id])
-          @response = @survey.responses 
-           if((Survey.check_numericality(params[:question_id])) && (check_question(params[:question_id])))          
-             @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
-              if @survey_response
+# def previous_question
+#   if params[:id].present? && params[:question_id].present? 
+#      if((Survey.check_numericality(params[:id])) && (check_survey(params[:id])))
+#        if check_user_surveys(params[:id])
+#           @survey = Survey.find(params[:id])
+#           @response = @survey.responses 
+#            if((Survey.check_numericality(params[:question_id])) && (check_question(params[:question_id])))          
+#              @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+#               if @survey_response
 
-                @question = Question.find(params[:question_id])
-                @sub_section = SubSection.find(@question.sub_section_id)
-                @section = Section.find(@sub_section.section_id)
-                @allSection = Section.all
-                @response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
-                @total_score = Survey.calculate_response_for_section(params[:id], @section.id)
-                ########for pagination ############
-                @question_all = Question.count
-                if(params[:question_id].to_i < 6)
-                @questions = Question.find(:all,
-                       :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
-                       :offset=> 0, :limit=>10 )
+#                 @question = Question.find(params[:question_id])
+#                 @sub_section = SubSection.find(@question.sub_section_id)
+#                 @section = Section.find(@sub_section.section_id)
+#                 @allSection = Section.all
+#                 @response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
+#                 @total_score = Survey.calculate_response_for_section(params[:id], @section.id)
+#                 ########for pagination ############
+#                 @question_all = Question.count
+#                 if(params[:question_id].to_i < 6)
+#                 @questions = Question.find(:all,
+#                        :select => "questions.id, responses.question_id as response_quest_id",
+#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
+#                        :offset=> 0, :limit=>10 )
 
-                elsif(params[:question_id].to_i > @question_all - 5)  
-                @questions = Question.find(:all,
-                       :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
+#                 elsif(params[:question_id].to_i > @question_all - 5)  
+#                 @questions = Question.find(:all,
+#                        :select => "questions.id, responses.question_id as response_quest_id",
+#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
                        
-                       :offset=> (@question_all - 10), :limit=>10 )
-                else
-                @questions = Question.find(:all,
-                       :select => "questions.id, responses.question_id as response_quest_id",
-                       :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
+#                        :offset=> (@question_all - 10), :limit=>10 )
+#                 else
+#                 @questions = Question.find(:all,
+#                        :select => "questions.id, responses.question_id as response_quest_id",
+#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
                        
-                       :offset=> (params[:question_id].to_i - 5), :limit=>10)
-                end 
-                ######### end of pagination logic ##########               
-              else
-                redirect_to questions_path(@survey, params[:question_id])
-              end 
-           else
-            flash[:error] = "Something went wrong please select a survey"
-            redirect_to continue_survey_path
-           end      
-      else
-       flash[:error] = "Something went wrong please select a survey"
-       redirect_to continue_survey_path   
-      end
-    else
-      flash[:error] = "Something went wrong please select a survey"
-      redirect_to continue_survey_path  
-    end  
-   else
-     flash[:error] = "Something went wrong please select a survey"
-     redirect_to continue_survey_path 
-   end 
+#                        :offset=> (params[:question_id].to_i - 5), :limit=>10)
+#                 end 
+#                 ######### end of pagination logic ##########               
+#               else
+#                 redirect_to questions_path(@survey, params[:question_id])
+#               end 
+#            else
+#             flash[:error] = "Something went wrong please select a survey"
+#             redirect_to continue_survey_path
+#            end      
+#       else
+#        flash[:error] = "Something went wrong please select a survey"
+#        redirect_to continue_survey_path   
+#       end
+#     else
+#       flash[:error] = "Something went wrong please select a survey"
+#       redirect_to continue_survey_path  
+#     end  
+#    else
+#      flash[:error] = "Something went wrong please select a survey"
+#      redirect_to continue_survey_path 
+#    end 
   
-end
+# end
 
 def update_response  
   if params[:response].blank?  
@@ -480,5 +542,29 @@ def calculate_response_for_subsection(survey_id, sub_section_id)
   @sur_responses = @survey.responses.find_all_by_question_id(questions) 
   Survey.calculate_response(@sur_responses)
 end 
+
+#Get all sections and store them in session
+def get_all_sections
+  all_sections = session[:all_sections]
+
+  if all_sections.blank?
+    all_sections = Section.all
+    session[:all_sections] = all_sections
+  end
+  all_sections
+end
+
+#Get the current survey based on the query parameters passed.
+#TODO: Check if this works when query parameters are not passed
+def get_current_survey
+  current_survey = session[:survey]
+
+  if current_survey.blank?
+    current_survey = Survey.find_by_id(params[:id])
+    session[:survey] = current_survey
+  end
+  
+  current_survey
+end
  
 end

@@ -1,10 +1,18 @@
 class Question < ActiveRecord::Base
+  #Relationships
+  belongs_to :sub_section
+  has_one :response
+
+
+  #Validations
 	validates :name, :on=>:update, :presence =>{:message=>"Question can't be blank"}
 	validates :description, :on=>:update,:presence =>{:message=>"Description can't be blank"}
 	validates :sub_section_id, :on=>:update, :presence =>{:message=>"Section can't be blank"}
-	belongs_to :sub_section
-	has_one :response
 
+#Scopes
+ # default_scope :order => :sequence  
+
+  # Configurations
 	self.per_page = 10
 
 

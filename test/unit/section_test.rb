@@ -10,11 +10,13 @@ end
 # Table name: sections
 #
 #  id               :integer         not null, primary key
-#  created_at       :datetime        not null
-#  updated_at       :datetime        not null
-#  questionnaire_id :integer
-#  name             :string(255)
+#  name             :string(50)
+#  sequence         :integer
 #  question_count   :integer
 #  total_points     :integer
+#  questionnaire_id :integer
+#  is_active        :boolean
+#  created_at       :datetime        not null
+#  updated_at       :datetime        not null
 #
 

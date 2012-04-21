@@ -105,17 +105,34 @@ def self.get_overall_graph(survey_id)
 end
 
   #total response for a section
+  #TODO: Optimize this query
 def self.calculate_response_for_section(survey_id, section_id)
-    questions = []  
-    @section = Section.find(section_id)
-    @section.sub_sections.each do |s|
-     s.questions.each do |q|
-       questions << q.id
+    # questions = []  
+    # @section = Section.find(section_id)
+    # @section.sub_sections.each do |s|
+    #  s.questions.each do |q|
+    #    questions << q.id
+    #  end
+    # end
+    # @survey = self.find(survey_id)
+    # @sur_responses = @survey.responses.find_all_by_question_id(questions)   
+    # calculate_response(@sur_responses)
+
+    #Get all responses in this Survey/Section
+    @section_responses = Response.select("responses.id as response_id, questions.points, responses.answer_1 ").joins(:survey, :question => [{:sub_section => :section}]).where("surveys.id = ? and sections.id = ? ", survey_id, section_id)
+
+
+    #Get the responses, get score from question and multiply the point from response
+    result = 0 
+    if @section_responses.blank?
+      result = 0
+    else
+      @section_responses.each do |response|
+        result += get_score_value(response.points, response.answer_1)
+      end
      end
-    end
-  @survey = self.find(survey_id)
-    @sur_responses = @survey.responses.find_all_by_question_id(questions)   
-    calculate_response(@sur_responses)
+
+    return result
 end   
 
 #total response for a subsection
@@ -178,6 +195,67 @@ def self.get_average_calculated_score(response_survey_id, response_questions_id,
   end  
     return avg_response_score
 end    
+
+#Get the Final Score for each answer
+# This is new function. Use this
+def self.get_score_value(question_points, response_score)
+  logger.debug "Scoring the Response"
+  score = 0 
+  question_points_int = question_points.to_i
+  response_score_int = response_score.to_i
+
+
+   case question_points_int
+        when 5 
+          case response_score_int
+            when 1
+              score = -1
+            when 2
+              score = 0 
+            when 3
+              score = 1
+            when 4
+              score = 3
+            when 5
+              score = 5
+            end
+
+       when 10 
+        case response_score_int
+        when 1
+          score = -2
+        when 2
+          score = 0 
+        when 3
+          score = 2
+        when 4
+          score = 6
+        when 5
+          score = 10
+        end 
+
+
+        when 20 
+          case response_score_int
+          when 1
+            score = -4
+          when 2
+            score = 0
+          when 3
+            score = 4
+          when 4
+            score = 12
+          when 5
+            score = 20
+          end
+
+        end        
+
+       return (score * question_points_int)
+end
+
+
+
 
 #individual score for each response
 def self.get_individual_response_score(response_id, response_question_id)
