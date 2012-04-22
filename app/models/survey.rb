@@ -102,15 +102,15 @@ def self.get_overall_graph(survey_id)
   #   @line_graph =  line_graph.to_url
   # end
 
-    # @response = Response.get_response_for_all_sections(survey_id)
-    # @questions = Questions.find(:all, :select => "id")
+    @response = Response.get_response_for_all_sections(survey_id)
+    @questions = Question.find(:all, :select => "id")
 
-    # if @companies.present?
-    # company_ids=@companies.collect(&:id).join(', ')
-    #   @response_all = Response.find_response_for_all_sections_company(company_ids,survey_id)
-    # else
-    #   @response_all = Response.find_response_for_sections_without_company(survey_id)
-    # end  
+    if @companies.present?
+    company_ids=@companies.collect(&:id).join(', ')
+      @response_all = Response.find_response_for_all_sections_company(company_ids,survey_id)
+    else
+      @response_all = Response.find_response_for_sections_without_company(survey_id)
+    end  
 
     @data_table = GoogleVisualr::DataTable.new
 
@@ -118,25 +118,22 @@ def self.get_overall_graph(survey_id)
     @data_table.new_column('number', 'Response')
     @data_table.new_column('number', 'Average Response')
 
-    # overall_array = Array.new
-    # response_array = Array.new
+     overall_array = Array.new
+     response_array = Array.new
 
-    # @questions.each do |question|
-    #   response_array.put(question.id)
-    #   your_answer = 
-    #   response_array.put(your_answer)
+     @questions.each do |question|
+        response_array = Array.new
 
-    # end
+      response_array.push(question.id.to_s)
+      @your_response = @response.select { |response| response.id == question.id } 
+      response_array.push(@your_response[1].nil? ? 0 : @your_response[1])
+      @avg_response = @response_all.select { |response| response.id == question.id }
+      response_array.push(@avg_response[1].nil? ? 0 : @avg_response[1] )
+      overall_array.push(response_array)
+      end
 
     # Add Rows and Values
-    @data_table.add_rows([
-
-
-      ['2004', 1000, 400],
-      ['2005', 1170, 460],
-      ['2006', 660, 1120],
-      ['2007', 1030, 540]
-    ])
+    @data_table.add_rows(overall_array)
 
    
 
