@@ -43,7 +43,9 @@
                                     <div class="box">                                        
                                         <h1>Responses in the current month <strong>March 2012</strong></h1>
                                      <div class="graph">
-                                        <img src="<%= @line_graph_system%>">
+                                        <div id='chart'></div>
+                                        <%= render_chart(@chart, 'chart') %>
+             
                                       </div>
                                     </div>
                                 </div>

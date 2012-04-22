@@ -430,7 +430,7 @@ def compare
     @survey = Survey.find_by_id(survey_id)
     @data_table = Survey.get_overall_graph(survey_id)
     
-     option = { width: 1200, height: 400, title: 'Overall Response Vs Average Response' }
+     option = { width: 1200, height: 400, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
         @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
         
   end
@@ -451,7 +451,12 @@ def compare_strategy
      redirect_to new_survey_path and return 
    else
   @survey = Survey.find(params[:id])
-  @line_graph_strategy = Survey.get_section_graph(@all_sections[0].id, @survey.id)
+  @data_table = Survey.get_section_graph(@all_sections[0].id, @survey.id)
+
+  option = { width: 1200, height: 400, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+  @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
+        
+
   @responses = Survey.get_result(@all_sections[0].id, @survey.id)
   end
     render :layout =>"report"
@@ -473,7 +478,11 @@ def compare_system
      redirect_to new_survey_path and return 
    else
   @survey = Survey.find(params[:id])
-  @line_graph_system = Survey.get_section_graph(@all_sections[1].id, @survey.id)
+  @data_table = Survey.get_section_graph(@all_sections[1].id, @survey.id)
+
+ option = { width: 1200, height: 400, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+  @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
+
   @responses = Survey.get_result(@all_sections[1].id, @survey.id)
 end
     render :layout =>"report"
@@ -495,7 +504,11 @@ def compare_programs
      redirect_to new_survey_path and return 
    else
   @survey = Survey.find(survey_id)
-  @line_graph_programs = Survey.get_section_graph(@all_sections[2].id, @survey.id)
+  @data_table = Survey.get_section_graph(@all_sections[2].id, @survey.id)
+
+  option = { width: 1200, height: 400, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+  @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
+
   @responses = Survey.get_result(@all_sections[2].id, @survey.id)
 end
     render :layout =>"report"

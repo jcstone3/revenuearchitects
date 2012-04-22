@@ -15,6 +15,13 @@ class Question < ActiveRecord::Base
   # Configurations
 	self.per_page = 10
 
+  scope :find_section_questions, lambda{|section_id| {
+    :select=>"questions.id",
+    :joins=>"left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+             inner join sections on sections.id = sub_sections.section_id",
+    :conditions=>"sections.id =#{section_id}"
+}}
+
 
 scope :find_question_count, lambda{|section_id| {
     :select=>"count(*) as question_count",

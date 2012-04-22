@@ -77,7 +77,8 @@
 <div class="span2 center-footer2" ><br>
     <br>
     <a href="#" >
-    <%= link_to image_tag("download_icon.png"),download_url(request.parameters.merge({:format => :pdf})), :class => "downloadIcon" %>
+        <%= link_to image_tag("download_icon.png"),"", :class => "downloadIcon"  %>
+    <%#= link_to image_tag("download_icon.png"),download_url(request.parameters.merge({:format => :pdf})), :class => "downloadIcon" %>
     Download
     <br>
     Result</a><br>                

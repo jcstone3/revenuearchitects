@@ -38,15 +38,41 @@ class Survey < ActiveRecord::Base
    end 
 
   def self.get_section_graph(section_id, survey_id)
-  require 'rubygems'
- require 'google_chart'
- @section = Section.find(section_id)   
- @survey = Survey.find(survey_id)
- @question_count = Question.find_question_count(section_id)
- @response = Response.get_resultresponse(section_id, survey_id)
-  @response_all = []
+ #  require 'rubygems'
+ # require 'google_chart'
+ # @section = Section.find(section_id)   
+ # @survey = Survey.find(survey_id)
+ # @question_count = Question.find_question_count(section_id)
+ # @response = Response.get_resultresponse(section_id, survey_id)
+ #  @response_all = []
   
-  #Average response for all survey
+ #  #Average response for all survey
+  
+ #  @company = Company.find(@survey.company_id)  
+ #  @companies = Company.get_all_companies(@company.id, @company.industry_id)
+ #  if @companies.present?
+ #  company_ids=@companies.collect(&:id).join(', ')
+ #  @response_all = Response.get_overall_response_on_companies(company_ids, section_id, survey_id)
+ #  else
+ #    @response_all = Response.get_overall_response_without_companies(section_id, survey_id)
+ #  end 
+  
+  
+ #  GoogleChart::LineChart.new("900x330", "#{@section.name}", false) do |line_gph|
+ #    line_gph.data "Your Response", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
+ #    line_gph.data "Overall Response", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
+ #    line_gph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
+ #    line_gph.axis :x, :range =>[0,@question_count.first.question_count], :font_size =>10, :alignment =>:center
+ #    line_gph.show_legend = true
+ #    line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 5
+ #    line_gph.grid :x_step => 100.0/10, :y_step=>100.0/10, :length_segment =>1, :length_blank => 0
+ #    @line_graph_programs =  line_gph.to_url
+ #  end
+ @survey = Survey.find(survey_id)
+ @response = Response.get_resultresponse(section_id, survey_id)
+    @questions = Question.find_section_questions(section_id)
+
+  # Average response for all survey
   
   @company = Company.find(@survey.company_id)  
   @companies = Company.get_all_companies(@company.id, @company.industry_id)
@@ -56,19 +82,33 @@ class Survey < ActiveRecord::Base
   else
     @response_all = Response.get_overall_response_without_companies(section_id, survey_id)
   end 
-  
-  
-  GoogleChart::LineChart.new("900x330", "#{@section.name}", false) do |line_gph|
-    line_gph.data "Your Response", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
-    line_gph.data "Overall Response", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
-    line_gph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
-    line_gph.axis :x, :range =>[0,@question_count.first.question_count], :font_size =>10, :alignment =>:center
-    line_gph.show_legend = true
-    line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 5
-    line_gph.grid :x_step => 100.0/10, :y_step=>100.0/10, :length_segment =>1, :length_blank => 0
-    @line_graph_programs =  line_gph.to_url
-  end
-   return @line_graph_programs
+
+    @data_table = GoogleVisualr::DataTable.new
+
+    @data_table.new_column('string', 'Questions' )
+    @data_table.new_column('number', 'Your Score')
+    @data_table.new_column('number', 'Average Score')
+
+     overall_array = Array.new
+     response_array = Array.new
+
+     @questions.each do |question|
+        response_array = Array.new
+
+      response_array.push(question.id.to_s)
+      @your_response = @response.select { |response| response.question_id == question.id } 
+      response_array.push(@your_response.first.answer_1.nil? ? 0 :  @your_response.first.answer_1.to_i)
+      @avg_response = @response_all.select { |response| response.id == question.id }
+      response_array.push(@avg_response.first.answer_1.nil? ? 0 : @avg_response.first.answer_1.to_i )
+      overall_array.push(response_array)
+      end
+
+    # Add Rows and Values
+    @data_table.add_rows(overall_array)
+
+
+
+   return @data_table
   end  
 
 def self.get_overall_graph(survey_id)
@@ -115,7 +155,7 @@ def self.get_overall_graph(survey_id)
     @data_table = GoogleVisualr::DataTable.new
 
     @data_table.new_column('string', 'Questions' )
-    @data_table.new_column('number', 'Response')
+    @data_table.new_column('number', 'Your Response')
     @data_table.new_column('number', 'Average Response')
 
      overall_array = Array.new
@@ -134,10 +174,6 @@ def self.get_overall_graph(survey_id)
 
     # Add Rows and Values
     @data_table.add_rows(overall_array)
-
-   
-
-   
 
   return @data_table
 end
