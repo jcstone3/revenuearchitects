@@ -428,7 +428,11 @@ def compare
      redirect_to new_survey_path and return 
    else
     @survey = Survey.find_by_id(survey_id)
-    @line_graph = Survey.get_overall_graph(survey_id)
+    @data_table = Survey.get_overall_graph(survey_id)
+    
+     option = { width: 1200, height: 400, title: 'Overall Response Vs Average Response' }
+        @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
+        
   end
   render :layout =>"report"
 end 

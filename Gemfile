@@ -41,7 +41,8 @@ gem 'rubyzip'
 gem 'newrelic_rpm'
 #google charts
 gem "googlecharts"
-gem "gchartrb"
+#gem "gchartrb"
+gem "google_visualr", ">= 2.1"
 #gem "google_charts"
 #bootstrap rails gem
 gem "twitter-bootstrap-rails"
