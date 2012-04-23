@@ -28,21 +28,37 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #build_resource
 
     build_resource
-
+    
     if resource.save
       if resource.active_for_authentication?
-        set_flash_message :success, :signed_up if is_navigational_format?
+      set_flash_message :success, :signed_up if is_navigational_format?
+      logger.debug "before sending mail"
+        Usermailer.welcome(resource).deliver
+        logger.debug "after sending mail"
         sign_in(resource_name, resource)
         respond_with resource, :location => after_sign_up_path_for(resource)
+        #format.html { redirect_to(@user, :notice => 'User was successfully created.') }
       else
-        set_flash_message :success, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
-        expire_session_data_after_sign_in!
-        respond_with resource, :location => after_inactive_sign_up_path_for(resource)
+        logger.debug "error in new"
+        return "new"
+        #format.html { render :action => "new" }
       end
-    else
-      clean_up_passwords resource
-      respond_with resource
     end
+   
+    # if resource.save
+    #   if resource.active_for_authentication?
+    #     set_flash_message :success, :signed_up if is_navigational_format?
+    #     sign_in(resource_name, resource)
+    #     respond_with resource, :location => after_sign_up_path_for(resource)
+    #   else
+    #     set_flash_message :success, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
+    #     expire_session_data_after_sign_in!
+    #     respond_with resource, :location => after_inactive_sign_up_path_for(resource)
+    #   end
+    # else
+    #   clean_up_passwords resource
+    #   respond_with resource
+    # end
   end
 
 	def update
@@ -72,4 +88,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user.valid?
     end
   end
+
+
+
 end

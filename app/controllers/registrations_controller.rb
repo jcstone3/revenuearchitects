@@ -9,13 +9,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	def create
       super
       session[:omniauth] = nil unless @user.new_record?
-      respond_to do |format|
-      if @user.save
-        UserMailer.welcome(@user).deliver
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-      else
-        format.html { render :action => "new" }
-      end
+      # respond_to do |format|
+      # if @user.save
+      #   UserMailer.welcome(@user).deliver
+      #   sign_in@user
+      #   redirect_to @user, :flash => {:success => "User was successfully created."}
+      #   #format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+      # else
+      #   return "new"
+      #   #format.html { render :action => "new" }
+      # end
     end
 
 	def update

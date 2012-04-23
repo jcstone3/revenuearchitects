@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email,     :case_sensitive => false, :allow_blank => true, :if => :email_changed?, :message=> "Email address already taken"
   validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?, :message => "Invalid email address"
  
+  
 
 #facebook authentication
 def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
@@ -47,8 +48,10 @@ def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
       end
     end
   end
+  
+  
 
-end
+ end
 # == Schema Information
 #
 # Table name: users
