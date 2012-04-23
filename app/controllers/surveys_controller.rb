@@ -285,7 +285,7 @@ def report
   @all_sections.each do |section|
      @section_total << Survey.calculate_response_for_section(survey_id, section.id)
      section.sub_sections.each do |sub_section|     
-     @subsection_total << calculate_response_for_subsection(survey_id, sub_section.id)
+     @subsection_total << calculate_response_for_subsection(survey_id, sub_section.id)    
     end
   end
   @final_score = @section_total[0]+@section_total[1]+@section_total[2]

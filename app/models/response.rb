@@ -40,7 +40,7 @@ scope :get_response_for_priority, lambda{ |surveyid, action| {
 
 
 scope :get_overall_response_on_companies, lambda{|company_ids, section_id, survey_id|{
-     :select=>"responses.answer_1, questions.id, surveys.id",
+     :select=>"responses.answer_1, questions.id as question_id, surveys.id",
      :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id!=#{survey_id})
               left outer join surveys on surveys.company_id in (#{company_ids}) 
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 
@@ -52,7 +52,7 @@ scope :get_overall_response_on_companies, lambda{|company_ids, section_id, surve
 }}
 
 scope :get_overall_response_without_companies, lambda{|section_id, survey_id|{
-     :select=>"count(*), responses.answer_1, questions.id",
+     :select=>"responses.answer_1, questions.id as question_id",
      :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id!=#{survey_id})
               left outer join surveys on responses.survey_id = surveys.id 
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 

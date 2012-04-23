@@ -79,8 +79,10 @@ class Survey < ActiveRecord::Base
   if @companies.present?
   company_ids=@companies.collect(&:id).join(', ')
   @response_all = Response.get_overall_response_on_companies(company_ids, section_id, survey_id)
+  logger.debug "in with companies"
   else
     @response_all = Response.get_overall_response_without_companies(section_id, survey_id)
+    logger.debug "in without companies"
   end 
 
     @data_table = GoogleVisualr::DataTable.new
@@ -96,9 +98,9 @@ class Survey < ActiveRecord::Base
         response_array = Array.new
 
       response_array.push(question.id.to_s)
-      @your_response = @response.select { |response| response.question_id == question.id } 
+      @your_response = @response.select { |response| response.question_id == question.id.to_i } 
       response_array.push(@your_response.first.answer_1.nil? ? 0 :  @your_response.first.answer_1.to_i)
-      @avg_response = @response_all.select { |response| response.id == question.id }
+      @avg_response = @response_all.select { |response| response.question_id == question.id.to_i }
       response_array.push(@avg_response.first.answer_1.nil? ? 0 : @avg_response.first.answer_1.to_i )
       overall_array.push(response_array)
       end
@@ -203,22 +205,29 @@ def self.calculate_response_for_section(survey_id, section_id)
     else
       @section_responses.each do |response|
         result += get_score_value(response.points, response.answer_1)
+        logger.debug "#{}"
       end
      end
-
+   
     return result
 end   
 
 #total response for a subsection
 def self.calculate_response_for_subsection(survey_id, sub_section_id)
-  questions = []  
-  @sub_section = SubSection.find(sub_section_id)
-  @sub_section.questions.each do |q|
-       questions << q.id
-  end
-  @survey = self.find(survey_id)
-  @sur_responses = @survey.responses.find_all_by_question_id(questions) 
-  calculate_response(@sur_responses)
+   
+  result = 0 
+  
+  @sub_section_responses = Response.select("responses.id as response_id, questions.points, responses.answer_1 ").joins(:survey, :question => [{:sub_section => :section}]).where("surveys.id = ? and sub_sections.id = ? ", survey_id, sub_section_id)
+  if @sub_section_responses.blank?
+      result = 0
+  else
+    @sub_section_responses.each do |q|
+     result +=  get_score_value(response.points, response.answer_1)
+    end
+  end 
+  logger.debug "#{result} in subsection ##############}" 
+  return result
+  
 end 
 
 #calculate response 
@@ -273,7 +282,7 @@ end
 #Get the Final Score for each answer
 # This is new function. Use this
 def self.get_score_value(question_points, response_score)
-  logger.debug "Scoring the Response"
+  #logger.debug "Scoring the Response"
   score = 0 
   question_points_int = question_points.to_i
   response_score_int = response_score.to_i
@@ -383,6 +392,19 @@ def self.get_individual_response_score(response_id, response_question_id)
            if response.answer_1 == 5
             score = 10
           end          
+         when 15 
+          case response.answer_1
+          when 1
+            score = -3
+          when 2
+            score = 0
+          when 3
+            score = 3
+          when 4
+            score = 9
+          when 5
+            score = 15
+          end
 
         when 20 
           if response.answer_1 == 1
