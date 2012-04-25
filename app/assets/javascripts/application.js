@@ -10,6 +10,7 @@
 //= jquery-ui-1.8.18.custom.min
 //= require twitter/bootstrap
 //= require bootstrap
+//= require jquery.feedback
 //= require_tree .
 
 $(document).ready(function(){

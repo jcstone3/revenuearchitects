@@ -1,5 +1,7 @@
 RevenueGrader::Application.routes.draw do 
 
+  resources :feedback, :only => [:new, :create]
+
   #admin settingss
   namespace :admin do 
    get '/dashboard' => "dashboard#show", :as => :dashboard 
