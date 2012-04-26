@@ -43,6 +43,8 @@ RevenueGrader::Application.routes.draw do
       get '/logout' => 'users/sessions#destroy', :as => :destroy_user_session
       get '/register' => 'users/registrations#new', :as => :new_user_registration
       get '/forgot-password/:resource' => 'users/passwords#new', :as => :new_password
+      get '/edit-password/:resource' => 'users/passwords#edit', :as => :edit_password
+      put '/update-password/:resource' => 'users/passwords#update', :as => :update_password
       get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru' #third party authentication
   end 
    

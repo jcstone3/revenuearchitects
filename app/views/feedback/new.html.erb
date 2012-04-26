@@ -1,27 +1,30 @@
-       <h1>Feedback</h1>
-<p>Please leave us feedback, it's really appreciated.</p>
+        <div class="content">
+       <h1 class="question"> Feedback</h1>
+<p class="question">Please leave us feedback, it's really appreciated.</p>
 
-<%= form_for @feedback, :as => :feedback, :url => feedback_index_path, :html => { :id => "feedback_form" } do |f| -%>
+<%= simple_form_for @feedback, :as => :feedback, :url => feedback_index_path, :html => { :id => "feedback_form" } do |f| -%>
   <%= f.hidden_field 'page' %>
   <% unless @error_message.blank? %>
   <p class="error">
     <%=h @error_message %>
   </p>
   <% end %>
-  <p>
-    <%= f.label 'subject' %>
-    <%= f.select 'subject', ['Problem', 'Suggestion', 'Question', 'Other'] %>
-  </p>
-  <p>
-    <%= f.label 'email' %>
-    <%= f.text_field 'email' %>
-  </p>
-  <p>
-    <%= f.label 'comment' %><br />
-    <%= f.text_area 'comment', :rows => 10, :cols => 30 %>
-  </p>
- <!--  <div class="form-actions">
-            <%#= f.submit, 'Send', :class => 'btn-primary' %>
-          </div> -->
+ 
+    <%= f.input :subject, 
+                      :collection => [ ['Problem'],['Suggestion'],['Question'],['Other'] ] , 
+                      :prompt => "Subject",  
+                      :label => "Subject",  
+                      :input_html => { :class => 'input-xlarge' }, 
+                      :label_html => { :class => '' } -%> 
+
+   <%= f.input :email,  
+                    :input_html => { :class => 'input-xlarge' } -%>
+  
+   <%= f.input :comment,  
+                    :label => "Comment",
+                    :input_html => { :class => 'input-xlarge', :rows => 10, :cols =>40 } -%>
+  
    <p><%= f.submit 'Send', :class => 'btn-primary' %></p> 
 <% end -%>
+</div>
+
