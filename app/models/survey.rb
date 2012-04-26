@@ -108,8 +108,6 @@ class Survey < ActiveRecord::Base
     # Add Rows and Values
     @data_table.add_rows(overall_array)
 
-
-
    return @data_table
   end  
 
@@ -197,7 +195,6 @@ def self.calculate_response_for_section(survey_id, section_id)
     #Get all responses in this Survey/Section
     @section_responses = Response.select("responses.id as response_id, questions.points, responses.answer_1 ").joins(:survey, :question => [{:sub_section => :section}]).where("surveys.id = ? and sections.id = ? ", survey_id, section_id)
 
-
     #Get the responses, get score from question and multiply the point from response
     result = 0 
     if @section_responses.blank?
@@ -205,7 +202,7 @@ def self.calculate_response_for_section(survey_id, section_id)
     else
       @section_responses.each do |response|
         result += get_score_value(response.points, response.answer_1)
-        logger.debug "#{}"
+        logger.debug "#{result}"
       end
      end
    
@@ -221,7 +218,7 @@ def self.calculate_response_for_subsection(survey_id, sub_section_id)
   if @sub_section_responses.blank?
       result = 0
   else
-    @sub_section_responses.each do |q|
+    @sub_section_responses.each do |response|
      result +=  get_score_value(response.points, response.answer_1)
     end
   end 
@@ -282,75 +279,32 @@ end
 #Get the Final Score for each answer
 # This is new function. Use this
 def self.get_score_value(question_points, response_score)
-  #logger.debug "Scoring the Response"
+  logger.debug "Scoring the Response"
   score = 0 
   question_points_int = question_points.to_i
   response_score_int = response_score.to_i
-
-
-   case question_points_int
-        when 5 
-          case response_score_int
-            when 1
-              score = -1
-            when 2
-              score = 0 
-            when 3
-              score = 1
-            when 4
-              score = 3
-            when 5
-              score = 5
-            end
-
-       when 10 
-        case response_score_int
-        when 1
-          score = -2
-        when 2
-          score = 0 
-        when 3
-          score = 2
-        when 4
-          score = 6
-        when 5
-          score = 10
-        end 
-
-        when 15 
-          case response_score_int
-          when 1
-            score = -3
-          when 2
-            score = 0
-          when 3
-            score = 3
-          when 4
-            score = 9
-          when 5
-            score = 15
-          end
-
-        when 20 
-          case response_score_int
-          when 1
-            score = -4
-          when 2
-            score = 0
-          when 3
-            score = 4
-          when 4
-            score = 12
-          when 5
-            score = 20
-          end
-
-        end        
-      
-       return score 
+  
+  #calculation for score is (question_points * slider_percentage)/100
+  #slider percentage will be -20, 0, 20, 60, 100 depending on the value of response_score
+  response_percentage = 0
+  case response_score_int
+             when 1
+               response_percentage = -20
+             when 2
+               response_percentage = 0
+             when 3
+               response_percentage = 20
+             when 4
+               response_percentage = 60
+             when 5
+               response_percentage = 100
+             end 
+ 
+  # individual response score calculation will be 
+  score = (question_points_int * response_percentage)/100
+     
+  return score 
 end
-
-
 
 
 #individual score for each response
@@ -358,72 +312,9 @@ def self.get_individual_response_score(response_id, response_question_id)
   score = 0
   question = Question.find(response_question_id)
   response = Response.find(response_id)
-  case question.points
-        when 5 
-          if response.answer_1 == 1
-            score = -1            
-          end
-           if response.answer_1 == 2
-            score = 0
-          end 
-           if response.answer_1 == 3
-            score = 1
-          end
-           if response.answer_1 == 4
-            score = 3
-          end
-           if response.answer_1 == 5
-            score = 5
-          end         
-
-       when 10 
-          if response.answer_1 == 1
-            score = -2
-          end
-           if response.answer_1 == 2
-            score = 0
-          end 
-           if response.answer_1 == 3
-            score = 2
-          end
-           if response.answer_1 == 4
-            score = 6
-          end
-           if response.answer_1 == 5
-            score = 10
-          end          
-         when 15 
-          case response.answer_1
-          when 1
-            score = -3
-          when 2
-            score = 0
-          when 3
-            score = 3
-          when 4
-            score = 9
-          when 5
-            score = 15
-          end
-
-        when 20 
-          if response.answer_1 == 1
-            score = -4
-          end
-           if response.answer_1 == 2
-            score = 0
-          end 
-           if response.answer_1 == 3
-            score = 4
-          end
-           if response.answer_1 == 4
-            score = 12
-          end
-           if response.answer_1 == 5
-            score = 20
-          end
-        end        
-       return score
+  #for each response calculate the response score
+  score = get_score_value(question.points, response.answer_1)
+  return score
 end
 
 

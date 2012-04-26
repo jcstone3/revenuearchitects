@@ -136,7 +136,7 @@ def question
   # - All Sections
   # - All Subsections
   @question = get_question(question_id)
-
+  
   if @survey.blank? 
     flash[:warning] = "Could not form the question. Please try again"
     redirect_to continue_survey_path and return
@@ -285,7 +285,7 @@ def report
   @all_sections.each do |section|
      @section_total << Survey.calculate_response_for_section(survey_id, section.id)
      section.sub_sections.each do |sub_section|     
-     @subsection_total << calculate_response_for_subsection(survey_id, sub_section.id)    
+     @subsection_total << Survey.calculate_response_for_subsection(survey_id, sub_section.id)    
     end
   end
   @final_score = @section_total[0]+@section_total[1]+@section_total[2]
@@ -631,7 +631,7 @@ def calculate_response_for_subsection(survey_id, sub_section_id)
   @survey = Survey.find(survey_id)
   @sur_responses = @survey.responses.find_all_by_question_id(questions) 
   Survey.calculate_response(@sur_responses)
-end 
+end
 
 #Get all sections and store them in session
 def get_all_sections
