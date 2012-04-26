@@ -620,19 +620,6 @@ def check_user_surveys(survey_id)
   return flag
 end  
 
-
-#total response for a subsection
-def calculate_response_for_subsection(survey_id, sub_section_id)
-  questions = []  
-  @sub_section = SubSection.find(sub_section_id)
-  @sub_section.questions.each do |q|
-       questions << q.id
-  end
-  @survey = Survey.find(survey_id)
-  @sur_responses = @survey.responses.find_all_by_question_id(questions) 
-  Survey.calculate_response(@sur_responses)
-end
-
 #Get all sections and store them in session
 def get_all_sections
   all_sections = session[:all_sections]
