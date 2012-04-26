@@ -7,7 +7,11 @@ class Survey < ActiveRecord::Base
     
 	belongs_to :company
 	has_many :responses
-
+  
+   #default_scope :
+   scope :get_all_survey_for_user, lambda{|company_ids|{   
+    :conditions => "company_id in (#{company_ids})"  
+   }}
 
     def self.check_numericality(params)
     	params = params

@@ -108,7 +108,18 @@ end
 
 #lists all the active surveys 
 def show
-  @companies =  current_user.companies  
+  @companies =  current_user.companies
+  company_ids= @companies.collect(&:id).join(', ')
+  #need to get current active and completed surveys
+  #first get all surveys for this user and then select for active and inactive
+  @get_all_surveys_for_current_user = Survey.get_all_survey_for_user(company_ids)  
+  
+  #current active surveys
+  @current_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active = true}
+  
+  #completed surveys
+  @completed_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active = false}
+
   @sections= Section.all  
   @total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count     
 end  
