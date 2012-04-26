@@ -1,0 +1,18 @@
+
+	<tr>
+                                                <td><%= response.questions_id %></td>
+                                                <td><%= response.name %></td>
+                                                <td><%= response.section_name%><%= response.sub_sect_name%></td>
+                                                <td><%= response.points %></td> 
+                                                <td><%= response.score %></td>
+                                                <td><%= response.avg_score.to_f()%> </td>  
+                                                
+                                                <td><%= response.response_id.present? ?
+                                                  get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
+                                                <td><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
+                                                 </td> 
+                                                <td><%= response.answer_3 %></td> 
+                                                </tr>
+                                       
+
+                                        

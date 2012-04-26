@@ -1,4 +1,6 @@
-<table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2"> 
+<%= @add_to_plan_responses.inspect%>
+<% if @responses.present?%> 
+ <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2"> 
                                                <thead>
                                                   <tr>
                                                     <th><h3>#</h3></th>
@@ -14,6 +16,7 @@
                                                   </tr>
                                                 </thead>
                                                 <tbody>
+
                                         <% @responses.each do |response| %>
                                             <tr>
                                                 <td><%= response.questions_id %></td>
@@ -38,3 +41,6 @@
                                         
                                                 </tbody>           
                                           </table>      
+ <%else%>
+ <p>No Response avaiable for this search</p>
+ <%end%>                                         

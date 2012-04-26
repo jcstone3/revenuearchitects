@@ -375,7 +375,7 @@ $(document).ready(function(){
            //--------------  end admin_user_index update -----------/    
 
             $(function () {
-             $('.tabs').click(function(){
+             $('.tabs').click(function(){              
                 alert($(this).attr('id'));
              });
             })

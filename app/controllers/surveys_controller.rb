@@ -270,94 +270,27 @@ def report
   #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
-
   if @survey.blank?
      flash[:notice] = "No such survey exists"
      redirect_to new_survey_path and return 
    else
-    @section_total = []
-    @subsection_total = []
-    @questions_score = [] 
-    @questions_score = []  
+    #for sections navigation tabs
+    @all_sections = get_all_sections
 
-  @all_sections = get_all_sections
-  #score for each section and subsection
-  @all_sections.each do |section|
-     @section_total << Survey.calculate_response_for_section(survey_id, section.id)
-     section.sub_sections.each do |sub_section|     
-     @subsection_total << Survey.calculate_response_for_subsection(survey_id, sub_section.id)    
-    end
-  end
-  @final_score = @section_total[0]+@section_total[1]+@section_total[2]
-  #get the individual response score
-  @survey.responses.each do |response|
-    @questions_score << Survey.get_individual_response_score(response.id, response.question_id)
-  end  
-  
-  render :layout =>"report"
+    #if the user is authorized for the survey then get details of add to plan responses
+     @add_to_plan_responses = Response.get_response_for_options(@survey.id, "add_to_plan")
+    #for must do responses
+     @must_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'must_do'}
+    #for should do responses
+     @should_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'should_do'}
+    #for could do responses
+     @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
+    
+    render :layout =>"report"
  
   end
 end 
 
-# def previous_question
-#   if params[:id].present? && params[:question_id].present? 
-#      if((Survey.check_numericality(params[:id])) && (check_survey(params[:id])))
-#        if check_user_surveys(params[:id])
-#           @survey = Survey.find(params[:id])
-#           @response = @survey.responses 
-#            if((Survey.check_numericality(params[:question_id])) && (check_question(params[:question_id])))          
-#              @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
-#               if @survey_response
-
-#                 @question = Question.find(params[:question_id])
-#                 @sub_section = SubSection.find(@question.sub_section_id)
-#                 @section = Section.find(@sub_section.section_id)
-#                 @allSection = Section.all
-#                 @response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
-#                 @total_score = Survey.calculate_response_for_section(params[:id], @section.id)
-#                 ########for pagination ############
-#                 @question_all = Question.count
-#                 if(params[:question_id].to_i < 6)
-#                 @questions = Question.find(:all,
-#                        :select => "questions.id, responses.question_id as response_quest_id",
-#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
-#                        :offset=> 0, :limit=>10 )
-
-#                 elsif(params[:question_id].to_i > @question_all - 5)  
-#                 @questions = Question.find(:all,
-#                        :select => "questions.id, responses.question_id as response_quest_id",
-#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
-                       
-#                        :offset=> (@question_all - 10), :limit=>10 )
-#                 else
-#                 @questions = Question.find(:all,
-#                        :select => "questions.id, responses.question_id as response_quest_id",
-#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
-                       
-#                        :offset=> (params[:question_id].to_i - 5), :limit=>10)
-#                 end 
-#                 ######### end of pagination logic ##########               
-#               else
-#                 redirect_to questions_path(@survey, params[:question_id])
-#               end 
-#            else
-#             flash[:error] = "Something went wrong please select a survey"
-#             redirect_to continue_survey_path
-#            end      
-#       else
-#        flash[:error] = "Something went wrong please select a survey"
-#        redirect_to continue_survey_path   
-#       end
-#     else
-#       flash[:error] = "Something went wrong please select a survey"
-#       redirect_to continue_survey_path  
-#     end  
-#    else
-#      flash[:error] = "Something went wrong please select a survey"
-#      redirect_to continue_survey_path 
-#    end 
-  
-# end
 
 def update_response  
   if params[:response].blank?  
