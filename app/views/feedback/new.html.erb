@@ -1,5 +1,5 @@
         <div class="content">
-       <h1 class="question"> Feedback</h1>
+       <h1 class="question"> Feedback </h1>
 <p class="question">Please leave us feedback, it's really appreciated.</p>
 
 <%= simple_form_for @feedback, :as => :feedback, :url => feedback_index_path, :html => { :id => "feedback_form" } do |f| -%>
@@ -22,7 +22,7 @@
   
    <%= f.input :comment,  
                     :label => "Comment",
-                    :input_html => { :class => 'input-xlarge', :rows => 10, :cols =>40 } -%>
+                    :input_html => { :class => 'input-xlarge', :rows => 7, :cols =>40 } -%>
   
    <p><%= f.submit 'Send', :class => 'btn-primary' %></p> 
 <% end -%>

@@ -1,6 +1,6 @@
 <% content_for :main_content do -%> 
     <div class="content">
-       <h1 class="question">Survey  <%= @survey_date%>: Enter Survey Details</h1>
+       <h1 class="question">Diagnostic  <%= @survey_date%>: Enter Diagnostic Details</h1>
       <p class="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu erat et velit dapibus bibendum id quis quam. Sed quis suscipit tortor.</p>
           
       <%= simple_form_for(@survey, :validate => true, :class => "well") do |f| %>
@@ -18,7 +18,7 @@
                       :input_html => { :class => 'input-xlarge' }   -%>  
 
          <div class="form-actions">
-            <%= f.button :submit, "Start the Survey", :class => 'btn btn-primary' %>
+            <%= f.button :submit, "Start the Diagnostic", :class => 'btn btn-primary' %>
             </div>
     <% end -%> 
       
