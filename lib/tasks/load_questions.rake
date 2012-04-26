@@ -75,11 +75,11 @@ open("#{Rails.root}/db/questions.csv") do |questions|
  end
 
 @section = Section.find(1)
-@section.update_attributes(:question_count=>30, :total_points=>100) 
+@section.update_attributes(:question_count=>30, :total_points=>100, :sequence => 1) 
 @section = Section.find(2)
-@section.update_attributes(:question_count=>40, :total_points=>100)
+@section.update_attributes(:question_count=>40, :total_points=>100, :sequence => 2)
 @section = Section.find(3)
-@section.update_attributes(:question_count=>30, :total_points=>100)
+@section.update_attributes(:question_count=>30, :total_points=>100, :sequence => 3)
  
 end
 

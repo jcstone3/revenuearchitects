@@ -390,14 +390,14 @@ def confirm_survey
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
                            :group => "sections.sequence", :order => "sections.sequence")
-  
+  logger.debug "#{@section_questions}"
   @all_sections = get_all_sections
 
-  # @all_sections.each_with_index do |section,i|
-  #   @final_score += @section_questions[i].question_attempted.to_i
+  @all_sections.each_with_index do |section,i|
+    @final_score += @section_questions[i].question_attempted.to_i
 
-  #   @total_question_count += section.question_count
-  # end
+    @total_question_count += section.question_count
+  end
 
  end
  
