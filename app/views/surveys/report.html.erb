@@ -32,7 +32,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                        
                             
                            <div class="tab-pane" id="must" >
                             <div class="tabHead">
@@ -41,6 +41,7 @@
                                 
                                 <div class="tabGraph">
                                     <div class="box">
+                                      
                                         <%= render :partial=>"table_header"%>
                                         <% @must_do_responses.each do |response|%>
                                           <%= render :partial=>"response_report", 
@@ -49,8 +50,7 @@
                                        <%= render :partial=>"table_end"%>
                                     </div>
                                 </div>
-                           </div>
-                 
+                           </div>                 
                  
 
                             <div class="tab-pane" id="should" >
