@@ -20,6 +20,7 @@
                                    
                                 </div>
                                 
+                                
                                 <div class="tabGraph">
                                     <div class="box">  
                                     	<%= render :partial=>"table_header"%>	
@@ -32,15 +33,14 @@
                                 </div>
                             </div>
 
+                            
                            <div class="tab-pane" id="must" >
                             <div class="tabHead">
                                   <h1>Must Do</h1>
-                                   
                                 </div>
                                 
                                 <div class="tabGraph">
                                     <div class="box">
-                                       
                                         <%= render :partial=>"table_header"%>
                                         <% @must_do_responses.each do |response|%>
                                           <%= render :partial=>"response_report", 
@@ -50,10 +50,12 @@
                                     </div>
                                 </div>
                            </div>
+                 
+                 
+
                             <div class="tab-pane" id="should" >
                             	 <div class="tabHead">
                                   <h1>Should Do</h1>
-                                   
                                 </div>
                                 
                                 <div class="tabGraph">
