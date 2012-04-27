@@ -81,7 +81,7 @@ scope :get_overall_response_without_companies, lambda{|section_id, survey_id|{
  }}
 
  scope :find_response_for_all_sections_company, lambda{|company_ids,survey_id|{
-    :select=>"avg(responses.answer_1), responses.answer_1, questions.id, surveys.id",
+    :select=>"avg(responses.answer_1), responses.answer_1, questions.id, surveys.id as survey_id",
     :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id!=#{survey_id})
               left outer join surveys on surveys.company_id in (#{company_ids}) 
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 
