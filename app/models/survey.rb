@@ -75,7 +75,7 @@ class Survey < ActiveRecord::Base
  #  end
  @survey = Survey.find(survey_id)
  @response = Response.get_resultresponse(section_id, survey_id)
-    @questions = Question.find_section_questions(section_id)
+ @questions = Question.find_section_questions(section_id)
 
   # Average response for all survey
   
