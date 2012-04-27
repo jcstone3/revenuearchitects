@@ -68,8 +68,10 @@ open("#{Rails.root}/db/questions.csv") do |questions|
     	sequence = sequence + 1	
     	name,description,sub_section,points = question.chomp.split(":")
         puts sub_section.downcase
+        p "in subsection"
     	sub_section_id = @sub_sections.select {|sec| sec.name.downcase == sub_section.downcase }.first.id
-    	question = Question.new(:name => name, :description => description, :sequence => sequence, :is_active => true, :sub_section_id => sub_section_id, :points => points)
+    	p "#{sub_section_id}"
+        question = Question.new(:name => name, :description => description, :sequence => sequence, :is_active => true, :sub_section_id => sub_section_id, :points => points)
     	question.save!
     end
  end

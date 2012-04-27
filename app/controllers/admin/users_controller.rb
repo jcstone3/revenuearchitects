@@ -42,28 +42,50 @@ class Admin::UsersController < ApplicationController
 
   def survey_report
     @user = User.find_by_id(params[:id])
-    @survey = Survey.find(params[:survey_id])
-    if @survey.present?
-      @section_total = []
-      @subsection_total = []
-      @questions_score = [] 
-      @questions_score = []  
-      @allSection = Section.find(:all) 
-      #score for each section and subsection
-      @allSection.each do |section|
-         @section_total << Survey.calculate_response_for_section(params[:survey_id], section.id)
-         section.sub_sections.each do |sub_section|     
-         @subsection_total << Survey.calculate_response_for_subsection(params[:survey_id], sub_section.id)
-        end
-      end
-      @final_score = @section_total[0]+@section_total[1]+@section_total[2]
-      #get the individual response score
-      @survey.responses.each do |response|
-        @questions_score << Survey.get_individual_response_score(response.id, response.question_id)
-      end        
+    
+    #scoping the survey
+    @survey = @user.companies.first.surveys.find_by_id(params[:survey_id])
+
+  if @survey.blank?
+     flash[:notice] = "No such survey exists"
+     redirect_to :index and return 
+   else
+    #for sections navigation tabs
+    @all_sections = Section.all
+
+    #if the user is authorized for the survey then get details of add to plan responses
+     @add_to_plan_responses = Response.get_response_for_options(@survey.id, "add_to_plan")
+    #for must do responses
+     @must_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'must_do'}
+    #for should do responses
+     @should_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'should_do'}
+    #for could do responses
+     @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
+    
+    #render :layout =>"report"
+ 
+  end
+    # if @survey.present?
+    #   @section_total = []
+    #   @subsection_total = []
+    #   @questions_score = [] 
+    #   @questions_score = []  
+    #   @allSection = Section.find(:all) 
+    #   #score for each section and subsection
+    #   @allSection.each do |section|
+    #      @section_total << Survey.calculate_response_for_section(params[:survey_id], section.id)
+    #      section.sub_sections.each do |sub_section|     
+    #      @subsection_total << Survey.calculate_response_for_subsection(params[:survey_id], sub_section.id)
+    #     end
+    #   end
+    #   @final_score = @section_total[0]+@section_total[1]+@section_total[2]
+    #   #get the individual response score
+    #   @survey.responses.each do |response|
+    #     @questions_score << Survey.get_individual_response_score(response.id, response.question_id)
+    #   end        
        
-    else
-     redirect_to :index     
-    end
+    # else
+    #  redirect_to :index     
+    # end
  end  
 end
