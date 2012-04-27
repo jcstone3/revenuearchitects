@@ -389,7 +389,46 @@ $(document).ready(function(){
             "bInfo": false,
             "bAutoWidth": true
         } ); 
+       
+       //-------report page table ids ------ //
+       $('#report_add_to_planTable').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } ); 
 
+       $('#report_must_doTable').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } );
+
+       $('#report_should_doTable').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } );
+
+       $('#report_could_doTable').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } );
+
+       //---end -- for --- report page table---//
+      // -- admin user table id --- //
       $('#user_table').dataTable( {
             "bPaginate": true,
             "bLengthChange": false,
@@ -398,6 +437,7 @@ $(document).ready(function(){
             "bInfo": false,
             "bAutoWidth": true
         } ); 
+      //---end --of admin user page table---//
 
       /* report Tables */
        $(".pageAccordion").accordion({

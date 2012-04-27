@@ -56,7 +56,7 @@ scope :get_overall_response_on_companies, lambda{|company_ids, section_id, surve
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 
               inner join sections on sections.id = sub_sections.section_id",
      :conditions =>  "sections.id = #{section_id}",
-     :group=>"surveys.id,responses.answer_1, questions.id",
+     :group=>"questions.id,surveys.id,responses.answer_1",
      :order=>"questions.id"        
      
 }}
@@ -81,8 +81,8 @@ scope :get_overall_response_without_companies, lambda{|section_id, survey_id|{
  }}
 
  scope :find_response_for_all_sections_company, lambda{|company_ids,survey_id|{
-    :select=>"responses.answer_1, questions.id, surveys.id",
-    :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id=#{survey_id})
+    :select=>"avg(responses.answer_1), responses.answer_1, questions.id, surveys.id",
+    :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id!=#{survey_id})
               left outer join surveys on surveys.company_id in (#{company_ids}) 
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 
               inner join sections on sections.id = sub_sections.section_id",
@@ -91,8 +91,8 @@ scope :get_overall_response_without_companies, lambda{|section_id, survey_id|{
  }}
 
 scope :find_response_for_sections_without_company, lambda{|survey_id|{
- 	:select=>"count(*), responses.answer_1, questions.id",
-     :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id=#{survey_id})
+ 	:select=>"count(*), avg(responses.answer_1), responses.answer_1, questions.id",
+     :joins =>"right outer join questions on (questions.id=responses.question_id and responses.survey_id!=#{survey_id})
               left outer join surveys on responses.survey_id = surveys.id 
               left outer join sub_sections on questions.sub_section_id = sub_sections.id 
               inner join sections on sections.id = sub_sections.section_id",

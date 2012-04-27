@@ -404,11 +404,11 @@ end
 
 
 def compare_system
-    survey_id = params[:id]
+  survey_id = params[:id]
   @all_sections = get_all_sections
   #check scope
 
-   #scoping the survey
+  #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
 
@@ -430,12 +430,12 @@ end
 
 
 def compare_programs
-    survey_id = params[:id]
+  survey_id = params[:id]
   @all_sections = get_all_sections
   #check scope
 
    #scoping the survey
-  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
 
   if @survey.blank?

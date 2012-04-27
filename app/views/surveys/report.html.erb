@@ -22,7 +22,9 @@
                                 
                                 
                                 <div class="tabGraph">
-                                    <div class="box">  
+                                    <div class="box">
+                                      <table cellpadding="1" cellspacing="1" 
+                                      id="report_add_to_planTable" class="report-body dataTable2">   
                                     	<%= render :partial=>"table_header"%>	
                                     	<% @add_to_plan_responses.each do |response|%>
                                             <%= render :partial=>"response_report",
@@ -32,7 +34,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                             
                            <div class="tab-pane" id="must" >
                             <div class="tabHead">
@@ -41,7 +43,7 @@
                                 
                                 <div class="tabGraph">
                                     <div class="box">
-                                      
+                                      <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2"> 
                                         <%= render :partial=>"table_header"%>
                                         <% @must_do_responses.each do |response|%>
                                           <%= render :partial=>"response_report", 
@@ -50,7 +52,8 @@
                                        <%= render :partial=>"table_end"%>
                                     </div>
                                 </div>
-                           </div>                 
+                           </div>
+                 
                  
 
                             <div class="tab-pane" id="should" >
@@ -60,14 +63,13 @@
                                 
                                 <div class="tabGraph">
                                     <div class="box">  
+                                      <table cellpadding="1" cellspacing="1" id="report_should_doTable" class="report-body dataTable2"> 
                                        <%= render :partial=>"table_header"%>
                                         <% @should_do_responses.each do |response|%>
                                           <%= render :partial=>"response_report", 
                                           :locals=> {:response =>response} %> 
                                         <%end%>
-                                       <%= render :partial=>"table_end"%>                                      
-                                        <%#= render :partial=>"report_response_table", 
-                                        :object=> {:responses =>@should_do_responses} %> 
+                                       <%= render :partial=>"table_end"%>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +80,8 @@
                                 </div>
                                 
                                 <div class="tabGraph">
-                                    <div class="box">                                        
+                                    <div class="box"> 
+                                    <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
                                         <%= render :partial=>"table_header"%>
                                         <% @could_do_responses.each do |response|%>
                                           <%= render :partial=>"response_report", 
@@ -86,8 +89,7 @@
                                         <%end%>
                                        <%= render :partial=>"table_end"%>         
                                     </div>
-                                </div></div>
-                           
+                                </div></div>                           
         </div>
       </div>
     </div> 

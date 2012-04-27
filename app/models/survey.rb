@@ -116,47 +116,29 @@ class Survey < ActiveRecord::Base
    return @data_table
   end  
 
+#the overall graph 
 def self.get_overall_graph(survey_id)
- # require 'rubygems'
- #require 'google_chart'
-  # @sections = Section.all  
-  # @allSection = Section.all 
-  # @survey = Survey.find(survey_id)
-  # @question_count =Question.all.count
-  # @response = Response.get_response_for_all_sections(survey_id)
-  # @response_all = []
-  # @sections = Section.all
-  # #Average response for all survey 
-  # @company =  Company.find(@survey.company_id)  
-  # @companies = Company.get_all_companies(@company.id, @company.industry_id)
-  #  if @companies.present?
-  #   company_ids=@companies.collect(&:id).join(', ')
-  #   @response_all = Response.find_response_for_all_sections_company(company_ids,survey_id)
-  # else
-  #   @response_all = Response.find_response_for_sections_without_company(survey_id)
-  # end  
-  
-  # GoogleChart::LineChart.new("900x330", "Overall", false) do |line_graph|
-  #   line_graph.data "Your Response", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
-  #   line_graph.data "Overall Response", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
-  #   line_graph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
-  #   line_graph.axis :x, :range =>[0,@question_count], :font_size =>10, :alignment =>:center
-  #   line_graph.show_legend = true
-  #   line_graph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 5
-  #   line_graph.grid :x_step => 100.0/10, :y_step=>100.0/10, :length_segment =>1, :length_blank => 0
-  #   @line_graph =  line_graph.to_url
-  # end
-
+ 
+    @survey = Survey.find(survey_id)
+    #current user response for the survey   
     @response = Response.get_response_for_all_sections(survey_id)
+    
     @questions = Question.find(:all, :select => "id")
+    
+    #get all companies belonging to the industry as of the current user company industry 
 
+    @company = Company.find(@survey.company_id)  
+    @companies = Company.get_all_companies(@company.id, @company.industry_id)
+   
     if @companies.present?
-    company_ids=@companies.collect(&:id).join(', ')
+      company_ids=@companies.collect(&:id).join(', ')
       @response_all = Response.find_response_for_all_sections_company(company_ids,survey_id)
+      logger.debug "in with companies"
     else
       @response_all = Response.find_response_for_sections_without_company(survey_id)
+      logger.debug "in without companies"
     end  
-
+     
     @data_table = GoogleVisualr::DataTable.new
 
     @data_table.new_column('string', 'Questions' )
