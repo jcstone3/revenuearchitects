@@ -13,29 +13,24 @@ def new
   @previous_surveys = []
   @response = []
   if current_user.companies.present?#if no company details is provided
-        if check_existing_surveys #check if there exists previous surveys
-            current_user.companies.each do |cmpany|
-            cmpany.surveys.each do |survey|    
-                if survey.is_active == true                    
-                  @active_survey << survey.id
-                end  
-            end              
-            end
-            flash[:success] = "Welcome back #{current_user.username}, please select a survey to continue"
-            redirect_to continue_survey_path  and return             
-        else
-          #list all the previous completed surveys & start a new survey
-          current_user.companies.each do |cmpany|
-            cmpany.surveys.each do |survey|    
-            if survey.is_active == false                    
-              @previous_surveys << survey.id
-              @response << Survey.get_response_score_for(survey.id)
-            end  
-          end
-          end       
-          @survey = Survey.new
-          @survey_date = Time.now.strftime('%B, %Y')
-        end  
+      #if current user has company get all the surveys for that company 
+      @surveys = current_user.companies.first.surveys.order("created_at DESC") 
+
+      #check if current incompleted surveys    
+      @current_surveys = @surveys.select{|survey| survey.is_active == true}  
+
+      #no surveys exists then provide the new survey form  
+      if(@surveys.blank? || @current_surveys.blank?)
+         @survey = Survey.new
+         @survey_date = Time.now.strftime('%B, %Y')
+
+         #show the previous completed surveys 
+         @completed_surveys = @surveys.select{|survey| survey.is_active == false}
+         @completed_surveys.take(2)
+
+      else         
+         redirect_to continue_survey_path  and return
+      end          
   else
     flash[:error] = "Please provide company details before proceeding"
     redirect_to new_company_path  and return
@@ -115,10 +110,10 @@ def show
   @get_all_surveys_for_current_user = Survey.get_all_survey_for_user(company_ids)  
   
   #current active surveys
-  @current_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active = true}
+  @current_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == true}
   
   #completed surveys
-  @completed_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active = false}
+  @completed_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == false}
 
   @sections= Section.all  
   @total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count     
@@ -579,9 +574,9 @@ end
 #TODO: Check if this works when query parameters are not passed
 def get_current_survey
   current_survey = session[:survey]
-
+  
   if current_survey.blank?
-    current_survey = Survey.find_by_id(params[:id])
+    current_survey = current_user.companies.first.surveys.find_by_id(params[:id])
     session[:survey] = current_survey
   end
   

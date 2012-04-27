@@ -50,7 +50,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
      data = request.env["omniauth.auth"].extra.raw_info
     #if @user.persisted?
       logger.debug "User #{data} is persisted"
-      #if new user then create Authorization
+    #if new user then create Authorization
     #  authentication = Authorization.find_by_provider_and_uid('twitter', "#{data.id}")
     #  if authentication
     #   else 
