@@ -180,7 +180,7 @@ def self.calculate_response_for_section(survey_id, section_id)
     # calculate_response(@sur_responses)
 
     #Get all responses in this Survey/Section
-    @section_responses = Response.select("responses.id as response_id, questions.points, responses.answer_1 ").joins(:survey, :question => [{:sub_section => :section}]).where("surveys.id = ? and sections.id = ? ", survey_id, section_id)
+    @section_responses = Response.select("responses.id as response_id, questions.points, responses.answer_1 ").joins(:survey, :question => [{:sub_section => :section}]).where("surveys.id = ? and sections.id = ? and responses.answer_2 !=?", survey_id, section_id, "not_applicable")
 
     #Get the responses, get score from question and multiply the point from response
     result = 0 
@@ -201,7 +201,7 @@ def self.calculate_response_for_subsection(survey_id, sub_section_id)
    
   result = 0 
   
-  @sub_section_responses = Response.select("responses.id as response_id, questions.points, responses.answer_1 ").joins(:survey, :question => [{:sub_section => :section}]).where("surveys.id = ? and sub_sections.id = ? ", survey_id, sub_section_id)
+  @sub_section_responses = Response.select("responses.id as response_id, questions.points, responses.answer_1 ").joins(:survey, :question => [{:sub_section => :section}]).where("surveys.id = ? and sub_sections.id = ? and responses.answer_2 !=?", survey_id, sub_section_id, "not_applicable")
   if @sub_section_responses.blank?
       result = 0
   else
