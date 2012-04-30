@@ -2,7 +2,7 @@ class Admin::SectionController < ApplicationController
    layout "admin"
 	def index
     @sections =  Section.find(:all,
-                       :select => "sections.name, sub_sections.name as subsection_name, sub_sections.description as subsection_desc",
+                       :select => "sub_sections.id as subsection_id, sections.name, sub_sections.name as subsection_name, sub_sections.description as subsection_desc",
                        :joins => "left outer join sub_sections on sections.id = sub_sections.section_id",
                        :order =>"sections.id ASC")
 	  #@sections = Section.all(:order=>"id ASC")
@@ -43,24 +43,25 @@ class Admin::SectionController < ApplicationController
         end 
     end
 
-    def edit_section
-      @section = Section.find_by_id(params[:id])
-    end  
+    # def edit_section
+    #   @section = Section.find_by_id(params[:id])
+    #   logger.debug "@section.inspect"
+    # end  
 
     def edit_subsection
       @subsection = SubSection.find_by_id(params[:id])
     end  
 
-    def update
-      @section = Section.find_by_id(params[:id])
-      if @section.update_attributes(params[:section])
-         flash[:success] = "Section updated successfully"
-         redirect_to admin_sections_url
-      else
-        flash[:error] = "Section could not be updated"
-         render :edit
-      end 
-    end
+    # def update_section
+    #   @section = Section.find_by_id(params[:id])
+    #   if @section.update_attributes(params[:section])
+    #      flash[:success] = "Section updated successfully"
+    #      redirect_to admin_sections_url
+    #   else
+    #     flash[:error] = "Section could not be updated"
+    #      render :edit
+    #   end 
+    # end
 
     def update_subsection
       @subsection = SubSection.find_by_id(params[:id])
@@ -73,6 +74,29 @@ class Admin::SectionController < ApplicationController
       end 
     end  
 
+    # def destroy_section
+    #   @section = Section.find_by_id(params[:id])
+    #    if @section.destroy
+    #   flash[:success] = "Section Created successfully"         
+    # else
+    #   flash[:success] = "Section not Created successfully"          
+    # end   
+    #  redirect_to :action => 'index' 
+    # end
+
+    def destroy_subsection
+      @subsection = SubSection.find_by_id(params[:id])
+       if @subsection.destroy
+      flash[:success] = "SubSection Created successfully"         
+    else
+      flash[:success] = "SubSection not Created successfully"          
+    end   
+     redirect_to :action => 'index' 
+    end
+
+
 	  def reports_index
   	end	
+
+
 end

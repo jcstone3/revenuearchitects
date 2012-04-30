@@ -21,18 +21,25 @@
                                   <table cellpadding="1" cellspacing="1" id="user_table" class="report-body dataTable2"> 
                                   <thead>
                                     <tr>
+                                      
                                       <th><h3>Name</h3></th>
                                       <th><h3>Subsection Name</h3></th>
                                       <th><h3>Description</h3></th>
+                                      <th><h3>Actions</h3></th>
                                                                          
                                     </tr>
                                   </thead>
                                   <tbody>
+                                    <%#= @sections.inspect%>
                                     <% @sections.each do |section| %>
                                         <tr>
+                                           
                                             <td><%= section.name %></td>
-                                            <td><%= section.subsection_name %></td>           
-                                            <td><%= truncate(section.subsection_desc, :length=>140) %></td>               
+                                            <td><%= section.subsection_name %></td> 
+                                            <td><%= truncate(section.subsection_desc, :length=>140) %></td>  
+                                            <td><%= link_to 'Edit Subsection', admin_edit_subsection_url(section.subsection_id) if section.subsection_id.present?%>/
+                                              <%= link_to 'Delete Subsection', admin_delete_subsection_url(section.subsection_id), :confirm => 'Are you sure?' %>
+                                            </td>             
                                         </tr>
                                     <% end %>
                                     </tbody>        
