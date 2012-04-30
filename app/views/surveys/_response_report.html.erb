@@ -11,7 +11,7 @@
                   get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
                 <td><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
                  </td> 
-                <td><%= response.answer_3 %></td> 
+                <td><%= response.answer_3.try(:titleize) %></td> 
                 </tr>
 
 

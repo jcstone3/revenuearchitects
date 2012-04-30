@@ -36,7 +36,7 @@
                                 </div>
                                 
                                 <div class="tabGraph">
-                                    <div class="box">
+                                   
                                       <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2"> 
                                         <%= render :partial=>"/surveys/table_header"%>
                                         <% @must_do_responses.each do |response|%>
@@ -44,7 +44,7 @@
                                           :locals=> {:response =>response} %> 
                                         <%end%>
                                        <%= render :partial=>"/surveys/table_end"%>
-                                    </div>
+                                    
                                 </div>
                            </div>
                  
