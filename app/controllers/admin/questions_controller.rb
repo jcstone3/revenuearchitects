@@ -20,19 +20,19 @@ class Admin::QuestionsController < ApplicationController
 	def create		
 		@question = Question.new(params[:question])		
         if @question.save
-          #find the section for the subsection to increase the count of the 
-          #the questions added to that section          
-          @section = Section.find(:all, :joins=>"sub_sections on sections.id = sub_sections.section_id and sub_sections.id = @question.sub_section_id")
-          @section_question_count = @section.question_count += 1
-          @section_total_points = @section.total_points + @question.points
-
-          if @section.update_attributes(:question_count => @section_question_count ,:total_points => @section_total_points)
+         #find the section for the subsection to increase the count of the 
+         #the questions added to that section          
+         @section = Section.find_by_sql("select * from sections inner join sub_sections on sections.id = sub_sections.section_id and sub_sections.id = #{@question.sub_section_id}")
+         @section_question_count = @section.first.question_count += 1
+         @section_total_points = @section.first.total_points + @question.points
+        
+         if @section.first.update_attributes(:question_count => @section_question_count ,:total_points => @section_total_points)
           flash[:success] = "Question Created successfully"
-          redirect_to :action => 'index'
-          else
-            flash[:success] = "Question could not successfully"
-            redirect_to :action => 'index'
-          end  
+         redirect_to :action => 'index'
+         else
+           flash[:success] = "Question could not successfully"
+           redirect_to :action => 'index'
+         end  
         else
           flash[:error] = "Question could not be created"
          render :index

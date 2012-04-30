@@ -5,9 +5,9 @@ class Question < ActiveRecord::Base
 
 
   #Validations
-	validates :name, :on=>:update, :presence =>{:message=>"Question can't be blank"}
-	validates :description, :on=>:update,:presence =>{:message=>"Description can't be blank"}
-	validates :sub_section_id, :on=>:update, :presence =>{:message=>"Section can't be blank"}
+	validates :name, :presence =>{:message=>"Question can't be blank"}
+	validates :description, :presence =>{:message=>"Description can't be blank"}
+	validates :sub_section_id, :presence =>{:message=>"Section can't be blank"}
 
 #Scopes
  # default_scope :order => :sequence  
