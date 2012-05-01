@@ -73,9 +73,9 @@ class Admin::QuestionsController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     if @question.destroy
-      flash[:success] = "Question Created successfully"         
+      flash[:success] = "Question Deleted successfully"         
     else
-      flash[:success] = "Question Created successfully"          
+      flash[:success] = "Question couldn't be deleted"          
     end   
      redirect_to :action => 'index'   
   end

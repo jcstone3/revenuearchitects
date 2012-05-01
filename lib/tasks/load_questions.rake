@@ -76,23 +76,15 @@ open("#{Rails.root}/db/questions.csv") do |questions|
     end
  end
 
-@section = Section.find(1)
-@section.update_attributes(:question_count=>30, :total_points=>100, :sequence => 1) 
-@section = Section.find(2)
-@section.update_attributes(:question_count=>40, :total_points=>100, :sequence => 2)
-@section = Section.find(3)
-@section.update_attributes(:question_count=>30, :total_points=>100, :sequence => 3)
+#update the sections total points and question counts for each section
+@questions = Question.find(:all, :select => "sum(questions.points) as question_points, count(*) as question_count, sections.name", :joins => "left join sub_sections on questions.sub_section_id = sub_sections.id inner join sections on sections.id = sub_sections.section_id", :group => "sections.name")
+@sections.each_with_index do |section, i|
+    section.update_attributes(:total_points=> @questions[i].question_points, :question_count=>@questions[i].question_count, :sequence => i+1)
+end 
  
 end
 
-#update question count and points in sections table
 
-# @sections = Section.find :all
-
-# @sections.each do |section|
-
-
-# end
 
 	
 end
