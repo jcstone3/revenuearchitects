@@ -21,6 +21,7 @@
                                   <table cellpadding="1" cellspacing="1" id="user_table" class="report-body dataTable2"> 
                                   <thead>
                                     <tr>
+                                      <th><h3>#</h3></th>
                                       <th><h3>Name</h3></th>
                                       <th><h3>Description</h3></th>
                                       <th><h3>Section :: SubSection</h3></th>
@@ -33,6 +34,7 @@
                                   <tbody>
                                     <% @questions.each do |question| %>
                                         <tr>
+                                            <td><%= question.id %></td>
                                             <td><%= question.name %></td>
                                             <td><%= question.description %></td>
                                            
