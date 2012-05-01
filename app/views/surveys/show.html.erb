@@ -2,10 +2,10 @@
     <div class="content">
 
         <% if @current_surveys.present?%>
-           <h1 class="question"> Existing Surveys </h1>
+           <h1 class="question"> Diagnostic Surveys </h1>
            <p>Please select a survey to continue </p>
               <% @current_surveys.each do |current_survey|%>
-                  <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Survey for #{current_survey.created_at.strftime('%B  %Y')}", get_response_status_url(current_survey)%></h3>                           
+                  <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{current_survey.created_at.strftime('%B  %Y')}", get_response_status_url(current_survey)%></h3>                           
 
                 <% @response_count= current_survey.responses.present? ? current_survey.responses.count : 0 %>
                 
@@ -20,15 +20,15 @@
 
        <%end%>
 
-      <h1 class="question">Previous Surveys</h1>
+      <h1 class="question">Previous Diagnostics</h1>
 
     
             <% if @completed_surveys.present?%>                     
                <% @completed_surveys.each_with_index do |completed_survey, i|%>
-                  <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Survey for #{completed_survey.created_at.strftime('%B  %Y')}", reports_path(completed_survey)%></h3>                          
+                  <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{completed_survey.created_at.strftime('%B  %Y')}", reports_path(completed_survey)%></h3>                          
 
                     <% @response_count= completed_survey.responses.present? ? completed_survey.responses.count : 0 %>        
-                    <h4> <%= "Total Completed Questions" %> <span class="green"> <%= "  #{@response_count}/100" %> </span>  </h4>
+                    <h4> <%= "Total Completed Questions" %> <span class="green"> <%= "  #{@response_count}"%>/<%= "#{@total_questions}" %> </span>  </h4>
                   </br>
 
                   <%end%>

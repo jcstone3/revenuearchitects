@@ -17,8 +17,12 @@ class Admin::QuestionsController < ApplicationController
 	    @subsection = SubSection.find(:all, :order=>"id ASC")
     end	
 
-	def create		
-		@question = Question.new(params[:question])		
+	def create	
+    @last_question = Question.last
+    @sequence = @last_question.sequence+1
+    params[:question].merge!(:sequence => @sequence)	
+		@question = Question.new(params[:question])	
+
         if @question.save
          #find the section for the subsection to increase the count of the 
          #the questions added to that section          
