@@ -7,7 +7,12 @@ class FeedbackController < ApplicationController
 
   def create
     @feedback = Feedback.new(params[:feedback])
+    logger.info "#{@feedback}"
     if @feedback.valid?
+      logger.info "in feedback valid"
+      
+      if @feedback.save
+        logger.info "in feedback save"
       FeedbackMailer.feedback(@feedback).deliver
       render :status => :created, :text => '<h3>Thank you for your feedback!</h3>'
     else
@@ -19,5 +24,8 @@ class FeedbackController < ApplicationController
       # without worrying about the javascript.
       render :action => 'new', :status => :unprocessable_entity
     end
+    else
+       render :action => 'new'
+    end  
   end
 end

@@ -2,7 +2,7 @@
 <h1 class="question"> Feedback </h1>
 <p class="question">Please leave us feedback, it's really appreciated.</p>
 
-<%= simple_form_for @feedback, :as => :feedback, :url => feedback_index_path, :html => { :id => "feedback_form" } do |f| -%>
+<%= simple_form_for @feedback, :as => :feedback, :url =>  create_feedback_path, :html => { :id => "feedback_form" } do |f| -%>
   <%= f.hidden_field 'page' %>
   <% unless @error_message.blank? %>
   <p class="error">

@@ -20,13 +20,13 @@ RevenueGrader::Application.routes.draw do
    get '/section/new' => "section#new", :as => "new_section"
    get '/subsection/new' => "section#subsection_new", :as => "new_subsection"
    post '/section/create' => "section#create", :as => "create_section"
-   post '/subsection/create' => "section#create_subsection", :as => "create_subsection"
-   #get  '/section/edit/:id' => "section#edit_section", :as => "edit_section"
+   post '/subsection/create' => "section#create_subsection", :as => "create_subsection"   
    get  '/subsection/edit/:id' => "section#edit_subsection", :as => "edit_subsection"
    get '/subsection/delete/:id' => "section#destroy_subsection", :as => "delete_subsection"
    post '/subsection/update' => "section#update_subsection", :as => "update_subsection"
    get '/settings' => "settings#index", :as => "settings"   
    get '/reports' => "section#reports_index", :as => "reports"
+   get '/feedbacks' => "feedbacks#feed_index", :as =>"feedbacks"
    root :to =>  "dashboard#index"
    resources :users
 
@@ -54,13 +54,10 @@ RevenueGrader::Application.routes.draw do
   resources :industries
   resources :responses
 
-  get 'surveys/:id/question/:question_id' => 'surveys#question', :as => 'questions' 
-  #get 'surveys/:id/previous-question/:question_id' => 'surveys#previous_question', :as => 'previous_question' 
+  get 'surveys/:id/question/:question_id' => 'surveys#question', :as => 'questions'  
   get 'surveys/:id/report/' => 'surveys#report', :as => 'reports'
-  
   post 'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
   put 'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
-
   post 'surveys/:id/update-question/:question_id' => 'surveys#update_response', :as=> 'reponses_update'
   get 'surveys/:id/download' => 'surveys#download_result', :as=>'download'
   get 'surveys/:id/reports' => 'surveys#reports', :as=>'reports_show'
@@ -73,7 +70,8 @@ RevenueGrader::Application.routes.draw do
   get 'surveys/:id/compare-strategy' => 'surveys#compare_strategy', :as=>'compare_strategy'
   get 'surveys/:id/compare-system' => 'surveys#compare_system', :as=>'compare_system'
   get 'surveys/:id/compare-programs' => 'surveys#compare_programs', :as=>'compare_programs'
-
+  post 'feedback/create' => 'feedback#create', :as=>'create_feedback'
+  
   #site controller maps about us, contact us privacy policy
   match "about-us" =>'site#aboutus', :as => 'aboutus'
   match "contact-us" =>'site#contactus', :as => 'contactus'

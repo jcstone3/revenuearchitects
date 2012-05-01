@@ -1,7 +1,7 @@
 class FeedbackMailer < ActionMailer::Base
-  #default from: "from@example.com"
+  
   def feedback(feedback)
-    recipients  = 'admin@revenuegrader.com'
+    recipients  = 'srinivas.elluri@icicletech.com'
     subject     = "[Feedback for YourSite] #{feedback.subject}"
     from 		= "#{feedback.email}"
     @feedback = feedback

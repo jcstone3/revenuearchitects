@@ -1,0 +1,55 @@
+<div class="container left">
+			<div class="row-fluid">
+				<div class="span12">
+					        <ul class="nav2 nav2-tabs2">
+                                <li><%= link_to 'Questions', admin_questions_url%></a></li>
+                                <li ><%=link_to 'Sections', admin_sections_url%>
+                                </li>
+                                <li><%= link_to 'Users', admin_users_url%></li>
+                                <li class="active"><%= link_to 'Feedback', admin_feedback_url%></li>
+                                <li><%= link_to 'Dashboard', admin_root_url %></li>
+
+                            </ul>
+                             
+                            <div class="tab-content2 dash">
+                            <div class="tab-pane active" id="dashboard" >
+								<div class="tabHead">
+                                	<h1>Sections</h1>
+                                    
+                                </div>
+                                
+                                <div class="tabGraph">
+                                     <div id="box">
+                                  <table cellpadding="1" cellspacing="1" id="user_table" class="report-body dataTable2"> 
+                                  <thead>
+                                    <tr>
+                                      <th><h3>#</h3><th>
+                                      <th><h3>Subject</h3></th>
+                                      <th><h3>Email</h3></th>
+                                      <th><h3>Comment</h3></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <%#= @sections.inspect%>
+                                    <% @feedbacks.each do |feedback| %>
+                                        <tr>
+                                           
+                                            <td><%= feedback.name %></td>
+                                            <td><%= feedback.email %></td> 
+                                            <td><%= feedback.comment %></td> 
+                                        </tr>
+                                    <% end %>
+                                    </tbody>        
+                                </table>
+                                    
+                                   
+                                </div>
+                                
+                                </div>
+
+                            </div>
+
+                            </div>
+				</div>
+			</div>
+		</div> 

@@ -462,7 +462,7 @@ end
 #to download in pdf/xls format
 def download_result
   require 'rubygems'
-  require 'google_chart'
+  #require 'google_chart'
   require 'spreadsheet'  
   
   @sections = Section.find(:all, :order=>'id ASC') 

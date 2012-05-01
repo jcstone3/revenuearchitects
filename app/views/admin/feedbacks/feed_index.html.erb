@@ -1,0 +1,38 @@
+<div class="container left">
+            <div class="row-fluid">
+                <div class="span12">
+                            <ul class="nav2 nav2-tabs2">
+                                <li class="active"><%= link_to 'Feedback'%></a></li>
+                                <li><%=link_to 'Questions', admin_questions_url%>
+                                </li>
+                                <li><%=link_to 'Sections', admin_sections_url%>
+                                </li>
+                                <li><%= link_to 'Users', admin_users_url%></li>
+                                <li><%= link_to 'Dashboard', admin_root_url %></li>
+                            </ul>
+                             
+                            <div class="tab-content2 dash">
+                            <div class="tab-pane active" id="dashboard" >
+                                <div class="tabHead">
+                                        <h1>Feedbacks</h1>
+                                </div>
+                                
+                                <div class="tabGraph">
+                                     <div id="box">
+
+                                      <%= render :partial =>'list_feed'%>
+                                  
+                                <br />
+                                
+                                </div>
+                                </div>
+                            </div>                                    
+                                        
+                                        
+                                    
+                                </div>
+                            </div>
+                           
+                </div>
+            </div>
+        </div> 
