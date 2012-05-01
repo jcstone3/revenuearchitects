@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :presence => true, :message  => "Password can't be blank"
   validates_length_of :password,  :within => 4..30, :message => "Password should be greater than 4 and less than 30"
   validates_presence_of :email, :message => "Email can't be blank"
-  validates_uniqueness_of :email,     :case_sensitive => false, :allow_blank => true, :if => :email_changed?, :message=> "Email address already taken"
+  validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true, :if => :email_changed?, :message=> "Email address already taken"
   validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?, :message => "Invalid email address"
  
   

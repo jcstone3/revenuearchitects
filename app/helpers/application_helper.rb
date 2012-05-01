@@ -16,5 +16,4 @@ module ApplicationHelper
     select_without_client_side_validations(method, choices, options, html_options)
   end
 
-
 end
