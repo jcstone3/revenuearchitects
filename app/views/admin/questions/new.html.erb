@@ -2,6 +2,7 @@
     <div class="row-fluid">
         <div class="span12">
           <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;">
+              <li><%=link_to 'Feedbacks', admin_feedbacks_url %></li>
               <li class="active"><%= link_to 'Questions'%></a></li>
               <li><%=link_to 'Sections', admin_sections_url%>
               </li>
@@ -13,10 +14,11 @@
             <div class="tab-pane active" id="dashboard" >
               <div class="tabHead">
                 <h1>Questions--Questions for the Survey</h1>
+                 <h3>Add New Question</h3>
               </div>
                 
               <div class="content">
-                <h1 class="question">Add New Question</h1>
+               
                 <%= simple_form_for(@question, :url=>{:action => :create},  :validate => true, :class => "well") do |f| %>
                         <br/>
                         <%= f.input :name, :as =>:text,
@@ -27,8 +29,9 @@
                         
                         <%= f.input :description, :as =>:text,
                                     :label => "Description",
-                                    :placeholder=>"Type description for question here...",   
-                                    :input_html => { :class => 'input-xlarge textarea1' }, 
+                                    :placeholder=>"Type description for question here..."  , 
+                                    :as => :text,
+                                    :input_html => {:class => 'input-xxlarge' , :cols => 50, :rows => 3 }, 
                                     :label_html => { :class => '' } -%> 
 
                         <%= f.input :sub_section_id, 
@@ -39,7 +42,7 @@
                                       :label_html => { :class => '' }    -%>  
 
                         <%= f.input :points, 
-                                      :collection => [['5'],['10'],['15']], 
+                                      :collection => [['5'],['10'],['15'],['20']], 
                                       :prompt => "Select Points",  
                                       :label => "Points",  
                                       :input_html => { :class => 'input-xlarge' },

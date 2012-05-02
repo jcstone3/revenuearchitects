@@ -2,6 +2,7 @@
   <div class="row-fluid">
     <div class="span12">
       <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;"> 
+        <li><%=link_to 'Feedbacks', admin_feedbacks_url %></li>
         <li><%= link_to 'Questions', admin_questions_url%></a></li>
         <li class="active"><%=link_to 'Sections', admin_sections_url%>
         </li>
@@ -13,9 +14,10 @@
         <div class="tab-pane active" id="dashboard" >
           <div class="tabHead">
             <h1>Sub Section</h1>
+            <h3> Add New Sub Section </h3>
           </div>
           <div class="content">
-            <h1 class="question">Add New Subsection</h1>
+            
              <%= simple_form_for(@subsection, :url=> admin_create_subsection_url,  :validate => true) do |f| %>
 
               <br/>
@@ -26,8 +28,9 @@
               :label_html => { :class => '' } -%> 
 
               <%= f.input :description,
-              :label => "Description",
-              :input_html => { :class => 'input-xlarge' }, 
+              :label => "Description", 
+              :as => :text,
+              :input_html => {:class => 'input-xxlarge' , :cols => 50, :rows => 3 }, 
               :label_html => { :class => '' } -%> 
 
               <%= f.input :section_id, 
