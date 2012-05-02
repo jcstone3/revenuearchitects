@@ -1,52 +1,49 @@
 <div class="container" style="margin-top:20px;">
-      <div class="row-fluid">
-        <div class="span12">
-                  <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;"> 
-                                <li><%= link_to 'Questions', admin_questions_url%></a></li>
-                                <li class="active"><%=link_to 'Sections', admin_sections_url%>
-                                </li>
-                                <li><%= link_to 'Users', admin_users_url%></li>
-                                 <li><%= link_to 'Dashboard', admin_root_url %></li>
-                            </ul>
+  <div class="row-fluid">
+    <div class="span12">
+      <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;"> 
+        <li><%= link_to 'Questions', admin_questions_url%></a></li>
+        <li class="active"><%=link_to 'Sections', admin_sections_url%>
+        </li>
+        <li><%= link_to 'Users', admin_users_url%></li>
+         <li><%= link_to 'Dashboard', admin_root_url %></li>
+      </ul>
                              
-                            <div class="tab-content2"style="padding-top:0px">
-                            <div class="tab-pane active" id="dashboard" >
-                <div class="tabHead">
-                                  <h1>Sub Section</h1>
-                                    
-                                </div>
-                                
-                                <div class="tabGraph">
-                                     <div id="box">
-                                     <div class="quesMain">
-                                            <div class="addQuesHead">
-                                                <h1>Add New SubSection</h1>
-                                            </div>
-                                            <div class="rightboxName">
-                                                <%= form_for @subsection, :url=> admin_create_subsection_url, :validate=>true do |f|%>
-                                            <h3>Name<span class="star">*</span></h3>
-                                           <%= f.text_field :name%>
-                                           <h3>Description</h3>
-                                           <%= f.text_field :description%>
-                                           <h3>Section</h3>
-                                           <%= select_tag(:section_id, options_for_select(@sections.collect{|x| [x.name,x.id]}))%><br/>
-                                            <%= f.submit 'Add SubSection', :class=>"btn btn-primary"%>
-                                             <span>  <%= link_to "Back", admin_sections_url  , :class=>"btn btn-primary" %></span> 
-                                            </div>                                             
-                                                           
-                                            </div>
-                                            <%end%>
- 
+      <div class="tab-content2"style="padding-top:0px">
+        <div class="tab-pane active" id="dashboard" >
+          <div class="tabHead">
+            <h1>Sub Section</h1>
+          </div>
+          <div class="content">
+            <h1 class="question">Add New Subsection</h1>
+             <%= simple_form_for(@subsection, :url=> admin_create_subsection_url,  :validate => true) do |f| %>
 
-                                </div>
-                                </div>
-                            </div>
-<!--                             <div class="tab-pane" id="users" >Users</div>
-                            <div class="tab-pane" id="reports" >Reports</div>
-                            <div class="tab-pane" id="sections" >Sections</div>
-                            <div class="tab-pane" id="questions" >Questions</div>
-                            <div class="tab-pane" id="settings" >Settings</div> -->
-                            </div>
+              <br/>
+
+              <%= f.input :name,
+              :label => "Name",
+              :input_html => { :class => 'input-xlarge' }, 
+              :label_html => { :class => '' } -%> 
+
+              <%= f.input :description,
+              :label => "Description",
+              :input_html => { :class => 'input-xlarge' }, 
+              :label_html => { :class => '' } -%> 
+
+              <%= f.input :section_id, 
+                :collection => @sections,
+                :prompt => "Select Section",  
+                :label => "Section",  
+                :input_html => { :class => 'input-xlarge' },
+                :label_html => { :class => '' }    -%> 
+                
+              <%= f.button :submit, "Add SubSection", :class => 'btn-primary' %>     
+              <%= link_to "Cancel", admin_sections_url  , :class=>"btn btn-primary" %>
+                                                                 
+              <%end%>
+            </div>
+          </div>
         </div>
       </div>
-    </div> 
+    </div>
+  </div> 

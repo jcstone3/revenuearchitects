@@ -1,52 +1,52 @@
-<div class="container left">
-			<div class="row-fluid">
-				<div class="span12">
-					        <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;">
-                                <li><%= link_to 'Questions', admin_questions_url%></a></li>
-                                <li class="active"><%=link_to 'Sections', admin_sections_url%>
-                                </li>
-                                <li><%= link_to 'Users', admin_users_url%></li>
-                                 <li><%= link_to 'Dashboard', admin_root_url %></li>
-                            </ul>
+<div class="container" style="margin-top:20px;">
+  <div class="row-fluid">
+    <div class="span12">
+      <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;"> 
+        <li><%= link_to 'Questions', admin_questions_url%></a></li>
+        <li class="active"><%=link_to 'Sections', admin_sections_url%>
+        </li>
+        <li><%= link_to 'Users', admin_users_url%></li>
+         <li><%= link_to 'Dashboard', admin_root_url %></li>
+      </ul>
                              
-                            <div class="tab-content2"style="padding-top:0px">
-                            <div class="tab-pane active" id="dashboard" >
-								<div class="tabHead">
-                                	<h1>Section</h1>
-                                    
-                                </div>
-                                
-                                <div class="tabGraph">
-                                     <div id="box">
-                                     <div class="quesMain">
-                                            <div class="addQuesHead">
-                                                <h1>Add New Section</h1>
-                                            </div>
-                                            <div class="rightboxName">
-                                                <%= form_for @section, :url=>{:action =>:create}, :validate=>true do |f|%>
-                                            <h3>Name<span class="star">*</span></h3>
-                                           <%= f.text_field :name%>
-                                            <p>
-                                             <%= f.hidden_field :total_points, :value=> 0%>
-                                             <%= f.hidden_field :question_count, :value=> 0%>
-                                             <%= f.hidden_field :questionnaire_id, :value=> 1%>
-                                             </p>
-                                             <%= f.submit 'Add Section', :class=>"btn btn-primary"%>
-                                                           
-                                            </div>
-                                            <%end%>
-                                             <p class="btn-admin">  <%= link_to "Back", admin_sections_url, :class=>"btn btn-primary" %></p> 
-                                            </div>  
+      <div class="tab-content2"style="padding-top:0px">
+        <div class="tab-pane active" id="dashboard" >
+          <div class="tabHead">
+            <h1>Sub Section</h1>
+          </div>
+          <div class="content">
+            <h1 class="question">Add New Section</h1>
+             <%= simple_form_for(@section, :url=>{:action =>:create}, :validate => true, :class => "well") do |f| %>
 
-                                </div>
-                                </div>
-                            </div>
-<!--                             <div class="tab-pane" id="users" >Users</div>
-                            <div class="tab-pane" id="reports" >Reports</div>
-                            <div class="tab-pane" id="sections" >Sections</div>
-                            <div class="tab-pane" id="questions" >Questions</div>
-                            <div class="tab-pane" id="settings" >Settings</div>-->
-                            </div>
-				</div>
-			</div>
-		</div> 
+              <br/>
+
+              <%= f.input :name,
+                          :label => "Name",
+                          :input_html => { :class => 'input-xlarge' }, 
+                          :label_html => { :class => '' } -%> 
+
+              <%= f.hidden_field :total_points, :value=> 0%>
+              <%= f.hidden_field :question_count, :value=> 0%>
+              <%= f.hidden_field :questionnaire_id, :value=> 1%>
+
+              <%= f.button :submit, "Add Section", :class => 'btn-primary' %>
+              <%= link_to "Cancel", admin_sections_url, :class=>"btn btn-primary" %>
+                                                                 
+              <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+
+
+
+
+
+
+
+
+
+
