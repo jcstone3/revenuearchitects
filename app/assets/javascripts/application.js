@@ -427,6 +427,26 @@ $(document).ready(function(){
             "bAutoWidth": true
         } );
 
+       $('#report_not_applicableTable').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } );
+
+       $('#report_in_planTable').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } );
+
+
+
        //---end -- for --- report page table---//
       // -- admin user table id --- //
       $('#user_table').dataTable( {
