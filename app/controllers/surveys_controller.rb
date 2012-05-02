@@ -455,8 +455,41 @@ end
 end  
 
   def reports
-   @sections = Section.find(:all) 
-  @survey = Survey.find(params[:id])
+    survey_id = params[:id]
+
+  #scoping the survey
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+
+  if @survey.blank?
+     flash[:notice] = "No such survey exists"
+     redirect_to new_survey_path and return 
+   else
+    #for sections navigation tabs
+    @all_sections = get_all_sections
+
+    #if the user is authorized for the survey then get details of add to plan responses
+     @add_to_plan_responses = Response.get_response_for_options(@survey.id, "add_to_plan")
+    #for must do responses
+     @must_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'must_do'}
+    #for should do responses
+     @should_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'should_do'}
+    #for could do responses
+     @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
+    #if the user is authorized for the survey then get details of not applicable responses
+     @not_applicable_responses = Response.get_response_for_options(@survey.id, "not_applicable")
+    #if the user is authorized for the survey then get details of in plan responses
+     @in_plan_responses = Response.get_response_for_options(@survey.id, "in_plan")
+     
+     @survey = Survey.find_by_id(survey_id)
+    @data_table = Survey.get_overall_graph(survey_id)
+    
+     option = { width: 1000, height: 400, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+        @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
+end
+    
+    render :layout =>"report"
+ 
+  
   end   
 
 #to download in pdf/xls format
@@ -471,7 +504,7 @@ def download_result
       format.html{}
        format.pdf {
         html = render_to_string(:layout => false , :action => "reports.html")
-        kit = PDFKit.new(html)    
+        kit = PDFKit.new(html, :page_size => 'Letter', :footer_html => "#{path_to_a_footer_html_file}")    
         kit.stylesheets << Rails.root.join("app/assets/stylesheets/jquery.dataTables.css") 
         kit.stylesheets << Rails.root.join("app/assets/stylesheets/application.css")   
         send_data(kit.to_pdf, :filename => "survey.pdf", :type => 'application/pdf')
@@ -498,6 +531,7 @@ def download_result
         send_data blob.string, :type =>:xls, :filename =>"result.xls"#; &quot;client_list.xls&quot;
       } 
   end    
+  
 end
 
 

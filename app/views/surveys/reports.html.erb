@@ -10,95 +10,162 @@
         </head> 
        
         <!-- Le styles -->
-<%#= content_for :main_content do%>
+<%= content_for :main_content do%>
        <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
         <%= render :partial=>"reports_css"%>
         <div class="content" style="page-break-after:always;">
             <h1>Revenue Grader</h1>
+            <img src="/assets/logo.png" alt="logo">
+            <h1> <%= "#{current_user.companies.first.name}"%></h1></br>
+             <h1><%= @survey.created_at.strftime("%B  %Y")%></h1>
             <h1>Report 2012</h1>
-            <h1>For Test-Company</h1>
-        </div>
-
-        <div class="content" style="page-break-after:always;">
             
-            <h1>Diagnostic Details</h1>
-            <h2>Industry</h2>
-            <h2>Size</h2>
-            <h2>Revenue</h2>
-
         </div>
 
         <div class="content" style="page-break-after:always;">
-           <h1 class="position_header">Overall Graph</h1>
-         </div>  
+            <div class="content2">
+            <h2> <%= "#{current_user.companies.first.name}"%></h2>
+            <h3><%= @survey.created_at.strftime("%B  %Y")%></h3>
+            </div>
+            <h1>Diagnostic Details</h1>
+            <h2>Industry :: <%#= "#{current_user.companies.first.}"%></h2>
+             <h2>Size ::<%#= "#{current_user.surveys.first.size}"%></h2>
+            <h2>Revenue :: <%#= "#{current_user.surveys.first.revenue}"%></h2>
+            <div class="footer">
+              <img src="/assets/logo.png" alt="logo">  
+            </div>
+        </div>
+
+        
          <div class="content" style="page-break-after:always;">
+            <h2> <%= "#{current_user.companies.first.name}"%></h2>
           <div class="graph">
             <h1>Overall Diagnostic</h1>
-            <img src="<%= get_overallgraph(params[:id]) %>">
-             
+                      <div id='chart'></div>
+                      <%= render_chart(@chart, 'chart') %>
           </div>
-        <!-- </div>
-        <%#@sections.each do |section| %>
-        <div class="content" style="page-break-after:always;">
-             <h1 class="position_header"><%= section.name.try(#:capitalize)%></h1>
-        </div>
- -->
-       <!--  <div class="content" style="page-break-after:always;">
-          <div class="graph">
-            <h1><%= section.name.try(#:capitalize)%></h1>
-            <img src = "<%= get_graph(section.id, params[#:id])%>"/>
-              
-          </div>
-          <br/>
-          <div class="textbox">
-             <%# @responses = get_response_result(section.id, params[:id])%>
-             <%#= render :partial=>"report_response_table" %>            
-          </div> 
-        </div>
-        <%#end%>        
+          <div class="footer">
+              <img src="/assets/logo.png" alt="logo">  
+            </div>
+         </div>
 
         <div class="content" style="page-break-after:always;">
-             <h1 class="position_header">Actions</h1>
-        </div>-->
-
-        <div class="content" style="page-break-after:always;">
-             <h1 class="position_header">Must Do</h1>
-        </div> 
-        <div class="content" style="page-break-after:always;">
+            <div class="content2">
+            <h2> <%= "#{current_user.companies.first.name}"%></h2>
+            <h3><%= @survey.created_at.strftime("%B  %Y")%></h3>
+            </div>
              <h1>Must Do</h1>
              <div class="textbox">
-             <% @responses = get_response_result_actions(params[:id], "must_do")%>
-             <%= render :partial=>"report_response_table" %>            
+              <table cellpadding="1" cellspacing="1" 
+                      id="report_add_to_planTable" class="report-body dataTable2">   
+                       <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2"> 
+                            <%= render :partial=>"table_header"%>
+                            <% @must_do_responses.each do |response|%>
+                              <%= render :partial=>"response_report", 
+                              :locals=> {:response =>response} %> 
+                            <%end%>
+                           <%= render :partial=>"table_end"%>
+                    </div>        
+            </div>
+            <div class="footer">
+              <img src="/assets/logo.png" alt="logo">  
             </div> 
         </div>  
+       
         <div class="content" style="page-break-after:always;">
-             <h1 class="position_header">Should Do</h1>
-        </div>
-        <div class="content" style="page-break-after:always;">
+         <div class="content2">
+            <h2> <%= "#{current_user.companies.first.name}"%></h2>
+            <h3><%= @survey.created_at.strftime("%B  %Y")%></h3>
+            </div>
              <h1>Should Do</h1>
              <div class="textbox">
-             <% @responses = get_response_result_actions(params[:id], "should_do")%>
-             <%= render :partial=>"report_response_table" %>            
+             <table cellpadding="1" cellspacing="1" id="report_should_doTable" class="report-body dataTable2"> 
+               <%= render :partial=>"table_header"%>
+                <% @should_do_responses.each do |response|%>
+                  <%= render :partial=>"response_report", 
+                  :locals=> {:response =>response} %> 
+                <%end%>
+               <%= render :partial=>"table_end"%>           
             </div> 
+            <div class="footer">
+              <img src="/assets/logo.png" alt="logo">  
+            </div>
         </div>  
 
+       
         <div class="content" style="page-break-after:always;">
-             <h1 class="position_header">Could Do</h1>
-        </div>
-        <div class="content" style="page-break-after:always;">
+            <div class="content2">
+            <h2> <%= "#{current_user.companies.first.name}"%></h2>
+            <h3><%= @survey.created_at.strftime("%B  %Y")%></h3>
+            </div>
              <h1>Could Do</h1>
              <div class="textbox">
-             <% @responses = get_response_result_actions(params[:id], "could_do")%>
-             <%= render :partial=>"report_response_table" %>            
+             <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
+                    <%= render :partial=>"table_header"%>
+                    <% @could_do_responses.each do |response|%>
+                      <%= render :partial=>"response_report", 
+                      :locals=> {:response =>response} %> 
+                    <%end%>
+                   <%= render :partial=>"table_end"%>            
             </div> 
+            <div class="footer">
+              <img src="/assets/logo.png" alt="logo">  
+            </div>
         </div> 
+
         <div class="content" style="page-break-after:always;">
+            <div class="content2">
+            <h2> <%= "#{current_user.companies.first.name}"%></h2>
+            <h3><%= @survey.created_at.strftime("%B  %Y")%></h3>
+            </div>
+             <h1>Items not applicable to your company</h1>
+             <div class="textbox">
+             <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
+                    <%= render :partial=>"table_header"%>
+                    <% @not_applicable_responses.each do |response|%>
+                      <%= render :partial=>"response_report", 
+                      :locals=> {:response =>response} %> 
+                    <%end%>
+                   <%= render :partial=>"table_end"%>            
+            </div> 
+            <div class="footer">
+              <img src="/assets/logo.png" alt="logo">  
+            </div>
+        </div> 
+
+        <div class="content" style="page-break-after:always;">
+            <div class="content2">
+            <h2> <%= "#{current_user.companies.first.name}"%></h2>
+            <h3><%= @survey.created_at.strftime("%B  %Y")%></h3>            </div>
+             <h1>Items already planned for your company</h1>
+             <div class="textbox">
+             <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
+                    <%= render :partial=>"table_header"%>
+                    <% @in_plan_responses.each do |response|%>
+                      <%= render :partial=>"response_report", 
+                      :locals=> {:response =>response} %> 
+                    <%end%>
+                   <%= render :partial=>"table_end"%>            
+            </div> 
+            <div class="footer">
+              <img src="/assets/logo.png" alt="logo">  
+            </div>
+        </div> 
+
+        <div class="content" style="page-break-after:always;">
+            <div class="content2">
+            <h2> <%= "#{current_user.companies.first.name}"%></h2>
+            <h3><%= @survey.created_at.strftime("%B  %Y")%></h3>
+            </div>
              <h2>About Revenue Grader</h2>
              <p class="aboutrevenue">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Aenean eu erat et velit dapibus bibendum id quis quam.
           Sed quis suscipit tortor.</p>
+          <div class="footer">
+              <img src="/assets/logo.png" alt="logo">  
+            </div>
         </div>
-<%#end%>
+<%end%>
    
     </body>
 </html>
