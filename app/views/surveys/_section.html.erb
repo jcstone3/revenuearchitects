@@ -1,3 +1,9 @@
+                  
+                  <li class="next" >
+                    <%= link_to(continue_survey_url) do%>
+                    <%= image_tag "home.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;
+                          <%end%>
+                  </li>
                   <li class="surveyname">&nbsp;Diagnostic
                        <%= @survey.created_at.strftime("%B  %Y")%>
                   </li>

@@ -5,12 +5,12 @@
                                                   <tr>
                                                     <th><h3>#</h3></th>
                                                     <th><h3>Questions</h3></th>
-                                                    <th><h3>Group</h3></th>
+                                                    <th><h3>Subsection</h3></th>
                                                     <th><h3>Points</h3></th>          
                                                     <th><h3>Score</h3></th>
-                                                    <th><h3>Average Score</h3></th>
-                                                    <th><h3>Calculated Score</h3></th>
-                                                     <th><h3>Average Calculated Score</h3></th>
+                                                    <th><h3>Avg Score</h3></th>
+                                                    <th><h3>Cal Score</h3></th>
+                                                     <th><h3>Avg Cal Score</h3></th>
                                                     <th><h3>In Plan</h3></th>
                                                     <th><h3>Priority</h3></th>        
                                                   </tr>
@@ -33,9 +33,9 @@
                                                 <% if(response.in_plan == "in_our_plan") %>
                                                     <td><%= 'Yes'%></td>
                                                <%else%>
-                                                    <td><%= '-'%></td>
+                                                    <td><%= 'No'%></td>
                                                <%end %>
-                                                <td><%= response.answer_3 %></td> 
+                                                <td><%= response.answer_3.try(:titleize) %></td> 
                                                 </tr>
                                         <% end %>
                                         
@@ -43,4 +43,4 @@
                                           </table>      
  <%else%>
  <p>No Response avaiable for this search</p>
- <%end%>                                         
+ <%end%> 

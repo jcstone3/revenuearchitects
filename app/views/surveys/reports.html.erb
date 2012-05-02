@@ -20,41 +20,50 @@
         </div>
 
         <div class="content" style="page-break-after:always;">
+            
+            <h1>Diagnostic Details</h1>
+            <h2>Industry</h2>
+            <h2>Size</h2>
+            <h2>Revenue</h2>
+
+        </div>
+
+        <div class="content" style="page-break-after:always;">
            <h1 class="position_header">Overall Graph</h1>
          </div>  
          <div class="content" style="page-break-after:always;">
           <div class="graph">
-            <h1>Overall Graph</h1>
+            <h1>Overall Diagnostic</h1>
             <img src="<%= get_overallgraph(params[:id]) %>">
              
           </div>
-        </div>
-        <%@sections.each do |section| %>
+        <!-- </div>
+        <%#@sections.each do |section| %>
         <div class="content" style="page-break-after:always;">
-             <h1 class="position_header"><%= section.name.try(:capitalize)%></h1>
+             <h1 class="position_header"><%= section.name.try(#:capitalize)%></h1>
         </div>
-
-        <div class="content" style="page-break-after:always;">
+ -->
+       <!--  <div class="content" style="page-break-after:always;">
           <div class="graph">
-            <h1><%= section.name.try(:capitalize)%></h1>
-            <img src = "<%= get_graph(section.id, params[:id])%>"/>
+            <h1><%= section.name.try(#:capitalize)%></h1>
+            <img src = "<%= get_graph(section.id, params[#:id])%>"/>
               
           </div>
           <br/>
           <div class="textbox">
-             <% @responses = get_response_result(section.id, params[:id])%>
-             <%= render :partial=>"report_response_table" %>            
+             <%# @responses = get_response_result(section.id, params[:id])%>
+             <%#= render :partial=>"report_response_table" %>            
           </div> 
         </div>
-        <%end%>        
+        <%#end%>        
 
         <div class="content" style="page-break-after:always;">
              <h1 class="position_header">Actions</h1>
-        </div>
+        </div>-->
 
         <div class="content" style="page-break-after:always;">
              <h1 class="position_header">Must Do</h1>
-        </div>
+        </div> 
         <div class="content" style="page-break-after:always;">
              <h1>Must Do</h1>
              <div class="textbox">
