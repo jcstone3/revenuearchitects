@@ -10,7 +10,7 @@
         </head> 
        
         <!-- Le styles -->
-<%#= content_for :main_content do%>
+<%= content_for :main_content do%>
        <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
         <%= render :partial=>"reports_css"%>
         <div class="content1" style="page-break-after:always;">
@@ -25,9 +25,9 @@
             <%= @survey.created_at.strftime("%B  %Y")%></h2>
             </div>
             <h1>Diagnostic Details</h1>
-            <h2>Industry :: <%#= "#{current_user.companies.first.}"%></h2>
-             <h2>Size ::<%#= "#{current_user.surveys.first.size}"%></h2>
-            <h2>Revenue :: <%#= "#{current_user.surveys.first.revenue}"%></h2>
+            <h2>Industry :: <%= "#{@industry.name}"%></h2>
+            <h2>Size ::<%= "#{@survey.size}"%></h2>
+            <h2>Revenue :: <%= "#{@survey.revenue}"%></h2>
             <div class="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
@@ -40,12 +40,14 @@
             <%= @survey.created_at.strftime("%B  %Y")%></h2>
             </div>
             <h1>Overall Diagnostic</h1>
-               <div class="box_compare">                                        
-                <h1>Responses in the current month <strong>March 2012</strong></h1>
+               
+               <div class="tabGraph">
+                                         
+                                        <h1>Responses in the current month <strong>March 2012</strong></h1>
 
-               <div id='chart'></div>
-                <%= render_chart(@chart, 'chart') %>
-            </div>
+                                       <div id='chart'></div>
+                                        <%= render_chart(@chart, 'chart') %>
+                                </div>
             <div class="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
@@ -65,7 +67,7 @@
                       <%= render :partial=>"response_report", 
                       :locals=> {:response =>response} %> 
                     <%end%>
-         <%= render :partial=>"table_end"%>
+                <%= render :partial=>"table_end"%>
                   </div>        
                   <div class="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
@@ -87,7 +89,7 @@
                       <%= render :partial=>"response_report", 
                       :locals=> {:response =>response} %> 
                     <%end%>
-         <%= render :partial=>"table_end"%>               
+                <%= render :partial=>"table_end"%>               
             </div> 
             <div class="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
@@ -103,12 +105,12 @@
              <h1>Could Do</h1>
              <div class="textbox">
             <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
-                   <%= render :partial=>"table_header"%>
-                    <% @could_do_responses.each do |response|%>
-                      <%= render :partial=>"response_report", 
-                      :locals=> {:response =>response} %> 
-                    <%end%>
-         <%= render :partial=>"table_end"%>            
+             <%= render :partial=>"table_header"%>
+              <% @could_do_responses.each do |response|%>
+                <%= render :partial=>"response_report", 
+                :locals=> {:response =>response} %> 
+              <%end%>
+             <%= render :partial=>"table_end"%>            
             </div> 
             <div class="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
@@ -153,6 +155,7 @@
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
         </div> 
+      </div>
 
         <div class="content" style="page-break-after:always;">
             <div class="content2">
@@ -167,7 +170,7 @@
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
         </div>
-<%#end%>
+<%end%>
    
     </body>
 </html>

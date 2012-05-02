@@ -457,7 +457,6 @@ end
   def reports
     @sections = Section.find(:all) 
   @survey = Survey.find(params[:id])
-  
   end   
 
 #to download in pdf/xls format
@@ -468,7 +467,10 @@ def download_result
 
    @sections = Section.find(:all) 
    @survey = current_user.companies.first.surveys.find_by_id(params[:id])
-
+   @industry = Industry.find(:first, :select=>"industries.name",
+               :joins=>"left outer join companies on companies.industry_id = industries.id 
+                       left outer join surveys on companies.id = surveys.company_id and 
+                       surveys.id = #{@survey.id}")
   if @survey.blank?
      flash[:notice] = "No such survey exists"
      redirect_to new_survey_path and return 
@@ -492,7 +494,7 @@ def download_result
      
      @data_table = Survey.get_overall_graph(@survey.id)
     
-     option = { width: 800, height: 400, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+     option = { width: 600, height: 300, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
      @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
       
   end
@@ -501,10 +503,10 @@ def download_result
       format.html {}
        format.pdf {
         html = render_to_string(:layout => false , :action => "reports.html")
-        kit = PDFKit.new(html)    
+        kit = PDFKit.new(html, :page_size => 'Letter')    
         kit.stylesheets << Rails.root.join("app/assets/stylesheets/jquery.dataTables.css") 
         kit.stylesheets << Rails.root.join("app/assets/stylesheets/application.css")   
-        send_data(kit.to_pdf, :filename => "survey.pdf", :type => 'application/pdf')
+        send_data(kit.to_pdf, :filename =>  "#{current_user.companies.first.name}_#{@survey.created_at.strftime('%B %Y')}_diagnostic_#{Time.now}.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }
       format.xls {
