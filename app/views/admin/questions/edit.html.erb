@@ -1,78 +1,76 @@
 <div class="container left" style="margin-top:20px;">
-    <div class="row-fluid">
-        <div class="span12">
-          <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;">
-            <li><%=link_to 'Feedbacks', admin_feedbacks_url %></li>
-              <li class="active"><%= link_to 'Questions'%></a></li>
-              <li><%=link_to 'Sections', admin_sections_url%>
-              </li>
-              <li><%= link_to 'Users', admin_users_url%></li>
-               <li><%= link_to 'Dashboard', admin_root_url %></li>
-          </ul>
+            <div class="row-fluid">
+                <div class="span12">
+                            <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;">
+                                <li class="active"><%= link_to 'Questions'%></a></li>
+                                <li><%=link_to 'Sections', admin_sections_url%>
+                                </li>
+                                <li><%= link_to 'Users', admin_users_url%></li>
+                                 <li><%= link_to 'Dashboard', admin_root_url %></li>
+                            </ul>
                              
-          <div class="tab-content2" style="padding-top:0px;">
-            <div class="tab-pane active" id="dashboard" >
-              <div class="tabHead">
-                <h1>Questions--Questions for the Survey</h1>
-                <h3>Edit Question</h3>
-              </div>
-                
-              <div class="content">
-               
-                <%= simple_form_for(@question, :url=>{:action => :update}) do |f| %>
-                        <br/>
-                        <%= f.input :name, :as =>:text,
-                                    :label => "Question",
-                                    :placeholder=>"Type new question here...",  
-                                    :input_html => { :class => 'input-xlarge textarea1' }, 
-                                    :label_html => { :class => '' } -%>
+                            <div class="tab-content2"style="padding-top:0px">
+                            <div class="tab-pane active" id="dashboard" >
+                                <div class="tabHead">
+                                        <h1>Questions</h1>
+                                        <h2>Questions for the Survey</h2>
+                                </div>
+                                
+                                <div class="tabGraph">
+                                     <div id="box">
+                                     <div class="quesMain">
+                                            <div class="addQuesHead">
+                                                <h1>Add New Question</h1>
+                                            </div>
+                                            <div class="rightboxName">
+                                                <%= form_for :question, :url=>{:action => :update}  do |f| %>
+                                                 
 
-                        <span id="question_name_error"  class="custom_error"></span>
-
-                        <%= f.input :description,
-                            :label => "Description",
-                            :placeholder => "Type description for question here...",
-                            :as => :text,
-                            :input_html => {:class => 'input-xxlarge' , :cols => 50, :rows => 3 }, 
-                            :label_html => { :class => '' } -%> 
-
-                        <span id="description_error"  class="custom_error"></span> 
-
-                        <%= f.hidden_field :is_active, :value=>true%>
-
-                        <%= f.input :sub_section_id, 
-                                      :collection => @subsection,
-                                      :prompt => "Select SubSection",  
-                                      :label => "Sub Section",  
-                                      :input_html => { :class => 'input-xlarge' },
-                                      :label_html => { :class => '' }    -%>  
-
-                        <span id="section_error" class="custom_error"></span>
-
-                        <%= f.input :points, 
-                                      :collection => [['5'],['10'],['15'],['20']], 
-                                      :prompt => "Select Points",  
-                                      :label => "Points",  
-                                      :input_html => { :class => 'input-xlarge' },
-                                      :label_html => { :class => '' }    -%>  
-                        
-                        <%= f.button :submit, "Save", :class => 'btn-primary',:id=>"questn_save" %>
-                        <%= link_to "Cancel", admin_questions_url, :class=>"btn btn-primary" %> 
-                        
-                <% end -%>  
-              </div>                               
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
+                                            <h3>Question<span class="star">*</span></h3>
+                                           <%= f.text_area :name, :class=>"input-xlarge", 
+                                           :placeholder=>"Type new question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8, :validate=>true%>
+                                           <span id="question_name_error"  class="custom_error">
+                                           </span>
+                                          <h3>Description<span class="star">*</span></h3>
+                                           <%= f.text_area :description, :class=>"input-xlarge", 
+                                           :placeholder=>"Type description for question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8, :validate=>true%>
+                                          <span id="description_error"  class="custom_error">
+                                          </span>
+                                             <%= f.hidden_field :is_active, :value=>true%>
+                                            <h3>Section<span class="star">*</span></h3>
+                                            <%= f.select "sub_section_id", options_for_select(@subsection.collect{|x| [x.name,x.id]}.insert(0,
+                                             "Select Section"),@question.sub_section_id)%>
+                                             <span id="section_error" class="custom_error"></span>
+                                             <br/>
+                                            
+                                            <h3>Points<span class="star">*</span></h3>
+                                            <%= f.select :points, [5,10,20]%>
+                                            <br>
+                                            <br>
+                                            <div class="button-bar" style="float:left;">
+                                                <%= f.submit 'Save', :class=>"btn btn-primary", :id=>"questn_save"%>
+                                            </div>
+                                            
+                                            <%#= f.submit 'Save & New', :class=>"btn ",:style=>"margin-left:30px;"%>
+                                            <%#= f.submit 'Reset', :class=>"btn",:style=>"margin-left:30px;"%>
                                                
-
-
-
-
-
+                                            </div>
+                                            <%end%>
+                                            </div>   
+                                </div>
+                                </div>
+                            </div>                                    
+                                        
+                                        
+                                    
+                                </div>
+                            </div>
+                            <!-- <div class="tab-pane" id="users" >Users</div>
+                            <div class="tab-pane" id="reports" >Reports</div>
+                            <div class="tab-pane" id="sections" >Sections</div>
+                            <div class="tab-pane" id="questions">Questions</div>
+                            <div class="tab-pane" id="settings">Settings</div> -->
+                            </div>
+                </div>
+            </div>
+        </div> 
