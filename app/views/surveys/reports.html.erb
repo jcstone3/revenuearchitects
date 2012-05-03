@@ -10,7 +10,7 @@
         </head> 
        
         <!-- Le styles -->
-<%= content_for :main_content do%>
+<%#= content_for :main_content do%>
        <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
         <%= render :partial=>"reports_css"%>
         <div class="content1" style="page-break-after:always;">
@@ -40,14 +40,10 @@
             <%= @survey.created_at.strftime("%B  %Y")%></h2>
             </div>
             <h1>Overall Diagnostic</h1>
-               
-               <div class="tabGraph">
-                                         
-                                        <h1>Responses in the current month <strong>March 2012</strong></h1>
-
-                                       <div id='chart'></div>
-                                        <%= render_chart(@chart, 'chart') %>
-                                </div>
+                  <div class="tabGraph">
+                         <div id='chart'></div>
+                          <%= render_chart(@chart, 'chart') %>
+                  </div>
             <div class="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
@@ -130,7 +126,7 @@
                       <%= render :partial=>"response_report", 
                       :locals=> {:response =>response} %> 
                     <%end%>
-         <%= render :partial=>"table_end"%>                      
+                <%= render :partial=>"table_end"%>                      
             </div> 
             <div class="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
@@ -170,7 +166,7 @@
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
         </div>
-<%end%>
+<%#end%>
    
     </body>
 </html>

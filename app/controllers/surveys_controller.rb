@@ -500,10 +500,10 @@ def download_result
   end
      
   respond_to do |format|
-      format.html {}
+      format.html{}
        format.pdf {
         html = render_to_string(:layout => false , :action => "reports.html")
-        kit = PDFKit.new(html, :page_size => 'Letter')    
+        kit = PDFKit.new(html)    
         kit.stylesheets << Rails.root.join("app/assets/stylesheets/jquery.dataTables.css") 
         kit.stylesheets << Rails.root.join("app/assets/stylesheets/application.css")   
         send_data(kit.to_pdf, :filename =>  "#{current_user.companies.first.name}_#{@survey.created_at.strftime('%B %Y')}_diagnostic_#{Time.now}.pdf", :type => 'application/pdf')

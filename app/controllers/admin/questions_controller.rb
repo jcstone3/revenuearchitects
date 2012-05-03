@@ -26,11 +26,9 @@ class Admin::QuestionsController < ApplicationController
         if @question.save
          #find the section for the subsection to increase the count of the 
          #the questions added to that section          
-<<<<<<< HEAD
+
          @section = Section.find_by_sql("select sections.id, sections.name , sections.questionnaire_id, question_count, total_points, sub_sections.id as sub_section_id from sections inner join sub_sections on sections.id = sub_sections.section_id and sub_sections.id = #{@question.sub_section_id}")
-=======
-         @section = Section.find_by_sql("select sections.id, question_count, total_points, sub_sections.id as sub_section_id from sections inner join sub_sections on sections.id = sub_sections.section_id and sub_sections.id = #{@question.sub_section_id}")
->>>>>>> download file name changed css changes for report page
+
          @section_question_count = @section.first.question_count += 1
          @section_total_points = @section.first.total_points + @question.points
         
