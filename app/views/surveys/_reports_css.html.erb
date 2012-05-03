@@ -69,7 +69,7 @@
            font-weight:100;     
         }
         
-        .footer img {
+        #footer img {
             text-align:right;
             margin-bottom: 10px;
             margin-right: 20px;
@@ -184,11 +184,11 @@ dl#csschart span em{
  * Table
  */
 table.dataTable2 {
-   page-break-after: 10; 
+   page-break-after: 5; 
    color:#FFF;
-
+   display:table-header-group;
+   page-break-inside: avoid;
 }
-
 .textbox table thead th {
   background-image: -moz-linear-gradient(top, #4e5960, #647077);
     background-image: -ms-linear-gradient(top, #4e5960, #647077);
@@ -205,16 +205,22 @@ table.dataTable2 {
     *cursor: hand;
     text-align:left;
     width:6px;
-
+    
 }
+
+.textbox table thead{
+   display:table-header-group; 
+}
+
 
 .textbox table tbody tr {
     font-weight: 100;
     font-family: "Lato", sans-serif;
     font-size: 15px;
+    page-break-inside: avoid;
 }
 table.dataTable thead h3{
-
+    display:table-header-group;
     font-weight:400;
 }
 report-body dataTable
@@ -222,6 +228,7 @@ table.dataTable tfoot th {
     padding: 3px 10px 3px 10px;
     border-top: 1px solid black;
     font-weight: bold;
+    display:table-header-group;
 }
 
 table.dataTable td {
@@ -253,6 +260,7 @@ table.dataTable tr.even td.sorting_3 { background-color: #E9E9E9; }
 table.dataTable2{
     width :100px;
     font-size:15px;
+
 }
 
 report-body dataTable2
@@ -260,6 +268,7 @@ table.dataTable2 tfoot th {
     padding: 3px 10px 3px 10px;
     border-top: 1px solid black;
     font-weight: bold;
+    display:table-header-group;
 }
 
 table.dataTable2 td {

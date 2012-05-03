@@ -28,7 +28,7 @@
             <h2>Industry :: <%= "#{@industry.name}"%></h2>
             <h2>Size ::<%= "#{@survey.size}"%></h2>
             <h2>Revenue :: <%= "#{@survey.revenue}"%></h2>
-            <div class="footer">
+            <div id="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
         </div>
@@ -44,7 +44,7 @@
                          <div id='chart'></div>
                           <%= render_chart(@chart, 'chart') %>
                   </div>
-            <div class="footer">
+            <div id="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
           </div>
@@ -65,7 +65,7 @@
                     <%end%>
                 <%= render :partial=>"table_end"%>
                   </div>        
-                  <div class="footer">
+                  <div id="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div> 
             </div>
@@ -87,7 +87,7 @@
                     <%end%>
                 <%= render :partial=>"table_end"%>               
             </div> 
-            <div class="footer">
+            <div id="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
         </div>  
@@ -108,7 +108,7 @@
               <%end%>
              <%= render :partial=>"table_end"%>            
             </div> 
-            <div class="footer">
+            <div id="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
         </div> 
@@ -128,8 +128,8 @@
                     <%end%>
                 <%= render :partial=>"table_end"%>                      
             </div> 
-            <div class="footer">
-              <img src="http://dev.revenue-grader.com/assets/logo.png">
+            <div id="footer">
+               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
         </div> 
 
@@ -147,7 +147,7 @@
                       :locals=> {:response =>response} %> 
                     <%end%>
               <%= render :partial=>"table_end"%>
-            <div class="footer">
+             <div id="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
         </div> 
@@ -162,7 +162,7 @@
              <p class="aboutrevenue">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Aenean eu erat et velit dapibus bibendum id quis quam.
           Sed quis suscipit tortor.</p>
-          <div class="footer">
+          <div id="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
         </div>

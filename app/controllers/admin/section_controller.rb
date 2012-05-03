@@ -31,7 +31,7 @@ class Admin::SectionController < ApplicationController
     end
     	
     def create_subsection
-    	params[:sub_section].merge!(:section_id=>params[:section_id], :is_active=>true)
+    	params[:sub_section].merge!(:is_active=>true)
     	@subsection = SubSection.new(params[:sub_section])
     	if @subsection.save    	
       	 flash[:success] = "Sub Section Added successfully!"

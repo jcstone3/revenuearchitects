@@ -464,13 +464,14 @@ def download_result
   require 'rubygems'
   #require 'google_chart'
   require 'spreadsheet'  
-
+   
    @sections = Section.find(:all) 
-   @survey = current_user.companies.first.surveys.find_by_id(params[:id])
+   @survey = current_user.companies.first.surveys.find(params[:id])
    @industry = Industry.find(:first, :select=>"industries.name",
                :joins=>"left outer join companies on companies.industry_id = industries.id 
                        left outer join surveys on companies.id = surveys.company_id and 
                        surveys.id = #{@survey.id}")
+
   if @survey.blank?
      flash[:notice] = "No such survey exists"
      redirect_to new_survey_path and return 
@@ -490,11 +491,11 @@ def download_result
      @not_applicable_responses = Response.get_response_for_options(@survey.id, "not_applicable")
     #if the user is authorized for the survey then get details of in plan responses
      @in_plan_responses = Response.get_response_for_options(@survey.id, "in_plan")
-     
-     
-     @data_table = Survey.get_overall_graph(@survey.id)
     
-     option = { width: 600, height: 300, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+    
+    @data_table = Survey.get_overall_graph(@survey.id)
+    
+     option = { width: 400, height: 300, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
      @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
       
   end
@@ -530,7 +531,6 @@ def download_result
         send_data blob.string, :type =>:xls, :filename =>"result.xls"#; &quot;client_list.xls&quot;
       } 
   end    
-
 end
 
 

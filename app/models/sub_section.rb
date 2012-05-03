@@ -1,6 +1,6 @@
 class SubSection < ActiveRecord::Base
 	validates :name, :presence => {:message=> "Name can't be blank"}
-	validates :section_id, :presence => true
+	validates :section_id, :presence => {:message=> "Select Section"}
 
 	belongs_to :section
 	has_many :questions

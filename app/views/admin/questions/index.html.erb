@@ -13,7 +13,7 @@
                             <div class="tab-content2 dash">
                             <div class="tab-pane active" id="dashboard" >
                                 <div class="tabHead">
-                                        <h1>Questions--Questions for the Survey</h1>
+                                        <h1>Questions for the Diagnostic</h1>
                                 </div>
                                 
                                 <div class="tabGraph">
@@ -38,7 +38,7 @@
                                             <td><%= question.name %></td>
                                             <td><%= question.description %></td>
                                            
-                                            <td><%= question.section_name %> :: <%= question.subsection_name%></td>
+                                            <td><%= question.section_name.try(:titleize) %> :: <%= question.subsection_name%></td>
                                             <td><%= question.points %></td>
                                             
                                             <td><%= link_to 'Edit', admin_edit_questions_url(question.id)%> /
