@@ -33,7 +33,7 @@
                 
                 <div class="tabGraph">
                     <div class="box_compare">                                        
-                      <h1>Responses in the current month <strong>March 2012</strong></h1>
+                      <h1>Response of the month :: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1>
                       <div class="graph">
                       <div id='chart'></div>
                       <%= render_chart(@chart, 'chart') %>

@@ -454,10 +454,10 @@ end
 
 end  
 
-  def reports
-    @sections = Section.find(:all) 
+ def reports
+  @sections = Section.find(:all) 
   @survey = Survey.find(params[:id])
-  end   
+ end   
 
 #to download in pdf/xls format
 def download_result

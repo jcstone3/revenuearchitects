@@ -10,9 +10,9 @@
         </head> 
        
         <!-- Le styles -->
-<%#= content_for :main_content do%>
+<%= content_for :main_content do%>
        <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
-        <%= render :partial=>"reports_css"%>
+        <%#= render :partial=>"reports_css"%>
         <div class="content1" style="page-break-after:always;">
              <img src="http://dev.revenue-grader.com/assets/logo.png">
              <h1><%= "#{current_user.companies.first.name}"%></h1></br>
@@ -25,9 +25,9 @@
             <%= @survey.created_at.strftime("%B  %Y")%></h2>
             </div>
             <h1>Diagnostic Details</h1>
-            <h2>Industry :: <%= "#{@industry.name}"%></h2>
-            <h2>Size ::<%= "#{@survey.size}"%></h2>
-            <h2>Revenue :: <%= "#{@survey.revenue}"%></h2>
+            <h2>Industry :: <%#= "#{@industry.name}"%></h2>
+            <h2>Size ::<%#= "#{@survey.size}"%></h2>
+            <h2>Revenue :: <%#= "#{@survey.revenue}"%></h2>
             <div id="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
@@ -40,10 +40,10 @@
             <%= @survey.created_at.strftime("%B  %Y")%></h2>
             </div>
             <h1>Overall Diagnostic</h1>
-                  <div class="tabGraph">
-                         <div id='chart'></div>
-                          <%= render_chart(@chart, 'chart') %>
-                  </div>
+                  
+               <div id='chart'></div>
+                <%= render_chart(@chart, 'chart') %>
+                  
             <div id="footer">
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
@@ -166,7 +166,7 @@
               <img src="http://dev.revenue-grader.com/assets/logo.png">
             </div>
         </div>
-<%#end%>
+<%end%>
    
     </body>
 </html>
