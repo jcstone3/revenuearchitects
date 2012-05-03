@@ -16,6 +16,8 @@ class Admin::SectionController < ApplicationController
 
     def create
       @section = Section.new(params[:section])  
+      @last_section = Section.last
+      @section.sequence = @last_section.sequence.to_i + 1
       if @section.save    	
       	flash[:success] = "Section Added successfully!"
       	redirect_to admin_sections_url

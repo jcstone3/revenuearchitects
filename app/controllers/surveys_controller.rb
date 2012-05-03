@@ -328,7 +328,7 @@ def confirm_survey
   @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id")
+                           :group => "sections.sequence", :order => "sections.sequence")
   logger.debug "#{@section_questions}"
   @all_sections = get_all_sections
 
