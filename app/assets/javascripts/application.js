@@ -31,7 +31,7 @@ $(document).ready(function(){
 				}	
             //----------end of hide n show----------------------------//
             //to set the active tab to the color of the login type clicked
-                $('#home_click').click(function(){	                	
+          $('#home_click').click(function(){	                	
 					$('#home_click').css({'background-color' :'#fff'});
 					$('#twitter_click').css({'background-color' :'#53b1f0'}); 
                     $('#facebook_click').css({'background-color' :'#3b5998'});                 
@@ -84,12 +84,16 @@ $(document).ready(function(){
                 {                               
                     var response_answer1 = $('#response_answer_1').val(); 
                 }
-               //hide priority option on load
-               if($('#response_answer_2').val() == "add_to_plan"){
-                 var response_answer2 = $('#response_answer_2').val();
+
+                var response_answer2 = $('#response_answer_2').val();
                 //if answer_2 is selected highlight it
-                $('#option').find('a#'+response_answer2+'').removeClass('btn form priorityTip');
-                $('#option').find('a#'+response_answer2+'').addClass('btn form btn-success priorityTip');                
+                if($('#response_answer_2').val() != ''){
+                  $('#option').find('a#'+response_answer2+'').removeClass('btn form priorityTip');
+                  $('#option').find('a#'+response_answer2+'').addClass('btn form btn-success priorityTip');
+                }
+                                
+               //hide priority option on load
+               if($('#response_answer_2').val() == "add_to_plan"){                                
                 $('#priority_option').show();
                 
                 //if answer_3 selected highlight it
