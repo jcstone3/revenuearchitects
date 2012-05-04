@@ -73,10 +73,9 @@ $(document).ready(function(){
 			//--------end-of-login-click ------------//
 			//---- question js ---------------------//
 			//set defalut value for anwer1 
-                //to set the slider value 
-                //alert('hi');
+                //to set the slider value              
                 var response_answer1 = $('#response_answer_1').val();
-                //alert(response_answer1);
+
                 if($('#response_answer_1').val() == ""){                            
                     var response_answer1  = 1; 
                     $('#response_answer_1').val('1');
@@ -87,13 +86,19 @@ $(document).ready(function(){
                 }
                //hide priority option on load
                if($('#response_answer_2').val() == "add_to_plan"){
-                var response_answer2 = $('#response_answer_2').val();
-                var response_answer3 = $('#response_answer_3').val();
+                 var response_answer2 = $('#response_answer_2').val();
+                //if answer_2 is selected highlight it
                 $('#option').find('a#'+response_answer2+'').removeClass('btn form priorityTip');
-                $('#option').find('a#'+response_answer2+'').addClass('btn form btn-success priorityTip');
+                $('#option').find('a#'+response_answer2+'').addClass('btn form btn-success priorityTip');                
+                $('#priority_option').show();
+                
+                //if answer_3 selected highlight it
+                if($('#response_answer_3').val() != ""){ 
+                var response_answer3 = $('#response_answer_3').val();
                 $('#priority_option').find('a#'+response_answer3+'').removeClass('btn form priorityTip');
                 $('#priority_option').find('a#'+response_answer3+'').addClass('btn form btn-success priorityTip');
-                $('#priority_option').show();
+                }
+               
                }
                else{
                 $('#priority_option').hide();
@@ -184,6 +189,7 @@ $(document).ready(function(){
 
                 //For the Priority options
                 $('#priority_option').click(function(e){
+                   
                     $('#response_answer_3').val(e.target.id);                     
                     
                     //make all option as grey
