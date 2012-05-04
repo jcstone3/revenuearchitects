@@ -36,7 +36,7 @@ class Admin::QuestionsController < ApplicationController
           flash[:success] = "Question Created successfully"
          redirect_to :action => 'index'
          else
-           flash[:success] = "Question could not successfully"
+           flash[:success] = "Question could not be created successfully"
            redirect_to :action => 'index'
          end  
         else

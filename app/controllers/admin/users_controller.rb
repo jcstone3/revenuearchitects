@@ -23,7 +23,7 @@ class Admin::UsersController < ApplicationController
        flash[:success] = "User #{@user.username} activated successfully"
        redirect_to admin_users_url
       else
-       flash[:success] = "Sorry could not deactivated the user"  
+       flash[:success] = "Sorry could not activated the user"  
        redirect_to admin_users_url
       end 
    end	
@@ -35,7 +35,7 @@ class Admin::UsersController < ApplicationController
       flash[:success] = "User #{@user.username} deactivated successfully"
       redirect_to admin_users_url
       else
-       flash[:success] = "Sorry could not activated the user"  
+       flash[:success] = "Sorry could not deactivated the user"  
        redirect_to admin_users_url
       end  
    end

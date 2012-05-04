@@ -34,11 +34,11 @@ class Admin::SectionController < ApplicationController
     	params[:sub_section].merge!(:is_active=>true)
     	@subsection = SubSection.new(params[:sub_section])
     	if @subsection.save    	
-      	 flash[:success] = "Sub Section Added successfully!"
+      	 flash[:success] = "Sub Section created successfully!"
       	 redirect_to admin_sections_url
         else
           @sections = Section.all	
-         flash[:error] = "Section could not be added"	
+         flash[:error] = "Section could not be created"	
          render :subsection_new
         end 
     end
@@ -87,9 +87,9 @@ class Admin::SectionController < ApplicationController
     def destroy_subsection
       @subsection = SubSection.find_by_id(params[:id])
        if @subsection.destroy
-      flash[:success] = "SubSection Created successfully"         
+      flash[:success] = "SubSection Deleted successfully"         
     else
-      flash[:success] = "SubSection not Created successfully"          
+      flash[:success] = "SubSection not Deleted"          
     end   
      redirect_to :action => 'index' 
     end
