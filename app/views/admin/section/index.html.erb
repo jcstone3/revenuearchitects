@@ -39,7 +39,7 @@
                                             <td><%= section.subsection_name %></td> 
                                             <td><%= truncate(section.subsection_desc, :length=>140) %></td>  
                                             <td><%= link_to 'Edit Subsection', admin_edit_subsection_url(section.subsection_id) if section.subsection_id.present?%>/
-                                              <%= link_to 'Delete Subsection', admin_delete_subsection_url(section.subsection_id) if section.subsection_id.present? %>
+                                              <%= link_to 'Delete Subsection', admin_delete_subsection_url(section.subsection_id) if section.subsection_id.present?  %>
                                             </td>             
                                         </tr>
                                     <% end %>
