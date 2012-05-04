@@ -1,66 +1,56 @@
 <div class="container left" style="margin-top:20px;">
-            <div class="row-fluid">
-                <div class="span12">
-                            <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;">
-                                <li><%=link_to 'Feedbacks', admin_feedbacks_url%>
-                                </li>
-                                <li class="active"><%= link_to 'Questions'%></a></li>
-                                <li><%=link_to 'Sections', admin_sections_url%>
-                                </li>
-                                <li><%= link_to 'Users', admin_users_url%></li>
-                                 <li><%= link_to 'Dashboard', admin_root_url %></li>
-                            </ul>
-                             
-                            <div class="tab-content2"style="padding-top:0px">
-                            <div class="tab-pane active" id="dashboard" >
-                                <div class="tabHead">
-                                        <h1>Questions</h1>
-                                        <h2>Questions for the Survey</h2>
-                                </div>
-                                
-                                <div class="tabGraph">
-                                     <div id="box">
-                                     <div class="quesMain" style="height:auto;">
-                                            <div class="addQuesHead">
-                                                <h1>Add New Question</h1>
-                                            </div>
-                                            <div class="rightboxName">
-                                                <%= form_for @question, :url=>{:action => :create}, :validate=>true do |f| %>
-                                            <h3>Question<span class="star">*</span></h3>
-                                           <%= f.text_area :name, :class=>"input-xlarge", 
-                                           :placeholder=>"Type new question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8%>
-                                          <h3>Description<span class="star">*</span></h3>
-                                           <%= f.text_area :description, :class=>"input-xlarge", 
-                                           :placeholder=>"Type description for question here...", :style=>"margin-bottom:9px;", :rows=>3, :cols=>8%>
-                                             <%= f.hidden_field :is_active, :value=>true%>
-                                            <h3>Section<span class="star">*</span></h3>
-                                            <%= f.select "sub_section_id", options_for_select(@subsection.collect{|x| [x.name,x.id]})%>
-                                            
-                                            <h3>Points<span class="star">*</span></h3>
-                                            <%= f.select :points, [5,10,20]%>
-                                            <br/>
-                                            
-                                                <%= f.submit 'Save', :class=>"btn btn-primary"%>
-                                            <br/>
-                                            
-                                            <%#= f.submit 'Save & New', :class=>"btn ",:style=>"margin-left:30px;"%>
-                                            <%#= f.submit 'Reset', :class=>"btn",:style=>"margin-left:30px;"%>
-                                               
-                                            </div>
-                                            <%end%>
-                                            </div>   
-                                </div>
-                                </div>
-                            </div>                                    
-                                        
-                                        
-                                    
-                                </div>
-                            </div>
-                            <!-- <div class="tab-pane" id="users" >Users</div>
-                            <div class="tab-pane" id="reports" >Reports</div>
-                            <div class="tab-pane" id="sections" >Sections</div>
-                            <div class="tab-pane" id="questions">Questions</div>
-                            <div class="tab-pane" id="settings">Settings</div> -->
-                            </div>
-                </div>
+    <div class="row-fluid">
+        <div class="span12">
+          <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;">
+              <li><%=link_to 'Feedbacks', admin_feedbacks_url %></li>
+              <li class="active"><%= link_to 'Questions'%></a></li>
+              <li><%=link_to 'Sections', admin_sections_url%>
+              </li>
+              <li><%= link_to 'Users', admin_users_url%></li>
+               <li><%= link_to 'Dashboard', admin_root_url %></li>
+          </ul>
+                            
+          <div class="tab-content2" style="padding-top:0px;">
+            <div class="tab-pane active" id="dashboard" >
+              <div class="tabHead">
+                <h1>Questions--Questions for the Survey</h1>
+                 <h3>Add New Question</h3>
+              </div>
+               
+              <div class="content">
+                <%= simple_form_for(@question, :url=>url_for(:action => 'create', :controller => 'admin/questions'), :validate => true, :class => "well") do |f| %>
+                        <br/>
+                        <%= f.input :name, :as =>:text,
+                                    :label => "Question",
+                                    :placeholder=>"Type new question here...", 
+                                    :input_html => { :class => 'input-xlarge textarea1' },
+                                    :label_html => { :class => '' } -%>
+                       
+                        <%= f.input :description, :as =>:text,
+                                    :label => "Description",
+                                    :placeholder=>"Type description for question here..."  ,
+                                    :as => :text,
+                                    :input_html => {:class => 'input-xxlarge' , :cols => 50, :rows => 3 },
+                                    :label_html => { :class => '' } -%>
+
+                        <%= f.association :sub_section,                                      
+                                      :prompt => "Select SubSection", 
+                                      :label => "Sub Section", 
+                                      :input_html => { :class => 'input-xlarge' },
+                                      :label_html => { :class => '' }    -%> 
+
+                        <%= f.input :points,
+                                      :collection => [['5'],['10'],['15'],['20']],
+                                      :prompt => "Select Points", 
+                                      :label => "Points", 
+                                      :input_html => { :class => 'input-xlarge' },
+                                      :label_html => { :class => '' }    -%> 
+
+                        <%= f.button :submit, "Save", :class => 'btn-primary' %>
+                        <%= link_to "Cancel", admin_questions_url, :class=>"btn btn-primary" %> 
+                <% end -%> 
+              </div>                              
+      </div>
+    </div>
+  </div>
+ </div>
