@@ -107,6 +107,14 @@ scope :find_average_response, lambda{|section_id|{
                inner join sections on sections.id = sub_sections.section_id",
        :conditions=>" sections.id=#{section_id}"
 	}}
+
+scope :find_response_from_other_companies, lambda{|response_questions_id,survey_id,company_ids|{
+      :select =>"responses.id, responses.question_id, responses.answer_1",
+      :joins=>"left outer join questions on (questions.id=#{response_questions_id} and responses.survey_id!=#{survey_id})
+              left outer join surveys on surveys.company_id in (#{company_ids})",
+      :conditions=>"questions.id=#{response_questions_id}"
+ 
+}} 
 end
 # == Schema Information
 #

@@ -261,7 +261,32 @@ def self.get_average_calculated_score(response_survey_id, response_questions_id,
     avg_response_score = (total_score/response.count)
   end  
     return avg_response_score
-end    
+end   
+
+#calculation average score for questions from other companies
+def self.get_average_score_from_other_companies(response_questions_id, response_survey_id)
+  #first check current user company and industry
+  #get other companies belonging to same company
+  #get question score from other companies
+  #calculate the average
+  @avg_response_score = 0
+  @total_average_score = 0
+  survey = self.find(response_survey_id)
+  company = Company.find(survey.company_id)
+ 
+  company_all = Company.get_companies_belonging_to_same_industry(company.industry_id,company.id)
+  if company_all
+    company_ids=company_all.collect(&:id).join(', ')
+    @responses = Response.find_response_from_other_companies(response_questions_id, response_survey_id,company_ids)
+    if @responses.present?
+      @responses.each do |response|
+        @total_average_score += response.answer_1
+      end
+      @total_average_score = @total_average_score/@responses.count  
+    end
+  end
+  return @total_average_score 
+end
 
 #Get the Final Score for each answer
 # This is new function. Use this

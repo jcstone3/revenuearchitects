@@ -22,4 +22,9 @@ module SurveysHelper
     def get_response_result_actions(surveyid, action)
       @responses = Survey.get_result_action(surveyid, action)
     end 
+
+    #Average score for question from other companies of same industry
+    def get_average_score(response_questions_id, response_survey_id)
+      @average_score = Survey.get_average_score_from_other_companies(response_questions_id, response_survey_id)
+    end  
 end
