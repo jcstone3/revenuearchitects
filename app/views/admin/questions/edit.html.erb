@@ -19,9 +19,9 @@
                
               <div class="content">
               
-                <%= simple_form_for(@question, :url=>url_for(:action => 'update', :controller => 'admin/questions'), :method=>"post") do |f| %>
+                <%= simple_form_for(@question, :url=>{:action => 'update', :controller => 'admin/questions'}, :validate=>true, :method=>"post") do |f| %>
                         <br/>
-                        <%= f.input :name, :as =>:text,
+                        <%= f.input :name, :as =>:text, :required => true,
                                     :label => "Question",
                                     :placeholder=>"Type new question here...", 
                                     :input_html => { :class => 'input-xlarge textarea1' },
@@ -29,7 +29,7 @@
 
                         <span id="question_name_error"  class="custom_error"></span>
 
-                        <%= f.input :description,
+                        <%= f.input :description, :required => true,
                             :label => "Description",
                             :placeholder => "Type description for question here...",
                             :as => :text,
@@ -40,7 +40,7 @@
 
                         <%= f.hidden_field :is_active, :value=>true%>
 
-                        <%= f.association :sub_section,                                      
+                        <%= f.association :sub_section, :required => true,
                                       :prompt => "Select SubSection", 
                                       :label => "Sub Section", 
                                       :input_html => { :class => 'input-xlarge' },
@@ -48,7 +48,7 @@
 
                         <span id="section_error" class="custom_error"></span>
 
-                        <%= f.input :points,
+                        <%= f.input :points, :required => true,
                                       :collection => [['5'],['10'],['15'],['20']],
                                       :prompt => "Select Points", 
                                       :label => "Points", 

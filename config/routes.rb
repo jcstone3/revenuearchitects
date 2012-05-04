@@ -23,7 +23,7 @@ RevenueGrader::Application.routes.draw do
    post '/subsection/create' => "section#create_subsection", :as => "create_subsection"   
    get  '/subsection/edit/:id' => "section#edit_subsection", :as => "edit_subsection"
    get '/subsection/delete/:id' => "section#destroy_subsection", :as => "delete_subsection"
-   post '/subsection/update' => "section#update_subsection", :as => "update_subsection"
+   post '/subsection/update/:id' => "section#update_subsection", :as => "update_subsection"
    get '/settings' => "settings#index", :as => "settings"   
    get '/reports' => "section#reports_index", :as => "reports"
    get '/feedbacks' => "feedbacks#feed_index", :as =>"feedbacks"

@@ -10,8 +10,7 @@ class Admin::SectionController < ApplicationController
 	end
 
     def new
-      @section = Section.new
-	  #@sub_section = SubSection.new
+      @section = Section.new	  
     end
 
     def create
@@ -28,8 +27,7 @@ class Admin::SectionController < ApplicationController
     end	
 
     def subsection_new
-      @subsection = SubSection.new
-      @sections = Section.all
+      @subsection = SubSection.new      
     end
     	
     def create_subsection
@@ -67,7 +65,7 @@ class Admin::SectionController < ApplicationController
 
     def update_subsection
       @subsection = SubSection.find_by_id(params[:id])
-      if @subsection.update_attributes(params[:subsection])
+      if @subsection.update_attributes(params[:sub_section])
          flash[:success] = "SubSection updated successfully"
          redirect_to admin_sections_url
       else

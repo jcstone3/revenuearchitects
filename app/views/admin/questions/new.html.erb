@@ -18,9 +18,9 @@
               </div>
                
               <div class="content">
-                <%= simple_form_for(@question, :url=>url_for(:action => 'create', :controller => 'admin/questions'), :validate => true, :class => "well") do |f| %>
+                <%= simple_form_for(@question, :validate => true, :url=>url_for(:action => 'create', :controller => 'admin/questions'), :class => "well") do |f| %>
                         <br/>
-                        <%= f.input :name, :as =>:text,
+                        <%= f.input :name, :as =>:text, 
                                     :label => "Question",
                                     :placeholder=>"Type new question here...", 
                                     :input_html => { :class => 'input-xlarge textarea1' },

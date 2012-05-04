@@ -13,8 +13,8 @@ class Admin::QuestionsController < ApplicationController
 	end	
 
     def new
-      @question = Question.new
-	    @subsection = SubSection.find(:all, :order=>"id ASC")
+      @question = Question.new	
+      @subsections = SubSection.all    
     end	
 
 	def create	
@@ -26,11 +26,11 @@ class Admin::QuestionsController < ApplicationController
         if @question.save
          #find the section for the subsection to increase the count of the 
          #the questions added to that section          
-
+         logger.debug @question
          @section = Section.find_by_sql("select sections.id, sections.name , sections.questionnaire_id, question_count, total_points, sub_sections.id as sub_section_id from sections inner join sub_sections on sections.id = sub_sections.section_id and sub_sections.id = #{@question.sub_section_id}")
 
          @section_question_count = @section.first.question_count += 1
-         @section_total_points = @section.first.total_points + @question.points
+         @section_total_points = @section.first.total_points + params[:question][:points].to_i
         
          if @section.first.update_attributes(:question_count => @section_question_count ,:total_points => @section_total_points)
           flash[:success] = "Question Created successfully"
@@ -41,13 +41,12 @@ class Admin::QuestionsController < ApplicationController
          end  
         else
           flash[:error] = "Question could not be created"
-         render :action => 'index'
+          render 'new'
         end 
 	end	
  
  def edit  
-    @question = Question.find_by_id(params[:id])
-    @subsection = SubSection.find(:all, :order=>"id ASC")
+    @question = Question.find_by_id(params[:id])    
     respond_to do |format|
       format.html
     end  
@@ -61,15 +60,17 @@ class Admin::QuestionsController < ApplicationController
        @questions =   Question.find(:all,
                                     :select => "sum(questions.points) as question_points, count(*) as question_count, sections.name", 
                                     :joins => "left join sub_sections on questions.sub_section_id = sub_sections.id right outer join sections on sections.id = sub_sections.section_id",
-                                    :group => "sections.name,sections.sequence",
-                                    :order => "sections.sequence")
-       @sections = Section.all
-
+                                    :group => "sections.name,sections.id",
+                                    :order => "sections.id")
+       logger.debug @questions.inspect
+       @sections = Section.all(:order=>'sections.id')
+       logger.debug @sections
         @sections.each_with_index do |section, i|
           section.update_attributes(:total_points=> @questions[i].question_points, :question_count=>@questions[i].question_count)
+          logger.debug section
         end 
         
-      flash[:success] = "Question Created successfully"
+      flash[:success] = "Question Updated successfully"
           redirect_to :action => 'index'
     #format.html (redirect_to (@question))
     else 

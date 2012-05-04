@@ -18,22 +18,22 @@
           </div>
           <div class="content">
             
-             <%= simple_form_for(@subsection, :url=> admin_create_subsection_url,  :validate => true) do |f| %>
+             <%= simple_form_for(@subsection, :validate=>true, :url=>url_for(:action => 'create_subsection', :controller => 'admin/section')) do |f| %>
 
               <br/>
 
-              <%= f.input :name,
+              <%= f.input :name, :required => true,
               :label => "Name",
               :input_html => { :class => 'input-xlarge' }, 
               :label_html => { :class => '' } -%> 
 
-              <%= f.input :description,
-              :label => "Description", 
+              <%= f.input :description, :required => true,
+              :label => "Description",
               :as => :text,
               :input_html => {:class => 'input-xxlarge' , :cols => 50, :rows => 3 }, 
               :label_html => { :class => '' } -%>               
 
-              <%= f.association :section, 
+              <%= f.association :section, :required => true,
                       :prompt => "Select Section",  
                       :input_html => { :class => 'input-xlarge' }   -%>  
                 
