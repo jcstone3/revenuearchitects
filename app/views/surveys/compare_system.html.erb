@@ -26,39 +26,34 @@
                                  </li>
                             </ul>
                              
-                            <div class="tab-content3 dash" >
-                            <div class="tab-pane active userTable" id="systems" style="auto;">
+
+
+                            <div class="tab-content3 dash"  style="height:auto;">
+                            <div class="tab-pane active userTable" id="strategy" >
                                 <div class="tabHead">
-                                  <h1>Systems</h1>
-
-                                 
-             
-   
-            <%# line_chart( { :height => 300, :is3D => true }, { :id => "question" } ) do |c| -%>
-
-           
+                                   <h1>Systems</h1>
+                                   
                                 </div>
                                 
-                                <div class="tabGraph">
+                           
+                               <div class="tabGraph">
                                     <div class="box_compare">                                        
                                        <h1>Response of the month :: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1>
-                                     <div class="graph">
-                                        <div id='chart'></div>
+                                        <div class="graph">
+                               <div id='chart'></div>
                                         <%= render_chart(@chart, 'chart') %>
              
-                                      </div>
+             
+                                         </div>
                                     </div>
-                                </div>
-
                                 <!--table information goes here-->
                                 
                                  <!--table goes here-->
-                                     <div class="container report-top" style="padding-bottom:10px;">
+                                     <div class="container report-top">
                                         <div class="row-fluid">
-                                         
-                                         <%= render :partial=>"compare_response_table"
-                                           %>
                                        
+                                         <%= render :partial=>"compare_response_table"%>
+                                           
                                         </div>
                                       </div>
                             <!--end table-->    
