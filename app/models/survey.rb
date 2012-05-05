@@ -275,7 +275,7 @@ def self.get_average_score_from_other_companies(response_questions_id, response_
   company = Company.find(survey.company_id)
  
   company_all = Company.get_companies_belonging_to_same_industry(company.industry_id,company.id)
-  if company_all
+  if company_all.present?
     company_ids=company_all.collect(&:id).join(', ')
     @responses = Response.find_response_from_other_companies(response_questions_id, response_survey_id,company_ids)
     if @responses.present?
