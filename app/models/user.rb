@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :message => "Email can't be blank"
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true, :if => :email_changed?, :message=> "Email address already taken"
   validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?, :message => "Invalid email address"
- 
+  validates_format_of :email,:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Email is invalid"
+
   
 
 #facebook authentication

@@ -369,7 +369,7 @@ def compare
     @survey = Survey.find_by_id(survey_id)
     @data_table = Survey.get_overall_graph(survey_id)
     
-     option = { width: 1200, height: 400, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+     option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
         @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
         
   end
@@ -392,7 +392,7 @@ def compare_strategy
   @survey = Survey.find(params[:id])
   @data_table = Survey.get_section_graph(@all_sections[0].id, @survey.id)
 
-  option = { width: 1200, height: 400, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+  option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
         
 
@@ -419,7 +419,7 @@ def compare_system
   @survey = Survey.find(params[:id])
   @data_table = Survey.get_section_graph(@all_sections[1].id, @survey.id)
 
- option = { width: 1200, height: 400, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+ option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
 
   @responses = Survey.get_result(@all_sections[1].id, @survey.id)
@@ -445,7 +445,7 @@ def compare_programs
   @survey = Survey.find(survey_id)
   @data_table = Survey.get_section_graph(@all_sections[2].id, @survey.id)
 
-  option = { width: 1200, height: 400, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+  option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
 
   @responses = Survey.get_result(@all_sections[2].id, @survey.id)
