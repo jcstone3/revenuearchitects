@@ -75,7 +75,7 @@ RevenueGrader::Application.routes.draw do
   #site controller maps about us, contact us privacy policy
   match "about-us" =>'site#aboutus', :as => 'aboutus'
   match "contact-us" =>'site#contactus', :as => 'contactus'
-  match "privacy-policy" =>'site#privacy_policy', :as => 'privacy_policy'
+  match "privacy" =>'site#privacy_policy', :as => 'privacy_policy'
   match "show" =>'site#index', :as => 'show'
 
 

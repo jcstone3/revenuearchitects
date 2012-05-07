@@ -467,6 +467,16 @@ $(document).ready(function(){
             "bInfo": false,
             "bAutoWidth": true
         } ); 
+
+      // -- admin question table id --- //
+      $('#question_table').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } ); 
       //---end --of admin user page table---//
 
       /* report Tables */

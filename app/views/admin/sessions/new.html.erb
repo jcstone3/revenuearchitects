@@ -1,4 +1,4 @@
-<div class="container headerPopup">
+<div class="headerPopup">
 	<div class="row-fluid">
     <div class="span12 leftBox mainLeft">
    <div class="adminHead">
@@ -6,8 +6,8 @@
    </div>       
      
      
-      <div class="tab-content" id="tab-content">
-      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal" } ) do |f| %>
+      <div class="tab-content adminpage" id="tab-content">
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal reset" } ) do |f| %>
 
         <h3>Email</h3>
         <%= f.email_field :email, :class=>"span3 logindetails", :placeholder=>"Your Email id" %>

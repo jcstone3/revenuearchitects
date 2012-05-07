@@ -10,7 +10,7 @@
                  <%= f.hidden_field :survey_id, :value=>@survey.id%>
                  <%= f.hidden_field :question_id, :value=>@question.id%> 
                  <%= render "questions_set", :f => f%>
-                 <%#= hidden_field_tag('section', @question.section_id)%>   
+                 <%= hidden_field_tag('section', @question.section_id)%>   
             <%end%>
         </div> 
 <% end %>
