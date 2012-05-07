@@ -114,6 +114,7 @@ def show
   
   #completed surveys
   @completed_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == false}
+  @completed_surveys.last(2)
 
   @sections= Section.all  
   @total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count     

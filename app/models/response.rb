@@ -14,7 +14,7 @@ class Response < ActiveRecord::Base
 				             left outer join sections on sections.id = sub_sections.section_id",   
 				:conditions =>  "sections.id=#{section_id}",
 				:group => "questions.id, responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points",            
-				:order=>"questions.id"
+				:order=>"questions.id, responses.id ASC"
 
 }}
 

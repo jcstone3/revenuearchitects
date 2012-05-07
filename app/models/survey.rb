@@ -11,8 +11,9 @@ class Survey < ActiveRecord::Base
    # default_scope :company_id == current_user.companies
    
    scope :get_all_survey_for_user, lambda{|company_ids|{   
-    :conditions => "company_id in (#{company_ids})"  
-   }}
+    :conditions => "company_id in (#{company_ids})",
+    :order => "created_at DESC" 
+     }}
 
     def self.check_numericality(params)
     	params = params
