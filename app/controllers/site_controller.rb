@@ -18,7 +18,7 @@ class SiteController < ApplicationController
        
   end
 
-  def privacy
+  def privacy_policy
 
   end
 

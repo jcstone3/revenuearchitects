@@ -31,7 +31,8 @@
                                 <div class="tabGraph">
                                     <div class="box">                                        
                                         <h1>Responses in the current month <strong><%= Time.now.strftime("%B-%Y") %> </strong></h1>
-                                        <dl id="csschart">
+
+                                           <dl id="csschart">
 
                                             <!-- TODO: retrieve no of days based on month   -->
                                             <% if !@total_surveys.blank? %>

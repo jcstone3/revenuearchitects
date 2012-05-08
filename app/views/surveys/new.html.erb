@@ -35,7 +35,7 @@
             <div class="head">Previous Diagnostic </div>
                <div class="score">
                    <%@completed_surveys.each do |completed_survey|%>
-                    <span><%= link_to "#{completed_survey.created_at.strftime('%B  %Y')}", reports_url(completed_survey)%>.</span><br/>
+                    <span><%= link_to "#{completed_survey.created_at.strftime('%d %B  %Y')}", reports_url(completed_survey)%>.</span><br/>
                    <%end%>
                </div>
           <div class="scoreboard">

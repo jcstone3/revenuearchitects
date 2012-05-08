@@ -5,7 +5,7 @@
            <h1 class="question"> Diagnostic Surveys </h1>
            <p>Please select a survey to continue </p>
               <% @current_surveys.each do |current_survey|%>
-                  <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{current_survey.created_at.strftime('%B  %Y')}", get_response_status_url(current_survey)%></h3>                           
+                  <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{current_survey.created_at.strftime('%d %B  %Y')}", get_response_status_url(current_survey)%></h3>                           
 
                 <% @response_count= current_survey.responses.present? ? current_survey.responses.count : 0 %>
                 
