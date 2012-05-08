@@ -16,10 +16,10 @@
 
                             </ul>
                              
-                            <div class="tab-content" id="tab-content">
+                            <div class="tab-content" id="tab-content" style="padding-left:0px;">
                             <div class="tab-pane active" id="home">
                                 <div class="rightboxName">
-                                <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true) do |f| %>
+                                <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true, :html => {:class => "reset" } ) do |f| %>
                                 <h3 >Email<span>*</span></h3>
                                 <%= f.email_field :email, :class=>"span3 logindetails", :placeholder=>"Your Email id" %><h4 class="loginheading">Login with the registered email address</h4> 
                                 <h3 >Password<span>*</span></h3><%= f.password_field :password, :class=>"span3", :placeholder=>"Password"%>

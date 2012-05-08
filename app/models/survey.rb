@@ -125,7 +125,7 @@ def self.get_overall_graph(survey_id)
     #current user response for the survey   
     @response = Response.get_response_for_all_sections(survey_id)
     
-    @questions = Question.find(:all, :select => "id")
+    @questions = Question.find(:all, :select => "id", :order => "id ASC")
     
     #get all companies belonging to the industry as of the current user company industry 
 
