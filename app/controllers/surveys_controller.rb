@@ -114,7 +114,7 @@ def show
   
   #completed surveys
   @completed_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == false}
-
+  @completed_surveys.take(2)
   @sections= Section.all  
   @total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count     
 end  
@@ -152,7 +152,10 @@ def question
     redirect_to confirm_survey_path and return 
   end
 
-
+  @section_questions  = Section.find(:all,
+                           :select => "count(responses.question_id) as question_attempted",
+                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
+                           :group => "sections.id", :order => "sections.id")
   @all_sections = get_all_sections
 
   #Getting the score to show on page
@@ -292,6 +295,13 @@ def report
     #for could do responses
      @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
     
+     #for section questions attempted
+      @section_questions  = Section.find(:all,
+                           :select => "count(responses.question_id) as question_attempted",
+                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
+                           :group => "sections.id", :order => "sections.id") 
+   
+
     render :layout =>"report"
  
   end
@@ -361,6 +371,11 @@ def compare
    #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
+  #for section questions attempted
+      @section_questions  = Section.find(:all,
+                           :select => "count(responses.question_id) as question_attempted",
+                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
+                           :group => "sections.id", :order => "sections.id") 
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
@@ -381,6 +396,11 @@ def compare_strategy
   @all_sections = get_all_sections
   #check scope
 
+  #for section questions attempted
+      @section_questions  = Section.find(:all,
+                           :select => "count(responses.question_id) as question_attempted",
+                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
+                           :group => "sections.id", :order => "sections.id") 
    #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
@@ -410,7 +430,11 @@ def compare_system
 
   #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
-
+  #for section questions attempted
+    @section_questions  = Section.find(:all,
+                           :select => "count(responses.question_id) as question_attempted",
+                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
+                           :group => "sections.id", :order => "sections.id") 
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
@@ -437,6 +461,11 @@ def compare_programs
    #scoping the survey
    @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
+   #for section questions attempted
+      @section_questions  = Section.find(:all,
+                           :select => "count(responses.question_id) as question_attempted",
+                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
+                           :group => "sections.id", :order => "sections.id") 
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"

@@ -19,7 +19,8 @@ class Question < ActiveRecord::Base
     :select=>"questions.id",
     :joins=>"left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              inner join sections on sections.id = sub_sections.section_id",
-    :conditions=>"sections.id =#{section_id}"
+    :conditions=>"sections.id =#{section_id}",
+    :order => "questions.id ASC"
 }}
 
 

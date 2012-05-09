@@ -34,9 +34,11 @@
       <div class="scoreboard">
             <div class="head">Previous Diagnostic </div>
                <div class="score">
-                   <%@completed_surveys.each do |completed_survey|%>
-                    <span><%= link_to "#{completed_survey.created_at.strftime('%d %B  %Y')}", reports_url(completed_survey)%>.</span><br/>
+                   <%@completed_surveys.each_with_index do |completed_survey, i|%>
+                    <% if i < 2%>
+                        <span><%= link_to "#{completed_survey.created_at.strftime('%d %B  %Y')}", reports_url(completed_survey)%>.</span><br/>
                    <%end%>
+                  <%end%>  
                </div>
           <div class="scoreboard">
              <div class="head">About Revenue Grader </div>

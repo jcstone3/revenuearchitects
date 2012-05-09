@@ -21,21 +21,20 @@
        <%end%>
 
       <h1 class="question">Previous Diagnostics</h1>
-
     
             <% if @completed_surveys.present?%>                     
                <% @completed_surveys.each_with_index do |completed_survey, i|%>
-                  <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{completed_survey.created_at.strftime('%d %B  %Y')}", reports_path(completed_survey)%></h3>                          
+                  <% if i < 2%>
+                      <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{completed_survey.created_at.strftime('%d %B  %Y')}", reports_path(completed_survey)%></h3>                          
 
-                    <% @response_count= completed_survey.responses.present? ? completed_survey.responses.count : 0 %>        
-                    <h4> <%= "Total Completed Questions" %> <span class="green"> <%= "  #{@response_count}"%>/<%= "#{@total_questions}" %> </span>  </h4>
-                  </br>
-
+                        <% @response_count= completed_survey.responses.present? ? completed_survey.responses.count : 0 %>        
+                        <h4> <%= "Total Completed Questions" %> <span class="green"> <%= "  #{@response_count}"%>/<%= "#{@total_questions}" %> </span>  </h4>
+                      </br>
                   <%end%>
-              <%else%>
-                 <h3> No previous Surveys </h3>
-              
-              <% end %>
+              <%end%>
+          <%else%>
+             <h3> No previous Surveys </h3>
+          <% end %>
 </div> 
        
   <% end  -%>                          
