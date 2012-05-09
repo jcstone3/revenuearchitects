@@ -651,7 +651,7 @@ def get_question(question_id)
   questions = session[:questions]
 
   if questions.blank?
-    questions = Question.select("questions.id, questions.name, questions.points, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).order("questions.sequence ASC")
+    questions = Question.select("questions.id, questions.name, questions.points, questions.description as description, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).order("questions.sequence ASC")
     session[:questions] = questions
   end
   question = questions.select { |quest|  quest.id == question_id.to_i }
