@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   
   #validations
   validates_presence_of :username, :message => "Name can't be blank"
-  validates_format_of :username, :with =>/^[a-z A-Z][a-z A-Z 0-9_]*$/, :message => "Name should contain only alphabets"
+  #validates_format_of :username, :with =>/^[a-z A-Z][a-z A-Z 0-9_]*$/, :message => "Name should contain only alphabets"
   validates_presence_of :password, :presence => true, :message  => "Password can't be blank"
   validates_length_of :password,  :within => 4..30, :message => "Password should be greater than 4 and less than 30"
   validates_presence_of :email, :message => "Email can't be blank"
