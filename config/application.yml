@@ -24,8 +24,8 @@ staging:
     host: stage.revenuegrader.com
     facebook_app_id: '208616319240040'
     facebook_secret_key: '907b9b8444f129d1dc6d8da744bfa781'
-    twitter_api_id: '80Mc8tqcacwJ07OrT8kPfw'
-    twitter_secret_key: 'pBA5xmtDz5vNdEwn1buvdFJaa5HxxbGy6M8YMto0o'
+    twitter_api_id: 'uak1pKWo7l9adv1i0SoQw'
+    twitter_secret_key: 'ufT3Y97LjaReNYMZ6X43ikYwKNhMwRjjRFpvebofrRk'
     google_api_id: ''
     google_secret_key: ''
 
