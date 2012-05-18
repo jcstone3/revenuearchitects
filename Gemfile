@@ -51,6 +51,7 @@ group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
 gem 'wkhtmltopdf-binary'
+gem 'taps'
 end
 
 #wkhtmltopdf for test, stage and production enviornments
