@@ -46,12 +46,13 @@ gem "google_visualr", ">= 2.1"
 #gem "google_charts"
 #bootstrap rails gem
 gem "twitter-bootstrap-rails"
+gem 'taps'
+
 
 group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
 gem 'wkhtmltopdf-binary'
-gem 'taps'
 end
 
 #wkhtmltopdf for test, stage and production enviornments
