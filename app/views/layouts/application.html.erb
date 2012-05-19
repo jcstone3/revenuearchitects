@@ -75,14 +75,15 @@
    
     <%= javascript_include_tag "application" %>
     <%= feedback_tab(:position => 'left') %>
-    <script>
-     
-    document.write (
+    <script type="text/javascript">
+  /* <![CDATA[ */
+  document.write (
     '<img src="http://engage.revenuearchitects.com/acton/bn/2488/visitor.gif?ts='+
     new Date().getTime()+
     '&ref='+escape(document.referrer) + '">'
-    );
-   
-    </script>
+  );
+  /* ]]> */
+</script>
+
   </body>
 </html>
