@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/rails/exception_notification.git
+  revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
+  specs:
+    exception_notification (1.0.0)
+
+GIT
   remote: https://github.com/dblock/to_xls.git
   revision: c7ef31174947b7b1459b0bb7bda3dd43f83aaa64
   branch: to-xls-on-models
@@ -216,6 +222,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise
+  exception_notification!
   faker
   google_visualr (>= 2.1)
   googlecharts

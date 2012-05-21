@@ -77,4 +77,11 @@ RevenueGrader::Application.configure do
   :user_name => "noreply@revenuegrader.com",
   :password => "survey$33" 
 }
+
+  # For a full list of configurable options, see the gem's GitHub home page.
+  config.middleware.use ExceptionNotifier,
+  :email_prefix => "[RevenueGrader Exception]",
+  :sender_address => %{ "RevenueGrader" <admin@revenuegrader.com> },
+  :exception_recipients => %w ['admin@revenuegrader.com']
+
 end

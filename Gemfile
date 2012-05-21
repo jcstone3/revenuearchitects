@@ -38,7 +38,6 @@ gem 'faker'
 gem 'rubyXL', '1.2.5'
 gem 'nokogiri'
 gem 'rubyzip'
-gem 'newrelic_rpm'
 #google charts
 gem "googlecharts"
 #gem "gchartrb"
@@ -47,6 +46,8 @@ gem "google_visualr", ">= 2.1"
 #bootstrap rails gem
 gem "twitter-bootstrap-rails"
 gem 'taps'
+gem 'exception_notification', :git => "git://github.com/rails/exception_notification.git",
+        :require => "exception_notifier"
 
 
 group :development do
@@ -58,6 +59,7 @@ end
 #wkhtmltopdf for test, stage and production enviornments
 group :test, :staging, :production do 
 	gem "wkhtmltopdf-heroku"
+	gem 'newrelic_rpm'
 end	
 # Gems used only for assets and not required
 # in production environments by default.
