@@ -69,9 +69,6 @@ group :assets do
   gem "twitter-bootstrap-rails"
 end
 
-configure :production do
-  require 'newrelic_rpm'
-end
 
 
 # To use ActiveModel has_secure_password
