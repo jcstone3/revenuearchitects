@@ -11,7 +11,7 @@
                       <table class="table table-bordered" >
                          <%@all_sections.each_with_index do |section,i| %>
                             <tr>
-                              <td><%= section.name%></td><td><span class="tblendstyle">
+                              <td><%= section.name.try(:titleize)%></td><td><span class="tblendstyle">
                                  <%= @section_questions[i].question_attempted%>/
                                  <%= section.question_count%> </span>
                               </td>
