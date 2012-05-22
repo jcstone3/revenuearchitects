@@ -2,8 +2,70 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <title>Welcome to Revenue Grader</title>
+    <style type="text/css">
+    #outlook a { padding:0; }
+    body { width:100% !important; }
+    body { -webkit-text-size-adjust:none; }
+    body { margin:0; padding:0; }
+    img { border:0; height:auto; line-height:100%; outline:none; text-decoration:none; }
+    table td { border-collapse:collapse; }
+    #backgroundTable { height:100% !important; margin:0; padding:0; width:100% !important; }
+    .bluebox { background: #eef7fa; border-bottom: 1px solid #c1eaf8; border-top: 1px solid #c1eaf8; padding: 10px; width: 540px; }
+    a { color: #00729D; text-decoration: underline; }
+    .footer a { color: #96ddf7; }
+    </style>
   </head>
-  <body>
+  <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: none;margin: 0;padding: 0;background-color: #00729D;width: 100% !important;">
+      <center>
+          <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="backgroundTable" style="margin: 0;padding: 0;background-color: #00729D;height: 100% !important;width: 100% !important;">
+              <tr>
+                  <td align="center" valign="top" style="border-collapse: collapse;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="600">
+                      <tr>
+                         <td align="left" style="padding: 20px 0" valign="bottom">
+                       <!--   <img alt="Revenue Grader" src="http://www.revenuegrader.com/"  style="border:none; display:block; height:auto; line-height:100%; outline:none;" /> -->
+                       </td>
+                        
+                      </tr>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" width="600">
+                      <tr>
+                        <td style="padding: 0;" valign="bottom"><img src="http://tracksu.it/img/email-content-top.gif" style="border:none; display:block; height:auto; line-height:100%; outline:none; text-decoration:none; max-width:600px;" /></td>
+                      </tr>
+                      <tr>
+                        <td style="background-color:#ffffff; color: #666666; font-family: Arial; font-size: 14px; line-height: 18px; padding: 15px 20px 40px 20px;" valign="top">
+                          <h1>Welcome to Revenue Grader </h1>
+                          <p>Hello <%= @user.username.titleize -%>,</p>
+                          
+                          <p>Welcome to RevenueGrdaer and thank you for signing up!</p>
+                          <div class="bluebox">
+                          <strong>Registered Email:</strong> <%= @user.email %>
+                          </div>
+                          <p>We are excited to have you with us and we're always here to help.If you have questions, email us at <a href="mailto:admin@revenuegrader.com">admin@revenuegrader.com</a> and we'll get back to you promptly.</p>
+                          <p>Thanks,<br>
+                          Revenue Grader Team</p>
+                        </td>
+                      </tr>
+                      <!-- <tr>
+                        <td><img src="http://tracksu.it/img/email-content-bottom.gif" style="border:none; display:block; height:auto; line-height:100%; outline:none; text-decoration:none; max-width:600px;" /></td>
+                      </tr>-->
+                      <tr>
+                        <td align="center" class="footer" style="color: #ffffff; font-family: Arial; font-size: 12px; line-height: 16px; padding: 10px 0;">
+                          <p><!-- Revenue Grader --></p>
+                        </td>
+                      </tr> 
+                    </table>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </body>
+
+
+
+
+  <!-- <body>
     <h1>Welcome to Revenue Grader ::<%= @user.username %></h1>
     <p>
       You have successfully signed up to www.revenuegrader.com,
@@ -14,5 +76,5 @@
       To login to the site, just follow this link: <%= @url %>.
     </p>
     <p>Thanks for joining Us!!!</p>
-  </body>
+  </body> -->
 </html>
