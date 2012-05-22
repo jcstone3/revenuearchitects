@@ -82,6 +82,5 @@ RevenueGrader::Application.configure do
   config.middleware.use ExceptionNotifier,
   :email_prefix => "[RevenueGrader Exception]",
   :sender_address => %{ "RevenueGrader" <admin@revenuegrader.com> },
-  :exception_recipients => %w ['admin@revenuegrader.com']
-
+  :exception_recipients => %{"admin@revenuegrader.com"}
 end
