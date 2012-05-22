@@ -47,6 +47,16 @@ unless config.consider_all_requests_local
   end
 
 
+unless Rails.application.config.consider_all_requests_local
+  rescue_from Exception, :with => :render_error
+end
+
+def render_error(exception)
+  ExceptionNotifier::Notifier.exception_notification(request.env, exception).deliver
+end
+
+
+
 # def error_handle404
 #     if current_user.nil?
 #      redirect_to new_user_session_url, :alert => "You must first log in to access this page"
