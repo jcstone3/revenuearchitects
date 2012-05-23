@@ -32,8 +32,8 @@ staging:
 production:
     <<: *defaults
     host: www.revenuegrader.com
-    facebook_app_id: '342877705749491'
-    facebook_secret_key: '24c4b810c67186af6a1804040814e436'  
+    facebook_app_id: '417073514990362'
+    facebook_secret_key: 'aba93b297245e2a257c5c145e8b374a5'  
     twitter_api_id: 'yB7A8psK5qBUHVt3RDEjjw'
     twitter_secret_key: 'rb5GB4BqA8Ojg0kQUeG1qNxz9PKN0gtl0RKzGoN5H4'
     google_api_id: ''
