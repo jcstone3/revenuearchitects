@@ -15,7 +15,7 @@
                                         <tr>
                                             <td><%= feedback.id %></td>
                                             <td><%= feedback.subject %></td>
-                                            <td><%= feedback.email %></td>
+                                            <td><a href="mailto:<%= feedback.email %>"><%= feedback.email %></td>
                                             <td><%= feedback.comment %></td>
                                             <td><%= feedback.created_at %></td>
                                         </tr>
