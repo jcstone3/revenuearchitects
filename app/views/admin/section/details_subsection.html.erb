@@ -1,0 +1,70 @@
+<div class="container left" >
+      <div class="row-fluid">
+        <div class="span12">
+                  <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;">
+                                <li><%=link_to 'Feedbacks', admin_feedbacks_url %></li>
+                                <li><%= link_to 'Questions', admin_questions_url%></a></li>
+                                <li class="active"><%=link_to 'Sections', admin_sections_url%>
+                                </li>
+                                <li><%= link_to 'Users', admin_users_url%></li>
+                                 <li><%= link_to 'Dashboard', admin_root_url %></li>
+                            </ul>
+                             
+                            <div class="tab-content2"style="padding-top:0px">
+                            <div class="tab-pane active" id="dashboard">
+                <div class="tabHead">
+                                  <h1>Questions For </h1>
+                                  <h2>  Following questions would be deleted along with Subsection </h2>
+                                </div> <br/>
+                                <% if !@question.blank?%>
+                                     <div class="buttons" style="padding-left:1050px;">
+                                     <%= link_to 'Delete', admin_delete_subsection_url, :id=>@question[0].subsection_id, :class => "btn btn-primary", :confirm => "Are you sure you want to delete subsection and all its questions?" %>
+
+                                     <%= link_to 'Cancel', admin_sections_url, :class => "btn btn-primary"%>
+                                   </div>
+                                       <div class="tabGraph">
+                                           <div id="box">
+
+                                        <table cellpadding="1" cellspacing="1" id="subsection_table" class="report-body dataTable2"> 
+                                        </br>
+                                        <thead>
+                                          <tr>
+                                            <th><h3>#</h3></th>
+                                            <th><h3>Question</h3></th>
+                                            <th><h3>Description</h3></th>
+                                            <th><h3>Points</h3></th>
+                                           
+                                                                               
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                                                              
+                                          <% @question.each do |section| %>
+
+                                              <tr>
+                                                  <td><%= section.question_id %></td>
+                                                  <td><%= section.question_name %></td>
+                                                  <td><%= truncate(section.question_desc, :length=>140) %></td> 
+                                                  <td><%= section.question_points %></td>  
+                                                                                                      
+                                              </tr>
+                                          <% end %>
+                                          </tbody>        
+                                      </table> <br/>
+                                          
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+ <!--                            <div class="tab-pane" id="users">Users</div>
+                            <div class="tab-pane" id="reports">Reports</div>
+                            <div class="tab-pane" id="sections">Sections</div>
+                            <div class="tab-pane" id="questions">Questions</div>
+                            <div class="tab-pane" id="settings">Settings</div> -->
+                            </div>
+                            <%else%>
+                            <h4>No Questions avaiable</h4>
+                            <%end%>
+        </div>
+      </div>
+    </div> 

@@ -18,6 +18,7 @@ RevenueGrader::Application.routes.draw do
    post '/questions/create' => "questions#create", :as=>"create_question"
    get '/sections' => "section#index", :as => "sections"
    get '/section/new' => "section#new", :as => "new_section"
+   get '/subsection/details/:id' => "section#details_subsection", :as => "details_subsection" 
    get '/subsection/new' => "section#subsection_new", :as => "new_subsection"
    post '/section/create' => "section#create", :as => "create_section"
    post '/subsection/create' => "section#create_subsection", :as => "create_subsection"   

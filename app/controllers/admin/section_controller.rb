@@ -83,20 +83,29 @@ class Admin::SectionController < ApplicationController
     # end   
     #  redirect_to :action => 'index' 
     # end
-
-    def destroy_subsection
-      @subsection = SubSection.find_by_id(params[:id])
-       if @subsection.destroy
-      flash[:success] = "SubSection Deleted successfully"         
-    else
-      flash[:success] = "SubSection not Deleted"          
-    end   
-     redirect_to :action => 'index' 
+  
+    
+    def reports_index
     end
 
+	  def destroy_subsection
+      @subsection = SubSection.find_by_id(params[:id])
 
-	  def reports_index
-  	end	
+      if @subsection.destroy
+         flash[:message] = "Subsection deleted successfully"
+      else
+        flash[:message] = "Sorry could not delete subsection" 
+      end    
+       
+    redirect_to :action => 'index'   
+  end
 
+    def details_subsection
+       @question =  Question.find(:all,
+                       :select => "questions.id as question_id, questions.points as question_points, sub_section_id as subsection_id, sub_sections.name, questions.name as question_name, questions.description as question_desc",
+                       :joins => "left outer join sub_sections on sub_sections.id = questions.sub_section_id where questions.sub_section_id = #{params[:id]}"
+                               )
+
+    end
 
 end

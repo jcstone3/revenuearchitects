@@ -479,6 +479,15 @@ $(document).ready(function(){
         } ); 
       //---end --of admin user page table---//
 
+      $('#subsection_table').dataTable( {
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } ); 
+
       /* report Tables */
        $(".pageAccordion").accordion({
       autoHeight: false,

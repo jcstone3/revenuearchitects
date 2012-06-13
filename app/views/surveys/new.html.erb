@@ -36,7 +36,7 @@
                <div class="score">
                    <%@completed_surveys.each_with_index do |completed_survey, i|%>
                     <% if i < 2%>
-                        <span><%= link_to "#{completed_survey.created_at.strftime('%d %B  %Y')}", reports_url(completed_survey)%>.</span><br/>
+                       <br/> <ul><%= link_to "#{completed_survey.created_at.strftime('%d %B  %Y')}", reports_url(completed_survey)%></ul>
                    <%end%>
                   <%end%>  
                </div>
