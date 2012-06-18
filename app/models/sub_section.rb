@@ -1,4 +1,7 @@
 class SubSection < ActiveRecord::Base
+
+    default_scope where(:deleted_at => nil)
+
 	validates :name, :presence => {:message=> "Name can't be blank"}
 	validates :section_id, :presence => {:message=> "Select Section"}
 	validates :description, :presence => {:message=> "Description can't be blank"}

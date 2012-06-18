@@ -3,7 +3,7 @@ class Admin::SectionController < ApplicationController
 	def index
     @sections =  Section.find(:all,
                        :select => "sub_sections.id as subsection_id, sections.name, sub_sections.name as subsection_name, sub_sections.description as subsection_desc",
-                       :joins => "left outer join sub_sections on sections.id = sub_sections.section_id",
+                       :joins => "left outer join sub_sections on sections.id = sub_sections.section_id WHERE sub_sections.deleted_at IS NULL",
                        :order =>"sections.id ASC")
 	  #@sections = Section.all(:order=>"id ASC")
     #@sub_sections = SubSection.all(:order=>"id ASC")
@@ -101,9 +101,9 @@ class Admin::SectionController < ApplicationController
   end
 
     def details_subsection
-       @question =  Question.find(:all,
+       @question =  Question.unscoped.find(:all,
                        :select => "questions.id as question_id, questions.points as question_points, sub_section_id as subsection_id, sub_sections.name, questions.name as question_name, questions.description as question_desc",
-                       :joins => "left outer join sub_sections on sub_sections.id = questions.sub_section_id where questions.sub_section_id = #{params[:id]}"
+                       :joins => "left outer join sub_sections on sub_sections.id = questions.sub_section_id where questions.sub_section_id = #{params[:id]} and questions.deleted_at is NULL"
                                )
 
     end

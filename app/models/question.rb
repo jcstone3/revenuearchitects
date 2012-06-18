@@ -1,8 +1,13 @@
 class Question < ActiveRecord::Base
+
+  #permanent_records(soft delete)
+  default_scope where(:deleted_at => nil)
+
   #Relationships
   belongs_to :sub_section
   has_one :response
-
+  
+  acts_as_ordered :order => 'id'
 
   #Validations
 	validates :name, :presence =>{:message=>"Question can't be blank"}
@@ -28,7 +33,7 @@ scope :find_question_count, lambda{|section_id| {
     :select=>"count(*) as question_count",
     :joins=>"right outer join sub_sections on questions.sub_section_id = sub_sections.id 
              inner join sections on sections.id = sub_sections.section_id",
-    :conditions=>"sections.id =#{section_id}"
+    :conditions=>"sections.id =#{section_id} "
 }}
 end
 # == Schema Information

@@ -323,7 +323,7 @@ end
 #individual score for each response
 def self.get_individual_response_score(response_id, response_question_id)
   score = 0
-  question = Question.find(response_question_id)
+  question = Question.unscoped.find(response_question_id)
   response = Response.find(response_id)
   #for each response calculate the response score
   score = get_score_value(question.points, response.answer_1)

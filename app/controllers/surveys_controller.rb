@@ -126,8 +126,11 @@ def question
   
   #TODO: Check if input parameters are correct 
   if survey_id.blank? or question_id.blank?
-    flash[:warning] = "Could not form the question. Please try again"
-    redirect_to continue_survey_path and return
+      #question_id = params[:question_id].next
+    # else 
+       flash[:warning] = "Could not form the question. Please try again"
+        redirect_to continue_survey_path and return
+      
   end
 
 
@@ -149,15 +152,19 @@ def question
   end
 
   if @question.blank?
+   #   @question = get_question(question_id).next
+       #redirect_to continue_survey_path
+   # else
+    @question = get_question(question_id)
     redirect_to confirm_survey_path and return 
   end
-
+ # question_total = Question.find_by_sql("SELECT count(questions) FROM questions left outer join sub_sections on questions.sub_section_id = sub_sections.id left outer join sections on sections.id = sub_sections.section_id WHERE questions.deleted_at IS NULL")
   @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
                            :group => "sections.id", :order => "sections.id")
   @all_sections = get_all_sections
-
+   
   #Getting the score to show on page
   @total_score = Survey.calculate_response_for_section(@survey.id, @question.section_id)
 
@@ -296,12 +303,11 @@ def report
      @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
     
      #for section questions attempted
-      @section_questions  = Section.find(:all,
+     @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
                            :group => "sections.id", :order => "sections.id") 
-   
-
+  
     render :layout =>"report"
  
   end
@@ -344,7 +350,7 @@ def confirm_survey
 
   @all_sections.each_with_index do |section,i|
     @final_score += @section_questions[i].question_attempted.to_i
-
+    #question_total = Question.find_by_sql("SELECT count(questions) FROM questions left outer join sub_sections on sub_section_id = sub_sections.id left outer join sections on sections.id = sub_sections.section_id WHERE questions.deleted_at IS NULL")
     @total_question_count += section.question_count
   end
 

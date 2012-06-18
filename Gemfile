@@ -48,7 +48,7 @@ gem "twitter-bootstrap-rails"
 gem 'taps'
 gem 'exception_notification', :git => "git://github.com/rails/exception_notification.git",
         :require => "exception_notifier"
-
+gem "permanent_records", "~> 2.1.2"
 
 group :development do
 gem "annotate", "~>2.4.1.beta1"

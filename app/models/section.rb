@@ -1,7 +1,7 @@
 class Section < ActiveRecord::Base
   #Relationships
 	belongs_to :questionnaire
-	has_many :sub_sections
+	has_many :sub_sections, :dependent => :destroy
 
   #Scopes
   #default_scope :order => :sequence
