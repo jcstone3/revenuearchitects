@@ -1,13 +1,14 @@
 class Question < ActiveRecord::Base
 
-  #permanent_records(soft delete)
-  default_scope where(:deleted_at => nil)
+  acts_as_ordered :order => 'id'
+  #permanent_records(for soft delete)
+  #default_scope where(:deleted_at => nil)
 
   #Relationships
   belongs_to :sub_section
   has_one :response
   
-  acts_as_ordered :order => 'id'
+  
 
   #Validations
 	validates :name, :presence =>{:message=>"Question can't be blank"}
