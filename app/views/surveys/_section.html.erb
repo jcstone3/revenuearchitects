@@ -8,6 +8,7 @@
                   <li class="surveyname">&nbsp;Diagnostic
                        <%= @survey.created_at.strftime("%B  %Y")%>
                   </li>
+                  
                     <%@all_sections.each_with_index do |section,i| %>
                    <li class="next" id="section_<%=section.id%>">
                           <%= link_to() do %>
@@ -15,8 +16,8 @@
                               <%= section.name.titleize %>
                               <span id ="span_<%=section.id%>" class="red" title ="Total number of questions", rel="tooltip">
                                  <%= @section_questions[i].question_attempted%>/
-                                 <%= section.question_count%> 
-                              </span>
+                                 <%= @section_questions_total[i].question_total %>
+                                </span>
                           <% end %> 
                    </li>              
                    <%end%> 

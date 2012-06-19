@@ -13,7 +13,8 @@
                             <tr>
                               <td><%= section.name.try(:titleize)%></td><td><span class="tblendstyle">
                                  <%= @section_questions[i].question_attempted%>/
-                                 <%= section.question_count%> </span>
+                                 <%= @section_questions_total[i].question_total %>
+                                 </span>
                               </td>
                             </tr>
                           <%end%>
@@ -21,7 +22,7 @@
                             <td>Total</td>
                             <td><span class="tblendstyle">
                               <%=  @final_score %>/
-                              <%= @total_question_count%></span>
+                              <%= @total_question_total %></span>
                             </td>
                           </tr> 
                        </table>     
