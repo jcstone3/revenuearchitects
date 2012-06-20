@@ -43,6 +43,8 @@ GEM
     activesupport (3.2.2)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    acts_as_list (0.1.6)
+    acts_as_ordered (0.0.2.alpha)
     addressable (2.2.7)
     annotate (2.4.1.beta1)
     arel (3.0.2)
@@ -218,6 +220,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_list (~> 0.1.6)
+  acts_as_ordered (~> 0.0.1.alpha)
   annotate (~> 2.4.1.beta1)
   bootstrap-will_paginate
   client_side_validations (~> 3.1.4)

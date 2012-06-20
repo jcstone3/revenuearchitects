@@ -20,7 +20,7 @@ gem 'jquery-rails'
 
 gem 'simple_form', "~> 2.0.1"
 
-
+gem "acts_as_ordered", "~> 0.0.1.alpha"
 gem "client_side_validations", '~>3.1.4'
 gem 'settingslogic'
 gem 'therubyracer'
@@ -49,6 +49,8 @@ gem 'taps'
 gem 'exception_notification', :git => "git://github.com/rails/exception_notification.git",
         :require => "exception_notifier"
 gem "permanent_records", "~> 2.1.2"
+gem "acts_as_list", "~> 0.1.6"
+#gem "ordered-active-record", "~> 0.9.7"
 
 group :development do
 gem "annotate", "~>2.4.1.beta1"

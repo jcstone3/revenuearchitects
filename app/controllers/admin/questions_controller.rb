@@ -20,7 +20,7 @@ class Admin::QuestionsController < ApplicationController
 	def create	
     @last_question = Question.last
     @sequence = @last_question.sequence+1
-    params[:question].merge!(:sequence => @sequence)	
+    params[:question].merge!(:sequence => @sequence)
 		@question = Question.new(params[:question])	
 
         if @question.save
