@@ -126,8 +126,6 @@ def question
   
   #TODO: Check if input parameters are correct 
   if survey_id.blank? or question_id.blank?
-      #question_id = params[:question_id].next
-    # else 
        flash[:warning] = "Could not form the question. Please try again"
         redirect_to continue_survey_path and return
       
@@ -158,13 +156,10 @@ def question
   end
 
   if @question.blank?
-   #   @question = get_question(question_id).next
-       #redirect_to continue_survey_path
-   # else
     @question = get_question(question_id)
     redirect_to confirm_survey_path and return 
   end
- # question_total = Question.find_by_sql("SELECT count(questions) FROM questions left outer join sub_sections on questions.sub_section_id = sub_sections.id left outer join sections on sections.id = sub_sections.section_id WHERE questions.deleted_at IS NULL")
+
   @section_questions  = Section.find(:all,
          :select => "count(responses.question_id) as question_attempted",
          :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",

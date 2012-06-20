@@ -3,15 +3,15 @@ class Question < ActiveRecord::Base
   #permanent_records(for soft delete)
   default_scope where(:deleted_at => nil)
 
-  acts_as_list 
-  acts_as_ordered :order => 'position'
+  acts_as_list :scope => :sub_section
+  #acts_as_ordered :order => 'position'
   
   
   #Relationships
   belongs_to :sub_section
   has_one :response
   
-  attr_accessible :name, :description, :position
+  attr_accessible :name, :description, :position, :sequence, :is_active, :sub_section_id, :points
 
   #Validations
 	validates :name, :presence =>{:message=>"Question can't be blank"}
