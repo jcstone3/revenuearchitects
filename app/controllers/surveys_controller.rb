@@ -72,7 +72,7 @@ def get_response_status
                    response << res.question_id   
                  end 
                  Question.all.each do |quest|
-                   questions << quest.id
+                   questions << quest.position
                  end
                  res = questions - response
                  @survey_name = @survey.created_at.strftime('%B,%Y')
@@ -123,7 +123,7 @@ end
 def question
   survey_id = params[:id]
   question_id = params[:question_id]
-  
+
   #TODO: Check if input parameters are correct 
   if survey_id.blank? or question_id.blank?
    flash[:warning] = "Could not form the question. Please try again"
@@ -154,9 +154,9 @@ def question
 
   #for total count
   @section_questions_total = Section.find(:all,
-        :select => "count(questions.id) as question_total, sections.id",
+        :select => "count(questions.position) as question_total, sections.id",
         :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-        :group => "sections.id")
+        :group => "sections.id", :order => "id ASC")
 
   @section_questions  = Section.find(:all,
          :select => "count(responses.question_id) as question_attempted",
@@ -195,7 +195,6 @@ def create_response
    #Create a response if new or update the existing record
    survey_id = response_params[:survey_id]
    question_id = response_params[:question_id]
-
    @response = Response.find_by_survey_id_and_question_id(survey_id, question_id)
 
    if @response.blank?
@@ -206,11 +205,12 @@ def create_response
     #TODO: Redirect to next page. Issue with sequence.
     #Find if the question is the last of the questions. If it is, then go to close survey, else go
     #go to next question
-    redirect_to questions_path(survey_id, response_params[:question_id].to_i + 1) and return
+    redirect_to questions_path(survey_id, response_params[:question_id].to_i ) and return
   else
     flash[:error] = "Error in saving the Response. Please try again."
     redirect_to questions_path(survey_id, question_id) and return
   end
+
 
 end
 
@@ -303,9 +303,9 @@ def report
     
     #for total count
      @section_questions_total = Section.find(:all,
-                            :select => "count(questions.id) as question_total, sections.id",
+                            :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id")
+                            :group => "sections.id", :order => "id ASC")
 
      #for section questions attempted
      @section_questions  = Section.find(:all,
@@ -348,9 +348,9 @@ def confirm_survey
   @survey = Survey.find_by_id(params[:id])
   #for total count
    @section_questions_total = Section.find(:all,
-                          :select => "count(questions.id) as question_total, sections.id",
+                          :select => "count(questions.position) as question_total, sections.id",
                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                          :group => "sections.id")
+                          :group => "sections.id", :order => "id ASC")
    
   @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
@@ -395,9 +395,9 @@ def compare
 
    #for total count
   @section_questions_total = Section.find(:all,
-                            :select => "count(questions.id) as question_total, sections.id",
+                            :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id")
+                            :group => "sections.id", :order => "id ASC")
 
 
   if @survey.blank?
@@ -421,9 +421,9 @@ def compare_strategy
 
   #for total count
      @section_questions_total = Section.find(:all,
-                            :select => "count(questions.id) as question_total, sections.id",
+                            :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id")
+                            :group => "sections.id", :order => "id ASC")
 
 
   #for section questions attempted
@@ -468,9 +468,9 @@ def compare_system
 
     #for total count
      @section_questions_total = Section.find(:all,
-                            :select => "count(questions.id) as question_total, sections.id",
+                            :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id")
+                            :group => "sections.id", :order => "id ASC")
 
 
   if @survey.blank?
@@ -500,9 +500,9 @@ def compare_programs
 
    #for total count
      @section_questions_total = Section.find(:all,
-                            :select => "count(questions.id) as question_total, sections.id",
+                            :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id")
+                            :group => "sections.id", :order => "id ASC")
 
 
    #for section questions attempted
