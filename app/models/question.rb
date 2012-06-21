@@ -25,11 +25,11 @@ class Question < ActiveRecord::Base
 	self.per_page = 10
 
   scope :find_section_questions, lambda{|section_id| {
-    :select=>"questions.position",
+    :select=>"questions.id",
     :joins=>"left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              inner join sections on sections.id = sub_sections.section_id",
     :conditions=>"sections.id =#{section_id}",
-    :order => "questions.position ASC"
+    :order => "questions.id ASC"
 }}
 
 

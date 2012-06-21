@@ -103,10 +103,14 @@ class Survey < ActiveRecord::Base
      @questions.each do |question|
         response_array = Array.new
 
-      response_array.push(question.position.to_s)
-      @your_response = @response.select { |response| response.question_id == question.position.to_i } 
+      response_array.push(question.id.to_s)
+      logger.debug question.id
+      @your_response = @response.select { |response| response.question_id == question.id.to_i } 
+      logger.debug "###########################"
+      logger.debug @response
+      puts @your_response
       response_array.push(@your_response.first.answer_1.nil? ? 0 :  @your_response.first.answer_1.to_i)
-      @avg_response = @response_all.select { |response| response.question_id == question.position.to_i }
+      @avg_response = @response_all.select { |response| response.question_id == question.id.to_i }
       response_array.push(@avg_response.first.answer_1.nil? ? 0 : @avg_response.first.answer_1.to_i )
       overall_array.push(response_array)
       end
