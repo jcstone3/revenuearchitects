@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
   #permanent_records(for soft delete)
   default_scope where(:deleted_at => nil)
 
-  acts_as_list :scope => :sub_section
+  acts_as_list 
   #acts_as_ordered :order => 'position'
   
   
@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
   belongs_to :sub_section
   has_one :response
   
-  attr_accessible :name, :description, :position, :sequence, :is_active, :sub_section_id, :points
+  #attr_accessible :name, :description, :position, :sequence, :is_active, :sub_section_id, :points
 
   #Validations
 	validates :name, :presence =>{:message=>"Question can't be blank"}
@@ -25,11 +25,11 @@ class Question < ActiveRecord::Base
 	self.per_page = 10
 
   scope :find_section_questions, lambda{|section_id| {
-    :select=>"questions.id",
+    :select=>"questions.position",
     :joins=>"left outer join sub_sections on questions.sub_section_id = sub_sections.id 
              inner join sections on sections.id = sub_sections.section_id",
     :conditions=>"sections.id =#{section_id}",
-    :order => "questions.id ASC"
+    :order => "questions.position ASC"
 }}
 
 

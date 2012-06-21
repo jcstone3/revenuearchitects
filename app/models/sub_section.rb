@@ -7,7 +7,7 @@ class SubSection < ActiveRecord::Base
 	validates :description, :presence => {:message=> "Description can't be blank"}
 
 	belongs_to :section
-	has_many :questions, :dependent => :destroy, :order => "position"
+	has_many :questions, :dependent => :destroy
 end
 # == Schema Information
 #

@@ -41,8 +41,8 @@
         <i class="icon-ok icon-white answer">
         </i>Confirm Answer
    <% end %>
-   <% if(@question.id > 1)%>
-    <%= link_to(questions_path(params[:id],@question.id - 1 ), :class=>"btn confprev") do %>
+   <% if(@question.position > 1)%>
+    <%= link_to(questions_path(params[:id],@question.position - 1 ), :class=>"btn confprev") do %>
        <i class="icon-chevron-left">
         </i> &nbsp;Previous Question
    <% end %>

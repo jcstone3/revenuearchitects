@@ -126,17 +126,9 @@ def question
   
   #TODO: Check if input parameters are correct 
   if survey_id.blank? or question_id.blank?
-       flash[:warning] = "Could not form the question. Please try again"
-        redirect_to continue_survey_path and return
-      
+   flash[:warning] = "Could not form the question. Please try again"
+   redirect_to continue_survey_path and return  
   end
-
-  #for total count
-    @section_questions_total = Section.find(:all,
-                    :select => "count(questions.id) as question_total, sections.id",
-                    :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                    :group => "sections.id")
-  
 
   #Get current Survey
   @survey = get_current_survey
@@ -159,6 +151,12 @@ def question
     @question = get_question(question_id)
     redirect_to confirm_survey_path and return 
   end
+
+  #for total count
+  @section_questions_total = Section.find(:all,
+        :select => "count(questions.id) as question_total, sections.id",
+        :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
+        :group => "sections.id")
 
   @section_questions  = Section.find(:all,
          :select => "count(responses.question_id) as question_attempted",
@@ -642,7 +640,7 @@ def check_survey(survey_id)
 end
 
 def check_question(question_id)  
-  @question = Question.find_by_id(question_id)
+  @question = Question.find_by_position(question_id)
   if @question.present?
     return true
   else
@@ -697,10 +695,10 @@ def get_question(question_id)
   questions = session[:questions]
 
   if questions.blank?
-    questions = Question.select("questions.id, questions.name, questions.points, questions.description as description, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).order("questions.sequence ASC")
+    questions = Question.select("questions.id, questions.position, questions.name, questions.points, questions.description as description, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).order("questions.sequence ASC")
     session[:questions] = questions
   end
-  question = questions.select { |quest|  quest.id == question_id.to_i }
+  question = questions.select { |quest|  quest.position == question_id.to_i }
 
   if question.present?
     return question.first
