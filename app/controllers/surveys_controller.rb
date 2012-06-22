@@ -72,7 +72,7 @@ def get_response_status
                    response << res.question_id   
                  end 
                  Question.all.each do |quest|
-                   questions << quest.position
+                   questions << quest.id
                  end
                  res = questions - response
                  @survey_name = @survey.created_at.strftime('%B,%Y')
@@ -141,7 +141,7 @@ def question
   # - All Sections
   # - All Subsections
   @question = get_question(question_id)
-  
+
   if @survey.blank? 
     flash[:warning] = "Could not form the question. Please try again"
     redirect_to continue_survey_path and return
@@ -184,6 +184,10 @@ end
 def create_response 
   #Once the response is submitted, depending on whether Score exists, 
   # create or update the record
+  logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+  logger.debug "in create response"
+  logger.debug params[:question_id]
+  logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 
   response_params = params[:response]
 
@@ -194,7 +198,10 @@ def create_response
 
    #Create a response if new or update the existing record
    survey_id = response_params[:survey_id]
-   question_id = response_params[:question_id]
+   question_id = params[:question_id]
+  logger.debug params[:question_id]
+  logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+   #question_id = response_params[:question_id]
    @response = Response.find_by_survey_id_and_question_id(survey_id, question_id)
 
    if @response.blank?
@@ -205,7 +212,9 @@ def create_response
     #TODO: Redirect to next page. Issue with sequence.
     #Find if the question is the last of the questions. If it is, then go to close survey, else go
     #go to next question
-    redirect_to questions_path(survey_id, response_params[:question_id].to_i ) and return
+    
+    redirect_to questions_path(survey_id, params[:question_id].to_i + 1 ) and return
+    #redirect_to questions_path(survey_id, question_id) and return
   else
     flash[:error] = "Error in saving the Response. Please try again."
     redirect_to questions_path(survey_id, question_id) and return
@@ -408,7 +417,7 @@ def compare
     @data_table = Survey.get_overall_graph(survey_id)
     
      option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
-        @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
+    @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
         
   end
   render :layout =>"report"
@@ -528,14 +537,47 @@ end
 end  
 
  def reports
+  
   @sections = Section.find(:all) 
-  @survey = Survey.find(params[:id])
+  survey_id = params[:id]
+  @survey = current_user.companies.first.surveys.find(params[:id])
+   @industry = Industry.find(:first, :select=>"industries.name",
+               :joins=>"left outer join companies on companies.industry_id = industries.id 
+                       left outer join surveys on companies.id = surveys.company_id and 
+                       surveys.id = #{@survey.id}")
+
+ 
+  if @survey.blank?
+     flash[:notice] = "No such survey exists"
+     redirect_to new_survey_path and return 
+   else
+    #for sections navigation tabs
+    @all_sections = get_all_sections
+
+    #if the user is authorized for the survey then get details of add to plan responses
+     @add_to_plan_responses = Response.get_response_for_options(@survey.id, "add_to_plan")
+    #for must do responses
+     @must_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'must_do'}
+    #for should do responses
+     @should_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'should_do'}
+    #for could do responses
+     @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
+    #if the user is authorized for the survey then get details of not applicable responses
+     @not_applicable_responses = Response.get_response_for_options(@survey.id, "not_applicable")
+    #if the user is authorized for the survey then get details of in plan responses
+     @in_plan_responses = Response.get_response_for_options(@survey.id, "in_plan")
+     @survey = Survey.find_by_id(survey_id)
+      @data_table = Survey.get_overall_graph(survey_id)
+  option = { width: 1000, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+  @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)     
+  end
+
  end   
 
 #to download in pdf/xls format
 def download_result
   require 'rubygems'
-  #require 'google_chart'
+  #require 'googlecharts'
   require 'spreadsheet'  
    
    @sections = Section.find(:all) 

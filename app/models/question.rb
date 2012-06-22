@@ -3,7 +3,8 @@ class Question < ActiveRecord::Base
   #permanent_records(for soft delete)
   default_scope where(:deleted_at => nil)
 
-  acts_as_list 
+  acts_as_list
+  #acts_as_list :scope => :sub_section
   #acts_as_ordered :order => 'position'
   
   
