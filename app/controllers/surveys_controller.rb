@@ -184,11 +184,7 @@ end
 def create_response 
   #Once the response is submitted, depending on whether Score exists, 
   # create or update the record
-  logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-  logger.debug "in create response"
-  logger.debug params[:question_id]
-  logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-
+  
   response_params = params[:response]
 
   if response_params.blank?  
@@ -198,10 +194,8 @@ def create_response
 
    #Create a response if new or update the existing record
    survey_id = response_params[:survey_id]
-   question_id = params[:question_id]
-  logger.debug params[:question_id]
-  logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-   #question_id = response_params[:question_id]
+   #question_id = params[:question_id]
+   question_id = response_params[:question_id]
    @response = Response.find_by_survey_id_and_question_id(survey_id, question_id)
 
    if @response.blank?
