@@ -101,7 +101,7 @@ class Admin::SectionController < ApplicationController
   end
 
     def details_subsection
-       @question =  Question.find(:all,
+       @question =  Question.unscoped.find(:all,
                        :select => "questions.id as question_id, questions.position as question_position, questions.points as question_points, sub_section_id as subsection_id, sub_sections.name, questions.name as question_name, questions.description as question_desc",
                        :joins => "left outer join sub_sections on sub_sections.id = questions.sub_section_id where questions.sub_section_id = #{params[:id]} and questions.deleted_at is NULL"
                                )

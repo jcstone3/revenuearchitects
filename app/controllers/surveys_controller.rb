@@ -108,7 +108,8 @@ def show
   #need to get current active and completed surveys
   #first get all surveys for this user and then select for active and inactive
   @get_all_surveys_for_current_user = Survey.get_all_survey_for_user(company_ids)  
-  
+  @total_question_total = 0
+  @survey = Survey.find_by_id(params[:id])
   #current active surveys
   @current_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == true}
   
@@ -116,7 +117,16 @@ def show
   @completed_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == false}
   @completed_surveys.take(2)
   @sections= Section.all  
-  @total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count     
+  #@total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count     
+  @section_questions_total = Section.find(:all,
+                            :select => "count(questions.position) as question_total, sections.id",
+                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
+                            :group => "sections.id", :order => "id ASC")
+  @all_sections = get_all_sections
+  @all_sections.each_with_index do |section,i|
+    #@final_score += @section_questions[i].question_attempted.to_i
+    @total_question_total += @section_questions_total[i].question_total.to_i
+  end
 end  
 
 #Show the question and capture the reponse
@@ -535,7 +545,7 @@ end
   @sections = Section.find(:all) 
   survey_id = params[:id]
   @survey = current_user.companies.first.surveys.find(params[:id])
-   @industry = Industry.find(:first, :select=>"industries.name",
+  @industry = Industry.find(:first, :select=>"industries.name",
                :joins=>"left outer join companies on companies.industry_id = industries.id 
                        left outer join surveys on companies.id = surveys.company_id and 
                        surveys.id = #{@survey.id}")
