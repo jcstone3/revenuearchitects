@@ -572,7 +572,7 @@ end
      @in_plan_responses = Response.get_response_for_options(@survey.id, "in_plan")
      @survey = Survey.find_by_id(survey_id)
       @data_table = Survey.get_overall_graph(survey_id)
-  option = { width: 1000, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+  option = { width: 600, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)     
   end
 
@@ -614,7 +614,7 @@ def download_result
     
     @data_table = Survey.get_overall_graph(@survey.id)
     
-     option = { width: 400, height: 300, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+     option = { width: 1000, height: 600, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
      @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
       
   end
