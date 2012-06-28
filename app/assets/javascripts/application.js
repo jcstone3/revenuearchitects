@@ -165,10 +165,12 @@ $(document).ready(function(){
                 });
                
                //For the Add to Plan options
-                $('#option').click(function(e){
+                $('.plan_option').click(function(e){
                     //set the add to plan options 
                     $('#response_answer_2').val(e.target.id); 
                     //make option as grey
+
+                  
                     $('#option').find('a#in_our_plan').removeClass($('#option').find('a#in_our_plan').
                         attr('class'));
                     $('#option').find('a#add_to_plan').removeClass($('#option').find('a#add_to_plan').
@@ -192,7 +194,7 @@ $(document).ready(function(){
                 });
 
                 //For the Priority options
-                $('#priority_option').click(function(e){
+                $('.priority_option').click(function(e){
                    
                     $('#response_answer_3').val(e.target.id);                     
                     
