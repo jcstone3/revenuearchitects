@@ -5,6 +5,7 @@
         <title>Revenue Grader - Survey Reports</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
+        <meta name = 'pdfkit-footer_right', content = 'Revenue Grader' >
         <meta name="author" content="">
         <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
         <script src='http://www.google.com/jsapi'></script>
@@ -14,25 +15,62 @@
 <%#= content_for :main_content do%>
        <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
         <%= render :partial=>"reports_css"%>
-        <div class="content1" style="page-break-after:always;">
-             <img src="http://dev.revenuegrader.com/assets/logo.png" alt = "Revenue Grader">
-             <h1><%= "#{current_user.companies.first.name}"%></h1></br>
-             <h1><%= @survey.created_at.strftime("%B  %Y")%></h1></br>
+        <div class="content" style="page-break-after:always;">
+        <div style="display:inline;">
+                <span><img src="http://dev.revenue-grader.com/assets/logo.png" alt = "Revenue Grader"><span>
+                <span style="font-size:60px;color: #0086AC;"> <%= "Revenue Grader" %> </span>  
+        </div>
+        
+        <div class="content1">             
+             <h3 style="text-align:center"><%= "#{current_user.companies.first.name}"%></h2></br>
+             <h3 style="text-align:center"><%= @survey.created_at.strftime("%B  %Y")%></h2></br>
+        </div>
         </div>
 
         <div class="content" style="page-break-after:always;">
-            <div class="content2">
-            <h2> <%= "#{current_user.companies.first.name}"%></h2>
-            <h2><%= @survey.created_at.strftime("%B  %Y")%></h2>
-           
-          </div>
-            <h1>Diagnostic Details</h1>
-            <h2>Industry :: <%= "#{@industry.name}"%></h2>
-            <h2>Size ::<%= "#{@survey.size}"%></h2>
-            <h2>Revenue :: <%= "#{@survey.revenue}"%></h2>
-            <div class="footer1">
-              <img src="http://dev.revenuegrader.com/assets/logo.png">
+            <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>  
             </div>
+
+        <h2> Diagnostic Details </h3>    
+        <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2 diagnostic-table">
+          <tr>
+            <td> Industry </td>
+            <td> <%= "#{@industry.name}"%> </td>
+          </tr>
+          <tr>
+            <td> Size </td>
+            <td> <%= "#{@survey.size}"%> </td>
+          </tr>
+          <tr>
+            <td> Revenue </td>
+            <td> <%= "#{@survey.revenue}"%> </td>
+          </tr>      
+        </table>
+
+        <h2> Diagnostic Summary </h3>    
+        <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
+          <tr>
+            <td> Sections </td>
+            <td> <%= "#{@industry.name}"%> </td>
+          </tr>
+          <tr>
+            <td> Size </td>
+            <td> <%= "#{@survey.size}"%> </td>
+          </tr>
+          <tr>
+            <td> Revenue </td>
+            <td> <%= "#{@survey.revenue}"%> </td>
+          </tr>      
+        </table>
+            
+
+            
+           <!--  <div class="footer1">
+              <img src="http://dev.revenue-grader.com/assets/logo.png">
+            </div> -->
         </div>
 
         
@@ -48,9 +86,9 @@
                  <div id='chart'></div>
                   <%= render_chart(@chart, 'chart') %>
                   
-            <div class="footer1">
+            <!-- <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div>
+            </div> -->
           </div>
          
         
@@ -70,9 +108,9 @@
                     <%end%>
                 <%= render :partial=>"table_end"%>
                   </div>        
-                  <div class="footer1">
+                  <!-- <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div> 
+            </div>  -->
             </div>
             
         </div>  
@@ -92,9 +130,9 @@
                     <%end%>
                 <%= render :partial=>"table_end"%>               
             </div> 
-           <div class="footer1">
+           <!-- <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div>
+            </div> -->
         </div>  
 
        
@@ -113,9 +151,9 @@
               <%end%>
              <%= render :partial=>"table_end"%>            
             </div> 
-            <div class="footer1">
+           <!--  <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div>
+            </div> -->
         </div> 
 
         <div class="content" style="page-break-after:always;">
@@ -133,9 +171,9 @@
                     <%end%>
                 <%= render :partial=>"table_end"%>                      
             </div> 
-            <div class="footer1">
+            <!-- <div class="footer1">
                <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div>
+            </div> -->
         </div> 
 
         <div class="content" style="page-break-after:always;">
@@ -152,9 +190,9 @@
                       :locals=> {:response =>response} %> 
                     <%end%>
               <%= render :partial=>"table_end"%>
-             <div class="footer1">
+            <!--  <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div>
+            </div> -->
         </div> 
       </div>
 
@@ -167,9 +205,9 @@
              <p class="aboutrevenue">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Aenean eu erat et velit dapibus bibendum id quis quam.
           Sed quis suscipit tortor.</p>
-          <div class="footer1">
+         <!--  <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div>
+            </div> -->
         </div>
 <%#end%>
    

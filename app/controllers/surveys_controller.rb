@@ -626,7 +626,7 @@ def download_result
         kit = PDFKit.new(html)    
         kit.stylesheets << Rails.root.join("app/assets/stylesheets/jquery.dataTables.css") 
         kit.stylesheets << Rails.root.join("app/assets/stylesheets/application.css")   
-        send_data(kit.to_pdf, :filename =>  "#{current_user.companies.first.name}_#{@survey.created_at.strftime('%B %Y')}_diagnostic_#{Time.now}.pdf", :type => 'application/pdf')
+        send_data(kit.to_pdf, :filename =>  "#{current_user.companies.first.name.humanize} #{@survey.created_at.strftime('%B %Y')} Diagnostic Report.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }
       format.xls {
