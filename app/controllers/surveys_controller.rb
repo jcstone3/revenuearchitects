@@ -590,6 +590,26 @@ def download_result
                :joins=>"left outer join companies on companies.industry_id = industries.id 
                        left outer join surveys on companies.id = surveys.company_id and 
                        surveys.id = #{@survey.id}")
+  @questions=[]
+  @final_score = 0
+  @total_question_total = 0
+  #@survey = Survey.find_by_id(params[:id])
+  #for total count
+   @section_questions_total = Section.find(:all,
+                          :select => "count(questions.position) as question_total, sections.id",
+                          :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
+                          :group => "sections.id", :order => "id ASC")
+   
+  @section_questions  = Section.find(:all,
+                           :select => "count(responses.question_id) as question_attempted",
+                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
+                           :group => "sections.id", :order => "sections.id")
+  logger.debug "#{@section_questions}"
+  @all_sections = get_all_sections
+   @all_sections.each_with_index do |section,i|
+    @final_score += @section_questions[i].question_attempted.to_i
+    @total_question_total += @section_questions_total[i].question_total.to_i
+  end
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"

@@ -17,7 +17,7 @@
         <%= render :partial=>"reports_css"%>
         <div class="content" style="page-break-after:always;">
         <div style="display:inline;">
-                <span><img src="http://dev.revenue-grader.com/assets/logo.png" alt = "Revenue Grader"><span>
+                <span><img src="http://dev.revenuegrader.com/assets/logo.png" alt = "Revenue Grader"><span>
                 <span style="font-size:60px;color: #0086AC;"> <%= "Revenue Grader" %> </span>  
         </div>
         
@@ -34,8 +34,9 @@
               </div>  
             </div>
 
-        <h2> Diagnostic Details </h3>    
-        <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2 diagnostic-table">
+        <h2> Diagnostic Details </h3>
+        <p>&nbsp;</p><table border="1" cellpadding="3" cellspacing="0" width="600" align="center" >  
+        <tbody style="color:#FFFFFF; background-color:#0086AC;">
           <tr>
             <td> Industry </td>
             <td> <%= "#{@industry.name}"%> </td>
@@ -47,25 +48,31 @@
           <tr>
             <td> Revenue </td>
             <td> <%= "#{@survey.revenue}"%> </td>
-          </tr>      
+          </tr> 
+          </tbody>     
         </table>
 
         <h2> Diagnostic Summary </h3>    
-        <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
-          <tr>
-            <td> Sections </td>
-            <td> <%= "#{@industry.name}"%> </td>
-          </tr>
-          <tr>
-            <td> Size </td>
-            <td> <%= "#{@survey.size}"%> </td>
-          </tr>
-          <tr>
-            <td> Revenue </td>
-            <td> <%= "#{@survey.revenue}"%> </td>
-          </tr>      
-        </table>
-            
+        <p>&nbsp;</p><table border="1" cellpadding="3" cellspacing="0" width="600" align="center" > 
+          <tbody style="color:#FFFFFF; background-color:#0086AC;">
+           <%@all_sections.each_with_index do |section,i| %>
+              <tr>
+                <td><%= section.name.try(:titleize)%></td><td><span class="tblendstyle">
+                   <%= @section_questions[i].question_attempted%>/
+                   <%= @section_questions_total[i].question_total %>
+                   </span>
+                </td>
+              </tr>
+            <%end%>
+            <tr>
+              <td>Total</td>
+              <td><span class="tblendstyle">
+                <%=  @final_score %>/
+                <%= @total_question_total %></span>
+              </td>
+            </tr> 
+          </tbody>
+         </table> 
 
             
            <!--  <div class="footer1">
@@ -75,9 +82,10 @@
 
         
          <div class="content" style="page-break-after:always;">
-            <div class="content2">
-            <h2> <%= "#{current_user.companies.first.name}"%>
-            <%= @survey.created_at.strftime("%B  %Y")%></h2>
+            <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>  
             </div>
             <h1>Overall Diagnostic</h1>
                 
@@ -93,10 +101,12 @@
          
         
         <div class="content" style="page-break-after:always;">
-            <div class="content2">
-           <h2> <%= "#{current_user.companies.first.name}"%>
-            <%= @survey.created_at.strftime("%B  %Y")%></h2>
+            <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>  
             </div>
+
              <h1>Must Do</h1>
 
              <div class="textbox">
@@ -116,10 +126,12 @@
         </div>  
        
         <div class="content" style="page-break-after:always;">
-         <div class="content2">
-            <h2> <%= "#{current_user.companies.first.name}"%>
-            <%= @survey.created_at.strftime("%B  %Y")%></h2>
+         <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>  
             </div>
+
              <h1>Should Do</h1>
              <div class="textbox">
                <table cellpadding="1" cellspacing="1" id="report_should_doTable" class="report-body dataTable2">
@@ -137,10 +149,12 @@
 
        
         <div class="content" style="page-break-after:always;">
-            <div class="content2">
-            <h2> <%= "#{current_user.companies.first.name}"%>
-            <%= @survey.created_at.strftime("%B  %Y")%></h2>
+            <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>  
             </div>
+
              <h1>Could Do</h1>
              <div class="textbox">
             <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
@@ -157,10 +171,12 @@
         </div> 
 
         <div class="content" style="page-break-after:always;">
-            <div class="content2">
-           <h2> <%= "#{current_user.companies.first.name}"%>
-            <%= @survey.created_at.strftime("%B  %Y")%></h2>
+            <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>  
             </div>
+
              <h1>Items not applicable to your company</h1>
              <div class="textbox">
                <table cellpadding="1" cellspacing="1" id="report_not_applicableTable" class="report-body dataTable2">
@@ -177,10 +193,12 @@
         </div> 
 
         <div class="content" style="page-break-after:always;">
-            <div class="content2">
-            <h2> <%= "#{current_user.companies.first.name}"%>
-            <%= @survey.created_at.strftime("%B  %Y")%></h2>
-           </div>
+            <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>  
+            </div>
+
              <h1>Items already planned for your company</h1>
              <div class="textbox">
                <table cellpadding="1" cellspacing="1" id="report_in_planTable" class="report-body dataTable2">
@@ -197,10 +215,12 @@
       </div>
 
         <div class="content" style="page-break-after:always;">
-            <div class="content3">
-            <h2> <%= "#{current_user.companies.first.name}"%>
-            <%= @survey.created_at.strftime("%B  %Y")%></h2>
+          <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>  
             </div>
+
              <h2>About Revenue Grader</h2>
             Revenue Grader is a <a>Revenue Architects</a> application. It is a diagnostic tool to help businesses leaders rapidly assess revenue performance potential and develop a prioritized top-level plan – all in minutes. Revenue Grader complements other grader apps by taking a broad and strategic view of the critical elements of revenue performance. </br>
 
@@ -240,9 +260,9 @@
 
            Visit our <a href="#">services section</a> to learn more about our areas of service and to share your requirements. Or visit the <a href="#">Revenue Grader</a> to get started on your own plan!</br>
 
-          <div class="footer1">
+          <!-- <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div> -->
+            </div>  -->
         </div>
 <%#end%>
    
