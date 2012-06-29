@@ -633,9 +633,8 @@ def download_result
     
     
     @data_table = Survey.get_overall_graph(@survey.id)
-    
-     option = { width: 1000, height: 600, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
-     @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
+    option = { width: 1000, height: 600, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+    @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
       
   end
      

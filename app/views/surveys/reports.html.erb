@@ -5,7 +5,6 @@
         <title>Revenue Grader - Survey Reports</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
-        <meta name = 'pdfkit-footer_right', content = 'Revenue Grader' >
         <meta name="author" content="">
         <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
         <script src='http://www.google.com/jsapi'></script>
@@ -20,53 +19,27 @@
                 <span style="margin-right:5px;"><img src="http://dev.revenue-grader.com/assets/logo.png" alt = "Revenue Grader"><span>
                 <span style="font-size:60px;color: #0086AC;"> <%= "Revenue Grader" %> </span>  
         </div>
-        
         <div class="content1">             
              <h3 style="text-align:center"><%= "#{current_user.companies.first.name}"%></h2></br>
              <h3 style="text-align:center"><%= @survey.created_at.strftime("%B  %Y")%></h2></br>
 
         </div>
-        </div>
 
-        
+        </div>
          <div class="content" style="page-break-after:always;">
             <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
               </div>  
             </div>
-            <h1>Overall Diagnostic for Month <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1>
+            <h1>Overall Diagnostic for month :: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1></br>
 
-   
-
-            <div class="survey-content">
-            
-              <div class="stats">
-              
-                <div class="stat">
-                  <span class="stat-value">140</span>                  
-                        System
-                </div> <!-- /stat -->
-              
-                  <div class="stat">
-                    <span class="stat-value">80</span>                 
-                        Strategy
-                  </div> <!-- /stat -->
-              
-                  <div class="stat">
-                    <span class="stat-value">110</span>                 
-                        Program
-                  </div> <!-- /stat -->
-              
-              </div> <!-- /stats -->
-            </div>
-    
                  <div id='chart'></div>
                   <%= render_chart(@chart, 'chart') %>
                   
-            <!-- <div class="footer1">
+            <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div> -->
+            </div>
           </div>
          
         <% if !@must_do_responses.blank? %>
@@ -247,6 +220,3 @@
    
     </body>
 </html>
-
-
-          
