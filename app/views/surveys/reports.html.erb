@@ -32,8 +32,30 @@
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
               </div>  
             </div>
-            <h1>Overall Diagnostic for month :: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1></br>
+            <h1>Overall Diagnostic for month  <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1></br>
 
+               <div class="survey-content">
+            
+              <div class="stats">
+              
+                <div class="stat">
+                  <span class="stat-value"><%= @sections[0].total_points%></span>     
+                        System
+                </div> <!-- /stat -->
+              
+                  <div class="stat">
+                    <span class="stat-value"><%= @sections[1].total_points%></span>                 
+                        Strategy
+                  </div> <!-- /stat -->
+              
+                  <div class="stat">
+                    <span class="stat-value"><%= @sections[2].total_points%></span>     Program
+                  </div> <!-- /stat -->
+              
+              </div> <!-- /stats -->
+            </div>     
+                <div style="clear:both"></div>
+                
                  <div id='chart'></div>
                   <%= render_chart(@chart, 'chart') %>
                   

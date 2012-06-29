@@ -590,6 +590,7 @@ def download_result
                :joins=>"left outer join companies on companies.industry_id = industries.id 
                        left outer join surveys on companies.id = surveys.company_id and 
                        surveys.id = #{@survey.id}")
+
   @questions=[]
   @final_score = 0
   @total_question_total = 0
