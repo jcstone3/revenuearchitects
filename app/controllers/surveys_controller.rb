@@ -605,8 +605,8 @@ def download_result
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
                            :group => "sections.id", :order => "sections.id")
   logger.debug "#{@section_questions}"
-  @all_sections = get_all_sections
-   @all_sections.each_with_index do |section,i|
+    @all_sections = get_all_sections
+    @all_sections.each_with_index do |section,i|
     @final_score += @section_questions[i].question_attempted.to_i
     @total_question_total += @section_questions_total[i].question_total.to_i
   end
@@ -629,7 +629,7 @@ def download_result
     #if the user is authorized for the survey then get details of not applicable responses
      @not_applicable_responses = Response.get_response_for_options(@survey.id, "not_applicable")
     #if the user is authorized for the survey then get details of in plan responses
-     @in_plan_responses = Response.get_response_for_options(@survey.id, "in_plan")
+     @in_plan_responses = Response.get_response_for_options(@survey.id, "in_our_plan")
     
     
     @data_table = Survey.get_overall_graph(@survey.id)

@@ -37,6 +37,7 @@
             </div>
             <h1>Overall Diagnostic for Month <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1>
 
+   
 
             <div class="survey-content">
             
@@ -59,7 +60,7 @@
               
               </div> <!-- /stats -->
             </div>
-
+    
                  <div id='chart'></div>
                   <%= render_chart(@chart, 'chart') %>
                   
@@ -199,51 +200,50 @@
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
               </div>  
             </div>
-
+            <div id="about">  
              <h2>About Revenue Grader</h2>
-            Revenue Grader is a <a>Revenue Architects</a> application. It is a diagnostic tool to help businesses leaders rapidly assess revenue performance potential and develop a prioritized top-level plan – all in minutes. Revenue Grader complements other grader apps by taking a broad and strategic view of the critical elements of revenue performance. </br>
+            <p>Revenue Grader is a Revenue Architects application. It is a diagnostic tool to help businesses leaders rapidly assess revenue performance potential and develop a prioritized top-level plan – all in minutes. Revenue Grader complements other grader apps by taking a broad and strategic view of the critical elements of revenue performance. </p>
 
-            It is focused across three critical dimensions: </br>
+            <p>It is focused across three critical dimensions: </p></br>
             
-          1)Revenue Strategy</br>
-          2)Revenue Systems</br>
-          3)Revenue Programs</br>
+            <p>1)Revenue Strategy</p>
+            <p>2)Revenue Systems</p>
+            <p>3)Revenue Programs</p>
             
-            After completing the Revenue Grader diagnostic, the executive can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation and enhancing sales team skills.</br>
-          <h2>How does it work? </h2> 
-          After a user registers, they are provided access to a very easy to use diagnostic tool. They can rate their maturity on key factors using a scale of 1-5. For each maturity factor, choose to <b>“add to plan”</b> and indicate priority.  In about 20 minutes, they will have a prioritized top-level plan indicating the items that are <b>“must do”</b>,<b> “should do” </b>and<b> “could do”</b>.  By updating the plan each quarter, the manager can see clear progression in plan execution.</br>
+            <p>After completing the Revenue Grader diagnostic, the executive can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation and enhancing sales team skills.</p></br>
+          
+          <h2>About Revenue Architects</h2>
 
-          <h2>Key features:</h2></br>
-         
-            1)50 Revenue Performance Factors across Revenue Strategy, Revenue Systems and Revenue Programs </br>
-            2)1-5 capability maturity scoring system</br>
-            3)Ability to quickly “add to plan” and indicate priority using “must”, “should”, “could”</br>
-            4)Compare scores with peer groups</br>
-            5)Print or view the report and sort by maturity and priority</br>
-         
-     
-          We hope you find the Revenue Grader to be valuable tool for your business and a start to an effective revenue growth plan.</br>
-              <h2>About Revenue Architects</h2>
+          <p>Integrated consulting and agency services for revenue growth</p>
 
-              <h4>Integrated consulting and agency services for revenue growth</h4>
+          <p>Revenue Architects delivers adaptive services for revenue growth. We combine marketing, sales, PR and communications skills in a flexible model to address the diverse and changing requirements of marketing and sales leaders. By combining our core team of trusted advisors and our independent network, we flexibly deliver comprehensive services for revenue growth:</p>
+      
 
-              Revenue Architects delivers adaptive services for revenue growth. We combine marketing, sales, PR and communications skills in a flexible model to address the diverse and changing requirements of marketing and sales leaders. By combining our core team of trusted advisors and our independent network, we flexibly deliver comprehensive services for revenue growth:
+          <p>Revenue Strategy: Envisioning opportunities, assessing capabilities and prioritizing initiatives</p>
+          <p>Revenue Systems: Deploying technology, mapping processes, and building skills</p>
+          <p>Revenue Programs: Creating and delivering innovative campaigns and programs.</p>
           
 
-          <b>Revenue Strategy:</b> Envisioning opportunities, assessing capabilities and prioritizing initiatives</br>
-            <b>Revenue Systems:</b> Deploying technology, mapping processes, and building skills</br>
-            <b>Revenue Programs:</b> Creating and delivering innovative campaigns and programs.</br>
-          
-
-           Growing the top-line is more challenging than ever. The web, social media and mobile technologies have transformed the buyer-seller relationship. Buyers are more in control.  Businesses must integrate marketing and sales and effectively engage the web to capture, deepen and expand relationships. Yet, executing successfully requires both a solid strategy and diverse talent  – from creative design and branding to content creation and technology.  And needs continuously evolve.
-
-           Visit our <a href="#">services section</a> to learn more about our areas of service and to share your requirements. Or visit the <a href="#">Revenue Grader</a> to get started on your own plan!</br>
-
+         <p>Growing the top-line is more challenging than ever. The web, social media and mobile technologies have transformed the buyer-seller relationship. Buyers are more in control.  Businesses must integrate marketing and sales and effectively engage the web to capture, deepen and expand relationships. Yet, executing successfully requires both a solid strategy and diverse talent  – from creative design and branding to content creation and technology.  And needs continuously evolve.</p>
+       </div>
+        
           <!-- <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div>  -->
         </div>
 <%#end%>
+      <div style="align:right">
+            <span style="margin-right:5px;"><img src="http://dev.revenue-grader.com/assets/logo.png" alt = "Revenue Grader"><span>    
+             <h2>Contact Details</h1>
+             <h4>Email</h4>
+             <p>contact@revenuearchitects.com</p>
+             <h4>Address</h4>
+            <p>24 Federal Street, 4th Floor</p>
+            <p>Boston, Massachusetts 02110</p>
+            <!-- <div class="footer1">
+               <img src="http://dev.revenuegrader.com/assets/logo.png">
+            </div> -->
+        </div> 
    
     </body>
 </html>
