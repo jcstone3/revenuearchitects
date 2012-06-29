@@ -17,67 +17,15 @@
         <%= render :partial=>"reports_css"%>
         <div class="content" style="page-break-after:always;">
         <div style="display:inline;">
-                <span><img src="http://dev.revenuegrader.com/assets/logo.png" alt = "Revenue Grader"><span>
+                <span style="margin-right:5px;"><img src="http://dev.revenue-grader.com/assets/logo.png" alt = "Revenue Grader"><span>
                 <span style="font-size:60px;color: #0086AC;"> <%= "Revenue Grader" %> </span>  
         </div>
         
         <div class="content1">             
              <h3 style="text-align:center"><%= "#{current_user.companies.first.name}"%></h2></br>
              <h3 style="text-align:center"><%= @survey.created_at.strftime("%B  %Y")%></h2></br>
+
         </div>
-        </div>
-
-        <div class="content" style="page-break-after:always;">
-            <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>  
-            </div>
-
-        <h2> Diagnostic Details </h3>
-        <p>&nbsp;</p><table border="1" cellpadding="3" cellspacing="0" width="600" align="center" >  
-        <tbody style="color:#FFFFFF; background-color:#0086AC;">
-          <tr>
-            <td> Industry </td>
-            <td> <%= "#{@industry.name}"%> </td>
-          </tr>
-          <tr>
-            <td> Size </td>
-            <td> <%= "#{@survey.size}"%> </td>
-          </tr>
-          <tr>
-            <td> Revenue </td>
-            <td> <%= "#{@survey.revenue}"%> </td>
-          </tr> 
-          </tbody>     
-        </table>
-
-        <h2> Diagnostic Summary </h3>    
-        <p>&nbsp;</p><table border="1" cellpadding="3" cellspacing="0" width="600" align="center" > 
-          <tbody style="color:#FFFFFF; background-color:#0086AC;">
-           <%@all_sections.each_with_index do |section,i| %>
-              <tr>
-                <td><%= section.name.try(:titleize)%></td><td><span class="tblendstyle">
-                   <%= @section_questions[i].question_attempted%>/
-                   <%= @section_questions_total[i].question_total %>
-                   </span>
-                </td>
-              </tr>
-            <%end%>
-            <tr>
-              <td>Total</td>
-              <td><span class="tblendstyle">
-                <%=  @final_score %>/
-                <%= @total_question_total %></span>
-              </td>
-            </tr> 
-          </tbody>
-         </table> 
-
-            
-           <!--  <div class="footer1">
-              <img src="http://dev.revenue-grader.com/assets/logo.png">
-            </div> -->
         </div>
 
         
@@ -87,9 +35,30 @@
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
               </div>  
             </div>
-            <h1>Overall Diagnostic</h1>
-                
-               <h1>Response of the month :: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1>
+            <h1>Overall Diagnostic for Month <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1>
+
+
+            <div class="survey-content">
+            
+              <div class="stats">
+              
+                <div class="stat">
+                  <span class="stat-value">140</span>                  
+                        System
+                </div> <!-- /stat -->
+              
+                  <div class="stat">
+                    <span class="stat-value">80</span>                 
+                        Strategy
+                  </div> <!-- /stat -->
+              
+                  <div class="stat">
+                    <span class="stat-value">110</span>                 
+                        Program
+                  </div> <!-- /stat -->
+              
+              </div> <!-- /stats -->
+            </div>
 
                  <div id='chart'></div>
                   <%= render_chart(@chart, 'chart') %>
@@ -99,7 +68,7 @@
             </div> -->
           </div>
          
-        
+        <% if !@must_do_responses.blank? %>
         <div class="content" style="page-break-after:always;">
             <div class="header">
               <div style="font-size: 14px">
@@ -107,13 +76,13 @@
               </div>  
             </div>
 
-             <h1>Must Do</h1>
+             <h1>Must Do Items</h1>
 
              <div class="textbox">
-               <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2">
-               <%= render :partial=>"table_header"%>
+               <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2" >
+               <%= render :partial=>"pdf_table_header"%>
                     <% @must_do_responses.each do |response|%>
-                      <%= render :partial=>"response_report", 
+                      <%= render :partial=>"pdf_report", 
                       :locals=> {:response =>response} %> 
                     <%end%>
                 <%= render :partial=>"table_end"%>
@@ -124,7 +93,9 @@
             </div>
             
         </div>  
+        <% end %>
        
+       <% if !@should_do_responses.blank? %>
         <div class="content" style="page-break-after:always;">
          <div class="header">
               <div style="font-size: 14px">
@@ -132,12 +103,12 @@
               </div>  
             </div>
 
-             <h1>Should Do</h1>
+             <h1>Should Do Items</h1>
              <div class="textbox">
                <table cellpadding="1" cellspacing="1" id="report_should_doTable" class="report-body dataTable2">
-                <%= render :partial=>"table_header"%>
+                <%= render :partial=>"pdf_table_header"%>
                     <% @should_do_responses.each do |response|%>
-                      <%= render :partial=>"response_report", 
+                      <%= render :partial=>"pdf_report", 
                       :locals=> {:response =>response} %> 
                     <%end%>
                 <%= render :partial=>"table_end"%>               
@@ -145,9 +116,10 @@
            <!-- <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div> -->
-        </div>  
+        </div>
+        <% end %>  
 
-       
+       <% if !@could_do_responses.blank? %>
         <div class="content" style="page-break-after:always;">
             <div class="header">
               <div style="font-size: 14px">
@@ -155,12 +127,12 @@
               </div>  
             </div>
 
-             <h1>Could Do</h1>
+             <h1>Could Do Items</h1>
              <div class="textbox">
             <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
-             <%= render :partial=>"table_header"%>
+             <%= render :partial=>"pdf_table_header"%>
               <% @could_do_responses.each do |response|%>
-                <%= render :partial=>"response_report", 
+                <%= render :partial=>"pdf_report", 
                 :locals=> {:response =>response} %> 
               <%end%>
              <%= render :partial=>"table_end"%>            
@@ -169,42 +141,22 @@
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div> -->
         </div> 
+        <% end %>
 
-        <div class="content" style="page-break-after:always;">
+        <% if !@in_plan_responses.blank? %>
+         <div class="content" style="page-break-after:always;">
             <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
               </div>  
             </div>
 
-             <h1>Items not applicable to your company</h1>
-             <div class="textbox">
-               <table cellpadding="1" cellspacing="1" id="report_not_applicableTable" class="report-body dataTable2">
-               <%= render :partial=>"table_header"%>
-                    <% @not_applicable_responses.each do |response|%>
-                      <%= render :partial=>"response_report", 
-                      :locals=> {:response =>response} %> 
-                    <%end%>
-                <%= render :partial=>"table_end"%>                      
-            </div> 
-            <!-- <div class="footer1">
-               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div> -->
-        </div> 
-
-        <div class="content" style="page-break-after:always;">
-            <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>  
-            </div>
-
-             <h1>Items already planned for your company</h1>
+             <h1>Planned Items</h1>
              <div class="textbox">
                <table cellpadding="1" cellspacing="1" id="report_in_planTable" class="report-body dataTable2">
-             <%= render :partial=>"table_header"%>
+             <%= render :partial=>"pdf_table_header"%>
                     <% @in_plan_responses.each do |response|%>
-                      <%= render :partial=>"response_report", 
+                      <%= render :partial=>"pdf_report", 
                       :locals=> {:response =>response} %> 
                     <%end%>
               <%= render :partial=>"table_end"%>
@@ -213,6 +165,33 @@
             </div> -->
         </div> 
       </div>
+      <% end %>
+
+        <% if !@not_applicable_responses.blank? %>
+        <div class="content" style="page-break-after:always;">
+            <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>  
+            </div>
+
+             <h1>Not Applicable Items</h1>
+             <div class="textbox">
+               <table cellpadding="1" cellspacing="1" id="report_not_applicableTable" class="report-body dataTable2">
+               <%= render :partial=>"pdf_table_header"%>
+                    <% @not_applicable_responses.each do |response|%>
+                      <%= render :partial=>"pdf_report", 
+                      :locals=> {:response =>response} %> 
+                    <%end%>
+                <%= render :partial=>"table_end"%>                      
+            </div> 
+            <!-- <div class="footer1">
+               <img src="http://dev.revenuegrader.com/assets/logo.png">
+            </div> -->
+        </div> 
+        <% end %>
+
+       
 
         <div class="content" style="page-break-after:always;">
           <div class="header">
