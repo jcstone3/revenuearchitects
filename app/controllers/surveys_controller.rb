@@ -115,6 +115,7 @@ def show
   #first get all surveys for this user and then select for active and inactive
   @get_all_surveys_for_current_user = Survey.get_all_survey_for_user(company_ids)  
   @total_question_total = 0
+  @total_question_previous = 0
   @survey = Survey.find_by_id(params[:id])
   #current active surveys
   @current_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == true}
@@ -132,6 +133,14 @@ def show
   @all_sections.each_with_index do |section,i|
     #@final_score += @section_questions[i].question_attempted.to_i
     @total_question_total += @section_questions_total[i].question_total.to_i
+  end
+  @previous_questions_total = Section.find(:all,
+                            :select => "count(questions.position) as question_total, sections.id",
+                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id ",
+                            :group => "sections.id", :order => "id ASC")
+  @all_sections = get_all_sections
+  @all_sections.each_with_index do |section,i|
+  @total_question_previous += @previous_questions_total[i].question_total.to_i
   end
 end  
 
