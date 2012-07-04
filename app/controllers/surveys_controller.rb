@@ -58,26 +58,32 @@ def create
 end
 
 def get_response_status
-  if params[:id].present?
+  if !params[:id].blank?
     if params[:id].to_i > 0
     if params[:id].to_i.is_a?(Numeric)
           if check_user_surveys(params[:id])
               response = []
               questions= []
-
               @survey = Survey.find(params[:id])
               @response = @survey.responses
+
               if @response.present?
                  @response.each do |res|
-                   response << res.question_id   
-                 end 
+                   response << res.question_id
+                  end 
+                  logger.debug response
                  Question.all.each do |quest|
                    questions << quest.id
                  end
+                 logger.debug questions                
                  res = questions - response
                  @survey_name = @survey.created_at.strftime('%B,%Y')
                  flash[:success] = "Continue Survey #{@survey_name}" 
-                 redirect_to questions_path(@survey, res[0]) 
+                  if(!res[0].blank?)
+                    redirect_to questions_path(@survey, res[0]) 
+                  else
+                    redirect_to confirm_survey_path
+                  end
               else
                @survey_name = @survey.created_at.strftime('%B,%Y') 
                flash[:success] = "Start Survey #{@survey_name}" 
@@ -85,7 +91,7 @@ def get_response_status
               end
           else
             flash[:error] = "Some thing went wrong please select a survey"
-            redirect_to continue_survey_path 
+            redirect_to confirm_survey_path 
           end      
   else
     flash[:error] = "Something went wrong please select a survey"
@@ -137,7 +143,7 @@ def question
   #TODO: Check if input parameters are correct 
   if survey_id.blank? or question_id.blank?
    flash[:warning] = "Could not form the question. Please try again"
-   redirect_to continue_survey_path and return  
+   redirect_to continue_survey_path
   end
 
   #Get current Survey
