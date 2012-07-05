@@ -7,7 +7,7 @@ Devise.setup do |config|
   config.mailer_sender = "noreply@revenuegrader.com"
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = "Devise::Mailer"
+  config.mailer = "Usermailer"
 
   # Automatically apply schema changes in tableless databases
   config.apply_schema = false

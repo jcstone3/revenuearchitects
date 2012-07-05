@@ -12,10 +12,11 @@
                              
                             <div class="tab-content2"style="padding-top:0px">
                             <div class="tab-pane active" id="dashboard">
-                <div class="tabHead">
-                                  <h1> Questions For </h1>
-                                  <h2>  Following questions would be deleted along with Subsection </h2>
-                                </div> <br/>
+                            <div class="tabHead">
+                                  <h1> Questions For ::<%= "#{@subsection.name}" %></h1>
+                                  <h3>  Following questions would be deleted along with Subsection </h3>
+
+                            </div> </br>
                                 <% if !@question.blank?%>
                                      <div class="buttons" style="padding-left:1050px;">
                                      <%= link_to 'Delete', admin_delete_subsection_url, :id=>@question[0].subsection_id, :class => "btn btn-primary", :confirm => "Are you sure you want to delete subsection and all its questions?" %>

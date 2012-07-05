@@ -6,12 +6,12 @@
   <%= f.hidden_field 'page' %>
   <% unless @error_message.blank? %>
   <p class="error">
-    <%=h @error_message %>
+    <%= @error_message %>
   </p>
   <% end %>
  
     <%= f.input :subject, 
-                      :collection => [ ['Problem'],['Suggestion'],['Question'],['Other'] ] , 
+                      :collection => [['Problem'],['Suggestion'],['Question'],['Other']],
                       :prompt => "Subject",  
                       :label => "Subject",  
                       :input_html => { :class => 'input-xlarge' }, 

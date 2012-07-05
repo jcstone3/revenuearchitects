@@ -97,7 +97,7 @@ div#feedback_loading {
 }
 
 .feedback_hide {
-  z-index:-100;
+  z-index:2000;
 }
 
 .feedback_overlayBG {
