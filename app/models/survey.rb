@@ -251,13 +251,13 @@ def self.get_response_score_for(survey_id)
 end 
 
 def self.get_average_calculated_score(response_survey_id, response_questions_id, section_id)
- @avg_response_score = 0
+ avg_response_score = 0
  total_score = 0
  survey = self.find(response_survey_id)
  company = Company.find(survey.company_id)
  
  company_all = Company.get_companies_belonging_to_same_industry(company.industry_id,company.id)
- if company_all
+ if !company_all.blank?
     response = Response.find_average_response(section_id)
     response.each do |res|
       @score =  get_individual_response_score(res.id, res.question_id)
