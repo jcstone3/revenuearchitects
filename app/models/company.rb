@@ -19,8 +19,8 @@ class Company < ActiveRecord::Base
           :conditions=>"industries.id = #{company_industry_id} and companies.id !=#{survey_company_id}"
     }}
    
-    scope :get_companies_belonging_to_same_industry, lambda{|company_industry_id,company_id|{
-    	  :conditions=>"industry_id=#{company_industry_id} and id !=#{company_id} "
+    scope :get_companies_belonging_to_same_industry, lambda{|company_industry_id|{
+    	  :conditions=>"industry_id=#{company_industry_id}"
     	}}
 
 end

@@ -443,7 +443,7 @@ def compare
 end 
 
 def compare_strategy
-  survey_id = params[:id]
+    survey_id = params[:id]
   @all_sections = get_all_sections
   #check scope
 
@@ -451,31 +451,40 @@ def compare_strategy
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
   #for total count
-   @section_questions_total = Section.find(:all,
+     @section_questions_total = Section.find(:all,
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                             :group => "sections.id", :order => "id ASC")
 
 
   #for section questions attempted
-   @section_questions  = Section.find(:all,
+      @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
                            :group => "sections.id", :order => "sections.id") 
-  
+   #scoping the survey
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+ 
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
      redirect_to new_survey_path and return 
    else
   @survey = Survey.find(params[:id])
-  @data_table = Survey.get_section_graph(@all_sections[0].id, @survey.id)
+  @responses = Survey.get_result(@all_sections[0].id, @survey.id)
+  @data_table = Survey.get_section_graph(@all_sections[0].id, @survey.id, @responses)
+
+  logger.debug "&&&&&&&&&&& datatable is "
+  logger.debug @data_table.inspect
 
   option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
         
 
-  @responses = Survey.get_result(@all_sections[0].id, @survey.id)
+ 
+
+  
+
   end
     render :layout =>"report"
 
@@ -501,18 +510,21 @@ def compare_system
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                             :group => "sections.id", :order => "id ASC")
 
-
+  
   if @survey.blank?
      flash[:notice] = "No such survey exists"
      redirect_to new_survey_path and return 
    else
+
   @survey = Survey.find(params[:id])
-  @data_table = Survey.get_section_graph(@all_sections[1].id, @survey.id)
+  @responses = Survey.get_result(@all_sections[1].id, @survey.id)
+  @data_table = Survey.get_section_graph(@all_sections[1].id, @survey.id, @responses)
+
 
  option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
 
-  @responses = Survey.get_result(@all_sections[1].id, @survey.id)
+ 
 end
     render :layout =>"report"
 
@@ -545,12 +557,13 @@ def compare_programs
      redirect_to new_survey_path and return 
    else
   @survey = Survey.find(survey_id)
-  @data_table = Survey.get_section_graph(@all_sections[2].id, @survey.id)
-
+  @responses = Survey.get_result(@all_sections[2].id, @survey.id)
+  @data_table = Survey.get_section_graph(@all_sections[2].id, @survey.id, @responses)
+  
   option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
 
-  @responses = Survey.get_result(@all_sections[2].id, @survey.id)
+  
 end
     render :layout =>"report"
 
@@ -561,7 +574,7 @@ end
   @sections = Section.find(:all) 
   survey_id = params[:id]
   @survey = current_user.companies.first.surveys.find(params[:id])
-  @industry = Industry.find(:all, :select=>"industries.name",
+  @industry = Industry.find(:first, :select=>"industries.name",
                :joins=>"left outer join companies on companies.industry_id = industries.id 
                        left outer join surveys on companies.id = surveys.company_id and 
                        surveys.id = #{@survey.id}")
