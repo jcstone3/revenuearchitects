@@ -43,82 +43,71 @@ class Survey < ActiveRecord::Base
    return @responses
    end 
 
-  def self.get_section_graph(section_id, survey_id)
- #  require 'rubygems'
- # require 'google_chart'
- # @section = Section.find(section_id)   
- # @survey = Survey.find(survey_id)
- # @question_count = Question.find_question_count(section_id)
- # @response = Response.get_resultresponse(section_id, survey_id)
- #  @response_all = []
-  
- #  #Average response for all survey
-  
- #  @company = Company.find(@survey.company_id)  
- #  @companies = Company.get_all_companies(@company.id, @company.industry_id)
- #  if @companies.present?
- #  company_ids=@companies.collect(&:id).join(', ')
- #  @response_all = Response.get_overall_response_on_companies(company_ids, section_id, survey_id)
- #  else
- #    @response_all = Response.get_overall_response_without_companies(section_id, survey_id)
- #  end 
-  
-  
- #  GoogleChart::LineChart.new("900x330", "#{@section.name}", false) do |line_gph|
- #    line_gph.data "Your Response", @response.map(&:answer_1).collect{|i| i.to_i}, '00ff00'
- #    line_gph.data "Overall Response", @response_all.map(&:answer_1).collect{|i| i.to_i}, 'ff0000'
- #    line_gph.axis :y, :range =>[0,5], :labels =>[0,1,2,3,4,5], :font_size =>10, :alignment =>:center
- #    line_gph.axis :x, :range =>[0,@question_count.first.question_count], :font_size =>10, :alignment =>:center
- #    line_gph.show_legend = true
- #    line_gph.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 5
- #    line_gph.grid :x_step => 100.0/10, :y_step=>100.0/10, :length_segment =>1, :length_blank => 0
- #    @line_graph_programs =  line_gph.to_url
- #  end
- @survey = Survey.find(survey_id)
- @response = Response.get_resultresponse(section_id, survey_id)
- @questions = Question.find_section_questions(section_id)
+  def self.get_section_graph(section_id, survey_id, responses)
+   #responses - your response for the current survey
+   logger.debug responses.inspect
+   logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+   @survey = Survey.find(survey_id)
+   #@response = Response.get_resultresponse(section_id, survey_id)
+   @questions = Question.find_section_questions(section_id)
 
-  # Average response for all survey
-  
-  @company = Company.find(@survey.company_id)  
-  @companies = Company.get_all_companies(@company.id, @company.industry_id)
-  if @companies.present?
-  company_ids=@companies.collect(&:id).join(', ')
-  @response_all = Response.get_overall_response_on_companies(company_ids, section_id, survey_id)
-  logger.debug "in with companies"
-  else
-    @response_all = Response.get_overall_response_without_companies(section_id, survey_id)
-    logger.debug "in without companies"
-  end 
+    # Average response for all survey
+    
+    @company = Company.find(@survey.company_id)  
+    @companies = Company.get_all_companies(@company.id, @company.industry_id)
+    # if @companies.present?
+    # company_ids=@companies.collect(&:id).join(', ')
+    # @response_all = Response.get_overall_response_on_companies(company_ids, section_id, survey_id)
+    # logger.debug "in with companies"
+    # else
+    #   @response_all = Response.get_overall_response_without_companies(section_id, survey_id)
+    #   logger.debug "in without companies"
+    # end 
 
-    @data_table = GoogleVisualr::DataTable.new
 
-    @data_table.new_column('string', 'Questions' )
-    @data_table.new_column('number', 'Your Score')
-    @data_table.new_column('number', 'Average Score')
 
-     overall_array = Array.new
-     response_array = Array.new
+      @data_table = GoogleVisualr::DataTable.new
 
-     @questions.each do |question|
-        response_array = Array.new
+      @data_table.new_column('string', 'Questions' )
+      @data_table.new_column('number', 'Your Score')
+      @data_table.new_column('number', 'Average Score')
 
-      response_array.push(question.id.to_s)
-      logger.debug question.id
-      @your_response = @response.select { |response| response.question_id == question.id.to_i } 
-      logger.debug "###########################"
-      logger.debug @response
-      puts @your_response
-      response_array.push(@your_response.first.answer_1.nil? ? 0 :  @your_response.first.answer_1.to_i)
-      @avg_response = @response_all.select { |response| response.question_id == question.id.to_i }
-      response_array.push(@avg_response.first.answer_1.nil? ? 0 : @avg_response.first.answer_1.to_i )
-      overall_array.push(response_array)
-      end
+       overall_array = Array.new
+       response_array = Array.new
 
-    # Add Rows and Values
-    @data_table.add_rows(overall_array)
+       @questions.each do |question|
+          response_array = Array.new
 
-   return @data_table
+        response_array.push(question.id.to_s)
+        logger.debug question.id
+         
+
+        @your_response = responses.select { |response| response.questions_id.to_i == question.id.to_i } 
+
+
+        
+        Rails.logger.debug @your_response.inspect
+        Rails.logger.debug "response array above!!!!!!!!!!!!!!!!!!!!!!!!!"
+        response_array.push(@your_response.blank? ? 0 :  @your_response.first.score.to_i)
+        
+        #@your_response contains the users response value
+        #call the helper method that calculated the avgerage value for this question
+        #with other user responses for the same industry 
+        #@get_avg_response will have the avg calculated values for this question
+
+        @get_avg_response = self.get_average_calculated_score(survey_id, question.id, section_id)
+
+        
+        #@avg_response = @response_all.select { |response| response.question_id == question.id.to_i }
+        
+        response_array.push(@get_avg_response)
+        overall_array.push(response_array)
+        end
+
+      # Add Rows and Values
+      @data_table.add_rows(overall_array)
+
+     return @data_table
   end  
 
 #the overall graph 
@@ -128,21 +117,21 @@ def self.get_overall_graph(survey_id)
     #current user response for the survey   
     @response = Response.get_response_for_all_sections(survey_id)
     
-    @questions = Question.find(:all, :select => "id", :order => "id ASC")
+    @questions = Question.find(:all, :select => "*", :order => "id ASC")
     
     #get all companies belonging to the industry as of the current user company industry 
 
     @company = Company.find(@survey.company_id)  
     @companies = Company.get_all_companies(@company.id, @company.industry_id)
    
-    if @companies.present?
-      company_ids=@companies.collect(&:id).join(', ')
-      @response_all = Response.find_response_for_all_sections_company(company_ids,survey_id)
-      logger.debug "in with companies"
-    else
-      @response_all = Response.find_response_for_sections_without_company(survey_id)
-      logger.debug "in without companies"
-    end  
+    # if @companies.present?
+    #   company_ids=@companies.collect(&:id).join(', ')
+    #   @response_all = Response.find_response_for_all_sections_company(company_ids,survey_id)
+    #   logger.debug "in with companies"
+    # else
+    #   @response_all = Response.find_response_for_sections_without_company(survey_id)
+    #   logger.debug "in without companies"
+    # end  
      
     @data_table = GoogleVisualr::DataTable.new
 
@@ -154,13 +143,21 @@ def self.get_overall_graph(survey_id)
      response_array = Array.new
 
      @questions.each do |question|
-        response_array = Array.new
+     response_array = Array.new
+      
+      #get section id for each question 
+      section_id = question.sub_section.section.id
 
       response_array.push(question.id.to_s)
+      
       @your_response = @response.select { |response| response.id == question.id.to_i } 
-      response_array.push(@your_response.first.answer_1.nil? ? 0 :  @your_response.first.answer_1.to_i)
-      @avg_response = @response_all.select { |response| response.id == question.id.to_i }
-      response_array.push(@avg_response.first.answer_1.nil? ? 0 : @avg_response.first.answer_1.to_i )
+      response_array.push(@your_response.blank? ? 0 :  @your_response.first.answer_1.to_i)
+
+      
+      @avg_response = self.get_average_calculated_score(survey_id, question.id,
+       section_id)
+     
+      response_array.push(@avg_response)
       overall_array.push(response_array)
       end
 
@@ -255,15 +252,16 @@ def self.get_average_calculated_score(response_survey_id, response_questions_id,
  total_score = 0
  survey = self.find(response_survey_id)
  company = Company.find(survey.company_id)
- 
- company_all = Company.get_companies_belonging_to_same_industry(company.industry_id,company.id)
+ industry_id = company.industry_id
+ company_all = Company.get_companies_belonging_to_same_industry(industry_id)
  if !company_all.blank?
-    response = Response.find_average_response(section_id)
+    response = Response.find_average_response(section_id,response_survey_id,industry_id)
     response.each do |res|
       @score =  get_individual_response_score(res.id, res.question_id)
       total_score += @score 
     end  
-    avg_response_score = (total_score/response.count)
+    response_count = response.count
+    avg_response_score = (total_score/response_count) if response_count > 0
   end  
     return avg_response_score
 end   
@@ -278,16 +276,18 @@ def self.get_average_score_from_other_companies(response_questions_id, response_
   @total_average_score = 0
   survey = self.find(response_survey_id)
   company = Company.find(survey.company_id)
- 
-  company_all = Company.get_companies_belonging_to_same_industry(company.industry_id,company.id)
+  industry_id = company.industry_id
+  company_all = Company.get_companies_belonging_to_same_industry(company.industry_id)
   if company_all.present?
     company_ids=company_all.collect(&:id).join(', ')
-    @responses = Response.find_response_from_other_companies(response_questions_id, response_survey_id,company_ids)
+    @responses = Response.find_response_from_other_companies(response_questions_id, response_survey_id,company_ids,industry_id)
     if @responses.present?
       @responses.each do |response|
         @total_average_score += response.answer_1
       end
-      @total_average_score = @total_average_score/@responses.count  
+
+      response_count = @response.count
+      @total_average_score = @total_average_score/response_count if response_count > 0
     end
   end
   return @total_average_score 
