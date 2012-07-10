@@ -104,11 +104,7 @@ class Survey < ActiveRecord::Base
         response_array = Array.new
 
       response_array.push(question.id.to_s)
-      logger.debug question.id
       @your_response = @response.select { |response| response.question_id == question.id.to_i } 
-      logger.debug "###########################"
-      logger.debug @response
-      puts @your_response
       response_array.push(@your_response.first.answer_1.nil? ? 0 :  @your_response.first.answer_1.to_i)
       @avg_response = @response_all.select { |response| response.question_id == question.id.to_i }
       response_array.push(@avg_response.first.answer_1.nil? ? 0 : @avg_response.first.answer_1.to_i )
@@ -214,7 +210,7 @@ def self.calculate_response_for_subsection(survey_id, sub_section_id)
      result +=  get_score_value(response.points, response.answer_1)
     end
   end 
-  logger.debug "#{result} in subsection ##############}" 
+  logger.debug "#{result} in subsection ##############" 
   return result
   
 end 
@@ -287,7 +283,10 @@ def self.get_average_score_from_other_companies(response_questions_id, response_
       @responses.each do |response|
         @total_average_score += response.answer_1
       end
+      logger.debug "#########################"
+      logger.debug @responses.count
       @total_average_score = @total_average_score/@responses.count  
+      logger.debug "#########################"
     end
   end
   return @total_average_score 

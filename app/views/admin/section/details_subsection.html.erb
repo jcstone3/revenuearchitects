@@ -18,7 +18,7 @@
 
                             </div> </br>
                                 <% if !@question.blank?%>
-                                     <div class="buttons" style="padding-left:1050px;">
+                                     <div class="buttons" style="padding-left:1100px;">
                                      <%= link_to 'Delete', admin_delete_subsection_url, :id=>@question[0].subsection_id, :class => "btn btn-primary", :confirm => "Are you sure you want to delete subsection and all its questions?" %>
 
                                      <%= link_to 'Cancel', admin_sections_url, :class => "btn btn-primary"%>

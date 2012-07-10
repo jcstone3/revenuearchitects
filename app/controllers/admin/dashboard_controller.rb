@@ -5,7 +5,7 @@ class Admin::DashboardController < Admin::ApplicationController
 
 		#retrieves total survey day wise
 		@total_surveys = Survey.find(:all, 
-						 :select => "count(id) as total, to_char(start_date, 'd') as survey_day",
+						 :select => "count(id) as total, date_part('day', start_date) as survey_day",
 						 :conditions => "start_date between date_trunc('month', current_date) and date_trunc('month', current_date)+'1month'::interval-'1day'::interval",
 						 :group => "survey_day")
 

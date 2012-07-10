@@ -443,25 +443,26 @@ def compare
 end 
 
 def compare_strategy
-    survey_id = params[:id]
+  survey_id = params[:id]
   @all_sections = get_all_sections
   #check scope
 
+   #scoping the survey
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+
   #for total count
-     @section_questions_total = Section.find(:all,
+   @section_questions_total = Section.find(:all,
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                             :group => "sections.id", :order => "id ASC")
 
 
   #for section questions attempted
-      @section_questions  = Section.find(:all,
+   @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
                            :group => "sections.id", :order => "sections.id") 
-   #scoping the survey
-  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
-
+  
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
@@ -560,7 +561,7 @@ end
   @sections = Section.find(:all) 
   survey_id = params[:id]
   @survey = current_user.companies.first.surveys.find(params[:id])
-  @industry = Industry.find(:first, :select=>"industries.name",
+  @industry = Industry.find(:all, :select=>"industries.name",
                :joins=>"left outer join companies on companies.industry_id = industries.id 
                        left outer join surveys on companies.id = surveys.company_id and 
                        surveys.id = #{@survey.id}")
