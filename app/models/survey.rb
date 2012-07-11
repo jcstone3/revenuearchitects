@@ -95,9 +95,11 @@ class Survey < ActiveRecord::Base
         #with other user responses for the same industry 
         #@get_avg_response will have the avg calculated values for this question
 
-        @get_avg_response = self.get_average_calculated_score(survey_id, question.id, section_id)
+        @get_avg_response = self.get_average_score_from_other_companies(question.id,survey_id)
 
-        
+        logger.debug "&&&&& average response for section graph"
+        logger.debug "question is #{question.id} - average score is #{@get_avg_response}"
+
         #@avg_response = @response_all.select { |response| response.question_id == question.id.to_i }
         
         response_array.push(@get_avg_response)
@@ -154,8 +156,7 @@ def self.get_overall_graph(survey_id)
       response_array.push(@your_response.blank? ? 0 :  @your_response.first.answer_1.to_i)
 
       
-      @avg_response = self.get_average_calculated_score(survey_id, question.id,
-       section_id)
+      @avg_response = self.get_average_score_from_other_companies(question.id,survey_id)
      
       response_array.push(@avg_response)
       overall_array.push(response_array)
@@ -255,7 +256,11 @@ def self.get_average_calculated_score(response_survey_id, response_questions_id,
  industry_id = company.industry_id
  company_all = Company.get_companies_belonging_to_same_industry(industry_id)
  if !company_all.blank?
-    response = Response.find_average_response(section_id,response_survey_id,industry_id)
+  
+    company_ids=company_all.collect(&:id).join(', ')
+
+     # response = Response.find_average_response(section_id,response_survey_id,industry_id)
+   response = Response.find_response_from_other_companies(response_questions_id, response_survey_id,company_ids,industry_id)
     response.each do |res|
       @score =  get_individual_response_score(res.id, res.question_id)
       total_score += @score 
