@@ -9,7 +9,7 @@ RevenueGrader::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -65,14 +65,14 @@ RevenueGrader::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.assets.debug = true
-  config.action_mailer.default_url_options = { :host => 'dev.revenue-grader.com' }
+  config.action_mailer.default_url_options = { :host => 'www.revenuegrader.com' }
   config.action_mailer.perform_deliveries = true 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   :enable_starttls_auto => true,
   :address => "smtp.gmail.com",
   :port => 587,
-  :domain => "dev.revenue-grader.com",
+  :domain => "www.revenuegrader.com",
   :authentication => :plain,
   :user_name => "noreply@revenuegrader.com",
   :password => "survey$33" 
