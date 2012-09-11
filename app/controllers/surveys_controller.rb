@@ -72,8 +72,9 @@ def get_response_status
                    response << res.question_id
                   end 
                   logger.debug response
-                 Question.all.each do |quest|
-                   questions << quest.id
+                 question = Question.not_deleted.find(:all,:order => "position")
+                 question.each do |quest|
+                   questions << quest.position
                  end
                  logger.debug questions                
                  res = questions - response
@@ -148,11 +149,12 @@ end
 def question
   survey_id = params[:id]
   question_id = params[:question_id]
+  #question_id  =  Question.where(:id => question_id).pluck("position")[0]
 
   #TODO: Check if input parameters are correct 
   if survey_id.blank? or question_id.blank?
    flash[:warning] = "Could not form the question. Please try again"
-   redirect_to continue_survey_path
+   redirect_to confirm_survey_path
   end
 
   #Get current Survey
