@@ -72,9 +72,9 @@ def get_response_status
                    response << res.question_id
                   end 
                   logger.debug response
-                 question = Question.not_deleted.find(:all,:order => "position")
-                 question.each do |quest|
-                   questions << quest.position
+                 #question = Question.find(:all,:order => "position")
+                 Question.all.each do |quest|
+                   questions << quest.id
                  end
                  logger.debug questions                
                  res = questions - response
