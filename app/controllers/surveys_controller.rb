@@ -72,8 +72,8 @@ def get_response_status
                    response << res.question_id
                   end 
                   logger.debug response
-                 #question = Question.find(:all,:order => "position")
-                 Question.all.each do |quest|
+                 question = Question.find(:all,:order => "position")
+                 question.each do |quest|
                    questions << quest.id
                  end
                  logger.debug questions                
@@ -154,7 +154,7 @@ def question
   #TODO: Check if input parameters are correct 
   if survey_id.blank? or question_id.blank?
    flash[:warning] = "Could not form the question. Please try again"
-   redirect_to confirm_survey_path
+   redirect_to continue_survey_path
   end
 
   #Get current Survey
