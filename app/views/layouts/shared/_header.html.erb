@@ -26,9 +26,9 @@
               <ul class="nav nav-pills top-links">
                 <!-- #TODO: Find active path -->
 
-                <li class="<%= current_page?(:controller => 'site', :action => 'index') ? "active" : "" -%>"><%= link_to "Home", root_path  %></li>
-                <li class="<%= current_page?(:controller => 'site', :action => 'aboutus') ? "active" : "" -%>"><%= link_to "About Us", aboutus_path %></li>
-                <li class="<%= current_page?(:controller => 'site', :action => 'contactus') ? "active" : "" -%>"><%= link_to "Contact Us", contactus_path %></li>
+                <li class="<%#= current_page?(:controller => 'site', :action => 'index') ? "active" : "" -%>"><%= link_to "Home", root_path  %></li>
+                <li class="<%#= current_page?(:controller => 'site', :action => 'aboutus') ? "active" : "" -%>"><%= link_to "About Us", aboutus_path %></li>
+                <li class="<%#= current_page?(:controller => 'site', :action => 'contactus') ? "active" : "" -%>"><%= link_to "Contact Us", contactus_path %></li>
               </ul><!-- / -->
               <div class="nav pull-right button-bar">
                   <%= link_to "Login", new_user_session_path, :class=>"btn btn-primary" %>
