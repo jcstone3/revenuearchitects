@@ -45,7 +45,8 @@ gem "googlecharts"
 gem "google_visualr", ">= 2.1"
 #gem "google_charts"
 #bootstrap rails gem
-gem "twitter-bootstrap-rails"
+gem "less-rails"
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'taps'
 gem 'exception_notification', :git => "git://github.com/rails/exception_notification.git",
         :require => "exception_notifier"
@@ -67,7 +68,7 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.5'
+  gem 'sass-rails'
   gem 'coffee-rails', '~> 3.2.1'
   # gem "less-rails"
   # gem "twitter-bootstrap-rails"
