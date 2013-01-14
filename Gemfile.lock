@@ -254,7 +254,7 @@ DEPENDENCIES
   random_data
   rubyXL (= 1.2.5)
   rubyzip
-  sass-rails (~> 3.2.3)
+  sass-rails (~> 3.2.5)
   settingslogic
   simple_form (~> 2.0.1)
   spreadsheet (= 0.6.5.8)
