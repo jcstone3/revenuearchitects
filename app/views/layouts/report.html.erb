@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-     
+  <head> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>RevenueGrader.com - Assess your Revenue Potential</title>
     <%#= csrf_meta_tags %>
-
-
-         <meta name="description" content="Revenue Grader is a self-diagnostic for revenue performance. Answer questions across three dimensions: Revenue Strategy, Revenue Systems and Revenue Programs and gain a comprehensive view of your revenue performance potential."/>
-          <meta name="keywords" content="revenue, survey, revenue strategy, revenue systems, revenue programs, revenue grading, revenue architects, increase revenue, diagnostic tool, revenue performance, revenue growth"/> 
-    
-    
+    <meta name="description" content="Revenue Grader is a self-diagnostic for revenue performance. Answer questions across three dimensions: Revenue Strategy, Revenue Systems and Revenue Programs and gain a comprehensive view of your revenue performance potential."/>
+    <meta name="keywords" content="revenue, survey, revenue strategy, revenue systems, revenue programs, revenue grading, revenue architects, increase revenue, diagnostic tool, revenue performance, revenue growth"/> 
+        
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 7]>
-        <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
+    <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
       <![endif]-->
 
       <!--[if lt IE 8]>
@@ -26,10 +22,10 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     <![endif]-->
-        <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <!-- Le styles -->
-     <link rel="shortcut icon" type="image/png" href="/assets/rg_icon.png"/>
+    <link rel="shortcut icon" type="image/png" href="/assets/rg_icon.png"/>
     <%= stylesheet_link_tag "application", :media => "all" %>
 
     <!-- Le fav and touch icons -->
@@ -38,36 +34,34 @@
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
-     <script src='http://www.google.com/jsapi'></script>
-     
+    <script src='http://www.google.com/jsapi'></script> 
   </head>
-  <body>
 
+  <body>
     <div class="container-fluid" >
       <div class="row-fluid top-bar">
-          <%= render  "/layouts/shared/header" -%> 
+        <%= render  "/layouts/shared/header" -%> 
       </div><!-- / end of row -->
     
     <%= yield :top_bar_content %>
 
     <% if !flash.blank? -%> 
       <div class="row-fluid">
-                 <% flash.each do |key, value| %>
-                     <%= content_tag :div, :id=>'flash_msg', :class => "alert alert-#{key}" do %>
-                        <%= value unless value.blank? %>                         
-                          <a class="close" data-dismiss="alert">×</a>   
-                    <% end %>
-                <% end %>   
+        <% flash.each do |key, value| %>
+          <%= content_tag :div, :id=>'flash_msg', :class => "alert alert-#{key}" do %>
+            <%= value unless value.blank? %>
+            <a class="close" data-dismiss="alert">×</a>   
+          <% end %>
+        <% end %>   
       </div><!-- / -->
-      <% end -%> 
+    <% end -%> 
     
-      <%= yield :main_content %>
+    <%= yield :main_content %>
 
-      <div class="row-fluid footer" >
-        <%= render '/layouts/shared/footer'%>
-        </div> <!-- / End of footer -->
-    </div> <!-- /end of content-section -->
-
+    <div class="row-fluid footer" >
+      <%= render '/layouts/shared/footer'%>
+    </div> <!-- / End of footer -->
+  </div> <!-- /end of content-section -->
       
   <!-- end on container - main -->
 
@@ -99,30 +93,32 @@
   /* ]]> */
 </script>-->
 
-<script type="text/javascript">
-// This tracking is for http://www.revenuegrader.com only.
-var _opt = _opt || [];
-_opt.push([ 'view', '7IWNQFW1' ]);
-(function() {
-var scr = document.createElement('script'); scr.type = 'text/javascript'; scr.async = true;
-scr.src = '//service.optify.net/opt-v2.js';
-var other = document.getElementsByTagName('script')[0]; other.parentNode.insertBefore(scr, other);
-})();
-</script>
+    <script type="text/javascript">
+      // This tracking is for http://www.revenuegrader.com only.
+      var _ss = _ss || [];
+      _ss.push(['_setDomain', 'https://koi-HSIR8I.sharpspring.com/net']);
+      _ss.push(['_setAccount', 'KOI-HTZJME']);
+      _ss.push(['_trackPageView']);
+      (function() {
+        var ss = document.createElement('script');
+        ss.type = 'text/javascript'; ss.async = true;
+        ss.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'koi-HSIR8I.sharpspring.com/client/ss.js?ver=1.1.1';
+        var scr = document.getElementsByTagName('script')[0];
+        scr.parentNode.insertBefore(ss, scr);
+      })();
+    </script>
 
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-35248979-1']);
+      _gaq.push(['_trackPageview']);
 
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-35248979-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script> 
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script> 
 
   </body>
 </html>
