@@ -40,13 +40,13 @@
                   <p>We got a New Signup!</p>
                   
                   <div class="bluebox">
-                    <strong>User Name:</strong> <%= @user.username %>
+                    <strong>User Name:</strong> <%= @user.username unless @user.blank? %>
                     <br/><br/>
-                    <strong>Registered Email:</strong> <%= @user.email %>
+                    <strong>Registered Email:</strong> <%= @user.email unless @user.blank? %>
                   </div>
                   
                   <p>Thanks,<br>
-                  Revenue Grader Bot</p>
+                  Revenue Grader Team</p>
                 </td>
               </tr>
               <tr>
