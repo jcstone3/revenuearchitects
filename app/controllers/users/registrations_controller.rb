@@ -14,9 +14,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.save
       if resource.active_for_authentication?
       set_flash_message :success, :signed_up if is_navigational_format?
-      logger.debug "before sending mail"
+      logger.debug "before sending welcome & signup mail"
         Usermailer.welcome(resource).deliver
-        logger.debug "after sending mail"
+        logger.debug "after sending welcome mail"
+        Usermailer.new_signup_details(resource).deliver
+        logger.debug "after sending signup mail"
         sign_in(resource_name, resource)
         respond_with resource, :location => after_sign_up_path_for(resource)
         #format.html { redirect_to(@user, :notice => 'User was successfully created.') }
