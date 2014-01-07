@@ -20,4 +20,10 @@ class Usermailer < ActionMailer::Base
     end
   end
 
+  # def new_signup_details(company)
+  #   @company = company
+  #   mail(:to => "contact@revenuearchitects.com, admin@revenuegrader.com", :subject => "New Signup Details", :tag => 'new-signup-details') do |format|
+  #     format.html { render "usermailer/new_signup_details" }
+  #   end
+  # end
 end
