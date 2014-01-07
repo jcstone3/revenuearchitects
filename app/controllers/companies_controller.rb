@@ -20,6 +20,9 @@ class CompaniesController < ApplicationController
 
       	if @company.save
       		flash[:success] = "Company #{@company.name} created successfully"
+          # logger.debug "before sending signup mail"
+          # Usermailer.new_signup_details(company).deliver
+          # logger.debug "after sending signup mail"
       		redirect_to new_survey_url
       	else
       	 # flash[:error] = "Sorry could not create company"
