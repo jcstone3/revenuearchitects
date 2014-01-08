@@ -43,6 +43,16 @@
                     <strong>User Name:</strong> <%= @user.username unless @user.blank? %>
                     <br/><br/>
                     <strong>Registered Email:</strong> <%= @user.email unless @user.blank? %>
+                    <br/><br/>
+                    <strong>Company:</strong> <%= @company.name unless @company.blank? %>
+                    <br/><br/>
+                    <strong>Website:</strong> <%= @company.website unless @company.blank? %>
+                    <br/><br/>
+                    <strong>Industry:</strong> <%= @company.industry.name unless @company.industry.blank? %>
+                    <br/><br/>
+                    <strong>Company Size:</strong> <%= @survey.size unless @survey.blank? %>
+                    <br/><br/>
+                    <strong>Revenue:</strong> <%= @survey.revenue unless @survey.blank? %>                    
                   </div>
                   
                   <p>Thanks,<br>
