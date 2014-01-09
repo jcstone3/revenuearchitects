@@ -43,8 +43,7 @@ def create
   params[:survey].merge!(:start_date => Time.now, :is_active => true)
   @survey = Survey.new(params[:survey])
   @survey.company = @company
-  @company = @survey.company unless @survey.blank?
-  @user = @survey.company.user unless @survey.company.blank?
+  @user = current_user
   #  @survey = @company.surveys.create!(params[:survey])
   if @survey.save
     @survey_name = @survey.created_at.strftime('%B,%Y')
