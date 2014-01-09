@@ -44,15 +44,14 @@ def create
   @survey = Survey.new(params[:survey])
   @survey.company = @company
   @company = @survey.company unless @survey.blank?
+  @user = @survey.company.user unless @survey.company.blank?
   #  @survey = @company.surveys.create!(params[:survey])
   if @survey.save
     @survey_name = @survey.created_at.strftime('%B,%Y')
     #TODO: Need to put the survey in session, even when accessing old survey
     session[:survey] = @survey 
     flash[:success] = "Survey #{@survey_name} created successfully"
-    logger.debug "before sending signup mail"
-    Usermailer.new_signup_details(@company,@survey).deliver
-    logger.debug "after sending signup mail"
+    Usermailer.new_signup_details(@user,@company,@survey).deliver
     redirect_to questions_path(@survey, 1)
   else
     flash[:error] = "Sorry could not create the Survey. Please try again."

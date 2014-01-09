@@ -40,6 +40,10 @@
                   <p>We got a New Signup!</p>
                   
                   <div class="bluebox">
+                    <strong>User Name:</strong> <%= @user.username unless @user.blank? %>
+                    <br/><br/>
+                    <strong>User Email:</strong> <%= @user.email unless @user.blank? %>
+                    <br/><br/>
                     <strong>Industry:</strong> <%= @company.industry.name unless @company.industry.blank? %>
                     <br/><br/>
                     <strong>Company:</strong> <%= @company.name unless @company.blank? %>

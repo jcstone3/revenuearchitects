@@ -13,9 +13,10 @@ class Usermailer < ActionMailer::Base
     end
   end
 
-  def new_signup_details(company,survey)
+  def new_signup_details(user,company,survey)
     @survey = survey unless survey.blank?
     @company = company unless company.blank?
+    @user = user unless user.blank?
     mail(:to => "support.revenuegrader@icicletech.com, contact@revenuearchitects.com, admin@revenuegrader.com", :subject => "New Signup Details", :tag => 'new-signup-details') do |format|
       format.html { render "usermailer/new_signup_details" }
     end
