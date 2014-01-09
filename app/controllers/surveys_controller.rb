@@ -50,12 +50,17 @@ def create
     #TODO: Need to put the survey in session, even when accessing old survey
     session[:survey] = @survey 
     flash[:success] = "Survey #{@survey_name} created successfully"
-    Usermailer.new_signup_details(@user,@company,@survey).deliver
+    begin
+      Usermailer.new_signup_details(@user,@company,@survey).deliver
+    rescue Exception => e
+      logger.info e.message
+      logger.info e.backtrace
+    end  
     redirect_to questions_path(@survey, 1)
   else
     flash[:error] = "Sorry could not create the Survey. Please try again."
     render "new"
-  end         
+  end     
 end
 
 def get_response_status
