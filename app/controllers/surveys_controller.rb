@@ -44,9 +44,6 @@ def create
   @survey = Survey.new(params[:survey])
   @survey.company = @company
   @company = @survey.company unless @survey.blank?
-  logger.debug "#{@company.inspect}"
-  @user = @survey.company.user unless @survey.company.blank?
-  logger.debug "#{@user.inspect}"
   #  @survey = @company.surveys.create!(params[:survey])
   if @survey.save
     @survey_name = @survey.created_at.strftime('%B,%Y')
@@ -54,7 +51,7 @@ def create
     session[:survey] = @survey 
     flash[:success] = "Survey #{@survey_name} created successfully"
     logger.debug "before sending signup mail"
-    Usermailer.new_signup_details(@user,@company,@survey).deliver
+    Usermailer.new_signup_details(@company,@survey).deliver
     logger.debug "after sending signup mail"
     redirect_to questions_path(@survey, 1)
   else
