@@ -15,7 +15,6 @@
 /tmp
 
 /config/database.yml
-/public/assets
 vendor/bundle
 /db/schema.rb
 .sass-cache/
