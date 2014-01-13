@@ -43,18 +43,24 @@ def create
   params[:survey].merge!(:start_date => Time.now, :is_active => true)
   @survey = Survey.new(params[:survey])
   @survey.company = @company
-#  @survey = @company.surveys.create!(params[:survey])
+  @user = current_user
+  #  @survey = @company.surveys.create!(params[:survey])
   if @survey.save
-     @survey_name = @survey.created_at.strftime('%B,%Y')
-     #TODO: Need to put the survey in session, even when accessing old survey
-     session[:survey] = @survey 
-
-     flash[:success] = "Survey #{@survey_name} created successfully"
-     redirect_to questions_path(@survey, 1)
+    @survey_name = @survey.created_at.strftime('%B,%Y')
+    #TODO: Need to put the survey in session, even when accessing old survey
+    session[:survey] = @survey 
+    flash[:success] = "Survey #{@survey_name} created successfully"
+    begin
+      Usermailer.new_signup_details(@user,@company,@survey).deliver
+    rescue Exception => e
+      logger.info e.message
+      logger.info e.backtrace
+    end  
+    redirect_to questions_path(@survey, 1)
   else
-     flash[:error] = "Sorry could not create the Survey. Please try again."
-     render "new"
-  end         
+    flash[:error] = "Sorry could not create the Survey. Please try again."
+    render "new"
+  end     
 end
 
 def get_response_status
