@@ -18,7 +18,7 @@ gem 'oauth2'
 gem 'uuidtools'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.0.2'
 
 gem 'simple_form', "~> 2.0.1"
 
