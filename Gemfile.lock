@@ -248,7 +248,7 @@ DEPENDENCIES
   google_visualr (>= 2.1)
   googlecharts
   highline
-  jquery-rails (~> 2.0.2)
+  jquery-rails (= 2.0.2)
   less-rails
   newrelic_rpm
   nokogiri
