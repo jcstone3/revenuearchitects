@@ -48,29 +48,19 @@ $(document).ready(function(){
 
 				$('#twitter_click').click(function(){							
           $('#twitter_click').css({'background-color' :'#fff'});
-          $('#google_click').css({'background-color' :'#bb2a0b'}); 
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
+          $('#google_click').css({'background-color' :'#bb2a0b'}); 
         });
 
 				$('#facebook_click').click(function(){									    			                    
  			    $('#facebook_click').css({'background-color' :'#fff'});
-          $('#google_click').css({'background-color' :'#bb2a0b'}); 
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
+          $('#google_click').css({'background-color' :'#bb2a0b'}); 
        	});
-
-				// $('#google_click').click(function(){				
-				// 	$('#tab-content').css({'border' :'#bb2a0b', 'color': '#fff'});
-				// 	}, function () {
-	   //  			var cssObj = {
-	   //    			'background-color' : '#bb2a0b', 
-	   //    			'color': '#fff'     			
-	   // 			 	}
-	   //  			$('#tab-content').css(cssObj);
-	 		// 	 	});
 
 				$('#linkedin_click').click(function(){				
 					$('#tab-content').css({'background-color' :'#006695', 'color': '#fff'});
