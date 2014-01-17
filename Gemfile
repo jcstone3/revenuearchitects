@@ -25,8 +25,9 @@ gem 'simple_form', "~> 2.0.1"
 gem "acts_as_ordered", "~> 0.0.1.alpha"
 gem "client_side_validations", '~>3.1.4'
 gem 'settingslogic'
-gem 'therubyracer'
-gem 'uglifier', '>= 1.0.3'
+gem 'therubyracer', '~> 0.10.1'
+gem 'execjs', '1.1.3'
+#gem 'uglifier', '>= 1.0.3'
 #Gems used for pdf and xls generation
 gem 'pdfkit'
 gem "spreadsheet", "0.6.5.8"
@@ -46,8 +47,8 @@ gem "googlecharts"
 gem "google_visualr", ">= 2.1"
 #gem "google_charts"
 #bootstrap rails gem
-gem "less-rails"
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem "less-rails", '~> 2.2.2'
+gem 'twitter-bootstrap-rails', '2.0.7'
 gem 'taps'
 gem 'exception_notification', :git => "git://github.com/rails/exception_notification.git",
         :require => "exception_notifier"
