@@ -2,7 +2,8 @@
            <% logo_link_path =( user_signed_in? ?  new_user_session_path : root_path )%>
             <%= link_to image_tag('logo.png', :alt=>"Revenue Grader", :class=>"pull-left" ) %>
             <div class="pull-left brand-name">
-              brought to you by&nbsp;<%= link_to image_tag("ra_logo.png", :alt=>"Revenue Architects Logo",:class=>"brand-image", :title => "Revenue Architects Website"),"http://www.revenuearchitects.com/", :target => "_blank" %>
+              brought to you by&nbsp;<%= link_to image_tag("ra_icon.png", :alt=>"Revenue Architects Logo", :style=>"margin-bottom: 8px;", :title => "Revenue Architects Website"),"http://www.revenuearchitects.com/", :target => "_blank" %>
+              <a href="http://www.revenuearchitects.com/", target="_blank" class="ra_logo">Revenue Architects</a>
             </div>
 
         </div>
