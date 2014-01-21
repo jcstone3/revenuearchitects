@@ -12329,15 +12329,15 @@ $(document).ready(function(){
                     $('#twitter_click').css({'background-color' :'#53b1f0'});
                  	});
 
-				$('#google_click').click(function(){				
-					$('#tab-content').css({'border' :'#bb2a0b', 'color': '#fff'});
-					}, function () {
-	    			var cssObj = {
-	      			'background-color' : '#bb2a0b', 
-	      			'color': '#fff'     			
-	   			 	}
-	    			$('#tab-content').css(cssObj);
-	 			 	});
+				// $('#google_click').click(function(){				
+				// 	$('#tab-content').css({'border' :'#bb2a0b', 'color': '#fff'});
+				// 	}, function () {
+	   //  			var cssObj = {
+	   //    			'background-color' : '#bb2a0b', 
+	   //    			'color': '#fff'     			
+	   // 			 	}
+	   //  			$('#tab-content').css(cssObj);
+	 		// 	 	});
 
 				$('#linkedin_click').click(function(){				
 					$('#tab-content').css({'background-color' :'#006695', 'color': '#fff'});
