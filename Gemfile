@@ -17,7 +17,7 @@ gem 'oauth2'
 #gem 'omniauth-openid'
 gem 'uuidtools'
 gem 'will_paginate', '~> 3.0'
-gem 'bootstrap-will_paginate'
+gem 'bootstrap-will_paginate', '0.0.9'
 gem 'jquery-rails', '~> 2.0.2'
 
 gem 'simple_form', "~> 2.0.1"
@@ -25,9 +25,9 @@ gem 'simple_form', "~> 2.0.1"
 gem "acts_as_ordered", "~> 0.0.1.alpha"
 gem "client_side_validations", '~>3.1.4'
 gem 'settingslogic'
-gem 'therubyracer', '~> 0.9.9'
-gem 'execjs', '1.3.0'
-gem 'uglifier', '>= 1.0.3'
+gem 'therubyracer', '0.11.3'
+gem 'execjs', '1.4.0'
+gem 'uglifier', '1.3.0'
 #Gems used for pdf and xls generation
 gem 'pdfkit'
 gem "spreadsheet", "0.6.5.8"
@@ -40,16 +40,16 @@ gem 'database_cleaner'
 gem 'faker'
 gem 'rubyXL', '1.2.5'
 gem 'nokogiri'
-gem 'rubyzip'
+gem 'rubyzip', '0.9.9'
 #google charts
 gem "googlecharts"
 #gem "gchartrb"
 gem "google_visualr", ">= 2.1"
 #gem "google_charts"
 #bootstrap rails gem
-gem "less-rails", '2.1.8'
-gem 'libv8', '3.3.10.4'
-gem 'twitter-bootstrap-rails', '2.0.4'
+gem "less-rails", '2.2.6'
+gem 'libv8', '3.11.8.13'
+gem 'twitter-bootstrap-rails', '2.0.2'
 gem 'taps'
 gem 'exception_notification', :git => "git://github.com/rails/exception_notification.git",
         :require => "exception_notifier"
@@ -72,7 +72,7 @@ end
 # in production environments by default.
 group :assets do
   gem 'sass-rails'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'coffee-rails', '3.2.2'
   # gem "less-rails"
   # gem "twitter-bootstrap-rails"
 end
