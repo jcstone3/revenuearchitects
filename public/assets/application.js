@@ -3886,7 +3886,7 @@ var Sizzle = function( selector, context, results, seed ) {
 	if ( context.nodeType !== 1 && context.nodeType !== 9 ) {
 		return [];
 	}
-	
+
 	if ( !selector || typeof selector !== "string" ) {
 		return results;
 	}
@@ -3896,7 +3896,7 @@ var Sizzle = function( selector, context, results, seed ) {
 		contextXML = Sizzle.isXML( context ),
 		parts = [],
 		soFar = selector;
-	
+
 	// Reset the position of the chunker regexp (start from head)
 	do {
 		chunker.exec( "" );
@@ -3904,9 +3904,9 @@ var Sizzle = function( selector, context, results, seed ) {
 
 		if ( m ) {
 			soFar = m[3];
-		
+
 			parts.push( m[1] );
-		
+
 			if ( m[2] ) {
 				extra = m[3];
 				break;
@@ -3930,7 +3930,7 @@ var Sizzle = function( selector, context, results, seed ) {
 				if ( Expr.relative[ selector ] ) {
 					selector += parts.shift();
 				}
-				
+
 				set = posProcess( selector, set, seed );
 			}
 		}
@@ -4058,7 +4058,7 @@ Sizzle.find = function( expr, context, isXML ) {
 
 	for ( i = 0, len = Expr.order.length; i < len; i++ ) {
 		type = Expr.order[i];
-		
+
 		if ( (match = Expr.leftMatch[ type ].exec( expr )) ) {
 			left = match[1];
 			match.splice( 1, 1 );
@@ -4430,7 +4430,7 @@ var Expr = Sizzle.selectors = {
 
 		ATTR: function( match, curLoop, inplace, result, not, isXML ) {
 			var name = match[1] = match[1].replace( rBackslash, "" );
-			
+
 			if ( !isXML && Expr.attrMap[name] ) {
 				match[1] = Expr.attrMap[name];
 			}
@@ -4464,7 +4464,7 @@ var Expr = Sizzle.selectors = {
 			} else if ( Expr.match.POS.test( match[0] ) || Expr.match.CHILD.test( match[0] ) ) {
 				return true;
 			}
-			
+
 			return match;
 		},
 
@@ -4474,7 +4474,7 @@ var Expr = Sizzle.selectors = {
 			return match;
 		}
 	},
-	
+
 	filters: {
 		enabled: function( elem ) {
 			return elem.disabled === false && elem.type !== "hidden";
@@ -4487,14 +4487,14 @@ var Expr = Sizzle.selectors = {
 		checked: function( elem ) {
 			return elem.checked === true;
 		},
-		
+
 		selected: function( elem ) {
 			// Accessing this property makes selected-by-default
 			// options in Safari work properly
 			if ( elem.parentNode ) {
 				elem.parentNode.selectedIndex;
 			}
-			
+
 			return elem.selected === true;
 		},
 
@@ -4516,7 +4516,7 @@ var Expr = Sizzle.selectors = {
 
 		text: function( elem ) {
 			var attr = elem.getAttribute( "type" ), type = elem.type;
-			// IE6 and 7 will map elem.type to 'text' for new HTML5 types (search, etc) 
+			// IE6 and 7 will map elem.type to 'text' for new HTML5 types (search, etc)
 			// use getAttribute instead to test this case
 			return elem.nodeName.toLowerCase() === "input" && "text" === type && ( attr === type || attr === null );
 		},
@@ -4635,21 +4635,21 @@ var Expr = Sizzle.selectors = {
 				case "only":
 				case "first":
 					while ( (node = node.previousSibling) )	 {
-						if ( node.nodeType === 1 ) { 
-							return false; 
+						if ( node.nodeType === 1 ) {
+							return false;
 						}
 					}
 
-					if ( type === "first" ) { 
-						return true; 
+					if ( type === "first" ) {
+						return true;
 					}
 
 					node = elem;
 
 				case "last":
 					while ( (node = node.nextSibling) )	 {
-						if ( node.nodeType === 1 ) { 
-							return false; 
+						if ( node.nodeType === 1 ) {
+							return false;
 						}
 					}
 
@@ -4662,22 +4662,22 @@ var Expr = Sizzle.selectors = {
 					if ( first === 1 && last === 0 ) {
 						return true;
 					}
-					
+
 					doneName = match[0];
 					parent = elem.parentNode;
-	
+
 					if ( parent && (parent[ expando ] !== doneName || !elem.nodeIndex) ) {
 						count = 0;
-						
+
 						for ( node = parent.firstChild; node; node = node.nextSibling ) {
 							if ( node.nodeType === 1 ) {
 								node.nodeIndex = ++count;
 							}
-						} 
+						}
 
 						parent[ expando ] = doneName;
 					}
-					
+
 					diff = elem.nodeIndex - last;
 
 					if ( first === 0 ) {
@@ -4696,7 +4696,7 @@ var Expr = Sizzle.selectors = {
 		TAG: function( elem, match ) {
 			return (match === "*" && elem.nodeType === 1) || !!elem.nodeName && elem.nodeName.toLowerCase() === match;
 		},
-		
+
 		CLASS: function( elem, match ) {
 			return (" " + (elem.className || elem.getAttribute("class")) + " ")
 				.indexOf( match ) > -1;
@@ -4766,7 +4766,7 @@ var makeArray = function( array, results ) {
 		results.push.apply( results, array );
 		return results;
 	}
-	
+
 	return array;
 };
 
@@ -4998,7 +4998,7 @@ if ( document.querySelectorAll ) {
 		if ( div.querySelectorAll && div.querySelectorAll(".TEST").length === 0 ) {
 			return;
 		}
-	
+
 		Sizzle = function( query, context, extra, seed ) {
 			context = context || document;
 
@@ -5007,24 +5007,24 @@ if ( document.querySelectorAll ) {
 			if ( !seed && !Sizzle.isXML(context) ) {
 				// See if we find a selector to speed up
 				var match = /^(\w+$)|^\.([\w\-]+$)|^#([\w\-]+$)/.exec( query );
-				
+
 				if ( match && (context.nodeType === 1 || context.nodeType === 9) ) {
 					// Speed-up: Sizzle("TAG")
 					if ( match[1] ) {
 						return makeArray( context.getElementsByTagName( query ), extra );
-					
+
 					// Speed-up: Sizzle(".CLASS")
 					} else if ( match[2] && Expr.find.CLASS && context.getElementsByClassName ) {
 						return makeArray( context.getElementsByClassName( match[2] ), extra );
 					}
 				}
-				
+
 				if ( context.nodeType === 9 ) {
 					// Speed-up: Sizzle("body")
 					// The body element only exists once, optimize finding it
 					if ( query === "body" && context.body ) {
 						return makeArray( [ context.body ], extra );
-						
+
 					// Speed-up: Sizzle("#ID")
 					} else if ( match && match[3] ) {
 						var elem = context.getElementById( match[3] );
@@ -5037,12 +5037,12 @@ if ( document.querySelectorAll ) {
 							if ( elem.id === match[3] ) {
 								return makeArray( [ elem ], extra );
 							}
-							
+
 						} else {
 							return makeArray( [], extra );
 						}
 					}
-					
+
 					try {
 						return makeArray( context.querySelectorAll(query), extra );
 					} catch(qsaError) {}
@@ -5080,7 +5080,7 @@ if ( document.querySelectorAll ) {
 					}
 				}
 			}
-		
+
 			return oldSizzle(query, context, extra, seed);
 		};
 
@@ -5107,7 +5107,7 @@ if ( document.querySelectorAll ) {
 			// This should fail with an exception
 			// Gecko does not error, returns false instead
 			matches.call( document.documentElement, "[test!='']:sizzle" );
-	
+
 		} catch( pseudoError ) {
 			pseudoWorks = true;
 		}
@@ -5117,7 +5117,7 @@ if ( document.querySelectorAll ) {
 			expr = expr.replace(/\=\s*([^'"\]]*)\s*\]/g, "='$1']");
 
 			if ( !Sizzle.isXML( node ) ) {
-				try { 
+				try {
 					if ( pseudoWorks || !Expr.match.PSEUDO.test( expr ) && !/!=/.test( expr ) ) {
 						var ret = matches.call( node, expr );
 
@@ -5154,7 +5154,7 @@ if ( document.querySelectorAll ) {
 	if ( div.getElementsByClassName("e").length === 1 ) {
 		return;
 	}
-	
+
 	Expr.order.splice(1, 0, "CLASS");
 	Expr.find.CLASS = function( match, context, isXML ) {
 		if ( typeof context.getElementsByClassName !== "undefined" && !isXML ) {
@@ -5205,7 +5205,7 @@ function dirCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
 
 		if ( elem ) {
 			var match = false;
-			
+
 			elem = elem[dir];
 
 			while ( elem ) {
@@ -5258,7 +5258,7 @@ if ( document.documentElement.contains ) {
 
 Sizzle.isXML = function( elem ) {
 	// documentElement is verified for cases where it doesn't yet exist
-	// (such as loading iframes in IE - #4833) 
+	// (such as loading iframes in IE - #4833)
 	var documentElement = (elem ? elem.ownerDocument || elem : 0).documentElement;
 
 	return documentElement ? documentElement.nodeName !== "HTML" : false;
@@ -5375,11 +5375,11 @@ jQuery.fn.extend({
 	},
 
 	is: function( selector ) {
-		return !!selector && ( 
+		return !!selector && (
 			typeof selector === "string" ?
 				// If this is a positional selector, check membership in the returned set
 				// so $("p:first").is("p:last") won't return true for a doc with two "p".
-				POS.test( selector ) ? 
+				POS.test( selector ) ?
 					jQuery( selector, this.context ).index( this[0] ) >= 0 :
 					jQuery.filter( selector, this ).length > 0 :
 				this.filter( selector ).length > 0 );
@@ -5387,7 +5387,7 @@ jQuery.fn.extend({
 
 	closest: function( selectors, context ) {
 		var ret = [], i, l, cur = this[0];
-		
+
 		// Array (deprecated as of jQuery 1.7)
 		if ( jQuery.isArray( selectors ) ) {
 			var level = 1;
@@ -12112,16 +12112,16 @@ var clientSideValidations = {
  * Version:     1.9.0
  * Author:      Allan Jardine (www.sprymedia.co.uk)
  * Info:        www.datatables.net
- * 
+ *
  * Copyright 2008-2012 Allan Jardine, all rights reserved.
  *
  * This source file is free software, under either the GPL v2 license or a
  * BSD style license, available at:
  *   http://datatables.net/license_gpl2
  *   http://datatables.net/license_bsd
- * 
- * This source file is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ *
+ * This source file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
  */
 
@@ -12293,74 +12293,74 @@ j.ext})(jQuery,window,document,void 0);
 
 $(document).ready(function(){
   /* Your javascripts goes here... */
-  //to hide and show login and signup	
+  //to hide and show login and signup
                  $(".alert").fadeOut(5000);
 				$('#signup_user').hide();
-				
+
 				var login_val = $('#login').val();
-				
+
 				if(login_val == "yes"){
 	             $('#signup_user').show();
 	             $('#login_user').hide();
 				}
 				else{
-				  $('#signup_user').hide();	
+				  $('#signup_user').hide();
 				  $('#login_user').show();
-				}	
+				}
             //----------end of hide n show----------------------------//
             //to set the active tab to the color of the login type clicked
-          $('#home_click').click(function(){	                	
+          $('#home_click').click(function(){
 					$('#home_click').css({'background-color' :'#fff'});
-					$('#twitter_click').css({'background-color' :'#53b1f0'}); 
-                    $('#facebook_click').css({'background-color' :'#3b5998'});                 
+					$('#twitter_click').css({'background-color' :'#53b1f0'});
+                    $('#facebook_click').css({'background-color' :'#3b5998'});
 	 			 	});
 
-				$('#twitter_click').click(function(){							
+				$('#twitter_click').click(function(){
                     $('#twitter_click').css({'background-color' :'#fff'});
                     $('#home_click').css({'color' :'#555555'});
                     $('#home_click').css({'background-color' :'#e3e3e3'});
                     $('#facebook_click').css({'background-color' :'#3b5998'});
                     });
 
-				$('#facebook_click').click(function(){									    			                    
+				$('#facebook_click').click(function(){
 	 			    $('#facebook_click').css({'background-color' :'#fff'});
                      $('#home_click').css({'color' :'#555555'});
                     $('#home_click').css({'background-color' :'#e3e3e3'});
                     $('#twitter_click').css({'background-color' :'#53b1f0'});
                  	});
 
-				$('#google_click').click(function(){				
+				$('#google_click').click(function(){
 					$('#tab-content').css({'border' :'#bb2a0b', 'color': '#fff'});
 					}, function () {
 	    			var cssObj = {
-	      			'background-color' : '#bb2a0b', 
-	      			'color': '#fff'     			
+	      			'background-color' : '#bb2a0b',
+	      			'color': '#fff'
 	   			 	}
 	    			$('#tab-content').css(cssObj);
 	 			 	});
 
-				$('#linkedin_click').click(function(){				
+				$('#linkedin_click').click(function(){
 					$('#tab-content').css({'background-color' :'#006695', 'color': '#fff'});
 					}, function () {
 	    			var cssObj = {
 	      			'background-color' : '#006695',
-	      			'color': '#fff'     			
+	      			'color': '#fff'
 	   			 	}
 	    			$('#tab-content').css(cssObj);
 	 			 	});
 			//--------end-of-login-click ------------//
 			//---- question js ---------------------//
-			//set defalut value for anwer1 
-                //to set the slider value              
+			//set defalut value for anwer1
+                //to set the slider value
                 var response_answer1 = $('#response_answer_1').val();
 
-                if($('#response_answer_1').val() == ""){                            
-                    var response_answer1  = 1; 
+                if($('#response_answer_1').val() == ""){
+                    var response_answer1  = 1;
                     $('#response_answer_1').val('1');
                 }
                 else
-                {                               
-                    var response_answer1 = $('#response_answer_1').val(); 
+                {
+                    var response_answer1 = $('#response_answer_1').val();
                 }
 
                 var response_answer2 = $('#response_answer_2').val();
@@ -12369,23 +12369,23 @@ $(document).ready(function(){
                   $('#option').find('a#'+response_answer2+'').removeClass('btn form priorityTip');
                   $('#option').find('a#'+response_answer2+'').addClass('btn form btn-success priorityTip');
                 }
-                                
+
                //hide priority option on load
-               if($('#response_answer_2').val() == "add_to_plan"){                                
+               if($('#response_answer_2').val() == "add_to_plan"){
                 $('#priority_option').show();
-                
+
                 //if answer_3 selected highlight it
-                if($('#response_answer_3').val() != ""){ 
+                if($('#response_answer_3').val() != ""){
                 var response_answer3 = $('#response_answer_3').val();
                 $('#priority_option').find('a#'+response_answer3+'').removeClass('btn form priorityTip');
                 $('#priority_option').find('a#'+response_answer3+'').addClass('btn form btn-success priorityTip');
                 }
-               
+
                }
                else{
                 $('#priority_option').hide();
                }
-                
+
                //highlight the section currently on
                 var section_id_val = $('#section').val();
                 $('#section_'+section_id_val).removeClass($('#section_'+section_id_val).attr('class'));
@@ -12395,7 +12395,7 @@ $(document).ready(function(){
 
                 if(section_id_val == "1"){
                  $('#section_2').removeClass($('#section_2').attr('class'));
-                 $('#section_2').addClass('next'); 
+                 $('#section_2').addClass('next');
                  $('#section_3').removeClass($('#section_2').attr('class'));
                  $('#section_3').addClass('next');
                  //for questions count
@@ -12403,101 +12403,101 @@ $(document).ready(function(){
                  $('#span_3').removeClass($('#span_'+section_id_val).attr('class'));
                  $('#span_2').addClass('red');
                  $('#span_3').addClass('red');
-                
+
                 }
 
                  if(section_id_val == "2"){
                  $('#section_1').removeClass($('#section_1').attr('class'));
-                 $('#section_1').addClass('done'); 
+                 $('#section_1').addClass('done');
                  $('#section_3').removeClass($('#section_2').attr('class'));
-                 $('#section_3').addClass('next');  
+                 $('#section_3').addClass('next');
                  $('#span_1').removeClass($('#span_'+section_id_val).attr('class'));
                  $('#span_1').addClass('green');
                  //for questions count
                  $('#span_1').removeClass($('#span_'+section_id_val).attr('class'));
                  $('#span_2').removeClass($('#span_'+section_id_val).attr('class'));
                  $('#span_3').removeClass($('#span_'+section_id_val).attr('class'));
-                 $('#span_1').addClass('green');                 
+                 $('#span_1').addClass('green');
                  $('#span_2').addClass('red');
-                 $('#span_3').addClass('red');               
+                 $('#span_3').addClass('red');
                 }
 
-               if(section_id_val == "3"){                
+               if(section_id_val == "3"){
                  $('#section_1').removeClass($('#section_1').attr('class'));
-                 $('#section_1').addClass('done'); 
+                 $('#section_1').addClass('done');
                  $('#section_2').removeClass($('#section_2').attr('class'));
                  $('#section_2').addClass('done');
                  $('#span_1').removeClass($('#span_'+section_id_val).attr('class'));
                  $('#span_2').removeClass($('#span_'+section_id_val).attr('class'));
-                 $('#span_3').removeClass($('#span_'+section_id_val).attr('class')); 
+                 $('#span_3').removeClass($('#span_'+section_id_val).attr('class'));
                  $('#span_1').addClass('green');
                  $('#span_2').addClass('green');
-                    
-                 $('#span_3').addClass('red');                 
+
+                 $('#span_3').addClass('red');
                 }
 
                 //post form
-                $('#confirm_answer').click(function(e){                   
+                $('#confirm_answer').click(function(e){
                     $('form').submit();
                     return false;
                 });
-               
+
                //For the Add to Plan options
                 $('.plan_option').click(function(e){
-                    //set the add to plan options 
-                    $('#response_answer_2').val(e.target.id); 
+                    //set the add to plan options
+                    $('#response_answer_2').val(e.target.id);
                     //make option as grey
 
-                  
+
                     $('#option').find('a#in_our_plan').removeClass($('#option').find('a#in_our_plan').
                         attr('class'));
                     $('#option').find('a#add_to_plan').removeClass($('#option').find('a#add_to_plan').
                         attr('class'));
-                    $('#option').find('a#not_applicable').removeClass($('#option').find('a#not_applicable').attr('class'));                    
-                    
+                    $('#option').find('a#not_applicable').removeClass($('#option').find('a#not_applicable').attr('class'));
+
                     $('#option').find('a#in_our_plan').addClass('btn form priorityTip');
                     $('#option').find('a#add_to_plan').addClass('btn form priorityTip');
                     $('#option').find('a#not_applicable').addClass('btn form priorityTip');
-                    
+
                     //make the selected to green
                     $('#option').find('a#'+e.target.id+'').removeClass('btn form priorityTip');
                     $('#option').find('a#'+e.target.id+'').addClass('btn form btn-success priorityTip');
                     //if Add to Plan is clicked the show the priority tab
                     if(e.target.id == "add_to_plan"){
-                      $('#priority_option').show();                      
+                      $('#priority_option').show();
                     }
                     else{
-                      $('#priority_option').hide();  
+                      $('#priority_option').hide();
                     }
                 });
 
                 //For the Priority options
                 $('.priority_option').click(function(e){
-                   
-                    $('#response_answer_3').val(e.target.id);                     
-                    
+
+                    $('#response_answer_3').val(e.target.id);
+
                     //make all option as grey
                     $('#priority_option').find('a#must_do').removeClass($('#option').find('a#must_do').
                         attr('class'));
                     $('#priority_option').find('a#should_do').removeClass($('#option').find('a#should_do').
                         attr('class'));
                     $('#priority_option').find('a#could_do').removeClass($('#option').find('a#could_do').attr('class'));
-                    
+
                     $('#priority_option').find('a#must_do').addClass('btn form priorityTip');
                     $('#priority_option').find('a#should_do').addClass('btn form priorityTip');
                     $('#priority_option').find('a#could_do').addClass('btn form priorityTip');
 
-                    //make selected option as green                    
+                    //make selected option as green
                     $('#priority_option').find('a#'+e.target.id+'').removeClass('btn form priorityTip');
                     $('#priority_option').find('a#'+e.target.id+'').addClass('btn form btn-success priorityTip');
                 });
-               
-                
+
+
                 $(".priorityTip").tooltip({
-                    placement: 'bottom' 
-                });                 
-                
-                
+                    placement: 'bottom'
+                });
+
+
                 $( "#slider" ).slider({
                     value:response_answer1,
                     min: 1,
@@ -12511,21 +12511,76 @@ $(document).ready(function(){
                             case 4 :  $("a.ui-slider-handle").attr('data-original-title', 'We do this on a regular basis and differentiate from competitors.'); break;
                             case 5 :  $("a.ui-slider-handle").attr('data-original-title', 'We do this consistently and effectively for market advantage.'); break;
                         }
-  
+
 
                     }
                 });
 
                 $("#slider").slider({
-                   change: function(event, ui) {                    
+                   change: function(event, ui) {
                     $( "#response_answer_1" ).val( $( "#slider" ).slider( "value" ));
                 }
                 });
-                
+
 
 
                 $("div#slider a.ui-slider-handle").tooltip({
-                    placement: 'bottom' 
+                    //placement: 'bottom'
+
+								  placement: function(tip, element) {
+    							var $element, above, actualHeight, actualWidth, below, boundBottom, boundLeft, boundRight, boundTop, elementAbove, elementBelow, elementLeft, elementRight, isWithinBounds, left, pos, right;
+    							isWithinBounds = function(elementPosition) {
+      							return boundTop < elementPosition.top && boundLeft < elementPosition.left && boundRight > (elementPosition.left + actualWidth) && boundBottom > (elementPosition.top + actualHeight);
+    							};
+    							$element = $(element);
+    							pos = $.extend({}, $element.offset(), {
+      							width: element.offsetWidth,
+      							height: element.offsetHeight
+    							});
+    							actualWidth = 283;
+    							actualHeight = 117;
+							    boundTop = $(document).scrollTop();
+							    boundLeft = $(document).scrollLeft();
+							    boundRight = boundLeft + $(window).width();
+							    boundBottom = boundTop + $(window).height();
+							    elementAbove = {
+						      top: pos.top - actualHeight,
+						      left: pos.left + pos.width / 2 - actualWidth / 2
+						    	};
+							    elementBelow = {
+							      top: pos.top + pos.height,
+							      left: pos.left + pos.width / 2 - actualWidth / 2
+							    };
+							    elementLeft = {
+							      top: pos.top + pos.height / 2 - actualHeight / 2,
+							      left: pos.left - actualWidth
+							    };
+							    elementRight = {
+							      top: pos.top + pos.height / 2 - actualHeight / 2,
+							      left: pos.left + pos.width
+							    };
+							    above = isWithinBounds(elementAbove);
+							    below = isWithinBounds(elementBelow);
+							    left = isWithinBounds(elementLeft);
+							    right = isWithinBounds(elementRight);
+							    if (above) {
+							      return "top";
+							    } else {
+							      if (below) {
+							        return "bottom";
+							      } else {
+							        if (left) {
+							          return "left";
+							        } else {
+							          if (right) {
+							            return "right";
+							          } else {
+							            return "right";
+							          }
+							        }
+							      }
+							    }
+							  }
                 });
                 $("a.ui-slider-handle").attr('data-original-title', 'We are not engaging in this activity today');
 
@@ -12536,14 +12591,14 @@ $(document).ready(function(){
               $('#company').change(function(){
                 var name = "";
                 $("#company option:selected").each(function () {
-                    name = $(this).text(); 
+                    name = $(this).text();
                 });
-                //alert(id);                
+                //alert(id);
                 $.ajax({
                     url: '/admin/users?company_name='+name,
-                    type: "GET"                    
+                    type: "GET"
                 });
-              });  
+              });
 
                $('#company_submit').click(function(){
                 var flag = true;
@@ -12589,8 +12644,8 @@ $(document).ready(function(){
                  $('#revenue_error').html('');
                }
                return flag;
-              }); 
-              
+              });
+
 
             $('#company_industry_id').change(function(){
                 var flag = true;
@@ -12602,30 +12657,30 @@ $(document).ready(function(){
                  $('#industry_error').html('');
                }
                return flag;
-              }); 
+              });
 
-               $('#questn_save').click(function(){ 
+               $('#questn_save').click(function(){
                 var flag = true;
-                if($('#sub_section_id').val()=="Select Section"){                  
+                if($('#sub_section_id').val()=="Select Section"){
                  $('#section_error').html('Please select Section');
                   flag =  false;
-                }else{                  
+                }else{
                   $('#section_error').html('');
                 }
-                if($('#question_description').val()==""){                  
+                if($('#question_description').val()==""){
                  $('#description_error').html("Description can't be blank");
                   flag =  false;
-                }else{                  
+                }else{
                   $('#description_error').html('');
                 }
-                if($('#question_name').val()==""){                  
+                if($('#question_name').val()==""){
                  $('#question_name_error').html("Question can't be blank");
                   flag =  false;
-                }else{                  
+                }else{
                   $('#question_name_error').html('');
                 }
                 return flag;
-              }); 
+              });
 
               $('#survey_size').change(function(){
                 var flag = true;
@@ -12650,26 +12705,26 @@ $(document).ready(function(){
                }
                return flag;
               });
-             
+
               $('#industry').change(function(){
                 var id = "";
                 $("#industry option:selected").each(function () {
-                    id = $(this).val(); 
+                    id = $(this).val();
                 });
-                //alert(id);                
+                //alert(id);
                 $.ajax({
                     url: '/admin/users?industry_id='+id,
-                    type: "GET"                    
+                    type: "GET"
                 });
-              });   
-           //--------------  end admin_user_index update -----------/    
+              });
+           //--------------  end admin_user_index update -----------/
 
             $(function () {
-             $('.tabs').click(function(){              
+             $('.tabs').click(function(){
                 alert($(this).attr('id'));
              });
             })
-    
+
 
       $('#resultTable').dataTable( {
             "bPaginate": false,
@@ -12678,8 +12733,8 @@ $(document).ready(function(){
             "bSort": true,
             "bInfo": false,
             "bAutoWidth": true
-        } ); 
-       
+        } );
+
        //-------report page table ids ------ //
        $('#report_add_to_planTable').dataTable( {
             "bPaginate": false,
@@ -12688,7 +12743,7 @@ $(document).ready(function(){
             "bSort": true,
             "bInfo": false,
             "bAutoWidth": true
-        } ); 
+        } );
 
        $('#report_must_doTable').dataTable( {
             "bPaginate": false,
@@ -12746,7 +12801,7 @@ $(document).ready(function(){
             "bSort": true,
             "bInfo": false,
             "bAutoWidth": true
-        } ); 
+        } );
 
       // -- admin question table id --- //
       $('#question_table').dataTable( {
@@ -12756,7 +12811,7 @@ $(document).ready(function(){
             "bSort": true,
             "bInfo": false,
             "bAutoWidth": true
-        } ); 
+        } );
       //---end --of admin user page table---//
 
       $('#subsection_table').dataTable( {
@@ -12766,7 +12821,7 @@ $(document).ready(function(){
             "bSort": true,
             "bInfo": false,
             "bAutoWidth": true
-        } ); 
+        } );
 
       /* report Tables */
        $(".pageAccordion").accordion({
