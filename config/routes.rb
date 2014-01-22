@@ -32,13 +32,7 @@ RevenueGrader::Application.routes.draw do
    resources :users
 
   end
-  devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations"} do 
-   get 'admins/login' => 'admin/sessions#new', :as => "new_admin_session"
-   get 'admins/logout' => 'admin/sessions#destroy', :as => "destroy_admin_session"
-   get 'admins/sign-up' => 'admin/sessions#new', :as => "new_admin_session" 
-  end  
-  
-  #setting up user registration
+   #setting up user registration
   devise_for :users, :path => "",:path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'register' } , :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions", :passwords => "users/passwords"} do
       get '/login' =>'users/sessions#new', :as => :new_user_session
       get '/logout' => 'users/sessions#destroy', :as => :destroy_user_session
@@ -48,6 +42,13 @@ RevenueGrader::Application.routes.draw do
       put '/update-password/:resource' => 'users/passwords#update', :as => :update_password
       get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru' #third party authentication
   end 
+  devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations"} do 
+   get 'admins/login' => 'admin/sessions#new', :as => "new_admin_session"
+   get 'admins/logout' => 'admin/sessions#destroy', :as => "destroy_admin_session"
+   get 'admins/sign-up' => 'admin/sessions#new', :as => "new_admin_session" 
+  end  
+  
+ 
    
   resources :companies
   resources :authorizations

@@ -128,7 +128,7 @@ GEM
       rack
     omniauth-facebook (1.4.1)
       omniauth-oauth2 (~> 1.1.0)
-    omniauth-google-oauth2 (0.1.13)
+    omniauth-google-oauth2 (0.2.2)
       omniauth (~> 1.0)
       omniauth-oauth2
     omniauth-oauth (1.0.1)
@@ -261,7 +261,7 @@ DEPENDENCIES
   oauth2
   omniauth
   omniauth-facebook
-  omniauth-google-oauth2
+  omniauth-google-oauth2 (~> 0.2.2)
   omniauth-twitter
   pdfkit
   permanent_records (~> 2.1.2)

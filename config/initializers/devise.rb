@@ -225,8 +225,8 @@ Devise.setup do |config|
   #config.omniauth :openid, :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id', :client_options => {:ssl => {:ca_path => "/etc/ssl/certs"}}
   config.omniauth :google_oauth2, 
                   Settings.google_api_id, 
-                  Settings.google_secret_key, 
-                  { access_type: "offline", approval_prompt: "" } 
+                  Settings.google_secret_key
+                  #{ access_type: "offline", approval_prompt: "" } 
                   # { :scope => 'userinfo.email', 
                   #   :client_options => 
                   #   {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}
