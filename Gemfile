@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 ruby "1.9.3"
 gem 'rails', '3.2.11'
@@ -25,7 +25,7 @@ gem 'simple_form', "~> 2.0.1"
 gem "acts_as_ordered", "~> 0.0.1.alpha"
 gem "client_side_validations", '~>3.1.4'
 gem 'settingslogic'
-gem 'therubyracer', '0.11.3'
+gem 'therubyracer'
 gem 'execjs', '1.4.0'
 gem 'uglifier', '1.3.0'
 #Gems used for pdf and xls generation
@@ -47,8 +47,7 @@ gem "googlecharts"
 gem "google_visualr", ">= 2.1"
 #gem "google_charts"
 #bootstrap rails gem
-gem "less-rails", '2.2.6'
-gem 'libv8', '3.11.8.13'
+gem "less-rails", '2.1.5'
 gem 'twitter-bootstrap-rails', '2.0.2'
 gem 'taps'
 gem 'exception_notification', :git => "git://github.com/rails/exception_notification.git",
@@ -64,10 +63,10 @@ gem 'wkhtmltopdf-binary'
 end
 
 #wkhtmltopdf for test, stage and production enviornments
-group :test, :staging, :production do 
+group :test, :staging, :production do
 	gem "wkhtmltopdf-heroku"
 	gem 'newrelic_rpm'
-end	
+end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
