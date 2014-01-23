@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   
 
 #facebook authentication
-def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
+  def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
     data = access_token.extra.raw_info
     if provider == "facebook"
         user = User.where(:email => data.email).first      
@@ -42,13 +42,10 @@ def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
       end     
     end
   end
-
+  
+  # Google Authentication
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil, provider)
-    Rails.logger.debug "in google_oauth2 mthod.."
-    Rails.logger.debug "provider #{provider.inspect}"
     data = access_token.info
-    Rails.logger.debug "data #{data.inspect}"
-        
     user = User.where(:email => data["email"]).first
     if user 
       user

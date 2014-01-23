@@ -45,9 +45,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end 
  
-  def google_oauth2
-    Rails.logger.debug "in google_oauth2 callback method"
-    
+  def google_oauth2   
     @user = User.find_for_google_oauth2(request.env["omniauth.auth"], current_user, "google_oauth2")
     data = request.env["omniauth.auth"].extra.raw_info
     
