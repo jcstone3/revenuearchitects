@@ -25,7 +25,7 @@ gem 'simple_form', "~> 2.0.1"
 gem "acts_as_ordered", "~> 0.0.1.alpha"
 gem "client_side_validations", '~>3.1.4'
 gem 'settingslogic'
-gem 'therubyracer', '0.9.2', :platforms => :ruby#gem 'therubyracer', :platforms => :ruby, :require => 'v8'
+#gem 'therubyracer', '0.9.2', :platforms => :ruby#gem 'therubyracer', :platforms => :ruby, :require => 'v8'
 gem 'execjs', '1.4.0'
 gem 'uglifier', '1.3.0'
 #Gems used for pdf and xls generation
