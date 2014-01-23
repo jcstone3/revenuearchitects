@@ -278,7 +278,6 @@ DEPENDENCIES
   simple_form (~> 2.0.1)
   spreadsheet (= 0.6.5.8)
   taps
-  therubyracer
   to_xls!
   twitter-bootstrap-rails (= 2.0.2)
   uglifier (= 1.3.0)

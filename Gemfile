@@ -26,7 +26,7 @@ gem "acts_as_ordered", "~> 0.0.1.alpha"
 gem "client_side_validations", '~>3.1.4'
 gem 'settingslogic'
 #gem 'therubyracer'
-gem 'therubyracer', :platforms => :ruby, :require => 'v8'
+#gem 'therubyracer', :platforms => :ruby, :require => 'v8'
 gem 'execjs', '1.4.0'
 gem 'uglifier', '1.3.0'
 #Gems used for pdf and xls generation
