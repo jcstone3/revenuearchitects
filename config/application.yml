@@ -14,20 +14,20 @@ development:
     facebook_secret_key: '340c1331cddc687ce7085d849424eece'
     twitter_api_id: '0MCcStPgM8eAvlIpDZEU5g'
     twitter_secret_key: 'NTxxbMxIXqsj2m3DWBAiosJPQp7IcDtLBd4l9nKOY'
-    google_api_id: '72880727859.apps.googleusercontent.com'
-    google_secret_key: 'ymxlipy3Od9BaFRRzvmJOE41'
+    google_api_id: '150310891690-mmu7i2a07r2baft34uifcam0bgipi68k.apps.googleusercontent.com'
+    google_secret_key: '_PqrR1qOya_N6pMK2RUPcqXI' 
     linkedin_api_key: 'dt67gevhr7lv'
     linkedin_secret_key: 'mIc7DHX0CquGm8jt'
 
 staging:
     <<: *defaults
-    host: stage.revenuegrader.com
+    host: revenuegrader-staging.herokuapp.com
     facebook_app_id: '208616319240040'
     facebook_secret_key: '907b9b8444f129d1dc6d8da744bfa781'
     twitter_api_id: '80Mc8tqcacwJ07OrT8kPfw'
     twitter_secret_key: 'pBA5xmtDz5vNdEwn1buvdFJaa5HxxbGy6M8YMto0o'
-    google_api_id: ''
-    google_secret_key: ''
+    google_api_id: '427784068507-lu0cvvc3mus1rfcfj18f9l8ulit92und.apps.googleusercontent.com'
+    google_secret_key: 'RWmmdJvDY6CyKDk9YSzJMtiD'
 
 production:
     <<: *defaults
@@ -36,5 +36,5 @@ production:
     facebook_secret_key: 'aba93b297245e2a257c5c145e8b374a5'  
     twitter_api_id: 'yB7A8psK5qBUHVt3RDEjjw'
     twitter_secret_key: 'rb5GB4BqA8Ojg0kQUeG1qNxz9PKN0gtl0RKzGoN5H4'
-    google_api_id: ''
-    google_secret_key: ''
+    google_api_id: '21247459892-6i4jd8suhj4ckhf54mm1440ehjcquqsd.apps.googleusercontent.com'
+    google_secret_key: 'x5unP9mwU_YMu3qkbncd2E91'

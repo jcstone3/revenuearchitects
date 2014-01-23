@@ -1,75 +1,94 @@
 <% content_for :side_content do -%> 
-         <ul class="nav nav-tabs">
-                            <li class="active">
-                               <a class="signuplink" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png", 
-                            :alt=>"home")%>Sign In</a></li>                
-                            <li>
-                               <a class="twitterlink" href="#twitter" data-toggle="tab"  id="twitter_click" >
-                                   <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
-                               </a>
-                            </li>
-                            <li>
-                                <a class="facebooklink" href="#facebook" data-toggle="tab" id="facebook_click">
-                                   <%= image_tag "facebook_icon.png", :alt=>"facebook", :id=>"facebook_click"%>
-                                </a>
-                            </li>
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a class="signuplink" href="#home" data-toggle="tab" id="home_click">
+        <%= image_tag("rg_icon.png", :alt=>"home")%>Sign In
+      </a>
+    </li>                
+    
+    <li>
+      <a class="googlelink" href="#google" data-toggle="tab" id="google_click" >
+        <%= image_tag "plus_icon.png", :alt=>"google", :id=>"google_click"%>
+      </a>
+    </li>
 
-                            </ul>
-                             
-                            <div class="tab-content" id="tab-content" style="padding-left:0px;">
-                            <div class="tab-pane active" id="home">
-                                <div class="rightboxName">
-                                <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true, :html => {:class => "reset" } ) do |f| %>
-                                <h3 >Email<span>*</span></h3>
-                                <%= f.email_field :email, :class=>"span8 logindetails", :placeholder=>"Your Email id" %><h4 class="loginheading">Login with the registered email address</h4> 
-                                <h3 >Password<span>*</span></h3><%= f.password_field :password, :class=>"span8", :placeholder=>"Password"%>
-                                <h4 class="loginheading">Enter your valid password</h4> 
-                                
-                              
-                                <% if devise_mapping.rememberable? -%>
-                                 <h3 ><%= f.check_box :remember_me %> <%= f.label :remember_me, :class=>"checkRemember" %></h3>
-                                <% end -%>
-                                <%= f.submit "Login", :class=>"btn btn-primary btn-large login" %>                               
-                               <%= hidden_field_tag('login', "yes")%><br>
-                              <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-                               <h5 > <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-                                <% end -%></h5>
-                                <h5>
-                                 <%= link_to "Sign up with us", new_user_registration_path %>
-                                 <br />                      
-                                </h5>
-                               <%end%>
-                               </div>
-                            </div>
-                            <div class="tab-pane signintweet" id="twitter">
-                                <br>
-                                <%= link_to image_tag("sign_in_with_twitter.png" , :alt=>"twitter"),                 user_omniauth_authorize_path(:twitter)
-                                                      %>
-                            </div>   
-                            <div class="tab-pane signinbtn" id="facebook">
-                            <br> 
-                                <%= link_to image_tag("login-w-fb.gif", :alt=>"facebook"), 
-                                                     user_omniauth_authorize_path(:facebook)
-                                                     %>
-                            </div>
- 
-                            </div>
- <% end -%> 
+    <li>
+      <a class="twitterlink" href="#twitter" data-toggle="tab"  id="twitter_click" >
+        <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
+      </a>
+    </li>
+    
+    <li>
+      <a class="facebooklink" href="#facebook" data-toggle="tab" id="facebook_click">
+        <%= image_tag "facebook_icon.png", :alt=>"facebook", :id=>"facebook_click"%>
+      </a>
+    </li>
+  </ul>
+     
+  <div class="tab-content" id="tab-content" style="padding-left:0px;">
+    <div class="tab-pane active" id="home">
+      <div class="rightboxName">
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true, :html => {:class => "reset" } ) do |f| %>
+          <h3 >Email<span>*</span></h3>
+          <%= f.email_field :email, :class=>"span8 logindetails", :placeholder=>"Your Email id" %><h4 class="loginheading">Login with the registered email address</h4> 
+          <h3 >Password<span>*</span></h3>
+          <%= f.password_field :password, :class=>"span8", :placeholder=>"Password"%>
+          <h4 class="loginheading">Enter your valid password</h4> 
+      
+          <% if devise_mapping.rememberable? -%>
+            <h3 >
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me, :class=>"checkRemember" %>
+            </h3>
+          <% end -%>
 
+          <%= f.submit "Login", :class=>"btn btn-primary btn-large login" %>                               
+          <%= hidden_field_tag('login', "yes")%><br>
+
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+            <h5 >
+              <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+            </h5>
+          <% end -%>
+          
+          <h5>
+            <%= link_to "Sign up with us", new_user_registration_path %>
+             <br />                      
+          </h5>
+        <%end%>
+      </div><!-- rightboxName -->
+    </div><!-- tab-pane active -->
+
+    <div class="tab-pane signingoogle" id="google">
+      <br>
+      <%= link_to image_tag("sign_in_with_google.jpg", :alt=>"google"), user_omniauth_authorize_path(:google_oauth2) %>
+    </div><!-- tab-pane signingoogle -->
+
+    <div class="tab-pane signintweet" id="twitter">
+      <br>
+      <%= link_to image_tag("sign_in_with_twitter.png" , :alt=>"twitter"), user_omniauth_authorize_path(:twitter) %>
+    </div><!-- tab-pane signintweet -->
+
+    <div class="tab-pane signinbtn" id="facebook">
+      <br> 
+      <%= link_to image_tag("login-w-fb.gif", :alt=>"facebook"), user_omniauth_authorize_path(:facebook) %>
+    </div> <!-- tab-pane signinbtn -->
+  </div>
+<% end -%> 
 
 <% content_for :main_content do -%> 
-    <div class="main-content-header">
-          <div class="heading">
-            <h1>Assess your <br />
-            Revenue Potential <%= link_to 'now', new_user_session_path %>
-            </h1>
-          </div><!-- / -->
-          <div class="arrow">
-            &nbsp;
-          </div><!-- / -->
-    </div><!-- / -->
+  <div class="main-content-header">
+    <div class="heading">
+      <h1>Assess your <br />
+        Revenue Potential <%= link_to 'now', new_user_session_path %>
+      </h1>
+    </div><!-- heading -->
+    <div class="arrow">
+      &nbsp;
+    </div><!-- arrow -->
+  </div><!-- main-content-header -->
 
-       <div class="main-content-content">
-             <%= render "/site/index_content" -%> 
-       </div>
+  <div class="main-content-content">
+    <%= render "/site/index_content" -%> 
+  </div>
 <% end -%> 

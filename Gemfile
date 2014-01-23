@@ -10,7 +10,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 #gem 'omniauth-google'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '~> 0.2.2'
 gem 'oauth2'
 #gem 'omniauth-google-apps'
 #gem "oa-openid"
@@ -60,6 +60,7 @@ group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
 gem 'wkhtmltopdf-binary'
+gem 'unicorn'
 end
 
 #wkhtmltopdf for test, stage and production enviornments

@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   
 
 #facebook authentication
-def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
+  def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
     data = access_token.extra.raw_info
     if provider == "facebook"
         user = User.where(:email => data.email).first      
@@ -42,7 +42,23 @@ def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
       end     
     end
   end
-
+  
+  # Google Authentication
+  def self.find_for_google_oauth2(access_token, signed_in_resource=nil, provider)
+    data = access_token.info
+    user = User.where(:email => data["email"]).first
+    if user 
+      user
+    else # Create a user with a stub password. 
+      if provider == "google_oauth2"             
+       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.first_name)  
+      else
+        email = data.id.to_s
+       User.create!(:email => "#{email}@test.com", :password => Devise.friendly_token[0,20], :username => data.name)
+      end     
+    end
+  end
+  
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -50,8 +66,6 @@ def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
       end
     end
   end
-  
-  
 
  end
 # == Schema Information

@@ -10,4 +10,10 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   #         :client_options => {:ssl => {:ca_path => "/etc/ssl/certs"}}}
   #twitter
   # provider :twitter, '0MCcStPgM8eAvlIpDZEU5g', 'NTxxbMxIXqsj2m3DWBAiosJPQp7IcDtLBd4l9nKOY'
+
+	# provider :google_oauth2, Settings.google_api_id, Settings.google_secret_key
+	# {
+	# 	:name => "google",
+	#     :scope => "userinfo.email"
+	# }
 end
