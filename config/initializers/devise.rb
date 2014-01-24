@@ -226,12 +226,7 @@ Devise.setup do |config|
   config.omniauth :google_oauth2, 
                   Settings.google_api_id, 
                   Settings.google_secret_key
-                  #{ access_type: "offline", approval_prompt: "" } 
-                  # { :scope => 'userinfo.email', 
-                  #   :client_options => 
-                  #   {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}
-                  #   }
-                  # }
+
   #require 'omniauth-linkedin'
   #require 'oauth'
  # config.omniauth :linkedin, Settings.linkedin_api_key, Settings.linkedin_secret_key 
