@@ -465,10 +465,11 @@ $(document).ready(function(){
             "bPaginate": true,
             "bLengthChange": false,
             "bFilter": true,
-            "bSort": true,
             "bInfo": false,
-            "bAutoWidth": true
-        } ); 
+            "bAutoWidth": true,
+            "aaSorting": [ [8,'desc']],
+            "aoColumnDefs": [{ "bVisible": false, "aTargets": [ 8 ] }]
+        } );
 
       // -- admin question table id --- //
       $('#question_table').dataTable( {
