@@ -223,8 +223,10 @@ Devise.setup do |config|
  # require "oa-openid" 
   #config.omniauth :google_apps, OpenID::Store::Filesystem.new('./tmp'), :name => 'google_apps'  
   #config.omniauth :openid, :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id', :client_options => {:ssl => {:ca_path => "/etc/ssl/certs"}}
-  config.omniauth :google_oauth2, Settings.google_api_id, Settings.google_secret_key , { :scope => 'email,profile',
-                 :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
+  config.omniauth :google_oauth2, 
+                  Settings.google_api_id, 
+                  Settings.google_secret_key
+
   #require 'omniauth-linkedin'
   #require 'oauth'
  # config.omniauth :linkedin, Settings.linkedin_api_key, Settings.linkedin_secret_key 
