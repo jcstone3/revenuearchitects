@@ -39,7 +39,7 @@ $(document).ready(function(){
 	 			 	});
 
         $('#google_click').click(function(){                                               
-          $('#google_click').css({'background-color' :'fff'}); 
+          $('#google_click').css({'background-color' :'#fff'}); 
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
@@ -62,7 +62,17 @@ $(document).ready(function(){
           $('#google_click').css({'background-color' :'#bb2a0b'}); 
        	});
 
-				$('#linkedin_click').click(function(){				
+				// $('#google_click').click(function(){
+				// 	$('#tab-content').css({'border' :'#bb2a0b', 'color': '#fff'});
+				// 	}, function () {
+	   //  			var cssObj = {
+	   //    			'background-color' : '#bb2a0b',
+	   //    			'color': '#fff'
+	   // 			 	}
+	   //  			$('#tab-content').css(cssObj);
+	 		// 	 	});
+
+				$('#linkedin_click').click(function(){
 					$('#tab-content').css({'background-color' :'#006695', 'color': '#fff'});
 					}, function () {
 	    			var cssObj = {
@@ -217,7 +227,61 @@ $(document).ready(function(){
 
 
                 $(".priorityTip").tooltip({
-                    placement: 'bottom'
+                    //placement: 'bottom'
+                    placement: function(tip, element) {
+                  var $element, above, actualHeight, actualWidth, below, boundBottom, boundLeft, boundRight, boundTop, elementAbove, elementBelow, elementLeft, elementRight, isWithinBounds, left, pos, right;
+                  isWithinBounds = function(elementPosition) {
+                    return boundTop < elementPosition.top && boundLeft < elementPosition.left && boundRight > (elementPosition.left + actualWidth) && boundBottom > (elementPosition.top + actualHeight);
+                  };
+                  $element = $(element);
+                  pos = $.extend({}, $element.offset(), {
+                    width: element.offsetWidth,
+                    height: element.offsetHeight
+                  });
+                  actualWidth = 283;
+                  actualHeight = 117;
+                  boundTop = $(document).scrollTop();
+                  boundLeft = $(document).scrollLeft();
+                  boundRight = boundLeft + $(window).width();
+                  boundBottom = boundTop + $(window).height();
+                  elementAbove = {
+                  top: pos.top - actualHeight,
+                  left: pos.left + pos.width / 2 - actualWidth / 2
+                  };
+                  elementBelow = {
+                    top: pos.top + pos.height,
+                    left: pos.left + pos.width / 2 - actualWidth / 2
+                  };
+                  elementLeft = {
+                    top: pos.top + pos.height / 2 - actualHeight / 2,
+                    left: pos.left - actualWidth
+                  };
+                  elementRight = {
+                    top: pos.top + pos.height / 2 - actualHeight / 2,
+                    left: pos.left + pos.width
+                  };
+                  above = isWithinBounds(elementAbove);
+                  below = isWithinBounds(elementBelow);
+                  left = isWithinBounds(elementLeft);
+                  right = isWithinBounds(elementRight);
+                  if (above) {
+                    return "top";
+                  } else {
+                    if (below) {
+                      return "bottom";
+                    } else {
+                      if (left) {
+                        return "left";
+                      } else {
+                        if (right) {
+                          return "right";
+                        } else {
+                          return "right";
+                        }
+                      }
+                    }
+                  }
+                }
                 });
 
 
@@ -520,9 +584,10 @@ $(document).ready(function(){
             "bPaginate": true,
             "bLengthChange": false,
             "bFilter": true,
-            "bSort": true,
             "bInfo": false,
-            "bAutoWidth": true
+            "bAutoWidth": true,
+            "aaSorting": [ [8,'desc']],
+            "aoColumnDefs": [{ "bVisible": false, "aTargets": [ 8 ] }]
         } );
 
       // -- admin question table id --- //

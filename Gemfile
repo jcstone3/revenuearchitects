@@ -47,8 +47,8 @@ gem "googlecharts"
 gem "google_visualr", ">= 2.1"
 #gem "google_charts"
 #bootstrap rails gem
-gem "less-rails", '2.1.5'
-gem 'twitter-bootstrap-rails', '2.0.2'
+gem "less-rails"
+gem 'twitter-bootstrap-rails'
 gem 'taps'
 gem 'exception_notification', :git => "git://github.com/rails/exception_notification.git",
         :require => "exception_notifier"
