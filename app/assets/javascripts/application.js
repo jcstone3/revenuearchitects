@@ -582,7 +582,7 @@ $(document).ready(function(){
       // -- admin user table id --- //
       $('#user_table').dataTable( {
             "bPaginate": true,
-            "bLengthChange": false,
+            "bLengthChange": true,
             "bFilter": true,
             "bInfo": false,
             "bAutoWidth": true,
