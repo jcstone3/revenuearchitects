@@ -68,7 +68,7 @@ RevenueGrader::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.assets.debug = true
   config.action_mailer.default_url_options = { :host => 'stage.revenuegrader.com' }
-  config.action_mailer.perform_deliveries = true 
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   :enable_starttls_auto => true,
@@ -77,12 +77,12 @@ RevenueGrader::Application.configure do
   :domain => "stage.revenuegrader.com",
   :authentication => :plain,
   :user_name => "noreply@revenuegrader.com",
-  :password => "survey$33" 
+  :password => "survey$33"
 }
 
   # For a Exception Notifier configurable options
   config.middleware.use ExceptionNotifier,
   :email_prefix => "[RevenueGrader Exception]",
   :sender_address => %{ "RevenueGrader" <admin@revenuegrader.com> },
-  :exception_recipients => %{"admin@revenuegrader.com"}
+  :exception_recipients => %{"support.revenuegrader@icicletech.com"}
 end
