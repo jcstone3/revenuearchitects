@@ -5,12 +5,12 @@ class Admin::UsersController < ApplicationController
 
    def index
 
-       @user_surveys = User.find(:all,
-                       :select => "users.id,users.username, users.email, companies.name as company_name, companies.website as company_website, surveys.size, industries.name as industry_name, surveys.revenue, surveys.start_date, surveys.id as survey_id",
-                       :joins => "left outer join companies on users.id = companies.user_id left outer
-                                 join surveys on companies.id = surveys.company_id inner join industries on
-                                 companies.industry_id = industries.id" ,
-                       :order => "start_date desc" )
+    @user_surveys = User.find(:all,
+                   :select => "users.id,users.username, users.email, companies.name as company_name, companies.website as company_website, surveys.size, industries.name as industry_name, surveys.revenue, surveys.start_date, surveys.id as survey_id",
+                   :joins => "left outer join companies on users.id = companies.user_id left outer
+                             join surveys on companies.id = surveys.company_id inner join industries on
+                             companies.industry_id = industries.id" ,
+                   :order => "start_date desc" )
 
     csv_string = CSV.generate do |csv|
       csv << ["Name", "Company", "Email", "Website", "Type", "Size", "Revenue", "Survey"]
