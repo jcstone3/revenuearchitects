@@ -15,7 +15,8 @@ class Admin::UsersController < ApplicationController
     csv_string = CSV.generate do |csv|
       csv << ["Name", "Company", "Email", "Website", "Type", "Size", "Revenue", "Survey"]
       @user_surveys.each do |user_survey|
-        csv << [user_survey.username, user_survey.company_name, user_survey.email, user_survey.company_website, user_survey.industry_name, user_survey.size, user_survey.revenue, user_survey.start_date.to_date.strftime("%d %B %Y")]
+        survey_date = user_survey.start_date.to_date.strftime("%d %B %Y") unless user_survey.start_date.blank?
+        csv << [user_survey.username, user_survey.company_name, user_survey.email, user_survey.company_website, user_survey.industry_name, user_survey.size, user_survey.revenue, survey_date]
       end
     end
 
