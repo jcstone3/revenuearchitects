@@ -213,8 +213,8 @@ def question
   @sub_section = SubSection.includes(:section).where(:id => @survey_question.sub_section_id).first
   @section = Section.select(:name).where(:id => @sub_section.section_id).first
 
-  @sub_section_name =  @sub_section.name
-  @section_name = @section.name
+  @sub_section_name =  @sub_section.name.titleize
+  @section_name = @section.name.titleize
 
   @response
 end
