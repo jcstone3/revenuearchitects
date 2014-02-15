@@ -5,7 +5,7 @@ layout "application"
 
 def index
   redirect_to continue_survey_path
-end  
+end
 #new survey
 #TODO: This action is too complicated, need to simplify this
 def new
@@ -13,32 +13,32 @@ def new
   @previous_surveys = []
   @response = []
   if current_user.companies.present?#if no company details is provided
-      #if current user has company get all the surveys for that company 
-      @surveys = current_user.companies.first.surveys.order("created_at DESC") 
+      #if current user has company get all the surveys for that company
+      @surveys = current_user.companies.first.surveys.order("created_at DESC")
 
-      #check if current incompleted surveys    
-      @current_surveys = @surveys.select{|survey| survey.is_active == true}  
+      #check if current incompleted surveys
+      @current_surveys = @surveys.select{|survey| survey.is_active == true}
 
-      #no surveys exists then provide the new survey form  
+      #no surveys exists then provide the new survey form
       if(@surveys.blank? || @current_surveys.blank?)
          @survey = Survey.new
          @survey_date = Time.now.strftime('%B, %Y')
 
-         #show the previous completed surveys 
+         #show the previous completed surveys
          @completed_surveys = @surveys.select{|survey| survey.is_active == false}
          @completed_surveys.take(2)
 
-      else         
+      else
          redirect_to continue_survey_path  and return
-      end          
+      end
   else
     flash[:error] = "Please provide company details before proceeding"
     redirect_to new_company_path  and return
   end
-end 
+end
 
 #create new survey
-def create  
+def create
   @company = current_user.companies.first
   params[:survey].merge!(:start_date => Time.now, :is_active => true)
   @survey = Survey.new(params[:survey])
@@ -48,19 +48,19 @@ def create
   if @survey.save
     @survey_name = @survey.created_at.strftime('%B,%Y')
     #TODO: Need to put the survey in session, even when accessing old survey
-    session[:survey] = @survey 
+    session[:survey] = @survey
     flash[:success] = "Survey #{@survey_name} created successfully"
     begin
       Usermailer.new_signup_details(@user,@company,@survey).deliver
     rescue Exception => e
       logger.info e.message
       logger.info e.backtrace
-    end  
+    end
     redirect_to questions_path(@survey, 1)
   else
     flash[:error] = "Sorry could not create the Survey. Please try again."
     render "new"
-  end     
+  end
 end
 
 def get_response_status
@@ -76,62 +76,62 @@ def get_response_status
               if @response.present?
                  @response.each do |res|
                    response << res.question_id
-                  end 
+                  end
                   logger.debug response
                  question = Question.find(:all,:order => "position")
                  question.each do |quest|
                    questions << quest.id
                  end
-                 logger.debug questions                
+                 logger.debug questions
                  res = questions - response
                  @survey_name = @survey.created_at.strftime('%B,%Y')
-                 flash[:success] = "Continue Survey #{@survey_name}" 
+                 flash[:success] = "Continue Survey #{@survey_name}"
                   if(!res[0].blank?)
-                    redirect_to questions_path(@survey, res[0]) 
+                    redirect_to questions_path(@survey, res[0])
                   else
                     redirect_to confirm_survey_path
                   end
               else
-               @survey_name = @survey.created_at.strftime('%B,%Y') 
-               flash[:success] = "Start Survey #{@survey_name}" 
-               redirect_to questions_path(@survey, 1)   
+               @survey_name = @survey.created_at.strftime('%B,%Y')
+               flash[:success] = "Start Survey #{@survey_name}"
+               redirect_to questions_path(@survey, 1)
               end
           else
             flash[:error] = "Some thing went wrong please select a survey"
-            redirect_to confirm_survey_path 
-          end      
+            redirect_to confirm_survey_path
+          end
   else
     flash[:error] = "Something went wrong please select a survey"
     redirect_to continue_survey_path
-  end 
+  end
    else
     flash[:error] = "Something went wrong please select a survey"
     redirect_to continue_survey_path
-  end 
+  end
   else
     flash[:error] = "Something went wrong please select a survey"
-    redirect_to continue_survey_path 
+    redirect_to continue_survey_path
  end
 end
 
-#lists all the active surveys 
+#lists all the active surveys
 def show
   @companies =  current_user.companies
   company_ids= @companies.collect(&:id).join(', ')
   #need to get current active and completed surveys
   #first get all surveys for this user and then select for active and inactive
-  @get_all_surveys_for_current_user = Survey.get_all_survey_for_user(company_ids)  
+  @get_all_surveys_for_current_user = Survey.get_all_survey_for_user(company_ids)
   @total_question_total = 0
   @total_question_previous = 0
   @survey = Survey.find_by_id(params[:id])
   #current active surveys
   @current_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == true}
-  
+
   #completed surveys
   @completed_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == false}
   @completed_surveys.take(2)
-  @sections= Section.all  
-  #@total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count     
+  @sections= Section.all
+  #@total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count
   @section_questions_total = Section.find(:all,
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
@@ -149,7 +149,7 @@ def show
   @all_sections.each_with_index do |section,i|
   @total_question_previous += @previous_questions_total[i].question_total.to_i
   end
-end  
+end
 
 #Show the question and capture the reponse
 def question
@@ -157,7 +157,7 @@ def question
   question_id = params[:question_id]
   #question_id  =  Question.where(:id => question_id).pluck("position")[0]
 
-  #TODO: Check if input parameters are correct 
+  #TODO: Check if input parameters are correct
   if survey_id.blank? or question_id.blank?
    flash[:warning] = "Could not form the question. Please try again"
    redirect_to continue_survey_path
@@ -175,14 +175,14 @@ def question
   # - All Subsections
   @question = get_question(question_id)
 
-  if @survey.blank? 
+  if @survey.blank?
     flash[:warning] = "Could not form the question. Please try again"
     redirect_to continue_survey_path and return
   end
 
   if @question.blank?
     @question = get_question(question_id)
-    redirect_to confirm_survey_path and return 
+    redirect_to confirm_survey_path and return
   end
 
   #for total count
@@ -196,15 +196,23 @@ def question
          :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
          :group => "sections.id", :order => "sections.id")
   @all_sections = get_all_sections
-   
+
   #Getting the score to show on page
   @total_score = Survey.calculate_response_for_section(@survey.id, @question.section_id)
 
   #Required for form. Select if the response already exists
 
-   @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
+  @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
 
-   if @response.blank?
+  if Response.find_by_survey_id(survey_id).present?
+    # @popup_model = true
+    cookies[:popup_model] = false
+  else
+    # @popup_model = false
+    cookies[:popup_model] = true
+  end
+
+  if @response.blank?
     logger.debug "Creating New Response"
     @response = Response.new
   end
@@ -214,13 +222,13 @@ end
 
 
 #TODO: Check the logic here and optimize
-def create_response 
-  #Once the response is submitted, depending on whether Score exists, 
+def create_response
+  #Once the response is submitted, depending on whether Score exists,
   # create or update the record
-  
+
   response_params = params[:response]
 
-  if response_params.blank?  
+  if response_params.blank?
     flash[:error] = "Could not save response. Please try again"
     redirect_to continue_survey_path and return
   end
@@ -239,7 +247,7 @@ def create_response
     #TODO: Redirect to next page. Issue with sequence.
     #Find if the question is the last of the questions. If it is, then go to close survey, else go
     #go to next question
-    
+
     redirect_to questions_path(survey_id, params[:question_id].to_i + 1 ) and return
     #redirect_to questions_path(survey_id, question_id) and return
   else
@@ -250,15 +258,15 @@ def create_response
 
 end
 
-#question for the survey  
+#question for the survey
 # def question
-#    if params[:id].present? && params[:question_id].present? 
+#    if params[:id].present? && params[:question_id].present?
 #      if((Survey.check_numericality(params[:id])) && (check_survey(params[:id])))
 #        if check_user_surveys(params[:id])
 #           @survey = Survey.find(params[:id])
-#           @response = @survey.responses 
-#            if((Survey.check_numericality(params[:question_id])) && (check_question(params[:question_id])))          
-             
+#           @response = @survey.responses
+#            if((Survey.check_numericality(params[:question_id])) && (check_question(params[:question_id])))
+
 #              @survey_response = Response.find_by_survey_id_and_question_id(params[:id], params[:question_id])
 #               if @survey_response
 #                redirect_to previous_question_path(params[:id], params[:question_id])
@@ -271,51 +279,51 @@ end
 #                 @response = Response.new
 #                 @total_score = Survey.calculate_response_for_section(params[:id], @section.id)
 #                 ########for pagination ############
-               
+
 #                 @question_all = Question.count
 #                 if(params[:question_id].to_i < 6)
 #                 @questions = Question.find(:all,
 #                        :select => "questions.id, responses.question_id as response_quest_id",
-#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
+#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}",
 #                        :offset=> 0, :limit=>10 )
 
-#                 elsif(params[:question_id].to_i > @question_all - 5)  
+#                 elsif(params[:question_id].to_i > @question_all - 5)
 #                 @questions = Question.find(:all,
 #                        :select => "questions.id, responses.question_id as response_quest_id",
-#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
-                       
+#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}",
+
 #                        :offset=> (@question_all - 10), :limit=>10 )
 #                 else
 #                 @questions = Question.find(:all,
 #                        :select => "questions.id, responses.question_id as response_quest_id",
-#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}", 
-                       
+#                        :joins => "left outer join responses on responses.question_id = questions.id and responses.survey_id=#{params[:id]}",
+
 #                        :offset=> (params[:question_id].to_i - 5), :limit=>10)
-#                 end 
-#                 ######### end of pagination logic ########## 
-#               end 
+#                 end
+#                 ######### end of pagination logic ##########
+#               end
 #            else
 #             flash[:error] = "Something went wrong please select a survey"
 #             redirect_to continue_survey_path
-#            end           
+#            end
 #       else
 #        flash[:error] = "Something went wrong please select a survey"
-#        redirect_to continue_survey_path   
+#        redirect_to continue_survey_path
 #       end
 #     else
 #       flash[:error] = "Something went wrong please select a survey"
-#       redirect_to continue_survey_path  
-#     end  
+#       redirect_to continue_survey_path
+#     end
 #    else
 #      flash[:error] = "Something went wrong please select a survey"
-#      redirect_to continue_survey_path 
-#    end 
-# end 
+#      redirect_to continue_survey_path
+#    end
+# end
 
 
 
 #report of a particular survey
-def report  
+def report
   survey_id = params[:id]
 
   #scoping the survey
@@ -323,7 +331,7 @@ def report
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
-     redirect_to new_survey_path and return 
+     redirect_to new_survey_path and return
    else
     #for sections navigation tabs
     @all_sections = get_all_sections
@@ -336,7 +344,7 @@ def report
      @should_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'should_do'}
     #for could do responses
      @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
-    
+
     #for total count
      @section_questions_total = Section.find(:all,
                             :select => "count(questions.position) as question_total, sections.id",
@@ -347,16 +355,16 @@ def report
      @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id") 
-  
+                           :group => "sections.id", :order => "sections.id")
+
     render :layout =>"report"
- 
+
   end
-end 
+end
 
 
-def update_response  
-  if params[:response].blank?  
+def update_response
+  if params[:response].blank?
     flash[:error] = "Could not save response for some reason please try again"
     redirect_to continue_survey_path
   else
@@ -369,9 +377,9 @@ def update_response
       @question = Question.find(@response.question_id.to_i + 1)
       @sub_section = SubSection.find(@question.sub_section_id)
       @section = Section.find(@sub_section.section_id)
-      @total_score = Survey.calculate_response_for_section(@survey.id, @section.id)      
+      @total_score = Survey.calculate_response_for_section(@survey.id, @section.id)
       redirect_to questions_path(@survey, @question.id)
-   else          
+   else
      redirect_to confirm_survey_path(@survey.id)
    end
   end
@@ -387,7 +395,7 @@ def confirm_survey
                           :select => "count(questions.position) as question_total, sections.id",
                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                           :group => "sections.id", :order => "id ASC")
-   
+
   @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
@@ -401,7 +409,7 @@ def confirm_survey
   end
 
  end
- 
+
 
 def close_survey
    @survey = Survey.find_by_id(params[:id])
@@ -411,11 +419,11 @@ def close_survey
    else
      flash[:success] = "Sorry could not close the survey"
      redirect_to confirm_survey_path(@survey.id)
-   end 
+   end
 end
 
 
-def compare   
+def compare
   survey_id = params[:id]
   @all_sections = get_all_sections
   #check scope
@@ -427,7 +435,7 @@ def compare
    @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id") 
+                           :group => "sections.id", :order => "sections.id")
 
    #for total count
   @section_questions_total = Section.find(:all,
@@ -438,17 +446,17 @@ def compare
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
-     redirect_to new_survey_path and return 
+     redirect_to new_survey_path and return
    else
     @survey = Survey.find_by_id(survey_id)
     @data_table = Survey.get_overall_graph(survey_id)
-    
+
      option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
     @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
-        
+
   end
   render :layout =>"report"
-end 
+end
 
 def compare_strategy
     survey_id = params[:id]
@@ -469,14 +477,14 @@ def compare_strategy
       @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id") 
+                           :group => "sections.id", :order => "sections.id")
    #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
- 
+
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
-     redirect_to new_survey_path and return 
+     redirect_to new_survey_path and return
    else
   @survey = Survey.find(params[:id])
   @responses = Survey.get_result(@all_sections[0].id, @survey.id)
@@ -487,16 +495,16 @@ def compare_strategy
 
   option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
-        
 
- 
 
-  
+
+
+
 
   end
     render :layout =>"report"
 
-end  
+end
 
 
 def compare_system
@@ -510,7 +518,7 @@ def compare_system
     @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id") 
+                           :group => "sections.id", :order => "sections.id")
 
     #for total count
      @section_questions_total = Section.find(:all,
@@ -518,10 +526,10 @@ def compare_system
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                             :group => "sections.id", :order => "id ASC")
 
-  
+
   if @survey.blank?
      flash[:notice] = "No such survey exists"
-     redirect_to new_survey_path and return 
+     redirect_to new_survey_path and return
    else
 
   @survey = Survey.find(params[:id])
@@ -532,11 +540,11 @@ def compare_system
  option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
 
- 
+
 end
     render :layout =>"report"
 
-end  
+end
 
 
 def compare_programs
@@ -558,39 +566,39 @@ def compare_programs
       @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id") 
+                           :group => "sections.id", :order => "sections.id")
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
-     redirect_to new_survey_path and return 
+     redirect_to new_survey_path and return
    else
   @survey = Survey.find(survey_id)
   @responses = Survey.get_result(@all_sections[2].id, @survey.id)
   @data_table = Survey.get_section_graph(@all_sections[2].id, @survey.id, @responses)
-  
+
   option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
 
-  
+
 end
     render :layout =>"report"
 
-end  
+end
 
  def reports
-  
-  @sections = Section.find(:all) 
+
+  @sections = Section.find(:all)
   survey_id = params[:id]
   @survey = current_user.companies.first.surveys.find(params[:id])
   @industry = Industry.find(:first, :select=>"industries.name",
-               :joins=>"left outer join companies on companies.industry_id = industries.id 
-                       left outer join surveys on companies.id = surveys.company_id and 
+               :joins=>"left outer join companies on companies.industry_id = industries.id
+                       left outer join surveys on companies.id = surveys.company_id and
                        surveys.id = #{@survey.id}")
 
- 
+
   if @survey.blank?
      flash[:notice] = "No such survey exists"
-     redirect_to new_survey_path and return 
+     redirect_to new_survey_path and return
    else
     #for sections navigation tabs
     @all_sections = get_all_sections
@@ -610,22 +618,22 @@ end
      @survey = Survey.find_by_id(survey_id)
       @data_table = Survey.get_overall_graph(survey_id)
   option = { width: 600, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
-  @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)     
+  @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
   end
 
- end   
+ end
 
 #to download in pdf/xls format
 def download_result
   require 'rubygems'
   #require 'googlecharts'
-  require 'spreadsheet'  
-   
-   @sections = Section.find(:all) 
+  require 'spreadsheet'
+
+   @sections = Section.find(:all)
    @survey = current_user.companies.first.surveys.find(params[:id])
    @industry = Industry.find(:first, :select=>"industries.name",
-               :joins=>"left outer join companies on companies.industry_id = industries.id 
-                       left outer join surveys on companies.id = surveys.company_id and 
+               :joins=>"left outer join companies on companies.industry_id = industries.id
+                       left outer join surveys on companies.id = surveys.company_id and
                        surveys.id = #{@survey.id}")
 
   @questions=[]
@@ -637,7 +645,7 @@ def download_result
                           :select => "count(questions.position) as question_total, sections.id",
                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                           :group => "sections.id", :order => "id ASC")
-   
+
   @section_questions  = Section.find(:all,
                            :select => "count(responses.question_id) as question_attempted",
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
@@ -651,7 +659,7 @@ def download_result
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
-     redirect_to new_survey_path and return 
+     redirect_to new_survey_path and return
    else
     #for sections navigation tabs
     @all_sections = get_all_sections
@@ -668,34 +676,34 @@ def download_result
      @not_applicable_responses = Response.get_response_for_options(@survey.id, "not_applicable")
     #if the user is authorized for the survey then get details of in plan responses
      @in_plan_responses = Response.get_response_for_options(@survey.id, "in_our_plan")
-    
-    
+
+
     @data_table = Survey.get_overall_graph(@survey.id)
     option = { width: 1000, height: 600, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
     @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
-      
+
   end
-     
+
   respond_to do |format|
       format.html{}
        format.pdf {
         html = render_to_string(:layout => false , :action => "reports.html")
-        kit = PDFKit.new(html)    
-        kit.stylesheets << Rails.root.join("app/assets/stylesheets/jquery.dataTables.css") 
-        kit.stylesheets << Rails.root.join("app/assets/stylesheets/application.css")   
+        kit = PDFKit.new(html)
+        kit.stylesheets << Rails.root.join("app/assets/stylesheets/jquery.dataTables.css")
+        kit.stylesheets << Rails.root.join("app/assets/stylesheets/application.css")
         send_data(kit.to_pdf, :filename =>  "#{current_user.companies.first.name.humanize} #{@survey.created_at.strftime('%B %Y')} Diagnostic Report.pdf", :type => 'application/pdf')
         return # to avoid double render call
       }
       format.xls {
         result = Spreadsheet::Workbook.new
-        list = result.create_worksheet :name => "response" 
+        list = result.create_worksheet :name => "response"
         list.row(0).concat %w{Section Subsection Questions QuestionPoints Score}
         @sections.each { |section|
            section.sub_sections.each { |subsection|
            subsection.questions.each { |question|
             list.row(question.id+1).push section.name, subsection.name, question.name, section.total_points,
             question.points, @questions_score[question.id]
-          }           
+          }
          }
         }
         header_format = Spreadsheet::Format.new :color =>"green", :weight =>"bold"
@@ -705,8 +713,8 @@ def download_result
         result.write blob
         #respond with blob object as a file
         send_data blob.string, :type =>:xls, :filename =>"result.xls"#; &quot;client_list.xls&quot;
-      } 
-  end    
+      }
+  end
 end
 
 
@@ -715,20 +723,20 @@ def check_company
   if !current_user.companies
      redirect_to new_company_path
   end
-end 
+end
 
 def check_existing_surveys
   flag = false
   if current_user.companies.present?
      current_user.companies.each do |c|
-       if c.surveys.present? 
+       if c.surveys.present?
          c.surveys.each do |survey|
-         if survey.is_active == true       
-          flag = true      
+         if survey.is_active == true
+          flag = true
          end
-        end  
-       end  
-     end 
+        end
+       end
+     end
   end
   return flag
 end
@@ -739,17 +747,17 @@ def check_survey(survey_id)
     return true
   else
     return false
-  end    
+  end
 end
 
-def check_question(question_id)  
+def check_question(question_id)
   @question = Question.find_by_position(question_id)
   if @question.present?
     return true
   else
     return false
-  end    
-end  
+  end
+end
 
 def check_user_surveys(survey_id)
    @survey = Survey.find_by_id(survey_id)
@@ -757,16 +765,16 @@ def check_user_surveys(survey_id)
    if current_user.companies.present?
      current_user.companies.each do |c|
        if c.surveys.present?
-        c.surveys.each do |s| 
+        c.surveys.each do |s|
           if(s.id == @survey.id)
-           flag = true      
+           flag = true
           end
-        end  
-       end 
+        end
+       end
      end
    end
   return flag
-end  
+end
 
 #Get all sections and store them in session
 def get_all_sections
@@ -783,12 +791,12 @@ end
 #TODO: Check if this works when query parameters are not passed
 def get_current_survey
   current_survey = session[:survey]
-  
+
   if current_survey.blank?
     current_survey = current_user.companies.first.surveys.find_by_id(params[:id])
     session[:survey] = current_survey
   end
-  
+
   current_survey
 end
 
@@ -807,7 +815,7 @@ def get_question(question_id)
     return question.first
   else
     return question
- end 
+ end
 end
- 
+
 end
