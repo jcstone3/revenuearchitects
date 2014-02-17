@@ -31,35 +31,35 @@ $(document).ready(function(){
 				}
             //----------end of hide n show----------------------------//
             //to set the active tab to the color of the login type clicked
-          $('#home_click').click(function(){	                	
+          $('#home_click').click(function(){
   					$('#home_click').css({'background-color' :'#fff'});
-            $('#google_click').css({'background-color' :'#bb2a0b'}); 
-  					$('#twitter_click').css({'background-color' :'#53b1f0'}); 
-            $('#facebook_click').css({'background-color' :'#3b5998'});                 
+            $('#google_click').css({'background-color' :'#bb2a0b'});
+  					$('#twitter_click').css({'background-color' :'#53b1f0'});
+            $('#facebook_click').css({'background-color' :'#3b5998'});
 	 			 	});
 
-        $('#google_click').click(function(){                                               
-          $('#google_click').css({'background-color' :'#fff'}); 
+        $('#google_click').click(function(){
+          $('#google_click').css({'background-color' :'#fff'});
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
         });
 
-				$('#twitter_click').click(function(){							
+				$('#twitter_click').click(function(){
           $('#twitter_click').css({'background-color' :'#fff'});
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
-          $('#google_click').css({'background-color' :'#bb2a0b'}); 
+          $('#google_click').css({'background-color' :'#bb2a0b'});
         });
 
-				$('#facebook_click').click(function(){									    			                    
+				$('#facebook_click').click(function(){
  			    $('#facebook_click').css({'background-color' :'#fff'});
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
-          $('#google_click').css({'background-color' :'#bb2a0b'}); 
+          $('#google_click').css({'background-color' :'#bb2a0b'});
        	});
 
 				// $('#google_click').click(function(){
@@ -311,64 +311,64 @@ $(document).ready(function(){
 
 
 
-                $("div#slider a.ui-slider-handle").tooltip({
-                    //placement: 'bottom'
-                    placement: function(tip, element) {
-                  var $element, above, actualHeight, actualWidth, below, boundBottom, boundLeft, boundRight, boundTop, elementAbove, elementBelow, elementLeft, elementRight, isWithinBounds, left, pos, right;
-                  isWithinBounds = function(elementPosition) {
-                    return boundTop < elementPosition.top && boundLeft < elementPosition.left && boundRight > (elementPosition.left + actualWidth) && boundBottom > (elementPosition.top + actualHeight);
-                  };
-                  $element = $(element);
-                  pos = $.extend({}, $element.offset(), {
-                    width: element.offsetWidth,
-                    height: element.offsetHeight
-                  });
-                  actualWidth = 283;
-                  actualHeight = 117;
-                  boundTop = $(document).scrollTop();
-                  boundLeft = $(document).scrollLeft();
-                  boundRight = boundLeft + $(window).width();
-                  boundBottom = boundTop + $(window).height();
-                  elementAbove = {
-                  top: pos.top - actualHeight,
-                  left: pos.left + pos.width / 2 - actualWidth / 2
-                  };
-                  elementBelow = {
-                    top: pos.top + pos.height,
-                    left: pos.left + pos.width / 2 - actualWidth / 2
-                  };
-                  elementLeft = {
-                    top: pos.top + pos.height / 2 - actualHeight / 2,
-                    left: pos.left - actualWidth
-                  };
-                  elementRight = {
-                    top: pos.top + pos.height / 2 - actualHeight / 2,
-                    left: pos.left + pos.width
-                  };
-                  above = isWithinBounds(elementAbove);
-                  below = isWithinBounds(elementBelow);
-                  left = isWithinBounds(elementLeft);
-                  right = isWithinBounds(elementRight);
-                  if (above) {
-                    return "top";
-                  } else {
-                    if (below) {
-                      return "bottom";
-                    } else {
-                      if (left) {
-                        return "left";
-                      } else {
-                        if (right) {
-                          return "right";
-                        } else {
-                          return "right";
-                        }
-                      }
-                    }
-                  }
-                }
-                });
-                $("a.ui-slider-handle").attr('data-original-title', 'We are not engaging in this activity today');
+                // $("div#slider a.ui-slider-handle").tooltip({
+                //     //placement: 'bottom'
+                //     placement: function(tip, element) {
+                //   var $element, above, actualHeight, actualWidth, below, boundBottom, boundLeft, boundRight, boundTop, elementAbove, elementBelow, elementLeft, elementRight, isWithinBounds, left, pos, right;
+                //   isWithinBounds = function(elementPosition) {
+                //     return boundTop < elementPosition.top && boundLeft < elementPosition.left && boundRight > (elementPosition.left + actualWidth) && boundBottom > (elementPosition.top + actualHeight);
+                //   };
+                //   $element = $(element);
+                //   pos = $.extend({}, $element.offset(), {
+                //     width: element.offsetWidth,
+                //     height: element.offsetHeight
+                //   });
+                //   actualWidth = 283;
+                //   actualHeight = 117;
+                //   boundTop = $(document).scrollTop();
+                //   boundLeft = $(document).scrollLeft();
+                //   boundRight = boundLeft + $(window).width();
+                //   boundBottom = boundTop + $(window).height();
+                //   elementAbove = {
+                //   top: pos.top - actualHeight,
+                //   left: pos.left + pos.width / 2 - actualWidth / 2
+                //   };
+                //   elementBelow = {
+                //     top: pos.top + pos.height,
+                //     left: pos.left + pos.width / 2 - actualWidth / 2
+                //   };
+                //   elementLeft = {
+                //     top: pos.top + pos.height / 2 - actualHeight / 2,
+                //     left: pos.left - actualWidth
+                //   };
+                //   elementRight = {
+                //     top: pos.top + pos.height / 2 - actualHeight / 2,
+                //     left: pos.left + pos.width
+                //   };
+                //   above = isWithinBounds(elementAbove);
+                //   below = isWithinBounds(elementBelow);
+                //   left = isWithinBounds(elementLeft);
+                //   right = isWithinBounds(elementRight);
+                //   if (above) {
+                //     return "top";
+                //   } else {
+                //     if (below) {
+                //       return "bottom";
+                //     } else {
+                //       if (left) {
+                //         return "left";
+                //       } else {
+                //         if (right) {
+                //           return "right";
+                //         } else {
+                //           return "right";
+                //         }
+                //       }
+                //     }
+                //   }
+                // }
+                // });
+                // $("a.ui-slider-handle").attr('data-original-title', 'We are not engaging in this activity today');
 
 
 			//------------end of question page js ---- //
