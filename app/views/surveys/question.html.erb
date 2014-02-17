@@ -18,9 +18,12 @@
         </div>
 <% end %>
 
+<% content_for :popup_notice do  -%>
+  <%= render "popup_notice_model"%>
+<% end -%>
+
 <% content_for :side_content do -%>
     <%= render "question_side_details" -%>
 <% end  -%>
 
-
-
+<%= javascript_include_tag "survey" %>

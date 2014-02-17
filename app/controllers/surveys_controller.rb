@@ -204,6 +204,14 @@ def question
 
   @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
 
+  if Response.find_by_survey_id(survey_id).present?
+    # @popup_model = true
+    cookies[:popup_model] = false
+  else
+    # @popup_model = false
+    cookies[:popup_model] = true
+  end
+
   if @response.blank?
     logger.debug "Creating New Response"
     @response = Response.new
@@ -494,9 +502,6 @@ def compare_strategy
 
   option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
-
-
-
 
 
 

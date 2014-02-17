@@ -4,13 +4,13 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+
     <title>RevenueGrader.com - Assess your Revenue Potential</title>
     <%#= csrf_meta_tags %>
 
     <meta name="description" content="Revenue Grader is a self-diagnostic for revenue performance. Answer questions across three dimensions: Revenue Strategy, Revenue Systems and Revenue Programs and gain a comprehensive view of your revenue performance potential."/>
     <meta name="keywords" content="revenue, survey, revenue strategy, revenue systems, revenue programs, revenue grading, revenue architects, increase revenue, diagnostic tool, revenue performance, revenue growth"/>
-        
+
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 7]>
         <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
@@ -27,7 +27,7 @@
     <link href="/assets/rg_icon.png" type="image/png" rel="shortcut icon">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
-        
+
     <%= stylesheet_link_tag "application", :media => "all" %>
 
     <!-- Le fav and touch icons -->
@@ -38,34 +38,38 @@
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
     <div class="container-fluid" >
       <div class="row-fluid top-bar">
-        <%= render  "/layouts/shared/header" -%> 
+        <%= render  "/layouts/shared/header" -%>
       </div><!-- / end of row -->
-    
+
       <%= yield :top_bar_content %>
 
-      <% if !flash.blank? -%> 
+      <% if !flash.blank? -%>
         <div class="row-fluid">
           <% flash.each do |key, value| %>
             <%= content_tag :div, :id=>'flash_msg', :class => "alert alert-#{key}" do %>
               <%= value unless value.blank? %>
-              <a class="close" data-dismiss="alert">×</a>   
+              <a class="close" data-dismiss="alert">×</a>
             <% end %>
-          <% end %>   
+          <% end %>
         </div><!-- / -->
-      <% end -%> 
-            
+      <% end -%>
+
       <div class="row-fluid content-section" >
-        <div class="span9 main-content"> 
+        <div class="span9 main-content">
           <%= yield :main_content %>
         </div> <!-- / end of span8 - main -->
 
         <div class="span3 side-content">
-          <%= yield :side_content -%> 
-        </div><!-- / end of span4 - side-content-->      
+          <%= yield :side_content -%>
+        </div><!-- / end of span4 - side-content-->
       </div> <!-- /end of content-section -->
+
+      <div id="popup-notice" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <%= yield :popup_notice %>
+      </div>
 
       <div class="row-fluid footer" >
         <%= render '/layouts/shared/footer'%>
@@ -75,7 +79,7 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-   
+
     <%= javascript_include_tag "application" %>
     <%= feedback_tab(:position => 'left') %>
 
@@ -105,7 +109,7 @@
         scr.parentNode.insertBefore(ss, scr);
       })();
     </script>
-  
+
   <!--  previous tracking code -->
   <!--//   <script type="text/javascript">
   // /* <![CDATA[ */
@@ -116,6 +120,6 @@
   // );
   // /* ]]> */
   // </script> -->
- 
+
   </body>
 </html>

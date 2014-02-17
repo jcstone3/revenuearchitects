@@ -11,6 +11,7 @@
 //= require twitter/bootstrap
 //= require bootstrap
 //= require jquery.feedback
+//= require jquery-readyselector
 //= require_tree .
 
 $(document).ready(function(){
@@ -31,35 +32,35 @@ $(document).ready(function(){
 				}
             //----------end of hide n show----------------------------//
             //to set the active tab to the color of the login type clicked
-          $('#home_click').click(function(){	                	
+          $('#home_click').click(function(){
   					$('#home_click').css({'background-color' :'#fff'});
-            $('#google_click').css({'background-color' :'#bb2a0b'}); 
-  					$('#twitter_click').css({'background-color' :'#53b1f0'}); 
-            $('#facebook_click').css({'background-color' :'#3b5998'});                 
+            $('#google_click').css({'background-color' :'#bb2a0b'});
+  					$('#twitter_click').css({'background-color' :'#53b1f0'});
+            $('#facebook_click').css({'background-color' :'#3b5998'});
 	 			 	});
 
-        $('#google_click').click(function(){                                               
-          $('#google_click').css({'background-color' :'#fff'}); 
+        $('#google_click').click(function(){
+          $('#google_click').css({'background-color' :'#fff'});
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
         });
 
-				$('#twitter_click').click(function(){							
+				$('#twitter_click').click(function(){
           $('#twitter_click').css({'background-color' :'#fff'});
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
-          $('#google_click').css({'background-color' :'#bb2a0b'}); 
+          $('#google_click').css({'background-color' :'#bb2a0b'});
         });
 
-				$('#facebook_click').click(function(){									    			                    
+				$('#facebook_click').click(function(){
  			    $('#facebook_click').css({'background-color' :'#fff'});
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
-          $('#google_click').css({'background-color' :'#bb2a0b'}); 
+          $('#google_click').css({'background-color' :'#bb2a0b'});
        	});
 
 				// $('#google_click').click(function(){
