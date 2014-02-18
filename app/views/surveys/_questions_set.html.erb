@@ -3,7 +3,7 @@
     <h2>Rate Your Current Maturity Level</h2>
     <div style="clear:both"></div>
     <div class="slabels">
-      <span rel="tooltip" data-original-title="We are not engaging in this activity today.">Weak</span>
+      <span rel="tooltip" data-original-title="We are not engaging in this activity today." data-placement="right">Weak</span>
       <span rel="tooltip" class="basic" data-original-title="We are inconsistent with our approach and level of activity">Basic</span>
       <span rel="tooltip" class="developing" data-original-title="We are currently ad hoc but building this capability.">Developing</span>
       <span rel="tooltip" class="diffworld" data-original-title="We do this on a regular basis and differentiate from competitors.">Differentiated</span>
@@ -19,18 +19,18 @@
     <div class="option" id="option">
     <h2>Add to Plan?</h2>
 
-    <a rel="tooltip" id ="add_to_plan" class="btn priorityTip plan_option" style="margin-left:18px;" data-original-title="Add this item to our plan for prioritization"><span><i class="icon-plus icon-white" id ="add_to_plan"></i></span> <strong id ="add_to_plan">Add to Plan</strong></a>
+    <a rel="tooltip" id ="add_to_plan" class="btn priorityTip plan_option" style="margin-left:18px;" data-original-title="Add this item to our plan for prioritization" data-placement="right"><span><i class="icon-plus icon-white" id ="add_to_plan"></i></span> <strong id ="add_to_plan">Add to Plan</strong></a>
 
-    <a rel="tooltip" id ="in_our_plan" class="btn priorityTip plan_option"  data-original-title="This item is already established in our plan"><span><i class="icon-ok icon-white" id ="in_our_plan"></i></span> <strong id ="in_our_plan">In Our Plan</strong></a>
+    <a rel="tooltip" id ="in_our_plan" class="btn priorityTip plan_option"  data-original-title="This item is already established in our plan" ><span><i class="icon-ok icon-white" id ="in_our_plan" ></i></span> <strong id ="in_our_plan">In Our Plan</strong></a>
 
-    <a rel="tooltip" id ="not_applicable" class="btn form priorityTip plan_option"  data-original-title="This item does not apply as a priority for our business"><span><i class="icon-remove icon-white" id ="not_applicable"></i></span> <strong id ="not_applicable">Not Applicable</strong></a>
+    <a rel="tooltip" id ="not_applicable" class="btn form priorityTip plan_option"  data-original-title="This item does not apply as a priority for our business" ><span><i class="icon-remove icon-white" id ="not_applicable"></i></span> <strong id ="not_applicable">Not Applicable</strong></a>
     <%= f.hidden_field :answer_2%>
     </div>
 </div>
 <div class="points1 priority">
     <div class="option" id="priority_option">
     <h2>Priority</h2>
-    <a rel="tooltip" class="btn priorityTip priority_option" id ="must_do" style="margin-left:18px;"data-original-title="This is among our highest priorities"><span><i class="icon-ok icon-white" id ="must_do"></i></span> <strong id ="must_do">Must Do</strong></a>
+    <a rel="tooltip" class="btn priorityTip priority_option" id ="must_do" style="margin-left:18px;"data-original-title="This is among our highest priorities" data-placement="right" ><span><i class="icon-ok icon-white" id ="must_do"></i></span> <strong id ="must_do">Must Do</strong></a>
     <a rel="tooltip" class="btn form priorityTip priority_option" id ="should_do" data-original-title="This is an important element of our plan"><span><i class="icon-plus icon-white" id ="should_do"></i></span> <strong id ="should_do">Should Do</strong></a>
     <a rel="tooltip" class="btn form priorityTip priority_option" id="could_do" data-original-title="We will do this opportunistically"><span><i class="icon-check icon-white" id="could_do"></i></span> <strong id="could_do">Could Do</strong></a>
     <%= f.hidden_field :answer_3%>
