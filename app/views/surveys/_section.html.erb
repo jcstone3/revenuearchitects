@@ -1,4 +1,4 @@
-                  
+
                   <li class="next" >
 
                     <%= link_to(continue_survey_url) do%>
@@ -8,23 +8,35 @@
                   <li class="surveyname">&nbsp;Diagnostic
                        <%= @survey.created_at.strftime("%B  %Y")%>
                   </li>
-                  
-                    <%@all_sections.each_with_index do |section,i| %>
-                   <li class="next" id="section_<%=section.id%>">
-                          <%= link_to() do %>
-                              <%= image_tag "icon_cat.png" %>
-                              <%= section.name.titleize %>
-                              <span id ="span_<%=section.id%>" class="red" title ="Total number of questions", rel="tooltip">
-                                 <%= @section_questions[i].question_attempted%>/
-                                 <%= @section_questions_total[i].question_total %>
-                                </span>
-                          <% end %> 
-                   </li>              
-                   <%end%> 
+
+                  <%@all_sections.each_with_index do |section,i| %>
+                    <li class="next dropdown" id="section_<%=section.id%>">
+                      <%#= link_to() do %>
+                        <a id="drop" role="button" data-toggle="dropdown" href="#">
+                          <%= image_tag "icon_cat.png" %>
+                          <%= section.name.titleize %>
+                        </a>
+                        <ul id="menu1" class="dropdown-menu" role="menu"
+                           aria-labelledby="drop" >
+                          <% section.sub_sections.each_with_index do |sub_section,j| %>
+
+                              <li role="presentation">
+                                <a class="sub-section-name" role="menuitem" tabindex="-1" href="#"><%= sub_section.name %></a>
+                              </li>
+
+                          <% end %>
+                        </ul>
+                        <span id ="span_<%=section.id%>" class="red" title ="Total number of questions", rel="tooltip">
+                          <%= @section_questions[i].question_attempted%>/
+                          <%= @section_questions_total[i].question_total %>
+                        </span>
+                       <%# end %>
+                    </li>
+                  <%end%>
                    <li class="next" id ="final_result">
                           <%= link_to(reports_url) do %>
                           <%= image_tag "icon_results.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;
                             Report
                           <%end%>
                    </li>
-                   
+
