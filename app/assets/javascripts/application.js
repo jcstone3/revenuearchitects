@@ -31,35 +31,35 @@ $(document).ready(function(){
 				}
             //----------end of hide n show----------------------------//
             //to set the active tab to the color of the login type clicked
-          $('#home_click').click(function(){	                	
+          $('#home_click').click(function(){
   					$('#home_click').css({'background-color' :'#fff'});
-            $('#google_click').css({'background-color' :'#bb2a0b'}); 
-  					$('#twitter_click').css({'background-color' :'#53b1f0'}); 
-            $('#facebook_click').css({'background-color' :'#3b5998'});                 
+            $('#google_click').css({'background-color' :'#bb2a0b'});
+  					$('#twitter_click').css({'background-color' :'#53b1f0'});
+            $('#facebook_click').css({'background-color' :'#3b5998'});
 	 			 	});
 
-        $('#google_click').click(function(){                                               
-          $('#google_click').css({'background-color' :'#fff'}); 
+        $('#google_click').click(function(){
+          $('#google_click').css({'background-color' :'#fff'});
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
         });
 
-				$('#twitter_click').click(function(){							
+				$('#twitter_click').click(function(){
           $('#twitter_click').css({'background-color' :'#fff'});
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
-          $('#google_click').css({'background-color' :'#bb2a0b'}); 
+          $('#google_click').css({'background-color' :'#bb2a0b'});
         });
 
-				$('#facebook_click').click(function(){									    			                    
+				$('#facebook_click').click(function(){
  			    $('#facebook_click').css({'background-color' :'#fff'});
           $('#home_click').css({'color' :'#555555'});
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
-          $('#google_click').css({'background-color' :'#bb2a0b'}); 
+          $('#google_click').css({'background-color' :'#bb2a0b'});
        	});
 
 				// $('#google_click').click(function(){
@@ -94,6 +94,17 @@ $(document).ready(function(){
                 else
                 {
                     var response_answer1 = $('#response_answer_1').val();
+                }
+
+                var response_answer4 = $('#response_answer_4').val();
+
+                if($('#response_answer_4').val() == ""){
+                    var response_answer4  = 1;
+                    $('#response_answer_4').val('1');
+                }
+                else
+                {
+                    var response_answer4 = $('#response_answer_4').val();
                 }
 
                 var response_answer2 = $('#response_answer_2').val();
@@ -304,11 +315,34 @@ $(document).ready(function(){
                 });
 
                 $("#slider").slider({
-                   change: function(event, ui) {
+                  change: function(event, ui) {
                     $( "#response_answer_1" ).val( $( "#slider" ).slider( "value" ));
-                }
+                  }
                 });
 
+                $( "#importance-slider" ).slider({
+                    value:response_answer4,
+                    min: 1,
+                    max: 5,
+                    step: 1,
+                    slide: function( event, ui ) {
+                        switch(ui.value){
+                            case 1 :  $("a.ui-slider-handle").attr('data-original-title', 'We are not engaging in this activity today.'); break;
+                            case 2 :  $("a.ui-slider-handle").attr('data-original-title', 'We are inconsistent with our approach and level of activity.'); break;
+                            case 3 :  $("a.ui-slider-handle").attr('data-original-title', 'We are currently ad hoc but building this capability.'); break;
+                            case 4 :  $("a.ui-slider-handle").attr('data-original-title', 'We do this on a regular basis and differentiate from competitors.'); break;
+                            case 5 :  $("a.ui-slider-handle").attr('data-original-title', 'We do this consistently and effectively for market advantage.'); break;
+                        }
+
+
+                    }
+                });
+
+                $("#importance-slider").slider({
+                  change: function(event, ui) {
+                    $( "#response_answer_4" ).val( $( "#importance-slider" ).slider( "value" ));
+                  }
+                });
 
 
                 $("div#slider a.ui-slider-handle").tooltip({
