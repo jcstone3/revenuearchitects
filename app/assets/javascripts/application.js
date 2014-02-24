@@ -371,6 +371,19 @@ $(document).ready(function(){
                 // });
                 // $("a.ui-slider-handle").attr('data-original-title', 'We are not engaging in this activity today');
 
+                $('.sub-section-name').live('click',function(){
+                  $.ajax({
+                    url:      '/surveys/sub_section',
+                    type:     'get',
+                    dataType: 'json',
+                    data: "sub_section_name="+$(this).text(),
+                    success: function(data){
+                      window.location = '/surveys/'+data.current_survey_id+'/question/'+data.question_id;
+                    },
+                    error: function(e){
+                    }
+                  });
+                });
 
 			//------------end of question page js ---- //
 

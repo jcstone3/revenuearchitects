@@ -1,13 +1,13 @@
-RevenueGrader::Application.routes.draw do 
+RevenueGrader::Application.routes.draw do
 
   resources :feedback, :only => [:new, :create]
 
   #admin settingss
-  namespace :admin do 
-   get '/dashboard' => "dashboard#show", :as => :dashboard 
-   get '/users' => "users#index", :as => "users" 
-   get '/users/activate_user/:id' => "users#activate_user", :as => "users_active"  
-   get '/users/deactivate_user/:id' => "users#deactivate_user", :as => "users_deactive" 
+  namespace :admin do
+   get '/dashboard' => "dashboard#show", :as => :dashboard
+   get '/users' => "users#index", :as => "users"
+   get '/users/activate_user/:id' => "users#activate_user", :as => "users_active"
+   get '/users/deactivate_user/:id' => "users#deactivate_user", :as => "users_deactive"
    get '/users/update_user/:company_id' => "users#update_user", :as => "users_update_user"
    get '/users/:id/survey-report/:survey_id' => "users#survey_report", :as => "users_survey_report"
    get '/questions' => "questions#index", :as=>"questions"
@@ -18,14 +18,14 @@ RevenueGrader::Application.routes.draw do
    post '/questions/create' => "questions#create", :as=>"create_question"
    get '/sections' => "section#index", :as => "sections"
    get '/section/new' => "section#new", :as => "new_section"
-   get '/subsection/details/:id' => "section#details_subsection", :as => "details_subsection" 
+   get '/subsection/details/:id' => "section#details_subsection", :as => "details_subsection"
    get '/subsection/new' => "section#subsection_new", :as => "new_subsection"
    post '/section/create' => "section#create", :as => "create_section"
-   post '/subsection/create' => "section#create_subsection", :as => "create_subsection"   
+   post '/subsection/create' => "section#create_subsection", :as => "create_subsection"
    get  '/subsection/edit/:id' => "section#edit_subsection", :as => "edit_subsection"
    get '/subsection/delete/:id' => "section#destroy_subsection", :as => "delete_subsection"
    post '/subsection/update/:id' => "section#update_subsection", :as => "update_subsection"
-   get '/settings' => "settings#index", :as => "settings"   
+   get '/settings' => "settings#index", :as => "settings"
    get '/reports' => "section#reports_index", :as => "reports"
    get '/feedbacks' => "feedbacks#feed_index", :as =>"feedbacks"
    root :to =>  "dashboard#index"
@@ -41,22 +41,24 @@ RevenueGrader::Application.routes.draw do
       get '/edit-password/:resource' => 'users/passwords#edit', :as => :edit_password
       put '/update-password/:resource' => 'users/passwords#update', :as => :update_password
       get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru' #third party authentication
-  end 
-  devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations"} do 
+  end
+  devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations"} do
    get 'admins/login' => 'admin/sessions#new', :as => "new_admin_session"
    get 'admins/logout' => 'admin/sessions#destroy', :as => "destroy_admin_session"
-   get 'admins/sign-up' => 'admin/sessions#new', :as => "new_admin_session" 
-  end  
-  
- 
-   
+   get 'admins/sign-up' => 'admin/sessions#new', :as => "new_admin_session"
+  end
+
+
+
   resources :companies
   resources :authorizations
-  resources :surveys
+  resources :surveys do
+    get :sub_section, on: :collection
+  end
   resources :industries
   resources :responses
 
-  get 'surveys/:id/question/:question_id' => 'surveys#question', :as => 'questions'  
+  get 'surveys/:id/question/:question_id' => 'surveys#question', :as => 'questions'
   get 'surveys/:id/report/' => 'surveys#report', :as => 'reports'
   post 'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
   put 'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
@@ -73,7 +75,7 @@ RevenueGrader::Application.routes.draw do
   get 'surveys/:id/compare-system' => 'surveys#compare_system', :as=>'compare_system'
   get 'surveys/:id/compare-programs' => 'surveys#compare_programs', :as=>'compare_programs'
   post 'feedback/create' => 'feedback#create', :as=>'create_feedback'
-  
+
   #site controller maps about us, contact us privacy policy
   match "about-us" =>'site#aboutus', :as => 'aboutus'
   match "contact-us" =>'site#contactus', :as => 'contactus'
@@ -81,7 +83,7 @@ RevenueGrader::Application.routes.draw do
   match "show" =>'site#index', :as => 'show'
 
 
-  
+
   #defalut error page
    match "*path" => 'dashboard#error_handle404', :as => 'error_handle404'
   # The priority is based upon order of creation:

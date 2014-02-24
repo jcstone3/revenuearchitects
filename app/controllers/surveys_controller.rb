@@ -202,7 +202,7 @@ def question
 
   #Required for form. Select if the response already exists
 
-  @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
+   @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
 
   if Response.find_by_survey_id(survey_id).present?
     # @popup_model = true
@@ -720,6 +720,14 @@ def download_result
       }
   end
 end
+
+  def sub_section
+    sub_section = SubSection.find_by_name(params[:sub_section_name])
+    current_survey = session[:survey]
+    respond_to do |format|
+      format.json {render json: {current_survey_id: current_survey.id, question_id: sub_section.questions.first.id}}
+    end
+  end
 
 
 private
