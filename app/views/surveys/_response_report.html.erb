@@ -1,19 +1,25 @@
-                
+
 	        <tr>
                 <td><%= response.questions_id %></td>
                 <td><%= response.name %></td>
                 <td><%= response.section_name.try(:titleize)%></td>
                 <td><%= response.sub_sect_name.try(:titleize)%></td>
-                <td><%= response.points %></td> 
+                <td><%= response.points %></td>
                 <td><%= response.score %></td>
+                <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
+                <td>
+                  <% performance_gap = get_performance_gap(response.answer_4, response.score) %>
+                  <%= performance_gap.present? ?
+                  performance_gap : 0 %>
+                </td>
                 <td><%= response.response_id.present? ?
                                                   get_average_score(response.questions_id, response.survey_id) : 0 %></td>
                 <td><%= response.response_id.present? ?
                   get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
                 <td><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                 </td> 
-                <td><%= response.answer_3.try(:titleize) %></td> 
+                 </td>
+                <td><%= response.answer_3.try(:titleize) %></td>
                 </tr>
 
 
-                                       
+
