@@ -1,17 +1,17 @@
-<table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2"> 
+<table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2">
                                                <thead>
                                                   <tr>
                                                     <th><h3>#</h3></th>
                                                     <th><h3>Questions</h3></th>
                                                     <th><h3>Section</h3></th>
-                                                    <th><h3>Subsection</h3></th>
-                                                    <th><h3>Points</h3></th>          
+                                                    <th><h3>Dimension</h3></th>
+                                                    <th><h3>Points</h3></th>
                                                     <th><h3>Your Score</h3></th>
                                                     <th><h3>Avg Points</h3></th>
                                                     <th><h3>Cal Score</h3></th>
                                                     <th><h3>Avg Cal Score</h3>
-                                                     </th>           
-                                                    <th><h3>Priority</h3></th>        
+                                                     </th>
+                                                    <th><h3>Priority</h3></th>
                                                   </tr>
                                                 </thead>
                                                 <tbody>
@@ -20,16 +20,16 @@
                                             <td><%= response.name %></td>
                                             <td><%= response.section_name.try(:titleize)%></td>
                                             <td><%= response.sub_sect_name.try(:titleize)%></td>
-                                            <td><%= response.points %></td> 
+                                            <td><%= response.points %></td>
                                             <td><%= response.score %></td>
-                                            <td><%= response.avg_score.to_f()%> </td>  
+                                            <td><%= response.avg_score.to_f()%> </td>
                                             <td><%= response.response_id.present? ?
                                               get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
                                             <td><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                                             </td> 
-                                            <td><%= response.answer_3.try(:titleize) %></td> 
+                                             </td>
+                                            <td><%= response.answer_3.try(:titleize) %></td>
                                                                             </tr>
                                         <% end %>
-                                        
-                                                </tbody>           
-                                          </table>      
+
+                                                </tbody>
+                                          </table>

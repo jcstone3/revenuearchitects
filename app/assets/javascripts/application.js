@@ -556,6 +556,15 @@ $(document).ready(function(){
         } );
 
        //-------report page table ids ------ //
+       $('#report_allTable').dataTable( {
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } );
+
        $('#report_add_to_planTable').dataTable( {
             "bPaginate": false,
             "bLengthChange": false,
