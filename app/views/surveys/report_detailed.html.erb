@@ -9,10 +9,10 @@
                       <%= link_to(reports_url(params[:id])) do %>
                       <%= image_tag "shoulddo.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;&nbsp;
                       Report
-                      <span class="green"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span>  <i class="icon-chevron-right icon-white"></i>                    
+                      <span class="green"><%= @sections[0].total_points + @sections[1].total_points + @sections[2].total_points%></span>  <i class="icon-chevron-right icon-white"></i>
                      <%end%>
                     </li>
-                                  
+
                      <li class="next2">
                      <%= link_to(compare_url(params[:id])) do %>
                             <i class="icon-file iconNext">
@@ -31,7 +31,7 @@
 </div>
 <div class="container report-top" >
   <div class="row-fluid">
-    <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2"> 
+    <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2">
           <thead>
             <tr>
               <th><h3>Questions</h3></th>
@@ -54,8 +54,8 @@
                 </tr>
             <% end %>
 
-          </tbody>        
-    </table>      
+          </tbody>
+    </table>
 
   </div>
 </div>
@@ -91,8 +91,8 @@
                     <%= link_to image_tag("download_icon.png"),download_url(request.parameters.merge({:format => :pdf})), :class => "downloadIcon" %>
                     Download
                     <br>
-                    Result</a><br>                
-                                        
+                    Result</a><br>
+
                     <br>
           <button class="btn btn-small">Compare with<br>Benchmark</button>
         </div>
@@ -101,4 +101,4 @@
         <div>
 
 
-      
+

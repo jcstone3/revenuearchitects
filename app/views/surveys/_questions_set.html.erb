@@ -1,3 +1,4 @@
+<br>
 <div class="points1 qseth2 slider-rate">
     <div class="option">
     <h2>Rate Your Current Maturity Level</h2>
@@ -15,15 +16,39 @@
     </div>
     </div>
 </div>
+
+<br>
+<div class="points1 qseth2">
+  <div class="option">
+    <h2>Rate Your Importance</h2>
+    <div style="clear:both"></div>
+    <div class="slabels">
+      <span>Weak</span>
+      <span class="basic">Basic</span>
+      <span class="developing">Developing</span>
+      <span class="diffworld">Differentiated</span>
+      <span class="diffworld">World Class</span>
+    </div>
+
+    <div id="importance-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" >
+      <a href="#" class="ui-slider-handle ui-state-default ui-corner-all"  data-original-title="" title="">
+      </a>
+      <br>
+      <br>
+      <%= f.hidden_field :answer_4 %>
+    </div>
+  </div>
+</div>
+<br>
 <div class="points1 qseth2">
     <div class="option" id="option">
     <h2>Add to Plan?</h2>
 
-    <a rel="tooltip" id ="add_to_plan" class="btn priorityTip plan_option" style="margin-left:18px;" data-original-title="Add this item to our plan for prioritization" data-placement="right"><span><i class="icon-plus icon-white" id ="add_to_plan"></i></span> <strong id ="add_to_plan">Add to Plan</strong></a>
+    <a rel="tooltip" id ="add_to_plan" class="btn priorityTip plan_option" style="margin-left:18px;" data-original-title="Add this item to our plan for prioritization"><span><i class="icon-plus icon-white" id ="add_to_plan"></i></span> <strong id ="add_to_plan">Add to Plan</strong></a>
 
-    <a rel="tooltip" id ="in_our_plan" class="btn priorityTip plan_option"  data-original-title="This item is already established in our plan" ><span><i class="icon-ok icon-white" id ="in_our_plan" ></i></span> <strong id ="in_our_plan">In Our Plan</strong></a>
+    <a rel="tooltip" id ="in_our_plan" class="btn priorityTip plan_option"  data-original-title="This item is already established in our plan"><span><i class="icon-ok icon-white" id ="in_our_plan"></i></span> <strong id ="in_our_plan">In Our Plan</strong></a>
 
-    <a rel="tooltip" id ="not_applicable" class="btn form priorityTip plan_option"  data-original-title="This item does not apply as a priority for our business" ><span><i class="icon-remove icon-white" id ="not_applicable"></i></span> <strong id ="not_applicable">Not Applicable</strong></a>
+    <a rel="tooltip" id ="not_applicable" class="btn form priorityTip plan_option"  data-original-title="This item does not apply as a priority for our business"><span><i class="icon-remove icon-white" id ="not_applicable"></i></span> <strong id ="not_applicable">Not Applicable</strong></a>
     <%= f.hidden_field :answer_2%>
     </div>
 </div>

@@ -343,6 +343,8 @@ def report
     #for sections navigation tabs
     @all_sections = get_all_sections
 
+    #if the user is authorized for the survey then get details of all responses
+     @all_responses = Response.get_all_responses(@survey.id)
     #if the user is authorized for the survey then get details of add to plan responses
      @add_to_plan_responses = Response.get_response_for_options(@survey.id, "add_to_plan")
     #for must do responses
@@ -502,6 +504,9 @@ def compare_strategy
 
   option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
+
+
+
 
 
 
