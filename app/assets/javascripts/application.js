@@ -377,7 +377,9 @@ $(document).ready(function(){
                     dataType: 'json',
                     data: "sub_section_name="+$(this).text(),
                     success: function(data){
-                      window.location = '/surveys/'+data.current_survey_id+'/question/'+data.question_id;
+                      if(data.current_survey!=null) {
+                        window.location = '/surveys/'+data.current_survey.id+'/question/'+data.question_id;
+                      }
                     },
                     error: function(e){
                     }
