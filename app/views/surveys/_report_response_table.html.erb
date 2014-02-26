@@ -7,6 +7,8 @@
                                                     <th><h3>Dimension</h3></th>
                                                     <th><h3>Points</h3></th>
                                                     <th><h3>Your Score</h3></th>
+                                                    <th><h3>Your Importance</h3></th>
+                                                    <th><h3>Your Gap</h3></th>
                                                     <th><h3>Avg Points</h3></th>
                                                     <th><h3>Cal Score</h3></th>
                                                     <th><h3>Avg Cal Score</h3>
@@ -22,6 +24,12 @@
                                             <td><%= response.sub_sect_name.try(:titleize)%></td>
                                             <td><%= response.points %></td>
                                             <td><%= response.score %></td>
+                                            <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
+                                            <td>
+                                              <% performance_gap = get_performance_gap(response.answer_4, response.score) %>
+                                              <%= performance_gap.present? ?
+                                              performance_gap : 0 %>
+                                            </td>
                                             <td><%= response.avg_score.to_f()%> </td>
                                             <td><%= response.response_id.present? ?
                                               get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
