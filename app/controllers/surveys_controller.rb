@@ -63,6 +63,19 @@ def create
   end
 end
 
+def edit
+  @survey = Survey.find_by_id(params[:id])
+end
+
+def update
+  @survey = Survey.find_by_id(params[:id])
+  if @survey.update_attributes(params[:survey])
+    redirect_to confirm_survey_path
+  else
+    redirect_to edit_survey_path
+  end
+end
+
 def get_response_status
   if !params[:id].blank?
     if params[:id].to_i > 0

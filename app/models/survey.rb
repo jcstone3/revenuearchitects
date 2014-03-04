@@ -1,9 +1,14 @@
 class Survey < ActiveRecord::Base
-	# validates :size, :presence => {:message => "Company size can't be blank"} #,:numericality => {:greater_than => 0}
-	# validates :revenue, :presence => {:message => "Company Revenue can't be blank"} #, :numericality => {:greater_than => 0}
+	# validates :size, :presence => {:message => "Company size can't be blank"},:numericality => {:greater_than => 0}, on: :update
+	# validates :revenue, :presence => {:message => "Company Revenue can't be blank"}, :numericality => {:greater_than => 0}, on: :update
+
+  validates :size, :presence => {:message => "Company size can't be blank"}, on: :update
+  validates :revenue, :presence => {:message => "Company Revenue can't be blank"}, on: :update
+
+
 	#validates :start_date, :presence => true
 	#validates :end_date, :presence => true
-  # validates :company_id, :presence => true
+  validates :company_id, :presence => true
 
 	belongs_to :company
 	has_many :responses

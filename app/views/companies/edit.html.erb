@@ -1,0 +1,87 @@
+<% content_for :main_content do -%>
+    <div class="span5 content">
+      <div class="content">
+       <h1 class="question">Company Details</h1>
+      <p class="question">Please provide basic information about your company</p>
+
+      <%= simple_form_for(@company, :validate => true, :class => "well") do |f| %>
+
+        <%= f.input :name,
+                    :label => "Your Company Name",
+                    :input_html => { :class => 'input-xlarge' },
+                    :label_html => { :class => '' } -%>
+        <%= f.input :website,
+                    :input_html => { :class => 'input-xlarge', value: "#{current_user.website}" } -%>
+        <%= f.association :industry,
+                      :prompt => "Select Industry",
+                      :input_html => { :class => 'input-xlarge' }   -%>
+
+         <div class="form-actions">
+            <%= f.button :submit, "Continue to Diagnostic", :class => 'btn-primary' %>
+          </div>
+    <% end -%>
+  </div>
+    </div><!-- / end of content -->
+
+    <div class="span4 side-text">
+      <h1 class="question">The Exercise should take about 60 minutes and help create a top-level revenue strategy and plan</h1>
+    </div>
+    <% end  -%> <!-- /end of main content -->
+
+    <% content_for :side_content do  -%>
+        <%= render "/shared/side_icons" -%>
+
+          <div class="scoreboard">
+            <div class="head">About Revenue Grader </div>
+               <div class="score">
+                  <span>Revenue Grader is a diagnostic tool developed by the team at Revenue
+Architects.  Revenue Grader helps you quickly assess and plan your revenue growth strategy.</span>
+               </div>
+            </div>
+
+            <div class="scoreboard">
+             <div class="head">About Revenue Architects </div>
+                <div class="score">
+                    <span>Revenue Architects delivers integrated consulting agency services for revenue growth.
+                    </span>
+                </div>
+             </div>
+           </div>
+<!-- Google Code for Signup Conversion Page -->
+<script type="text/javascript">
+
+/* <![CDATA[ */
+
+var google_conversion_id = 998846885;
+
+var google_conversion_language = "en";
+
+var google_conversion_format = "3";
+
+var google_conversion_color = "ffffff";
+
+var google_conversion_label = "GeruCNvhrQQQpeOk3AM";
+
+var google_conversion_value = 1;
+
+/* ]]> */
+
+</script>
+
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+
+</script>
+
+<noscript>
+
+<div style="display:inline;">
+
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/998846885/?value=1&amp;label=GeruCNvhrQQQpeOk3AM&amp;guid=ON&amp;script=0"/>
+
+</div>
+
+</noscript>
+
+    <% end -%>
+
+
