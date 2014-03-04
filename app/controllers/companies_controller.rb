@@ -40,7 +40,7 @@ class CompaniesController < ApplicationController
       # On comapany updation redirects to the update survey
       redirect_to edit_survey_path(id: session[:survey])
     else
-      redirect_to edit_company_path
+      render :edit
     end
   end
 end

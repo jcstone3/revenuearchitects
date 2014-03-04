@@ -73,7 +73,7 @@ def update
     # On comapany updation redirects to the confirm survey
     redirect_to confirm_survey_path
   else
-    redirect_to edit_survey_path
+    render :edit
   end
 end
 
