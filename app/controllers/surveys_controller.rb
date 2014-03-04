@@ -70,6 +70,7 @@ end
 def update
   @survey = Survey.find_by_id(params[:id])
   if @survey.update_attributes(params[:survey])
+    # On comapany updation redirects to the confirm survey
     redirect_to confirm_survey_path
   else
     redirect_to edit_survey_path
@@ -137,6 +138,14 @@ def show
   @total_question_total = 0
   @total_question_previous = 0
   @survey = Survey.find_by_id(params[:id])
+
+  # create new Survey object on survey show
+  @companies.each do |c|
+    @company_id = c.id
+  end
+  @survey = Survey.create(company_id: "#{@company_id}")
+  session[:survey] = @survey
+
   #current active surveys
   @current_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == true}
 
@@ -194,8 +203,12 @@ def question
 
   if @question.blank?
     @question = get_question(question_id)
-    redirect_to edit_company_path(id: @survey.company.id)
-    # redirect_to confirm_survey_path and return
+    if @survey.company.name.present? && @survey.company.industry.present?
+      redirect_to edit_survey_path(id: session[:survey])
+      # redirect_to confirm_survey_path and return
+    else
+      redirect_to edit_company_path(id: @survey.company.id)
+    end
   end
 
   #for total count
@@ -211,11 +224,10 @@ def question
   @all_sections = get_all_sections
 
   #Getting the score to show on page
-  @total_score = Survey.calculate_response_for_section(@survey.id, @question.section_id)
+  @total_score = Survey.calculate_response_for_section(@survey.id, @question.section_id) if @question.present?
 
   #Required for form. Select if the response already exists
-
-  @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
+  @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id) if @question.present?
 
   if @response.blank?
     logger.debug "Creating New Response"
@@ -223,11 +235,11 @@ def question
   end
 
   @survey_question = Question.includes(:sub_section).where(:id => params[:question_id]).first
-  @sub_section = SubSection.includes(:section).where(:id => @survey_question.sub_section_id).first
-  @section = Section.select(:name).where(:id => @sub_section.section_id).first
+  @sub_section = SubSection.includes(:section).where(:id => @survey_question.sub_section_id).first if @survey_question.present?
+  @section = Section.select(:name).where(:id => @sub_section.section_id).first if @sub_section.present?
 
-  @sub_section_name =  @sub_section.name.titleize
-  @section_name = @section.name.titleize
+  @sub_section_name =  @sub_section.name.titleize if @sub_section.present?
+  @section_name = @section.name.titleize if @section.present?
 
   @response
 end

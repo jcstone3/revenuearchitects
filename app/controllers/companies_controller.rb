@@ -37,6 +37,7 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find_by_id(params[:id])
     if @company.update_attributes(params[:company])
+      # On comapany updation redirects to the update survey
       redirect_to edit_survey_path(id: session[:survey])
     else
       redirect_to edit_company_path

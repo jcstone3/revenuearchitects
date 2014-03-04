@@ -17,10 +17,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
         set_flash_message :success, :signed_up if is_navigational_format?
         Usermailer.welcome(resource).deliver
         sign_in(resource_name, resource)
+
+        # On successful signup create Company and Survey object
         @company = Company.create(user_id: current_user.id)
         @survey = Survey.create(company_id: @company.id)
         # respond_with resource, :location => after_sign_up_path_for(resource)
+
+        # New flow - redirects to the first question
         redirect_to questions_path(@survey, 1)
+
         #format.html { redirect_to(@user, :notice => 'User was successfully created.') }
       else
          set_flash_message :success, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
