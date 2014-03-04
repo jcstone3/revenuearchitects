@@ -18,8 +18,8 @@
                         </a>
                         <ul id="menu1" class="dropdown-menu" role="menu"
                            aria-labelledby="drop" >
-                          <% section.sub_sections.each_with_index do |sub_section,j| %>
-
+                          <% sorted_subsections = subsection_sorting(section.sub_sections) %>
+                          <% sorted_subsections.each_with_index do |sub_section,j| %>
                               <li role="presentation">
                                 <a class="sub-section-name" role="menuitem" tabindex="-1" href="#"><%= sub_section.name %></a>
                               </li>
