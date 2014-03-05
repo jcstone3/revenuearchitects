@@ -338,7 +338,7 @@ def report
      redirect_to new_survey_path and return
    else
     #for sections navigation tabs
-    @all_sections = get_all_sections
+    @all_sections = Section.order(:sequence)
 
     #if the user is authorized for the survey then get details of all responses
      @all_responses = Response.get_all_responses(@survey.id)
