@@ -333,7 +333,7 @@ def report
      redirect_to new_survey_path and return
    else
     #for sections navigation tabs
-    @all_sections = get_all_sections
+    @all_sections = Section.order(:sequence)
 
     #if the user is authorized for the survey then get details of add to plan responses
      @add_to_plan_responses = Response.get_response_for_options(@survey.id, "add_to_plan")
