@@ -8,8 +8,8 @@
     <%#= csrf_meta_tags %>
 
     <meta name="description" content="Revenue Grader is a self-diagnostic for revenue performance. Answer questions across three dimensions: Revenue Strategy, Revenue Systems and Revenue Programs and gain a comprehensive view of your revenue performance potential."/>
-    <meta name="keywords" content="revenue, survey, revenue strategy, revenue systems, revenue programs, revenue grading, revenue architects, increase revenue, diagnostic tool, revenue performance, revenue growth"/> 
-    
+    <meta name="keywords" content="revenue, survey, revenue strategy, revenue systems, revenue programs, revenue grading, revenue architects, increase revenue, diagnostic tool, revenue performance, revenue growth"/>
+
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 7]>
         <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
@@ -33,37 +33,49 @@
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
-    
+
   </head>
-  
+
   <body>
     <div class="container-fluid" >
       <div class="row-fluid top-bar">
-        <%= render  "/layouts/shared/header" -%> 
+        <%= render  "/layouts/shared/header" -%>
       </div><!-- / end of row -->
 
-      <% if !flash.blank? -%> 
+      <% if !flash.blank? -%>
         <div class="row-fluid">
           <% flash.each do |key, value| %>
             <%= content_tag :div, :id=>'flash_msg', :class => "alert alert-#{key}" do %>
               <%= value unless value.blank? %>
-              <a class="close" data-dismiss="alert">×</a>   
+              <a class="close" data-dismiss="alert">×</a>
             <% end %>
-          <% end %>   
+          <% end %>
         </div><!-- / -->
-      <% end -%> 
-     
-      <div class="row-fluid content-section" >
-        <div class="span8 main-content"> 
+      <% end -%>
+
+      <div class="row-fluid content-section landing" >
+
+        <div class="span4 side-content">
+          <div class="main-content-header">
+            <div class="heading">
+              <h1>Assess your <br />
+              Revenue Potential <%= link_to 'now', new_user_session_path %>
+              </h1>
+            </div><!-- / -->
+            <div class="arrow">
+              &nbsp;
+            </div><!-- / -->
+          </div><!-- / -->
+          <%= yield :side_content -%>
+        </div><!-- / end of span4 - side-content-->
+
+        <div class="row-fluid main-content clear">
           <%= yield :main_content %>
         </div> <!-- / end of span8 - main -->
 
-        <div class="span4 side-content">
-          <%= yield :side_content -%> 
-        </div><!-- / end of span4 - side-content-->      
       </div> <!-- /end of content-section -->
 
-      <div class="row-fluid footer" >
+      <div class="row-fluid footer">
         <%= render '/layouts/shared/footer'%>
       </div> <!-- / End of footer -->
     </div> <!-- end on container - main -->
@@ -71,7 +83,7 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-   
+
     <%= javascript_include_tag "application" %>
     <%= feedback_tab(:position => 'left') %>
 <!-- previous code

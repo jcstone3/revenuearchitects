@@ -182,7 +182,8 @@ def question
 
   if @question.blank?
     @question = get_question(question_id)
-    redirect_to confirm_survey_path and return
+    redirect_to edit_company_path(id: @survey.company.id)
+    # redirect_to confirm_survey_path and return
   end
 
   #for total count
@@ -261,8 +262,6 @@ def create_response
     flash[:error] = "Error in saving the Response. Please try again."
     redirect_to questions_path(survey_id, question_id) and return
   end
-
-
 end
 
 #question for the survey
@@ -327,8 +326,6 @@ end
 #    end
 # end
 
-
-
 #report of a particular survey
 def report
   survey_id = params[:id]
@@ -367,10 +364,8 @@ def report
                            :group => "sections.id", :order => "sections.id")
 
     render :layout =>"report"
-
   end
 end
-
 
 def update_response
   if params[:response].blank?
@@ -416,9 +411,7 @@ def confirm_survey
     @final_score += @section_questions[i].question_attempted.to_i
     @total_question_total += @section_questions_total[i].question_total.to_i
   end
-
  end
-
 
 def close_survey
    @survey = Survey.find_by_id(params[:id])
@@ -430,7 +423,6 @@ def close_survey
      redirect_to confirm_survey_path(@survey.id)
    end
 end
-
 
 def compare
   survey_id = params[:id]
@@ -451,7 +443,6 @@ def compare
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                             :group => "sections.id", :order => "id ASC")
-
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
@@ -507,9 +498,6 @@ def compare_strategy
 
 
 
-
-
-
   end
     render :layout =>"report"
 
@@ -534,7 +522,6 @@ def compare_system
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                             :group => "sections.id", :order => "id ASC")
-
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
@@ -808,7 +795,6 @@ end
 #TODO: Check if this works when query parameters are not passed
 def get_current_survey
   current_survey = session[:survey]
-
   if current_survey.blank?
     current_survey = current_user.companies.first.surveys.find_by_id(params[:id])
     session[:survey] = current_survey

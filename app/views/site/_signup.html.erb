@@ -1,29 +1,3 @@
-<ul class="nav nav-tabs">
-  <li class="active">
-    <a class="signuplink" href="#home" data-toggle="tab" id="home_click">
-      <%= image_tag("rg_icon.png", :alt=>"home")%>Sign Up with us
-    </a>
-  </li>
-
-  <li>
-    <a class="googlelink" href="#google" data-toggle="tab" id="google_click" >
-      <%= image_tag "plus_icon.png", :alt=>"google", :id=>"google_click"%>
-    </a>
-  </li>
-  
-  <li>
-    <a class="twitterlink" href="#twitter" data-toggle="tab" id="twitter_click" >
-      <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
-    </a>
-  </li>
-  
-  <li>
-    <a class="facebooklink" href="#facebook" data-toggle="tab"  id="facebook_click">
-      <%= image_tag "facebook_icon.png", :alt=>"facebook", :id=>"facebook_click"%>
-    </a>
-  </li>
-</ul>
-       
 <div class="tab-content" id="tab-content" style="padding-left:0px;">
   <div class="tab-pane active" id="home">
     <%= render :partial=> "users/registrations/new"%>
@@ -37,10 +11,31 @@
   <div class="tab-pane signintweet" id="twitter">
     <br>
     <%= link_to image_tag("sign_in_with_twitter.png", :alt=>"twitter"), user_omniauth_authorize_path(:twitter) %>
-  </div>   
+  </div>
 
   <div class="tab-pane signinbtn" id="facebook">
-    <br> 
+    <br>
     <%= link_to image_tag("login-w-fb.gif", :alt=>"facebook"), user_omniauth_authorize_path(:facebook)%>
   </div>
+  <ul class="nav nav-tabs">
+  <li>
+    <a class="googlelink" href="#google" data-toggle="tab" id="google_click" >
+      <%= image_tag "plus_icon.png", :alt=>"google", :id=>"google_click"%>
+    </a>
+  </li>
+
+  <li>
+    <a class="twitterlink" href="#twitter" data-toggle="tab" id="twitter_click" >
+      <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
+    </a>
+  </li>
+
+  <li>
+    <a class="facebooklink" href="#facebook" data-toggle="tab"  id="facebook_click">
+      <%= image_tag "facebook_icon.png", :alt=>"facebook", :id=>"facebook_click"%>
+    </a>
+  </li>
+</ul>
 </div>
+
+

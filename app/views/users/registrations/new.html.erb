@@ -1,24 +1,13 @@
 
-<% content_for :side_content do -%> 
-     <%= render "/site/signup" -%> 
- <% end -%> 
+<% content_for :side_content do -%>
+     <%= render "/site/signup" -%>
+ <% end -%>
 
 
-<% content_for :main_content do -%> 
-    <div class="main-content-header">
-          <div class="heading">
-            <h1>Assess your <br />
-            Revenue Potential <%= link_to 'now', new_user_session_path %>
-            </h1>
-          </div><!-- / -->
-          <div class="arrow">
-            &nbsp;
-          </div><!-- / -->
-    </div><!-- / -->
-
+<% content_for :main_content do -%>
        <div class="main-content-content">
-             <%= render "/site/index_content" -%> 
+             <%= render "/site/index_content" -%>
        </div>
-<% end -%> 
+<% end -%>
 
 

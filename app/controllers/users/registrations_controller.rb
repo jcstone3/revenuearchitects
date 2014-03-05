@@ -1,5 +1,4 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-
  #users/registration/new.html.erb
   def new
     resource = build_resource({})
@@ -8,15 +7,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 #create new user
   def create
-     
+
      build_resource
-    
+     generated_password = Devise.friendly_token.first(8)
+     resource.password = generated_password
+
     if resource.save
       if resource.active_for_authentication?
         set_flash_message :success, :signed_up if is_navigational_format?
         Usermailer.welcome(resource).deliver
         sign_in(resource_name, resource)
-        respond_with resource, :location => after_sign_up_path_for(resource)
+        @company = Company.create(user_id: current_user.id)
+        @survey = Survey.create(company_id: @company.id)
+        # respond_with resource, :location => after_sign_up_path_for(resource)
+        redirect_to questions_path(@survey, 1)
         #format.html { redirect_to(@user, :notice => 'User was successfully created.') }
       else
          set_flash_message :success, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
@@ -26,7 +30,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       else
        clean_up_passwords resource
        respond_with resource
-    end   
+    end
   end
 
 	def update
@@ -48,7 +52,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
    private
-  
+
   def build_resource(*args)
     super
     if session[:omniauth]

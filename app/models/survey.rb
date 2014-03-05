@@ -84,8 +84,6 @@ class Survey < ActiveRecord::Base
 
         @your_response = responses.select { |response| response.questions_id.to_i == question.id.to_i }
 
-
-
         Rails.logger.debug @your_response.inspect
         Rails.logger.debug "response array above!!!!!!!!!!!!!!!!!!!!!!!!!"
         response_array.push(@your_response.blank? ? 0 :  @your_response.first.score.to_i)

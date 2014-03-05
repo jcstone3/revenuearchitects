@@ -1,53 +1,42 @@
-<% content_for :main_content do -%> 
-    <div class="main-content-header">
-          <div class="heading">
-            <h1>Assess your <br />
-            Revenue Potential <%= link_to 'now', new_user_session_path %>
-            </h1>
-          </div><!-- / -->
-          <div class="arrow">
-            &nbsp;
-          </div><!-- / -->
-    </div><!-- / -->
-
+<% content_for :main_content do -%>
        <div class="main-content-content">
-             <%= render "/site/index_content" -%> 
+             <%= render "/site/index_content" -%>
        </div>
-<% end -%> 
+<% end -%>
 
 
-<% content_for :side_content do -%> 
+<% content_for :side_content do -%>
        <ul class="nav nav-tabs">
                             <li class="active">
-                               <a class="signuplink" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png", 
-                            :alt=>"home")%>Forgot Password</a></li>                          
-                           
+                               <a class="signuplink" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png",
+                            :alt=>"home")%>Forgot Password</a></li>
+
                             </ul>
-                             
+
                             <div class="tab-content" id="tab-content">
                             <div class="tab-pane active" id="home">
                                 <div class="rightboxName">
                                 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }, :validate=>true) do |f| %>
                   <%#= devise_error_messages! %>
-                                
+
                   <h3>Email<span class="star">*</span></h3>
-                  
+
                   <%= f.email_field :email, :class=>"span3 logindetails", :validate =>
-                        {:presence => true, :uniqueness => true}  %> 
+                        {:presence => true, :uniqueness => true}  %>
                                  <p class="lefttextbox">
                                  Enter your email address registered with the<br/> Revenue Grader</p>
-                  <%= f.submit "Reset Password", :class=>"btn btn-primary btn-large reset" %> 
+                  <%= f.submit "Reset Password", :class=>"btn btn-primary btn-large reset" %>
                 <% end %>
                </div>
 
                 <p class="commonLeftRight">New password will be send to your email account</p>
 
                 <h5 class="newuser"> <%= link_to "Sign up with us", new_user_registration_path %><br />
-                  <%= link_to "Sign In", new_user_session_path %>       
+                  <%= link_to "Sign In", new_user_session_path %>
                                 </h5>
                   </div>
-           
+
                   </div>
- <% end -%> 
+ <% end -%>
 
 
