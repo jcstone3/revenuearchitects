@@ -32,4 +32,8 @@ module SurveysHelper
       (importance.nil? ? 0 : importance.to_i)-(maturity.nil? ? 0 : maturity.to_i)
     end
 
+	def subsection_sorting(subsections)
+      subsections.order('sequence')
+    end
+
 end
