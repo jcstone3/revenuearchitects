@@ -136,7 +136,9 @@ def show
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                             :group => "sections.id", :order => "id ASC")
-  @all_sections = get_all_sections
+  # @all_sections = get_all_sections
+  @all_sections = Section.order(:sequence)
+
   @all_sections.each_with_index do |section,i|
     #@final_score += @section_questions[i].question_attempted.to_i
     @total_question_total += @section_questions_total[i].question_total.to_i
@@ -145,7 +147,6 @@ def show
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id ",
                             :group => "sections.id", :order => "id ASC")
-  @all_sections = get_all_sections
   @all_sections.each_with_index do |section,i|
   @total_question_previous += @previous_questions_total[i].question_total.to_i
   end
@@ -196,7 +197,9 @@ def question
          :select => "count(responses.question_id) as question_attempted",
          :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
          :group => "sections.id", :order => "sections.id")
-  @all_sections = get_all_sections
+  # @all_sections = get_all_sections
+  @all_sections = Section.order(:sequence)
+
 
   #Getting the score to show on page
   @total_score = Survey.calculate_response_for_section(@survey.id, @question.section_id)
@@ -405,7 +408,9 @@ def confirm_survey
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
                            :group => "sections.id", :order => "sections.id")
   logger.debug "#{@section_questions}"
-  @all_sections = get_all_sections
+  # @all_sections = get_all_sections
+  @all_sections = Section.order(:sequence)
+
 
   @all_sections.each_with_index do |section,i|
     @final_score += @section_questions[i].question_attempted.to_i
@@ -426,7 +431,9 @@ end
 
 def compare
   survey_id = params[:id]
-  @all_sections = get_all_sections
+  # @all_sections = get_all_sections
+  @all_sections = Section.order(:sequence)
+
   #check scope
 
    #scoping the survey
@@ -459,8 +466,10 @@ def compare
 end
 
 def compare_strategy
-    survey_id = params[:id]
-  @all_sections = get_all_sections
+  survey_id = params[:id]
+  # @all_sections = get_all_sections
+  @all_sections = Section.order(:sequence)
+
   #check scope
 
    #scoping the survey
@@ -506,7 +515,9 @@ end
 
 def compare_system
   survey_id = params[:id]
-  @all_sections = get_all_sections
+  # @all_sections = get_all_sections
+  @all_sections = Section.order(:sequence)
+
   #check scope
 
   #scoping the survey
@@ -545,7 +556,9 @@ end
 
 def compare_programs
   survey_id = params[:id]
-  @all_sections = get_all_sections
+  # @all_sections = get_all_sections
+  @all_sections = Section.order(:sequence)
+
   #check scope
 
    #scoping the survey
@@ -597,7 +610,8 @@ end
      redirect_to new_survey_path and return
    else
     #for sections navigation tabs
-    @all_sections = get_all_sections
+    # @all_sections = get_all_sections
+    @all_sections = Section.order(:sequence)
 
     #if the user is authorized for the survey then get details of add to plan responses
      @add_to_plan_responses = Response.get_response_for_options(@survey.id, "add_to_plan")
