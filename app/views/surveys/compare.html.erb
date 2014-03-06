@@ -1,46 +1,59 @@
-<% content_for :top_bar_content do  -%> 
+<% content_for :top_bar_content do  -%>
         <%= render "sections_nav"%>
-<% end -%> 
+<% end -%>
 
-<% content_for :main_content do -%> 
+<% content_for :main_content do -%>
       <div class="row-fluid">
         <div class="span12">
-                  <ul class="nav3-tabs3 usercompare"> 
+                  <ul class="nav3-tabs3 usercompare">
                                 <li class="active"><a href="#overall" data-toggle="tab">Overall</a></li>
                                 <li><%= link_to(compare_strategy_url(params[:id])) do %>
                                     Strategy
-                                     <% end %> 
+                                     <% end %>
                                  </li>
                                  <li><%= link_to(compare_system_url(params[:id])) do %>
                                     Systems
-                                     <% end %> 
+                                     <% end %>
                                  </li>
                                  <li><%= link_to(compare_programs_url(params[:id])) do %>
                                     Programs
-                                     <% end %> 
+                                     <% end %>
                                  </li>
-                                
+
                             </ul>
-                             
-                            <div class="tab-content3 dash">
-                            <div class="tab-pane active" id="overall" style="height:730px;">
+
+                            <div class="tab-content3 dash" style="height:auto;">
+                            <div class="tab-pane active" id="overall">
                             <div class="tabHead">
                                   <h1>Overall Report</h1>
-                                   
+
                                 </div>
-                                
+
                                 <div class="tabGraph">
-                                    <div class="box_compare">                                        
+                                    <div class="box_compare">
                                         <h1>Response of the month :: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1>
 
                                        <div id='chart'></div>
                                         <%= render_chart(@chart, 'chart') %>
 
                                     </div>
+                                        <!--table goes here-->
+                                     <div class="container report-top">
+                                        <div class="row-fluid">
+
+                                         <%= render :partial=>"compare_response_table"%>
+
+                                        </div>
+                                      </div>
+                                  <!--end table-->
+
                                 </div>
+
+
+
                             </div>
         </div>
     </br>
       </div>
-    </div> 
-<% end %>   
+    </div>
+<% end %>

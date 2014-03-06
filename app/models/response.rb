@@ -40,6 +40,17 @@ scope :get_response_for_priority, lambda{ |surveyid, action| {
 }}
 
 scope :get_response_for_options, lambda{ |surveyid, action| {
+    :select => "questions.id as questions_id,responses.id as response_id, sections.id as section_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score, responses.survey_id as survey_id ",
+      :joins => "left outer join questions on responses.question_id = questions.id
+             left outer join sub_sections on questions.sub_section_id = sub_sections.id
+             left outer join sections on sections.id = sub_sections.section_id",
+      :conditions =>  "responses.survey_id =#{surveyid} and responses.answer_2 like'#{action}'",
+      :group => "questions.id, responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, sections.name, sub_sections.name, questions.points",
+      :order=>"questions.id"
+
+}}
+
+scope :get_all_responses, lambda{ |surveyid| {
     :select => "questions.id as questions_id,responses.id as response_id, sections.id as section_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, responses.answer_4, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score, responses.survey_id as survey_id ",
       :joins => "left outer join questions on responses.question_id = questions.id
              left outer join sub_sections on questions.sub_section_id = sub_sections.id

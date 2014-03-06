@@ -95,8 +95,8 @@ class Survey < ActiveRecord::Base
         response_array.push(question.id.to_s)
         logger.debug question.id
 
+        @your_response = responses.select { |response| response.questions_id.to_i == question.id.to_i } 
 
-        @your_response = responses.select { |response| response.questions_id.to_i == question.id.to_i }
 
         Rails.logger.debug @your_response.inspect
         Rails.logger.debug "response array above!!!!!!!!!!!!!!!!!!!!!!!!!"
