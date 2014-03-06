@@ -1,6 +1,9 @@
 class SurveysController < ApplicationController
 
 before_filter :authenticate_user!, :check_company #check current_user & company
+require 'csv'
+include SurveysHelper
+
 layout "application"
 
 def index
@@ -363,6 +366,35 @@ def report
   end
 end
 
+def import_excel
+  survey_id = params[:id]
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+  @diagnostic_for = @survey.created_at.strftime('%d %B  %Y')
+  @all_responses = Response.get_all_responses(@survey.id)
+  headers["Content-Disposition"] = "attachment; filename=\"#{current_user.companies.first.name.humanize}_#{@diagnostic_for}.xls\""
+  respond_to do |format|
+    format.xls { render :report }
+  end
+end
+
+def import_csv
+  survey_id = params[:id]
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+  @diagnostic_for = @survey.created_at.strftime('%d %B  %Y')
+  @all_responses = Response.get_all_responses(@survey.id)
+  headers["Content-Disposition"] = "attachment; filename=\"#{current_user.companies.first.name.humanize}_#{@diagnostic_for}.csv\""
+
+
+  csv_string = CSV.generate do |csv|
+    csv << ["#", "Questions", "Section", "Subsection", "Points", "Your Score", "Avg Score", "Cal Score", "Avg Cal Score", "Priority"]
+    @all_responses.each do |response|
+      csv << [response.questions_id, response.name, response.section_name.try(:titleize), response.sub_sect_name.try(:titleize), response.points, response.score, response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0, response.response_id.present? ? get_calculated_score(response.response_id, response.questions_id) : 0, response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0, response.answer_3.try(:titleize)]
+    end
+  end
+  respond_to do |format|
+    format.csv { send_data csv_string, :type => 'text/csv; charset=iso-8859-1; header=present', :disposition => "attachment; filename=#{current_user.companies.first.name.humanize}_#{@diagnostic_for}.csv" }
+  end
+end
 
 def update_response
   if params[:response].blank?
