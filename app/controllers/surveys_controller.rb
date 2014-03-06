@@ -731,7 +731,7 @@ def download_result
 end
 
   def sub_section
-    sub_section = SubSection.find_by_name(params[:sub_section_name])
+    sub_section = SubSection.find_by_name(params[:sub_section_name].strip)
     current_survey = session[:survey]
     respond_to do |format|
       format.json {render json: {current_survey: current_survey, question_id: sub_section.questions.first.id}}

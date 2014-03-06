@@ -18,12 +18,18 @@
                         </a>
                         <ul id="menu1" class="dropdown-menu" role="menu"
                            aria-labelledby="drop" >
-                          <% sorted_subsections = subsection_sorting(section.sub_sections) %>
-                          <% sorted_subsections.each_with_index do |sub_section,j| %>
-                              <li role="presentation">
-                                <a class="sub-section-name" role="menuitem" tabindex="-1" href="#"><%= sub_section.name %></a>
-                              </li>
+                          <% sorted_subsections = subsection_sorting(section.sub_sections, @survey.id ) %>
 
+                          <% sorted_subsections.each_with_index do |sub_section,j| %>
+                              <% subsection_done = check_subsection_all_ans(sub_section, @survey.id) %>
+                              <a class="sub-section-name" role="menuitem" tabindex="-1" href="#">
+                                <span class="subsection-span"><%= sub_section.name %></span>
+                                <% if subsection_done == true %>
+                                  <span role="menuitem" tabindex="-1" href="#">
+                                    <img class="sub-section-done" src="/assets/icon_results.png" alt="done" width="22" height="22"/>
+                                  </span>
+                                <% end %>
+                              </a>
                           <% end %>
                         </ul>
                         <span id ="span_<%=section.id%>" class="red" title ="Total number of questions", rel="tooltip">

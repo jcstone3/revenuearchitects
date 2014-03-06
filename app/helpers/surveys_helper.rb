@@ -28,7 +28,7 @@ module SurveysHelper
       @average_score = Survey.get_average_score_from_other_companies(response_questions_id, response_survey_id)
     end
 
-    def subsection_sorting(subsections)
+    def subsection_sorting(subsections, survey_id)
       @sub_sections = Array.new
       subsections.order('sequence').each do |subsection|
         if subsection.questions.present?
@@ -36,5 +36,15 @@ module SurveysHelper
         end
       end
       @sub_sections
+    end
+
+    def check_subsection_all_ans(subsection, survey_id)
+      @sub_section_answered = true
+      subsection.questions.each do |question|
+        if !Response.find_by_survey_id_and_question_id(survey_id, question.id).present?
+          @sub_section_answered = false
+        end
+      end
+      @sub_section_answered
     end
 end
