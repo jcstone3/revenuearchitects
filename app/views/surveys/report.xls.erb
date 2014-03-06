@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+
+ <Styles>
+    <Style ss:ID="heading">
+      <Font ss:Bold="1" />
+    </Style>
+  </Styles>
+
+  <Worksheet ss:Name="Diagnostic For <%= @diagnostic_for %>">
+    <Table>
+      <Row>
+        <Cell ss:StyleID="heading"><Data ss:Type="String">#</Data></Cell>
+        <Cell ss:StyleID="heading"><Data ss:Type="String">Questions</Data></Cell>
+        <Cell ss:StyleID="heading"><Data ss:Type="String">Section</Data></Cell>
+        <Cell ss:StyleID="heading"><Data ss:Type="String">Subsection</Data></Cell>
+        <Cell ss:StyleID="heading"><Data ss:Type="String">Points</Data></Cell>
+        <Cell ss:StyleID="heading"><Data ss:Type="String">Your Score</Data></Cell>
+        <Cell ss:StyleID="heading"><Data ss:Type="String">Avg Score</Data></Cell>
+        <Cell ss:StyleID="heading"><Data ss:Type="String">Cal Score</Data></Cell>
+        <Cell ss:StyleID="heading"><Data ss:Type="String">Avg Cal Score</Data></Cell>
+        <Cell ss:StyleID="heading"><Data ss:Type="String">Priority</Data></Cell>
+      </Row>
+    <% @all_responses.each do |response| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= response.questions_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= response.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= response.section_name.try(:titleize) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= response.sub_sect_name.try(:titleize) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= response.points %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= response.score %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0 %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= response.response_id.present? ? get_calculated_score(response.response_id, response.questions_id) : 0 %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= response.answer_3.try(:titleize) %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

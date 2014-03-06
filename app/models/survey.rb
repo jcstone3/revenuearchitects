@@ -20,6 +20,15 @@ class Survey < ActiveRecord::Base
     :order => "created_at DESC"
     }}
 
+    def self.to_csv(options = {})
+      CSV.generate(options) do |csv|
+        csv << column_names
+        all.each do |survey|
+          csv << survey.attributes.values_at(*column_names)
+        end
+      end
+    end
+
     def self.check_numericality(params)
     	params = params
     	if params.to_i.is_a?(Integer) && params.to_i > 0

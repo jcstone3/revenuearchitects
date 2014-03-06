@@ -30,6 +30,10 @@
                                       :locals=>{:response => response}%>
                                     <%end%>
                                   <%= render :partial=>"table_end"%>
+                                    <p style="color: #333333;font-weight: 700;margin-top: 20px;margin-left: 52px;">Download
+                                       <%= link_to "CSV", import_csv_path(format: "csv") %> | <%= link_to "Excel", import_excel_path(format: "xls") %>
+
+                                    </p>
                                 </div>
                               </div>
                               <div class="tab-pane" id="overall" style="height:auto;">

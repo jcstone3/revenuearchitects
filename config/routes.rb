@@ -82,7 +82,11 @@ RevenueGrader::Application.routes.draw do
   match "privacy" =>'site#privacy_policy', :as => 'privacy_policy'
   match "show" =>'site#index', :as => 'show'
 
+  # import excel
+  get 'surveys/:id/import_excel' => 'surveys#import_excel', :as=>'import_excel'
 
+  # import CSV
+  get 'surveys/:id/import_csv' => 'surveys#import_csv', :as=>'import_csv'
 
   #defalut error page
    match "*path" => 'dashboard#error_handle404', :as => 'error_handle404'
