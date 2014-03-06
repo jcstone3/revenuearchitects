@@ -1,7 +1,7 @@
 <div class="container left">
       <div class="row-fluid">
         <div class="span12">
-                  <ul class="nav2 nav2-tabs2"> 
+                  <ul class="nav2 nav2-tabs2">
                                 <li><%=link_to 'Feedbacks', admin_feedbacks_url %></li>
                                 <li><%= link_to 'Questions', admin_questions_url%></a></li>
                                 <li><%=link_to 'Sections', admin_sections_url%></li>
@@ -9,23 +9,26 @@
                                 <!--<li><a href="" data-toggle="tab">Users</a></li> -->
                                 <li><%= link_to 'Dashboard', admin_root_url %></li>
                             </ul>
-                             
+
                             <div class="tab-content2 dash">
                             <div class="tab-pane active" id="dashboard">
                             <div class="tabHead">
                                   <h1>User--Overview about the user activity</h1>
                                 </div>
-                             
+
                                 <div class="tabGraph">
                                     <div id="box">
                                              <%= render :partial =>'list_users'%>
-                                      <%#= link_to "Back", admin_users_url  , :class=>"btn btn-primary" %> 
+                                      <%#= link_to "Back", admin_users_url  , :class=>"btn btn-primary" %>
                                     </div>
-                               
+                                <p>
+                                  Download:
+                                  <%= link_to "CSV", admin_users_path(format: "csv") %>
+                                </p>
                             </div>
 
-                            
+
                             </div>
         </div>
       </div>
-    </div> 
+    </div>

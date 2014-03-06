@@ -201,10 +201,17 @@ user.jpg: user-e056b4617ca7970153e0a2980258cf30.jpg
 user/index.jpg: user-e056b4617ca7970153e0a2980258cf30.jpg
 user1.jpg: user1-633323b9d779ad24b320f2cf1e31179c.jpg
 user1/index.jpg: user1-633323b9d779ad24b320f2cf1e31179c.jpg
+<<<<<<< HEAD
 application.js: application-cc56a3b706439c49c145d56c540b1e38.js
 application/index.js: application-cc56a3b706439c49c145d56c540b1e38.js
 application.css: application-1ed93bb5d2a968ded70f4c20e16e6e9b.css
 application/index.css: application-1ed93bb5d2a968ded70f4c20e16e6e9b.css
+=======
+application.js: application-a90beecc0cc8723ec2063b4589abe55d.js
+application/index.js: application-a90beecc0cc8723ec2063b4589abe55d.js
+application.css: application-140c495dc4edb5e727d9b3bc5ee48c07.css
+application/index.css: application-140c495dc4edb5e727d9b3bc5ee48c07.css
+>>>>>>> ef2121c500a8e0419c4e072b37ae6e9957eac51e
 font/fontawesome-webfont.eot: font/fontawesome-webfont-eb49debea57db75036ff2dd85239292f.eot
 font/fontawesome-webfont/index.eot: font/fontawesome-webfont-eb49debea57db75036ff2dd85239292f.eot
 font/fontawesome-webfont.svg: font/fontawesome-webfont-0ccfb31247ba4f209dda05e4e008956b.svg

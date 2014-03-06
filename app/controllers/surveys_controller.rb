@@ -202,12 +202,19 @@ def question
 
   #Required for form. Select if the response already exists
 
-   @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
+  @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
 
-   if @response.blank?
+  if @response.blank?
     logger.debug "Creating New Response"
     @response = Response.new
   end
+
+  @survey_question = Question.includes(:sub_section).where(:id => params[:question_id]).first
+  @sub_section = SubSection.includes(:section).where(:id => @survey_question.sub_section_id).first
+  @section = Section.select(:name).where(:id => @sub_section.section_id).first
+
+  @sub_section_name =  @sub_section.name.titleize
+  @section_name = @section.name.titleize
 
   @response
 end
