@@ -38,13 +38,6 @@ class Survey < ActiveRecord::Base
    return @responses
    end
 
-   def self.get_overall_result(section, surveyid)
-    section.each do |section|
-      @responses = Response.get_response(section.id, surveyid)
-    end
-    return @responses
-   end
-
   def self.get_result_action(surveyid, action)
    @responses = Response.get_response_for_priority(surveyid, action)
    return @responses
