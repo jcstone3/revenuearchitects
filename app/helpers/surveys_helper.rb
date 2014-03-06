@@ -33,7 +33,12 @@ module SurveysHelper
     end
 
 	def subsection_sorting(subsections)
-      subsections.order('sequence')
+      @sub_sections = Array.new
+      subsections.order('sequence').each do |subsection|
+        if subsection.questions.present?
+          @sub_sections << subsection
+        end
+      end
+      @sub_sections
     end
-
 end
