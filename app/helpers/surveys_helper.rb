@@ -32,15 +32,16 @@ module SurveysHelper
       (importance.nil? ? 0 : importance.to_i)-(maturity.nil? ? 0 : maturity.to_i)
     end
 
-	def subsection_sorting(subsections)
-      @sub_sections = Array.new
-      subsections.order('sequence').each do |subsection|
-        if subsection.questions.present?
-          @sub_sections << subsection
+	def subsection_sorting(subsections, survey_id)
+        @sub_sections = Array.new
+        subsections.order('sequence').each do |subsection|
+          if subsection.questions.present?
+            @sub_sections << subsection
+          end
         end
+        @sub_sections
       end
-      @sub_sections
-    end
+
 
     def check_subsection_all_ans(subsection, survey_id)
       @sub_section_answered = true
