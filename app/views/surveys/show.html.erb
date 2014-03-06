@@ -5,29 +5,30 @@
            <h1 class="question"> Diagnostic Surveys </h1>
            <p>Please select a survey to continue </p>
               <% @current_surveys.each do |current_survey|%>
-                  <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{current_survey.created_at.strftime('%d %B  %Y')}", get_response_status_url(current_survey)%></h3>                           
+                  <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{current_survey.created_at.strftime('%d %B  %Y')}", get_response_status_url(current_survey)%></h3>
 
                 <% @response_count= current_survey.responses.present? ? current_survey.responses.count : 0 %>
-                
-                <h4> <%= "Total Completed Questions" %> <span class="red"> <%= @response_count%>/<%= @total_question_total%> </span>  
+
+                <h4> <%= "Total Completed Questions" %> <span class="red"> <%= @response_count%>/<%= @total_question_total%> </span>
                 </h4 >
               </br>
-                 
+
               <%end%>
           <%else%>
             <h1 class="question"> Start a new Diagnostic </h1>
-            <%= link_to 'Start Diagnostic', new_survey_path %>
+            <!-- New flow - redirect to the first question -->
+            <%= link_to 'Start Diagnostic', questions_path(@survey, 1) %>
 
        <%end%>
 
       <h1 class="question">Previous Diagnostics</h1>
-    
-            <% if @completed_surveys.present?%>                     
+
+            <% if @completed_surveys.present?%>
                <% @completed_surveys.each_with_index do |completed_survey, i|%>
                   <% if i < 2%>
-                      <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{completed_survey.created_at.strftime('%d %B  %Y')}", reports_path(completed_survey)%></h3>                          
+                      <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{completed_survey.created_at.strftime('%d %B  %Y')}", reports_path(completed_survey)%></h3>
 
-                        <% @response_count= completed_survey.responses.present? ? completed_survey.responses.count : 0 %>        
+                        <% @response_count= completed_survey.responses.present? ? completed_survey.responses.count : 0 %>
                         <h4> <%= "Total Completed Questions" %> <span class="green"> <%= "  #{@response_count}"%>/<%= "#{@total_question_previous}" %> </span>  </h4>
                       </br>
                   <%end%>
@@ -35,11 +36,11 @@
           <%else%>
              <h3> No previous Surveys </h3>
           <% end %>
-</div> 
-       
-  <% end  -%>                          
+</div>
+
+  <% end  -%>
 
 
 <% content_for :side_content do -%>
-    <%= render "simple_side" -%> 
-<% end  -%>  
+    <%= render "simple_side" -%>
+<% end  -%>

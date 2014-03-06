@@ -1,0 +1,67 @@
+<% content_for :main_content do -%>
+    <div class="content">
+       <h1 class="question">Diagnostic  <%= @survey_date%>: Enter Diagnostic Details</h1>
+      <p class="question">Please provide basic information about your company</p>
+
+      <%= simple_form_for(@survey, :validate => true, :class => "well") do |f| %>
+
+        <%= f.input :size,
+                      :collection => [ ['1 -99'],['100 - 499'],['500-5000'],['5000 and above'] ] ,
+                      :prompt => "Select Company Size",
+                      :label => "Company Size",
+                      :input_html => { :class => 'input-xlarge' },
+                      :label_html => { :class => '' } -%>
+        <%= f.input :revenue,
+                      :collection => [['below $1M'],['$1M-10M'],['$10M-$100M'],['$100M-$1B'],['above $1B']],
+                      :prompt => "Select Revenue",
+                      :label => "Revenue Last 12 Months",
+                      :input_html => { :class => 'input-xlarge' }   -%>
+
+         <div class="form-actions">
+            <%= f.button :submit, "Complete the Diagnostic", :class => 'btn btn-primary' %>
+            </div>
+    <% end -%>
+
+    </div><!-- / end of content -->
+
+    <% end  -%> <!-- /end of main content -->
+
+
+<% content_for :side_content do -%>
+      <%= render "/shared/side_icons" -%>
+      <% if @completed_surveys.present?%>
+
+      <div class="scoreboard">
+            <div class="head">Previous Diagnostic </div>
+               <div class="score">
+                   <%@completed_surveys.each_with_index do |completed_survey, i|%>
+                    <% if i < 2%>
+                       <br/> <ul><%= link_to "#{completed_survey.created_at.strftime('%d %B  %Y')}", reports_url(completed_survey)%></ul>
+                   <%end%>
+                  <%end%>
+               </div>
+          <div class="scoreboard">
+             <div class="head">About Revenue Grader </div>
+               <div class="score">
+                  <span>Revenue Grader is a diagnostic tool developed by the team at Revenue Architects.  Revenue Grader helps you quickly assess and plan your revenue growth strategy.</span>
+               </div>
+            </div>
+
+           </div>
+       <%else%>
+           <div class="scoreboard">
+            <div class="head">About Revenue Grader </div>
+               <div class="score">
+                  <span>Revenue Grader is a diagnostic tool developed by the team at Revenue Architects.  Revenue Grader helps you quickly assess and plan your revenue growth strategy.</span>
+               </div>
+            </div>
+
+            <div class="scoreboard">
+             <div class="head">About Revenue Architects </div>
+                <div class="score">
+                    <span>Revenue Architects is a consulting agency that helps our clients drive revenue growth.</span>
+                </div>
+             </div>
+           </div>
+       <%end%>
+<% end -%>  <!-- /end of side_content -->

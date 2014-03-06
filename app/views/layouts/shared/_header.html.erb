@@ -10,18 +10,18 @@
         <div class="span6">
              <% if user_signed_in? %>
              <div class="pull-right">
-                <i class="icon-user "></i>&nbsp; 
-                <%= "#{current_user.username}" %>&nbsp;<br/>
+                <i class="icon-user "></i>&nbsp;
+                <%= "#{current_user.email}" %>&nbsp;<br/>
                 <% if current_user.companies.present? %>
                 <i class="icon-home "></i>&nbsp;
                  <%= "#{current_user.companies.first.name}"%>
-                  <%end%> 
+                  <%end%>
               </div>
-                 
-                 <div class="pull-right button-signin">    
+
+                 <div class="pull-right button-signin">
                 <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
               </div>
-          
+
               <%else%>
 
               <ul class="nav nav-pills top-links">
@@ -35,7 +35,7 @@
                   <%= link_to "Login", new_user_session_path, :class=>"btn btn-primary" %>
                   <%= link_to "Sign Up", new_user_registration_path, :class=>"btn btn-primary"%>
               </div><!-- / -->
-                
+
               <%end%>
-          
+
         </div><!-- /  end of right span6-->

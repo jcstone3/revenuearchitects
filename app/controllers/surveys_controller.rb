@@ -63,6 +63,20 @@ def create
   end
 end
 
+def edit
+  @survey = Survey.find_by_id(params[:id])
+end
+
+def update
+  @survey = Survey.find_by_id(params[:id])
+  if @survey.update_attributes(params[:survey])
+    # On comapany updation redirects to the confirm survey
+    redirect_to confirm_survey_path
+  else
+    render :edit
+  end
+end
+
 def get_response_status
   if !params[:id].blank?
     if params[:id].to_i > 0
@@ -124,6 +138,14 @@ def show
   @total_question_total = 0
   @total_question_previous = 0
   @survey = Survey.find_by_id(params[:id])
+
+  # create new Survey object on survey show
+  @companies.each do |c|
+    @company_id = c.id
+  end
+  @survey = Survey.create(company_id: "#{@company_id}")
+  session[:survey] = @survey
+
   #current active surveys
   @current_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == true}
 
@@ -175,7 +197,6 @@ def question
   # - All Sections
   # - All Subsections
   @question = get_question(question_id)
-
   if @survey.blank?
     flash[:warning] = "Could not form the question. Please try again"
     redirect_to continue_survey_path and return
@@ -183,8 +204,12 @@ def question
 
   if @question.blank?
     @question = get_question(question_id)
-    redirect_to edit_company_path(id: @survey.company.id)
-    # redirect_to confirm_survey_path and return
+    if @survey.company.name.present? && @survey.company.industry.present?
+      redirect_to edit_survey_path(id: session[:survey])
+      # redirect_to confirm_survey_path and return
+    else
+      redirect_to edit_company_path(id: @survey.company.id)
+    end
   end
 
   #for total count
@@ -202,9 +227,10 @@ def question
 
 
   #Getting the score to show on page
-  @total_score = Survey.calculate_response_for_section(@survey.id, @question.section_id)
+  @total_score = Survey.calculate_response_for_section(@survey.id, @question.section_id) if @question.present?
 
   #Required for form. Select if the response already exists
+  @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id) if @question.present?
 
    @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
 
