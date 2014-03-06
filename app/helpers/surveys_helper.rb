@@ -41,4 +41,14 @@ module SurveysHelper
       end
       @sub_sections
     end
+
+    def check_subsection_all_ans(subsection, survey_id)
+      @sub_section_answered = true
+      subsection.questions.each do |question|
+        if !Response.find_by_survey_id_and_question_id(survey_id, question.id).present?
+          @sub_section_answered = false
+        end
+      end
+      @sub_section_answered
+    end
 end
