@@ -141,14 +141,6 @@ def show
   @total_question_total = 0
   @total_question_previous = 0
   @survey = Survey.find_by_id(params[:id])
-
-  # create new Survey object on survey show
-  @companies.each do |c|
-    @company_id = c.id
-  end
-  @survey = Survey.create(company_id: "#{@company_id}")
-  # session[:survey] = @survey
-
   #current active surveys
   @current_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == true}
 
@@ -161,9 +153,7 @@ def show
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                             :group => "sections.id", :order => "id ASC")
-  # @all_sections = get_all_sections
-  @all_sections = Section.order(:sequence)
-
+  @all_sections = get_all_sections
   @all_sections.each_with_index do |section,i|
     #@final_score += @section_questions[i].question_attempted.to_i
     @total_question_total += @section_questions_total[i].question_total.to_i
@@ -172,10 +162,21 @@ def show
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id ",
                             :group => "sections.id", :order => "id ASC")
+  @all_sections = get_all_sections
   @all_sections.each_with_index do |section,i|
   @total_question_previous += @previous_questions_total[i].question_total.to_i
   end
 end
+
+def create_survey
+  @companies =  current_user.companies
+  @companies.each do |c|
+    @company_id = c.id
+  end
+  @survey = Survey.create(company_id: "#{@company_id}", is_active: true, start_date: Time.now)
+  redirect_to questions_path(@survey, 1)
+end
+
 
 #Show the question and capture the reponse
 def question
@@ -191,6 +192,7 @@ def question
 
   #Get current Survey
   @survey = Survey.find_by_id(survey_id)
+  session[:survey] = Survey.find_by_id(params[:id])
 
   #Check if the there is question in the survey. If question exists, get the following
   # - Question

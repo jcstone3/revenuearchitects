@@ -88,6 +88,9 @@ RevenueGrader::Application.routes.draw do
   # import CSV
   get 'surveys/:id/import_csv' => 'surveys#import_csv', :as=>'import_csv'
 
+  #create survey object
+  post 'surveys/create_survey' => 'surveys#create_survey', :as=>'create_survey'
+
   #defalut error page
    match "*path" => 'dashboard#error_handle404', :as => 'error_handle404'
   # The priority is based upon order of creation:

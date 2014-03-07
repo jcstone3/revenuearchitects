@@ -17,7 +17,7 @@
           <%else%>
             <h1 class="question"> Start a new Diagnostic </h1>
             <!-- New flow - redirect to the first question -->
-            <%= link_to 'Start Diagnostic', questions_path(@survey, 1) %>
+            <%= link_to 'Start Diagnostic', create_survey_path, method: :post %>
 
        <%end%>
 
