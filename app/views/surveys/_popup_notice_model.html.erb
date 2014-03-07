@@ -29,7 +29,26 @@
       <div>
         4. Confirm your answer
       </div>
+
+      <%= check_box_tag 'prevent_popup', id: "prevent_popup" %>
     </div>
   </div>
 </div>
 
+<script type="text/javascript">
+  $("#prevent_popup").live('change', function(){
+    alert('iiii');
+    if (this.checked){
+      $.ajax({
+        url: '/surveys/prevent_popup',
+        type: 'POST',
+        data: {"checked_in": this.checked}
+      });
+    }
+  });
+
+  $("#prevent_popup").live('change', function(){
+    alert('test');
+    $('.close').trigger('click');
+  });
+</script>

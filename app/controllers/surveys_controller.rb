@@ -721,6 +721,11 @@ def download_result
   end
 end
 
+def prevent_popup
+  @user = User.find_by_id(current_user.id)
+  @user.update_attribute(:popup_status, false)
+  render text: "OK"
+end
 
 private
 def check_company
