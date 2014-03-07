@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
         # On successful signup create Company and Survey object
         @company = Company.create(user_id: current_user.id)
-        @survey = Survey.create(company_id: @company.id)
+        @survey = Survey.create(company_id: @company.id, is_active: true, start_date: Time.now)
         # respond_with resource, :location => after_sign_up_path_for(resource)
 
         # New flow - redirects to the first question
