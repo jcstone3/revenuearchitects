@@ -1,7 +1,7 @@
-<% content_for :main_content do -%> 
+<% content_for :main_content do -%>
     <div class="main-content-header">
           <div class="heading">
-            <h1>Assess your <br />
+            <h1 style="margin-top: 30px;">Assess your <br />
             Revenue Potential <%= link_to 'now', new_user_session_path %>
             </h1>
           </div><!-- / -->
@@ -11,39 +11,39 @@
     </div><!-- / -->
 
        <div class="main-content-content">
-             <%= render "/site/index_content" -%> 
+             <%= render "/site/index_content" -%>
        </div>
-<% end -%> 
-  
-<% content_for :side_content do -%> 
+<% end -%>
+
+<% content_for :side_content do -%>
 				 <ul class="nav nav-tabs">
                             <li class="active">
-                               <a class="signuplink" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png", 
-                            :alt=>"home")%>Change your password</a></li>                          
+                               <a class="signuplink" href="#home" data-toggle="tab" id="home_click"><%= image_tag("rg_icon.png",
+                            :alt=>"home")%>Change your password</a></li>
                             </ul>
                              <div class="tab-content" id="tab-content">
                             <div class="tab-pane active" id="home">
                                 <div class="rightboxName">
                                 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }, :validate=>true) do |f| %>
 
-                                
+
 									<h3>New Password<span class="star">*</span></h3>
                           <%#= devise_error_messages! %>
                          <%= f.hidden_field :reset_password_token %>
 					                 <%= f.password_field :password, :class=>"span3 logindetails", :validate =>
-					                        {:presence => true, :uniqueness => true}  %> 
-					                                 
+					                        {:presence => true, :uniqueness => true}  %>
+
 					                <h3>Confirm New Password<span class="star">*</span></h3>
 					                 <%= f.password_field :password, :class=>"span3 logindetails", :validate =>
-					                        {:presence => true, :uniqueness => true}  %> 
-                                 
-										<%= f.submit "Change my password", :class=>"btn btn-primary btn-large reset" %>                                 
+					                        {:presence => true, :uniqueness => true}  %>
+
+										<%= f.submit "Change my password", :class=>"btn btn-primary btn-large reset" %>
 
 									<% end %>
 								 </div>
-					           			
+
            			<h5 class="newuser"> <%= link_to "Sign up with us", new_user_registration_path %><br />
-                  <%= link_to "Sign In", new_user_session_path %>       
+                  <%= link_to "Sign In", new_user_session_path %>
                                 </h5>
                   </div>
                   </div>

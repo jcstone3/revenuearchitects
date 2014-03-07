@@ -14,18 +14,16 @@
                             </ul>
 
                             <div class="tab-content" id="tab-content">
-                            <div class="tab-pane active" id="home">
+                            <div class="tab-pane active" id="home" style="margin: auto !important;width: 500px;">
                                 <div class="rightboxName">
                                 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }, :validate=>true) do |f| %>
                   <%#= devise_error_messages! %>
 
-                  <h3>Email<span class="star">*</span></h3>
-
                   <%= f.email_field :email, :class=>"span3 logindetails", :validate =>
-                        {:presence => true, :uniqueness => true}  %>
+                        {:presence => true, :uniqueness => true}, :placeholder=>"Email"  %>
                                  <p class="lefttextbox">
                                  Enter your email address registered with the<br/> Revenue Grader</p>
-                  <%= f.submit "Reset Password", :class=>"btn btn-primary btn-large reset" %>
+                  <%= f.submit "Reset Password", :class=>"btn btn-primary btn-large reset", style: "color: white;" %>
                 <% end %>
                </div>
 
