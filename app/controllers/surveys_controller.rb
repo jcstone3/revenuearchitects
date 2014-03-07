@@ -147,7 +147,7 @@ def show
     @company_id = c.id
   end
   @survey = Survey.create(company_id: "#{@company_id}")
-  session[:survey] = @survey
+  # session[:survey] = @survey
 
   #current active surveys
   @current_surveys =  @get_all_surveys_for_current_user.select{|survey| survey.is_active == true}
@@ -190,7 +190,7 @@ def question
   end
 
   #Get current Survey
-  @survey = get_current_survey
+  @survey = Survey.find_by_id(survey_id)
 
   #Check if the there is question in the survey. If question exists, get the following
   # - Question
@@ -208,7 +208,7 @@ def question
   if @question.blank?
     @question = get_question(question_id)
     if @survey.company.name.present? && @survey.company.industry.present?
-      redirect_to edit_survey_path(id: session[:survey])
+      redirect_to edit_survey_path(id: survey_id)
       # redirect_to confirm_survey_path and return
     else
       redirect_to edit_company_path(id: @survey.company.id)
@@ -230,12 +230,10 @@ def question
 
 
   #Getting the score to show on page
-  @total_score = Survey.calculate_response_for_section(@survey.id, @question.section_id) if @question.present?
+  @total_score = Survey.calculate_response_for_section(survey_id, @question.section_id) if @question.present?
 
   #Required for form. Select if the response already exists
-  @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id) if @question.present?
-
-   @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
+  @response = Response.find_by_survey_id_and_question_id(survey_id, @question.id) if @question.present?
 
   if Response.find_by_survey_id(survey_id).present?
     # @popup_model = true
@@ -250,13 +248,15 @@ def question
     @response = Response.new
   end
 
-  @survey_question = Question.includes(:sub_section).where(:id => params[:question_id]).first
-  @sub_section = SubSection.includes(:section).where(:id => @survey_question.sub_section_id).first
-  @section = Section.select(:name).where(:id => @sub_section.section_id).first
-
-  @sub_section_name =  @sub_section.name.titleize
-  @section_name = @section.name.titleize
-
+  if params[:question_id].present?
+    @survey_question = Question.includes(:sub_section).where(:id => params[:question_id]).first
+    if @survey_question.present?
+      @sub_section = SubSection.includes(:section).where(:id => @survey_question.sub_section_id).first
+      @section = Section.select(:name).where(:id => @sub_section.section_id).first
+      @sub_section_name =  @sub_section.name.titleize
+      @section_name = @section.name.titleize
+    end
+  end
   @response
 end
 
@@ -865,7 +865,6 @@ end
 #TODO: Check if this works when query parameters are not passed
 def get_current_survey
   current_survey = session[:survey]
-
   if current_survey.blank?
     current_survey = current_user.companies.first.surveys.find_by_id(params[:id])
     session[:survey] = current_survey
@@ -878,7 +877,6 @@ end
 # If Current Question is not found, run the query
 def get_question(question_id)
   questions = session[:questions]
-
   if questions.blank?
     questions = Question.select("questions.id, questions.position, questions.name, questions.points, questions.description as description, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).order("questions.sequence ASC")
     session[:questions] = questions

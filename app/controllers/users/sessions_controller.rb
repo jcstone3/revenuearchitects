@@ -11,11 +11,12 @@ class Users::SessionsController < Devise::SessionsController
 	def create
 	  #super
     resource = warden.authenticate!(auth_options)
-    set_flash_message(:success, :signed_in) if is_navigational_format?    
+    set_flash_message(:success, :signed_in) if is_navigational_format?
     sign_in(resource_name, resource)
-    respond_with resource, :location => after_sign_in_path_for(resource)
-	end 
-	
+    # respond_with resource, :location => after_sign_in_path_for(resource)
+    redirect_to continue_survey_path
+	end
+
 	def destroy
       #super
     redirect_path = new_user_session_url
@@ -33,13 +34,13 @@ class Users::SessionsController < Devise::SessionsController
       end
     end
 
-	end	
+	end
 
- 
-  
+
+
 	private
-  
-    def build_resource(*args)    
+
+    def build_resource(*args)
       super
       if session[:omniauth]
         @user.apply_omniauth(session[:omniauth])
