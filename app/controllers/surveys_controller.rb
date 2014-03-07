@@ -217,6 +217,13 @@ def question
     @response = Response.new
   end
 
+  @survey_question = Question.includes(:sub_section).where(:id => params[:question_id]).first
+  @sub_section = SubSection.includes(:section).where(:id => @survey_question.sub_section_id).first
+  @section = Section.select(:name).where(:id => @sub_section.section_id).first
+
+  @sub_section_name =  @sub_section.name.titleize
+  @section_name = @section.name.titleize
+
   @response
 end
 
@@ -495,9 +502,6 @@ def compare_strategy
 
   option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
-
-
-
 
 
 
