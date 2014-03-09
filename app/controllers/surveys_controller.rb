@@ -204,11 +204,9 @@ def question
 
   @response = Response.find_by_survey_id_and_question_id(@survey.id, @question.id)
 
-  if Response.find_by_survey_id(survey_id).present?
-    # @popup_model = true
+  if Response.find_by_survey_id(survey_id).present? || current_user.popup_status == false
     cookies[:popup_model] = false
   else
-    # @popup_model = false
     cookies[:popup_model] = true
   end
 
@@ -723,7 +721,10 @@ end
 
 def prevent_popup
   @user = User.find_by_id(current_user.id)
-  @user.update_attribute(:popup_status, false)
+  @user.update_attribute(:popup_status, params[:checked])
+  if @user.popup_status == false
+    cookies.delete :popup_model
+  end
   render text: "OK"
 end
 
