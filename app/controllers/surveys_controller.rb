@@ -202,6 +202,7 @@ def question
   # - All Sections
   # - All Subsections
   @question = get_question(question_id)
+
   if @survey.blank?
     flash[:warning] = "Could not form the question. Please try again"
     redirect_to continue_survey_path and return
@@ -237,11 +238,9 @@ def question
   #Required for form. Select if the response already exists
   @response = Response.find_by_survey_id_and_question_id(survey_id, @question.id) if @question.present?
 
-  if Response.find_by_survey_id(survey_id).present?
-    # @popup_model = true
+  if Response.find_by_survey_id(survey_id).present? || current_user.popup_status == false
     cookies[:popup_model] = false
   else
-    # @popup_model = false
     cookies[:popup_model] = true
   end
 
@@ -785,14 +784,14 @@ def download_result
   end
 end
 
-  def sub_section
-    sub_section = SubSection.find_by_name(params[:sub_section_name].strip)
-    current_survey = session[:survey]
-    respond_to do |format|
-      format.json {render json: {current_survey: current_survey, question_id: sub_section.questions.first.id}}
-    end
+def prevent_popup
+  @user = User.find_by_id(current_user.id)
+  @user.update_attribute(:popup_status, params[:checked])
+  if @user.popup_status == false
+    cookies.delete :popup_model
   end
-
+  render text: "OK"
+end
 
 private
 def check_company

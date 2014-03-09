@@ -15,4 +15,20 @@ $(".surveys.question").ready(function() {
       $('#popup-notice').modal('hide')
     }
   }
+
+  $("#prevent_popup").live('change', function(){
+    var checked;
+    if ($(this).is(':checked')) {
+      checked = false;
+    } else {
+      checked = true;
+    }
+
+    $.ajax({
+      url: '/surveys/prevent_popup',
+      type: 'POST',
+      data: {"checked": checked}
+    });
+  });
+
 });

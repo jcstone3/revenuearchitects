@@ -201,10 +201,17 @@ user.jpg: user-e056b4617ca7970153e0a2980258cf30.jpg
 user/index.jpg: user-e056b4617ca7970153e0a2980258cf30.jpg
 user1.jpg: user1-633323b9d779ad24b320f2cf1e31179c.jpg
 user1/index.jpg: user1-633323b9d779ad24b320f2cf1e31179c.jpg
+<<<<<<< HEAD
 application.js: application-98e04c86cb66c03217e77b9c28d132d8.js
 application/index.js: application-98e04c86cb66c03217e77b9c28d132d8.js
 application.css: application-0a76e034a5fc8328894ba378600bd3b1.css
 application/index.css: application-0a76e034a5fc8328894ba378600bd3b1.css
+=======
+application.js: application-a90beecc0cc8723ec2063b4589abe55d.js
+application/index.js: application-a90beecc0cc8723ec2063b4589abe55d.js
+application.css: application-140c495dc4edb5e727d9b3bc5ee48c07.css
+application/index.css: application-140c495dc4edb5e727d9b3bc5ee48c07.css
+>>>>>>> ss_lightbox
 font/fontawesome-webfont.eot: font/fontawesome-webfont-eb49debea57db75036ff2dd85239292f.eot
 font/fontawesome-webfont/index.eot: font/fontawesome-webfont-eb49debea57db75036ff2dd85239292f.eot
 font/fontawesome-webfont.svg: font/fontawesome-webfont-0ccfb31247ba4f209dda05e4e008956b.svg

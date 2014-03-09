@@ -316,9 +316,9 @@ $(document).ready(function(){
                 });
 
                 $("#slider").slider({
-                  change: function(event, ui) {
+                   change: function(event, ui) {
                     $( "#response_answer_1" ).val( $( "#slider" ).slider( "value" ));
-                  }
+                }
                 });
 
                 $( "#importance-slider" ).slider({
