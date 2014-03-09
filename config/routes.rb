@@ -85,6 +85,9 @@ RevenueGrader::Application.routes.draw do
   # prevent popup
   post "surveys/prevent_popup" => "surveys#prevent_popup", :as => 'prevent_popup'
 
+  # import excel
+  get 'surveys/:id/import_excel' => 'surveys#import_excel', :as=>'import_excel'
+
   # import CSV
   get 'surveys/:id/import_csv' => 'surveys#import_csv', :as=>'import_csv'
 
