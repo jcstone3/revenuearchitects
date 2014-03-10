@@ -153,7 +153,9 @@ def show
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
                             :group => "sections.id", :order => "id ASC")
-  @all_sections = get_all_sections
+  # @all_sections = get_all_sections
+  @all_sections = Section.order(:sequence)
+
   @all_sections.each_with_index do |section,i|
     #@final_score += @section_questions[i].question_attempted.to_i
     @total_question_total += @section_questions_total[i].question_total.to_i
@@ -162,7 +164,6 @@ def show
                             :select => "count(questions.position) as question_total, sections.id",
                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id ",
                             :group => "sections.id", :order => "id ASC")
-  @all_sections = get_all_sections
   @all_sections.each_with_index do |section,i|
   @total_question_previous += @previous_questions_total[i].question_total.to_i
   end
@@ -784,13 +785,17 @@ def download_result
   end
 end
 
-def sub_section
-  sub_section = SubSection.find_by_name(params[:sub_section_name].strip)
-  current_survey = session[:survey]
-  respond_to do |format|
-    format.json {render json: {current_survey: current_survey, question_id: sub_section.questions.first.id}}
+  def sub_section
+    sub_section = SubSection.find_by_name(params[:sub_section_name].strip)
+    current_survey = session[:survey]
+    if current_survey.is_active == false
+      current_survey = nil
+    end
+
+    respond_to do |format|
+      format.json {render json: {current_survey: current_survey, question_id: sub_section.questions.first.id}}
+    end
   end
-end
 
 def prevent_popup
   @user = User.find_by_id(current_user.id)
