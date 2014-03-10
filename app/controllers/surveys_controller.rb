@@ -784,6 +784,14 @@ def download_result
   end
 end
 
+def sub_section
+  sub_section = SubSection.find_by_name(params[:sub_section_name].strip)
+  current_survey = session[:survey]
+  respond_to do |format|
+    format.json {render json: {current_survey: current_survey, question_id: sub_section.questions.first.id}}
+  end
+end
+
 def prevent_popup
   @user = User.find_by_id(current_user.id)
   @user.update_attribute(:popup_status, params[:checked])
