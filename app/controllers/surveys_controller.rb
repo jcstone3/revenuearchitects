@@ -733,6 +733,10 @@ end
   def sub_section
     sub_section = SubSection.find_by_name(params[:sub_section_name].strip)
     current_survey = session[:survey]
+    if current_survey.is_active == false
+      current_survey = nil
+    end
+
     respond_to do |format|
       format.json {render json: {current_survey: current_survey, question_id: sub_section.questions.first.id}}
     end
