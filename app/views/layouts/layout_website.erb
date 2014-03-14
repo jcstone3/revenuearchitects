@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,7 +13,7 @@
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 7]>
         <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
-      <!--[endif]-->
+      <![endif]-->
 
       <!--[if lt IE 8]>
       <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
@@ -24,27 +23,24 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     <![endif]-->
-    <link href="/assets/rg_icon.png" type="image/png" rel="shortcut icon">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
-
+    <!-- Le styles -->
+    <link rel="icon" type="image/png" href="/assets/rg_icon.png" />
     <%= stylesheet_link_tag "application", :media => "all" %>
 
     <!-- Le fav and touch icons -->
-
-    <!-- <link href="assets/rg_icon.png" rel="shortcut icon"> -->
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+
   </head>
 
-  <body class="<%= controller_name %> <%= action_name %>">
+  <body>
     <div class="container-fluid" >
       <div class="row-fluid top-bar">
         <%= render  "/layouts/shared/header" -%>
       </div><!-- / end of row -->
-
-      <%= yield :top_bar_content %>
 
       <% if !flash.blank? -%>
         <div class="row-fluid">
@@ -57,21 +53,14 @@
         </div><!-- / -->
       <% end -%>
 
-      <div class="row-fluid content-section" >
-        <div class="span9 main-content" style="padding-top:0;">
+      <div class="row-fluid content-section landing" >
+        <div class="row-fluid main-content clear" style="padding-top:0;">
           <%= yield :main_content %>
         </div> <!-- / end of span8 - main -->
 
-        <div class="span3 side-content">
-          <%= yield :side_content -%>
-        </div><!-- / end of span4 - side-content-->
       </div> <!-- /end of content-section -->
 
-      <div id="popup-notice" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <%= yield :popup_notice %>
-      </div>
-
-      <div class="row-fluid footer" >
+      <div class="row-fluid footer">
         <%= render '/layouts/shared/footer'%>
       </div> <!-- / End of footer -->
     </div> <!-- end on container - main -->
@@ -82,18 +71,16 @@
 
     <%= javascript_include_tag "application" %>
     <%= feedback_tab(:position => 'left') %>
-
+<!-- previous code
     <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-35248979-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
+  /* <![CDATA[ */
+  document.write (
+    '<img src="http://engage.revenuearchitects.com/acton/bn/2488/visitor.gif?ts='+
+    new Date().getTime()+
+    '&ref='+escape(document.referrer) + '">'
+  );
+  /* ]]> */
+</script> -->
 
     <script type="text/javascript">
       // This tracking is for http://www.revenuegrader.com only.
@@ -110,16 +97,17 @@
       })();
     </script>
 
-  <!--  previous tracking code -->
-  <!--//   <script type="text/javascript">
-  // /* <![CDATA[ */
-  // document.write (
-  //   '<img src="http://engage.revenuearchitects.com/acton/bn/2488/visitor.gif?ts='+
-  //   new Date().getTime()+
-  //   '&ref='+escape(document.referrer) + '">'
-  // );
-  // /* ]]> */
-  // </script> -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-35248979-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
 
   </body>
 </html>

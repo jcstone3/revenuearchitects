@@ -1,10 +1,10 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true, :html => {:class => "reset" }) do |f| %>
   <%#= devise_error_messages! %>
       <div class='input_box'>
-        <%= f.text_field :website,  :class=>"span8 righttextBox", :maxlength => "30",  :placeholder=>"Your website URL", :validate =>{:presence => true} %>
+        <%= f.text_field :website,  :class=>"span8 righttextBox", :maxlength => "30",  :placeholder=>"Website URL", :validate =>{:presence => true} %>
       </div>
       <div class='input_box'>
-        <%= f.email_field :email, :class=>"span8 righttextBox" ,:placeholder=>"Your Email id", :validate =>
+        <%= f.email_field :email, :class=>"span8 righttextBox" ,:placeholder=>"Email", :validate =>
                         {:presence => true, :uniqueness => true}  %>
       </div>
       <div class='input_box'>
@@ -16,7 +16,9 @@
         <%= f.submit "Sign up and Get Started!", :class=>"btn btn-primary btn-large btnStart" %>
       </div>
       <h5 class="confidential input_box">
-        We will keep your personal information strictly confidential
+        We will keep your personal information strictly confidential.</h5>
+      <h5 class="confidential input_box">
+        You can save your work and return to the diagnostic later.
       </h5>
       <%= hidden_field_tag('login', "no")%>
 <% end %>
