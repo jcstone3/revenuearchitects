@@ -1,6 +1,5 @@
 class SiteController < ApplicationController
-  layout "layout_website", except: :index
-  layout "website", only: :index
+  layout :resolve_layout
 
   def index
     if user_signed_in?
@@ -24,5 +23,16 @@ class SiteController < ApplicationController
   end
 
   def show
+  end
+
+  private
+
+  def resolve_layout
+    case action_name
+    when "index"
+      "website"
+    else
+      "layout_website"
+    end
   end
 end
