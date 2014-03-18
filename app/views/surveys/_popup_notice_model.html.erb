@@ -2,11 +2,11 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Need to select - add to plan </h4>
+      <div class="modal-title" id="myModalLabel">Quick Start Instructions</div>
     </div>
     <div class="lightbox-popup-content">
       <div>
-        1. For each question, rate your current level of maturity and the level of importance to your business.
+        1. The diagnostic has 50 dimensions across strategy, systems and programs.
       </div>
       <div>
         2. Select one of the following options:
@@ -24,15 +24,21 @@
         </span>
       </div>
       <div>
-        3. If you have selected “Add to Plan” then indicate priority (Must Do, Should Do, or Could Do or Won't do)
+        3. For each dimension, you can rate your current maturity leve (1-5) and importance (1-5).
       </div>
       <div>
-        4. Confirm your answer
+        4. You can optionally add items  to your plan. If you add an item to the pla, you can enter a priority (must, should, could).
+      </div>
+      <div>
+        5. Press 'Confirm' to register your response. You can return to edit items.
+      </div>
+       <div>
+        If you have any questions or need help, contact us at contact@revenuearchitects.com
       </div>
       </br>
       <%= check_box_tag "prevent_popup", id: "prevent_popup" %>
       <span class="checkbox-popup-label">
-        <%= "Don't show this on next visit "%>
+        <%= "Don't show this on next visit."%>
       <span>
     </div>
   </div>
