@@ -646,7 +646,8 @@ $(document).ready(function(){
             "bInfo": false,
             "bAutoWidth": true,
             "aaSorting": [ [8,'desc']],
-            "aoColumnDefs": [{ "bVisible": false, "aTargets": [ 8 ] }]
+            "aoColumnDefs": [{ "bVisible": false, "aTargets": [ 8 ] }],
+            "aLengthMenu": [[25, 50, -1],[25, 50, "Show all"]]
         } );
 
       // -- admin question table id --- //
