@@ -397,7 +397,15 @@ def report
                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
                            :group => "sections.id", :order => "sections.id")
 
-    render :layout =>"report"
+    # render :layout =>"report"
+
+    respond_to do |format|
+      format.html {render :layout => "report"}
+      format.pdf do
+        pdf =  render_to_string(:pdf => "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf", :template => '/surveys/reports_in_pdf.html.erb', :layouts => false)
+        send_data pdf, filename: "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf"
+      end
+    end
   end
 end
 

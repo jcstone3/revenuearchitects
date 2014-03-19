@@ -236,6 +236,8 @@ GEM
     uuidtools (2.1.4)
     warden (1.2.3)
       rack (>= 1.0)
+    wicked_pdf (0.9.10)
+      rails
     will_paginate (3.0.5)
     wkhtmltopdf-binary (0.9.9.1)
     wkhtmltopdf-heroku (1.0.0)
@@ -287,6 +289,7 @@ DEPENDENCIES
   uglifier (= 1.3.0)
   unicorn
   uuidtools
+  wicked_pdf
   will_paginate (~> 3.0)
   wkhtmltopdf-binary
   wkhtmltopdf-heroku

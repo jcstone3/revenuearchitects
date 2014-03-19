@@ -56,6 +56,9 @@ gem "permanent_records", "~> 2.1.2"
 gem "acts_as_list", "~> 0.1.6"
 #gem "ordered-active-record", "~> 0.9.7"
 
+#PDF generation plugin
+gem 'wicked_pdf'
+
 group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
