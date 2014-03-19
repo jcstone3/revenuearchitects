@@ -402,7 +402,7 @@ def report
     respond_to do |format|
       format.html {render :layout => "report"}
       format.pdf do
-        pdf =  render_to_string(:pdf => "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf", :template => '/surveys/reports_in_pdf.html.erb', :layouts => false)
+        pdf =  render_to_string(:pdf => "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf", :template => '/surveys/reports_in_pdf.html.erb', orientation: 'Landscape', :layouts => false)
         send_data pdf, filename: "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf"
       end
     end

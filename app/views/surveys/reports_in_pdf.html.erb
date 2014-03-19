@@ -24,26 +24,38 @@
     line-height:25px;
   }
 
-  .content1{
+  .content1, .content2{
     font-weight:bold;
-    margin-top: 400px;
+    margin-top: 100px;
     width:1000px;
     line-height:25px;
   }
 
-  .content1 h3 {
+  .content1 h3, .content2 h3 {
     font-family: "Lato", sans-serif;
     color: #0086AC;
     font-weight:bold;
-    font-size:30px;
+    font-size:20px;
+    text-align: left;
   }
-  .content2{
+
+  .content1 h4, .content2 h4 {
+    font-family: "Lato", sans-serif;
+    color: #0086AC;
+    font-weight:bold;
+    font-size:16px;
+    text-align: left;
+  }
+  .content1 h4{
+    display:inline!important;
+  }
+/*  .content2{
     font-weight:bold;
     margin-left: 5px;
     width:1000px;
     line-height:25px;
-  }
-  .content1 h1{
+  }*/
+/*  .content1 h1{
     margin-left: 400px;
   }
 
@@ -54,7 +66,7 @@
     margin-left :400px;
     margin-top :80px;
     text-align:center;
-  }
+  }*/
   .content h1{
     line-height:25px;
     display: block;
@@ -70,7 +82,7 @@
     line-height:30px;
     font-weight:300;
     color: #0086AC;
-    margin-top: 120px;
+    margin-top: 20px;
     text-align:left;
     font-size:30px;
     font-color:black;
@@ -98,12 +110,12 @@
     margin-bottom: 10px;
     margin-right: 10px;
   }
-  .content2 h2{
+/*  .content2 h2{
     margin-top: 10px;
     text-align :left;
     font-weight:300;
     color: #0086AC;
-  }
+  }*/
   .content3{
     text-align :left;
     font-weight:300;
@@ -116,11 +128,11 @@
     font-weight:300;
     line-height:25px;
   }
-  .content2 h3{
+/*  .content2 h3{
     text-align :right;
     font-weight:300;
     color: #0086AC;
-  }
+  }*/
   .graph{
     padding-top: 30px;
       padding-bottom: 20px;
@@ -553,7 +565,7 @@ table.dataTable th:active {
 }
 
 
-#about p {
+#about p, #nest_steps p{
   color: gray;
 }
 
@@ -564,11 +576,18 @@ table.dataTable th:active {
                 <span style="margin-right:5px;"><img src="http://stage.revenuegrader.com/assets/logo.png" alt = "Revenue Grader"><span>
                 <span style="font-size:60px;color: #0086AC;"> <%= "Revenue Grader" %> </span>
         </div>
-        <div class="content1">
-             <h3 style="text-align:center"><%= "#{current_user.companies.first.name}"%></h2></br>
-             <h3 style="text-align:center"><%= @survey.created_at.strftime("%B  %Y")%></h2></br>
-             <h3 style="text-align:center"><%= current_user.username.present? ? current_user.username : '' %>
-                      </h2></br>
+        <div class="content1" style="text-align:left;">
+            <h3>From</h3>
+             <h4><%= "#{current_user.companies.first.name}"%></h4>&nbsp;
+             <h4><%= @survey.created_at.strftime("%B  %Y")%></h4>&nbsp;
+             <h4><%= current_user.username.present? ? current_user.username : '' %></h4></br>
+        </div>
+        <div class="content2" style="text-align:left;">
+          <h3>To</h3>
+          <h3>Revenue Grader Report</h3>
+          <h4><%= "#{current_user.companies.first.name}"%></h4></br>
+          <h4><%= @survey.created_at.strftime("%B  %Y")%></h4></br>
+          <h4>Completed By: <%= current_user.username.present? ? current_user.username : '' %></h4>
         </div>
 
         </div>
@@ -578,7 +597,7 @@ table.dataTable th:active {
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
               </div>
             </div>
-            <h1>Overall Diagnostic for month  <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1></br>
+            <h1>Diagnostic Scorecard: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1></br>
               <p>&nbsp;</p>
                <div class="survey-content">
 
@@ -610,6 +629,7 @@ table.dataTable th:active {
             </div>
           </div>
 
+          <h2>Revenue Grader Plan</h2>
         <% if !@must_do_responses.blank? %>
         <div class="content" style="page-break-after:always;">
             <div class="header">
@@ -638,7 +658,7 @@ table.dataTable th:active {
                       <%#= render :partial=>"pdf_report",
                       :locals=> {:response =>response} %>
                       <tr>
-                        <td width="600" text-align="left"><%= response.name %></td>
+                        <td width="600" style="text-align:left !important"><%= response.name %></td>
                         <td><%= response.points %></td>
                         <td><%= response.score %></td>
                         <td><%= response.response_id.present? ?
@@ -690,7 +710,7 @@ table.dataTable th:active {
                       <%#= render :partial=>"pdf_report",
                       :locals=> {:response =>response} %>
                       <tr>
-                        <td width="600" text-align="left"><%= response.name %></td>
+                        <td width="600" style="text-align:left !important"><%= response.name %></td>
                         <td><%= response.points %></td>
                         <td><%= response.score %></td>
                         <td><%= response.response_id.present? ?
@@ -740,7 +760,7 @@ table.dataTable th:active {
                 <%#= render :partial=>"pdf_report",
                 :locals=> {:response =>response} %>
                       <tr>
-                        <td width="600" text-align="left"><%= response.name %></td>
+                        <td width="600" style="text-align:left !important"><%= response.name %></td>
                         <td><%= response.points %></td>
                         <td><%= response.score %></td>
                         <td><%= response.response_id.present? ?
@@ -791,7 +811,7 @@ table.dataTable th:active {
                       <%#= render :partial=>"pdf_report",
                       :locals=> {:response =>response} %>
                       <tr>
-                        <td width="600" text-align="left"><%= response.name %></td>
+                        <td width="600"><%= response.name %></td>
                         <td><%= response.points %></td>
                         <td><%= response.score %></td>
                         <td><%= response.response_id.present? ?
@@ -865,29 +885,35 @@ table.dataTable th:active {
         </div>
         <% end %>
 
-
-
         <div class="content" style="page-break-after:always;">
           <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
               </div>
             </div>
+
+            <div id="nest_steps">
+              <h2>Next Steps</h2>
+              <p>The Revenue Grader serves an an early step in strategic planning for revenue growth. It helps identify top level areas that require additional focus. The next step is to analyze each of the priorities and develop a specific and detailed plan and timeline. A plan will reflect various dependencies and critical success factors. Revenue Architects can assist in plan development and implementation. Visit us at www.revenuearchitects.com.</p>
+            </div>
+
             <div id="about">
+            <h2 style="margin-top: 80px;">About Us</h2>
              <h2>About Revenue Grader</h2>
-            <p>Revenue Grader is a Revenue Architects application. It is a diagnostic tool to help businesses leaders rapidly assess revenue performance potential and develop a prioritized top-level plan – all in minutes. Revenue Grader complements other grader apps by taking a broad and strategic view of the critical elements of revenue performance. </p>
 
-            <p>It is focused across three critical dimensions: </p></br>
-            <ul>
-            <li><p>Revenue Strategy</p></li>
-            <li><p>Revenue Systems</p></li>
-            <li><p>Revenue Programs</p></li></ul></br>
+              <p>Revenue Grader is a Revenue Architects application. It is a diagnostic tool to help businesses leaders rapidly assess revenue performance potential and develop a prioritized top-level plan – all in minutes. Revenue Grader complements other grader apps by taking a broad and strategic view of the critical elements of revenue performance. </p>
 
-            <p>After completing the Revenue Grader diagnostic, the executive can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation and enhancing sales team skills.</p></br>
+              <p>It is focused across three critical dimensions: </p></br>
+              <ul>
+              <li><p>Revenue Strategy</p></li>
+              <li><p>Revenue Systems</p></li>
+              <li><p>Revenue Programs</p></li></ul></br>
 
-          <h2>About Revenue Architects</h2>
+              <p>After completing the Revenue Grader diagnostic, the executive can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation and enhancing sales team skills.</p></br>
 
-          <p>Integrated consulting and agency services for revenue growth</p>
+              <h2 style="margin-top: 80px;">About Revenue Architects</h2>
+
+         <!--  <p>Integrated consulting and agency services for revenue growth</p>
 
           <p>Revenue Architects delivers adaptive services for revenue growth. We combine marketing, sales, PR and communications skills in a flexible model to address the diverse and changing requirements of marketing and sales leaders. By combining our core team of trusted advisors and our independent network, we flexibly deliver comprehensive services for revenue growth:</p>
 
@@ -897,25 +923,36 @@ table.dataTable th:active {
           <li><p>Revenue Programs: Creating and delivering innovative campaigns and programs.</p></li></ul></br>
 
          <p>Growing the top-line is more challenging than ever. The web, social media and mobile technologies have transformed the buyer-seller relationship. Buyers are more in control.  Businesses must integrate marketing and sales and effectively engage the web to capture, deepen and expand relationships. Yet, executing successfully requires both a solid strategy and diverse talent  – from creative design and branding to content creation and technology.  And needs continuously evolve.</p>
-       </div>
+       </div> -->
+
+          <h3 style="color: #0086AC; text-align:left">Who We Are<h3>
+
+          <p>Revenue Architects is a revenue marketing consulting agency working with clients that manage a considered or complex revenue process. We serve as a trusted delivery partner helping clients respond to dynamic growth opportunities.</p>
+
+          <p>By blending strategy, creative, media and technology, we help clients architect new revenue models, enhance brands, design experiences, deploy websites and marketing technology and integrate campaigns and programs. Based in Boston, we work locally and globally on a range of revenue-focused initiatives.</p>
+
+          <p>Visit our <a href="http://revenuearchitects.com/services/" style="color: #f05a1a;">Services Page<a></p>
+
+          <h3 style="color: #0086AC; text-align:left">How We Are Different</h3>
+
+          <p>As our client’s trusted partner for revenue-focused initiatives, we help architect and build agile and durable marketing and sales capabilities. We differentiate with our strategic architecture approach, our responsive delivery model and our adaptive approach to emerging technology, media and marketing practices.</p>
 
           <!-- <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div>  -->
         </div>
 <%#end%>
-      <div style="align:right">
-            <span style="margin-right:5px;"><img src="http://stage.revenuegrader.com/assets/logo.png" alt = "Revenue Grader"><span>
+      <div style="align:right;padding-top:80px;">
+            <span style="margin-right:5px;"><img src="http://stage.revenuegrader.com/assets/logo.png" alt="Revenue Grader"><span>
              <h2>Contact Details</h1>
-             <h4>Email</h4>
+             <h4 style="text-align:left">Email</h4>
              <p>contact@revenuearchitects.com</p>
-             <h4>Address</h4>
+             <h4 style="text-align:left">Address</h4>
             <p>24 Federal Street, 4th Floor</p>
             <p>Boston, Massachusetts 02110</p>
             <!-- <div class="footer1">
                <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div> -->
         </div>
-
     </body>
 </html>
