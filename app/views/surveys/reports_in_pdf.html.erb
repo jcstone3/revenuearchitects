@@ -9,11 +9,7 @@
         <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
         <script src='http://www.google.com/jsapi'></script>
         </head>
-
-        <!-- Le styles -->
-<%#= content_for :main_content do%>
        <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
-        <%#= render :partial=>"reports_css"%>
 <style type="text/css">
 
   .content{
@@ -49,24 +45,7 @@
   .content1 h4{
     display:inline!important;
   }
-/*  .content2{
-    font-weight:bold;
-    margin-left: 5px;
-    width:1000px;
-    line-height:25px;
-  }*/
-/*  .content1 h1{
-    margin-left: 400px;
-  }
 
-  .content1 img{
-    display: block;
-    height:260px;
-    width:200px;
-    margin-left :400px;
-    margin-top :80px;
-    text-align:center;
-  }*/
   .content h1{
     line-height:25px;
     display: block;
@@ -110,12 +89,7 @@
     margin-bottom: 10px;
     margin-right: 10px;
   }
-/*  .content2 h2{
-    margin-top: 10px;
-    text-align :left;
-    font-weight:300;
-    color: #0086AC;
-  }*/
+
   .content3{
     text-align :left;
     font-weight:300;
@@ -128,11 +102,6 @@
     font-weight:300;
     line-height:25px;
   }
-/*  .content2 h3{
-    text-align :right;
-    font-weight:300;
-    color: #0086AC;
-  }*/
   .graph{
     padding-top: 30px;
       padding-bottom: 20px;
@@ -329,9 +298,6 @@ table.dataTable2 td.center,
 table.dataTable2 td.dataTables_empty {
   text-align: center;
 }
-
-
-
 
 table.dataTable2 td.center,
 table.dataTable2 td.dataTables_empty {
@@ -536,6 +502,8 @@ table.dataTable th:active {
 
 .survey-content {
   margin-top: 40px;
+  text-align: left;
+
 }
 
 .stats {
@@ -568,6 +536,10 @@ table.dataTable th:active {
 #about p, #nest_steps p{
   color: gray;
 }
+.width_14 td
+{
+  width:14% !important;
+}
 
 /* --- */
 </style>
@@ -599,50 +571,160 @@ table.dataTable th:active {
             </div>
             <h1>Diagnostic Scorecard: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1></br>
               <p>&nbsp;</p>
-               <div class="survey-content">
+               <div class="survey-content" >
 
-              <div class="stats">
+                <h3 style="color: #0086AC; text-align:left">Scorecard</h3>
+                <p>
+                <span style="font-weight:bold;">Strategy</span><br/>
+                Define your competitive advantage.<br/>
+                Score:  135 / 300<br/>
 
-                <div class="stat">
-                  <span class="stat-value"><%= @all_sections[0].total_points%></span>
-                        System
-                </div> <!-- /stat -->
+                <br/>
+                <span style="font-weight:bold;">Systems</span<br/>
+                Build an agile and durable platform.<br/>
+                Score:  155 / 400<br/>
 
-                  <div class="stat">
-                    <span class="stat-value"><%= @all_sections[1].total_points%></span>
-                        Strategy
-                  </div> <!-- /stat -->
+                <br/>
+                <span style="font-weight:bold;">Programs</span<br/>
+                Launch integrated campaigns.<br/>
+                Score:  210 / 400
 
-                  <div class="stat">
-                    <span class="stat-value"><%= @all_sections[2].total_points%></span>     Program
-                  </div> <!-- /stat -->
-
-              </div> <!-- /stats -->
+                <br/><br/>
+                <span style="font-weight:bold;">Total Score</span><br/>
+                Revenue Architecture<br/>
+                Score:  500 / 600<br/>
+                83.33%
+              </p>
             </div></br></br>
                 <div style="clear:both"></div>
-
                  <div id='chart'></div>
-                  <%#= render_chart(@chart, 'chart') %>
-
             <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div>
           </div>
 
-          <h2>Revenue Grader Plan</h2>
-        <% if !@must_do_responses.blank? %>
-        <div class="content" style="page-break-after:always;">
+
+
+
+            <div class="content" style="page-break-after:always;">
+              <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>
+          </div>
+
+              <h1>Scoring Method</h1>
+            <div class="textbox">
+               <table cellpadding="1" cellspacing="1" id="report_in_planTable" class="report-body dataTable2">
+                <thead class="table-header">
+                <tr>
+                <th><h3></h3></th>
+                <th><h3>Raw Points</h3></th>
+                <th><h3>1</h3></th>
+                <th><h3>2</h3></th>
+                <th><h3>3</h3></th>
+                <th><h3>4</h3></th>
+                <th><h3>5</h3></th>
+              </tr>
+              </thead>
+              <tbody>
+                    <tr>
+                      <td width="150">Strategy</td>
+                      <td width="110">150</td>
+                      <td width="110">-20.00%</td>
+                      <td width="110">-10.00%</td>
+                      <td width="110">0.00%</td>
+                      <td width="110">10.00%</td>
+                      <td width="110">20.00%</td>
+                    </tr>
+                    <tr>
+                      <td width="150">Range 120-180</td>
+                      <td width="110"></td>
+                      <td width="110">160</td>
+                      <td width="110">180</td>
+                      <td width="110">200</td>
+                      <td width="110">220</td>
+                      <td width="110">240</td>
+                    <tr>
+
+                    <tr></tr><tr></tr>
+
+                    <tr>
+                      <td width="150">System</td>
+                      <td width="110">150</td>
+                      <td width="110">-0.2</td>
+                      <td width="110">-0.1</td>
+                      <td width="110">0</td>
+                      <td width="110">0.1</td>
+                      <td width="110">0.2</td>
+                    </tr>
+                    <tr>
+                      <td width="150">Range 120-180</td>
+                      <td width="110"></td>
+                      <td width="110">160</td>
+                      <td width="110">180</td>
+                      <td width="110">200</td>
+                      <td width="110">220</td>
+                      <td width="110">240</td>
+                    <tr>
+
+                    <tr></tr><tr></tr>
+
+                    <tr>
+                      <td width="150">Programs</td>
+                      <td width="110">200</td>
+                      <td width="110">-0.2</td>
+                      <td width="110">-0.1</td>
+                      <td width="110">0</td>
+                      <td width="110">0.1</td>
+                      <td width="110">0.2</td>
+                   </tr>
+                   <tr>
+                    <td width="150">Range 160-240</td>
+                    <td width="110"></td>
+                    <td width="110">160</td>
+                    <td width="110">180</td>
+                    <td width="110">200</td>
+                    <td width="110">220</td>
+                    <td width="110">240</td>
+                  <tr>
+
+                    <tr></tr><tr></tr>
+
+                    <tr>
+                      <td width="150">Total Score</td>
+                      <td width="110"></td>
+                      <td width="110">400</td>
+                      <td width="110">450</td>
+                      <td width="110">500</td>
+                      <td width="110">550</td>
+                      <td width="110">600</td>
+                    </tr>
+                    <tr>
+                      <td width="150">Range 400-600</td>
+                      <td width="110"></td>
+                      <td width="110"></td>
+                      <td width="110"></td>
+                      <td width="110"></td>
+                      <td width="110"></td>
+                      <td width="110"></td>
+                    <tr>
+               </tbody>
+            </table>
+          </div>
+          </div>
+
+        <% if !@add_to_plan_responses.blank? %>
+         <div class="content" style="page-break-after:always;">
             <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
               </div>
             </div>
 
-             <h1>Must Do Items</h1>
-
+             <div class="content"><h1>All Items</h1></div>
              <div class="textbox">
-               <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2" >
-               <%#= render :partial=>"pdf_table_header"%>
+               <table cellpadding="1" cellspacing="1" id="report_in_planTable" class="report-body dataTable2">
                 <thead class="table-header">
                 <tr>
                   <th><h3>Questions</h3></th>
@@ -654,9 +736,8 @@ table.dataTable th:active {
                 </tr>
                 </thead>
                 <tbody>
-                    <% @must_do_responses.each do |response|%>
-                      <%#= render :partial=>"pdf_report",
-                      :locals=> {:response =>response} %>
+
+                    <% @add_to_plan_responses.each do |response|%>
                       <tr>
                         <td width="600" style="text-align:left !important"><%= response.name %></td>
                         <td><%= response.points %></td>
@@ -668,17 +749,40 @@ table.dataTable th:active {
                         <td><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
                         </td>
                       </tr>
+
                     <%end%>
-                <%#= render :partial=>"table_end"%>
                  </tbody>
                </table>
+        </div>
+      </div>
+      <% end %>
 
-                  </div>
-                  <!-- <div class="footer1">
-              <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div>  -->
+        <% if !@must_do_responses.blank? %>
+        <div class="content" style="page-break-after:always;">
+            <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>
             </div>
+             <h1>Must Do Items</h1>
 
+             <div class="textbox">
+               <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2" >
+                <thead class="table-header">
+                <tr>
+                  <th><h3>Questions</h3></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% @must_do_responses.each do |response|%>
+                      <tr>
+                        <td width="600" style="text-align:left !important;width:100%;"><%= response.name %></td>
+                      </tr>
+                    <%end%>
+                 </tbody>
+               </table>
+              </div>
+            </div>
         </div>
         <% end %>
 
@@ -693,42 +797,21 @@ table.dataTable th:active {
              <h1>Should Do Items</h1>
              <div class="textbox">
                <table cellpadding="1" cellspacing="1" id="report_should_doTable" class="report-body dataTable2">
-                <%#= render :partial=>"pdf_table_header"%>
                 <thead class="table-header">
                 <tr>
                   <th><h3>Questions</h3></th>
-                  <th><h3>Points</h3></th>
-                  <th><h3>Your Score</h3></th>
-                  <th><h3>Avg Score</h3></th>
-                  <th><h3>Cal Score</h3></th>
-                  <th><h3>Avg Cal Score</h3></th>
                 </tr>
                 </thead>
                 <tbody>
 
                     <% @should_do_responses.each do |response|%>
-                      <%#= render :partial=>"pdf_report",
-                      :locals=> {:response =>response} %>
                       <tr>
-                        <td width="600" style="text-align:left !important"><%= response.name %></td>
-                        <td><%= response.points %></td>
-                        <td><%= response.score %></td>
-                        <td><%= response.response_id.present? ?
-                        get_average_score(response.questions_id, response.survey_id) : 0 %></td>
-                        <td><%= response.response_id.present? ?
-                        get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
-                        <td><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                        </td>
+                        <td width="600" style="text-align:left !important;width:100%;"><%= response.name %></td>
                       </tr>
-
                     <%end%>
-                <%#= render :partial=>"table_end"%>
                  </tbody>
                </table>
             </div>
-           <!-- <div class="footer1">
-              <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div> -->
         </div>
         <% end %>
 
@@ -743,145 +826,21 @@ table.dataTable th:active {
              <h1>Could Do Items</h1>
              <div class="textbox">
             <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
-             <%#= render :partial=>"pdf_table_header"%>
                 <thead class="table-header">
                 <tr>
                   <th><h3>Questions</h3></th>
-                  <th><h3>Points</h3></th>
-                  <th><h3>Your Score</h3></th>
-                  <th><h3>Avg Score</h3></th>
-                  <th><h3>Cal Score</h3></th>
-                  <th><h3>Avg Cal Score</h3></th>
                 </tr>
                 </thead>
                 <tbody>
 
               <% @could_do_responses.each do |response|%>
-                <%#= render :partial=>"pdf_report",
-                :locals=> {:response =>response} %>
-                      <tr>
-                        <td width="600" style="text-align:left !important"><%= response.name %></td>
-                        <td><%= response.points %></td>
-                        <td><%= response.score %></td>
-                        <td><%= response.response_id.present? ?
-                        get_average_score(response.questions_id, response.survey_id) : 0 %></td>
-                        <td><%= response.response_id.present? ?
-                        get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
-                        <td><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                        </td>
-                      </tr>
-
+                <tr>
+                  <td style="text-align:left !important;width:100%;"><%= response.name %></td>
+                </tr>
               <%end%>
-             <%#= render :partial=>"table_end"%>
                  </tbody>
                </table>
-
             </div>
-           <!--  <div class="footer1">
-              <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div> -->
-        </div>
-        <% end %>
-
-        <% if !@in_plan_responses.blank? %>
-         <div class="content" style="page-break-after:always;">
-            <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>
-            </div>
-
-             <h1>Planned Items</h1>
-             <div class="textbox">
-               <table cellpadding="1" cellspacing="1" id="report_in_planTable" class="report-body dataTable2">
-             <%#= render :partial=>"pdf_table_header"%>
-                <thead class="table-header">
-                <tr>
-                  <th><h3>Questions</h3></th>
-                  <th><h3>Points</h3></th>
-                  <th><h3>Your Score</h3></th>
-                  <th><h3>Avg Score</h3></th>
-                  <th><h3>Cal Score</h3></th>
-                  <th><h3>Avg Cal Score</h3></th>
-                </tr>
-                </thead>
-                <tbody>
-
-                    <% @in_plan_responses.each do |response|%>
-                      <%#= render :partial=>"pdf_report",
-                      :locals=> {:response =>response} %>
-                      <tr>
-                        <td width="600"><%= response.name %></td>
-                        <td><%= response.points %></td>
-                        <td><%= response.score %></td>
-                        <td><%= response.response_id.present? ?
-                        get_average_score(response.questions_id, response.survey_id) : 0 %></td>
-                        <td><%= response.response_id.present? ?
-                        get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
-                        <td><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                        </td>
-                      </tr>
-
-                    <%end%>
-              <%#= render :partial=>"table_end"%>
-                 </tbody>
-               </table>
-
-            <!--  <div class="footer1">
-              <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div> -->
-        </div>
-      </div>
-      <% end %>
-
-        <% if !@not_applicable_responses.blank? %>
-        <div class="content" style="page-break-after:always;">
-            <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>
-            </div>
-
-             <h1>Not Applicable Items</h1>
-             <div class="textbox">
-               <table cellpadding="1" cellspacing="1" id="report_not_applicableTable" class="report-body dataTable2">
-               <%#= render :partial=>"pdf_table_header"%>
-                <thead class="table-header">
-                <tr>
-                  <th><h3>Questions</h3></th>
-                  <th><h3>Points</h3></th>
-                  <th><h3>Your Score</h3></th>
-                  <th><h3>Avg Score</h3></th>
-                  <th><h3>Cal Score</h3></th>
-                  <th><h3>Avg Cal Score</h3></th>
-                </tr>
-                </thead>
-                <tbody>
-
-                    <% @not_applicable_responses.each do |response|%>
-                      <%#= render :partial=>"pdf_report",
-                      :locals=> {:response =>response} %>
-                      <tr>
-                        <td width="600" text-align="left"><%= response.name %></td>
-                        <td><%= response.points %></td>
-                        <td><%= response.score %></td>
-                        <td><%= response.response_id.present? ?
-                        get_average_score(response.questions_id, response.survey_id) : 0 %></td>
-                        <td><%= response.response_id.present? ?
-                        get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
-                        <td><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                        </td>
-                      </tr>
-
-                    <%end%>
-                <%#= render :partial=>"table_end"%>
-                 </tbody>
-               </table>
-
-            </div>
-            <!-- <div class="footer1">
-               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div> -->
         </div>
         <% end %>
 
@@ -911,19 +870,15 @@ table.dataTable th:active {
 
               <p>After completing the Revenue Grader diagnostic, the executive can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation and enhancing sales team skills.</p></br>
 
-              <h2 style="margin-top: 80px;">About Revenue Architects</h2>
 
-         <!--  <p>Integrated consulting and agency services for revenue growth</p>
+          <div class="content" style="page-break-after:always;">
+            <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>
+            </div>
 
-          <p>Revenue Architects delivers adaptive services for revenue growth. We combine marketing, sales, PR and communications skills in a flexible model to address the diverse and changing requirements of marketing and sales leaders. By combining our core team of trusted advisors and our independent network, we flexibly deliver comprehensive services for revenue growth:</p>
-
-          <ul>
-          <li><p>Revenue Strategy: Envisioning opportunities, assessing capabilities and prioritizing initiatives</p></li>
-          <li><p>Revenue Systems: Deploying technology, mapping processes, and building skills</p></li>
-          <li><p>Revenue Programs: Creating and delivering innovative campaigns and programs.</p></li></ul></br>
-
-         <p>Growing the top-line is more challenging than ever. The web, social media and mobile technologies have transformed the buyer-seller relationship. Buyers are more in control.  Businesses must integrate marketing and sales and effectively engage the web to capture, deepen and expand relationships. Yet, executing successfully requires both a solid strategy and diverse talent  – from creative design and branding to content creation and technology.  And needs continuously evolve.</p>
-       </div> -->
+          <h2>About Revenue Architects</h2>
 
           <h3 style="color: #0086AC; text-align:left">Who We Are<h3>
 
@@ -931,28 +886,11 @@ table.dataTable th:active {
 
           <p>By blending strategy, creative, media and technology, we help clients architect new revenue models, enhance brands, design experiences, deploy websites and marketing technology and integrate campaigns and programs. Based in Boston, we work locally and globally on a range of revenue-focused initiatives.</p>
 
-          <p>Visit our <a href="http://revenuearchitects.com/services/" style="color: #f05a1a;">Services Page<a></p>
+          <p>Visit our <a href="http://revenuearchitects.com/services/" target="_blank" style="color: #f05a1a;">Services Page<a></p>
 
           <h3 style="color: #0086AC; text-align:left">How We Are Different</h3>
 
           <p>As our client’s trusted partner for revenue-focused initiatives, we help architect and build agile and durable marketing and sales capabilities. We differentiate with our strategic architecture approach, our responsive delivery model and our adaptive approach to emerging technology, media and marketing practices.</p>
-
-          <!-- <div class="footer1">
-              <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div>  -->
-        </div>
-<%#end%>
-      <div style="align:right;padding-top:80px;">
-            <span style="margin-right:5px;"><img src="http://stage.revenuegrader.com/assets/logo.png" alt="Revenue Grader"><span>
-             <h2>Contact Details</h1>
-             <h4 style="text-align:left">Email</h4>
-             <p>contact@revenuearchitects.com</p>
-             <h4 style="text-align:left">Address</h4>
-            <p>24 Federal Street, 4th Floor</p>
-            <p>Boston, Massachusetts 02110</p>
-            <!-- <div class="footer1">
-               <img src="http://dev.revenuegrader.com/assets/logo.png">
-            </div> -->
         </div>
     </body>
 </html>
