@@ -95,7 +95,7 @@ class Survey < ActiveRecord::Base
         response_array.push(question.id.to_s)
         logger.debug question.id
 
-        @your_response = responses.select { |response| response.questions_id.to_i == question.id.to_i } 
+        @your_response = responses.select { |response| response.questions_id.to_i == question.id.to_i }
 
 
         Rails.logger.debug @your_response.inspect
@@ -209,6 +209,33 @@ def self.calculate_response_for_section(survey_id, section_id)
      end
 
     return result
+end
+
+def self.calculate_score_for_section(survey_id)
+  @point_per_question = Section.find(:all, :select => "sections.id as section, questions.points as points, responses.answer_1 as answer_1", :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id)", :conditions =>  "responses.survey_id =#{survey_id}")
+
+  @score_strategy = 0
+  @score_system = 0
+  @score_program = 0
+  nums = 0
+  if @point_per_question.blank?
+    @score_strategy = 0
+    @score_system = 0
+    @score_program = 0
+    nums = 0
+  else
+    @point_per_question.each do |response|
+      if response.section.to_i == 1
+        @score_strategy += get_score_value(response.points, response.answer_1)
+      elsif response.section.to_i == 2
+        @score_system += get_score_value(response.points, response.answer_1)
+      elsif response.section.to_i == 3
+        @score_program += get_score_value(response.points, response.answer_1)
+      end
+    end
+    nums = Array[@score_strategy,@score_system,@score_program]
+    return nums
+  end
 end
 
 #total response for a subsection

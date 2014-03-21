@@ -577,34 +577,32 @@ table.dataTable th:active {
                 <p>
                 <span style="font-weight:bold;">Strategy</span><br/>
                 Define your competitive advantage.<br/>
-                Score:  135 / 300<br/>
+                Score: <%= @score_per_section[0] %> / <%= @all_sections[0].total_points%><br/>
 
                 <br/>
                 <span style="font-weight:bold;">Systems</span<br/>
                 Build an agile and durable platform.<br/>
-                Score:  155 / 400<br/>
+                Score: <%= @score_per_section[1] %> / <%= @all_sections[1].total_points%><br/>
 
                 <br/>
                 <span style="font-weight:bold;">Programs</span<br/>
                 Launch integrated campaigns.<br/>
-                Score:  210 / 400
+                Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points%><br/>
 
-                <br/><br/>
+                <br/>
                 <span style="font-weight:bold;">Total Score</span><br/>
                 Revenue Architecture<br/>
-                Score:  500 / 600<br/>
-                83.33%
+                Score: <%= @total_score_per_section.to_i %> / <%= @total_all_sections_points.to_i %><br/>
+                <%= '%.2f' % ((@total_score_per_section.to_f / @total_all_sections_points.to_f) * 100) %>%
               </p>
             </div></br></br>
-                <div style="clear:both"></div>
-                 <div id='chart'></div>
+            <div style="clear:both"></div>
+            <div id='chart'></div>
+
             <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div>
           </div>
-
-
-
 
             <div class="content" style="page-break-after:always;">
               <div class="header">
