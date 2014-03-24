@@ -540,29 +540,46 @@ table.dataTable th:active {
 {
   width:14% !important;
 }
+.company_title h3{
+  text-align:center;
+  text-align:center;
+  font-weight:bold;
+  margin-top:40px;
+}
 
 /* --- */
 </style>
-        <div class="content" style="page-break-after:always;">
+        <div class="content" style="page-break-after:always;text-align:center;">
         <div style="display:inline;">
                 <span style="margin-right:5px;"><img src="http://stage.revenuegrader.com/assets/logo.png" alt = "Revenue Grader"><span>
                 <span style="font-size:60px;color: #0086AC;"> <%= "Revenue Grader" %> </span>
         </div>
-        <div class="content1" style="text-align:left;">
-            <h3>From</h3>
-             <h4><%= "#{current_user.companies.first.name}"%></h4>&nbsp;
-             <h4><%= @survey.created_at.strftime("%B  %Y")%></h4>&nbsp;
-             <h4><%= current_user.username.present? ? current_user.username : '' %></h4></br>
+      </div>
+
+        <div class="content" style="page-break-after:always;">
+          <div class="header">
+              <div style="font-size: 14px">
+                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+              </div>
+          </div>
+          <h1>Revenue Grader Report</h1>
+          <div class="content2">
+            <div class="company_title">
+              <h3><%= "#{current_user.companies.first.name}"%></h3><br/>
+              <h3>Report: <%= @survey.created_at.strftime("%B  %Y")%></h3>&nbsp;
+            </div>
+
+          <div style="text-align:left;">
+            <h3>To</h3>
+            <h3><%= current_user.username.present? ? current_user.username : '' %></h3></br>
+            <h4><%= "#{current_user.companies.first.name}"%></h4></br>
+            <h4><%= @survey.created_at.strftime("%B  %Y")%></h4></br>
+            <h4>Completed By: <%= current_user.email.present? ? current_user.email : '' %></h4>
+          </div>
         </div>
-        <div class="content2" style="text-align:left;">
-          <h3>To</h3>
-          <h3>Revenue Grader Report</h3>
-          <h4><%= "#{current_user.companies.first.name}"%></h4></br>
-          <h4><%= @survey.created_at.strftime("%B  %Y")%></h4></br>
-          <h4>Completed By: <%= current_user.username.present? ? current_user.username : '' %></h4>
         </div>
 
-        </div>
+
          <div class="content" style="page-break-after:always;">
             <div class="header">
               <div style="font-size: 14px">
