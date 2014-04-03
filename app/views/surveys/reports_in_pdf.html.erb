@@ -549,10 +549,10 @@ table.dataTable th:active {
 
 /* --- */
 </style>
-        <div class="content" style="page-break-after:always;text-align:center;margin-top:300px;">
-        <div style="display:inline;">
-                <span style="margin-right:5px;"><img src="http://stage.revenuegrader.com/assets/logo.png" alt = "Revenue Grader"><span>
-                <span style="font-size:60px;color: #0086AC;"> <%= "Revenue Grader" %> </span>
+        <div class="content" style="page-break-after:always;text-align:center;margin-top:250px;">
+        <div style="text-align:center;">
+          <img src="http://stage.revenuegrader.com/assets/logo.png" alt="Revenue Grader"><br/>
+          <span style="font-size:60px;color: #0086AC;margin-top:20px;"> <%= "Revenue Grader" %></span>
         </div>
       </div>
 
@@ -562,17 +562,14 @@ table.dataTable th:active {
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
               </div>
           </div>
-          <h1>Revenue Grader Report</h1>
           <div class="content2">
             <div class="company_title">
-              <h3><%= "#{current_user.companies.first.name}"%></h3><br/>
-              <h3>Report: <%= @survey.created_at.strftime("%B  %Y")%></h3>&nbsp;
+              <h3 style="font-size: 30px"><%= "#{current_user.companies.first.name}"%></h3><br/>
+              <h3 style="margin-top:0px;">Report: <%= @survey.created_at.strftime("%B  %Y")%></h3>&nbsp;
             </div>
-          <div style="text-align:left;">
+          <div style="text-align:left;margin-top:160px;">
             <h3>To</h3>
             <h3><%= current_user.username.present? ? current_user.username : '' %></h3></br>
-            <h4><%= "#{current_user.companies.first.name}"%></h4></br>
-            <h4><%= @survey.created_at.strftime("%B  %Y")%></h4></br>
             <h4>Completed By: <%= current_user.email.present? ? current_user.email : '' %></h4>
           </div>
         </div>
@@ -586,38 +583,44 @@ table.dataTable th:active {
               </div>
             </div>
             <h1>Diagnostic Scorecard: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1></br>
-              <p>&nbsp;</p>
-               <div class="survey-content" >
+
+               <div class="survey-content" style="float:left;" >
 
                 <h3 style="color: #0086AC; text-align:left">Scorecard</h3>
                 <p>
                 <span style="font-weight:bold;">Strategy</span><br/>
                 Define your competitive advantage.<br/>
                 Score: <%= @score_per_section[0] %> / <%= @all_sections[0].total_points%><br/>
+                <%= '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100) %>%
 
-                <br/>
+                <br/><br/>
                 <span style="font-weight:bold;">Systems</span<br/>
                 Build an agile and durable platform.<br/>
                 Score: <%= @score_per_section[1] %> / <%= @all_sections[1].total_points%><br/>
+                <%= '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100) %>%
 
-                <br/>
+                <br/><br/>
                 <span style="font-weight:bold;">Programs</span<br/>
                 Launch integrated campaigns.<br/>
                 Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points%><br/>
+                <%= '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100) %>%
 
-                <br/>
+                <br/><br/>
                 <span style="font-weight:bold;">Total Score</span><br/>
                 Revenue Architecture<br/>
                 Score: <%= @total_score_per_section.to_i %> / <%= @total_all_sections_points.to_i %><br/>
                 <%= '%.2f' % ((@total_score_per_section.to_f / @total_all_sections_points.to_f) * 100) %>%
               </p>
-            </div></br></br>
-            <div style="clear:both"></div>
-            <div id='chart'></div>
-
-            <div class="footer1">
-              <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div>
+
+            <div style="float:right; width: 400px;margin-top: 80px;margin-right: 40px;">
+              <p>Revenue Grader scores your revenu performance potentials by measuring three dimwntians: Strategy, Systems and Programs. Each dimentions has individual values assigned 1, 10 or 15 points based on theirr level of impact in their level of impact in today's marketing. </p>
+
+              <p>An overall score is provided which is the weighted score against the total potential score of 1,500. This is also presented as a percentage.</p>
+
+              <p>Strategy, Systems and Programs scores are also provided which is the raw weighted score against the total potential score of 500. This is also presented as a percentage.</p>
+            </div>
+            <div style="clear:both"></div>
           </div>
 
             <div class="content" style="page-break-after:always;">
