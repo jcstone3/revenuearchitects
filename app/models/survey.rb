@@ -352,13 +352,13 @@ def self.get_score_value(question_points, response_score)
              when 1
                response_percentage = -20
              when 2
-               response_percentage = 0
+               response_percentage = -10
              when 3
-               response_percentage = 20
+               response_percentage = 0
              when 4
-               response_percentage = 60
+               response_percentage = 20
              when 5
-               response_percentage = 100
+               response_percentage = 30
              end
 
   # individual response score calculation will be
