@@ -346,7 +346,7 @@ def self.get_score_value(question_points, response_score)
   response_score_int = response_score.to_i
 
   #calculation for score is (question_points * slider_percentage)/100
-  #slider percentage will be -20, 0, 20, 60, 100 depending on the value of response_score
+  #slider percentage will be -20, -10, 0, 20, 30 depending on the value of response_score
   response_percentage = 0
   case response_score_int
              when 1

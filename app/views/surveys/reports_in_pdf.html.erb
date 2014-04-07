@@ -676,7 +676,7 @@ table.dataTable th:active {
                 <tbody>
                     <% @add_to_plan_responses.each do |response|%>
                       <tr>
-                        <td><%= response.sub_sect_name %></td>
+                        <td style="text-align:left !important"><%= response.sub_sect_name %></td>
                         <td width="600" style="text-align:left !important"><%= response.name %></td>
                         <td><%= response.points %></td>
                         <td><%= response.score %></td>
