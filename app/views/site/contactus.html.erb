@@ -12,19 +12,19 @@
 
    <%= form_tag(send_mail_path) do %>
       <div class="form-group">
-        <%= label_tag 'first_name', 'First Name' %>
+        <%= label_tag 'first_name', 'First Name*' %>
         <%= text_field_tag 'first_name', nil, class: 'form-control', placeholder: 'First Name' %>
       </div>
       <div class="form-group">
-        <%= label_tag 'last_name', 'Last Name' %>
+        <%= label_tag 'last_name', 'Last Name*' %>
         <%= text_field_tag 'last_name', nil, class: 'form-control', placeholder: 'Last Name' %>
       </div>
       <div class="form-group">
-        <%= label_tag 'email', 'Email' %>
+        <%= label_tag 'email', 'Email*' %>
         <%= email_field_tag 'email', nil, class: 'form-control', placeholder: 'Email' %>
       </div>
       <div class="form-group">
-        <%= label_tag 'company_name', 'Company Name' %>
+        <%= label_tag 'company_name', 'Company Name*' %>
         <%= text_area_tag 'company_name', nil, class: 'form-control', placeholder: 'Company Name' %>
       </div>
       <div class="form-group">
@@ -39,7 +39,7 @@
         <%= label_tag 'your_message', 'Your Message' %>
         <%= text_area_tag 'your_message', nil, class: 'form-control', rows: 4, placeholder: 'Your Message' %>
       </div>
-      <%= submit_tag nil, class: 'btn btn-default btn-about pull-right' %>
+      <%= submit_tag nil, class: 'btn btn-default btn-about pull-right', style: "float: left;" %>
    <% end %>
   </div>
 <% end -%>
