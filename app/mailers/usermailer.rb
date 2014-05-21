@@ -33,7 +33,7 @@ class Usermailer < ActionMailer::Base
 
     # @body = body`enter code here`
 
-    mail(:to => "rohit.bhore@icicletech.com", :subject => "Contact Request", :tag => 'contact-request') do |format|
+    mail(:to => "rohit.bhore@icicletech.com", :subject => "RevenueGrader: Contact Request", :tag => 'contact-request') do |format|
       format.html { render "usermailer/contactus" }
     end
 
