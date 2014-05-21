@@ -10,9 +10,11 @@ $(".surveys.question").ready(function() {
   if (popup_present!='undefined'){
     if (popup_present.split('=')[1]=='true'){
       $('#popup-notice').modal('show')
+      $('#popup-notice').css("z-index","1050");
     }
     else{
       $('#popup-notice').modal('hide')
+      $('#popup-notice').css("z-index","0");
     }
   }
 
