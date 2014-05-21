@@ -21,4 +21,22 @@ class Usermailer < ActionMailer::Base
       format.html { render "usermailer/new_signup_details" }
     end
   end
+
+  def contact_email(first_name, last_name, email,company_name,website,phone_number,your_message)
+    @first_name = first_name
+    @last_name = last_name
+    @email = email
+    @company_name = company_name
+    @website = website
+    @phone_number = phone_number
+    @your_message = your_message
+
+    # @body = body`enter code here`
+
+    mail(:to => "rohit.bhore@icicletech.com, support.revenuegrader@icicletech.com", :subject => "RevenueGrader: Contact Request", :tag => 'contact-request') do |format|
+      format.html { render "usermailer/contactus" }
+    end
+
+    # mail(from: email, subject: 'Contact Request')
+  end
 end
