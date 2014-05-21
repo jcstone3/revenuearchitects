@@ -25,6 +25,18 @@ class SiteController < ApplicationController
   def show
   end
 
+  def send_mail
+    first_name = params[:first_name]
+    last_name = [:last_name]
+    email = params[:email]
+    company_name = params[:company_name]
+    website = [:website]
+    phone_number = [:phone_number]
+    your_message = [:your_message]
+    Usermailer.contact_email(first_name, last_name, email,company_name,website,phone_number,your_message).deliver
+    redirect_to contactus_path, notice: 'Email sent'
+  end
+
   private
 
   def resolve_layout

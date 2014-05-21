@@ -1,5 +1,7 @@
 RevenueGrader::Application.routes.draw do
 
+  get "contacts/send_mail"
+
   resources :feedback, :only => [:new, :create]
 
   #admin settingss
@@ -82,6 +84,8 @@ RevenueGrader::Application.routes.draw do
   match "privacy" =>'site#privacy_policy', :as => 'privacy_policy'
   match "show" =>'site#index', :as => 'show'
 
+  post "send_mail" =>'site#send_mail'
+
   # prevent popup
   post "surveys/prevent_popup" => "surveys#prevent_popup", :as => 'prevent_popup'
 
@@ -142,6 +146,8 @@ RevenueGrader::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
