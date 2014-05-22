@@ -31,12 +31,8 @@ class Usermailer < ActionMailer::Base
     @phone_number = phone_number
     @your_message = your_message
 
-    # @body = body`enter code here`
-
-    mail(:to => "support.revenuegrader@icicletech.com", :subject => "RevenueGrader: Contact Request", :tag => 'contact-request') do |format|
+    mail(:to => "support.revenuegrader@icicletech.com, contact@revenuearchitects.com", :subject => "RevenueGrader: Contact Request", :tag => 'contact-request') do |format|
       format.html { render "usermailer/contactus" }
     end
-
-    # mail(from: email, subject: 'Contact Request')
   end
 end
