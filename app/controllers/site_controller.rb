@@ -25,6 +25,23 @@ class SiteController < ApplicationController
   def show
   end
 
+  def send_mail
+    if !params[:first_name].blank? && !params[:last_name].blank? && !params[:email].blank? && !params[:company_name].blank?
+      first_name = params[:first_name]
+      last_name = params[:last_name]
+      email = params[:email]
+      company_name = params[:company_name]
+      website = params[:website]
+      phone_number = params[:phone_number]
+      your_message = params[:your_message]
+      Usermailer.contact_email(first_name, last_name, email,company_name,website,phone_number,your_message).deliver
+      redirect_to contactus_path, notice: 'Email sent'
+    else
+      # raise MyApp::MissingFieldError
+      redirect_to contactus_path, notice: 'Please enter all required fields.'
+    end
+  end
+
   private
 
   def resolve_layout
