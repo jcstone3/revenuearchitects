@@ -91,10 +91,10 @@ end
 
 # Deploy with Capistrano
 # gem 'capistrano'
-gem 'capistrano', '2.15.5'
-gem 'net-ssh', '2.7.0'
-gem 'rvm-capistrano'
-gem 'capistrano-ext'
+# gem 'capistrano', '2.15.5'
+# gem 'net-ssh', '2.7.0'
+# gem 'rvm-capistrano'
+# gem 'capistrano-ext'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
