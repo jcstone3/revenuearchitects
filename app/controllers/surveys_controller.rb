@@ -367,51 +367,57 @@ def report
   #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
-  if @survey.blank?
-     flash[:notice] = "No such survey exists"
-     redirect_to new_survey_path and return
-   else
-    #for sections navigation tabs
-    @all_sections = Section.order(:sequence)
+  company = Company.find(@survey.company_id)
+  if company.industry_id.present?
+    if @survey.blank?
+       flash[:notice] = "No such survey exists"
+       redirect_to new_survey_path and return
+     else
+      #for sections navigation tabs
+      @all_sections = Section.order(:sequence)
 
-    #if the user is authorized for the survey then get details of all responses
-     @all_responses = Response.get_all_responses(@survey.id)
-    #if the user is authorized for the survey then get details of add to plan responses
-     @add_to_plan_responses = Response.get_response_for_options(@survey.id, "add_to_plan")
-    #for must do responses
-     @must_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'must_do'}
-    #for should do responses
-     @should_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'should_do'}
-    #for could do responses
-     @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
+      #if the user is authorized for the survey then get details of all responses
+       @all_responses = Response.get_all_responses(@survey.id)
+      #if the user is authorized for the survey then get details of add to plan responses
+       @add_to_plan_responses = Response.get_response_for_options(@survey.id, "add_to_plan")
+      #for must do responses
+       @must_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'must_do'}
+      #for should do responses
+       @should_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'should_do'}
+      #for could do responses
+       @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
 
-    #for total count
-     @section_questions_total = Section.find(:all,
-                            :select => "count(questions.position) as question_total, sections.id",
-                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id", :order => "id ASC")
+      #for total count
+       @section_questions_total = Section.find(:all,
+                              :select => "count(questions.position) as question_total, sections.id",
+                              :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
+                              :group => "sections.id", :order => "id ASC")
 
-     #for section questions attempted
-     @section_questions  = Section.find(:all,
-                           :select => "count(responses.question_id) as question_attempted",
-                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id")
+       #for section questions attempted
+       @section_questions  = Section.find(:all,
+                             :select => "count(responses.question_id) as question_attempted",
+                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
+                             :group => "sections.id", :order => "sections.id")
 
-    # render :layout =>"report"
+        # render :layout =>"report"
 
-    # Generate per section score
-    @score_per_section = Survey.calculate_score_for_section(survey_id)
-    @total_score_per_section = @score_per_section[0] + @score_per_section[1] + @score_per_section[2]
-    @total_all_sections_points = @all_sections[0].total_points + @all_sections[1].total_points + @all_sections[2].total_points
+        # Generate per section score
+        @score_per_section = Survey.calculate_score_for_section(survey_id)
+        @total_score_per_section = @score_per_section[0] + @score_per_section[1] + @score_per_section[2]
+        @total_all_sections_points = @all_sections[0].total_points + @all_sections[1].total_points + @all_sections[2].total_points
 
-    respond_to do |format|
-      format.html {render :layout => "report"}
-      format.pdf do
-        pdf =  render_to_string(:pdf => "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf", :template => '/surveys/reports_in_pdf.html.erb', orientation: 'Landscape', :layouts => false)
-        send_data pdf, filename: "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf"
+
+      respond_to do |format|
+        format.html {render :layout => "report"}
+        format.pdf do
+          pdf =  render_to_string(:pdf => "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf", :template => '/surveys/reports_in_pdf.html.erb', orientation: 'Landscape', :layouts => false)
+          send_data pdf, filename: "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf"
+        end
       end
-    end
 
+    end
+  else
+    redirect_to get_response_status_url(@survey)
   end
 end
 
