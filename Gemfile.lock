@@ -54,6 +54,14 @@ GEM
     bootstrap-will_paginate (0.0.9)
       will_paginate
     builder (3.0.4)
+    capistrano (2.15.5)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    capistrano-ext (1.2.1)
+      capistrano (>= 1.0.0)
     client_side_validations (3.1.5)
     code_analyzer (0.4.4)
       sexp_processor
@@ -107,6 +115,13 @@ GEM
     multi_json (1.10.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.7.0)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
     newrelic_rpm (3.7.3.204)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -187,6 +202,8 @@ GEM
     ruby-progressbar (1.4.2)
     rubyXL (1.2.5)
     rubyzip (0.9.9)
+    rvm-capistrano (1.5.1)
+      capistrano (~> 2.15.4)
     sass (3.3.3)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -250,6 +267,8 @@ DEPENDENCIES
   acts_as_ordered (~> 0.0.1.alpha)
   annotate (~> 2.4.1.beta1)
   bootstrap-will_paginate (= 0.0.9)
+  capistrano (= 2.15.5)
+  capistrano-ext
   client_side_validations (~> 3.1.4)
   coffee-rails (= 3.2.2)
   database_cleaner
@@ -262,6 +281,7 @@ DEPENDENCIES
   highline
   jquery-rails (~> 2.0.2)
   less-rails
+  net-ssh (= 2.7.0)
   newrelic_rpm
   nokogiri
   oauth2
@@ -278,6 +298,7 @@ DEPENDENCIES
   random_data
   rubyXL (= 1.2.5)
   rubyzip (= 0.9.9)
+  rvm-capistrano
   sass-rails
   settingslogic
   simple_form (~> 2.0.1)

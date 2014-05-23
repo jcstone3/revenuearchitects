@@ -17,8 +17,8 @@ require "rvm/capistrano"
 set :application, "revenuegrader"
 # set :rvm_type, :system
 # set :rvm_path, '/usr/local/rvm'
-set :rvm_ruby_string, 'ruby-2.0.0-p0'
-set :default_shell, '/bin/bash -l'
+set :rvm_ruby_string, 'ruby-1.9.3-p125'
+# set :default_shell, '/bin/bash -l'
 # set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
 # set :rvm_type, :user
 # Load RVM's capistrano plugin
