@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby "2.0.0"
+#ruby "2.0.0"
 gem 'rails', '3.2.18'
 gem 'pg'
 gem "devise", "~> 2.1.3"
@@ -80,8 +80,6 @@ group :assets do
   # gem "twitter-bootstrap-rails"
 end
 
-
-
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -93,6 +91,10 @@ end
 
 # Deploy with Capistrano
 # gem 'capistrano'
+gem 'capistrano', '2.15.5'
+gem 'net-ssh', '2.7.0'
+gem 'rvm-capistrano'
+gem 'capistrano-ext'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
