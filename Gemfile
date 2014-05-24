@@ -4,6 +4,7 @@ ruby "1.9.3"
 gem 'rails', '3.2.18'
 gem 'pg'
 gem "devise", "~> 2.1.3"
+gem 'unicorn'
 #gem 'oa-oauth', :require => 'omniauth/oauth'
 
 gem 'omniauth'
@@ -63,7 +64,7 @@ group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
 gem 'wkhtmltopdf-binary'
-gem 'unicorn'
+# gem 'unicorn'
 end
 
 #wkhtmltopdf for test, stage and production enviornments
