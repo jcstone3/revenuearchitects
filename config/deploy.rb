@@ -68,16 +68,6 @@ task :restart do
 run "#{ try_sudo } touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
 end
  end
-namespace :folder do
-desc "creating folders for application"
-task :setup, :except => { :no_release => true } do
-run "mkdir -p #{shared_path}/sockets"
-end
-desc "creating symlinks for the folders"
-task :symlink, :except => { :no_release => true } do
-run "ln -nfs #{shared_path}/sockets #{release_path}/tmp/sockets"
-end
-end
 namespace :db do
 desc <<-DESC
 Creates the database.yml configuration file in shared path.
@@ -150,26 +140,39 @@ get "#{shared_path}/#{timestamp}_backup.tar.gz", "#{timestamp}_backup.tar.gz"
 end
 end
 
-# # This will restart the nginx and unicorn
-# namespace :restart do
-# desc "Restarting Nginx"
-# task :nginx_restart, :roles => :app do
-# sudo "service nginx restart"
-# end
+namespace :folder do
+  desc "creating folders for application"
+  task :setup, :except => { :no_release => true } do
+    run "mkdir -p #{shared_path}/sockets"
+  end
+  desc "creating symlinks for the folders"
+  task :symlink, :except => { :no_release => true } do
+    run "ln -nfs #{shared_path}/sockets #{release_path}/tmp/sockets"
+  end
+end
 
-# desc "Restarting Unicorn"
-# task :unicorn_restart, :roles => :app do
-# sudo "service unicorn restart"
-# end
-# end
+# # This will restart the nginx and unicorn
+namespace :restart do
+desc "Restarting Nginx"
+task :nginx_restart, :roles => :app do
+sudo "service nginx restart"
+end
+
+desc "Restarting Unicorn"
+task :unicorn_restart, :roles => :app do
+sudo "service unicorn restart"
+end
+end
 
 after "deploy:setup", "db:setup" unless fetch(:skip_db_setup, false)
 after "symlink_config_files", "deploy:precompile_assets"
 after "deploy:finalize_update", "db:symlink"
-#after "db:setup", "folder:setup"
 after "db:symlink", "deploy:symlink_config_files"
-after "deploy", "deploy:restart"
-after "deploy", "deploy:cleanup"
+after "deploy", "folder:setup"
+after "folder:setup", "folder:symlink"
+after "folder:symlink", "restart:nginx_restart"
+# after "deploy", "deploy:restart"
+# after "deploy", "deploy:cleanup"
 # after "deploy", "restart:nginx_restart"
-# after "restart:nginx_restart", "restart:unicorn_restart"
-# after "restart:unicorn_restart","deploy:cleanup"
+after "restart:nginx_restart", "restart:unicorn_restart"
+after "restart:unicorn_restart","deploy:cleanup"

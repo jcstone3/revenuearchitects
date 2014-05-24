@@ -47,14 +47,14 @@ set :repository,  "git@code.icicletech.com:rails/revenuegrader.git"
 #set :keep_releases, 1
 
 # Path for application deployment
-set :path, "/home/icicle/sites/revenuegrader"
+set :path, "/home/icicle/sites/revenue"
 
 # Location  for deployment i.e server name
-set :location, "192.168.1.13"
+set :location, "192.168.1.2"
 
-role :web, "192.168.1.13"      # Your HTTP server, Apache/etc
-role :app, "192.168.1.13"      # This may be the same as your `Web` server
-role :db, "192.168.1.13"       # This is where Rails migrations will run
+role :web, "192.168.1.2"      # Your HTTP server, Apache/etc
+role :app, "192.168.1.2"      # This may be the same as your `Web` server
+role :db, "192.168.1.2"       # This is where Rails migrations will run
 
 server location, :app , :web, :db, :primary => true
 
