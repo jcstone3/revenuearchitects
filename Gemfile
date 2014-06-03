@@ -60,6 +60,10 @@ gem "acts_as_list", "~> 0.1.6"
 #PDF generation plugin
 gem 'wicked_pdf'
 
+# Squash Setup
+gem 'squash_ruby', :require => 'squash/ruby'
+gem 'squash_rails', :require => 'squash/rails'
+
 group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"

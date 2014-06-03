@@ -35,7 +35,7 @@ module RevenueGrader
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
- 
+
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
@@ -63,16 +63,20 @@ module RevenueGrader
         Devise::SessionsController.layout "website"
         Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "website" }
         Devise::ConfirmationsController.layout "website"
-        Devise::UnlocksController.layout "website"            
-        Devise::PasswordsController.layout "website"        
+        Devise::UnlocksController.layout "website"
+        Devise::PasswordsController.layout "website"
     end
-    
+
     # For Exception Notification.
-  
+
   config.middleware.use ExceptionNotifier,
   :email_prefix => "[RevenueGrader Exception]",
   :sender_address => %{ "RevenueGrader" <admin@revenuegrader.com> },
   :exception_recipients => %{"admin@revenuegrader.com"}
-    
+
+    # Squash Setup
+    Squash::Ruby.configure :api_host => 'http://198.199.123.91',
+    :api_key => 'dfec22c6-109a-4e3f-a439-ce79060d724d',
+    :disabled => (Rails.env.development? || Rails.env.test?)
   end
 end
