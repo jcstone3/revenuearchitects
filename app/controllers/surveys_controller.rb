@@ -89,6 +89,8 @@ def get_response_status
               questions= []
               @survey = Survey.find(params[:id])
               @response = @survey.responses
+              company = Company.find(@survey.company_id)
+
 
               if @response.present?
                  @response.each do |res|
@@ -102,7 +104,12 @@ def get_response_status
                  logger.debug questions
                  res = questions - response
                  @survey_name = @survey.created_at.strftime('%B,%Y')
-                 flash[:success] = "Continue Survey #{@survey_name}"
+                 if company.industry_id.present?
+                  flash[:success] = "Continue Survey #{@survey_name}"
+                 else
+                  flash[:success] = "Please complete your survey to view report"
+                 end
+
                   if(!res[0].blank?)
                     redirect_to questions_path(@survey, res[0])
                   else

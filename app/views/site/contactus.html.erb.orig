@@ -1,0 +1,84 @@
+<% content_for :main_content do -%>
+  <div class="main-content-header">
+    <div class="heading" style="padding-left: 44% !important;">
+      <h1 style="margin-top: 50px;"> Contact Us</h1>
+    </div>
+    <div class="arrow">
+      &nbsp;
+    </div>
+  </div>
+<<<<<<< HEAD
+=======
+
+  <div class="main-content-content contact">
+
+   <%= form_tag(send_mail_path) do %>
+      <div class="form-group">
+        <%= label_tag 'first_name', 'First Name*' %>
+        <%= text_field_tag 'first_name', nil, class: 'form-control', placeholder: 'First Name' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'last_name', 'Last Name*' %>
+        <%= text_field_tag 'last_name', nil, class: 'form-control', placeholder: 'Last Name' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'email', 'Email*' %>
+        <%= email_field_tag 'email', nil, class: 'form-control', placeholder: 'Email' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'company_name', 'Company Name*' %>
+        <%= text_field_tag 'company_name', nil, class: 'form-control', placeholder: 'Company Name' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'website', 'Website' %>
+        <%= text_field_tag 'website', nil, class: 'form-control', placeholder: 'Website' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'phone_number', 'Phone Number' %>
+        <%= telephone_field_tag 'phone_number', nil, class: 'form-control', placeholder: 'Phone Number' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'your_message', 'Your Message' %>
+        <%= text_area_tag 'your_message', nil, class: 'form-control', rows: 4, placeholder: 'Your Message' %>
+      </div>
+      <%= submit_tag nil, class: 'btn btn-default btn-about pull-right', style: "float: left;" %>
+   <% end %>
+  </div>
+<% end -%>
+>>>>>>> 840391af0fb3a0ca70054cf0d4f0546efa323a18
+
+  <div class="main-content-content contact">
+
+   <%= form_tag(send_mail_path) do %>
+      <div class="form-group">
+        <%= label_tag 'first_name', 'First Name*' %>
+        <%= text_field_tag 'first_name', nil, class: 'form-control', placeholder: 'First Name' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'last_name', 'Last Name*' %>
+        <%= text_field_tag 'last_name', nil, class: 'form-control', placeholder: 'Last Name' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'email', 'Email*' %>
+        <%= email_field_tag 'email', nil, class: 'form-control', placeholder: 'Email' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'company_name', 'Company Name*' %>
+        <%= text_field_tag 'company_name', nil, class: 'form-control', placeholder: 'Company Name' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'website', 'Website' %>
+        <%= text_field_tag 'website', nil, class: 'form-control', placeholder: 'Website' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'phone_number', 'Phone Number' %>
+        <%= telephone_field_tag 'phone_number', nil, class: 'form-control', placeholder: 'Phone Number' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag 'your_message', 'Your Message' %>
+        <%= text_area_tag 'your_message', nil, class: 'form-control', rows: 4, placeholder: 'Your Message' %>
+      </div>
+      <%= submit_tag nil, class: 'btn btn-default btn-about pull-right', style: "float: left;" %>
+   <% end %>
+  </div>
+<% end -%>
