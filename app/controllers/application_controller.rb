@@ -5,9 +5,6 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user
 
-  include Squash::Ruby::ControllerMethods
-  enable_squash_client
-
   #before_filter :check_resource_type
   #to set the redirect path after sign in/ registration
   def after_sign_in_path_for(resource)

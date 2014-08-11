@@ -73,10 +73,5 @@ module RevenueGrader
   :email_prefix => "[RevenueGrader Exception]",
   :sender_address => %{ "RevenueGrader" <admin@revenuegrader.com> },
   :exception_recipients => %{"admin@revenuegrader.com"}
-
-    # Squash Setup
-    Squash::Ruby.configure :api_host => 'http://ex.icicletech.com/',
-      :api_key => '88238103-5725-4971-9248-a35c46940f51',
-      :disabled => (Rails.env.development? || Rails.env.test?)
   end
 end
