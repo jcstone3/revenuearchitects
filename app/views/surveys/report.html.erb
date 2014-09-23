@@ -35,10 +35,6 @@
                                       :locals=>{:response => response}%>
                                     <%end%>
                                   <%= render :partial=>"table_end"%>
-                                    <p style="color: #333333;font-weight: 700;margin-top: 20px;margin-left: 52px;">Download
-                                       <%= link_to "CSV", import_csv_path(format: "csv") %> | <%= link_to "Excel", import_excel_path(format: "xls") %>
-
-                                    </p>
                                 </div>
                               </div>
                               <div class="tab-pane" id="overall" style="height:auto;">
@@ -145,9 +141,4 @@ var google_conversion_value = 1;
 </div>
 
 </noscript>
-
-<p style="margin-top: -17px;">
-  <%= link_to "Export to PDF", reports_url(:format => :pdf) %>
-</p>
-
 <% end %>
