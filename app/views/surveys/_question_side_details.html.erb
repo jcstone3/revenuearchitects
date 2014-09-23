@@ -17,21 +17,11 @@
 
 <div class="scoreboard">
   <div class="head">
-    <p class="abouttext">What it means?</p>
+    <h2 class="abouttext">What it means?</h2>
   </div>
   <div class="text1"><br>
     <p class="abouttextcontent">
-      <%= @question.description%>           
+      <%= @question.description%>
     </p>
   </div> 
-</div>
-
-<div class="scoreboard">
-  <div class="head" >
-    <p class="scoretext">This Section Score</p> 
-  </div>
-  <div class="score3"><br>
-    <%= @total_score%>/<span class="totalpoints"><%= @question.total_points%></span> <br>
-      <span>POINTS</span>
-  </div>
 </div>
