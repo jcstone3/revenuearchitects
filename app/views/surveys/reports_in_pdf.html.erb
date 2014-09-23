@@ -578,7 +578,7 @@ table.dataTable th:active {
 </style>
         <div class="content" style="page-break-after:always;text-align:center;margin-top:250px;">
         <div style="text-align:center;">
-          <img src="http://stage.revenuegrader.com/assets/logo.png" alt="Revenue Grader"><br/>
+          <img src="http://www.revenuegrader.com/assets/logo.png" alt="Revenue Grader"><br/>
           <span style="font-size:60px;margin-top:20px;color: #0086AC;"> <%= "Revenue Grader" %></span>
         </div>
       </div>
@@ -595,7 +595,7 @@ table.dataTable th:active {
               <h3 style="margin-top:0px;">Report: <%= @survey.created_at.strftime("%B  %Y")%></h3>&nbsp;
             </div>
           <div style="text-align:left;margin-top:160px;">
-            <h3>Diagnostic Conducted By:</h3>
+            <h3>Diagnostic:</h3>
             <h4><%= current_user.username.present? ? current_user.username : '' %></h4></br>
             <h4>Completed By: <%= current_user.email.present? ? current_user.email : '' %></h4>
           </div>
