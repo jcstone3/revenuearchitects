@@ -5,31 +5,33 @@
       <div class="modal-title" id="myModalLabel">Quick Start Instructions</div>
     </div>
     <div class="lightbox-popup-content">
-      <div>
-        1. Answer each of the 50 questions in the diagnostic. It takes about an hour.
-        </br>
-        <span class="sub-points">
-          a. For each dimension, rate your current level of maturity and the importance of each item from (1-5)
-        </span>
-        <span class="sub-points">
-          b. Choose ‘Add to Plan’, ‘In Your Plan’ or "Not Applicable".
-        </span>
-      </div>
-      <div>
-        2. If added to your plan, prioritize the dimension: (Must, Should, Could)
-      </div>
-      <div>
-        3. Press 'Confirm' to register your response.
-      </div>
-      <!-- <div>
-        4. You can optionally add items  to your plan. If you add an item to the pla, you can enter a priority (must, should, could).
-      </div>
-      <div>
-        5. Press 'Confirm' to register your response. You can return to edit items.
-      </div> -->
-       <div>
-        If you have any questions or need help, contact us at contact@revenuearchitects.com
-      </div>
+      <ol>
+        <li>
+          Answer each of the 50 questions in the diagnostic. It takes about an hour.
+          </br>
+          <ol>
+            <li>
+              For each dimension, rate your current level of maturity and the importance of each item from (1-5)
+            </li>
+            <li>
+              Choose <i>‘Add to Plan’, ‘In Your Plan’</i> or <i>'Not Applicable'</i>.
+            </li>
+          </ol>
+        </li>
+        <li>
+          If added to your plan, prioritize the dimension: (Must, Should, Could)
+        </li>
+        <li>
+          Press <i>'Confirm'</i> to register your response.
+        </li>
+        <!-- <li>
+          4. You can optionally add items  to your plan. If you add an item to the pla, you can enter a priority (must, should, could).
+        </li>
+        <li>
+          5. Press 'Confirm' to register your response. You can return to edit items.
+        </li> -->
+      </ol>
+      <p>If you have any questions or need help, contact us at <%= mail_to 'contact@revenuearchitects.com' %></p>
       </br>
       <%= check_box_tag "prevent_popup", id: "prevent_popup" %>
       <span class="checkbox-popup-label">
