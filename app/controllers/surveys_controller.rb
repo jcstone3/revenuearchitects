@@ -411,7 +411,7 @@ def report
         # Generate per section score
         @score_per_section = Survey.calculate_score_for_section(survey_id)
         @total_score_per_section = @score_per_section[0] + @score_per_section[1] + @score_per_section[2]
-        @total_all_sections_points = @all_sections[0].total_points + @all_sections[1].total_points + @all_sections[2].total_points
+        @total_all_sections_points = @all_sections[0].total_points.to_i + @all_sections[1].total_points.to_i + @all_sections[2].total_points.to_i
 
 
       respond_to do |format|
