@@ -350,15 +350,15 @@ def self.get_score_value(question_points, response_score)
   response_percentage = 0
   case response_score_int
              when 1
-               response_percentage = -20
+               response_percentage = 10
              when 2
-               response_percentage = -10
+               response_percentage = 40
              when 3
-               response_percentage = 0
+               response_percentage = 60
              when 4
-               response_percentage = 20
+               response_percentage = 80
              when 5
-               response_percentage = 30
+               response_percentage = 100
              end
 
   # individual response score calculation will be
