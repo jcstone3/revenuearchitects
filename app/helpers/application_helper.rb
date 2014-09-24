@@ -16,4 +16,13 @@ module ApplicationHelper
     select_without_client_side_validations(method, choices, options, html_options)
   end
 
+  def show_question_number(question)
+    position = question.position
+    count = 0
+    @all_sections.limit(question.section_id.to_i - 1).each_with_index do |section, index|
+      count = count + @section_questions_total[index].question_total.to_i
+    end
+    position > count ? (position - count) : position
+  end
+
 end
