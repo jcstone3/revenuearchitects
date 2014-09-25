@@ -1,0 +1,32 @@
+<div class="social-btns">
+  <%= link_to image_tag("google-button.png", :alt=>"google"), user_omniauth_authorize_path(:google_oauth2), class: 'google-btn' %>
+  <%= link_to image_tag("twitter-button.png", :alt=>"twitter"), user_omniauth_authorize_path(:twitter), class: 'twitter-btn' %>
+  <%= link_to image_tag("facebook-button.png", :alt=>"facebook"), user_omniauth_authorize_path(:facebook), class: 'facebook-btn' %>
+  <%= link_to image_tag("linkedin-button.png", :alt=>"linkedin"), user_omniauth_authorize_path(:linkedin), class: 'linkedin-btn' %>
+</div>
+
+<ul class="nav nav-tabs">
+  <li>
+    <a class="googlelink" href="#google" data-toggle="tab" id="google_click" >
+      <%= image_tag "plus_icon.png", :alt=>"google", :id=>"google_click"%>
+    </a>
+  </li>
+
+  <li>
+    <a class="twitterlink" href="#twitter" data-toggle="tab" id="twitter_click" >
+      <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
+    </a>
+  </li>
+
+  <li>
+    <a class="facebooklink" href="#facebook" data-toggle="tab"  id="facebook_click">
+      <%= image_tag "facebook_icon.png", :alt=>"facebook", :id=>"facebook_click"%>
+    </a>
+  </li>
+
+  <li>
+    <a class="linkedinlink" href="#linkedin" data-toggle="tab"  id="linkedin_click">
+      <%= image_tag "linkedin_icon.png", :alt=>"linkedin", :id=>"linkedin_click"%>
+    </a>
+  </li>
+</ul>

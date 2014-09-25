@@ -39,42 +39,9 @@
         <%end%>
       </div><!-- rightboxName -->
     </div><!-- tab-pane active -->
-
-
-
-    <div class="tab-pane signingoogle" id="google">
-      <br>
-      <%= link_to image_tag("signin_with_google(270 X 59).png", :alt=>"google"), user_omniauth_authorize_path(:google_oauth2) %>
-    </div><!-- tab-pane signingoogle -->
-
-    <div class="tab-pane signintweet" id="twitter">
-      <br>
-      <%= link_to image_tag("sign_in_with_twitter.png" , :alt=>"twitter"), user_omniauth_authorize_path(:twitter) %>
-    </div><!-- tab-pane signintweet -->
-
-    <div class="tab-pane signinbtn" id="facebook">
-      <br>
-      <%= link_to image_tag("login-w-fb.gif", :alt=>"facebook"), user_omniauth_authorize_path(:facebook) %>
-    </div> <!-- tab-pane signinbtn -->
-    <ul class="nav nav-tabs">
-      <li>
-        <a class="googlelink" href="#google" data-toggle="tab" id="google_click" >
-          <%= image_tag "plus_icon.png", :alt=>"google", :id=>"google_click"%>
-        </a>
-      </li>
-
-      <li>
-        <a class="twitterlink" href="#twitter" data-toggle="tab"  id="twitter_click" >
-          <%= image_tag "twitter_icon.png", :alt=>"twitter", :id=>"twitter_click"%>
-        </a>
-      </li>
-
-      <li>
-        <a class="facebooklink" href="#facebook" data-toggle="tab" id="facebook_click">
-          <%= image_tag "facebook_icon.png", :alt=>"facebook", :id=>"facebook_click"%>
-        </a>
-      </li>
-    </ul>
+    <div class="social-login">
+      <%= render partial: 'shared/social_login' %>
+    </div>
   </div>
 <% end -%>
 
