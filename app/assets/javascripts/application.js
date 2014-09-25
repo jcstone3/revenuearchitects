@@ -37,6 +37,8 @@ $(document).ready(function(){
             $('#google_click').css({'background-color' :'#bb2a0b'});
             $('#twitter_click').css({'background-color' :'#53b1f0'});
             $('#facebook_click').css({'background-color' :'#3b5998'});
+            $('#linkedin_click').css({'background-color' :'#006695'});
+            $('.social-btns a').hide();
           });
 
         $('#google_click').click(function(){
@@ -45,6 +47,9 @@ $(document).ready(function(){
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
+          $('#linkedin_click').css({'background-color' :'#006695'});
+          $('.social-btns a').hide();
+          $('.google-btn').show();
         });
 
         $('#twitter_click').click(function(){
@@ -53,6 +58,9 @@ $(document).ready(function(){
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
           $('#google_click').css({'background-color' :'#bb2a0b'});
+          $('#linkedin_click').css({'background-color' :'#006695'});
+          $('.social-btns a').hide();
+          $('.twitter-btn').show();
         });
 
         $('#facebook_click').click(function(){
@@ -61,27 +69,21 @@ $(document).ready(function(){
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
           $('#google_click').css({'background-color' :'#bb2a0b'});
+          $('#linkedin_click').css({'background-color' :'#006695'});
+          $('.social-btns a').hide();
+          $('.facebook-btn').show();
         });
 
-        // $('#google_click').click(function(){
-        //  $('#tab-content').css({'border' :'#bb2a0b', 'color': '#fff'});
-        //  }, function () {
-     //       var cssObj = {
-     //         'background-color' : '#bb2a0b',
-     //         'color': '#fff'
-     //         }
-     //       $('#tab-content').css(cssObj);
-      //    });
-
         $('#linkedin_click').click(function(){
-          $('#tab-content').css({'background-color' :'#006695', 'color': '#fff'});
-          }, function () {
-            var cssObj = {
-              'background-color' : '#006695',
-              'color': '#fff'
-            }
-            $('#tab-content').css(cssObj);
-          });
+          $('#facebook_click').css({'background-color' :'#3b5998'});
+          $('#home_click').css({'color' :'#555555'});
+          $('#home_click').css({'background-color' :'#e3e3e3'});
+          $('#twitter_click').css({'background-color' :'#53b1f0'});
+          $('#google_click').css({'background-color' :'#bb2a0b'});
+          $('#linkedin_click').css({'background-color' :'#fff'});
+          $('.social-btns a').hide();
+          $('.linkedin-btn').show();
+        });
       //--------end-of-login-click ------------//
       //---- question js ---------------------//
       //set defalut value for anwer1
