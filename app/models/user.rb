@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
       user
     else
       uid = access_token.uid
-      email = if data.email ? data.email : "#{uid}@test.com"
+      email = data.email ? data.email : "#{uid}@test.com"
       user = User.create!(email: email, password: Devise.friendly_token[0,20], website: "http://www.#{uid}.com")
       user.authorizations.create!(uid: uid, provider: provider)
     end
