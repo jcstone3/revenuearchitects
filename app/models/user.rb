@@ -61,6 +61,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_for_linkedin_oauth(access_token, provider)
+    data = access_token.info
+    user = Authorization.where(uid: access_token.uid, provider: provider).first.try(:user)
+    if user
+      user
+    else
+      uid = access_token.uid
+      email = if data.email ? data.email : "#{uid}@test.com"
+      user = User.create!(email: email, password: Devise.friendly_token[0,20], website: "http://www.#{uid}.com")
+      user.authorizations.create!(uid: uid, provider: provider)
+    end
+    user
+  end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

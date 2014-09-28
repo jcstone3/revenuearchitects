@@ -227,8 +227,8 @@ Devise.setup do |config|
                   Settings.google_api_id,
                   Settings.google_secret_key
 
-  #require 'omniauth-linkedin'
   #require 'oauth'
+  require 'omniauth-linkedin'
   config.omniauth :linkedin, Settings.linkedin_api_key, Settings.linkedin_secret_key
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

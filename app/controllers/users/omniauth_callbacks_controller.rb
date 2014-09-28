@@ -59,21 +59,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def linkedin
-    @user = User.find_for_oauth(request.env["omniauth.auth"], current_user, "linkedin")
+    @user = User.find_for_linkedin_oauth(request.env["omniauth.auth"], "linkedin")
     data = request.env["omniauth.auth"].extra.raw_info
-    if @user.persisted? 
-    logger.debug "User #{data} is persisted"
-      #if new user then create Authorization
-      authentication = Authorization.find_by_provider_and_uid('linkedin', data.id)
-      if authentication
-       else
-         @user.authorizations.create!(:provider => 'linkedin', :uid => @user.username, :link => data.link) 
-      end
-      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "LinkedIn"
+
+    if @user.persisted?
+      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Linkedin"
       sign_in_and_redirect @user, :event => :authentication
     else
-      logger.error "User #{@user.email} is not persisted"
-      session["devise.linkedin_data"] = request.env["omniauth.auth"]
+      session["devise.linkedin"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url
     end
   end
