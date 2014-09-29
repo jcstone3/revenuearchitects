@@ -201,12 +201,10 @@ dl#csschart span em{
 * Table
 */
 table.dataTable2 {
-  page-break-after:5;
   color:#FFF;
-  display:table-header-group;
-  page-break-inside: avoid;
+  width: 100%;
 }
-.textbox table thead th {
+.textbox table thead th, .div-table-head {
   background-image: -moz-linear-gradient(top, #4e5960, #647077);
   background-image: -ms-linear-gradient(top, #4e5960, #647077);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e5960), to(#647077));
@@ -214,7 +212,7 @@ table.dataTable2 {
   background-image: -o-linear-gradient(top, #4e5960, #647077);
   background-image: linear-gradient(top, #4e5960, #647077);
   background-color:#909090;
-  padding: 3px 18px 3px 10px;
+  padding: 3px 10px;
   border-bottom: 1px solid black;
   color:#ffffff;
   font-weight: bold;
@@ -232,8 +230,6 @@ table.dataTable2 {
 .textbox table tbody tr {
   font-weight: 100;
   font-family: "Lato", sans-serif;
-  font-size: 15px;
-  page-break-inside: avoid;
 }
 table.dataTable thead h3{
   display:table-header-group;
@@ -274,24 +270,21 @@ table.dataTable tr.even td.sorting_3 { background-color: #E9E9E9; }
 
 
 table.dataTable2{
-  width :100px;
-  font-size:15px;
-
+  font-size:12px;
 }
 
 report-body dataTable2
 table.dataTable2 tfoot th {
-  padding: 3px 10px 3px 10px;
+  padding: 3px 10px;
   border-top: 1px solid black;
   font-weight: bold;
-  display:table-header-group;
 }
 
-table.dataTable2 td {
+table.dataTable2 td{
   padding: 3px 10px;
   background-color: #80C2D6;
   font-weight:bold;
-  font-size:15px;
+  font-size:12px;
 }
 
 table.dataTable2 td.center,
@@ -575,6 +568,69 @@ table.dataTable th:active {
 #about_us li span{
   color: #FFA500;
 }
+table p{
+  margin: 0;
+  line-height: 20px;
+  display: block;
+}
+.div-table { page-break-inside:auto!important }
+.div-td, p { page-break-inside:avoid!important; }
+.div-tr    { page-break-inside:avoid!important; page-break-after:auto!important; }
+thead { display:table-header-group }
+tfoot { display:table-footer-group }
+
+.div-table{
+  color: #fff;
+  font-size: 12px;
+  display: table;
+  border-collapse: separate;
+  border-spacing: 1pt;
+}
+.div-table, .div-table-header, .div-table-body, .div-tr{
+  display: block;
+  width: 100%;
+}
+.div-table-body{
+  text-align: center;
+  page-break-inside: auto;
+}
+.div-tr{
+  display: table-row;
+  page-break-inside: avoid;
+  page-break-after: auto;
+  page-break-before: auto;
+  margin: 0;
+  background: #fff;
+}
+.div-td{
+  background-color: #80C2D6;
+  page-break-inside: avoid;
+  width: 6%;
+  height: 100%;
+  display: table-cell;
+  padding: 0px 5px;
+}
+.div-td:nth-child(1){
+  text-align: left;
+  width: 10%;
+}
+.div-td:nth-child(2){
+  text-align: left;
+  width: 57%;
+}
+.div-table-header .div-td{
+  text-align: center;
+  background-image: -moz-linear-gradient(top, #4e5960, #647077);
+  background-image: -ms-linear-gradient(top, #4e5960, #647077);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e5960), to(#647077));
+  background-image: -webkit-linear-gradient(top, #4e5960, #647077);
+  background-image: -o-linear-gradient(top, #4e5960, #647077);
+  background-image: linear-gradient(top, #4e5960, #647077);
+  background-color: #909090;
+  border-bottom: 1px solid black;
+  vertical-align: middle;
+  border-spacing: 0px;
+}
 </style>
         <div class="content" style="page-break-after:always;text-align:center;margin-top:250px;">
         <div style="text-align:center;">
@@ -617,19 +673,19 @@ table.dataTable th:active {
                 <p>
                 <span>Strategy</span><br/>
                 Define your competitive advantage.<br/>
-                Score: <%= @score_per_section[0] %> / <%= @all_sections[0].total_points%><br/>
+                Score: <%= @score_per_section[0] %> / <%= @all_sections[0].total_points.to_i %><br/>
                 <b><%= '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100) %>%</b>
 
                 <br/><br/>
                 <span>Systems</span<br/>
                 Build an agile and durable platform.<br/>
-                Score: <%= @score_per_section[1] %> / <%= @all_sections[1].total_points%><br/>
+                Score: <%= @score_per_section[1] %> / <%= @all_sections[1].total_points.to_i %><br/>
                 <b><%= '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100) %>%</b>
 
                 <br/><br/>
                 <span>Programs</span<br/>
                 Launch integrated campaigns.<br/>
-                Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points%><br/>
+                Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points.to_i %><br/>
                 <b><%= '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100) %>%</b>
 
                 <br/><br/>
@@ -663,35 +719,33 @@ table.dataTable th:active {
 
              <div class="content"><h1>All Items</h1></div>
              <div class="textbox">
-               <table cellpadding="1" cellspacing="1" id="report_in_planTable" class="report-body dataTable2">
-                <thead class="table-header">
-                <tr>
-                  <th><h3>Category</h3></th>
-                  <th><h3>Questions</h3></th>
-                  <th><h3>Points</h3></th>
-                  <th><h3>Your Score</h3></th>
-                  <th><h3>Avg Score</h3></th>
-                  <th><h3>Cal Score</h3></th>
-                  <th><h3>Avg Cal Score</h3></th>
-                </tr>
-                </thead>
-                <tbody>
-                    <% @all_responses.each do |response|%>
-                      <tr>
-                        <td style="text-align:left !important"><%= response.sub_sect_name %></td>
-                        <td width="600" style="text-align:left !important"><%= response.name %></td>
-                        <td><%= response.points %></td>
-                        <td><%= response.score %></td>
-                        <td><%= response.response_id.present? ?
-                        get_average_score(response.questions_id, response.survey_id) : 0 %></td>
-                        <td><%= response.response_id.present? ?
-                        get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
-                        <td><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                        </td>
-                      </tr>
+               <div id="report_in_planTable" class="report-body dataTable2 div-table">
+                <div class="table-header div-table-header">
+                  <div class="div-td"><h3>Category</h3></div>
+                  <div class="div-td"><h3>Questions</h3></div>
+                  <div class="div-td"><h3>Points</h3></div>
+                  <div class="div-td"><h3>Your Score</h3></div>
+                  <div class="div-td"><h3>Avg Score</h3></div>
+                  <div class="div-td"><h3>Cal Score</h3></div>
+                  <div class="div-td"><h3>Avg Cal Score</h3></div>
+                </div>
+                <div class="div-table-body">
+                    <% @all_responses.each_with_index do |response, index|%>
+                      <div class="div-tr">
+                        <div class="div-td"><p><%= response.sub_sect_name %></p></div>
+                        <div class="div-td"><p><%= response.name %></p></div>
+                        <div class="div-td"><%= response.points %></div>
+                        <div class="div-td"><%= response.score %></div>
+                        <div class="div-td"><%= response.response_id.present? ?
+                        get_average_score(response.questions_id, response.survey_id) : 0 %></div>
+                        <div class="div-td"><%= response.response_id.present? ?
+                        get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
+                        <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
+                        </div>
+                      </div>
                     <%end%>
-                 </tbody>
-               </table>
+                 </div>
+               </div>
         </div>
       </div>
       <% end %>
