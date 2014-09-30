@@ -347,6 +347,11 @@ $(document).ready(function(){
                   }
                 });
 
+                $('.important-slabels span').click(function(e){
+                  console.log($(this).data('value'));
+                  $( "#importance-slider" ).slider( "value", $(this).data('value') )
+                  $( "#response_answer_4" ).val( $( "#importance-slider" ).slider( "value" ));
+                });
 
                 // $("div#slider a.ui-slider-handle").tooltip({
                 //     //placement: 'bottom'
