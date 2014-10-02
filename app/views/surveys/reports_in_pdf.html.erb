@@ -613,7 +613,7 @@ tfoot { display:table-footer-group }
 }
 .div-td:nth-child(2){
   text-align: left;
-  width: 57%;
+  width: 47%;
 }
 .div-table-header .div-td{
   text-align: center;
@@ -628,6 +628,10 @@ tfoot { display:table-footer-group }
   vertical-align: middle;
   border-spacing: 0px;
 }
+.div-td.success{ background: #dff0d8; color: #000; }
+.div-td.warning{ background: #fcf8e3; color: #000; }
+.div-td.danger{ background: #f2dede; color: #000; }
+
 </style>
         <div class="content" style="page-break-after:always;text-align:center;margin-top:250px;">
         <div style="text-align:center;">
@@ -720,6 +724,7 @@ tfoot { display:table-footer-group }
                 <div class="table-header div-table-header">
                   <div class="div-td"><h3>Category</h3></div>
                   <div class="div-td"><h3>Questions</h3></div>
+                  <div class="div-td"><h3>Priority</h3></div>
                   <div class="div-td"><h3>Points</h3></div>
                   <div class="div-td"><h3>Your Score</h3></div>
                   <div class="div-td"><h3>Avg Score</h3></div>
@@ -731,6 +736,7 @@ tfoot { display:table-footer-group }
                       <div class="div-tr">
                         <div class="div-td"><p><%= response.sub_sect_name %></p></div>
                         <div class="div-td"><p><%= response.name %></p></div>
+                        <%= priority_column(response.answer_3) %>
                         <div class="div-td"><%= response.points %></div>
                         <div class="div-td"><%= response.score %></div>
                         <div class="div-td"><%= response.response_id.present? ?

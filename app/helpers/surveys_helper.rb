@@ -52,4 +52,16 @@ module SurveysHelper
       end
       @sub_section_answered
     end
+
+  def priority_class(answer_priority)
+    case answer_priority
+    when 'must_do' then 'success'
+    when 'should_do' then 'warning'
+    when 'could_do' then 'danger'
+    end
+  end
+
+  def priority_column(answer_priority)
+    content_tag :div, content_tag(:p, answer_priority.to_s.humanize), class: "div-td #{priority_class(answer_priority)}"
+  end
 end
