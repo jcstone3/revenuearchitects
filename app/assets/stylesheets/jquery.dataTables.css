@@ -71,7 +71,13 @@ table.dataTable2 tfoot th {
 }
 
 table.dataTable2 td {
-	padding: 3px 10px;
+	padding: 5px 3px;
+	text-align: center;
+}
+
+table.dataTable2 td.question-column {
+	width: 100%;
+	text-align: left;
 }
 
 table.dataTable2 td.center,
