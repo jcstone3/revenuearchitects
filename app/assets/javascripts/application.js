@@ -129,9 +129,6 @@ $(document).ready(function(){
                 }
 
                }
-               else{
-                $('#priority_option').hide();
-               }
 
                //highlight the section currently on
                 var section_id_val = $('#section').val();
@@ -211,10 +208,10 @@ $(document).ready(function(){
                     $('#option').find('a#'+e.target.id+'').addClass('btn form btn-success priorityTip');
                     //if Add to Plan is clicked the show the priority tab
                     if(e.target.id == "add_to_plan"){
-                      $('#priority_option').show();
+                      $('#priority_option').slideDown( "fast" );
                     }
                     else{
-                      $('#priority_option').hide();
+                      $('#priority_option').slideUp( "fast" );
                     }
                 });
 
