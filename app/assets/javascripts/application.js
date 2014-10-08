@@ -579,7 +579,7 @@ $(document).ready(function(){
         } );
 
        //-------report page table ids ------ //
-       $('#report_allTable').dataTable( {
+       $('#report_StrategyTable, #report_ProgramTable, #report_SystemTable').dataTable( {
             "bPaginate": false,
             "bLengthChange": false,
             "bFilter": true,

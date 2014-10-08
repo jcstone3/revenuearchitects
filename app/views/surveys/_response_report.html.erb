@@ -1,19 +1,18 @@
-
-	        <tr>
-                <td><%= response.questions_id %></td>
-                <td class="question-column"><%= response.name %></td>
-                <td><%= response.section_name.try(:titleize)%></td>
-                <td><%= response.sub_sect_name.try(:titleize)%></td>
-                <td><%= response.points %></td>
-                <td><%= response.score %></td>
-                <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
-                <td>
-                  <% performance_gap = get_performance_gap(response.answer_4, response.score) %>
-                  <%= performance_gap.present? ?
-                  performance_gap : 0 %>
-                </td>
-                <td><%= response.answer_3.try(:titleize) %></td>
-                </tr>
+<tr>
+  <td><%= @index %></td>
+  <td class="question-column"><%= response.name %></td>
+  <td><%= response.section_name.try(:titleize)%></td>
+  <td><%= response.sub_sect_name.try(:titleize)%></td>
+  <td><%= response.points %></td>
+  <td><%= response.score %></td>
+  <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
+  <td>
+    <% performance_gap = get_performance_gap(response.answer_4, response.score) %>
+    <%= performance_gap.present? ?
+    performance_gap : 0 %>
+  </td>
+  <td><%= response.answer_3.try(:titleize) %></td>
+</tr>
 
 
 

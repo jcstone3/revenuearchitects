@@ -54,6 +54,9 @@ GEM
     bootstrap-will_paginate (0.0.9)
       will_paginate
     builder (3.0.4)
+    byebug (3.0.0)
+      columnize (~> 0.3)
+      debugger-linecache (~> 1.2)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
@@ -73,8 +76,10 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     colored (1.2)
+    columnize (0.8.9)
     commonjs (0.2.7)
     database_cleaner (1.2.0)
+    debugger-linecache (1.2.0)
     devise (2.1.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -273,6 +278,7 @@ DEPENDENCIES
   acts_as_ordered (~> 0.0.1.alpha)
   annotate (~> 2.4.1.beta1)
   bootstrap-will_paginate (= 0.0.9)
+  byebug
   capistrano (= 2.15.5)
   capistrano-ext
   client_side_validations (~> 3.1.4)

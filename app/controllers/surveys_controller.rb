@@ -385,6 +385,9 @@ def report
 
       #if the user is authorized for the survey then get details of all responses
        @all_responses = Response.get_all_responses(@survey.id)
+       @all_responses_for_strategy = Response.get_response(1, @survey.id)
+       @all_responses_for_system = Response.get_response(2, @survey.id)
+       @all_responses_for_program = Response.get_response(3, @survey.id)
       #if the user is authorized for the survey then get details of add to plan responses
        @add_to_plan_responses = Response.get_response_for_options(@survey.id, "add_to_plan")
       #for must do responses

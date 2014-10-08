@@ -122,8 +122,9 @@ table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
  * Filter
  */
 .dataTables_filter {
-	float: right;
-	text-align: left;
+	position: absolute;
+	top: -60px;
+	right: 10px;
 }
 
 
