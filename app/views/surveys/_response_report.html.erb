@@ -11,7 +11,7 @@
     <%= performance_gap.present? ?
     performance_gap : 0 %>
   </td>
-  <td><%= response.answer_3.try(:titleize) %></td>
+  <td><%= response.answer_3.blank? ? response.in_plan.humanize : response.answer_3.try(:titleize) %></td>
 </tr>
 
 
