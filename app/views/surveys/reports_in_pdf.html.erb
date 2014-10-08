@@ -718,37 +718,103 @@ tfoot { display:table-footer-group }
               </div>
             </div>
 
-             <div class="content"><h1>All Items</h1></div>
-             <div class="textbox">
-               <div id="report_in_planTable" class="report-body dataTable2 div-table">
-                <div class="table-header div-table-header">
-                  <div class="div-td"><h3>Category</h3></div>
-                  <div class="div-td"><h3>Questions</h3></div>
-                  <div class="div-td"><h3>Priority</h3></div>
-                  <div class="div-td"><h3>Points</h3></div>
-                  <div class="div-td"><h3>Your Score</h3></div>
-                  <div class="div-td"><h3>Avg Score</h3></div>
-                  <div class="div-td"><h3>Cal Score</h3></div>
-                  <div class="div-td"><h3>Avg Cal Score</h3></div>
+        <div class="content"><h1>Strategy</h1></div>
+        <div class="textbox">
+          <div id="report_in_planTable" class="report-body dataTable2 div-table">
+            <div class="table-header div-table-header">
+              <div class="div-td"><h3>Category</h3></div>
+              <div class="div-td"><h3>Questions</h3></div>
+              <div class="div-td"><h3>Priority</h3></div>
+              <div class="div-td"><h3>Points</h3></div>
+              <div class="div-td"><h3>Your Score</h3></div>
+              <div class="div-td"><h3>Avg Score</h3></div>
+              <div class="div-td"><h3>Cal Score</h3></div>
+              <div class="div-td"><h3>Avg Cal Score</h3></div>
+            </div>
+            <div class="div-table-body">
+              <% @all_responses_for_strategy.each do |response|%>
+                <div class="div-tr">
+                  <div class="div-td"><p><%= response.sub_sect_name %></p></div>
+                  <div class="div-td"><p><%= response.name %></p></div>
+                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td") : priority_column(response.answer_3) %>
+                  <div class="div-td"><%= response.points %></div>
+                  <div class="div-td"><%= response.score %></div>
+                  <div class="div-td"><%= response.response_id.present? ?
+                  get_average_score(response.questions_id, response.survey_id) : 0 %></div>
+                  <div class="div-td"><%= response.response_id.present? ?
+                  get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
+                  <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
+                  </div>
                 </div>
-                <div class="div-table-body">
-                    <% @all_responses.each_with_index do |response, index|%>
-                      <div class="div-tr">
-                        <div class="div-td"><p><%= response.sub_sect_name %></p></div>
-                        <div class="div-td"><p><%= response.name %></p></div>
-                        <%= priority_column(response.answer_3) %>
-                        <div class="div-td"><%= response.points %></div>
-                        <div class="div-td"><%= response.score %></div>
-                        <div class="div-td"><%= response.response_id.present? ?
-                        get_average_score(response.questions_id, response.survey_id) : 0 %></div>
-                        <div class="div-td"><%= response.response_id.present? ?
-                        get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
-                        <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                        </div>
-                      </div>
-                    <%end%>
-                 </div>
-               </div>
+              <%end%>
+            </div>
+          </div>
+        </div>
+
+        <div class="content"><h1>System</h1></div>
+        <div class="textbox">
+          <div id="report_in_planTable" class="report-body dataTable2 div-table">
+            <div class="table-header div-table-header">
+              <div class="div-td"><h3>Category</h3></div>
+              <div class="div-td"><h3>Questions</h3></div>
+              <div class="div-td"><h3>Priority</h3></div>
+              <div class="div-td"><h3>Points</h3></div>
+              <div class="div-td"><h3>Your Score</h3></div>
+              <div class="div-td"><h3>Avg Score</h3></div>
+              <div class="div-td"><h3>Cal Score</h3></div>
+              <div class="div-td"><h3>Avg Cal Score</h3></div>
+            </div>
+            <div class="div-table-body">
+              <% @all_responses_for_system.each do |response|%>
+                <div class="div-tr">
+                  <div class="div-td"><p><%= response.sub_sect_name %></p></div>
+                  <div class="div-td"><p><%= response.name %></p></div>
+                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td") : priority_column(response.answer_3) %>
+                  <div class="div-td"><%= response.points %></div>
+                  <div class="div-td"><%= response.score %></div>
+                  <div class="div-td"><%= response.response_id.present? ?
+                  get_average_score(response.questions_id, response.survey_id) : 0 %></div>
+                  <div class="div-td"><%= response.response_id.present? ?
+                  get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
+                  <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
+                  </div>
+                </div>
+              <%end%>
+            </div>
+          </div>
+        </div>
+
+        <div class="content"><h1>Program</h1></div>
+        <div class="textbox">
+          <div id="report_in_planTable" class="report-body dataTable2 div-table">
+            <div class="table-header div-table-header">
+              <div class="div-td"><h3>Category</h3></div>
+              <div class="div-td"><h3>Questions</h3></div>
+              <div class="div-td"><h3>Priority</h3></div>
+              <div class="div-td"><h3>Points</h3></div>
+              <div class="div-td"><h3>Your Score</h3></div>
+              <div class="div-td"><h3>Avg Score</h3></div>
+              <div class="div-td"><h3>Cal Score</h3></div>
+              <div class="div-td"><h3>Avg Cal Score</h3></div>
+            </div>
+            <div class="div-table-body">
+              <% @all_responses_for_program.each do |response|%>
+                <div class="div-tr">
+                  <div class="div-td"><p><%= response.sub_sect_name %></p></div>
+                  <div class="div-td"><p><%= response.name %></p></div>
+                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td") : priority_column(response.answer_3) %>
+                  <div class="div-td"><%= response.points %></div>
+                  <div class="div-td"><%= response.score %></div>
+                  <div class="div-td"><%= response.response_id.present? ?
+                  get_average_score(response.questions_id, response.survey_id) : 0 %></div>
+                  <div class="div-td"><%= response.response_id.present? ?
+                  get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
+                  <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
+                  </div>
+                </div>
+              <%end%>
+            </div>
+          </div>
         </div>
       </div>
       <% end %>
