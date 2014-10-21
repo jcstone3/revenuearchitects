@@ -674,6 +674,16 @@ $(document).ready(function(){
             "bAutoWidth": true
         } );
 
+
+      $('#feed_table').dataTable( {
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } );
+
       /* report Tables */
        $(".pageAccordion").accordion({
       autoHeight: false,
