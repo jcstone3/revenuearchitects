@@ -5,33 +5,29 @@
       <div class="modal-title" id="myModalLabel">Quick Start Instructions</div>
     </div>
     <div class="lightbox-popup-content">
+      <p>The Grader helps you assess 30 Revenue Architecture dimensions. It takes
+      about 45 minutes to complete and you can save your responses and return as
+      needed.
+      </p>
+      <p>Here are the steps for using the diagnostic and scoring each dimension:</p>
       <ol>
         <li>
-          Answer each of the 50 questions in the diagnostic. It takes about an hour.
-          </br>
-          <ol>
-            <li>
-              For each dimension, rate your current level of maturity and the importance of each item from (1-5)
-            </li>
-            <li>
-              Choose <i>‘Add to Plan’, ‘In Your Plan’</i> or <i>'Not Applicable'</i>.
-            </li>
-          </ol>
+          Assess the dimension and rate your current maturity level using the maturity scale.
         </li>
         <li>
-          If added to your plan, prioritize the dimension: (Must, Should, Could)
+          Rate the importance of each item to your business (1-5).
         </li>
         <li>
-          Press <i>'Confirm'</i> to register your response.
-        </li>
-        <!-- <li>
-          4. You can optionally add items  to your plan. If you add an item to the pla, you can enter a priority (must, should, could).
+          Select ‘Add to Plan’, mark ‘In Your Plan’ or "Not Applicable".
         </li>
         <li>
-          5. Press 'Confirm' to register your response. You can return to edit items.
-        </li> -->
+          Mark the priority taking action to improve the dimension: (Must, Should, Could).
+        </li>
+        <li>
+          Press 'Confirm' to register your response.
+        </li>
       </ol>
-      <p>If you have any questions or need help, contact us at <%= mail_to 'contact@revenuearchitects.com' %></p>
+      <p>A report will be produced upon completion. If you have any questions or need help, please email us at <%= mail_to 'contact@revenuearchitects.com' %></p>
       </br>
       <%= check_box_tag "prevent_popup", id: "prevent_popup" %>
       <span class="checkbox-popup-label">
