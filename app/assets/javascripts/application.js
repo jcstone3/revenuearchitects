@@ -850,4 +850,14 @@ $(document).ready(function(){
     .on('click.dropdown.data-api'  , toggle, Dropdown.prototype.toggle)
     .on('keydown.dropdown.data-api', toggle + ', [role=menu]' , Dropdown.prototype.keydown)
 
+  $("a[data-toggle='dropdown']").on('click',function () {
+    var list = $(this).next('ul');
+    if(list.css('display') == 'none'){
+      $('.dropdown-menu').hide();
+      list.toggle();
+    }else{
+      $('.dropdown-menu').hide();
+    }
+  });
+
 }(window.jQuery);
