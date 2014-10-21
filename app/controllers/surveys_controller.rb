@@ -68,6 +68,7 @@ end
 
 def edit
   @survey = Survey.find_by_id(params[:id])
+  @sizes = [['5000 and above'], ['500-5000'], ['100 - 499'], ['75 - 99'], ['50 - 74'], ['25 - 49'], ['1 - 24']]
 end
 
 def update
