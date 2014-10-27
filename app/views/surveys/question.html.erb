@@ -4,7 +4,7 @@
 
  <% content_for :main_content do%>
     <h2 class = 'bread-crumb'>
-      <%= @question.sub_section.section.name %> : <%= @question.sub_section.name %>
+      <%= @section_name %> : <%= @sub_section_name %>
     </h2>
     <div class="content">
        <h1 class="question"><span>Q<%= show_question_number(@question) %>. </span><%= @question.name%></h1>
