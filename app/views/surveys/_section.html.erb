@@ -22,7 +22,7 @@
 
                           <% sorted_subsections.each_with_index do |sub_section,j| %>
                               <% subsection_done = check_subsection_all_ans(sub_section, @survey.id) %>
-                              <%= link_to questions_path(@survey.id, j + 1), class: 'sub-section-name', role: 'menuitem' do %>
+                              <%= link_to questions_url(@survey.id, sub_section.questions.first.position), method: :get, class: 'sub-section-name', role: 'menuitem' do %>
                                 <span class="subsection-span"><%= sub_section.name %></span>
                                 <% if subsection_done == true %>
                                   <span role="menuitem" tabindex="-1" href="#">

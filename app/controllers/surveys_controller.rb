@@ -259,7 +259,7 @@ def question
   end
 
   if params[:question_id].present?
-    @survey_question = Question.includes(:sub_section).where(:id => params[:question_id]).first
+    @survey_question = Question.find_by_position(params[:question_id])
     if @survey_question.present?
       @sub_section = SubSection.includes(:section).where(:id => @survey_question.sub_section_id).first
       @section = Section.select(:name).where(:id => @sub_section.section_id).first
