@@ -225,11 +225,12 @@ def self.calculate_score_for_section(survey_id)
     nums = 0
   else
     @point_per_question.each do |response|
-      if response.section.to_i == 1
+      @all_sections = Section.all
+      if response.section.to_i == @all_sections[0].id
         @score_strategy += get_score_value(response.points, response.answer_1)
-      elsif response.section.to_i == 2
+      elsif response.section.to_i == @all_sections[1].id
         @score_system += get_score_value(response.points, response.answer_1)
-      elsif response.section.to_i == 3
+      elsif response.section.to_i == @all_sections[2].id
         @score_program += get_score_value(response.points, response.answer_1)
       end
     end

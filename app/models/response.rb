@@ -57,7 +57,7 @@ scope :get_all_responses, lambda{ |surveyid| {
              left outer join sections on sections.id = sub_sections.section_id",
       :conditions =>  "responses.survey_id =#{surveyid}",
       :group => "questions.id, responses.id, sections.id, responses.survey_id, questions.name, responses.answer_1, responses.answer_2, responses.answer_3, responses.answer_4, sections.name, sub_sections.name, questions.points",
-      :order=>"questions.id"
+      :order=>"questions.sequence"
 
 }}
 
