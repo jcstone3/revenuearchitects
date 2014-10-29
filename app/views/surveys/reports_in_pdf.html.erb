@@ -54,16 +54,16 @@
     font-weight:300;
     line-height:25px;
     text-align: left;
-    font-size:38px;
+    font-size:30px;
   }
 
   .content h2{
-    line-height:30px;
+    line-height:26px;
     font-weight:300;
     color: #0086AC;
     margin-top: 20px;
     text-align:left;
-    font-size:30px;
+    font-size:24px;
     font-color:black;
   }
   .content h4{
@@ -234,8 +234,10 @@ table.dataTable2 {
 table.dataTable thead h3{
   display:table-header-group;
   font-weight:400;
+  font-size: 14px;
+  margin: 5px;
+  padding: 0px;
 }
-report-body dataTable
 table.dataTable tfoot th {
   padding: 3px 10px 3px 10px;
   border-top: 1px solid black;
@@ -273,7 +275,6 @@ table.dataTable2{
   font-size:12px;
 }
 
-report-body dataTable2
 table.dataTable2 tfoot th {
   padding: 3px 10px;
   border-top: 1px solid black;
@@ -570,7 +571,7 @@ table.dataTable th:active {
 }
 table p{
   margin: 0;
-  line-height: 20px;
+  line-height: 16px;
   display: block;
 }
 .div-table { page-break-inside:auto!important }
@@ -607,6 +608,11 @@ tfoot { display:table-footer-group }
   display: table-cell;
   padding: 0px 5px;
 }
+.div-td, .div-td p{
+  line-height: 14px;
+  font-size: 12px;
+  margin: 5px;
+}
 .div-td:nth-child(1){
   text-align: left;
   width: 10%;
@@ -628,6 +634,11 @@ tfoot { display:table-footer-group }
   vertical-align: middle;
   border-spacing: 0px;
 }
+.div-table-header h3{
+  font-size: 14px;
+  margin: 5px;
+  padding: 0px;
+}
 .div-td.success{ background: #dff0d8; color: #000; }
 .div-td.warning{ background: #fcf8e3; color: #000; }
 .div-td.danger{ background: #f2dede; color: #000; }
@@ -636,13 +647,19 @@ a{
   font-weight: bold;
   font-size: 14px;
   margin-top: 5px;
+  color: #f05a1a;
 }
+.page-break { display:block; clear:both; page-break-after:always; }
 
 </style>
         <div class="content" style="page-break-after:always;text-align:center;margin-top:250px;">
         <div style="text-align:center;">
           <img src="http://www.revenuegrader.com/assets/logo.png" alt="Revenue Grader"><br/>
-          <span style="font-size:60px;margin-top:20px;color: #0086AC;"> <%= "Revenue Architects" %></span>
+          <center>
+            from
+          </center>
+          <br>
+          <span style="font-size:60px;margin-top:40px;color: #0086AC;"> <%= "Revenue Architects" %></span>
         </div>
       </div>
 
@@ -754,7 +771,13 @@ a{
                 </div>
               <%end%>
             </div>
-            <center><%= link_to 'Learn more about strategy', 'http://www.revenuearchitects.com/revenue-grader/revenue-strategy-diagnostic/' %></center>
+            <div style="float:right; margin-right: 2px;">
+              <%= link_to 'Learn more about strategy', 'http://www.revenuearchitects.com/revenue-grader/revenue-strategy-diagnostic/' %>
+            </div>
+            <h2>
+              Score: <%= @score_per_section[0] %> / <%= @all_sections[0].total_points.to_i %><br/>
+              <b><%= '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100) %>%</b>
+            </h2>
           </div>
         </div>
 
@@ -788,7 +811,13 @@ a{
                 </div>
               <%end%>
             </div>
-            <center><%= link_to 'Learn more about systems', 'http://www.revenuearchitects.com/revenue-grader/revenue-systems-diagnostic/' %></center>
+            <div style="float:right; margin-right: 2px;">
+              <%= link_to 'Learn more about systems', 'http://www.revenuearchitects.com/revenue-grader/revenue-systems-diagnostic/' %>
+            </div>
+            <h2>
+              Score: <%= @score_per_section[1] %> / <%= @all_sections[1].total_points.to_i %><br/>
+              <b><%= '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100) %>%</b>
+            </h2>
           </div>
         </div>
 
@@ -823,7 +852,13 @@ a{
               <%end%>
             </div>
           </div>
-          <center><%= link_to 'Learn more about programs', 'http://www.revenuearchitects.com/revenue-grader/revenue-programs-diagnostic/' %></center>
+          <div style="float:right; margin-right: 2px;">
+            <%= link_to 'Learn more about programs', 'http://www.revenuearchitects.com/revenue-grader/revenue-programs-diagnostic/' %>
+          </div>
+          <h2>
+            Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points.to_i %><br/>
+            <b><%= '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100) %>%</b>
+          </h2>
         </div>
       </div>
       <% end %>
@@ -931,7 +966,9 @@ a{
             <div id="nest_steps">
               <h2>Next Steps</h2>
               <p>The Revenue Grader serves an an early step in strategic planning for revenue growth. It helps identify top level areas that require additional focus. The next step is to analyze each of the priorities and develop a specific and detailed plan and timeline. A plan will reflect various dependencies and critical success factors. Revenue Architects can assist in plan development and implementation. Visit us at www.revenuearchitects.com.</p>
+              <p><%= link_to 'Arrange a Briefing with Revenue Architects', 'http://www.revenuearchitects.com/offers/revenue-diagnostic/' %></p>
             </div>
+            <br>
 
             <div id="about">
              <h2>About Revenue Grader</h2>
@@ -949,50 +986,6 @@ a{
             </div>
           </div>
 
-
-     <!--      <div class="content" style="page-break-after:always;">
-            <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%#= "#{current_user.companies.first.name}"%></span>
-              </div>
-            </div>
-
-          <h2>About Revenue Architects</h2>
-
-          <h3 style="color: #0086AC; text-align:left">Who We Are<h3>
-
-          <p>Revenue Architects is a revenue marketing consulting agency working with clients that manage a considered or complex revenue process. We serve as a trusted delivery partner helping clients respond to dynamic growth opportunities.</p>
-
-          <p>By blending strategy, creative, media and technology, we help clients architect new revenue models, enhance brands, design experiences, deploy websites and marketing technology and integrate campaigns and programs. Based in Boston, we work locally and globally on a range of revenue-focused initiatives.</p>
-
-          <p>Visit our <a href="http://revenuearchitects.com/services/" target="_blank" style="color: #f05a1a;">Services Page<a></p>
-
-          <h3 style="color: #0086AC; text-align:left">How We Are Different</h3>
-
-          <p>As our client’s trusted partner for revenue-focused initiatives, we help architect and build agile and durable marketing and sales capabilities. We differentiate with our strategic architecture approach, our responsive delivery model and our adaptive approach to emerging technology, media and marketing practices.</p>
-        </div> -->
-
-       <!--  <div class="content" style="page-break-after:always;">
-            <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%#= "#{current_user.companies.first.name}"%></span>
-              </div>
-            </div>
-
-          <h2>About Revenue Architects</h2>
-
-          <h3 style="color: #0086AC; text-align:left">Who We Are<h3>
-
-          <p>Revenue Architects is a revenue marketing consulting agency working with clients that manage a considered or complex revenue process. We serve as a trusted delivery partner helping clients respond to dynamic growth opportunities.</p>
-
-          <p>By blending strategy, creative, media and technology, we help clients architect new revenue models, enhance brands, design experiences, deploy websites and marketing technology and integrate campaigns and programs. Based in Boston, we work locally and globally on a range of revenue-focused initiatives.</p>
-
-          <p>Visit our <a href="http://revenuearchitects.com/services/" target="_blank" style="color: #f05a1a;">Services Page<a></p>
-
-          <h3 style="color: #0086AC; text-align:left">How We Are Different</h3>
-
-          <p>As our client’s trusted partner for revenue-focused initiatives, we help architect and build agile and durable marketing and sales capabilities. We differentiate with our strategic architecture approach, our responsive delivery model and our adaptive approach to emerging technology, media and marketing practices.</p>
-        </div> -->
 
          <div class="content" id="about_us" style="page-break-after:always;">
             <div class="header">
@@ -1017,11 +1010,7 @@ a{
 
           <p>Today, business need a new more integrated revenue marketing capability and success requires a complex range of skills and expertise.  We blend strategy, design, media and technology skills to help clients differentiate their brand strategies, integrate digital and revenue systems, and launch innovative programs.  As a trusted advisor and program delivery partner, we build agile marketing systems and respond to dynamic growth opportunities. We are differentiated by our revenue architecture approach and flexible multi-affiliate resource model that allows us to respond to our client’s dynamic revenue initiatives.</p>
 
-          <p>Learn more. Visit our <a href="http://revenuearchitects.com/services/" target="_blank" style="color: #f05a1a;">Services Page</a></p>
-
-          <h3 style="color: #0086AC; text-align:left">How We Are Different</h3>
-
-          <p>As our client’s trusted partner for revenue-focused initiatives, we help architect and build agile and durable marketing and sales capabilities. We differentiate with our strategic architecture approach, our responsive delivery model and our adaptive approach to emerging technology, media and marketing practices.</p>
+          <p>Learn more. Visit our <a href="http://revenuearchitects.com/" target="_blank" style="color: #f05a1a;">Website</a></p>
         </div>
     </body>
 </html>
