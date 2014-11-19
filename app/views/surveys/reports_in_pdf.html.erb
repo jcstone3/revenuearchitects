@@ -607,7 +607,9 @@ tfoot { display:table-footer-group }
   height: 100%;
   display: table-cell;
   padding: 0px 5px;
-  min-width: 87px;
+}
+.td-priority{
+  min-width: 80px;
 }
 .div-td, .div-td p{
   line-height: 14px;
@@ -760,7 +762,7 @@ a{
                 <div class="div-tr">
                   <div class="div-td"><p><%= response.sub_sect_name %></p></div>
                   <div class="div-td"><p><%= response.name %></p></div>
-                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td") : priority_column(response.answer_3) %>
+                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3) %>
                   <div class="div-td"><%= response.points %></div>
                   <div class="div-td"><%= response.score %></div>
                   <div class="div-td"><%= response.response_id.present? ?
@@ -800,7 +802,7 @@ a{
                 <div class="div-tr">
                   <div class="div-td"><p><%= response.sub_sect_name %></p></div>
                   <div class="div-td"><p><%= response.name %></p></div>
-                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td") : priority_column(response.answer_3) %>
+                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3) %>
                   <div class="div-td"><%= response.points %></div>
                   <div class="div-td"><%= response.score %></div>
                   <div class="div-td"><%= response.response_id.present? ?
@@ -840,7 +842,7 @@ a{
                 <div class="div-tr">
                   <div class="div-td"><p><%= response.sub_sect_name %></p></div>
                   <div class="div-td"><p><%= response.name %></p></div>
-                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td") : priority_column(response.answer_3) %>
+                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3) %>
                   <div class="div-td"><%= response.points %></div>
                   <div class="div-td"><%= response.score %></div>
                   <div class="div-td"><%= response.response_id.present? ?
