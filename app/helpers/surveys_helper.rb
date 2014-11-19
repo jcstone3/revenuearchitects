@@ -62,6 +62,6 @@ module SurveysHelper
   end
 
   def priority_column(answer_priority)
-    content_tag :div, content_tag(:p, answer_priority.to_s.humanize), class: "div-td #{priority_class(answer_priority)}"
+    content_tag :div, content_tag(:p, answer_priority.to_s.humanize), class: "div-td td-priority #{priority_class(answer_priority)}"
   end
 end
