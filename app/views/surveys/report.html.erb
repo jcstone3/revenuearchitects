@@ -77,7 +77,8 @@
                                   <table cellpadding="1" cellspacing="1"
                                   id="report_add_to_planTable" class="report-body dataTable2">
                                     <%= render :partial=>"table_header"%>
-                                    <% @add_to_plan_responses.each do |response|%>
+                                    <% @add_to_plan_responses.each_with_index do |response, index|%>
+                                      <% @index = index + 1 %>
                                       <%= render :partial=>"response_report",
                                       :locals=>{:response => response}%>
                                       <%end%>
@@ -93,7 +94,8 @@
                                 <div class="tabGraph">
                                   <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2">
                                     <%= render :partial=>"table_header"%>
-                                    <% @must_do_responses.each do |response|%>
+                                    <% @must_do_responses.each_with_index do |response, index|%>
+                                      <% @index = index + 1 %>
                                       <%= render :partial=>"response_report",
                                       :locals=> {:response =>response} %>
                                     <%end%>
@@ -109,7 +111,8 @@
                                   <div class="tabGraph">
                                      <table cellpadding="1" cellspacing="1" id="report_should_doTable" class="report-body dataTable2">
                                          <%= render :partial=>"table_header"%>
-                                          <% @should_do_responses.each do |response|%>
+                                          <% @should_do_responses.each_with_index do |response, index|%>
+                                            <% @index = index + 1 %>
                                             <%= render :partial=>"response_report",
                                             :locals=> {:response =>response} %>
                                           <%end%>
@@ -125,7 +128,8 @@
                                   <div class="tabGraph">
                                       <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
                                           <%= render :partial=>"table_header"%>
-                                          <% @could_do_responses.each do |response|%>
+                                          <% @could_do_responses.each_with_index do |response, index|%>
+                                            <% @index = index + 1 %>
                                             <%= render :partial=>"response_report",
                                             :locals=> {:response =>response} %>
                                           <%end%>
