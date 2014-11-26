@@ -616,6 +616,9 @@ tfoot { display:table-footer-group }
   font-size: 12px;
   margin: 5px;
 }
+.div-td:nth-child(0){
+  width: 120px;
+}
 .div-td:nth-child(1){
   text-align: left;
   width: 10%;
@@ -700,8 +703,8 @@ a{
                 <p>
                 <span>Strategy</span><br/>
                 Define your competitive advantage.<br/>
-                Score: <%= @score_per_section[0] %> / <%= @all_sections[0].total_points.to_i %><br/>
-                <b><%= '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100) %>%</b>
+                Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points.to_i %><br/>
+                <b><%= '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100) %>%</b>
 
                 <br/><br/>
                 <span>Systems</span<br/>
@@ -712,8 +715,8 @@ a{
                 <br/><br/>
                 <span>Programs</span<br/>
                 Launch integrated campaigns.<br/>
-                Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points.to_i %><br/>
-                <b><%= '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100) %>%</b>
+                Score: <%= @score_per_section[0] %> / <%= @all_sections[0].total_points.to_i %><br/>
+                <b><%= '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100) %>%</b>
 
                 <br/><br/>
                 <span>Total Score</span><br/>
