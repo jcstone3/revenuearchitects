@@ -39,6 +39,11 @@ scope :find_question_count, lambda{|section_id| {
              inner join sections on sections.id = sub_sections.section_id",
     :conditions=>"sections.id =#{section_id} "
 }}
+
+def self.last_secuence
+  (Question.last.nil? )? 1 :  Question.last.sequence.to_i + 1 
+end
+
 end
 # == Schema Information
 #

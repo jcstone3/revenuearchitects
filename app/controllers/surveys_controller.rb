@@ -297,7 +297,6 @@ def create_response
     #TODO: Redirect to next page. Issue with sequence.
     #Find if the question is the last of the questions. If it is, then go to close survey, else go
     #go to next question
-
     redirect_to questions_path(survey_id, params[:question_id].to_i + 1 ) and return
     #redirect_to questions_path(survey_id, question_id) and return
   else
@@ -921,13 +920,7 @@ end
 #Get the current question from Session
 # If Current Question is not found, run the query
 def get_question(question_id)
-  questions = session[:questions]
-  if questions.blank?
-    questions = Question.select("questions.id, questions.position, questions.name, questions.points, questions.description as description, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).order("questions.sequence ASC")
-    session[:questions] = questions
-  end
-  question = questions.select { |quest|  quest.position == question_id.to_i }
-
+  question = Question.select("questions.id, questions.position, questions.name, questions.points, questions.description as description, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).where(:position => question_id).order("questions.sequence ASC")
   if question.present?
     return question.first
   else

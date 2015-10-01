@@ -10,6 +10,9 @@ class Section < ActiveRecord::Base
   validates :name, :presence => {:message=> "Name can't be blank"}
   validates :questionnaire_id, :presence => true  
 
+  def self.last_secuence
+    (Section.last.nil? )? 1 :  Section.last.sequence.to_i + 1 
+  end
 	
 end
 # == Schema Information

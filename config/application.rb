@@ -69,9 +69,9 @@ module RevenueGrader
 
     # For Exception Notification.
 
-  config.middleware.use ExceptionNotifier,
-  :email_prefix => "[RevenueGrader Exception]",
-  :sender_address => %{ "RevenueGrader" <admin@revenuegrader.com> },
-  :exception_recipients => %{"admin@revenuegrader.com"}
+  # config.middleware.use ExceptionNotifier,
+  # :email_prefix => "[RevenueGrader Exception]",
+  # :sender_address => %{ "RevenueGrader" <admin@revenuegrader.com> },
+  # :exception_recipients => %{"admin@revenuegrader.com"}
   end
 end
