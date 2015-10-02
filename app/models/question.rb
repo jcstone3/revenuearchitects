@@ -41,7 +41,7 @@ scope :find_question_count, lambda{|section_id| {
 }}
 
 def self.fix_order_to_check
-  Question.order(:sequence,"to_check desc").each_with_index{|q,i| q.update_attributes(sequence: (i+1)) }
+  Question.order(:sequence,"to_check desc").each_with_index{|q,i| q.update_attributes(to_check:0 ,sequence: (i+1)) }
 end
 
 def self.last_secuence
