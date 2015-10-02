@@ -62,9 +62,9 @@ RevenueGrader::Application.routes.draw do
 
   get 'surveys/:id/question/:question_id' => 'surveys#question', :as => 'questions'
   get 'surveys/:id/report/' => 'surveys#report', :as => 'reports'
-  post 'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
+  post'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
   put 'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
-  post 'surveys/:id/update-question/:question_id' => 'surveys#update_response', :as=> 'reponses_update'
+  post'surveys/:id/update-question/:question_id' => 'surveys#update_response', :as=> 'reponses_update'
   get 'surveys/:id/download' => 'surveys#download_result', :as=>'download'
   get 'surveys/:id/reports' => 'surveys#reports', :as=>'reports_show'
   get 'surveys/show' =>'surveys#show', :as=>'continue_survey'

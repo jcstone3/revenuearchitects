@@ -190,13 +190,14 @@ end
 #Show the question and capture the reponse
 def question
   survey_id = params[:id]
-  question_id = params[:question_id]
+  question_id = Question.id_by_sequence(params[:question_id])
   #question_id  =  Question.where(:id => question_id).pluck("position")[0]
 
   #TODO: Check if input parameters are correct
-  if survey_id.blank? or question_id.blank?
+
+  if survey_id.blank? or params[:question_id].blank?
    flash[:warning] = "Could not form the question. Please try again"
-   redirect_to continue_survey_path
+   redirect_to continue_survey_path and return
   end
 
   #Get current Survey

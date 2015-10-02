@@ -21,6 +21,12 @@
 
                 <%= simple_form_for(@question, :url=>{:action => 'update', :controller => 'admin/questions'}, :validate=>true, :method=>"post") do |f| %>
                         <br/>
+
+                        <%= f.input :sequence, :required => true,
+                          :label => "Sequence",
+                          :input_html => { :class => 'input-xlarge' }, 
+                          :label_html => { :class => '' } -%> 
+
                         <%= f.input :name, :as =>:text, :required => true,
                                     :label => "Question",
                                     :placeholder=>"Type new question here...",
