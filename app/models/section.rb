@@ -11,9 +11,13 @@ class Section < ActiveRecord::Base
   validates :questionnaire_id, :presence => true  
 
   def self.last_secuence
-    (Section.last.nil? )? 1 :  Section.last.sequence.to_i + 1 
+    (last.nil? )? 1 :  last.sequence.to_i + 1 
   end
-	
+
+  def self.total_points
+     order(:sequence).sum(&:total_points)
+  end
+
 end
 # == Schema Information
 #
