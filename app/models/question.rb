@@ -40,8 +40,24 @@ scope :find_question_count, lambda{|section_id| {
     :conditions=>"sections.id =#{section_id} "
 }}
 
+def self.fix_order_to_check
+  Question.order(:sequence,"to_check desc").each_with_index{|q,i| q.update_attributes(sequence: (i+1)) }
+end
+
 def self.last_secuence
-  (Question.last.nil? )? 1 :  Question.last.sequence.to_i + 1 
+  (last.nil? )? 1 :  last.sequence.to_i + 1 
+end
+
+def self.id_by_sequence(sequence_id)
+  (find_by_sequence(sequence_id))? find_by_sequence(sequence_id).id : nil  
+end
+
+def self.next_secuence(question_id)
+  (next_in_sequence(question_id).empty? )? 0 : next_in_sequence(question_id).first.sequence
+end
+
+def self.next_in_sequence(question_id)
+  where("sequence > ?", question_id).order(:sequence)
 end
 
 end

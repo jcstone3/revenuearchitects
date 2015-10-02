@@ -4,7 +4,7 @@ class Admin::QuestionsController < ApplicationController
 		#@question = Question.new
     @questions = Question.paginate(:page=> params[:page], :per_page=>10)
     @questions  =  Question.find(:all,
-                       :select => "questions.id, questions.position, questions.name, questions.description, questions.id, questions.points, sub_sections.name as subsection_name, sections.name as section_name",
+                       :select => "questions.id, questions.sequence, questions.position, questions.name, questions.description, questions.id, questions.points, sub_sections.name as subsection_name, sections.name as section_name",
                        :joins => "left outer join sub_sections on questions.sub_section_id = sub_sections.id left outer join
                                   sections on sections.id = sub_sections.section_id",
                        :order => "questions.position ASC")
@@ -12,10 +12,10 @@ class Admin::QuestionsController < ApplicationController
 				
 	end	
 
-    def new
-      @question = Question.new	
-      @subsections = SubSection.all    
-    end	
+  def new
+    @question = Question.new	
+    @subsections = SubSection.all    
+  end	
 
 	def create	
     params[:question].merge!(:sequence => Question.last_secuence)
@@ -54,6 +54,8 @@ class Admin::QuestionsController < ApplicationController
    @question = Question.find(params[:id])
    
     if @question.update_attributes(params[:question])
+      @question.update_attributes(to_check:1)
+      Question.fix_order_to_check
       #get questions count and questions total point for each section 
        @questions =   Question.find(:all,
                                     :select => "sum(questions.points) as question_points, count(*) as question_count, sections.name", 

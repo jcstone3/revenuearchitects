@@ -221,10 +221,10 @@ def question
   if @question.blank?
     @question = get_question(question_id)
     if @survey.company.name.present? && @survey.company.industry.present?
-      redirect_to edit_survey_path(id: survey_id)
+      redirect_to edit_survey_path(id: survey_id) and return
       # redirect_to confirm_survey_path and return
     else
-      redirect_to edit_company_path(id: @survey.company.id)
+      redirect_to edit_company_path(id: @survey.company.id) and return
     end
   end
 
@@ -278,27 +278,26 @@ def create_response
   # create or update the record
 
   response_params = params[:response]
-
   if response_params.blank?
     flash[:error] = "Could not save response. Please try again"
     redirect_to continue_survey_path and return
   end
-
    #Create a response if new or update the existing record
    survey_id = response_params[:survey_id]
-   #question_id = params[:question_id]
-   question_id = response_params[:question_id]
+   question_id = Question.id_by_sequence(params[:question_id])
    @response = Response.find_by_survey_id_and_question_id(survey_id, question_id)
 
-   if @response.blank?
+  if @response.blank?
     @response = Response.new
   end
 
-   if @response.update_attributes(response_params)
+  if @response.update_attributes(response_params)
     #TODO: Redirect to next page. Issue with sequence.
     #Find if the question is the last of the questions. If it is, then go to close survey, else go
     #go to next question
-    redirect_to questions_path(survey_id, params[:question_id].to_i + 1 ) and return
+    next_sequence = Question.next_secuence( question_id)
+    redirect_to questions_path(survey_id, next_sequence ) and return
+
     #redirect_to questions_path(survey_id, question_id) and return
   else
     flash[:error] = "Error in saving the Response. Please try again."
