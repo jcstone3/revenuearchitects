@@ -1,3 +1,5 @@
+
+
 <% content_for :main_content do -%>
   <div class="main-content-header">
     <div class="heading" style="padding-left: 44% !important;">
@@ -10,7 +12,7 @@
 
   <div class="main-content-content contact">
 
-   <%= form_tag(send_mail_path) do %>
+    <%= form_tag(send_mail_path) do %>
       <div class="form-group">
         <%= label_tag 'first_name', 'First Name*' %>
         <%= text_field_tag 'first_name', nil, class: 'form-control', placeholder: 'First Name' %>
@@ -40,7 +42,13 @@
         <%= text_area_tag 'your_message', nil, class: 'form-control', rows: 4, placeholder: 'Your Message' %>
       </div>
       <%= submit_tag nil, class: 'btn btn-default btn-about pull-right', style: "float: left;" %>
-   <% end %>
+
+    <% end %>
+    <script type="text/javascript">
+    var __ss_noform = __ss_noform || [];
+    __ss_noform.push(['baseURI', 'https://app-HSIR8I.sharpspring.com/webforms/receivePostback/szAzBwA/']); __ss_noform.push(['endpoint', '6bd2f905-be09-41a7-ab67-6d6a8188f284']);
+    </script>
+    <script type="text/javascript" src="https://koi-HSIR8I.sharpspring.com/client/noform.js?ver=1.24" ></script>
   </div>
 <% end -%>
 
