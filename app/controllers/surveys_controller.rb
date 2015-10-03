@@ -295,7 +295,7 @@ def create_response
     #TODO: Redirect to next page. Issue with sequence.
     #Find if the question is the last of the questions. If it is, then go to close survey, else go
     #go to next question
-    next_sequence = Question.next_secuence( question_id)
+    next_sequence = Question.next_secuence( params[:question_id] )
     redirect_to questions_path(survey_id, next_sequence ) and return
 
     #redirect_to questions_path(survey_id, question_id) and return

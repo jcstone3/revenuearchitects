@@ -52,12 +52,12 @@ def self.id_by_sequence(sequence_id)
   (find_by_sequence(sequence_id))? find_by_sequence(sequence_id).id : nil  
 end
 
-def self.next_secuence(question_id)
-  (next_in_sequence(question_id).empty? )? 0 : next_in_sequence(question_id).first.sequence
+def self.next_secuence(sequence_id)
+  (next_in_sequence(sequence_id).empty? )? 0 : next_in_sequence(sequence_id).first.sequence
 end
 
-def self.next_in_sequence(question_id)
-  where("sequence > ?", question_id).order(:sequence)
+def self.next_in_sequence(sequence_id)
+  where("sequence > ?", sequence_id).order(:sequence)
 end
 
 end
