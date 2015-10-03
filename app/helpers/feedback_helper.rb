@@ -5,7 +5,8 @@ module FeedbackHelper
     }.merge(options.stringify_keys)
 
     options['position'] = "'#{options['position']}'" unless options['position'].blank? || options['position'] == 'null'
-     "<script type='text/javascript'>$(document).ready(function() { $('.feedback_link').feedback({tabPosition: #{options["position"]}}); });</script>"
+    javascript_tag "$(document).ready(function() { $('.feedback_link').feedback({tabPosition: #{options["position"]}}); });"
+
   end
 
   def feedback_includes()
