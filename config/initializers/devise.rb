@@ -212,7 +212,9 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   require "omniauth-facebook"
-  config.omniauth :facebook, Settings.facebook_app_id, Settings.facebook_secret_key,  {:scope => 'email,offline_access',
+  config.omniauth :facebook, Settings.facebook_app_id, Settings.facebook_secret_key,  
+                {:scope => 'public_profile, email',
+                  info_fields: 'email,first_name,name,id,gender,link,locale',
                   :client_options => {:ssl => {:ca_path => "/etc/ssl/certs"}}}
   require "omniauth-twitter"
   config.omniauth :twitter, Settings.twitter_api_id, Settings.twitter_secret_key
