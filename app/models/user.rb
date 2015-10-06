@@ -16,10 +16,13 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :message => "Email can't be blank"
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true, :if => :email_changed?, :message=> "Email address already taken"
   validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?, :message => "Invalid email address"
-  # validates_format_of :email,:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Email is invalid"
-  # validates :website, :presence => {:message => "Website url can't be blank"},
-  #       :format => {:with => /^(http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)*$/i,:message =>"Invalid url"}
+  validates_format_of :email,:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Email is invalid"
+  validates :website, :presence => {:message => "Website url can't be blank"},
+        :format => {:with => /^(http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)*$/i,:message =>"Invalid url"}
 
+  def name_for_show
+    companies.first ? companies.first.name : username
+  end
 
 #facebook authentication
   def self.find_for_oauth(access_token, signed_in_resource=nil, provider)
@@ -33,10 +36,10 @@ class User < ActiveRecord::Base
       user
     else # Create a user with a stub password.
       if provider == "facebook"
-       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.name)
+       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.name, website: "http://www.#{data.id}.com")
       else
         email = data.id.to_s
-       User.create!(:email => "#{email}@test.com", :password => Devise.friendly_token[0,20], :username => data.name)
+       User.create!(:email => "#{email}@test.com", :password => Devise.friendly_token[0,20], :username => data.name, website: "http://www.#{data.id}.com")
       end
     end
   end
@@ -49,10 +52,10 @@ class User < ActiveRecord::Base
       user
     else # Create a user with a stub password.
       if provider == "google_oauth2"
-       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.first_name)
+       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.first_name, website: data['urls']['Google'])
       else
         email = data.id.to_s
-       User.create!(:email => "#{email}@test.com", :password => Devise.friendly_token[0,20], :username => data.name)
+       User.create!(:email => "#{email}@test.com", :password => Devise.friendly_token[0,20], :username => data.name, website: "http://www.#{data.id}.com")
       end
     end
   end

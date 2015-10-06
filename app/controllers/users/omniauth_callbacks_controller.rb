@@ -9,28 +9,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     
     data = request.env["omniauth.auth"].extra.raw_info
 
-    puts '***' * 50
-    puts 'enter'
-    puts data.inspect
-    puts '-*-*-*-*' * 50
-    puts request.env["omniauth.auth"].inspect
-
-    puts '----' * 50
-
     @user = User.find_for_oauth(request.env["omniauth.auth"], current_user, "facebook")
-    if @user.persisted? 
+
+    if @user.persisted?
     logger.debug "User #{data} is persisted"   
       #if new user then create Authorization
       authentication = Authorization.find_by_provider_and_uid('facebook', data.id)
       if authentication
        else 
-
- puts '***' * 50
-    puts '!authentication'
-    puts data.inspect
-
-
-         @user.authorizations.create!(:provider => 'facebook', :uid => @user.username, :link => data.link) 
+         @user.authorizations.create!(:provider => 'facebook', :uid => @user.id, :link => data.link) 
       end        
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
       sign_in_and_redirect @user, :event => :authentication

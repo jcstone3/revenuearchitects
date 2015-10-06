@@ -11,13 +11,11 @@
              <div class="pull-right">
                 <i class="icon-user "></i>&nbsp;
                 <%= "#{current_user.email}" %>&nbsp;<br/>
-                <% if current_user.companies.any? %>
                 <i class="icon-home "></i>&nbsp;
-                 <%= "#{current_user.companies.first.name}"%>
-                  <%end%>
+                  <%= "#{current_user.name_for_show}"%>
               </div>
 
-                 <div class="pull-right button-signin">
+              <div class="pull-right button-signin">
                 <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
               </div>
 

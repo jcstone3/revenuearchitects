@@ -1,5 +1,6 @@
-<% content_for :main_content do -%> 
-    <div class="span5 content">
+<% content_for :main_content do -%>
+  <div class="content">
+    <div class="span5 ">
        <h1 class="question">Company Details</h1>
       <p class="question">Please provide basic information about your company</p>
           
@@ -18,14 +19,15 @@
          <div class="form-actions1">
             <%= f.button :submit, "Continue to Diagnostic", :class => 'btn-primary' %>
           </div>
-    <% end -%> 
+      <% end -%> 
       
     </div><!-- / end of content -->
      
     <div class="span4 side-text">
       <h1 class="question">The Exercise should take about 60 minutes and help create a top-level revenue strategy and plan</h1>
     </div>
-    <% end  -%> <!-- /end of main content --> 
+  </div>
+<% end  -%> <!-- /end of main content --> 
 
     <% content_for :side_content do  -%>
         <%= render "/shared/side_icons" -%> 
