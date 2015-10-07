@@ -30,13 +30,14 @@ class User < ActiveRecord::Base
     if provider == "facebook"
         user = User.where(:email => data.email).first
     else
-        user = User.where(:username => data.name).first
+        user = User.where(:username => data.email).first
     end
+    
     if user
       user
     else # Create a user with a stub password.
       if provider == "facebook"
-       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.name, website: "http://www.#{data.id}.com")
+       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.name, website: data.link)
       else
         email = data.id.to_s
        User.create!(:email => "#{email}@test.com", :password => Devise.friendly_token[0,20], :username => data.name, website: "http://www.#{data.id}.com")
@@ -60,7 +61,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.find_for_linkedin_oauth(access_token, provider)
+  def self.find_for_linkedin_oauth(access_token, signed_in_resource=nil, provider)
     data = access_token.info
     user = Authorization.where(uid: access_token.uid, provider: provider).first.try(:user)
     if user
@@ -68,7 +69,7 @@ class User < ActiveRecord::Base
     else
       uid = access_token.uid
       email = data.email ? data.email : "#{uid}@test.com"
-      user = User.create!(email: email, password: Devise.friendly_token[0,20], website: "http://www.#{uid}.com")
+      user = User.create!(email: email, :username => data.nickname, password: Devise.friendly_token[0,20], website: data['urls']['public_profile'])
       user.authorizations.create!(uid: uid, provider: provider)
     end
     user
