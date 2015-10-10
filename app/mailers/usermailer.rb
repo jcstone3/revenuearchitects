@@ -17,7 +17,16 @@ class Usermailer < ActionMailer::Base
     @survey = survey unless survey.blank?
     @company = company unless company.blank?
     @user = user unless user.blank?
-    mail(:to => "support.revenuegrader@icicletech.com, contact@revenuearchitects.com, admin@revenuegrader.com", :subject => "New Survey Details", :tag => 'new-signup-details') do |format|
+    mail(:to => "danielcfe@softwarecriollo.com", :subject => "New Survey Details", :tag => 'new-signup-details') do |format|
+      format.html { render "usermailer/new_signup_details" }
+    end
+  end
+
+  def complete_survey_details(user,company,survey)
+    @survey = survey unless survey.blank?
+    @company = company unless company.blank?
+    @user = user unless user.blank?
+    mail(:to => "danielcfe@softwarecriollo.com", :subject => "New Survey Details", :tag => 'new-signup-details') do |format|
       format.html { render "usermailer/new_signup_details" }
     end
   end
@@ -31,7 +40,7 @@ class Usermailer < ActionMailer::Base
     @phone_number = phone_number
     @your_message = your_message
 
-    mail(:to => "support.revenuegrader@icicletech.com, contact@revenuearchitects.com", :subject => "RevenueGrader: Contact Request", :tag => 'contact-request') do |format|
+    mail(:to => "danielcfe@softwarecriollo.com", :subject => "RevenueGrader: Contact Request", :tag => 'contact-request') do |format|
       format.html { render "usermailer/contactus" }
     end
   end

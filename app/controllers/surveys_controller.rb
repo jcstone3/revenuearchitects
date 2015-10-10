@@ -53,12 +53,12 @@ def create
     #TODO: Need to put the survey in session, even when accessing old survey
     session[:survey] = @survey
     flash[:success] = "Survey #{@survey_name} created successfully"
-    begin
-      Usermailer.new_signup_details(@user,@company,@survey).deliver
-    rescue Exception => e
-      logger.info e.message
-      logger.info e.backtrace
-    end
+    # begin
+    #   Usermailer.new_signup_details(@user,@company,@survey).deliver
+    # rescue Exception => e
+    #   logger.info e.message
+    #   logger.info e.backtrace
+    # end
     redirect_to questions_path(@survey, 1)
   else
     flash[:error] = "Sorry could not create the Survey. Please try again."
@@ -483,9 +483,11 @@ end
 
 def confirm_survey
   @questions=[]
+  @survey = Survey.find_by_id(params[:id])
+
+
   @final_score = 0
   @total_question_total = 0
-  @survey = Survey.find_by_id(params[:id])
   #for total count
    @section_questions_total = Section.find(:all,
                           :select => "count(questions.position) as question_total, sections.id",
@@ -505,17 +507,52 @@ def confirm_survey
     @final_score += @section_questions[i].question_attempted.to_i
     @total_question_total += @section_questions_total[i].question_total.to_i
   end
- end
+end
+
+def total_score
+    @final_score = 0
+  @total_question_total = 0
+  #for total count
+   @section_questions_total = Section.find(:all,
+                          :select => "count(questions.position) as question_total, sections.id",
+                          :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
+                          :group => "sections.id", :order => "id ASC")
+
+  @section_questions  = Section.find(:all,
+                           :select => "count(responses.question_id) as question_attempted",
+                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
+                           :group => "sections.id", :order => "sections.id")
+  logger.debug "#{@section_questions}"
+  # @all_sections = get_all_sections
+  @all_sections = Section.order(:sequence)
+
+  @all_sections.each_with_index do |section,i|
+    @final_score += @section_questions[i].question_attempted.to_i
+    @total_question_total += @section_questions_total[i].question_total.to_i
+  end
+end
 
 def close_survey
-   @survey = Survey.find_by_id(params[:id])
-   if @survey.update_attribute(:is_active, false)
-     flash[:success] = "Thank you for taking up the survey"
-     redirect_to reports_path(params[:id])
-   else
-     flash[:success] = "Sorry could not close the survey"
-     redirect_to confirm_survey_path(@survey.id)
-   end
+  total_score
+  @company = current_user.companies.first
+  @survey = Survey.find_by_id(params[:id])
+  if @survey.update_attribute(:is_active, false)
+  flash[:success] = "Thank you for taking up the survey"
+  send_mail_complete_survey
+  redirect_to reports_path(params[:id])
+  else
+  flash[:success] = "Sorry could not close the survey"
+  redirect_to confirm_survey_path(@survey.id)
+  end
+end
+
+def send_mail_complete_survey
+  begin
+    Usermailer.new_signup_details(@user,@company,@survey).deliver
+  rescue Exception => e
+    logger.info e.message
+    logger.info e.backtrace
+  end
 end
 
 def compare
