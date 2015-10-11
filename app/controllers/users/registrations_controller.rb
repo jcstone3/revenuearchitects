@@ -16,6 +16,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         set_flash_message :success, :signed_up if is_navigational_format?
         Usermailer.welcome(resource).deliver
+
+        begin
+          Usermailer.new_signup_details(resource).deliver
+        rescue Exception => e
+          logger.info e.message
+          logger.info e.backtrace
+        end
+
         sign_in(resource_name, resource)
 
         # On successful signup create Company and Survey object

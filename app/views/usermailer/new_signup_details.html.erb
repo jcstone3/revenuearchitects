@@ -34,29 +34,17 @@
               </tr>
               <tr>
                 <td style="background-color:#ffffff; color: #666666; font-family: Arial; font-size: 14px; line-height: 18px; padding: 15px 20px 40px 20px;" valign="top">
-                  <h1>Survey Details </h1>
+                  <h1>User Details </h1>
                   <p>Hello, </p>
 
-                  <p>We got a New Survey!</p>
+                  <p>We got a New Sign Up!</p>
 
                   <div class="bluebox">
                     <strong>User Name:</strong> <%= @user.username unless @user.blank? %>
                     <br/><br/>
                     <strong>User Email:</strong> <%= @user.email unless @user.blank? %>
                     <br/><br/>
-                    <strong>Industry:</strong> <%= @company.industry.name unless @company.industry.blank? %>
-                    <br/><br/>
-                    <strong>Company:</strong> <%= @company.name unless @company.blank? %>
-                    <br/><br/>
-                    <strong>Company Size:</strong> <%= @survey.size unless @survey.blank? %>
-                    <br/><br/>
-                    <strong>Company revenue:</strong> <%= @survey.revenue unless @survey.blank? %>
-                    <br/><br/>
-
-                    <strong>Survey Final Score:</strong> <%= @survey.size unless @survey.blank? %>
-                    <br/><br/>
-
-                    <strong>Survey Total Question:</strong> <%= @survey.size unless @survey.blank? %>
+                    <strong>User website:</strong> <%= @user.website unless @user.blank? %>
                     <br/><br/>
                   </div>
 
