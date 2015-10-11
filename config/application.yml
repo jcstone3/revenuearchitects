@@ -6,8 +6,8 @@ defaults: &defaults
     host: www.revenuegrader.com
     domain_host: revenuegrader.com
     support_email: support@revenuegrader.com
-    linkedin_api_key: 'dt67gevhr7lv'
-    linkedin_secret_key: 'mIc7DHX0CquGm8jt'
+    linkedin_api_key: '77rjwbnry8xj3n'
+    linkedin_secret_key: '9nebekRmylzpJ4cC'
 
 development:
     <<: *defaults
