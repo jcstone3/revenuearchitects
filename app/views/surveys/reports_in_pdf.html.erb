@@ -1,1022 +1,1081 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Revenue Grader - Survey Reports</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
-        <script src='http://www.google.com/jsapi'></script>
-        </head>
-       <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
-<style type="text/css">
-
-  .content{
-    font-weight:bold;
-    margin-left: 5px;
-    text-align:right;
-    width:1000px;
-    line-height:25px;
-  }
-
-  .content1, .content2{
-    font-weight:bold;
-    margin-top: 100px;
-    width:1000px;
-    line-height:25px;
-  }
-
-  .content1 h3, .content2 h3 {
-    font-family: "Lato", sans-serif;
-    color: #0086AC;
-    font-weight:bold;
-    font-size:20px;
-    text-align: left;
-  }
-
-  .content1 h4, .content2 h4 {
-    font-family: "Lato", sans-serif;
-    color: #0086AC;
-    font-weight:bold;
-    font-size:16px;
-    text-align: left;
-  }
-  .content1 h4{
-    display:inline!important;
-  }
-
-  .content h1{
-    line-height:25px;
-    display: block;
-    font-family: "Lato", sans-serif;
-    color: #0086AC;
-    font-weight:300;
-    line-height:25px;
-    text-align: left;
-    font-size:30px;
-  }
-
-  .content h2{
-    line-height:26px;
-    font-weight:300;
-    color: #0086AC;
-    margin-top: 20px;
-    text-align:left;
-    font-size:24px;
-    font-color:black;
-  }
-  .content h4{
-    display: block;
-    font-family: "Lato", sans-serif;
-    color: #0086AC;
-    font-weight:300;
-    line-height:25px;
-  }
-
-  .content p{
-    font-weight:100;
-    text-align: justify;
-  }
-  .header {
-    border-bottom: 1px solid #000;
-  }
-  .content1 h2 {
-    padding-bottom: 3px;
-  }
-  .footer1 img {
-    text-align:left;
-    margin-bottom: 10px;
-    margin-right: 10px;
-  }
-
-  .content3{
-    text-align :left;
-    font-weight:300;
-    color: #0086AC;
-  }
-  .content h4{
-    display: block;
-    font-family: "Lato", sans-serif;
-    color: #0086AC;
-    font-weight:300;
-    line-height:25px;
-  }
-  .graph{
-    padding-top: 30px;
-      padding-bottom: 20px;
-  }
-
-  .graph h1{
-    text-align:center;
-  }
-  .aboutrevenue{
-    display: block;
-    font-family: "Lato", sans-serif;
-    color: #0086AC;
-    padding-top:50px;
-    padding-bottom: 30px;
-  }
-  .position_header{
-    margin-top:600px;
-    font-size:26px;
-  }
-  /*
-
-Css Chart created by Alen Grakalic
-Brought to you by Css Globe (cssglobe.com)
-
-*/
-
-
-dl#csschart, dl#csschart dt, dl#csschart dd{
-  margin:0;
-  padding:0;
-}
-dl#csschart{
-  background:url(bg_chart.gif) no-repeat 0 0;
-  width:677px;
-  height:385px;
-  margin-left:10px;
-}
-dl#csschart dt{
-  display:none;
-}
-dl#csschart dd{
-  position:relative;
-  float:left;
-  display:inline;
-  width:25px;
-  height:330px;
-  margin-top:22px;
-}
-dl#csschart dd.first{
-  margin-left:43px;
-}
-dl#csschart span{
-  position:absolute;
-  display:block;
-  width:33px;
-  bottom:0;
-  left:0;
-  z-index:1;
-  color:#555;
-  text-decoration:none;
-}
-dl#csschart span em{
-  display:block;
-  font-style:normal;
-  float:left;
-  line-height:200%;
-  background:#fff;
-  color:#555;
-  border:1px solid #b1b1b1;
-  position:absolute;
-  top:50%;
-  left:3px;
-  text-align:center;
-  width:23px;
-}
-
-
-
-.box_compare{
-  width:96%;
-  margin:0 0 0 20px;
-  background-color:#fff;
-  height:auto;
-}
-.box_compare h1{
-  font-size:15px;
-  color:#707b82;
-  margin:13px 0 0 0;
-  width:100%;
-  text-align:center;
-  font-weight:normal;
-  text-shadow: 1px 1px 1px #fff;
-}
-
-
-/*
-* Table
-*/
-table.dataTable2 {
-  color:#FFF;
-  width: 100%;
-}
-.textbox table thead th, .div-table-head {
-  background-image: -moz-linear-gradient(top, #4e5960, #647077);
-  background-image: -ms-linear-gradient(top, #4e5960, #647077);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e5960), to(#647077));
-  background-image: -webkit-linear-gradient(top, #4e5960, #647077);
-  background-image: -o-linear-gradient(top, #4e5960, #647077);
-  background-image: linear-gradient(top, #4e5960, #647077);
-  background-color:#909090;
-  padding: 3px 10px;
-  border-bottom: 1px solid black;
-  color:#ffffff;
-  font-weight: bold;
-  cursor: pointer;
-  *cursor: hand;
-  text-align:left;
-  width:6px;
-}
-
-.textbox table thead{
-  display:table-header-group;
-}
-
-
-.textbox table tbody tr {
-  font-weight: 100;
-  font-family: "Lato", sans-serif;
-}
-table.dataTable thead h3{
-  display:table-header-group;
-  font-weight:400;
-  font-size: 14px;
-  margin: 5px;
-  padding: 0px;
-}
-table.dataTable tfoot th {
-  padding: 3px 10px 3px 10px;
-  border-top: 1px solid black;
-  font-weight: bold;
-  display:table-header-group;
-}
-
-table.dataTable td {
-  padding: 3px 10px;
-  background-color: #80C2D6;
-}
-
-table.dataTable td.center,
-table.dataTable td.dataTables_empty {
-  text-align: center;
-}
-
-table.dataTable tr.odd { background-color: #BDBDBD; }
-table.dataTable tr.even { background-color: #E9E9E9; }
-
-table.dataTable tr.odd td.sorting_1 { background-color: #BDBDBD; }
-table.dataTable tr.odd td.sorting_2 { background-color: #BDBDBD; }
-table.dataTable tr.odd td.sorting_3 { background-color: #BDBDBD; }
-table.dataTable tr.even td.sorting_1 { background-color: #E9E9E9; }
-table.dataTable tr.even td.sorting_2 { background-color: #E9E9E9; }
-table.dataTable tr.even td.sorting_3 { background-color: #E9E9E9; }
-
-.tablestyle{
-  text-align:center ;
-  color:white;
-}
-
-
-table.dataTable2{
-  font-size:12px;
-}
-
-table.dataTable2 tfoot th {
-  padding: 3px 10px;
-  border-top: 1px solid black;
-  font-weight: bold;
-}
-
-table.dataTable2 td{
-  padding: 3px 10px;
-  background-color: #80C2D6;
-  font-weight:bold;
-  font-size:12px;
-}
-
-table.dataTable2 td.center,
-table.dataTable2 td.dataTables_empty {
-  text-align: center;
-}
-
-table.dataTable2 td.center,
-table.dataTable2 td.dataTables_empty {
-  text-align: center;
-}
-
-table.dataTable2 tr.odd { background-color: #E6F3F7; }
-table.dataTable2 tr.even { background-color: #80C2D6; }
-
-table.dataTable2 tr.odd td.sorting_1 { background-color: #E6F3F7; }
-table.dataTable2 tr.odd td.sorting_2 { background-color: #E6F3F7; }
-table.dataTable2 tr.odd td.sorting_3 { background-color: #E6F3F7; }
-table.dataTable2 tr.even td.sorting_1 { background-color: #80C2D6; }
-table.dataTable2 tr.even td.sorting_2 { background-color: #80C2D6; }
-table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
-
-.tablestyle{
-  text-align:center ;
-  color:white;
-}
-
-/*
-* Table wrapper
-*/
-.dataTables_wrapper {
-  position: relative;
-  clear: both;
-  *zoom: 1;
-}
-
-
-/*
-* Page length menu
-*/
-.dataTables_length {
-  float: left;
-}
-
-
-/*
-* Filter
-*/
-.dataTables_filter {
-  text-align: left;
-}
-
-
-/*
-* Table information
-*/
-.dataTables_info {
-  clear: both;
-  float: left;
-}
-
-
-/*
-* Pagination
-*/
-.dataTables_paginate {
-  float: right;
-  text-align: right;
-}
-
-/* Two button pagination - previous / next */
-.paginate_disabled_previous,
-.paginate_disabled_next
-{
-  height: 19px;
-  float: left;
-  cursor: default;
-  *cursor: hand;
-  color: #111 !important;
-}
-
-.paginate_enabled_previous,
-.paginate_enabled_next {
-  height: 19px;
-  float: left;
-  cursor: pointer;
-  *cursor: hand;
-  color: #111 !important;
-}
-.paginate_disabled_previous:hover,
-.paginate_enabled_previous:hover,
-.paginate_disabled_next:hover,
-.paginate_enabled_next:hover {
-  text-decoration: none !important;
-}
-.paginate_disabled_previous:active,
-.paginate_enabled_previous:active,
-.paginate_disabled_next:active,
-.paginate_enabled_next:active {
-  outline: none;
-}
-
-.paginate_disabled_previous,
-.paginate_disabled_next {
-  color: #666 !important;
-}
-.paginate_disabled_previous,
-.paginate_enabled_previous {
-  padding-left: 23px;
-}
-.paginate_disabled_next,
-.paginate_enabled_next {
-  padding-right: 23px;
-  margin-left: 10px;
-}
-
-.paginate_enabled_previous { background: url('../images/back_enabled.png') no-repeat top left; }
-.paginate_enabled_previous:hover { background: url('../images/back_enabled_hover.png') no-repeat top left; }
-.paginate_disabled_previous { background: url('../images/back_disabled.png') no-repeat top left; }
-
-.paginate_enabled_next { background: url('../images/forward_enabled.png') no-repeat top right; }
-.paginate_enabled_next:hover { background: url('../images/forward_enabled_hover.png') no-repeat top right; }
-.paginate_disabled_next { background: url('../images/forward_disabled.png') no-repeat top right; }*/*/
-
-/* Full number pagination */
-.paging_full_numbers {
-  height: 22px;
-  line-height: 22px;
-}
-.paging_full_numbers a:active {
-  outline: none
-}
-.paging_full_numbers a:hover {
-  text-decoration: none;
-}
-
-.paging_full_numbers a.paginate_button,
-.paging_full_numbers a.paginate_active {
-  /*border: 1px solid #aaa;*/
-  /* -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;*/
-  border-radius: 5px;
-  padding: 2px 5px;
-  margin: 0 3px;
-  cursor: pointer;
-  *cursor: hand;
-  color: #333 !important;
-}
-
-.paging_full_numbers a.paginate_button {
-  background-color: #ddd;
-}
-
-.paging_full_numbers a.paginate_button:hover {
-  background-color: #ccc;
-  text-decoration: none !important;
-}
-
-.paging_full_numbers a.paginate_active {
-  background-color: #99B3FF;
-}
-*/
-
-/*
-* Processing indicator
-*/
-.dataTables_processing {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 250px;
-  height: 30px;
-  margin-left: -125px;
-  margin-top: -15px;
-  padding: 14px 0 2px 0;
-  border: 1px solid #ddd;
-  text-align: center;
-  color: #999;
-  font-size: 14px;
-}*/
-
-
-/*
-* Sorting
-*/
-.sorting { background: url('../images/sort_both.png') no-repeat center right; }
-.sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
-.sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
-
-.sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
-.sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }
-
-table.dataTable th:active {
-  outline: none;
-}*/
-
-
-/*
-* Scrolling
-*/
-.dataTables_scroll {
-  clear: both;
-}
-
-.dataTables_scrollBody {
-  *margin-top: -1px;
-}
-
-.survey-content {
-  margin-top: 40px;
-  text-align: left;
-
-}
-
-.stats {
-  width: 80%;
-  display: table;
-  padding: 0 0 0 10px;
-  margin-top: .5em;
-  margin-bottom: 1.9em;
-}
-
-.stats .stat {
-  display: table-cell;
-  width: 30%;
-  vertical-align: top;
-  font-size: 11px;
-  font-weight: bold;
-  color: #999;
-}
-
-
-.stat-value {
-  display: block;
-  margin-bottom: .55em;
-  font-size: 40px;
-  font-weight: bold;
-  color: #0086AC;
-}
-
-
-#about p, #nest_steps p, #about_us p, #about_us li{
-  color: gray;
-}
-#about_us p, #about_us li{
-  font-size: 16px;
-}
-.width_14 td
-{
-  width:14% !important;
-}
-.company_title h3{
-  text-align:center;
-  text-align:center;
-  font-weight:bold;
-  margin-top:40px;
-}
-.survey-content b
-{
-  color: #FFA500;
-  font-weight: bold;
-  font-size: 16px;
-}
-.survey-content span
-{
-  font-weight: bold;
-}
-.survey-content{
-  float: left;
-}
-.survey-content h3, .scoring_methodology h3{
-  color: #0086AC;
-  text-align:left;
-}
-.scoring_methodology{
-  float:right;
-  width: 400px;
-  margin-top: 70px;
-  margin-right: 40px;
-}
-#about_us li span{
-  color: #FFA500;
-}
-table p{
-  margin: 0;
-  line-height: 16px;
-  display: block;
-}
-.div-table { page-break-inside:auto!important }
-.div-td, p { page-break-inside:avoid!important; }
-.div-tr    { page-break-inside:avoid!important; page-break-after:auto!important; }
-thead { display:table-header-group }
-tfoot { display:table-footer-group }
-
-.div-table{
-  color: #fff;
-  font-size: 12px;
-}
-.div-table, .div-table-header, .div-table-body, .div-tr{
-  display: block;
-  width: 100%;
-}
-.div-table-body{
-  text-align: center;
-  page-break-inside: auto;
-}
-.div-tr{
-  page-break-inside: avoid;
-  page-break-after: auto;
-  page-break-before: auto;
-  margin: 0;
-  background: #fff;
-  margin-bottom: 1pt;
-}
-.div-td{
-  background-color: #80C2D6;
-  page-break-inside: avoid;
-  width: 6%;
-  height: 100%;
-  display: table-cell;
-  padding: 0px 5px;
-}
-.td-priority{
-  min-width: 80px;
-}
-.div-td, .div-td p{
-  line-height: 14px;
-  font-size: 10px;
-  margin: 5px;
-}
-.div-td:nth-child(0){
-  width: 120px;
-}
-.div-td:nth-child(1){
-  text-align: left;
-  width: 10%;
-}
-.div-td:nth-child(2){
-  text-align: left;
-  width: 47%!important;
-}
-.div-table-header .div-td{
-  text-align: center;
-  background-image: -moz-linear-gradient(top, #4e5960, #647077);
-  background-image: -ms-linear-gradient(top, #4e5960, #647077);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e5960), to(#647077));
-  background-image: -webkit-linear-gradient(top, #4e5960, #647077);
-  background-image: -o-linear-gradient(top, #4e5960, #647077);
-  background-image: linear-gradient(top, #4e5960, #647077);
-  background-color: #909090;
-  border-bottom: 1px solid black;
-  vertical-align: middle;
-  border-spacing: 0px;
-}
-.div-table-header h3{
-  font-size: 12px;
-  margin: 5px;
-  padding: 0px;
-}
-.div-td.success{ background: #dff0d8; color: #000; }
-.div-td.warning{ background: #fcf8e3; color: #000; }
-.div-td.danger{ background: #f2dede; color: #000; }
-a{
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 5px;
-  color: #f05a1a;
-}
-.page-break { display:block; clear:both; page-break-after:always; }
-
-</style>
-        <div class="content" style="page-break-after:always;text-align:center;margin-top:250px;">
-        <div style="text-align:center;">
-          <img src="http://www.revenuegrader.com/assets/logo.png" alt="Revenue Grader"><br/>
-          <center>
-            from
-          </center>
+  <!DOCTYPE html>
+  <html lang="en">
+      <head>
+          <meta charset="utf-8">
+          <title>Revenue Grader - Survey Reports</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta name="description" content="">
+          <meta name="author" content="">
+          <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+          <script src='http://www.google.com/jsapi'></script>
+          </head>
+         <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
+  <style type="text/css">
+
+    .content{
+      font-weight:bold;
+      margin-left: 5px;
+      text-align:right;
+      width:1000px;
+      line-height:25px;
+    }
+
+    .content1, .content2{
+      font-weight:bold;
+      margin-top: 100px;
+      width:1000px;
+      line-height:25px;
+    }
+
+    .content1 h3, .content2 h3 {
+      font-family: "Lato", sans-serif;
+      color: #0086AC;
+      font-weight:bold;
+      font-size:20px;
+      text-align: left;
+    }
+
+    .content1 h4, .content2 h4 {
+      font-family: "Lato", sans-serif;
+      color: #0086AC;
+      font-weight:bold;
+      font-size:16px;
+      text-align: left;
+    }
+    .content1 h4{
+      display:inline!important;
+    }
+
+    .content h1{
+      line-height:25px;
+      display: block;
+      font-family: "Lato", sans-serif;
+      color: #0086AC;
+      font-weight:300;
+      line-height:25px;
+      text-align: left;
+      font-size:30px;
+    }
+
+    .content h2{
+      line-height:26px;
+      font-weight:300;
+      color: #0086AC;
+      margin-top: 20px;
+      text-align:left;
+      font-size:24px;
+      font-color:black;
+    }
+    .content h4{
+      display: block;
+      font-family: "Lato", sans-serif;
+      color: #0086AC;
+      font-weight:300;
+      line-height:25px;
+    }
+
+    .content p{
+      font-weight:100;
+      text-align: justify;
+    }
+    .header {
+      /*border-bottom: 1px solid #000;*/
+      height: 50px;
+    }
+    .content1 h2 {
+      padding-bottom: 3px;
+    }
+    .footer1 img {
+      text-align:left;
+      margin-bottom: 10px;
+      margin-right: 10px;
+    }
+
+    .content3{
+      text-align :left;
+      font-weight:300;
+      color: #0086AC;
+    }
+    .content h4{
+      display: block;
+      font-family: "Lato", sans-serif;
+      color: #0086AC;
+      font-weight:300;
+      line-height:25px;
+    }
+    .graph{
+      padding-top: 30px;
+        padding-bottom: 20px;
+    }
+
+    .graph h1{
+      text-align:center;
+    }
+    .aboutrevenue{
+      display: block;
+      font-family: "Lato", sans-serif;
+      color: #0086AC;
+      padding-top:50px;
+      padding-bottom: 30px;
+    }
+    .position_header{
+      margin-top:600px;
+      font-size:26px;
+    }
+    /*
+
+    Css Chart created by Alen Grakalic
+    Brought to you by Css Globe (cssglobe.com)
+
+    */
+
+
+    dl#csschart, dl#csschart dt, dl#csschart dd{
+      margin:0;
+      padding:0;
+    }
+    dl#csschart{
+      background:url(bg_chart.gif) no-repeat 0 0;
+      width:677px;
+      height:385px;
+      margin-left:10px;
+    }
+    dl#csschart dt{
+      display:none;
+    }
+    dl#csschart dd{
+      position:relative;
+      float:left;
+      display:inline;
+      width:25px;
+      height:330px;
+      margin-top:22px;
+    }
+    dl#csschart dd.first{
+      margin-left:43px;
+    }
+    dl#csschart span{
+      position:absolute;
+      display:block;
+      width:33px;
+      bottom:0;
+      left:0;
+      z-index:1;
+      color:#555;
+      text-decoration:none;
+    }
+    dl#csschart span em{
+      display:block;
+      font-style:normal;
+      float:left;
+      line-height:200%;
+      background:#fff;
+      color:#555;
+      border:1px solid #b1b1b1;
+      position:absolute;
+      top:50%;
+      left:3px;
+      text-align:center;
+      width:23px;
+    }
+
+
+
+    .box_compare{
+      width:96%;
+      margin:0 0 0 20px;
+      background-color:#fff;
+      height:auto;
+    }
+    .box_compare h1{
+      font-size:15px;
+      color:#707b82;
+      margin:13px 0 0 0;
+      width:100%;
+      text-align:center;
+      font-weight:normal;
+      text-shadow: 1px 1px 1px #fff;
+    }
+
+
+    /*
+    * Table
+    */
+    table.dataTable2 {
+      color:#FFF;
+      width: 100%;
+    }
+    .textbox table thead th, .div-table-head {
+      background-image: -moz-linear-gradient(top, #4e5960, #647077);
+      background-image: -ms-linear-gradient(top, #4e5960, #647077);
+      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e5960), to(#647077));
+      background-image: -webkit-linear-gradient(top, #4e5960, #647077);
+      background-image: -o-linear-gradient(top, #4e5960, #647077);
+      background-image: linear-gradient(top, #4e5960, #647077);
+      background-color:#909090;
+      padding: 3px 10px;
+      border-bottom: 1px solid black;
+      color:#ffffff;
+      font-weight: bold;
+      cursor: pointer;
+      *cursor: hand;
+      text-align:left;
+      width:6px;
+    }
+
+    .textbox table thead{
+      display:table-header-group;
+    }
+
+
+    .textbox table tbody tr {
+      font-weight: 100;
+      font-family: "Lato", sans-serif;
+    }
+    table.dataTable thead h3{
+      display:table-header-group;
+      font-weight:400;
+      font-size: 14px;
+      margin: 5px;
+      padding: 0px;
+    }
+    table.dataTable tfoot th {
+      padding: 3px 10px 3px 10px;
+      border-top: 1px solid black;
+      font-weight: bold;
+      display:table-header-group;
+    }
+
+    table.dataTable td {
+      padding: 3px 10px;
+      background-color: #80C2D6;
+    }
+
+    table.dataTable td.center,
+    table.dataTable td.dataTables_empty {
+      text-align: center;
+    }
+
+    table.dataTable tr.odd { background-color: #BDBDBD; }
+    table.dataTable tr.even { background-color: #E9E9E9; }
+
+    table.dataTable tr.odd td.sorting_1 { background-color: #BDBDBD; }
+    table.dataTable tr.odd td.sorting_2 { background-color: #BDBDBD; }
+    table.dataTable tr.odd td.sorting_3 { background-color: #BDBDBD; }
+    table.dataTable tr.even td.sorting_1 { background-color: #E9E9E9; }
+    table.dataTable tr.even td.sorting_2 { background-color: #E9E9E9; }
+    table.dataTable tr.even td.sorting_3 { background-color: #E9E9E9; }
+
+    .tablestyle{
+      text-align:center ;
+      color:white;
+    }
+
+
+    table.dataTable2{
+      font-size:12px;
+    }
+
+    table.dataTable2 tfoot th {
+      padding: 3px 10px;
+      border-top: 1px solid black;
+      font-weight: bold;
+    }
+
+    table.dataTable2 td{
+      padding: 3px 10px;
+      background-color: #80C2D6;
+      font-weight:bold;
+      font-size:12px;
+    }
+
+    table.dataTable2 td.center,
+    table.dataTable2 td.dataTables_empty {
+      text-align: center;
+    }
+
+    table.dataTable2 td.center,
+    table.dataTable2 td.dataTables_empty {
+      text-align: center;
+    }
+
+    table.dataTable2 tr.odd { background-color: #E6F3F7; }
+    table.dataTable2 tr.even { background-color: #80C2D6; }
+
+    table.dataTable2 tr.odd td.sorting_1 { background-color: #E6F3F7; }
+    table.dataTable2 tr.odd td.sorting_2 { background-color: #E6F3F7; }
+    table.dataTable2 tr.odd td.sorting_3 { background-color: #E6F3F7; }
+    table.dataTable2 tr.even td.sorting_1 { background-color: #80C2D6; }
+    table.dataTable2 tr.even td.sorting_2 { background-color: #80C2D6; }
+    table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
+
+    .tablestyle{
+      text-align:center ;
+      color:white;
+    }
+
+    /*
+    * Table wrapper
+    */
+    .dataTables_wrapper {
+      position: relative;
+      clear: both;
+      *zoom: 1;
+    }
+
+
+    /*
+    * Page length menu
+    */
+    .dataTables_length {
+      float: left;
+    }
+
+
+    /*
+    * Filter
+    */
+    .dataTables_filter {
+      text-align: left;
+    }
+
+
+    /*
+    * Table information
+    */
+    .dataTables_info {
+      clear: both;
+      float: left;
+    }
+
+
+    /*
+    * Pagination
+    */
+    .dataTables_paginate {
+      float: right;
+      text-align: right;
+    }
+
+    /* Two button pagination - previous / next */
+    .paginate_disabled_previous,
+    .paginate_disabled_next
+    {
+      height: 19px;
+      float: left;
+      cursor: default;
+      *cursor: hand;
+      color: #111 !important;
+    }
+
+    .paginate_enabled_previous,
+    .paginate_enabled_next {
+      height: 19px;
+      float: left;
+      cursor: pointer;
+      *cursor: hand;
+      color: #111 !important;
+    }
+    .paginate_disabled_previous:hover,
+    .paginate_enabled_previous:hover,
+    .paginate_disabled_next:hover,
+    .paginate_enabled_next:hover {
+      text-decoration: none !important;
+    }
+    .paginate_disabled_previous:active,
+    .paginate_enabled_previous:active,
+    .paginate_disabled_next:active,
+    .paginate_enabled_next:active {
+      outline: none;
+    }
+
+    .paginate_disabled_previous,
+    .paginate_disabled_next {
+      color: #666 !important;
+    }
+    .paginate_disabled_previous,
+    .paginate_enabled_previous {
+      padding-left: 23px;
+    }
+    .paginate_disabled_next,
+    .paginate_enabled_next {
+      padding-right: 23px;
+      margin-left: 10px;
+    }
+
+    .paginate_enabled_previous { background: url('../images/back_enabled.png') no-repeat top left; }
+    .paginate_enabled_previous:hover { background: url('../images/back_enabled_hover.png') no-repeat top left; }
+    .paginate_disabled_previous { background: url('../images/back_disabled.png') no-repeat top left; }
+
+    .paginate_enabled_next { background: url('../images/forward_enabled.png') no-repeat top right; }
+    .paginate_enabled_next:hover { background: url('../images/forward_enabled_hover.png') no-repeat top right; }
+    .paginate_disabled_next { background: url('../images/forward_disabled.png') no-repeat top right; }*/*/
+
+    /* Full number pagination */
+    .paging_full_numbers {
+      height: 22px;
+      line-height: 22px;
+    }
+    .paging_full_numbers a:active {
+      outline: none
+    }
+    .paging_full_numbers a:hover {
+      text-decoration: none;
+    }
+
+    .paging_full_numbers a.paginate_button,
+    .paging_full_numbers a.paginate_active {
+      /*border: 1px solid #aaa;*/
+      /* -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;*/
+      border-radius: 5px;
+      padding: 2px 5px;
+      margin: 0 3px;
+      cursor: pointer;
+      *cursor: hand;
+      color: #333 !important;
+    }
+
+    .paging_full_numbers a.paginate_button {
+      background-color: #ddd;
+    }
+
+    .paging_full_numbers a.paginate_button:hover {
+      background-color: #ccc;
+      text-decoration: none !important;
+    }
+
+    .paging_full_numbers a.paginate_active {
+      background-color: #99B3FF;
+    }
+    */
+
+    /*
+    * Processing indicator
+    */
+    .dataTables_processing {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 250px;
+      height: 30px;
+      margin-left: -125px;
+      margin-top: -15px;
+      padding: 14px 0 2px 0;
+      border: 1px solid #ddd;
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+    }*/
+
+
+    /*
+    * Sorting
+    */
+    .sorting { background: url('../images/sort_both.png') no-repeat center right; }
+    .sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
+    .sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
+
+    .sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
+    .sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }
+
+    table.dataTable th:active {
+      outline: none;
+    }*/
+
+
+    /*
+    * Scrolling
+    */
+    .dataTables_scroll {
+      clear: both;
+    }
+
+    .dataTables_scrollBody {
+      *margin-top: -1px;
+    }
+
+    .survey-content {
+      margin-top: 40px;
+      text-align: left;
+
+    }
+
+    .stats {
+      width: 80%;
+      display: table;
+      padding: 0 0 0 10px;
+      margin-top: .5em;
+      margin-bottom: 1.9em;
+    }
+
+    .stats .stat {
+      display: table-cell;
+      width: 30%;
+      vertical-align: top;
+      font-size: 11px;
+      font-weight: bold;
+      color: #999;
+    }
+
+
+    .stat-value {
+      display: block;
+      margin-bottom: .55em;
+      font-size: 40px;
+      font-weight: bold;
+      color: #0086AC;
+    }
+
+
+    #about p, #nest_steps p, #about_us p, #about_us li{
+      color: gray;
+    }
+    #about_us p, #about_us li{
+      font-size: 16px;
+    }
+    .width_14 td
+    {
+      width:14% !important;
+    }
+    .company_title h3{
+      text-align:center;
+      text-align:center;
+      font-weight:bold;
+      margin-top:40px;
+    }
+    .survey-content b
+    {
+      color: #FFA500;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .survey-content span
+    {
+      font-weight: bold;
+    }
+    .survey-content{
+      float: left;
+    }
+    .survey-content h3, .scoring_methodology h3{
+      color: #0086AC;
+      text-align:left;
+    }
+    .scoring_methodology{
+      float:right;
+      width: 400px;
+      margin-top: 70px;
+      margin-right: 40px;
+    }
+    #about_us li span{
+      color: #FFA500;
+    }
+    table p{
+      margin: 0;
+      line-height: 16px;
+      display: block;
+    }
+    .div-table { page-break-inside:auto!important }
+    .div-td, p { page-break-inside:avoid!important; }
+    .div-tr    { page-break-inside:avoid!important; page-break-after:auto!important; }
+    thead { display:table-header-group }
+    tfoot { display:table-footer-group }
+
+    .div-table{
+      color: #fff;
+      font-size: 12px;
+    }
+    .div-table, .div-table-header, .div-table-body, .div-tr{
+      display: block;
+      width: 100%;
+    }
+    .div-table-body{
+      text-align: center;
+      page-break-inside: auto;
+    }
+    .div-tr{
+      page-break-inside: avoid;
+      page-break-after: auto;
+      page-break-before: auto;
+      margin: 0;
+      background: #fff;
+      margin-bottom: 1pt;
+    }
+    .div-td{
+      background-color: #80C2D6;
+      page-break-inside: avoid;
+      width: 6%;
+      height: 100%;
+      display: table-cell;
+      padding: 0px 5px;
+    }
+    .td-priority{
+      min-width: 80px;
+    }
+    .div-td, .div-td p{
+      line-height: 14px;
+      font-size: 10px;
+      margin: 5px;
+    }
+    .div-td:nth-child(0){
+      width: 120px;
+    }
+    .div-td:nth-child(1){
+      text-align: left;
+      width: 10%;
+    }
+    .div-td:nth-child(2){
+      text-align: left;
+      width: 47%!important;
+    }
+    .div-table-header .div-td{
+      text-align: center;
+      background-image: -moz-linear-gradient(top, #4e5960, #647077);
+      background-image: -ms-linear-gradient(top, #4e5960, #647077);
+      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e5960), to(#647077));
+      background-image: -webkit-linear-gradient(top, #4e5960, #647077);
+      background-image: -o-linear-gradient(top, #4e5960, #647077);
+      background-image: linear-gradient(top, #4e5960, #647077);
+      background-color: #909090;
+      border-bottom: 1px solid black;
+      vertical-align: middle;
+      border-spacing: 0px;
+    }
+    .div-table-header h3{
+      font-size: 12px;
+      margin: 5px;
+      padding: 0px;
+    }
+    .div-td.success{ background: #dff0d8; color: #000; }
+    .div-td.warning{ background: #fcf8e3; color: #000; }
+    .div-td.danger{ background: #f2dede; color: #000; }
+    a{
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 5px;
+      color: #f05a1a;
+    }
+    .page-break { display:block; clear:both; page-break-after:always; }
+
+    .title-gray{
+      color: #5A656F;
+      font-size: 28px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .title-header{
+      font-size: 16px;
+      color: #0086AC;
+      text-align: left;
+    }
+
+    .font-blue{
+      color: #0086AC;
+    }
+
+    .title-2{
+      font-size: 15px;
+    }
+
+    h3{
+      background-color: #EAEAEA;
+      padding: 13px;
+      font-size: 14px;
+      text-align: left;
+    }
+  </style>
+  </body>
+    <div class="content" style="page-break-after:always;text-align:center;margin-top:180px;">
+      <div style="text-align:center;">
+        <img src="http://www.revenuegrader.com/assets/logo.png" alt="Revenue Grader"><br/>
+        <br>
+        <div style="width:550px; margin:auto" >
+          <hr style='border: 2px solid #008BDC'>
+        </div>
+        <br>
+        <div style="color:#5B656E:font-size:30;">
+          <span class="title-gray" style="font-size:60px;margin-top:50px"> <%= "Revenue Architects" %></span>
           <br>
-          <span style="font-size:60px;margin-top:40px;color: #0086AC;"> <%= "Revenue Architects" %></span>
+          <br>
+          <span class="title-gray">
+            from <%= @user.name_for_show.capitalize %>
+          </span>
+          <br>
+          <br>
+          <span class="title-gray">
+            <%= @survey.created_at.strftime("%d / %m / %Y") %>
+          </span>
+        </div>
+
+      </div>
+    </div>
+    .font-blue{
+      color: #0086AC;
+    }
+
+    .title-2{
+      font-size: 15px;
+    }
+
+    <div class="content" style="page-break-after:always;">
+      <div class="header">
+        <div class="title-header">
+          <span> <%= "#{current_user.companies.first.name}"%></span>
+          <span style="float:right;color: black;">Programs</span>
         </div>
       </div>
-
-        <div class="content" style="page-break-after:always;">
-          <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>
+      <h3>
+        REPORT
+      </h3>
+      <div>
+        <div>
+          <div>
+            <span class="title-2" >
+              REPORT
+            </span>
+            September 2015
           </div>
-          <div class="content2">
-            <div class="company_title">
-              <h3 style="font-size: 30px"><%= "#{current_user.companies.first.name}"%></h3><br/>
-              <h3 style="margin-top:0px;">Report: <%= @survey.created_at.strftime("%B  %Y")%></h3>&nbsp;
-            </div>
-          <div style="text-align:left;margin-top:160px;">
-            <h3>Diagnostic:</h3>
-            <h4><%= current_user.username.present? ? current_user.username : '' %></h4></br>
-            <h4>Completed By: <%= current_user.email.present? ? current_user.email : '' %></h4>
+          <div>
+            <span class="title-2" >
+              DIAGNOSTIC
+            </span>
+            Completed
+          </div>
+          <div>
+            <span class="title-2" >
+              REPORT
+            </span>
+            September 2015
           </div>
         </div>
+        <div>
+          
         </div>
+      </div>
+      <h3>Diagnostic Scorecard: 
+        <strong><%= @survey.created_at.strftime("%B  %Y")%></strong>
+      </h3>
+      </br>
+      <div class="survey-content">
 
+          <h3>Scorecard</h3>
+          <p>
+          <span>Strategy</span><br/>
+          Define your competitive advantage.<br/>
+          Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points.to_i %><br/>
+          <b><%= '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100) %>%</b>
 
-         <div class="content" style="page-break-after:always;">
-            <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+          <br/><br/>
+          <span>Systems</span<br/>
+          Build an agile and durable platform.<br/>
+          Score: <%= @score_per_section[1] %> / <%= @all_sections[1].total_points.to_i %><br/>
+          <b><%= '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100) %>%</b>
+
+          <br/><br/>
+          <span>Programs</span<br/>
+          Launch integrated campaigns.<br/>
+          Score: <%= @score_per_section[0] %> / <%= @all_sections[0].total_points.to_i %><br/>
+          <b><%= '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100) %>%</b>
+
+          <br/><br/>
+          <span>Total Score</span><br/>
+          Revenue Architecture<br/>
+          Score: <%= @total_score_per_section.to_i %> / <%= @total_all_sections_points.to_i %><br/>
+          <b><%= '%.2f' % ((@total_score_per_section.to_f / @total_all_sections_points.to_f) * 100) %>%</b>
+        </p>
+      </div>
+      <div class="scoring_methodology">
+        <h3>Scoring Methodology</h3>
+
+        <p>Revenue Grader scores your revenue performance potential by measuring 30 dimensions across three category layers: Strategy, Systems and Programs. Each dimension has points assigned. These points may change from time to time.</p>
+
+        <p>Each section layer (strategy, systems, programs) has 500 available points for a total of 1,500. You earn additional points for high maturity scores and discounts for low maturity scores.</p>
+
+        <p>Your overall score is the weighted score against the total potential score of 1,500. This is also presented as a percentage.</p>
+      </div>
+      <div style="clear:both"></div>
+    </div>
+
+          <% if !@all_responses.blank? %>
+           <div class="content" style="page-break-after:always;">
+              <div class="header">
+                <div style="font-size: 14px">
+                  <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+                </div>
               </div>
-            </div>
-            <h1>Diagnostic Scorecard: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1></br>
 
-               <div class="survey-content">
-
-                <h3>Scorecard</h3>
-                <p>
-                <span>Strategy</span><br/>
-                Define your competitive advantage.<br/>
-                Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points.to_i %><br/>
-                <b><%= '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100) %>%</b>
-
-                <br/><br/>
-                <span>Systems</span<br/>
-                Build an agile and durable platform.<br/>
-                Score: <%= @score_per_section[1] %> / <%= @all_sections[1].total_points.to_i %><br/>
-                <b><%= '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100) %>%</b>
-
-                <br/><br/>
-                <span>Programs</span<br/>
-                Launch integrated campaigns.<br/>
+          <div class="content"><h1>Strategy</h1></div>
+          <div class="textbox">
+            <div id="report_in_planTable" class="report-body dataTable2 div-table">
+              <div class="table-header div-table-header">
+                <div class="div-td"><h3>Category</h3></div>
+                <div class="div-td"><h3>Questions</h3></div>
+                <div class="div-td"><h3>Priority</h3></div>
+                <div class="div-td"><h3>Points</h3></div>
+                <div class="div-td"><h3>Your Score</h3></div>
+                <div class="div-td"><h3>Avg Score</h3></div>
+                <div class="div-td"><h3>Cal Score</h3></div>
+                <div class="div-td"><h3>Avg Cal Score</h3></div>
+              </div>
+              <div class="div-table-body">
+                <% @all_responses_for_strategy.each do |response|%>
+                  <div class="div-tr">
+                    <div class="div-td"><p><%= response.sub_sect_name %></p></div>
+                    <div class="div-td"><p><%= response.name %></p></div>
+                    <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3) %>
+                    <div class="div-td"><%= response.points %></div>
+                    <div class="div-td"><%= response.score %></div>
+                    <div class="div-td"><%= response.response_id.present? ?
+                    get_average_score(response.questions_id, response.survey_id) : 0 %></div>
+                    <div class="div-td"><%= response.response_id.present? ?
+                    get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
+                    <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
+                    </div>
+                  </div>
+                <%end%>
+              </div>
+              <div style="float:right; margin-right: 2px;">
+                <%= link_to 'Learn more about strategy', 'http://www.revenuearchitects.com/revenue-grader/revenue-strategy-diagnostic/' %>
+              </div>
+              <h2>
                 Score: <%= @score_per_section[0] %> / <%= @all_sections[0].total_points.to_i %><br/>
                 <b><%= '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100) %>%</b>
-
-                <br/><br/>
-                <span>Total Score</span><br/>
-                Revenue Architecture<br/>
-                Score: <%= @total_score_per_section.to_i %> / <%= @total_all_sections_points.to_i %><br/>
-                <b><%= '%.2f' % ((@total_score_per_section.to_f / @total_all_sections_points.to_f) * 100) %>%</b>
-              </p>
+              </h2>
             </div>
-
-            <div class="scoring_methodology">
-              <h3>Scoring Methodology</h3>
-
-              <p>Revenue Grader scores your revenue performance potential by measuring 30 dimensions across three category layers: Strategy, Systems and Programs. Each dimension has points assigned. These points may change from time to time.</p>
-
-              <p>Each section layer (strategy, systems, programs) has 500 available points for a total of 1,500. You earn additional points for high maturity scores and discounts for low maturity scores.</p>
-
-              <p>Your overall score is the weighted score against the total potential score of 1,500. This is also presented as a percentage.</p>
-
-            </div>
-            <div style="clear:both"></div>
           </div>
 
-        <% if !@all_responses.blank? %>
-         <div class="content" style="page-break-after:always;">
-            <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+          <div class="content"><h1>System</h1></div>
+          <div class="textbox">
+            <div id="report_in_planTable" class="report-body dataTable2 div-table">
+              <div class="table-header div-table-header">
+                <div class="div-td"><h3>Category</h3></div>
+                <div class="div-td"><h3>Questions</h3></div>
+                <div class="div-td"><h3>Priority</h3></div>
+                <div class="div-td"><h3>Points</h3></div>
+                <div class="div-td"><h3>Your Score</h3></div>
+                <div class="div-td"><h3>Avg Score</h3></div>
+                <div class="div-td"><h3>Cal Score</h3></div>
+                <div class="div-td"><h3>Avg Cal Score</h3></div>
+              </div>
+              <div class="div-table-body">
+                <% @all_responses_for_system.each do |response|%>
+                  <div class="div-tr">
+                    <div class="div-td"><p><%= response.sub_sect_name %></p></div>
+                    <div class="div-td"><p><%= response.name %></p></div>
+                    <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3) %>
+                    <div class="div-td"><%= response.points %></div>
+                    <div class="div-td"><%= response.score %></div>
+                    <div class="div-td"><%= response.response_id.present? ?
+                    get_average_score(response.questions_id, response.survey_id) : 0 %></div>
+                    <div class="div-td"><%= response.response_id.present? ?
+                    get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
+                    <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
+                    </div>
+                  </div>
+                <%end%>
+              </div>
+              <div style="float:right; margin-right: 2px;">
+                <%= link_to 'Learn more about systems', 'http://www.revenuearchitects.com/revenue-grader/revenue-systems-diagnostic/' %>
+              </div>
+              <h2>
+                Score: <%= @score_per_section[1] %> / <%= @all_sections[1].total_points.to_i %><br/>
+                <b><%= '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100) %>%</b>
+              </h2>
+            </div>
+          </div>
+
+          <div class="content"><h1>Program</h1></div>
+          <div class="textbox">
+            <div id="report_in_planTable" class="report-body dataTable2 div-table">
+              <div class="table-header div-table-header">
+                <div class="div-td"><h3>Category</h3></div>
+                <div class="div-td"><h3>Questions</h3></div>
+                <div class="div-td"><h3>Priority</h3></div>
+                <div class="div-td"><h3>Points</h3></div>
+                <div class="div-td"><h3>Your Score</h3></div>
+                <div class="div-td"><h3>Avg Score</h3></div>
+                <div class="div-td"><h3>Cal Score</h3></div>
+                <div class="div-td"><h3>Avg Cal Score</h3></div>
+              </div>
+              <div class="div-table-body">
+                <% @all_responses_for_program.each do |response|%>
+                  <div class="div-tr">
+                    <div class="div-td"><p><%= response.sub_sect_name %></p></div>
+                    <div class="div-td"><p><%= response.name %></p></div>
+                    <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3) %>
+                    <div class="div-td"><%= response.points %></div>
+                    <div class="div-td"><%= response.score %></div>
+                    <div class="div-td"><%= response.response_id.present? ?
+                    get_average_score(response.questions_id, response.survey_id) : 0 %></div>
+                    <div class="div-td"><%= response.response_id.present? ?
+                    get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
+                    <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
+                    </div>
+                  </div>
+                <%end%>
               </div>
             </div>
-
-        <div class="content"><h1>Strategy</h1></div>
-        <div class="textbox">
-          <div id="report_in_planTable" class="report-body dataTable2 div-table">
-            <div class="table-header div-table-header">
-              <div class="div-td"><h3>Category</h3></div>
-              <div class="div-td"><h3>Questions</h3></div>
-              <div class="div-td"><h3>Priority</h3></div>
-              <div class="div-td"><h3>Points</h3></div>
-              <div class="div-td"><h3>Your Score</h3></div>
-              <div class="div-td"><h3>Avg Score</h3></div>
-              <div class="div-td"><h3>Cal Score</h3></div>
-              <div class="div-td"><h3>Avg Cal Score</h3></div>
-            </div>
-            <div class="div-table-body">
-              <% @all_responses_for_strategy.each do |response|%>
-                <div class="div-tr">
-                  <div class="div-td"><p><%= response.sub_sect_name %></p></div>
-                  <div class="div-td"><p><%= response.name %></p></div>
-                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3) %>
-                  <div class="div-td"><%= response.points %></div>
-                  <div class="div-td"><%= response.score %></div>
-                  <div class="div-td"><%= response.response_id.present? ?
-                  get_average_score(response.questions_id, response.survey_id) : 0 %></div>
-                  <div class="div-td"><%= response.response_id.present? ?
-                  get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
-                  <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                  </div>
-                </div>
-              <%end%>
-            </div>
             <div style="float:right; margin-right: 2px;">
-              <%= link_to 'Learn more about strategy', 'http://www.revenuearchitects.com/revenue-grader/revenue-strategy-diagnostic/' %>
+              <%= link_to 'Learn more about programs', 'http://www.revenuearchitects.com/revenue-grader/revenue-programs-diagnostic/' %>
             </div>
             <h2>
-              Score: <%= @score_per_section[0] %> / <%= @all_sections[0].total_points.to_i %><br/>
-              <b><%= '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100) %>%</b>
+              Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points.to_i %><br/>
+              <b><%= '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100) %>%</b>
             </h2>
           </div>
         </div>
+        <% end %>
 
-        <div class="content"><h1>System</h1></div>
-        <div class="textbox">
-          <div id="report_in_planTable" class="report-body dataTable2 div-table">
-            <div class="table-header div-table-header">
-              <div class="div-td"><h3>Category</h3></div>
-              <div class="div-td"><h3>Questions</h3></div>
-              <div class="div-td"><h3>Priority</h3></div>
-              <div class="div-td"><h3>Points</h3></div>
-              <div class="div-td"><h3>Your Score</h3></div>
-              <div class="div-td"><h3>Avg Score</h3></div>
-              <div class="div-td"><h3>Cal Score</h3></div>
-              <div class="div-td"><h3>Avg Cal Score</h3></div>
-            </div>
-            <div class="div-table-body">
-              <% @all_responses_for_system.each do |response|%>
-                <div class="div-tr">
-                  <div class="div-td"><p><%= response.sub_sect_name %></p></div>
-                  <div class="div-td"><p><%= response.name %></p></div>
-                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3) %>
-                  <div class="div-td"><%= response.points %></div>
-                  <div class="div-td"><%= response.score %></div>
-                  <div class="div-td"><%= response.response_id.present? ?
-                  get_average_score(response.questions_id, response.survey_id) : 0 %></div>
-                  <div class="div-td"><%= response.response_id.present? ?
-                  get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
-                  <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                  </div>
+          <% if !@must_do_responses.blank? %>
+          <div class="content" style="page-break-after:always;">
+              <div class="header">
+                <div style="font-size: 14px">
+                  <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
                 </div>
-              <%end%>
-            </div>
-            <div style="float:right; margin-right: 2px;">
-              <%= link_to 'Learn more about systems', 'http://www.revenuearchitects.com/revenue-grader/revenue-systems-diagnostic/' %>
-            </div>
-            <h2>
-              Score: <%= @score_per_section[1] %> / <%= @all_sections[1].total_points.to_i %><br/>
-              <b><%= '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100) %>%</b>
-            </h2>
-          </div>
-        </div>
+              </div>
+               <h1>Must Do Items</h1>
 
-        <div class="content"><h1>Program</h1></div>
-        <div class="textbox">
-          <div id="report_in_planTable" class="report-body dataTable2 div-table">
-            <div class="table-header div-table-header">
-              <div class="div-td"><h3>Category</h3></div>
-              <div class="div-td"><h3>Questions</h3></div>
-              <div class="div-td"><h3>Priority</h3></div>
-              <div class="div-td"><h3>Points</h3></div>
-              <div class="div-td"><h3>Your Score</h3></div>
-              <div class="div-td"><h3>Avg Score</h3></div>
-              <div class="div-td"><h3>Cal Score</h3></div>
-              <div class="div-td"><h3>Avg Cal Score</h3></div>
-            </div>
-            <div class="div-table-body">
-              <% @all_responses_for_program.each do |response|%>
-                <div class="div-tr">
-                  <div class="div-td"><p><%= response.sub_sect_name %></p></div>
-                  <div class="div-td"><p><%= response.name %></p></div>
-                  <%= response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3) %>
-                  <div class="div-td"><%= response.points %></div>
-                  <div class="div-td"><%= response.score %></div>
-                  <div class="div-td"><%= response.response_id.present? ?
-                  get_average_score(response.questions_id, response.survey_id) : 0 %></div>
-                  <div class="div-td"><%= response.response_id.present? ?
-                  get_calculated_score(response.response_id, response.questions_id) : 0 %></div>
-                  <div class="div-td"><%= response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0 %>
-                  </div>
+               <div class="textbox">
+                 <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2" >
+                  <thead class="table-header">
+                  <tr>
+                    <th><h3>Category</h3></th>
+                    <th><h3>Questions</h3></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      <% @must_do_responses.each do |response|%>
+                        <tr>
+                          <td style="text-align:left !important;width:20%;"><%= response.sub_sect_name %></td>
+                          <td width="600" style="text-align:left !important;width:80%;"><%= response.name %></td>
+                        </tr>
+                      <%end%>
+                   </tbody>
+                 </table>
                 </div>
-              <%end%>
-            </div>
+              </div>
           </div>
-          <div style="float:right; margin-right: 2px;">
-            <%= link_to 'Learn more about programs', 'http://www.revenuearchitects.com/revenue-grader/revenue-programs-diagnostic/' %>
+          <% end %>
+
+         <% if !@should_do_responses.blank? %>
+          <div class="content" style="page-break-after:always;">
+           <div class="header">
+                <div style="font-size: 14px">
+                  <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+                </div>
+              </div>
+
+               <h1>Should Do Items</h1>
+               <div class="textbox">
+                 <table cellpadding="1" cellspacing="1" id="report_should_doTable" class="report-body dataTable2">
+                  <thead class="table-header">
+                  <tr>
+                    <th><h3>Category</h3></th>
+                    <th><h3>Questions</h3></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                      <% @should_do_responses.each do |response|%>
+                        <tr>
+                          <td style="text-align:left !important;width:20%;"><%= response.sub_sect_name %></td>
+                          <td width="600" style="text-align:left !important;width:80%;"><%= response.name %></td>
+                        </tr>
+                      <%end%>
+                   </tbody>
+                 </table>
+              </div>
           </div>
-          <h2>
-            Score: <%= @score_per_section[2] %> / <%= @all_sections[2].total_points.to_i %><br/>
-            <b><%= '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100) %>%</b>
-          </h2>
-        </div>
-      </div>
-      <% end %>
+          <% end %>
 
-        <% if !@must_do_responses.blank? %>
-        <div class="content" style="page-break-after:always;">
-            <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+         <% if !@could_do_responses.blank? %>
+          <div class="content" style="page-break-after:always;">
+              <div class="header">
+                <div style="font-size: 14px">
+                  <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+                </div>
               </div>
-            </div>
-             <h1>Must Do Items</h1>
 
-             <div class="textbox">
-               <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2" >
-                <thead class="table-header">
-                <tr>
-                  <th><h3>Category</h3></th>
-                  <th><h3>Questions</h3></th>
-                </tr>
-                </thead>
-                <tbody>
-                    <% @must_do_responses.each do |response|%>
-                      <tr>
-                        <td style="text-align:left !important;width:20%;"><%= response.sub_sect_name %></td>
-                        <td width="600" style="text-align:left !important;width:80%;"><%= response.name %></td>
-                      </tr>
-                    <%end%>
-                 </tbody>
-               </table>
+               <h1>Could Do Items</h1>
+               <div class="textbox">
+              <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
+                  <thead class="table-header">
+                  <tr>
+                    <th><h3>Category</h3></th>
+                    <th><h3>Questions</h3></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                <% @could_do_responses.each do |response|%>
+                  <tr>
+                    <td style="text-align:left !important;width:20%;"><%= response.sub_sect_name %></td>
+                    <td style="text-align:left !important;width:80%;"><%= response.name %></td>
+                  </tr>
+                <%end%>
+                   </tbody>
+                 </table>
               </div>
-            </div>
-        </div>
-        <% end %>
-
-       <% if !@should_do_responses.blank? %>
-        <div class="content" style="page-break-after:always;">
-         <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>
-            </div>
-
-             <h1>Should Do Items</h1>
-             <div class="textbox">
-               <table cellpadding="1" cellspacing="1" id="report_should_doTable" class="report-body dataTable2">
-                <thead class="table-header">
-                <tr>
-                  <th><h3>Category</h3></th>
-                  <th><h3>Questions</h3></th>
-                </tr>
-                </thead>
-                <tbody>
-
-                    <% @should_do_responses.each do |response|%>
-                      <tr>
-                        <td style="text-align:left !important;width:20%;"><%= response.sub_sect_name %></td>
-                        <td width="600" style="text-align:left !important;width:80%;"><%= response.name %></td>
-                      </tr>
-                    <%end%>
-                 </tbody>
-               </table>
-            </div>
-        </div>
-        <% end %>
-
-       <% if !@could_do_responses.blank? %>
-        <div class="content" style="page-break-after:always;">
-            <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>
-            </div>
-
-             <h1>Could Do Items</h1>
-             <div class="textbox">
-            <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
-                <thead class="table-header">
-                <tr>
-                  <th><h3>Category</h3></th>
-                  <th><h3>Questions</h3></th>
-                </tr>
-                </thead>
-                <tbody>
-
-              <% @could_do_responses.each do |response|%>
-                <tr>
-                  <td style="text-align:left !important;width:20%;"><%= response.sub_sect_name %></td>
-                  <td style="text-align:left !important;width:80%;"><%= response.name %></td>
-                </tr>
-              <%end%>
-                 </tbody>
-               </table>
-            </div>
-        </div>
-        <% end %>
-
-        <div class="content" style="page-break-after:always;">
-          <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>
-            </div>
-
-            <div id="nest_steps">
-              <h2>Next Steps</h2>
-              <p>The Revenue Grader serves an an early step in strategic planning for revenue growth. It helps identify top level areas that require additional focus. The next step is to analyze each of the priorities and develop a specific and detailed plan and timeline. A plan will reflect various dependencies and critical success factors. Revenue Architects can assist in plan development and implementation. Visit us at www.revenuearchitects.com.</p>
-              <p><%= link_to 'Arrange a Briefing with Revenue Architects', 'http://www.revenuearchitects.com/offers/revenue-diagnostic/' %></p>
-            </div>
-            <br>
-
-            <div id="about">
-             <h2>About Revenue Grader</h2>
-
-              <p>Revenue Grader is a Revenue Architects application. It is a diagnostic tool to help businesses leaders rapidly assess revenue performance potential and develop a prioritized top-level plan – all in minutes. Revenue Grader complements other grader apps by taking a broad and strategic view of the critical elements of revenue performance. </p>
-
-              <p>It is focused across three critical dimensions: </p></br>
-              <ul>
-                <li><p>Revenue Strategy</p></li>
-                <li><p>Revenue Systems</p></li>
-                <li><p>Revenue Programs</p></li>
-              </ul></br>
-
-              <p>After completing the Revenue Grader diagnostic, the executive can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation and enhancing sales team skills.</p></br>
-            </div>
           </div>
+          <% end %>
 
-
-         <div class="content" id="about_us" style="page-break-after:always;">
+          <div class="content" style="page-break-after:always;">
             <div class="header">
-              <div style="font-size: 14px">
-                <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+                <div style="font-size: 14px">
+                  <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+                </div>
+              </div>
+
+              <div id="nest_steps">
+                <h2>Next Steps</h2>
+                <p>The Revenue Grader serves an an early step in strategic planning for revenue growth. It helps identify top level areas that require additional focus. The next step is to analyze each of the priorities and develop a specific and detailed plan and timeline. A plan will reflect various dependencies and critical success factors. Revenue Architects can assist in plan development and implementation. Visit us at www.revenuearchitects.com.</p>
+                <p><%= link_to 'Arrange a Briefing with Revenue Architects', 'http://www.revenuearchitects.com/offers/revenue-diagnostic/' %></p>
+              </div>
+              <br>
+
+              <div id="about">
+               <h2>About Revenue Grader</h2>
+
+                <p>Revenue Grader is a Revenue Architects application. It is a diagnostic tool to help businesses leaders rapidly assess revenue performance potential and develop a prioritized top-level plan – all in minutes. Revenue Grader complements other grader apps by taking a broad and strategic view of the critical elements of revenue performance. </p>
+
+                <p>It is focused across three critical dimensions: </p></br>
+                <ul>
+                  <li><p>Revenue Strategy</p></li>
+                  <li><p>Revenue Systems</p></li>
+                  <li><p>Revenue Programs</p></li>
+                </ul></br>
+
+                <p>After completing the Revenue Grader diagnostic, the executive can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation and enhancing sales team skills.</p></br>
               </div>
             </div>
 
-          <h2>About Revenue Architects</h2>
 
-          <h3 style="color: #0086AC; text-align:left">Who We Are<h3>
+           <div class="content" id="about_us" style="page-break-after:always;">
+              <div class="header">
+                <div style="font-size: 14px">
+                  <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
+                </div>
+              </div>
 
-          <p style="font-size:16px;">Revenue Architects is a marketing consulting and services firm helping businesses align marketing and sales and drive revenue growth. We do this by integrating three things:</p>
+            <h2>About Revenue Architects</h2>
 
-          <ol style="text-align:left;font-weight:normal;">
-            <li><span>Strategy:</span> Define competitive advantage and the integrated revenue marketing plan.</li>
-            <li><span>Systems:</span> Build web presence and an agile and durable revenue platform</li>
-            <li><span>Programs:</span> Envision, integrate and launch integrated campaigns and programs.</li>
-          </ol>
+            <h3 style="color: #0086AC; text-align:left">Who We Are<h3>
 
-          <p>By integrating these three layers, our clients build an effective Revenue Architecture.</p>
+            <p style="font-size:16px;">Revenue Architects is a marketing consulting and services firm helping businesses align marketing and sales and drive revenue growth. We do this by integrating three things:</p>
 
-          <p>Today, business need a new more integrated revenue marketing capability and success requires a complex range of skills and expertise.  We blend strategy, design, media and technology skills to help clients differentiate their brand strategies, integrate digital and revenue systems, and launch innovative programs.  As a trusted advisor and program delivery partner, we build agile marketing systems and respond to dynamic growth opportunities. We are differentiated by our revenue architecture approach and flexible multi-affiliate resource model that allows us to respond to our client’s dynamic revenue initiatives.</p>
+            <ol style="text-align:left;font-weight:normal;">
+              <li><span>Strategy:</span> Define competitive advantage and the integrated revenue marketing plan.</li>
+              <li><span>Systems:</span> Build web presence and an agile and durable revenue platform</li>
+              <li><span>Programs:</span> Envision, integrate and launch integrated campaigns and programs.</li>
+            </ol>
 
-          <p>Learn more. Visit our <a href="http://revenuearchitects.com/" target="_blank" style="color: #f05a1a;">Website</a></p>
-        </div>
-    </body>
-</html>
+            <p>By integrating these three layers, our clients build an effective Revenue Architecture.</p>
+
+            <p>Today, business need a new more integrated revenue marketing capability and success requires a complex range of skills and expertise.  We blend strategy, design, media and technology skills to help clients differentiate their brand strategies, integrate digital and revenue systems, and launch innovative programs.  As a trusted advisor and program delivery partner, we build agile marketing systems and respond to dynamic growth opportunities. We are differentiated by our revenue architecture approach and flexible multi-affiliate resource model that allows us to respond to our client’s dynamic revenue initiatives.</p>
+
+            <p>Learn more. Visit our <a href="http://revenuearchitects.com/" target="_blank" style="color: #f05a1a;">Website</a></p>
+          </div>
+      </body>
+  </html>

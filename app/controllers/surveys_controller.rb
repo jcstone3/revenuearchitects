@@ -365,6 +365,7 @@ end
 #report of a particular survey
 def report
   survey_id = params[:id]
+  @user = current_user
 
   #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
@@ -407,11 +408,12 @@ def report
         # render :layout =>"report"
 
         # Generate per section score
+        @score_per_section = Survey.calculate_score_for_section(survey_id)
         @total_score_per_section = Survey.calculate_score_for_section(survey_id).sum()
         @total_all_sections_points = Section.total_points
 
       respond_to do |format|
-        format.html {render :layout => "report"}
+        format.html {render :layout => false, :template => '/surveys/reports_in_pdf'}
         format.pdf do
           pdf =  render_to_string(:pdf => "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf", :template => '/surveys/reports_in_pdf.html.erb', orientation: 'Landscape', :layouts => false)
           send_data pdf, filename: "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf"
