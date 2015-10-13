@@ -52,6 +52,7 @@ gem "google_visualr", ">= 2.1"
 gem "less-rails"
 gem 'twitter-bootstrap-rails'
 gem 'taps'
+gem 'slim'
 gem 'exception_notification', :git => "git://github.com/rails/exception_notification.git",
         :require => "exception_notifier"
 gem "permanent_records", "~> 2.1.2"
@@ -60,7 +61,6 @@ gem "acts_as_list", "~> 0.1.6"
 
 #PDF generation plugin
 gem 'wicked_pdf'
-
 # Raven Setup
 gem "sentry-raven"
 
@@ -74,7 +74,7 @@ end
 
 #wkhtmltopdf for test, stage and production enviornments
 group :test, :staging, :production do
-	gem "wkhtmltopdf-heroku"
+	gem 'wkhtmltopdf-heroku', '~> 1.0.0'
 	gem 'newrelic_rpm'
 end
 # Gems used only for assets and not required
