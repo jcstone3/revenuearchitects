@@ -413,10 +413,11 @@ def report
         @total_all_sections_points = Section.total_points
 
       respond_to do |format|
-        format.html {render :layout => false, :template => '/surveys/reports_in_pdf'}
+        format.html {render :layout => 'pdf', :template => '/surveys/pdf_report'}
         format.pdf do
-          pdf =  render_to_string(:pdf => "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf", :template => '/surveys/reports_in_pdf.html.erb', orientation: 'Landscape', :layouts => false)
-          send_data pdf, filename: "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf"
+          pdf =  render_to_string(:pdf => "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf", :template => '/surveys/pdf_report.html.slim', orientation: 'Landscape', :layouts => 'pdf',
+            margin:  { top:0,bottom:0,left:0,right:0})
+          send_data pdf, :disposition => 'inline', :type => 'application/pdf', filename: "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf"
         end
       end
 

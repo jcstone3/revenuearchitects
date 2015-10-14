@@ -15,7 +15,7 @@
     .content{
       font-weight:bold;
       margin-left: 5px;
-      text-align:right;
+      text-align: left;
       width:1000px;
       line-height:25px;
     }
@@ -660,9 +660,9 @@
 
     .title-gray{
       color: #5A656F;
-      font-size: 28px;
-      margin-top: 20px;
-      margin-bottom: 20px;
+      font-size: 38px;
+      padding-top: 25px;
+      padding-bottom: 25px;
     }
 
     .title-header{
@@ -685,40 +685,35 @@
       font-size: 14px;
       text-align: left;
     }
+    .col-6{
+      width: 50%;
+    }
+    .clearfix{
+      clear: both;
+    }
   </style>
   </body>
-    <div class="content" style="page-break-after:always;text-align:center;margin-top:180px;">
-      <div style="text-align:center;">
-        <img src="http://www.revenuegrader.com/assets/logo.png" alt="Revenue Grader"><br/>
+    <div class="content" style="background-color:#D5E5F1;page-break-after:always;text-align:center;margin-top:180px;">
+      <div>
+        <div class="title-gray">
+          from <%= @user.name_for_show.capitalize %>
+        </div>
         <br>
-        <div style="width:550px; margin:auto" >
+        <br>
+        <div class="title-gray">
+          <%= @survey.created_at.strftime("%d / %m / %Y") %>
+        </div>
+        <br>
+        <div style="width:550px; margin: 30px auto;margin-bottom: 45px;" >
           <hr style='border: 2px solid #008BDC'>
         </div>
-        <br>
-        <div style="color:#5B656E:font-size:30;">
-          <span class="title-gray" style="font-size:60px;margin-top:50px"> <%= "Revenue Architects" %></span>
-          <br>
-          <br>
-          <span class="title-gray">
-            from <%= @user.name_for_show.capitalize %>
-          </span>
-          <br>
-          <br>
-          <span class="title-gray">
-            <%= @survey.created_at.strftime("%d / %m / %Y") %>
-          </span>
+        <div style="text-align:center;margin-top: 21px;">
+          <span>By  </span>
+          <img src="http://www.revenuegrader.com/assets/logo.png" alt="Revenue Grader"><br/>
         </div>
-
+        <br>
       </div>
     </div>
-    .font-blue{
-      color: #0086AC;
-    }
-
-    .title-2{
-      font-size: 15px;
-    }
-
     <div class="content" style="page-break-after:always;">
       <div class="header">
         <div class="title-header">
@@ -729,30 +724,44 @@
       <h3>
         REPORT
       </h3>
-      <div>
-        <div>
-          <div>
-            <span class="title-2" >
-              REPORT
-            </span>
-            September 2015
-          </div>
-          <div>
-            <span class="title-2" >
-              DIAGNOSTIC
-            </span>
-            Completed
-          </div>
-          <div>
-            <span class="title-2" >
-              REPORT
-            </span>
-            September 2015
-          </div>
-        </div>
-        <div>
-          
-        </div>
+      <div class="container-fluid">
+        <table>
+          <tr>
+            <td class="col-6">
+              <div >
+                <div>
+                  <span class="title-2 font-blue" >
+                    REPORT
+                  </span>
+                  September 2015
+                </div>
+                <div>
+                  <span class="title-2 font-blue" >
+                    DIAGNOSTIC
+                  </span>
+                  Completed
+                </div>
+                <div>
+                  <span class="title-2 font-blue" >
+                    REPORT
+                  </span>
+                  September 2015
+                </div>
+              </div>
+            </td>
+            <td class="col-6">
+              <div >
+                <p>
+                  The Revenue Grader diagnostic help you explore 30 best
+                  practice dimensions used by successful growth businesses.
+                  You can measure your current capability, the importance
+                  to your business and the priority to act.
+                </p>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div class="clearfix"></div>
       </div>
       <h3>Diagnostic Scorecard: 
         <strong><%= @survey.created_at.strftime("%B  %Y")%></strong>
