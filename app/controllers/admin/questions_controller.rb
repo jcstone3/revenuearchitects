@@ -53,9 +53,7 @@ class Admin::QuestionsController < ApplicationController
   def update
    @question = Question.find(params[:id])
    
-    if @question.update_attributes(params[:question])
-      @question.update_attributes(to_check:1)
-      Question.fix_order_to_check
+    if @question.update_attr_with_previos_sequence(params[:question])
       #get questions count and questions total point for each section 
        @questions =   Question.find(:all,
                                     :select => "sum(questions.points) as question_points, count(*) as question_count, sections.name", 

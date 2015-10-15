@@ -40,6 +40,16 @@ scope :find_question_count, lambda{|section_id| {
     :conditions=>"sections.id =#{section_id} "
 }}
 
+def update_attr_with_previos_sequence(params)
+  @previos = sequence
+  @target_question = Question.find_by_sequence(params[:sequence])
+  @valid_record= update_attributes(params)
+  if @valid_record
+    update_targer_by_sequence
+  end
+  @valid_record
+end
+
 def self.fix_order_to_check
   Question.order(:sequence,"to_check desc").each_with_index{|q,i| q.update_attributes(to_check:0 ,sequence: (i+1)) }
 end
@@ -58,6 +68,13 @@ end
 
 def self.next_in_sequence(sequence_id)
   where("sequence > ?", sequence_id).order(:sequence)
+end
+
+private
+def update_targer_by_sequence
+  @target_question.update_attributes(sequence:@previos) if @target_question
+  update_attributes(to_check:1)
+  self.class.fix_order_to_check
 end
 
 end
