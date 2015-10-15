@@ -9,14 +9,14 @@
 
                 <% @response_count= current_survey.responses.present? ? current_survey.responses.count : 0 %>
 
-                <h4> <%= "Total Completed Questions" %> <span class="red"> <%= @response_count%>/<%= @total_question_total%> </span>
+                <h4> <%= "Total Completed Practices" %> <span class="red"> <%= @response_count%>/<%= @total_question_total%> </span>
                 </h4 >
               </br>
 
               <%end%>
           <%else%>
             <h1 class="question"> Start a new Diagnostic </h1>
-            <!-- New flow - redirect to the first question -->
+            <!-- New flow - redirect to the first practice -->
             <%= link_to 'Start Diagnostic', create_survey_path, method: :post %>
 
        <%end%>
@@ -29,7 +29,7 @@
                       <h3><i class="icon-bar-chart" style="font-size:30px; margin-top:10px"></i>&nbsp; <%= link_to "Diagnostic for #{completed_survey.created_at.strftime('%d %B  %Y')}", reports_path(completed_survey)%></h3>
 
                         <% @response_count= completed_survey.responses.present? ? completed_survey.responses.count : 0 %>
-                        <h4> <%= "Total Completed Questions" %> <span class="green"> <%= "  #{@response_count}"%>/<%= "#{@total_question_previous}" %> </span>  </h4>
+                        <h4> <%= "Total Completed Practices" %> <span class="green"> <%= "  #{@response_count}"%>/<%= "#{@total_question_previous}" %> </span>  </h4>
                       </br>
                   <%end%>
               <%end%>

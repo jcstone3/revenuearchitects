@@ -72,10 +72,10 @@
    <% if(@question.position > 1)%>
     <%= link_to(questions_path(params[:id],@question.position - 1 ), :class=>"btn confprev") do %>
        <i class="icon-chevron-left">
-        </i> &nbsp;Previous Question
+        </i> &nbsp;Previous Practice
    <% end %>
    <%else%>
-    <a rel="tooltip" class="btn large disabled confprev"><i class="icon-chevron-left"></i>&nbsp;Previous Question</a>
+    <a rel="tooltip" class="btn large disabled confprev"><i class="icon-chevron-left"></i>&nbsp;Previous Practice</a>
     <%end%>
     <!--<a href="#" class="btn btn-small btn-info" style="float:right; margin-right:20px;"><i class="icon-chevron-left"></i> Save Work</a>-->
   </p>

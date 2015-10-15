@@ -7,7 +7,7 @@
   <div class="content">
 
     <h1 class="question">Thank you for successfully completing the Diagnostic  </h1>          
-    <p class="question">Number of questions attempted in each section</p>
+    <p class="question">Number of practices attempted in each section</p>
     <%= form_for(@survey, url: close_survey_path(@survey) ) do |f| %>
       <%= f.hidden_field :size, { :value => @survey.size } %>
       <%= f.hidden_field :revenue, { :value => @survey.revenue } %>
