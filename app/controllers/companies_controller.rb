@@ -9,6 +9,7 @@ class CompaniesController < ApplicationController
 
     #new#company
 	def new
+    @user = current_user;
 		@company = Company.new
 		#@industries = Industry.all
 	end
@@ -32,11 +33,14 @@ class CompaniesController < ApplicationController
   #edit#company
   def edit
     @company = Company.find_by_id(params[:id])
+    @user = current_user;
   end
 
   def update
     @company = Company.find_by_id(params[:id])
-    if @company.update_attributes(params[:company])
+    @user = User.find_by_id(params[:id])
+    
+    if @company.update_attributes(params[:company]) && @user.update_attributes(params[:user])
       # On comapany updation redirects to the update survey
       redirect_to edit_survey_path(id: session[:survey])
     else

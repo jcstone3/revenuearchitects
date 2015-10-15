@@ -5,6 +5,10 @@
  *= require bootstrap_and_overrides
  *= require feedback
  *= require_self
+ *= require_tree .
+ *= stub pdf
+ *= stub font-lato
+ 
 */
 
 @import 'footer';

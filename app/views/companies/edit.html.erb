@@ -1,27 +1,43 @@
 <% content_for :main_content do -%>
-    <div class="span5 content">
-      <div class="content">
-       <h1 class="question">Company Details</h1>
-      <p class="question">Please provide basic information about your company</p>
+  <div class="span5 content">
+    <div class="content">
+     <h1 class="question">Company Details</h1>
+    <p class="question">Please provide basic information about your company</p>
 
-      <%= simple_form_for(@company, :validate => true, :class => "well") do |f| %>
+    <%= simple_form_for(@company, :validate => true, :class => "well") do |f| %>
 
-        <%= f.input :name,
-                    :label => "Your Company Name",
-                    :input_html => { :class => 'input-xlarge' },
-                    :label_html => { :class => '' } -%>
-        <%= f.input :website,
-                    :input_html => { :class => 'input-xlarge', value: "#{current_user.website}" } -%>
-        <%= f.association :industry,
-                      :prompt => "Select Industry",
-                      :input_html => { :class => 'input-xlarge' }   -%>
 
-         <div class="form-actions">
-            <%= f.button :submit, "Continue to Diagnostic", :class => 'btn-primary' %>
-          </div>
+      <div class="control-group string required">
+        <label class="string required control-label " for="user_email">
+        <abbr title="required">*</abbr>User Email</label>
+        <div class="controls">
+          <%= text_field(:user, :email, value: @user.email )-%>
+        </div>
+      </div>
+      <div class="control-group string required">
+        <label class="string required control-label " for="user_username">
+        <abbr title="required">*</abbr>User Name</label>
+        <div class="controls">
+          <%= text_field(:user, :username, value: @user.username )-%>
+        </div>
+      </div>
+
+      <%= f.input :name,
+                  :label => "Your Company Name",
+                  :input_html => { :class => 'input-xlarge' },
+                  :label_html => { :class => '' } -%>
+      <%= f.input :website,
+                  :input_html => { :class => 'input-xlarge', value: "#{current_user.website}" } -%>
+      <%= f.association :industry,
+                    :prompt => "Select Industry",
+                    :input_html => { :class => 'input-xlarge' }   -%>
+
+       <div class="form-actions">
+          <%= f.button :submit, "Continue to Diagnostic", :class => 'btn-primary' %>
+        </div>
     <% end -%>
-  </div>
-    </div><!-- / end of content -->
+    </div>
+  </div><!-- / end of content -->
 <!--
     <div class="span4 side-text">
       <h1 class="question">The Exercise should take about 60 minutes and help create a top-level revenue strategy and plan</h1>
