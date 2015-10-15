@@ -4,7 +4,7 @@
      <h1 class="question">Company Details</h1>
     <p class="question">Please provide basic information about your company</p>
 
-    <%= simple_form_for(@company, :validate => true, :class => "well") do |f| %>
+    <%= simple_form_for(@company, html: { validate: true, novalidate: false}) do |f| %>
 
 
       <div class="control-group string required">
@@ -12,6 +12,9 @@
         <abbr title="required">*</abbr>User Email</label>
         <div class="controls">
           <%= text_field(:user, :email, value: @user.email )-%>
+          <% unless (@user.errors[:email].empty?) -%>
+            <span class="help-inline">@user.errors[:email]</span>
+          <% end -%>
         </div>
       </div>
       <div class="control-group string required">
@@ -19,6 +22,9 @@
         <abbr title="required">*</abbr>User Name</label>
         <div class="controls">
           <%= text_field(:user, :username, value: @user.username )-%>
+          <% unless (@user.errors[:username].empty?) -%>
+            <span class="help-inline">@user.errors[:username]</span>
+          <% end -%>
         </div>
       </div>
 

@@ -4,38 +4,50 @@
        <h1 class="question">Company Details</h1>
       <p class="question">Please provide basic information about your company</p>
           
-      <%= simple_form_for(@company, :validate => true, :class => "well") do |f| %>
+      <%= simple_form_for(@company, html: { validate: true, novalidate: false}) do |f| %>
 
-        <div class="control-group string required">
+        <div class="control-group string required <%= ( @user.errors[:email].empty?)? '' : 'error' -%>">
           <label class="string required control-label " for="user_email">
           <abbr title="required">*</abbr>User Email</label>
           <div class="controls">
-            <%= text_field(:user, :email, value: @user.email )-%>
+            <%= text_field(:user, :email, value: @user.email, required: true)-%>
+            <% unless (@user.errors[:email].empty?) -%>
+              <span class="help-inline"><%= @user.errors[:email].first -%></span>
+            <% end -%>
           </div>
         </div>
-        <div class="control-group string required">
+        <div class="control-group string required <%= ( @user.errors[:username].empty?)? '' : 'error' -%>">
           <label class="string required control-label " for="user_username">
           <abbr title="required">*</abbr>User Name</label>
           <div class="controls">
-            <%= text_field(:user, :username, value: @user.username )-%>
+            <%= text_field(:user, :username, value: @user.username, required: true )-%>
+            <% unless (@user.errors[:username].empty?) -%>
+              <span class="help-inline"><%= @user.errors[:username].first -%></span>
+            <% end -%>
           </div>
         </div>
 
         <%= f.input :name, 
                     :label => "Your Company Name",  
-                    :input_html => { :class => 'input-xlarge' }, 
+                    :input_html => { :class => 'input-xlarge', required: true }, 
                     :label_html => { :class => '' } -%> 
         <%= f.input :website,  
-                    :input_html => { :class => 'input-xlarge' } -%>
+                    :input_html => { :class => 'input-xlarge', required: true } -%>
         <%= f.association :industry, 
                       :prompt => "Select Industry",  
-                      :input_html => { :class => 'input-xlarge' }   -%>  
+                      :input_html => { :class => 'input-xlarge', required: true }   -%>  
 
          <div class="form-actions1">
             <%= f.button :submit, "Continue to Diagnostic", :class => 'btn-primary' %>
           </div>
       <% end -%> 
-      
+      <script type="text/javascript">
+      var __ss_noform = __ss_noform || [];
+      __ss_noform.push(['baseURI', 'https://app-HSIR8I.sharpspring.com/webforms/receivePostback/szAzBwA/']); __ss_noform.push(['endpoint', '6bd2f905-be09-41a7-ab67-6d6a8188f284']);
+      </script>
+      <script type="text/javascript" src="https://koi-HSIR8I.sharpspring.com/client/noform.js?ver=1.24" ></script>
+
+
     </div><!-- / end of content -->
      
     <div class="span4 side-text">
