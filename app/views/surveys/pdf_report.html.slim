@@ -1,12 +1,12 @@
 .page-break.cover-page 
   div
     .title-cover-page
-      | Client's Company Name
+      = @survey.company_name.upcase
     
     .title-gray
       | Revenue Grader Diagnostic
-    .title-gray
-      | 13 / 10 / 2015
+    .title-gray 
+      = @survey.created_at.strftime('%B %d th, %Y')
     div.content-line-decorator
       hr.line-decorator
     div.center-logo
@@ -15,13 +15,12 @@
           td.width-50
             div.logo-content-by By
           td.width-50
-            img.logo-content-img src="http://www.revenuegrader.com/assets/logo.png"
+            = image_tag("logopdf.png", class: 'logo-content-img ' )
 
 .content.page-break
   .header
     .title-header
-      span.header-left TEST SOFTWARECRIOLLO
-      / span.header-right STRATEGY
+      span.header-left = @survey.company_name.upcase
   h3
     | REVENUE GRADER DIAGNOSTIC
   .container-fluid
@@ -33,72 +32,272 @@
               .margin-bottom-10
                 span.title-2.font-blue
                   | REPORT
-                | September 2015
+                = @survey.date_format
               .margin-bottom-10
                 span.title-2.font-blue
                   | DIAGNOSTIC COMPLETED BY
-                div danielcfe@gmail.com
+                div = @user.email
           td.width-50
             div
-              p
+              p.margin-top-none
                 | The Revenue Grader diagnostic helps you explore the best practice dimensions used by successful growth businesses. You can measure your current capability, the importance to your business and the priority to act.
     .clearfix
-  h3 DIAGNOSTIC SCORECARD: SEPTEMBER 2015
+  h3
+    |DIAGNOSTIC SCORECARD:  
+    = @survey.date_format
   .survey-content
     .container-fluid
-      table
+      table.table-for-div
         tbody
           tr
             td.width-50
               .title-black SCORECARD
               p.margin-bottom-30
-                span STRATEGY
+                span.title-black.sub2 STRATEGY
                 br/
                 | Define your competitive advantage.
                 br/
-                span.font-blue Score:
-                span 45 / 45
+                span.font-blue SCORE:
+                span 
+                = @score_per_section[0]
+                | /
+                = @all_sections[0].total_points.to_i
                 br/
-                b.title-black 100.00%
+                b.title-black = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
               p.margin-bottom-30
-                span SYSTEMS
+                span.title-black.sub2 SYSTEMS
                 br/
                 | Build an agile and durable platform.
                 br/
-                span.font-blue Score:
-                span 48 / 10
+                span.font-blue SCORE:
+                span 
+                = @score_per_section[1]
+                | /
+                = @all_sections[1].total_points.to_i
                 br/
-                b.title-black 48.00%
+                b.title-black = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
                 br/
               p.margin-bottom-30
-                span Programs
+                span.title-black.sub2 PROGRAMS
                 br/
                 | Launch integrated campaigns.
                 br/
-                span.font-blue Score:
-                span 8 / 50
+                span.font-blue SCORE:
+                span 
+                = @score_per_section[2]
+                | /
+                = @all_sections[2].total_points.to_i
                 br/
-                b.title-black  16.00%
+                b.title-black = '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100)
             td.width-50
               .title-black SCORING METHODOGY
-              p Revenue Grader scores your revenue performance potential by measuring 30 dimensions across three category layers: Strategy, Systems and Programs. Each dimension has points assigned. These points may change from time to time.
-              p Each section layer (strategy, systems, programs) has 500 available points for a total of 1,500. You earn additional points for high maturity scores and discounts for low maturity scores.
-              p Your overall score is the weighted score against the total potential score of 1,500. This is also presented as a percentage.
-              p
-                br/
-                span Total Score
-                br/
-                | Revenue Architecture
-                br/
-                | Score: 101 / 105
-                br/
-                b 96.19%
+              p Revenue Grader scores your performance potential bymeasuring 30 dimensions across three category layers: Strategy,Systems and Programs.  Each dimension has points assigned.These points may change from time to time.
+
+              div.total-score-content
+                  p.title-black TOTAL SCORE
+                  p.title-black.sub1 = @survey.company_name
+                  p.title-super-1
+                    span.font-blue SCORE:
+                    span 101 / 105
+                  b.important-score 96.19%
   
 
 
-.page-break style="page-break-after: always;"
-  span page1
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right STRATEGY
 
-.page-break style="page-break-after: always;"
-  span page2
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th 
+            |DIMENSION
+            div.div-header
+          th
+            |PRACTICE
+            div.div-header
+          th
+            |PRIORITY
+            div.div-header
+          th
+            |POINTS
+            div.div-header
+          th
+            |YOUR SCORE
+            div.div-header
+          th
+            |AVG SCORE
+            div.div-header
+          th
+            |CAL SCORE
+            div.div-header
+          th
+            |AVG. CAL SCORE
+      tbody
+        - @all_responses_for_strategy.each do |response|
+          tr
+            td = response.sub_sect_name
+            td = response.name
+            td = response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3)
+            td.center = response.points
+            td.center = response.score
+            td.center = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td.center = response.response_id.present? ? get_calculated_score(response.response_id, response.questions_id) : 0
+            td.center = response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id,response.section_id) : 0
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right SYSTEM
+
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th 
+            |DIMENSION
+            div.div-header
+          th
+            |PRACTICE
+            div.div-header
+          th
+            |PRIORITY
+            div.div-header
+          th
+            |POINTS
+            div.div-header
+          th.center
+            |YOUR SCORE
+            div.div-header
+          th.center
+            |AVG SCORE
+            div.div-header
+          th.center
+            |CAL SCORE
+            div.div-header
+          th.center
+            |AVG. CAL SCORE
+      tbody
+        - @all_responses_for_system.each do |response|
+          tr
+            td = response.sub_sect_name
+            td = response.name
+            td = response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3)
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = response.response_id.present? ? get_calculated_score(response.response_id, response.questions_id) : 0
+            td = response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id,response.section_id) : 0
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right PROGRAMS
+
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th 
+            |DIMENSION
+            div.div-header
+          th
+            |PRACTICE
+            div.div-header
+          th
+            |PRIORITY
+            div.div-header
+          th.center
+            |POINTS
+            div.div-header
+          th.center
+            |YOUR SCORE
+            div.div-header
+          th.center
+            |AVG SCORE
+            div.div-header
+          th.center
+            |CAL SCORE
+            div.div-header
+          th.center
+            |AVG. CAL SCORE
+      tbody
+        - @all_responses_for_program.each do |response|
+          tr
+            td = response.sub_sect_name
+            td = response.name
+            td = response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3)
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = response.response_id.present? ? get_calculated_score(response.response_id, response.questions_id) : 0
+            td = response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id,response.section_id) : 0
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right 
+  h3 NEXT STEPS
+  p The Revenue Grader serves an an early step in strategic planning for revenue growth. It helps identify top level areas that require additional focus. The next step is to analyze each of the priorities and develop a specific and detailed plan and timeline. A plan will reflect various dependencies and critical success factors. Revenue Architects can assist in plan development and implementation. Visit us at www.revenuearchitects.com.
+  h3 ABOUT REVENUE GRADER
+  div
+    p.margin-extra Revenue Grader is a Revenue Architects application. It is a diagnostic tool to help businesses leaders rapidly assess revenue performance potential and develop a prioritized top-level plan – all in minutes. Revenue Grader complements other grader apps by taking a broad and strategic view of the critical elements of revenue performance.
+    p.margin-extra The Revenue Grader explores 30 dimensions of revenue growth across three layers:
+    ul.margin-extra.blue-list
+      li.font-blue - Revenue Strategy
+      li.font-blue - Revenue Systems
+      li.font-blue - Revenue Programs
+    p.margin-extra After completing the Revenue Grader diagnostic, the management teams can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation and enhancing sales team skills.
+
+
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right 
+  h3 CLOSED LOOP MARKETING FOR COMPLEX SALES
+  p Revenue Architects is a marketing consulting and services firm helping businesses align marketing and sales and drive revenue growth.
+  p We do this by building a 'Revenue Architecture' integrating your strategy, systems and programs:
+
+  div.content-icons
+    table
+      tr
+        td.width-30
+          div
+            = image_tag("icon3.jpg")
+            p Define competitive advantage and the integrated revenue marketing plan.
+            / wicked_pdf_image_tag
+        td.width-30
+          div
+            = image_tag("icon-windows.jpg")
+            p Build web presence and an agile and durable revenue platform
+        td.width-30
+          div
+            = image_tag("icon-computer.jpg")
+            p  Envision, integrate and launch integrated campaigns and programs
+
+
+
+  div
+    p.margin-extra Today, business need a new more integrated revenue marketing capability and success requires a complex range of skills and expertise. We blend strategy, design, media and technology skills to help clients differentiate their brand strategies, integrate digital and revenue systems, and launch innovative programs. As a trusted advisor and program delivery partner, we build agile marketing systems and  respond to dynamic growth opportunities. We are differentiated by our revenue architecture approach and flexible multi-affiliate resource model that allows us to respond to our client’s dynamic revenue initiatives.
+    p.margin-extra
+      |Learn more. Visit our 
+      a.title-black.font-normal-size.clear-link href="http://www.revenuegrader.com/" Website
+
+
+
+
+
+
+
+
 

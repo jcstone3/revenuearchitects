@@ -20,6 +20,14 @@ class Survey < ActiveRecord::Base
     :order => "created_at DESC"
     }}
 
+  def company_name
+    (company)? company.name : ''
+  end
+
+  def date_format
+    created_at.strftime('%^B %Y')
+  end
+
     def self.to_csv(options = {})
       CSV.generate(options) do |csv|
         csv << column_names
