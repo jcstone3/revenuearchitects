@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
        User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.name, website: data.link)
       else
         email = data.id.to_s
-       User.create!(:email => "#{email}@test.com", :password => Devise.friendly_token[0,20], :username => data.name, website: "http://www.#{data.id}.com")
+       User.create!(:email => "#{email}@withoutemail.com", :password => Devise.friendly_token[0,20], :username => data.name, website: "http://www.#{data.id}.com")
       end
     end
   end
@@ -53,10 +53,10 @@ class User < ActiveRecord::Base
       user
     else # Create a user with a stub password.
       if provider == "google_oauth2"
-       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.first_name, website: data['urls']['Google'])
+       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.first_name, website: extract_page_google(data))
       else
         email = data.id.to_s
-       User.create!(:email => "#{email}@test.com", :password => Devise.friendly_token[0,20], :username => data.name, website: "http://www.#{data.id}.com")
+       User.create!(:email => "#{email}@withoutemail.com", :password => Devise.friendly_token[0,20], :username => data.name, website: "http://www.#{data.id}.com")
       end
     end
   end
@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
       user
     else
       uid = access_token.uid
-      email = data.email ? data.email : "#{uid}@test.com"
+      email = data.email ? data.email : "#{uid}@withoutemail.com"
       user = User.create!(email: email, :username => data.nickname, password: Devise.friendly_token[0,20], website: data['urls']['public_profile'])
       user.authorizations.create!(uid: uid, provider: provider)
     end
@@ -80,6 +80,16 @@ class User < ActiveRecord::Base
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"]
       end
+    end
+  end
+
+  private
+
+  def self.extract_page_google( data )
+    if data['urls'] && data['urls']['Google']
+      data['urls']['Google']
+    else
+      "http://www.#{userwithoutopage}.com"
     end
   end
 
