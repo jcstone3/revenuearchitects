@@ -10,7 +10,7 @@
       <div class="pull-right button-signin">
         <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
       </div>
-      <div class="pull-right data-user-header">
+      <div class="pull-right visible-desktop data-user-header">
         <i class="icon-home "></i>
         <span><%= "#{current_user.name_for_show.upcase}"%></span>
       </div>

@@ -40,7 +40,7 @@
 
   <body class="<%= controller_name %> <%= action_name %>">
     <div class="container-fluid" >
-      <div class="row-fluid top-bar">
+      <div class="row-fluid top-bar extend-content">
         <%= render  "/layouts/shared/header" -%>
       </div><!-- / end of row -->
 
@@ -57,7 +57,7 @@
         </div><!-- / -->
       <% end -%>
 
-      <div class="row-fluid content-section" >
+      <div class="row-fluid" >
         <div class="span9 main-content" style="padding-top:0;">
           <%= yield :main_content %>
         </div> <!-- / end of span8 - main -->

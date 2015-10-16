@@ -170,7 +170,6 @@ def show
   @all_sections.each_with_index do |section,i|
   @total_question_previous += @previous_questions_total[i].question_total.to_i
   end
-  render 'surveys/show', :layout => 'style2'
 end
 
 def create_survey
