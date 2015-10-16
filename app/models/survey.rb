@@ -90,7 +90,7 @@ class Survey < ActiveRecord::Base
 
       @data_table = GoogleVisualr::DataTable.new
 
-      @data_table.new_column('string', 'Questions' )
+      @data_table.new_column('string', 'Practices' )
       @data_table.new_column('number', 'Your Score')
       @data_table.new_column('number', 'Average Score')
 
@@ -157,7 +157,7 @@ def self.get_overall_graph(survey_id)
 
     @data_table = GoogleVisualr::DataTable.new
 
-    @data_table.new_column('string', 'Questions' )
+    @data_table.new_column('string', 'Practices' )
     @data_table.new_column('number', 'Your Response')
     @data_table.new_column('number', 'Average Response')
 

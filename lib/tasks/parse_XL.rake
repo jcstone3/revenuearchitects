@@ -17,7 +17,7 @@ task :parse_XL  => :environment do
      
       #########################SubSections starts here#########
       temp = ""
-      workbook.worksheets[2].each do |row|  #Reading data from Questions-Systems sheet 
+      workbook.worksheets[2].each do |row|  #Reading data from Practices-Systems sheet 
         unless row[1].nil?
           if (row[1].value != temp and row[1].value != "Segment")          
             @sub_section = SubSection.new

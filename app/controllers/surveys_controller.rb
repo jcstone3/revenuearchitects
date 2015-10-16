@@ -203,7 +203,7 @@ def question
   # - Question
   # - Current Section
   # - Current Subsection
-  # - Array for Pagination of Questions
+  # - Array for Pagination of Practices
   # - All Sections
   # - All Subsections
   @question = get_question(question_id)
@@ -447,7 +447,7 @@ def import_csv
 
 
   csv_string = CSV.generate do |csv|
-    csv << ["#", "Questions", "Section", "Subsection", "Points", "Your Score", "Avg Score", "Cal Score", "Avg Cal Score", "Priority"]
+    csv << ["#", "Practices", "Section", "Subsection", "Points", "Your Score", "Avg Score", "Cal Score", "Avg Cal Score", "Priority"]
     @all_responses.each_with_index do |response, index|
       csv << [index+1, response.name, response.section_name.try(:titleize), response.sub_sect_name.try(:titleize), response.points, response.score, response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0, response.response_id.present? ? get_calculated_score(response.response_id, response.questions_id) : 0, response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id, response.section_id) : 0, response.answer_3.try(:titleize)]
     end
@@ -538,7 +538,7 @@ def compare
     @survey = Survey.find_by_id(survey_id)
     @data_table = Survey.get_overall_graph(survey_id)
 
-     option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+     option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Practices', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
     @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
 
     @responses = Response.get_all_responses(@survey.id)
@@ -583,7 +583,7 @@ def compare_strategy
   logger.debug "&&&&&&&&&&& datatable is "
   logger.debug @data_table.inspect
 
-  option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+  option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Practices', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
   end
     render :layout =>"report"
@@ -621,7 +621,7 @@ def compare_system
   @data_table = Survey.get_section_graph(@all_sections[1].id, @survey.id, @responses)
 
 
- option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+ option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Practices', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
 
 
@@ -662,7 +662,7 @@ def compare_programs
   @responses = Survey.get_result(@all_sections[2].id, @survey.id)
   @data_table = Survey.get_section_graph(@all_sections[2].id, @survey.id, @responses)
 
-  option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+  option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '2',title: 'Practices', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
 
 
@@ -704,7 +704,7 @@ end
      @in_plan_responses = Response.get_response_for_options(@survey.id, "in_plan")
      @survey = Survey.find_by_id(survey_id)
       @data_table = Survey.get_overall_graph(survey_id)
-  option = { width: 600, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+  option = { width: 600, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Practices', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
   @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
   end
 
@@ -766,7 +766,7 @@ def download_result
 
 
     @data_table = Survey.get_overall_graph(@survey.id)
-    option = { width: 1000, height: 600, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Questions', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
+    option = { width: 1000, height: 600, title: 'Your Score Vs Average Score',lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Practices', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
     @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
 
   end
@@ -784,7 +784,7 @@ def download_result
       format.xls {
         result = Spreadsheet::Workbook.new
         list = result.create_worksheet :name => "response"
-        list.row(0).concat %w{Section Subsection Questions QuestionPoints Score}
+        list.row(0).concat %w{Section Subsection Practices QuestionPoints Score}
         @sections.each { |section|
            section.sub_sections.each { |subsection|
            subsection.questions.each { |question|
