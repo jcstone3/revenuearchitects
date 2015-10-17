@@ -1,7 +1,6 @@
 .without_margin{
   margin-left: -20px;
   margin-right: -20px;
-  padding-right: 30px!important;
   padding-left: 30px!important;
 }
 
@@ -25,14 +24,18 @@
 
 .title1{
   background-color: #4CA7C6;
-  padding: 15px;
+  padding: 7px 30px;
   font-size: 18px;
   color: #fff;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .title2{
   background-color: #E9E9E9;
-  padding: 15px 30px;
+  padding: 7px 30px;
   font-size: 15px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .plane-btn{
@@ -42,7 +45,7 @@
   background-image: none;
   border-radius: 1px;
   border: 1px solid #848D94;
-  margin: 10px;
+  margin: 10px 4px;
   box-shadow: none;
   text-shadow: none;
 }
@@ -90,4 +93,85 @@ p.margin-extra{
 .center-image{
   padding: 50px;
 }
+
+.content-survey{
+  border-bottom: 1px solid #DDDDDD;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.content-survey .content{
+  padding: 15px 0;
+  margin-left: 0;
+}
+
+.content-survey .plane-btn{
+  margin-top: 15px;
+}
+.content-survey .text-center{
+  margin-top: 5px;
+}
+
+.content-link{
+  margin: 20px 0 25px;
+  margin-left: 0;
+}
+
+.report{
+  margin-top: 0;
+}
+
+.content-gray{
+  background-color: #e3e3e3;
+  padding: 15px;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+.content-gray .list-tab{
+  margin-left: 15px;
+}
+
+.list-tab li{
+  float: left;
+  list-style: none;
+}
+
+.list-tab li a{
+  padding: 5px 10px;
+  text-align: center;
+  color: #8d969b;
+  font-size: 12px;
+  border-radius: 0px;
+  display: block;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #8d969b;
+  text-decoration: none;
+}
+
+.list-tab li a.active, .list-tab li a:hover{
+  color: #fff;
+  background-color: #8d969b;
+}
+
+.content-gray .plane-btn{
+  margin: 0 4px;
+}
+
+.content-gray .plane-btn:active, .content-gray .plane-btn:hover{
+  background-color: #848D94;
+  color: #fff;
+}
+
+.action-btns{
+  margin-top: 0;
+}
+
+.container-fluid.not_margin{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+
 

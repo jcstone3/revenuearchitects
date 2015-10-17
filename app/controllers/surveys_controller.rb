@@ -170,6 +170,7 @@ def show
   @all_sections.each_with_index do |section,i|
   @total_question_previous += @previous_questions_total[i].question_total.to_i
   end
+  render 'surveys/show', :layout => 'style2'
 end
 
 def create_survey
@@ -413,7 +414,7 @@ def report
         @total_all_sections_points = Section.total_points
 
       respond_to do |format|
-        format.html {render :layout => 'report'}
+        format.html {render :layout => 'report2'}
         format.pdf do
           pdf =  render_to_string(:pdf => "RevenueGrader survey report #{DateTime.now.strftime('%b %d %Y')}.pdf", :template => '/surveys/pdf_report.html.slim', orientation: 'Landscape', :layouts => 'pdf',
             margin:  { top:0,bottom:0,left:0,right:0})

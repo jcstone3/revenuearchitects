@@ -1,0 +1,34 @@
+- content_for :top_bar_content do
+  .container-fluid
+    .row-fluid
+      .span12
+        h2.title1.without_margin= "DIAGNOSTIC #{@survey.created_at.strftime('%d %^B  %Y')}"
+      .row-fluid
+        .span12
+          .content-gray
+            .pull-right.action-btns
+              = link_to "Export to PDF", reports_url(:format => :pdf), class: 'btn plane-btn'
+              = link_to "Download CSV", import_csv_path(format: "csv"), class: 'btn plane-btn'
+              = link_to "Download Excel", import_excel_path(format: "xls"), class: 'btn plane-btn'
+
+            ul.list-tab.nav3-tabs3.usercompare
+              li.active
+                a href="#all" data-toggle="tab" ALL
+              li
+                a href="#overall" data-toggle="tab" PRIORITIES
+              li
+                a href="#must" data-toggle="tab" PLAN SUMMARY
+              li
+                a href="#should" data-toggle="tab" COMPARE
+            .clearfix
+
+  .container-fluid.not_margin
+    .tabGraph
+      h2.title2 Strategy
+      table#report_StrategyTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
+        = render partial: 'table_header.html.slim'
+        - @all_responses_for_strategy.each_with_index do |response, index|
+          - @index = index + 1
+          = render "response_report", {response: response}
+
+    = render "sections_nav"
