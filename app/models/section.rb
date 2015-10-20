@@ -15,7 +15,7 @@ class Section < ActiveRecord::Base
   end
 
   def self.total_points
-     order(:sequence).sum(&:total_points)
+     order(:sequence).sum{|s|s.total_points || 0}
   end
 
   def self.section_questions(survey_id)
