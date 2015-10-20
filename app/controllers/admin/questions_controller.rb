@@ -22,21 +22,22 @@ class Admin::QuestionsController < ApplicationController
 		@question = Question.new(params[:question])	
 
         if @question.save
-         #find the section for the subsection to increase the count of the 
-         #the questions added to that section          
-         logger.debug @question
-         @section = Section.find_by_sql("select sections.id, sections.name , sections.questionnaire_id, question_count, total_points, sub_sections.id as sub_section_id from sections inner join sub_sections on sections.id = sub_sections.section_id and sub_sections.id = #{@question.sub_section_id}")
+          #find the section for the subsection to increase the count of the 
+          #the questions added to that section          
+          logger.debug @question
+          @section = Section.find_by_sql("select sections.id, sections.name , sections.questionnaire_id, question_count, total_points, sub_sections.id as sub_section_id from sections inner join sub_sections on sections.id = sub_sections.section_id and sub_sections.id = #{@question.sub_section_id}")
 
-         @section_question_count = @section.first.question_count += 1
-         @section_total_points = @section.first.total_points + params[:question][:points].to_i
-        
-         if @section.first.update_attributes(:question_count => @section_question_count ,:total_points => @section_total_points)
+          @section_question_count = @section.first.question_count += 1
+          @section_total_points = @section.first.total_points + params[:question][:points].to_i
+
+          if @section.first.update_attributes(:question_count => @section_question_count ,:total_points => @section_total_points)
+          Question.fix_order_to_check
           flash[:success] = "Question Created successfully"
-         redirect_to :action => 'index'
-         else
+          redirect_to :action => 'index'
+          else
            flash[:success] = "Question could not be created successfully"
            redirect_to :action => 'index'
-         end  
+          end  
         else
           flash[:error] = "Question could not be created"
           render 'new'
@@ -67,7 +68,7 @@ class Admin::QuestionsController < ApplicationController
           section.update_attributes(:total_points=> @questions[i].question_points, :question_count=>@questions[i].question_count)
           logger.debug section
         end 
-        
+      Question.fix_order_to_check
       flash[:success] = "Question Updated successfully"
           redirect_to :action => 'index'
     #format.html (redirect_to (@question))
@@ -83,6 +84,7 @@ class Admin::QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     if @question.destroy
+      Question.fix_order_to_check
       flash[:success] = "Question Deleted successfully"         
     else
       flash[:success] = "Question couldn't be deleted"          

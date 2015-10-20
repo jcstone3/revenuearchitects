@@ -6,7 +6,6 @@ class Question < ActiveRecord::Base
   acts_as_list
   #acts_as_ordered :order => 'position'
   
-  
   #Relationships
   belongs_to :sub_section
   has_one :response
@@ -18,8 +17,10 @@ class Question < ActiveRecord::Base
 	validates :description, :presence =>{:message=>"Description can't be blank"}
 	validates :sub_section_id, :presence =>{:message=>"Section can't be blank"}
   validates :points, :presence =>{:message=>"Question points can't be blank"}
-#Scopes
- # default_scope :order => :sequence  
+  #Scopes
+
+  validates :sequence, :numericality => {greater_than_or_equal_to: 1, :less_than_or_equal_to => 100 }
+  # default_scope :order => :sequence  
 
   # Configurations
 	self.per_page = 10
