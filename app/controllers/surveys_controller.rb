@@ -9,6 +9,7 @@ layout "application"
 def index
   redirect_to continue_survey_path
 end
+
 #new survey
 #TODO: This action is too complicated, need to simplify this
 def new
@@ -152,10 +153,7 @@ def show
   @completed_surveys.take(2)
   @sections= Section.all
   #@total_questions = @sections[0].question_count+@sections[1].question_count+@sections[2].question_count
-  @section_questions_total = Section.find(:all,
-                            :select => "count(questions.position) as question_total, sections.id",
-                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id", :order => "id ASC")
+  @section_questions_total = Section.section_questions_total
   # @all_sections = get_all_sections
   @all_sections = Section.order(:sequence)
 
@@ -225,15 +223,9 @@ def question
   end
 
   #for total count
-  @section_questions_total = Section.find(:all,
-        :select => "count(questions.position) as question_total, sections.id",
-        :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-        :group => "sections.id", :order => "id ASC")
+  @section_questions_total = Section.section_questions_total
 
-  @section_questions  = Section.find(:all,
-         :select => "count(responses.question_id) as question_attempted",
-         :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-         :group => "sections.id", :order => "sections.id")
+  @section_questions  = Section.section_questions(params[:id])
   # @all_sections = get_all_sections
   @all_sections = Section.order(:sequence)
 
@@ -395,16 +387,10 @@ def report
        @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
 
       #for total count
-       @section_questions_total = Section.find(:all,
-                              :select => "count(questions.position) as question_total, sections.id",
-                              :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                              :group => "sections.id", :order => "id ASC")
+       @section_questions_total = Section.section_questions_total
 
        #for section questions attempted
-       @section_questions  = Section.find(:all,
-                             :select => "count(responses.question_id) as question_attempted",
-                             :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                             :group => "sections.id", :order => "sections.id")
+       @section_questions  = Section.section_questions(params[:id])
 
         # render :layout =>"report"
 
@@ -521,16 +507,10 @@ def compare
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
   #for section questions attempted
-   @section_questions  = Section.find(:all,
-                           :select => "count(responses.question_id) as question_attempted",
-                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id")
+   @section_questions  = Section.section_questions(params[:id])
 
    #for total count
-  @section_questions_total = Section.find(:all,
-                            :select => "count(questions.position) as question_total, sections.id",
-                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id", :order => "id ASC")
+  @section_questions_total = Section.section_questions_total
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
@@ -558,17 +538,11 @@ def compare_strategy
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
   #for total count
-     @section_questions_total = Section.find(:all,
-                            :select => "count(questions.position) as question_total, sections.id",
-                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id", :order => "id ASC")
+     @section_questions_total = Section.section_questions_total
 
 
   #for section questions attempted
-      @section_questions  = Section.find(:all,
-                           :select => "count(responses.question_id) as question_attempted",
-                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id")
+      @section_questions  = Section.section_questions(params[:id])
    #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
@@ -601,16 +575,10 @@ def compare_system
   #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
   #for section questions attempted
-    @section_questions  = Section.find(:all,
-                           :select => "count(responses.question_id) as question_attempted",
-                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id")
+    @section_questions  = Section.section_questions(params[:id])
 
     #for total count
-     @section_questions_total = Section.find(:all,
-                            :select => "count(questions.position) as question_total, sections.id",
-                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id", :order => "id ASC")
+     @section_questions_total = Section.section_questions_total
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
@@ -643,17 +611,11 @@ def compare_programs
    @survey = current_user.companies.first.surveys.find_by_id(survey_id)
 
    #for total count
-     @section_questions_total = Section.find(:all,
-                            :select => "count(questions.position) as question_total, sections.id",
-                            :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                            :group => "sections.id", :order => "id ASC")
+     @section_questions_total = Section.section_questions_total
 
 
    #for section questions attempted
-      @section_questions  = Section.find(:all,
-                           :select => "count(responses.question_id) as question_attempted",
-                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id")
+      @section_questions  = Section.section_questions(params[:id])
 
   if @survey.blank?
      flash[:notice] = "No such survey exists"
@@ -729,15 +691,9 @@ def download_result
   @total_question_total = 0
   #@survey = Survey.find_by_id(params[:id])
   #for total count
-   @section_questions_total = Section.find(:all,
-                          :select => "count(questions.position) as question_total, sections.id",
-                          :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                          :group => "sections.id", :order => "id ASC")
+   @section_questions_total = Section.section_questions_total
 
-  @section_questions  = Section.find(:all,
-                           :select => "count(responses.question_id) as question_attempted",
-                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id")
+  @section_questions  = Section.section_questions(params[:id])
   logger.debug "#{@section_questions}"
     @all_sections = get_all_sections
     @all_sections.each_with_index do |section,i|
@@ -922,15 +878,9 @@ def cal_total_score
     @final_score = 0
   @total_question_total = 0
   #for total count
-   @section_questions_total = Section.find(:all,
-                          :select => "count(questions.position) as question_total, sections.id",
-                          :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id Where questions.deleted_at IS NULL",
-                          :group => "sections.id", :order => "id ASC")
+   @section_questions_total = Section.section_questions_total
 
-  @section_questions  = Section.find(:all,
-                           :select => "count(responses.question_id) as question_attempted",
-                           :joins => "left outer join sub_sections on sections.id = sub_sections.section_id left outer join questions on questions.sub_section_id = sub_sections.id left outer join responses on (responses.question_id = questions.id and responses.survey_id=#{params[:id]})",
-                           :group => "sections.id", :order => "sections.id")
+  @section_questions  = Section.section_questions(params[:id])
   logger.debug "#{@section_questions}"
   # @all_sections = get_all_sections
   @all_sections = Section.order(:sequence)
