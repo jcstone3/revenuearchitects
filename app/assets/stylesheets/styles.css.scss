@@ -172,6 +172,21 @@ p.margin-extra{
   padding-right: 0;
 }
 
+.dataTable th:first-child, .dataTable td:first-child{
+  padding-left: 40px;
+}
+
+.dataTable th:last-child, .dataTable td:last-child{
+  padding-right: 30px;
+}
+
+
+
+
+
+
+
+
 
 
 
