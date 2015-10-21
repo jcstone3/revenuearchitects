@@ -20,6 +20,11 @@
               <div class="content">
                 <%= simple_form_for(@question, :validate => true, :url=>url_for(:action => 'create', :controller => 'admin/questions'), :class => "well") do |f| %>
                         <br/>
+                        <%= f.input :sequence, :required => true,
+                          :label => "Sequence",
+                          :input_html => { :class => 'input-xlarge', :min => '1', :max => '100', :type => 'text' }, 
+                          :label_html => { :class => '' } -%> 
+
                         <%= f.input :name, :as =>:text,
                                     :label => "Practice",
                                     :placeholder=>"Type new practice here...",

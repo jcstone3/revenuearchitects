@@ -32,7 +32,8 @@ class Section < ActiveRecord::Base
     Section.find(:all,
       :select => "count(questions.position) as question_total, sections.id",
       :joins => "left outer join sub_sections on sections.id = sub_sections.section_id 
-      left outer join questions on questions.sub_section_id = sub_sections.id",
+      left outer join questions on questions.sub_section_id = sub_sections.id
+      Where questions.deleted_at IS NULL",
       :group => "sections.id", :order => "id ASC")
   end
 
