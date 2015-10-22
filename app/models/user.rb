@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
       user
     else # Create a user with a stub password.
       if provider == "google_oauth2"
-       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.first_name, website: User.extract_page_google(data))
+       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :username => data.first_name, website: extract_page_google(data))
       else
         email = data.id.to_s
        User.create!(:email => "#{email}@withoutemail.com", :password => Devise.friendly_token[0,20], :username => data.name, website: "http://www.#{data.id}.com")
@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def self.User.extract_page_google( data )
+  def self.extract_page_google( data )
     if data['urls'] && data['urls']['Google']
       data['urls']['Google']
     else
