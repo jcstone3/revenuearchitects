@@ -33,7 +33,7 @@ gem 'uglifier', '1.3.0'
 #Gems used for pdf and xls generation
 gem 'pdfkit'
 gem "spreadsheet", "0.6.5.8"
-gem "to_xls", :git => "https://github.com/dblock/to_xls.git", :branch => "to-xls-on-models"
+gem "to_xls", "> 1.0.0"
 # Gem used for creating sample data
 gem 'populator3'
 gem 'highline'
@@ -104,4 +104,3 @@ gem 'capistrano-ext'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-
