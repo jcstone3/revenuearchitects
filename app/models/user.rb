@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
     if data['urls'] && data['urls']['Google']
       data['urls']['Google']
     else
-      "http://www.#{userwithoutopage}.com"
+      "http://www.userwithoutopage.com"
     end
   end
 
