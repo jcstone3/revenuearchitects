@@ -123,8 +123,8 @@ table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
  */
 .dataTables_filter {
 	position: absolute;
-	top: -42px;
-	right: 28px;
+	top: -54px;
+  right: 470px;
 }
 
 
@@ -267,7 +267,7 @@ table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
 
 .sorting_asc_disabled { background: url('/assets/sort_asc_disabled.png') no-repeat center right; }
 .sorting_desc_disabled { background: url('/assets/sort_desc_disabled.png') no-repeat center right; }
- 
+
 table.dataTable th:active {
 	outline: none;
 }
@@ -283,4 +283,3 @@ table.dataTable th:active {
 .dataTables_scrollBody {
 	*margin-top: -1px;
 }
-
