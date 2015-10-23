@@ -1,65 +1,38 @@
 <%#= @add_to_plan_responses.inspect%>
 <% if @responses.present?%>
  <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2">
-                                               <thead>
-                                                  <tr>
-                                                    <th><h3>#</h3></th>
-                                                    <th><h3 title ="Practices">Practices</h3></th>
-                                                    <th><h3 title ="Subdimension of practices">Dimension</h3></th>
-                                                    <th><h3 title ="Points for practices">Points</h3></th>
-                                                    <th><h3 title ="Your Score for Practices">Score</h3></th>
-                                                    <th><h3 title ="Your importance for practices">Importance</h3></th>
-                                                    <th><h3 title ="Gap between importance and maturity level for practices">Gap</h3></th>
-                                                    <th><h3 title ="Average score for practices">Avg Score</h3></th>
-                                                    <th><h3 title ="Calculated score for practices">Cal Score</h3></th>
-                                                     <th><h3 title ="Average calculated score for practices">Avg Cal Score</h3></th>
-                                                    <th><h3  title ="Is this practices are in our plan">In Plan</h3></th>
-                                                    <th><h3 title ="Priority for practices">Priority</h3></th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
+  <thead class="table-header">
+    <tr>
+      <th title ="Subdimension of practices">DIMENSION</th>
+      <th title ="Practices">PRACTICE</th>
+      <th title ="Priority for practices">PRIORITY</th>
+      <th title ="Your importance for practices">IMPORTANCE</th>
+      <th title ="Points for practices">POINTS</th>
+      <th title ="Your Score for Practices">YOUR SCORE</th>
+      <th title ="Average score for practices">AVERAGE SCORE</th>
+    </tr>
+  </thead>
+  <tbody>
 
-                                        <% @responses.each do |response| %>
-                                            <tr>
-                                                <td><%= response.questions_id %></td>
-                                                <td><%= response.name %></td>
-                                                <td><%= response.sub_sect_name%></td>
-                                                <td><%= response.points %></td>
-                                                <td><%= response.score.blank? ? 0 : response.score %></td>
-                                                <!-- <td><%= response.avg_score.to_f()%> </td> -->
-                                                <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
-                                                <td>
-                                                  <% performance_gap = get_performance_gap(response.answer_4, response.score) %>
-                                                  <%= performance_gap.present? ?
-                                                  performance_gap : 0 %>
-                                                </td>
-                                                <td>
-                                                  <% average_score = get_average_score(response.questions_id, @survey.id) %>
-                                                  <%= average_score.present? ?
-                                                  average_score : 0 %>
+  <% @responses.each do |response| %>
+    <tr>
+      <td><%= response.sub_sect_name%></td>
+      <td><%= response.name %></td>
+      <td><%= response.answer_3.try(:titleize) %></td>
+      <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
 
-                                                </td>
+      <td><%= response.points %></td>
+      <td><%= response.score.blank? ? 0 : response.score %></td>
+      <td>
+        <% average_score = get_average_score(response.questions_id, @survey.id) %>
+        <%= average_score.present? ?
+        average_score : 0 %>
 
-                                                <td>
-
-                                                  <%= response.response_id.present? ?
-                                                  get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
-
-                                                <td>
-                                                  <% avg_calculated_score = get_avg_calculated_score(@survey.id, response.questions_id, response.section_id) %>
-                                                  <%= avg_calculated_score.present? ? avg_calculated_score : 0 %>
-                                                 </td>
-                                                <% if(response.in_plan == "in_our_plan") %>
-                                                    <td><%= 'Yes'%></td>
-                                               <%else%>
-                                                    <td><%= 'No'%></td>
-                                               <%end %>
-                                                <td><%= response.answer_3.try(:titleize) %></td>
-                                                </tr>
-                                        <% end %>
-
-                                                </tbody>
-                                          </table>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
  <%else%>
  <p>No Response avaiable for this search</p>
  <%end%>
