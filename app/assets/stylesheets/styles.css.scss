@@ -163,9 +163,16 @@ table.dataTable thead.compare_table th{
 
 table.dataTable2 td{
   background-color: #fff !important;
-  border-bottom: 1px solid #BAB8B9;
   font-size: 13px;
   padding-top: 10px;
+}
+
+table.dataTable2 tr {
+  border-bottom: 1px solid #BAB8B9;
+}
+
+table.dataTable2 tr:last-child {
+  border-bottom: none;
 }
 
 .content-gray .list-tab{
@@ -234,6 +241,19 @@ table.dataTable2 td{
   margin: 0px;
 }
 
+.tabHead{
+  background-color: #6D787E;
+  height: 50px;
+  margin-top: 55px;
+}
+
+.tabHead h1{
+  line-height: 18px;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 7px 0 0 20px;
+}
+
 .dataTable th:first-child, .dataTable td:first-child{
   padding-left: 40px;
 }
@@ -242,6 +262,6 @@ table.dataTable2 td{
   padding-right: 30px;
 }
 
-#compare_report div#resultTable_filter{
+#compare_report div#report_StrategyTable_filter, #compare_report div#report_SystemTable_filter, #compare_report div#report_ProgramTable_filter, #compare_report div#resultTable_filter{
   display: none;
 }

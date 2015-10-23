@@ -1,69 +1,79 @@
-<% content_for :top_bar_content do  -%>
-        <%= render "sections_nav"%>
-<% end -%>
-
 <% content_for :main_content do -%>
+  <div class="container-fluid " >
+    <div class="row-fluid">
+      <%= render :partial=>"title.html.slim"%>
       <div class="row-fluid">
         <div class="span12">
-                  <ul class="nav3-tabs3 usercompare">
-                                <li><%= link_to(compare_url(params[:id])) do %>
-                                    Overall
-                                     <% end %>
-                                 </li>
-                                <li  class="active" href="#strategy" data-toggle="tab"><%= link_to(compare_strategy_url(params[:id])) do %>
-                                    Strategy
-                                     <% end %>
-                                 </li>
-                                 <li><%= link_to(compare_system_url(params[:id])) do %>
-                                    Systems
-                                     <% end %>
-                                 </li>
-                                 <li><%= link_to(compare_programs_url(params[:id])) do %>
-                                    Programs
-                                     <% end %>
-                                 </li>
-                            </ul>
-
-                            <div class="tab-content3 dash"  style="height:auto;">
-                            <div class="tab-pane active userTable" id="strategy" >
-                <div class="tabHead">
-                                  <h1>Strategy</h1>
-
-                                </div>
-
-                                <div class="tabGraph">
-                                    <div class="box_compare">
-                                       <h1>Response of the month :: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1>
-                                        <div class="graph">
-                               <div id='chart'></div>
-                                        <%= render_chart(@chart, 'chart') %>
-
-
-                                         </div>
-                                    </div>
-                                     <!--table goes here-->
-                                     <div class="container report-top">
-                                        <div class="row-fluid">
-
-                                         <%= render :partial=>"compare_response_table"%>
-
-                                        </div>
-                                      </div>
-                                  <!--end table-->
-                                </div>
-                            </div>
-                  </div>
-              </br>
-        <!--second tab-->
-
-
+          <div class="content-gray">
+            <ul class="list-tab nav3-tabs3 usercompare">
+              <li>
+                <a data-toggle="tab" href="#all">ALL</a>
+              </li>
+              <li>
+                <a data-toggle="tab" href="#overall">PRIORITIES</a>
+              </li>
+              <li>
+                <a data-toggle="tab" href="#must">PLAN SUMMARY</a>
+              </li>
+              <li class="active on2">
+                <%= link_to(compare_path(params[:id])) do %>
+              </i>&nbsp;COMPARE
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="span12 not_margin2">
+      <ul class="list-tab list-tab-compare nav3-tabs3 usercompare">
+        <li class="on2">
+          <%= link_to(compare_path(params[:id])) do %>
+            </i>&nbsp;OVERALL
+          <% end %>
+        </li>
+        <li class="active"><%= link_to(compare_strategy_url(params[:id])) do %>
+          STRATEGY
+           <% end %>
+        </li>
+        <li><%= link_to(compare_system_url(params[:id])) do %>
+          SYSTEMS
+           <% end %>
+        </li>
+        <li><%= link_to(compare_programs_url(params[:id])) do %>
+          PROGRAMS
+           <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid not_margin">
+    <div class="tab-content3 dash" style="height:auto;">
+      <div class="tab-pane active" id="overall">
+        <div class="tabGraph">
+          <div class="box_compare">
 
-    <script>
-            $(function () {
-            $('.tabs').click(function(){
-                    alert($(this).attr('id'));
-                });
-            })
-    </script>
-    <%end%>
+            <div id='chart'></div>
+            <%= render_chart(@chart, 'chart') %>
+
+          </div>
+
+          <!--table goes here-->
+          <div id="compare_report" class="report-top">
+            <div class="row-fluid">
+              <div class="tabHead">
+                <h1>STRATEGY</h1>
+              </div>
+             <%= render :partial=>"compare_response_table"%>
+            </div>
+          </div>
+          <!--end table-->
+
+        </div>
+      </div>
+    </div>
+    </br>
+</div>
+<% end %>

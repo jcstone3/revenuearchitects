@@ -1,51 +1,14 @@
 <%#= @add_to_plan_responses.inspect%>
-<div class="tabHead">
-  <h1>Strategy</h1>
-</div>
-<% if @all_responses_for_strategy.present?%>
-<table cellpadding="1" cellspacing="1" id="report_StrategyTable" class="report-body dataTable2">
-  <%= render :partial=>"table_header_compare"%>
+ <% if @responses.present?%>
+  <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2">
+    <%= render :partial=>"table_header_compare"%>
   <tbody>
-    <% @all_responses_for_strategy.each_with_index do |response, index|%>
-      <% @index = index + 1 %>
+    <% @responses.each do |response| %>
       <%= render "response_report_compare", {response: response} %>
-    <%end%>
+    <% end %>
   </tbody>
-</table>
+ </table>
+
  <%else%>
  <p>No Response avaiable for this search</p>
  <%end%>
-
- <div class="tabHead">
-   <h1>System</h1>
- </div>
- <% if @all_responses_for_system.present?%>
- <table cellpadding="1" cellspacing="1" id="report_SystemTable" class="report-body dataTable2">
-   <%= render :partial=>"table_header_compare"%>
-   <tbody>
-     <% @all_responses_for_system.each_with_index do |response, index|%>
-       <% @index = index + 1 %>
-       <%= render "response_report_compare", {response: response} %>
-     <%end%>
-   </tbody>
- </table>
-  <%else%>
-  <p>No Response avaiable for this search</p>
-  <%end%>
-
-  <div class="tabHead">
-    <h1>Program</h1>
-  </div>
-  <% if @all_responses_for_program.present?%>
-  <table cellpadding="1" cellspacing="1" id="report_ProgramTable" class="report-body dataTable2">
-    <%= render :partial=>"table_header_compare"%>
-    <tbody>
-      <% @all_responses_for_program.each_with_index do |response, index|%>
-        <% @index = index + 1 %>
-        <%= render "response_report_compare", {response: response} %>
-      <%end%>
-    </tbody>
-  </table>
-   <%else%>
-   <p>No Response avaiable for this search</p>
-   <%end%>

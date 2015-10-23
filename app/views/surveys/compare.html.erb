@@ -17,7 +17,7 @@
               </li>
               <li class="active on2">
                 <%= link_to(compare_path(params[:id])) do %>
-              </i>&nbsp;COMPARE
+                  </i>&nbsp;COMPARE
                 <% end %>
               </li>
             </ul>
@@ -29,7 +29,11 @@
   <div class="container-fluid">
     <div class="span12 not_margin2">
       <ul class="list-tab list-tab-compare nav3-tabs3 usercompare">
-        <li class="active"><a href="#overall" data-toggle="tab">OVERALL</a></li>
+        <li class="active on2">
+          <%= link_to(compare_path(params[:id])) do %>
+            </i>&nbsp;OVERALL
+          <% end %>
+        </li>
         <li><%= link_to(compare_strategy_url(params[:id])) do %>
           STRATEGY
            <% end %>
@@ -59,7 +63,7 @@
           <!--table goes here-->
           <div id="compare_report" class="report-top">
             <div class="row-fluid">
-             <%= render :partial=>"compare_response_table"%>
+             <%= render :partial=>"compare_response_all_table"%>
             </div>
           </div>
           <!--end table-->
