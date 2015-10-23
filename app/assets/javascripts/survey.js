@@ -37,8 +37,86 @@ $(".surveys.question").ready(function() {
 });
 
 $(window).load(function() {
-  $('#report_StrategyTable_filter').find('input').attr('placeholder','Search');
-  $('#report_SystemTable_filter').find('input').attr('placeholder','Search');
-  $('#report_ProgramTable_filter').find('input').attr('placeholder','Search');
   $('#resultTable_filter').find('input').attr('placeholder','Search');
+  $('#Search_All').attr('placeholder','Search');
+
+  $.fn.dataTableExt.oApi.fnFilterAll = function (oSettings, sInput, iColumn, bRegex, bSmart) {
+     var settings = $.fn.dataTableSettings;
+
+     for (var i = 0; i < settings.length; i++) {
+         settings[i].oInstance.fnFilter(sInput, iColumn, bRegex, bSmart);
+     }
+  };
+
+  $(document).ready(function () {
+
+     $('#report_ProgramTable').dataTable({
+       "bPaginate": false,
+       "bDestroy": true,
+       "bInfo": false
+
+     });
+     var oTable0 = $("#report_ProgramTable").dataTable();
+
+     $("#Search_All").keyup(function () {
+       // Filter on the column (the index) of this element
+       oTable0.fnFilterAll(this.value);
+     });
+
+
+     $('#report_SystemTable').dataTable({
+       "bPaginate": false,
+       "bDestroy": true,
+       "bInfo": false
+
+     });
+     var oTable1 = $("#report_SystemTable").dataTable();
+
+     $("#Search_All").keyup(function () {
+       // Filter on the column (the index) of this element
+       oTable1.fnFilterAll(this.value);
+     });
+
+     $('#report_StrategyTable').dataTable({
+       "bPaginate": false,
+       "bDestroy": true,
+       "bInfo": false
+
+     });
+     var oTable2 = $("#report_StrategyTable").dataTable();
+
+     $("#Search_All").keyup(function () {
+       // Filter on the column (the index) of this element
+       oTable2.fnFilterAll(this.value);
+     });
+
+
+
+     $('#report_prioritiesTable').dataTable({
+       "bPaginate": false,
+       "bDestroy": true,
+       "bInfo": false
+
+     });
+     var oTable3 = $("#report_prioritiesTable").dataTable();
+
+     $("#Search_All").keyup(function () {
+       // Filter on the column (the index) of this element
+       oTable3.fnFilterAll(this.value);
+     });
+
+     $('#report_add_to_planTable').dataTable({
+       "bPaginate": false,
+       "bDestroy": true,
+       "bInfo": false
+
+     });
+
+     var oTable4 = $("#report_add_to_planTable").dataTable();
+
+     $("#Search_All").keyup(function () {
+       // Filter on the column (the index) of this element
+       oTable4.fnFilterAll(this.value);
+     });
+  });
 });

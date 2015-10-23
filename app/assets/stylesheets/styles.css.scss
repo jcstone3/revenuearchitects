@@ -128,20 +128,17 @@ p.margin-extra{
   margin-right: -20px;
 }
 
-#report_StrategyTable_filter input::-webkit-input-placeholder
-{
+#Search_All {
   color: #BAB8B9;
   font-size: 13px;
   font-weight:500;
 }
 
-#report_StrategyTable_filter label
-{
+#Search_All {
   font-size: 0.000001px;
 }
 
-#report_StrategyTable_filter input
-{
+#Search_All {
   font-size: 12px;
   border: none;
   background-image: url('../assets/search_new.png');
@@ -152,9 +149,13 @@ p.margin-extra{
 
 table.dataTable thead th{
   background-color: #E3E3E3;
-  border: 1px solid #BAB8B9;
+  border-top: 1px solid #BAB8B9;
+  border-bottom: 1px solid #BAB8B9;
   font-weight: normal;
   color: #333333;
+  background-image: url('../assets/bar.png');
+  background-repeat: no-repeat;
+  background-position: 100% center;
 }
 
 table.dataTable thead.compare_table th{
@@ -263,8 +264,18 @@ table.dataTable2 tr:last-child {
   padding-right: 30px;
 }
 
+#all_report div#report_StrategyTable_filter, #all_report div#report_SystemTable_filter, #all_report div#report_ProgramTable_filter,
 #compare_report div#report_StrategyTable_filter, #compare_report div#report_SystemTable_filter, #compare_report div#report_ProgramTable_filter, #compare_report div#resultTable_filter{
   display: none;
+}
+
+#Search_All{
+  margin-bottom: 0px;
+}
+
+.dataTables_filter {
+	position: absolute;
+	top: -40px;
 }
 
 .priority-red{

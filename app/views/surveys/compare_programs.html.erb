@@ -6,6 +6,7 @@
         <div class="span12">
           <div class="content-gray">
             <div class="pull-right action-btns">
+              <input type="text" id="Search_All">
               <%= link_to "EXPORT PDF", reports_url(:format => :pdf), class: 'btn plane-btn' %>
               <%= link_to "DOWNLOAD CSV", import_csv_path(format: "csv"), class: 'btn plane-btn' %>
               <%= link_to "DOWNLOAD EXCEL", import_excel_path(format: "xls"), class: 'btn plane-btn' %>
