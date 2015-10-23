@@ -128,10 +128,11 @@ p.margin-extra{
   margin-right: -20px;
 }
 
-#report_StrategyTable_filter input::-webkit-input-placeholder::before
+#report_StrategyTable_filter input::-webkit-input-placeholder
 {
-  content: 'Search \A' !important;
   color: #BAB8B9;
+  font-size: 13px;
+  font-weight:500;
 }
 
 #report_StrategyTable_filter label
@@ -145,7 +146,7 @@ p.margin-extra{
   border: none;
   background-image: url('../assets/search_new.png');
   background-repeat: no-repeat;
-  background-position: 5% center;
+  background-position: 4% center;
   padding-left: 25px;
 }
 

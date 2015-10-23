@@ -143,4 +143,3 @@ end
 #  name        :string(255)
 #  answer_1    :integer
 #
-

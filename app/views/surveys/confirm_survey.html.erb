@@ -1,12 +1,12 @@
     
-<% content_for :top_bar_content do  -%> 
+<% content_for :top_bar_content do  -%>
 <%= render "sections"%>
-<% end -%> 
+<% end -%>
 
-<%content_for :main_content do%> 
+<%content_for :main_content do%>
   <div class="content">
 
-    <h1 class="question">Thank you for successfully completing the Diagnostic  </h1>          
+    <h1 class="question">Thank you for successfully completing the Diagnostic  </h1>
     <p class="question">Number of practices attempted in each section</p>
     <%= form_for(@survey, url: close_survey_path(@survey) ) do |f| %>
       <%= f.hidden_field :size, { :value => @survey.size } %>
@@ -35,8 +35,8 @@
             <%=  @final_score %>/
             <%= @total_question_total %></span>
           </td>
-        </tr> 
-      </table>     
+        </tr>
+      </table>
       <div class="footerconfirm" >
         <%= link_to 'Go back', continue_survey_path ,:class=>"btn questionsattemted"%>
         <%= f.submit  'Complete Diagnostic' ,:class=>"btn btn-primary questionsattemted" %>
@@ -50,13 +50,9 @@
     <script type="text/javascript" src="https://koi-HSIR8I.marketingautomation.services/client/noform.js?ver=1.24" ></script>
 
     </div>
-  <% end -%> 
+  <% end -%>
 
 
 <% content_for :side_content do -%>
-<%= render "confirm_side_details" -%> 
-<% end  -%>  
-
-
-
-
+<%= render "confirm_side_details" -%>
+<% end  -%>

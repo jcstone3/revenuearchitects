@@ -35,3 +35,10 @@ $(".surveys.question").ready(function() {
   });
 
 });
+
+$(window).load(function() {
+  $('#report_StrategyTable_filter').find('input').attr('placeholder','Search');
+  $('#report_SystemTable_filter').find('input').attr('placeholder','Search');
+  $('#report_ProgramTable_filter').find('input').attr('placeholder','Search');
+  $('#resultTable_filter').find('input').attr('placeholder','Search');
+});
