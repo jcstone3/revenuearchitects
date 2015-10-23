@@ -118,5 +118,9 @@ $(window).load(function() {
        // Filter on the column (the index) of this element
        oTable4.fnFilterAll(this.value);
      });
+
+     $('a[data-toggle="tab"]').on('click', function (e) {
+        $("#Search_All").val('');
+      });
   });
 });
