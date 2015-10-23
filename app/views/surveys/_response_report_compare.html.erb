@@ -1,0 +1,15 @@
+<tr>
+  <td><%= response.questions_id%></td>
+  <td><%= response.section_name.try(:titleize)%></td>
+  <td><%= response.sub_sect_name.try(:titleize)%></td>
+  <td class="question-column"><%= response.name %></td>
+  <td><b><%= response.answer_3.blank? ? response.in_plan.humanize : response.answer_3.try(:titleize) %></b></td>
+  <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
+  <td><%= response.points %></td>
+  <td><%= Survey.get_score_value(response.points, response.score) %></td>
+  <td>
+    <% average_score = get_average_score(response.questions_id, @survey.id) %>
+    <%= average_score.present? ?
+    average_score : 0 %>
+  </td>
+</tr>

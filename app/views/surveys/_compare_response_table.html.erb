@@ -1,38 +1,51 @@
 <%#= @add_to_plan_responses.inspect%>
-<% if @responses.present?%>
- <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2">
-  <thead class="table-header">
-    <tr>
-      <th title ="Subdimension of practices">DIMENSION</th>
-      <th title ="Practices">PRACTICE</th>
-      <th title ="Priority for practices">PRIORITY</th>
-      <th title ="Your importance for practices">IMPORTANCE</th>
-      <th title ="Points for practices">POINTS</th>
-      <th title ="Your Score for Practices">YOUR SCORE</th>
-      <th title ="Average score for practices">AVERAGE SCORE</th>
-    </tr>
-  </thead>
+<div class="tabHead">
+  <h1>Strategy</h1>
+</div>
+<% if @all_responses_for_strategy.present?%>
+<table cellpadding="1" cellspacing="1" id="report_StrategyTable" class="report-body dataTable2">
+  <%= render :partial=>"table_header_compare"%>
   <tbody>
-
-  <% @responses.each do |response| %>
-    <tr>
-      <td><%= response.sub_sect_name%></td>
-      <td><%= response.name %></td>
-      <td><%= response.answer_3.try(:titleize) %></td>
-      <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
-
-      <td><%= response.points %></td>
-      <td><%= response.score.blank? ? 0 : response.score %></td>
-      <td>
-        <% average_score = get_average_score(response.questions_id, @survey.id) %>
-        <%= average_score.present? ?
-        average_score : 0 %>
-
-      </td>
-    </tr>
-  <% end %>
+    <% @all_responses_for_strategy.each_with_index do |response, index|%>
+      <% @index = index + 1 %>
+      <%= render "response_report_compare", {response: response} %>
+    <%end%>
   </tbody>
 </table>
  <%else%>
  <p>No Response avaiable for this search</p>
  <%end%>
+
+ <div class="tabHead">
+   <h1>System</h1>
+ </div>
+ <% if @all_responses_for_system.present?%>
+ <table cellpadding="1" cellspacing="1" id="report_SystemTable" class="report-body dataTable2">
+   <%= render :partial=>"table_header_compare"%>
+   <tbody>
+     <% @all_responses_for_system.each_with_index do |response, index|%>
+       <% @index = index + 1 %>
+       <%= render "response_report_compare", {response: response} %>
+     <%end%>
+   </tbody>
+ </table>
+  <%else%>
+  <p>No Response avaiable for this search</p>
+  <%end%>
+
+  <div class="tabHead">
+    <h1>Program</h1>
+  </div>
+  <% if @all_responses_for_program.present?%>
+  <table cellpadding="1" cellspacing="1" id="report_ProgramTable" class="report-body dataTable2">
+    <%= render :partial=>"table_header_compare"%>
+    <tbody>
+      <% @all_responses_for_program.each_with_index do |response, index|%>
+        <% @index = index + 1 %>
+        <%= render "response_report_compare", {response: response} %>
+      <%end%>
+    </tbody>
+  </table>
+   <%else%>
+   <p>No Response avaiable for this search</p>
+   <%end%>

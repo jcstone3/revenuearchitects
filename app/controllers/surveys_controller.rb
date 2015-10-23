@@ -498,9 +498,17 @@ end
 
 def compare
   survey_id = params[:id]
+  @user = current_user
+
+  #scoping the survey
+  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
   # @all_sections = get_all_sections
   @all_sections = Section.order(:sequence)
 
+  #if the user is authorized for the survey then get details of all responses
+   @all_responses_for_strategy = Response.get_response(@all_sections.first.id, @survey.id)
+   @all_responses_for_system = Response.get_response(@all_sections[1].id, @survey.id)
+   @all_responses_for_program = Response.get_response(@all_sections.last.id, @survey.id)
   #check scope
 
    #scoping the survey
@@ -892,4 +900,3 @@ def cal_total_score
 end
 
 end
-
