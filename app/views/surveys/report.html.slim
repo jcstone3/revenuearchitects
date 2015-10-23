@@ -12,11 +12,37 @@
             = render partial: 'sections_nav2.html.slim'
 
   .container-fluid.not_margin
-    .tabGraph
-      table#report_StrategyTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
-        = render partial: 'table_header.html.slim'
-        - @all_responses_for_strategy.each_with_index do |response, index|
-          - @index = index + 1
-          = render "response_report", {response: response}
+    #tab-content.tab-content.tab_content_report.dash
+      #all.tab-pane.active style="height:auto;"
+        .tabGraph
+          .tabHead
+            h1 STRATEGY
+          table#report_StrategyTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
+            = render partial: 'table_header.html.slim'
+            - @all_responses_for_strategy.each_with_index do |response, index|
+              - @index = index + 1
+              = render "response_report", {response: response}
+        .tabGraph
+          .tabHead
+            h1 SYSTEM
+          table#report_SystemTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
+            = render partial: 'table_header.html.slim'
+            - @all_responses_for_system.each_with_index do |response, index|
+              - @index = index + 1
+              = render "response_report", {response: response}
+        .tabGraph
+          .tabHead
+            h1 PROGRAM
+          table#report_ProgramTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
+            = render partial: 'table_header.html.slim'
+            - @all_responses_for_program.each_with_index do |response, index|
+              - @index = index + 1
+              = render "response_report", {response: response}
 
-    <! = render "sections_nav"
+      #overall.tab-pane.active style="height:auto;"
+        .tabGraph
+          table#report_add_to_planTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
+            = render partial: 'table_header.html.slim'
+            - @add_to_plan_responses.each_with_index do |response, index|
+              - @index = index + 1
+              = render "response_report", {response: response}
