@@ -128,9 +128,40 @@ p.margin-extra{
   margin-right: -20px;
 }
 
+#report_StrategyTable_filter input::-webkit-input-placeholder::before
+{
+  content: 'Search \A' !important;
+  color: #BAB8B9;
+}
+
+#report_StrategyTable_filter label
+{
+  font-size: 0.000001px;
+}
+
+#report_StrategyTable_filter input
+{
+  font-size: 12px;
+  border: none;
+  background-image: url('../assets/search_new.png');
+  background-repeat: no-repeat;
+  background-position: 5% center;
+  padding-left: 25px;
+}
+
 table.dataTable thead th{
   background-color: #E3E3E3;
-  border: 1px solid #8D959B;
+  border: 1px solid #BAB8B9;
+  font-weight: normal;
+  color: #333333;
+}
+
+table.dataTable2 td{
+  background-color: #fff !important;
+  border-bottom: 1px solid #BAB8B9;
+  font-size: 13px;
+  padding-top: 10px;
+  color: #333333;
 }
 
 .content-gray .list-tab{
@@ -170,6 +201,10 @@ table.dataTable thead th{
 
 .content-gray .plane-btn{
   margin: 0 4px;
+  background-image: url('../assets/download_new.png');
+  background-repeat: no-repeat;
+  background-position: 5% center;
+  padding-left: 25px;
 }
 
 .content-gray .plane-btn:active, .content-gray .plane-btn:hover{
