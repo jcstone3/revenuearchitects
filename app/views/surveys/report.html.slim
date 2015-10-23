@@ -39,7 +39,23 @@
               - @index = index + 1
               = render "response_report", {response: response}
 
-      #overall.tab-pane.active style="height:auto;"
+      #priorities.tab-pane style="height:auto;"
+        .tabGraph
+          table#report_prioritiesTable.report-body.dataTable.dataTable2 cellpadding="1" cellspacing="1"
+            = render partial: 'table_header.html.slim'
+            - @must_do_responses.each_with_index do |response, index|
+              - @index = index + 1
+              = render "response_report", {response: response}
+            - @could_do_responses.each_with_index do |response, index|
+              - @index = index + 1
+              = render "response_report", {response: response}
+            - @should_do_responses.each_with_index do |response, index|
+              - @index = index + 1
+              = render "response_report", {response: response}
+            - @not_applicable_responses.each do |response|
+              = render "response_report", {response: response}
+
+      #overall.tab-pane style="height:auto;"
         .tabGraph
           table#report_add_to_planTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
             = render partial: 'table_header.html.slim'

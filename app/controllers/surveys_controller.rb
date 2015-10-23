@@ -386,6 +386,9 @@ def report
       #for could do responses
        @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
 
+      #for not applicable responses
+       @not_applicable_responses = Response.get_response_for_options(@survey.id, "not_applicable")
+
       #for total count
        @section_questions_total = Section.section_questions_total
 
