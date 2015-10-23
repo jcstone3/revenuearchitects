@@ -1,8 +1,7 @@
 - content_for :top_bar_content do
   .container-fluid
     .row-fluid
-      .span12
-        h2.title1.without_margin= "DIAGNOSTIC #{@survey.created_at.strftime('%d %^B  %Y')}"
+      = render partial: 'title.html.slim'
       .row-fluid
         .span12
           .content-gray
@@ -10,17 +9,7 @@
               = link_to "EXPORT PDF", reports_url(:format => :pdf), class: 'btn plane-btn'
               = link_to "DOWNLOAD CSV", import_csv_path(format: "csv"), class: 'btn plane-btn'
               = link_to "DOWNLOAD EXCEL", import_excel_path(format: "xls"), class: 'btn plane-btn'
-
-            ul.list-tab.nav3-tabs3.usercompare
-              li.active
-                a href="#all" data-toggle="tab" ALL
-              li
-                a href="#overall" data-toggle="tab" PRIORITIES
-              li
-                a href="#must" data-toggle="tab" PLAN SUMMARY
-              li
-                a href="#should" data-toggle="tab" COMPARE
-            .clearfix
+            = render partial: 'sections_nav2.html.slim'
 
   .container-fluid.not_margin
     .tabGraph
@@ -30,4 +19,4 @@
           - @index = index + 1
           = render "response_report", {response: response}
 
-    = render "sections_nav"
+    <! = render "sections_nav"
