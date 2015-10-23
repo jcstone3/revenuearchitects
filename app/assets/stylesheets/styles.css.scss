@@ -266,3 +266,16 @@ table.dataTable2 tr:last-child {
 #compare_report div#report_StrategyTable_filter, #compare_report div#report_SystemTable_filter, #compare_report div#report_ProgramTable_filter, #compare_report div#resultTable_filter{
   display: none;
 }
+
+
+.priority-red{
+  color: #EA722F;
+}
+
+.priority-green{
+  color: #02B15C;
+}
+
+.priority-blue{
+  color: #56C9F3;
+}

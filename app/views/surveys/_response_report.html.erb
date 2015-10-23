@@ -2,7 +2,17 @@
   <td><%= response.section_name.try(:titleize)%></td>
   <td><%= response.sub_sect_name.try(:titleize)%></td>
   <td class="question-column"><%= response.name %></td>
-  <td><b><%= response.answer_3.blank? ? response.in_plan.humanize : response.answer_3.try(:titleize) %></b></td>
+  <td>
+    <% if(response.answer_3.try(:titleize) == "Must Do") %>
+      <b class="priority-red"><%= response.answer_3.try(:titleize) %></b>
+    <%elsif(response.answer_3.try(:titleize) == "Should Do") %>
+      <b class="priority-blue" ><%= response.answer_3.try(:titleize) %></b>
+    <%elsif(response.answer_3.try(:titleize) == "Could Do") %>
+      <b class="priority-green"><%= response.answer_3.try(:titleize)%></b>
+    <%else %>
+      <b>N/A</b>
+    <%end %>
+  </td>
   <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
   <td><%= response.points %></td>
   <td><%= Survey.get_score_value(response.points, response.score) %></td>
