@@ -1,11 +1,11 @@
-.page-break.cover-page 
+.page-break.cover-page
   div
     .title-cover-page
       = @survey.company_name.upcase
-    
+
     .title-gray
       | Revenue Grader Diagnostic
-    .title-gray 
+    .title-gray
       = @survey.created_at.strftime('%B %d th, %Y')
     div.content-line-decorator
       hr.line-decorator
@@ -43,7 +43,7 @@
                 | The Revenue Grader diagnostic helps you explore the best practice dimensions used by successful growth businesses. You can measure your current capability, the importance to your business and the priority to act.
     .clearfix
   h3
-    |DIAGNOSTIC SCORECARD:  
+    |DIAGNOSTIC SCORECARD:
     = @survey.date_format
   .survey-content
     .container-fluid
@@ -58,7 +58,7 @@
                 | Define your competitive advantage.
                 br/
                 span.font-blue SCORE:
-                span 
+                span
                 = @score_per_section[0]
                 | /
                 = @all_sections[0].total_points.to_i
@@ -70,7 +70,7 @@
                 | Build an agile and durable platform.
                 br/
                 span.font-blue SCORE:
-                span 
+                span
                 = @score_per_section[1]
                 | /
                 = @all_sections[1].total_points.to_i
@@ -83,7 +83,7 @@
                 | Launch integrated campaigns.
                 br/
                 span.font-blue SCORE:
-                span 
+                span
                 = @score_per_section[2]
                 | /
                 = @all_sections[2].total_points.to_i
@@ -98,9 +98,12 @@
                   p.title-black.sub1 = @survey.company_name
                   p.title-super-1
                     span.font-blue SCORE:
-                    span 101 / 105
-                  b.important-score 96.19%
-  
+                    span
+                    = '%.2f' % (@score_per_section[0] + @score_per_section[1] + @score_per_section[2])
+                    | /
+                    = '%.2f' % @total_all_sections_points.to_f
+                  span.important-score = '%.2f' % (((@score_per_section[0].to_f + @score_per_section[1].to_f + @score_per_section[2].to_f)/ @total_all_sections_points.to_f)*100)
+
 
 
 .content.page-break
@@ -113,7 +116,7 @@
     table.table.table-report.table-condesed
       thead
         tr
-          th 
+          th
             |DIMENSION
             div.div-header
           th
@@ -158,7 +161,7 @@
     table.table.table-report.table-condesed
       thead
         tr
-          th 
+          th
             |DIMENSION
             div.div-header
           th
@@ -203,7 +206,7 @@
     table.table.table-report.table-condesed
       thead
         tr
-          th 
+          th
             |DIMENSION
             div.div-header
           th
@@ -243,7 +246,7 @@
   .header
     .title-header
       span.header-left = @survey.company_name.upcase
-      span.header-right 
+      span.header-right
   h3 NEXT STEPS
   p The Revenue Grader serves an an early step in strategic planning for revenue growth. It helps identify top level areas that require additional focus. The next step is to analyze each of the priorities and develop a specific and detailed plan and timeline. A plan will reflect various dependencies and critical success factors. Revenue Architects can assist in plan development and implementation. Visit us at www.revenuearchitects.com.
   h3 ABOUT REVENUE GRADER
@@ -263,7 +266,7 @@
   .header
     .title-header
       span.header-left = @survey.company_name.upcase
-      span.header-right 
+      span.header-right
   h3 CLOSED LOOP MARKETING FOR COMPLEX SALES
   p Revenue Architects is a marketing consulting and services firm helping businesses align marketing and sales and drive revenue growth.
   p We do this by building a 'Revenue Architecture' integrating your strategy, systems and programs:
@@ -290,14 +293,5 @@
   div
     p.margin-extra Today, business need a new more integrated revenue marketing capability and success requires a complex range of skills and expertise. We blend strategy, design, media and technology skills to help clients differentiate their brand strategies, integrate digital and revenue systems, and launch innovative programs. As a trusted advisor and program delivery partner, we build agile marketing systems and  respond to dynamic growth opportunities. We are differentiated by our revenue architecture approach and flexible multi-affiliate resource model that allows us to respond to our client’s dynamic revenue initiatives.
     p.margin-extra
-      |Learn more. Visit our 
+      |Learn more. Visit our
       a.title-black.font-normal-size.clear-link href="http://www.revenuegrader.com/" Website
-
-
-
-
-
-
-
-
-

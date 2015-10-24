@@ -12,6 +12,58 @@
               = link_to "DOWNLOAD EXCEL", import_excel_path(format: "xls"), class: 'btn plane-btn'
             = render partial: 'sections_nav2.html.slim'
 
+  #container-scores
+    table.table-for-div
+      tbody
+        tr
+          td.width-50
+            div.total-score-content
+                p.title-black.title-total TOTAL SCORE
+                p.title-black.sub1 = @survey.company_name
+                p.title-super-1
+                  span.score-total.font-blue SCORE
+                  span
+                  = '%.2f' % (@score_per_section[0] + @score_per_section[1] + @score_per_section[2])
+                  | /
+                  = '%.2f' % @total_all_sections_points.to_f
+                span.important-score = '%.2f' % (((@score_per_section[0].to_f + @score_per_section[1].to_f + @score_per_section[2].to_f)/ @total_all_sections_points.to_f)*100)
+          td.width-50
+            p.margin-bottom-30
+              p.title-black.sub2 STRATEGY
+              p.title-black Define your competitive advantage.
+              p.title-super-2
+                span.font-blue.title-black SCORE
+                span
+                = @score_per_section[0]
+                | /
+                = @all_sections[0].total_points.to_i
+              span.title-black.section-score = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
+              span.title-black.section-score %
+          td.width-50
+            p.margin-bottom-30
+              p.title-black.sub2 SYSTEMS
+              p.title-black Build an agile and durable platform.
+              p.title-super-2
+                span.font-blue.title-black SCORE
+                span
+                = @score_per_section[1]
+                | /
+                = @all_sections[1].total_points.to_i
+              span.title-black.section-score = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
+              span.title-black.section-score %
+          td.width-50
+            p.margin-bottom-30
+              p.title-black.sub2 PROGRAMS
+              p.title-black Launch integrated campaigns.
+              p.title-super-2
+                span.font-blue.title-black SCORE
+                span
+                = @score_per_section[2]
+                | /
+                = @all_sections[2].total_points.to_i
+              span.title-black.section-score = '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100)
+              span.title-black.section-score %
+
   #all_report.container-fluid.not_margin
     #tab-content.tab-content.tab_content_report.dash
       #all.tab-pane.active style="height:auto;"

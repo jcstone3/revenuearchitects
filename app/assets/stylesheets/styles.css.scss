@@ -298,3 +298,60 @@ table.dataTable{
 .footer {
   margin-top: 50px;
 }
+
+
+#container-scores {
+  padding: 3% 6% 0 6%;
+}
+
+#container-scores table.table-for-div {
+  width: 100%;
+  font-size: 15px;
+}
+
+#container-scores td.width-50 {
+  width: 25%;
+  padding-right: 3%;
+}
+
+#container-scores div.total-score-content {
+  border-right: 2px solid #E3E3E3;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#container-scores p{
+  margin: 0px;
+}
+
+#container-scores .title-black {
+    font-weight: 700;
+}
+
+#container-scores .title-total{
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+#container-scores .title-super-1 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+#container-scores .title-super-2{
+  margin-bottom: 5px;
+}
+
+#container-scores .score-total{
+  font-weight: bolder;
+}
+
+#container-scores .important-score{
+  font-size: 45px;
+  color: #E6652A;
+  font-weight: bolder;
+}
+
+#container-scores .section-score{
+  font-size: 30px;
+}
