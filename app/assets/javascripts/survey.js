@@ -122,5 +122,9 @@ $(window).load(function() {
      $('a[data-toggle="tab"]').on('click', function (e) {
         $("#Search_All").val('');
       });
+
+      var hash = location.hash
+      $('a[href$="'+hash+'"]').trigger( "click" );
+      location.hash='';
   });
 });
