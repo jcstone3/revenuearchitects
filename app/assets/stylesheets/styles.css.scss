@@ -355,3 +355,10 @@ table.dataTable{
 #container-scores .section-score{
   font-size: 30px;
 }
+
+circle {
+  r: 10px;
+  outline: 5px solid white;
+  outline-offset: -14px;
+  box-sizing: border-box;
+}

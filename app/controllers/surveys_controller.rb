@@ -530,8 +530,33 @@ def compare
     @survey = Survey.find_by_id(survey_id)
     @data_table = Survey.get_overall_graph(survey_id)
 
-     option = { width: 1200, height: 400, pointSize: 4, title: 'Your Score Vs Average Score', lineWidth: '3', hAxis: {showTextEvery: '5',title: 'Practices', titleTextStyle: {color: '#000',fontName: 'Lato'}}, vAxis: {title: 'Score', titleTextStyle: {color: '#000',fontName: 'Lato'}} }
-    @chart = GoogleVisualr::Interactive::AreaChart.new(@data_table, option)
+     option = {
+       width: 1200,
+       pointSize: 10,
+       height: 500,
+       colors: ['#EA722F', '#02B15C', '#56C9F3'],
+       title: 'Your Score Vs Average Score',
+       lineWidth: '3',
+       hAxis: {
+         showTextEvery: '5',
+         title: 'Practices',
+         titleTextStyle: {
+           color: '#8C959A',
+           fontName: 'Lato',
+           fontSize: 12
+         }
+       },
+       vAxis: {
+         showTextEvery: '1',
+         title: 'Score',
+         titleTextStyle: {
+           color: '#8C959A',
+           fontName: 'Lato',
+           fontSize: 12
+         }
+       }
+     }
+    @chart = GoogleVisualr::Interactive::LineChart.new(@data_table, option)
 
     @responses = Response.get_all_responses(@survey.id)
   end
