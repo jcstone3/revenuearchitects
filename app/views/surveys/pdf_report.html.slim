@@ -1,6 +1,6 @@
 .page-break.cover-page
   div
-    .title-cover-page
+    .title-cover-page.company-name
       = @survey.company_name.upcase
 
     .title-gray
@@ -13,9 +13,9 @@
       table
         tr
           td.width-50
-            div.logo-content-by By
+            div.logo-content-by by
           td.width-50
-            = image_tag("logopdf.png", class: 'logo-content-img ' )
+            = wicked_pdf_image_tag("logopdf.png", class: 'logo-content-img ' )
 
 .content.page-break
   .header
@@ -51,8 +51,8 @@
         tbody
           tr
             td.width-50
-              .title-black SCORECARD
-              p.margin-bottom-30
+              .title-black.margin-bottom-10 SCORECARD
+              p
                 span.title-black.sub2 STRATEGY
                 br/
                 | Define your competitive advantage.
@@ -63,9 +63,9 @@
                 | /
                 = @all_sections[0].total_points.to_i
                 br/
-                span.title-black = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
-                span.title-black %
-              p.margin-bottom-30
+                span.title-black.section-score = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
+                span.title-black.section-score %
+              p.margin-bottom-25
                 span.title-black.sub2 SYSTEMS
                 br/
                 | Build an agile and durable platform.
@@ -76,10 +76,10 @@
                 | /
                 = @all_sections[1].total_points.to_i
                 br/
-                span.title-black = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
-                span.title-black %
+                span.title-black.section-score = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
+                span.title-black.section-score %
                 br/
-              p.margin-bottom-30
+              p.margin-bottom-25
                 span.title-black.sub2 PROGRAMS
                 br/
                 | Launch integrated campaigns.
@@ -90,8 +90,8 @@
                 | /
                 = @all_sections[2].total_points.to_i
                 br/
-                span.title-black = '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100)
-                span.title-black %
+                span.title-black.section-score = '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100)
+                span.title-black.section-score %
             td.width-50
               .title-black SCORING METHODOGY
               p Revenue Grader scores your performance potential bymeasuring 30 practices across three dimensions layers: Strategy,Systems and Programs.  Each dimension has points assigned.These points may change from time to time.
@@ -279,16 +279,16 @@
       tr
         td.width-30
           div
-            = image_tag("icon3.jpg")
+            = wicked_pdf_image_tag("icon3.jpg")
             p Define competitive advantage and the integrated revenue marketing plan.
             / wicked_pdf_image_tag
         td.width-30
           div
-            = image_tag("icon-windows.jpg")
+            = wicked_pdf_image_tag("icon-windows.jpg")
             p Build web presence and an agile and durable revenue platform
         td.width-30
           div
-            = image_tag("icon-computer.jpg")
+            = wicked_pdf_image_tag("icon-computer.jpg")
             p  Envision, integrate and launch integrated campaigns and programs
 
 
@@ -296,5 +296,5 @@
   div
     p.margin-extra Today, business need a new more integrated revenue marketing capability and success requires a complex range of skills and expertise. We blend strategy, design, media and technology skills to help clients differentiate their brand strategies, integrate digital and revenue systems, and launch innovative programs. As a trusted advisor and program delivery partner, we build agile marketing systems and  respond to dynamic growth opportunities. We are differentiated by our revenue architecture approach and flexible multi-affiliate resource model that allows us to respond to our client’s dynamic revenue initiatives.
     p.margin-extra
-      |Learn more. Visit our
-      a.title-black.font-normal-size.clear-link href="http://www.revenuegrader.com/" Website
+      |Learn more. Visit
+      a.title-black.font-blue.font-normal-size.clear-link href="http://www.revenuegrader.com/" http://www.revenuegrader.com
