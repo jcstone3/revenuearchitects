@@ -16,7 +16,7 @@
     table.table-for-div
       tbody
         tr
-          td.width-50
+          td.width-total
             div.total-score-content
                 p.title-black.title-total TOTAL SCORE
                 p.title-black.sub1 = @survey.company_name
@@ -27,6 +27,7 @@
                   | /
                   = '%.2f' % @total_all_sections_points.to_f
                 span.important-score = '%.2f' % (((@score_per_section[0].to_f + @score_per_section[1].to_f + @score_per_section[2].to_f)/ @total_all_sections_points.to_f)*100)
+                span.important-score %
           td.width-50
             p.margin-bottom-30
               p.title-black.sub2 STRATEGY

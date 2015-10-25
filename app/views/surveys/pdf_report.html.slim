@@ -63,7 +63,8 @@
                 | /
                 = @all_sections[0].total_points.to_i
                 br/
-                b.title-black = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
+                span.title-black = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
+                span.title-black %
               p.margin-bottom-30
                 span.title-black.sub2 SYSTEMS
                 br/
@@ -75,7 +76,8 @@
                 | /
                 = @all_sections[1].total_points.to_i
                 br/
-                b.title-black = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
+                span.title-black = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
+                span.title-black %
                 br/
               p.margin-bottom-30
                 span.title-black.sub2 PROGRAMS
@@ -88,7 +90,8 @@
                 | /
                 = @all_sections[2].total_points.to_i
                 br/
-                b.title-black = '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100)
+                span.title-black = '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100)
+                span.title-black %
             td.width-50
               .title-black SCORING METHODOGY
               p Revenue Grader scores your performance potential bymeasuring 30 practices across three dimensions layers: Strategy,Systems and Programs.  Each dimension has points assigned.These points may change from time to time.
@@ -103,7 +106,7 @@
                     | /
                     = '%.2f' % @total_all_sections_points.to_f
                   span.important-score = '%.2f' % (((@score_per_section[0].to_f + @score_per_section[1].to_f + @score_per_section[2].to_f)/ @total_all_sections_points.to_f)*100)
-
+                  span.important-score %
 
 
 .content.page-break

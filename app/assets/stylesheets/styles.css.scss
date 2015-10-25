@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('/assets/font/Lato-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
 .without_margin{
   margin-left: -20px;
   margin-right: -20px;
@@ -158,6 +167,10 @@ table.dataTable thead th{
   background-position: 100% center;
 }
 
+table.dataTable thead th:last-child{
+  background-image: none;
+}
+
 table.dataTable thead.compare_table th{
   padding: 15px 50px;
   text-align: center;
@@ -311,7 +324,13 @@ table.dataTable{
 
 #container-scores td.width-50 {
   width: 25%;
-  padding-right: 3%;
+  padding-right: 2%;
+  padding-left: 3%;
+}
+
+#container-scores td.width-total {
+    width: 26%;
+    padding-right: 2%;
 }
 
 #container-scores div.total-score-content {
