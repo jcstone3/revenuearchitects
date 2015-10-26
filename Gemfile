@@ -67,14 +67,14 @@ gem "sentry-raven"
 group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
-gem 'wkhtmltopdf-binary', '0.9.9.3'
+gem 'wkhtmltopdf-binary'
 gem 'byebug'
 # gem 'unicorn'
 end
 
 #wkhtmltopdf for test, stage and production enviornments
 group :test, :staging, :production do
-	gem 'wkhtmltopdf-heroku', '~> 1.0.0'
+	gem 'wkhtmltopdf-heroku'
 	gem 'newrelic_rpm'
 end
 # Gems used only for assets and not required
