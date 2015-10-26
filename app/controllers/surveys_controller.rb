@@ -385,9 +385,37 @@ def report
        @should_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'should_do'}
       #for could do responses
        @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
+       #for not applicable responses
+        @not_applicable_responses = Response.get_response_for_options(@survey.id, "not_applicable")
 
-      #for not applicable responses
-       @not_applicable_responses = Response.get_response_for_options(@survey.id, "not_applicable")
+       #for must do responses
+        @must_do_responses_strategy = @all_responses_for_strategy.select{|response| response.answer_3 == 'must_do'}
+       #for should do responses
+        @should_do_responses_strategy = @all_responses_for_strategy.select{|response| response.answer_3 == 'should_do'}
+       #for could do responses
+        @could_do_responses_strategy = @all_responses_for_strategy.select{|response| response.answer_3 == 'could_do'}
+        #for not applicable responses
+        @not_applicable_responses_strategy = @all_responses_for_strategy.select{|response| response.answer_3 == ""}
+
+        #for must do responses
+         @must_do_responses_system = @all_responses_for_system.select{|response| response.answer_3 == 'must_do'}
+        #for should do responses
+         @should_do_responses_system = @all_responses_for_system.select{|response| response.answer_3 == 'should_do'}
+        #for could do responses
+         @could_do_responses_system = @all_responses_for_system.select{|response| response.answer_3 == 'could_do'}
+         #for not applicable responses
+         @not_applicable_responses_system = @all_responses_for_system.select{|response| response.answer_3 == ""}
+
+
+         #for must do responses
+          @must_do_responses_program = @all_responses_for_program.select{|response| response.answer_3 == 'must_do'}
+         #for should do responses
+          @should_do_responses_program = @all_responses_for_program.select{|response| response.answer_3 == 'should_do'}
+         #for could do responses
+          @could_do_responses_program = @all_responses_for_program.select{|response| response.answer_3 == 'could_do'}
+          #for not applicable responses
+          @not_applicable_responses_program = @all_responses_for_program.select{|response| response.answer_3 == ""}
+
 
       #for total count
        @section_questions_total = Section.section_questions_total

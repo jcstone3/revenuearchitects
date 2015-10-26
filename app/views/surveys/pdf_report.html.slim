@@ -154,7 +154,7 @@
   .header
     .title-header
       span.header-left = @survey.company_name.upcase
-      span.header-right SYSTEM
+      span.header-right SYSTEMS
 
   .content-table
     table.table.table-report.table-condesed
@@ -233,6 +233,323 @@
             td = response.points
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right STRATEGY PRIORITIES
+
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th
+            |DIMENSION
+          th.practice-column
+            |PRACTICE
+          th
+            |PRIORITY
+          th
+            |IMPORTANCE
+          th
+            |POINTS
+          th.center
+            |YOUR SCORE
+          th.center
+            |AVG SCORE
+      tbody
+        - @must_do_responses_strategy.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @should_do_responses_strategy.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @could_do_responses_strategy.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @not_applicable_responses_strategy.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right SYSTEMS PRIORITIES
+
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th
+            |DIMENSION
+          th.practice-column
+            |PRACTICE
+          th
+            |PRIORITY
+          th
+            |IMPORTANCE
+          th
+            |POINTS
+          th.center
+            |YOUR SCORE
+          th.center
+            |AVG SCORE
+      tbody
+        - @must_do_responses_system.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @should_do_responses_system.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @could_do_responses_system.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @not_applicable_responses_system.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right PROGRAMS PRIORITIES
+
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th
+            |DIMENSION
+          th.practice-column
+            |PRACTICE
+          th
+            |PRIORITY
+          th
+            |IMPORTANCE
+          th
+            |POINTS
+          th.center
+            |YOUR SCORE
+          th.center
+            |AVG SCORE
+      tbody
+        - @must_do_responses_program.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @should_do_responses_program.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @could_do_responses_program.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @not_applicable_responses_program.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right PLAN PRIORITIES SUMMARY
+
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th
+            |DIMENSION
+          th.practice-column
+            |PRACTICE
+          th
+            |PRIORITY
+          th
+            |IMPORTANCE
+          th
+            |POINTS
+          th.center
+            |YOUR SCORE
+          th.center
+            |AVG SCORE
+      tbody
+        - @add_to_plan_responses.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+
+
 
 .content.page-break
   .header
