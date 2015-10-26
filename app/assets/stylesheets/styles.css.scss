@@ -88,7 +88,7 @@ p.margin-extra{
 }
 
 .font-blue{
-  color: #1e92b9;
+  color: #1e92b9 !important;
   margin-right: 5px;
 }
 
@@ -345,6 +345,7 @@ table.dataTable{
 
 #container-scores .title-black {
     font-weight: 700;
+    color: #000;
 }
 
 #container-scores .title-total{
