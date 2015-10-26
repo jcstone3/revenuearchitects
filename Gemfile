@@ -61,13 +61,13 @@ gem "acts_as_list", "~> 0.1.6"
 
 #PDF generation plugin
 gem 'wicked_pdf', '0.11.0'
+gem 'wkhtmltopdf-binary', '0.9.9.3'
 # Raven Setup
 gem "sentry-raven"
 
 group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
-gem 'wkhtmltopdf-binary', '0.9.9.3'
 gem 'byebug'
 # gem 'unicorn'
 end
