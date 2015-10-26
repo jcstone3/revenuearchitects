@@ -63,7 +63,7 @@ p{
 }
 
 .cover-page{
-  background-color:#F5F5F5 !important;
+  background-image: url('file://<%= Rails.root.join('app', 'assets', 'images', 'bg.jpg') %>');
   text-align:center !important;
   position: relative;
   padding: 200px;
@@ -72,7 +72,7 @@ p{
 }
 
 .company-name{
-  font-family: 'Lato4';
+  font-family: 'Lato5';
 }
 
 .logo-content{
@@ -90,6 +90,10 @@ p{
 }
 .logo-content-img{
   margin-top: 15px;
+}
+
+.td-by{
+  text-align: right;
 }
 
 .width-50{
@@ -188,6 +192,10 @@ p{
 .font-blue{
   color: #1e92b9;
   margin-right: 5px;
+}
+
+.font-white{
+  color: #ffffff;
 }
 
 .font-bold{
@@ -324,7 +332,7 @@ p.margin-extra{
   background-color: #F3F3F3;
   margin-left: -35px;
   margin-right: -35px;
-  padding: 50px;
+  padding: 30px 50px;
 }
 
 .content-icons table{
