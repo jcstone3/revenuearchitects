@@ -96,6 +96,10 @@ p{
   width: 50%;
 }
 
+.width-80{
+  width: 80%;
+}
+
 .width-30{
   width: 33%;
   padding-left: 60px;
@@ -186,6 +190,15 @@ p{
   margin-right: 5px;
 }
 
+.font-bold{
+  font-family: 'Lato3';
+  font-weight: bolder;
+}
+
+.font-bold2{
+  font-weight: bold;
+}
+
 .header{
   font-size: 18px;
   padding-top: 20px;
@@ -241,11 +254,19 @@ p{
 }
 
 .table-report>thead>tr>th {
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 300;
     padding: 15px;
     padding-top: 15px;
     padding-bottom: 15px;
     text-align: center;
+    background-image: url('file://<%= Rails.root.join('app', 'assets', 'images', 'bar.png') %>');
+    background-repeat: no-repeat;
+    background-position: 100% center;
+}
+
+.table-report>thead>tr>th:last-child{
+  background-image: none;
 }
 
 .table-report>thead>tr{
@@ -255,14 +276,25 @@ p{
 
 .table-report>tbody>tr>td {
   padding: 20px;
+  text-align: center;
 }
+
+.table-report>tbody>tr>td:first-child, .table-report>tbody>tr>td:nth-child(2) {
+  text-align: left;
+}
+
 .table-report>tbody>tr>td:first-child {
   padding-left: 35px;
 }
 
+.practice-column{
+  width: 250px;
+	text-align: left;
+}
+
 .table-report .div-header{
-  height: 23px;
-  border-right: 1px solid #bcbbbc;
+  height: 30px;
+  border-right: 2px solid #bcbbbc;
   float: right;
   margin-right: -16px;
 }
@@ -310,3 +342,18 @@ p.margin-extra{
     /* font-size: 15px; */
     /* color: #222; */
     /* font-weight: 600; */
+
+.priority-red{
+  font-weight: bold;
+  color: #EA722F;
+}
+
+.priority-green{
+  font-weight: bold;
+  color: #02B15C;
+}
+
+.priority-blue{
+  font-weight: bold;
+  color: #56C9F3;
+}

@@ -53,11 +53,11 @@
             td.width-50
               .title-black.margin-bottom-10 SCORECARD
               p
-                span.title-black.sub2 STRATEGY
+                span.title-black.sub2.font-bold STRATEGY
                 br/
                 | Define your competitive advantage.
                 br/
-                span.font-blue SCORE:
+                span.font-blue.font-bold SCORE:
                 span
                 = @score_per_section[0]
                 | /
@@ -66,11 +66,11 @@
                 span.title-black.section-score = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
                 span.title-black.section-score %
               p.margin-bottom-25
-                span.title-black.sub2 SYSTEMS
+                span.title-black.sub2.font-bold SYSTEMS
                 br/
                 | Build an agile and durable platform.
                 br/
-                span.font-blue SCORE:
+                span.font-blue.font-bold SCORE:
                 span
                 = @score_per_section[1]
                 | /
@@ -80,11 +80,11 @@
                 span.title-black.section-score %
                 br/
               p.margin-bottom-25
-                span.title-black.sub2 PROGRAMS
+                span.title-black.sub2.font-bold PROGRAMS
                 br/
                 | Launch integrated campaigns.
                 br/
-                span.font-blue SCORE:
+                span.font-blue.font-bold SCORE:
                 span
                 = @score_per_section[2]
                 | /
@@ -94,7 +94,7 @@
                 span.title-black.section-score %
             td.width-50
               .title-black SCORING METHODOGY
-              p Revenue Grader scores your performance potential bymeasuring 30 practices across three dimensions layers: Strategy,Systems and Programs.  Each dimension has points assigned.These points may change from time to time.
+              p Revenue Grader scores your performance potential bymeasuring 30 practices across three dimensions layers: Strategy, Systems and Programs.  Each dimension has points assigned. These points may change from time to time.
 
               div.total-score-content
                   p.title-black TOTAL SCORE
@@ -121,39 +121,35 @@
         tr
           th
             |DIMENSION
-            div.div-header
-          th
+          th.practice-column
             |PRACTICE
-            div.div-header
           th
             |PRIORITY
-            div.div-header
+          th
+            |IMPORTANCE
           th
             |POINTS
-            div.div-header
-          th
+          th.center
             |YOUR SCORE
-            div.div-header
-          th
+          th.center.th-border
             |AVG SCORE
-            div.div-header
-          th
-            |CAL SCORE
-            div.div-header
-          th
-            |AVG. CAL SCORE
       tbody
         - @all_responses_for_strategy.each do |response|
           tr
             td = response.sub_sect_name
-            td = response.name
-            td = response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3)
-            td.center = response.points
-            td.center = response.score
-            td.center = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td.center = response.response_id.present? ? get_calculated_score(response.response_id, response.questions_id) : 0
-            td.center = response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id,response.section_id) : 0
-
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
 .content.page-break
   .header
     .title-header
@@ -166,38 +162,35 @@
         tr
           th
             |DIMENSION
-            div.div-header
-          th
+          th.practice-column
             |PRACTICE
-            div.div-header
           th
             |PRIORITY
-            div.div-header
+          th
+            |IMPORTANCE
           th
             |POINTS
-            div.div-header
           th.center
             |YOUR SCORE
-            div.div-header
           th.center
             |AVG SCORE
-            div.div-header
-          th.center
-            |CAL SCORE
-            div.div-header
-          th.center
-            |AVG. CAL SCORE
       tbody
         - @all_responses_for_system.each do |response|
           tr
             td = response.sub_sect_name
-            td = response.name
-            td = response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3)
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = response.response_id.present? ? get_calculated_score(response.response_id, response.questions_id) : 0
-            td = response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id,response.section_id) : 0
 
 .content.page-break
   .header
@@ -211,39 +204,35 @@
         tr
           th
             |DIMENSION
-            div.div-header
-          th
+          th.practice-column
             |PRACTICE
-            div.div-header
           th
             |PRIORITY
-            div.div-header
-          th.center
+          th
+            |IMPORTANCE
+          th
             |POINTS
-            div.div-header
           th.center
             |YOUR SCORE
-            div.div-header
           th.center
             |AVG SCORE
-            div.div-header
-          th.center
-            |CAL SCORE
-            div.div-header
-          th.center
-            |AVG. CAL SCORE
       tbody
         - @all_responses_for_program.each do |response|
           tr
             td = response.sub_sect_name
-            td = response.name
-            td = response.answer_3.blank? ? content_tag(:div, response.in_plan.humanize, class: "div-td td-priority") : priority_column(response.answer_3)
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - else
+              td.font-bold2 N/A
+            td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = response.response_id.present? ? get_calculated_score(response.response_id, response.questions_id) : 0
-            td = response.response_id.present? ? get_avg_calculated_score(response.survey_id, response.questions_id,response.section_id) : 0
-
 
 .content.page-break
   .header
