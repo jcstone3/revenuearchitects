@@ -1,8 +1,3 @@
-WickedPdf.config = {
-  :layout => "layouts/pdf.html"
-}
-
-
 module WickedPdfHelper
   def wicked_pdf_stylesheet_link_tag(*sources)
     sources.collect { |source|
