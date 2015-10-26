@@ -1,9 +1,7 @@
 module WickedPdfHelper
   def wicked_pdf_stylesheet_link_tag(*sources)
     sources.collect { |source|
-      puts 'AAAAAAAAAAAAAAAA'*50
-      puts Rails.application.assets.find_asset(source+".css.erb")
-      "<style type='text/css'>#{Rails.application.assets.find_asset(source+".css.erb")}</style>"
+      "<style type='text/css'>#{Rails.application.assets.find_asset(source+".css")}</style>"
     }.join("\n").html_safe
   end
 
@@ -24,9 +22,7 @@ module WickedPdfHelper
   module Assets
     def wicked_pdf_stylesheet_link_tag(*sources)
       sources.collect { |source|
-        puts 'AAAA2222'*50
-        puts Rails.application.assets.find_asset(source+".css.erb")
-        "<style type='text/css'>#{Rails.application.assets.find_asset(source+".css.erb")}</style>"
+        "<style type='text/css'>#{Rails.application.assets.find_asset(source+".css")}</style>"
       }.join("\n").html_safe
     end
 
