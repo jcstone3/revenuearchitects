@@ -1,7 +1,7 @@
 WickedPdf.config = {
   #:wkhtmltopdf => '/usr/local/bin/wkhtmltopdf',
   :layout => "layouts/pdf.html",
-  :exe_path => Rails.root.join('vendor', 'cache', 'wkhtmltopdf-heroku').to_s
+  :exe_path => ENV["BIN_PEF"]
 }
 
 
