@@ -150,12 +150,28 @@
             td = response.points
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+  #resutls-section
+    table.table-for-div
+      tbody
+        tr
+          td.total-score-content
+            p.title-super-1
+              span.font-blue SCORE
+              span
+              = @score_per_section[0]
+              |  /
+              =  @all_sections[0].total_points.to_i
+            span.section-score2 = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
+            span.section-score2 %
+          td
+            #chart
+
+
 .content.page-break
   .header
     .title-header
       span.header-left = @survey.company_name.upcase
       span.header-right SYSTEMS
-
   .content-table
     table.table.table-report.table-condesed
       thead
@@ -191,13 +207,22 @@
             td = response.points
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+  #resutls-section
+    div.total-score-content.width-25
+      p.title-super-1
+        span.font-blue SCORE
+        span
+        = @score_per_section[1]
+        |  /
+        =  @all_sections[1].total_points.to_i
+      span.section-score2 = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
+      span.section-score2 %
 
 .content.page-break
   .header
     .title-header
       span.header-left = @survey.company_name.upcase
       span.header-right PROGRAMS
-
   .content-table
     table.table.table-report.table-condesed
       thead
@@ -233,13 +258,22 @@
             td = response.points
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+  #resutls-section
+    div.total-score-content.width-25
+      p.title-super-1
+        span.font-blue SCORE
+        span
+        = @score_per_section[2]
+        |  /
+        =  @all_sections[2].total_points.to_i
+      span.section-score2 = '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100)
+      span.section-score2 %
 
 .content.page-break
   .header
     .title-header
       span.header-left = @survey.company_name.upcase
       span.header-right STRATEGY PRIORITIES
-
   .content-table
     table.table.table-report.table-condesed
       thead
@@ -330,7 +364,6 @@
     .title-header
       span.header-left = @survey.company_name.upcase
       span.header-right SYSTEMS PRIORITIES
-
   .content-table
     table.table.table-report.table-condesed
       thead
@@ -421,7 +454,6 @@
     .title-header
       span.header-left = @survey.company_name.upcase
       span.header-right PROGRAMS PRIORITIES
-
   .content-table
     table.table.table-report.table-condesed
       thead
@@ -512,7 +544,6 @@
     .title-header
       span.header-left = @survey.company_name.upcase
       span.header-right PLAN PRIORITIES SUMMARY
-
   .content-table
     table.table.table-report.table-condesed
       thead
