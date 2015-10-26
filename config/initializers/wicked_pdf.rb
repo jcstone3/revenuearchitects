@@ -1,10 +1,3 @@
-WickedPdf.config = {
-  #:wkhtmltopdf => '/usr/local/bin/wkhtmltopdf',
-  :layout => "layouts/pdf.html",
-  :exe_path => ENV["BIN_PEF"]
-}
-
-
 module WickedPdfHelper
   def wicked_pdf_stylesheet_link_tag(*sources)
     sources.collect { |source|
