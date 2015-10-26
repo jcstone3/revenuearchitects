@@ -8,7 +8,7 @@ WickedPdf.config = {
 module WickedPdfHelper
   def wicked_pdf_stylesheet_link_tag(*sources)
     sources.collect { |source|
-      "<style type='text/css'>#{Rails.application.assets.find_asset(source+".css.erb")}</style>"
+      "<style type='text/css'>file://#{Rails.application.assets.find_asset(source+".css.erb")}</style>"
     }.join("\n").html_safe
   end
 
