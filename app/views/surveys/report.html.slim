@@ -77,7 +77,7 @@
               = render "response_report", {response: response}
         .tabGraph
           .tabHead
-            h1 SYSTEM
+            h1 SYSTEMS
           table#report_SystemTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
             = render partial: 'table_header.html.slim'
             - @all_responses_for_system.each_with_index do |response, index|
@@ -85,7 +85,7 @@
               = render "response_report", {response: response}
         .tabGraph
           .tabHead
-            h1 PROGRAM
+            h1 PROGRAMS
           table#report_ProgramTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
             = render partial: 'table_header.html.slim'
             - @all_responses_for_program.each_with_index do |response, index|
