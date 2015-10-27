@@ -71,10 +71,6 @@ p{
 
 }
 
-.company-name{
-  font-family: 'Lato5';
-}
-
 .logo-content{
   text-align: center;
   width: 300px;
@@ -142,6 +138,10 @@ p{
   margin-bottom: 20px;
 }
 
+.font-small{
+  font-size: 18px;
+}
+
 .title-black{
   font-size: 22px;
   color: black;
@@ -162,9 +162,8 @@ p{
 }
 
 .title-cover-page{
+  font-family: 'LatoBlack2' !important;
   font-size: 55px;
-  font-family: 'Lato2';
-  font-style: normal;
   font-weight: bolder;
   margin-top: 250px;
   margin-bottom: 20px;
@@ -203,7 +202,7 @@ p{
 }
 
 .font-bold{
-  font-family: 'Lato3';
+  font-family: 'LatoBold';
   font-weight: bolder;
 }
 
@@ -226,7 +225,7 @@ p{
 }
 
 .important-score{
-  font-family: 'Lato5';
+  font-family: 'LatoSemiBold';
   color: #E87033;
   font-size: 52px;
   margin: 0;
@@ -238,13 +237,13 @@ p{
 }
 
 .section-score{
-  font-family: 'Lato5';
+  font-family: 'LatoSemiBold';
   font-size: 25px;
   font-weight: bolder;
 }
 
 .section-score2{
-  font-family: 'Lato5';
+  font-family: 'LatoSemiBold';
   font-size: 40px;
   font-weight: bolder;
   color: #E87033;
@@ -277,14 +276,16 @@ p{
 .table-report>thead>tr>th {
     font-size: 15px;
     font-weight: 300;
-    padding: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
     text-align: center;
     background-image: url('file://<%= Rails.root.join('app', 'assets', 'images', 'bar.png') %>');
     background-repeat: no-repeat;
     background-position: 100% center;
-    background-size: auto 94%;
+    background-size: auto 92%;
+    vertical-align: middle;
 }
 
 .table-report>thead>tr>th:last-child{
@@ -302,6 +303,19 @@ p{
   padding-right: 5px;
   padding-left: 5px;
   text-align: center;
+  vertical-align: top;
+}
+
+.td-10{
+ width: 10%;
+}
+
+.td-15{
+  width: 15%;
+}
+
+.td-30{
+  width: 30%;
 }
 
 .table-report>tbody>tr>td:first-child, .table-report>tbody>tr>td:nth-child(2) {
@@ -310,11 +324,6 @@ p{
 
 .table-report>tbody>tr>td:first-child {
   padding-left: 35px;
-}
-
-.practice-column{
-  width: 300px;
-	text-align: left;
 }
 
 .table-report .div-header{

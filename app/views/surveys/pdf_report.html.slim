@@ -1,18 +1,18 @@
 .page-break.cover-page
   div
-    .title-cover-page.company-name
-      = @survey.company_name.upcase
+    .title-cover-page
+      = @survey.company_name
 
     .title-gray
       | Revenue Grader Diagnostic
-    .title-gray
+    .title-gray.font-small
       = @survey.created_at.strftime('%B %d th, %Y')
     div.content-line-decorator
       hr.line-decorator
     div.center-logo
       table
         tr
-          td.width-50.td-by
+          td.width-50.td-by.font-small
             div.logo-content-by by
           td.width-50
             = wicked_pdf_image_tag("logocolor.png", class: 'logo-content-img ' )
@@ -119,19 +119,19 @@
     table.table.table-report.table-condesed
       thead
         tr
-          th
+          th.td-15
             |DIMENSION
-          th.practice-column
+          th.td-30
             |PRACTICE
-          th
+          th.td-10
             |PRIORITY
-          th
+          th.td-15
             |IMPORTANCE
-          th
+          th.td-10
             |POINTS
-          th.center
+          th.td-10.center
             |YOUR SCORE
-          th.center.th-border
+          th.center.td-10
             |AVG SCORE
       tbody
         - @all_responses_for_strategy.each do |response|
@@ -176,19 +176,19 @@
     table.table.table-report.table-condesed
       thead
         tr
-          th
+          th.td-15
             |DIMENSION
-          th.practice-column
+          th.td-30
             |PRACTICE
-          th
+          th.td-10
             |PRIORITY
-          th
+          th.td-15
             |IMPORTANCE
-          th
+          th.td-10
             |POINTS
-          th.center
+          th.td-10.center
             |YOUR SCORE
-          th.center
+          th.center.td-10
             |AVG SCORE
       tbody
         - @all_responses_for_system.each do |response|
@@ -227,19 +227,19 @@
     table.table.table-report.table-condesed
       thead
         tr
-          th
+          th.td-15
             |DIMENSION
-          th.practice-column
+          th.td-30
             |PRACTICE
-          th
+          th.td-10
             |PRIORITY
-          th
+          th.td-15
             |IMPORTANCE
-          th
+          th.td-10
             |POINTS
-          th.center
+          th.td-10.center
             |YOUR SCORE
-          th.center
+          th.center.td-10
             |AVG SCORE
       tbody
         - @all_responses_for_program.each do |response|
@@ -278,19 +278,19 @@
     table.table.table-report.table-condesed
       thead
         tr
-          th
+          th.td-15
             |DIMENSION
-          th.practice-column
+          th.td-30
             |PRACTICE
-          th
+          th.td-10
             |PRIORITY
-          th
+          th.td-15
             |IMPORTANCE
-          th
+          th.td-10
             |POINTS
-          th.center
+          th.td-10.center
             |YOUR SCORE
-          th.center
+          th.center.td-10
             |AVG SCORE
       tbody
         - @must_do_responses_strategy.each do |response|
@@ -368,19 +368,19 @@
     table.table.table-report.table-condesed
       thead
         tr
-          th
+          th.td-15
             |DIMENSION
-          th.practice-column
+          th.td-30
             |PRACTICE
-          th
+          th.td-10
             |PRIORITY
-          th
+          th.td-15
             |IMPORTANCE
-          th
+          th.td-10
             |POINTS
-          th.center
+          th.td-10.center
             |YOUR SCORE
-          th.center
+          th.center.td-10
             |AVG SCORE
       tbody
         - @must_do_responses_system.each do |response|
@@ -458,19 +458,19 @@
     table.table.table-report.table-condesed
       thead
         tr
-          th
+          th.td-15
             |DIMENSION
-          th.practice-column
+          th.td-30
             |PRACTICE
-          th
+          th.td-10
             |PRIORITY
-          th
+          th.td-15
             |IMPORTANCE
-          th
+          th.td-10
             |POINTS
-          th.center
+          th.td-10.center
             |YOUR SCORE
-          th.center
+          th.center.td-10
             |AVG SCORE
       tbody
         - @must_do_responses_program.each do |response|
@@ -548,19 +548,19 @@
     table.table.table-report.table-condesed
       thead
         tr
-          th
+          th.td-15
             |DIMENSION
-          th.practice-column
+          th.td-30
             |PRACTICE
-          th
+          th.td-10
             |PRIORITY
-          th
+          th.td-15
             |IMPORTANCE
-          th
+          th.td-10
             |POINTS
-          th.center
+          th.td-10.center
             |YOUR SCORE
-          th.center
+          th.center.td-10
             |AVG SCORE
       tbody
         - @add_to_plan_responses.each do |response|
