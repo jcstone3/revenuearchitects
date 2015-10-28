@@ -158,12 +158,12 @@ $(function () {
           text: 'Your Score vs. Average Score',
           align: 'right',
           x: 133,
-          y: 115
+          y: 85
       },
         chart: {
             type: 'line',
             width: 950,
-            height: 350
+            height: 300
         },
         xAxis: {
           title: {
