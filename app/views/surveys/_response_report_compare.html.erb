@@ -1,6 +1,5 @@
 <tr>
   <td><%= response.questions_id%></td>
-  <td><%= response.section_name.try(:titleize)%></td>
   <td><%= response.sub_sect_name.try(:titleize)%></td>
   <td class="question-column"><%= response.name %></td>
 
@@ -11,9 +10,17 @@
       <b class="priority-blue" ><%= response.answer_3.try(:titleize) %></b>
     <%elsif(response.answer_3.try(:titleize) == "Could Do") %>
       <b class="priority-green"><%= response.answer_3.try(:titleize)%></b>
-    <%else %>
-      <b> <%= response.answer_3.try(:titleize) %></b>
-    <%end %>
+    <%elsif(response.answer_3.blank?) %>
+
+      <% if ((response.in_plan.humanize) == "Not applicable") %>
+        <b>N/A</b>
+      <% else %>
+        <b><%= response.in_plan.humanize %></b>
+      <% end %>
+
+    <% else %>
+      <b><%=  response.answer_3.try(:titleize) %></b>
+    <% end %>
   </td>
   <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
   <td><%= response.points %></td>

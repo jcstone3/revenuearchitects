@@ -148,9 +148,13 @@ p.margin-extra{
 
 .content-gray{
   background-color: #E3E3E3;
-  padding: 15px;
+  padding: 12px 15px 5px 15px;
   margin-left: -20px;
   margin-right: -20px;
+}
+
+.content-gray .action-btns{
+  margin-right: 0px;
 }
 
 #Search_All {
@@ -192,10 +196,14 @@ table.dataTable thead.compare_table th{
   text-align: center;
 }
 
-table.dataTable2 td{
+table.dataTable td, table.dataTable2 td{
   background-color: #fff !important;
   font-size: 13px;
   padding-top: 10px;
+}
+
+table.dataTable td::first-letter, table.dataTable2 td::first-letter{
+  text-transform: capitalize;
 }
 
 table.dataTable2 tr {
@@ -224,10 +232,10 @@ table.dataTable{
 }
 
 .list-tab li a, .nav3-tabs3>a{
-  padding: 5px 10px;
+  padding: 9px 10px 6px 10px;
   text-align: center;
   color: #8C959A;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 0px;
   display: block;
   position: relative;
@@ -251,7 +259,7 @@ table.dataTable{
 
 
 .content-gray .plane-btn{
-  margin: 0 4px;
+  margin: 0 3px;
   background-image: url('../assets/download_new.png');
   background-repeat: no-repeat;
   background-position: 5% center;
@@ -304,6 +312,7 @@ table.dataTable{
 
 #Search_All{
   margin-bottom: 0px;
+  margin-right: 10px;
 }
 
 .dataTables_filter {
@@ -357,6 +366,7 @@ table.dataTable{
 
 #container-scores p{
   margin: 0px;
+  font-size: 15px;
 }
 
 #container-scores .title-black {

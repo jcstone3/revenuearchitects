@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <%= wicked_pdf_stylesheet_link_tag "font-lato" %>
     <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+    <%= wicked_pdf_javascript_include_tag 'survey' %>
     </style>
   </head>
   <body>
@@ -12,5 +13,7 @@
     <div id="content">
       <%= yield %>
     </div>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
   </body>
 </html>

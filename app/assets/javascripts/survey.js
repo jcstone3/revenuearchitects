@@ -153,7 +153,6 @@ $(function () {
     }
 
   $.getJSON(route, function (data) {
-    console.log(data);
     var options = {
       title: {
           text: 'Your Score vs. Average Score',

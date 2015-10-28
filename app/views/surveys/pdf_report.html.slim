@@ -164,7 +164,7 @@
             span.section-score2 = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
             span.section-score2 %
           td
-            #chart
+            #compare-chart-strategy
 
 
 .content.page-break
@@ -208,15 +208,20 @@
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
   #resutls-section
-    div.total-score-content.width-25
-      p.title-super-1
-        span.font-blue SCORE
-        span
-        = @score_per_section[1]
-        |  /
-        =  @all_sections[1].total_points.to_i
-      span.section-score2 = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
-      span.section-score2 %
+    table.table-for-div
+      tbody
+        tr
+          td.total-score-content
+            p.title-super-1
+              span.font-blue SCORE
+              span
+              = @score_per_section[1]
+              |  /
+              =  @all_sections[1].total_points.to_i
+            span.section-score2 = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
+            span.section-score2 %
+          td
+            #compare-chart-systems
 
 .content.page-break
   .header
@@ -259,15 +264,20 @@
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
   #resutls-section
-    div.total-score-content.width-25
-      p.title-super-1
-        span.font-blue SCORE
-        span
-        = @score_per_section[2]
-        |  /
-        =  @all_sections[2].total_points.to_i
-      span.section-score2 = '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100)
-      span.section-score2 %
+    table.table-for-div
+      tbody
+        tr
+          td.total-score-content
+            p.title-super-1
+              span.font-blue SCORE
+              span
+              = @score_per_section[0]
+              |  /
+              =  @all_sections[0].total_points.to_i
+            span.section-score2 = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
+            span.section-score2 %
+          td
+            #compare-chart-programs
 
 .content.page-break
   .header

@@ -23,6 +23,6 @@ module WickedPdfHelper
   end
 
   def wicked_pdf_javascript_include_tag(*sources)
-    sources.collect{ |source| "<script type='text/javascript'>#{Rails.application.assets.find_asset(source+".js")}</script>" }.join("\n").html_safe
+    sources.collect{ |source| "<script type='text/javascript'>file://#{Rails.application.assets.find_asset(source+".js")}</script>" }.join("\n").html_safe
   end
 end
