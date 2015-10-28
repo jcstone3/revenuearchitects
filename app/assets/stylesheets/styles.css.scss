@@ -419,6 +419,26 @@ circle {
 }
 
 .highcharts-legend-item text{
-  font-size: 14px !important;
+  font-size: 18px !important;
   font-weight: 500 !important;
+}
+.highcharts-axis-labels, .highcharts-yaxis-labels{
+  font-weight: 700;
+}
+
+.highcharts-axis text{
+  font-size: 10px !important;
+  font-weight: 700;
+}
+
+.highcharts-axis path{
+  display: none;
+}
+
+.highcharts-axis path:last-child{
+  display: block;
+}
+
+svg {
+    width: 1100px !important;
 }

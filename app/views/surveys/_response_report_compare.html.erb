@@ -12,7 +12,7 @@
     <%elsif(response.answer_3.try(:titleize) == "Could Do") %>
       <b class="priority-green"><%= response.answer_3.try(:titleize)%></b>
     <%else %>
-      <b>N/A</b>
+      <b> <%= response.answer_3.try(:titleize) %></b>
     <%end %>
   </td>
   <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>

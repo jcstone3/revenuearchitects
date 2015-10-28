@@ -38,24 +38,6 @@ $(".surveys.question").ready(function() {
 
 $(window).load(function() {
 
-  if(location.href.indexOf("compare") > -1)
-  {
-    console.log("old one");
-  /*  $.ajax({
-    type: 'GET',
-    url: '/surveys/overall_chart',
-    success: function(data,status,xhr){
-        console.log(data);
-        console.dir(data);
-        console.log('1: '+data[1]);
-      },
-      error: function(xhr,status,error){
-        console.log(xhr);
-        console.log(error);
-      }
-    });*/
-  }
-
   $('#resultTable_filter').find('input').attr('placeholder','Search');
   $('#Search_All').attr('placeholder','Search');
 
@@ -154,25 +136,30 @@ $(function () {
   {
   $.getJSON('/surveys/overall_chart', function (data) {
 
+
+
     $('#compare-chart').highcharts({
       title: {
           text: 'Your Score vs. Average Score',
           align: 'right',
-          x: 120,
-          y: 120
+          x: 133,
+          y: 115
       },
         chart: {
             type: 'line',
-            width: 850,
+            width: 950,
             height: 350
         },
         xAxis: {
           title: {
-            text: 'PRACTICES',
-            align: 'left'
+            text: 'PRACTICE',
+            align: 'left',
+            y: -18
           },
           categories: data[0],
-          gridLineColor: '#FFFFFF'
+          gridLineColor: '#FFFFFF',
+          lineColor: '#8D969B',
+          lineWidth: 2
         },
         legend: {
           layout: 'vertical',
@@ -182,14 +169,16 @@ $(function () {
           itemMarginTop: 15,
           itemMarginBottom: 5,
           itemStyle: {
-              lineHeight: '14px'
+              lineHeight: '20px'
           }
         },
         yAxis: {
           title: {
             text: ''
           },
-          gridLineColor: '#ffff'
+          gridLineColor: '#FFFFFF',
+          lineColor: '#8D969B',
+          lineWidth: 2
         },
         tooltip: {
             crosshairs: true,
