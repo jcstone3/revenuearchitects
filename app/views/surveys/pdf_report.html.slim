@@ -574,7 +574,7 @@
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
             - else
-              td.font-bold2 N/A
+              td.font-bold2 Add to Plan
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
