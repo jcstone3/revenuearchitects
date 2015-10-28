@@ -228,6 +228,10 @@ $(function () {
     }
 
     $('#compare-chart').highcharts(options);
+    $('#compare-chart-strategy').highcharts(options);
+    $('#compare-chart-systems').highcharts(options);
+    $('#compare-chart-programs').highcharts(options);
+
   });
   }
 });
