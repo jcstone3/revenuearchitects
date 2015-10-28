@@ -533,6 +533,7 @@ def compare
 
   #scoping the survey
   @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+  session[:survey] = @survey
   # @all_sections = get_all_sections
   @all_sections = Section.order(:sequence)
 
@@ -589,6 +590,11 @@ def compare
     @responses = Response.get_all_responses(@survey.id)
   end
   render :layout =>"report"
+end
+
+def overall_chart
+  @data_table = Survey.get_overall_data(session[:survey].id)
+  render :json => @data_table, :status => :ok
 end
 
 def compare_strategy

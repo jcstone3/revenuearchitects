@@ -56,6 +56,7 @@ RevenueGrader::Application.routes.draw do
   resources :authorizations
   resources :surveys do
     get :sub_section, on: :collection
+    get :overall_chart, on: :collection
   end
   resources :industries
   resources :responses

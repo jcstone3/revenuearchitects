@@ -37,6 +37,25 @@ $(".surveys.question").ready(function() {
 });
 
 $(window).load(function() {
+
+  if(location.href.indexOf("compare") > -1)
+  {
+    console.log("old one");
+  /*  $.ajax({
+    type: 'GET',
+    url: '/surveys/overall_chart',
+    success: function(data,status,xhr){
+        console.log(data);
+        console.dir(data);
+        console.log('1: '+data[1]);
+      },
+      error: function(xhr,status,error){
+        console.log(xhr);
+        console.log(error);
+      }
+    });*/
+  }
+
   $('#resultTable_filter').find('input').attr('placeholder','Search');
   $('#Search_All').attr('placeholder','Search');
 
@@ -127,4 +146,46 @@ $(window).load(function() {
       $('a[href$="'+hash+'"]').trigger( "click" );
       location.hash='';
   });
+});
+
+
+$(function () {
+  if(location.href.indexOf("compare") > -1)
+  {
+  $.getJSON('/surveys/overall_chart', function (data) {
+
+    $('#compare-chart').highcharts({
+        xAxis: {
+          categories: data[0]
+        },
+        yAxis: {
+        },
+        tooltip: {
+            crosshairs: true,
+            shared: true
+        },
+        series: [{
+            name: 'Your Response',
+            marker: {
+                symbol: 'circle',
+                fill: 'red',
+                radius: 9,
+                lineColor: '#666666',
+                lineWidth: 2
+            },
+            data: data[1]
+
+        }, {
+            name: 'Avg Response',
+            marker: {
+              symbol: 'circle',
+              radius: 9,
+              lineColor: '#666666',
+              lineWidth: 2
+            },
+            data: data[2]
+        }]
+    });
+  });
+  }
 });

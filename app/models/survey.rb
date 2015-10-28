@@ -194,8 +194,9 @@ def self.get_overall_data(survey_id)
     @response = Response.get_response_for_all_sections(survey_id)
     @questions = Question.find(:all, :select => "*", :order => "id ASC")
 
-    @data = Array.new
+    @data_table = Array.new
     @resp_array = Array.new
+    @your_array = Array.new
     @avg_array = Array.new
 
     @questions.each do |question|
@@ -203,17 +204,16 @@ def self.get_overall_data(survey_id)
       @your_response = @response.select { |response| response.id == question.id.to_i }
 
       @resp_array.push(question.id.to_s)
-      @resp_array.push(@your_response.blank? ? 0 :  @your_response.first.answer_1.to_i)
-
-
-      @avg_array.push(question.id.to_s)
+      @your_array.push(@your_response.blank? ? 0 :  @your_response.first.answer_1.to_i)
       @avg_array.push(self.get_average_score_from_other_companies(question.id,survey_id))
 
     end
-    @data.push(@resp_array)
-    @data.push(@avg_array)
 
-  return @data
+    @data_table.push(@resp_array)
+    @data_table.push(@your_array)
+    @data_table.push(@avg_array)
+
+  return @data_table
 end
 
 
