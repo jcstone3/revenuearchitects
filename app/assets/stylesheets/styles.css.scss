@@ -398,3 +398,27 @@ circle {
   outline-offset: -14px;
   box-sizing: border-box;
 }
+
+.highcharts-container > svg > text:last-child,.highcharts-button{
+  display: none;
+}
+
+#compare-chart{
+  text-align: center;
+
+}
+
+.highcharts-container{
+  display: inline-block;
+  overflow: visible !important;
+}
+
+.highcharts-title{
+  font-size: 22px !important;
+  font-weight: bold;
+}
+
+.highcharts-legend-item text{
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}

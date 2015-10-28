@@ -155,10 +155,41 @@ $(function () {
   $.getJSON('/surveys/overall_chart', function (data) {
 
     $('#compare-chart').highcharts({
+      title: {
+          text: 'Your Score vs. Average Score',
+          align: 'right',
+          x: 120,
+          y: 120
+      },
+        chart: {
+            type: 'line',
+            width: 850,
+            height: 350
+        },
         xAxis: {
-          categories: data[0]
+          title: {
+            text: 'PRACTICES',
+            align: 'left'
+          },
+          categories: data[0],
+          gridLineColor: '#FFFFFF'
+        },
+        legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle',
+          borderWidth: 0,
+          itemMarginTop: 15,
+          itemMarginBottom: 5,
+          itemStyle: {
+              lineHeight: '14px'
+          }
         },
         yAxis: {
+          title: {
+            text: ''
+          },
+          gridLineColor: '#ffff'
         },
         tooltip: {
             crosshairs: true,
@@ -166,21 +197,25 @@ $(function () {
         },
         series: [{
             name: 'Your Response',
+            color: '#56C9F3',
             marker: {
                 symbol: 'circle',
                 fill: 'red',
-                radius: 9,
-                lineColor: '#666666',
+                radius: 7,
+                fillColor: '#FFFFFF',
+                lineColor: '#56C9F3',
                 lineWidth: 2
             },
             data: data[1]
 
         }, {
-            name: 'Avg Response',
+            name: 'Average Response',
+            color: '#EA722F',
             marker: {
               symbol: 'circle',
-              radius: 9,
-              lineColor: '#666666',
+              radius: 7,
+              fillColor: '#FFFFFF',
+              lineColor: '#EA722F',
               lineWidth: 2
             },
             data: data[2]
