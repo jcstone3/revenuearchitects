@@ -194,6 +194,18 @@ table.dataTable thead th{
   text-align: center;
 }
 
+#overall table.dataTable thead th, #priorities table.dataTable thead th{
+  background-image: url('../assets/dropdown12px.png'), url('../assets/bar.png');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 20px) center, 100% center;
+  background-size: auto auto, auto 92%;
+  padding-right: 40px;
+}
+
+#overall table.dataTable thead th:last-child, #priorities table.dataTable thead th:last-child{
+  background-image: url('../assets/dropdown12px.png'), none;
+}
+
 .table-all th{
   padding-top: 17px !important;
   padding-bottom: 17px !important;
