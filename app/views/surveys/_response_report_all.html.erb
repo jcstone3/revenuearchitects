@@ -1,6 +1,6 @@
 <tr>
   <td><%= response.section_name.try(:titleize)%></td>
-  <td class="question-column"><%= response.name %></td>
+  <td><%= response.name %></td>
   <td>
     <% if(response.answer_3.try(:titleize) == "Must Do") %>
       <b class="priority-red"><%= response.answer_3.try(:titleize) %></b>

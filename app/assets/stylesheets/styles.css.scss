@@ -185,6 +185,22 @@ table.dataTable thead th{
   background-image: url('../assets/bar.png');
   background-repeat: no-repeat;
   background-position: 100% center;
+  background-size: auto 92%;
+  vertical-align: middle;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+
+.table-all th{
+  padding-top: 17px !important;
+  padding-bottom: 17px !important;
+}
+
+table.dataTable>tbody>tr>td:first-child, table.dataTable>tbody>tr>td:nth-child(2) {
+  text-align: left;
 }
 
 table.dataTable thead th:last-child{
@@ -204,6 +220,26 @@ table.dataTable td, table.dataTable2 td{
 
 table.dataTable td::first-letter, table.dataTable2 td::first-letter{
   text-transform: capitalize;
+}
+
+.td-10{
+  width: 10% !important;
+}
+
+.td-12{
+  width: 12.5% !important;
+}
+
+.td-15{
+  width: 15% !important;
+}
+
+.td-25{
+  width: 25% !important;
+}
+
+.td-30{
+  width: 30% !important;
 }
 
 table.dataTable2 tr {
@@ -299,6 +335,7 @@ table.dataTable{
 
 .dataTable th:first-child, .dataTable td:first-child{
   padding-left: 40px;
+  text-align: left;
 }
 
 .dataTable th:last-child, .dataTable td:last-child{

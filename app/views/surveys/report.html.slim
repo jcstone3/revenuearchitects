@@ -71,26 +71,26 @@
           .tabHead
             h1 STRATEGY
           table#report_StrategyTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
-            = render partial: 'table_header.html.slim'
+            = render partial: 'table_header_all.html.slim'
             - @all_responses_for_strategy.each_with_index do |response, index|
               - @index = index + 1
-              = render "response_report", {response: response}
+              = render "response_report_all", {response: response}
         .tabGraph
           .tabHead
             h1 SYSTEMS
           table#report_SystemTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
-            = render partial: 'table_header.html.slim'
+            = render partial: 'table_header_all.html.slim'
             - @all_responses_for_system.each_with_index do |response, index|
               - @index = index + 1
-              = render "response_report", {response: response}
+              = render "response_report_all", {response: response}
         .tabGraph
           .tabHead
             h1 PROGRAMS
           table#report_ProgramTable.report-body.dataTable2 cellpadding="1" cellspacing="1"
-            = render partial: 'table_header.html.slim'
+            = render partial: 'table_header_all.html.slim'
             - @all_responses_for_program.each_with_index do |response, index|
               - @index = index + 1
-              = render "response_report", {response: response}
+              = render "response_report_all", {response: response}
 
       #priorities.tab-pane style="height:auto;"
         .tabGraph
