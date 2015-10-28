@@ -216,6 +216,32 @@ def self.get_overall_data(survey_id)
   return @data_table
 end
 
+def self.get_section_chart(section_id, survey_id, responses)
+
+  @questions = Question.find_section_questions(section_id)
+
+  @data_table = Array.new
+  @resp_array = Array.new
+  @your_array = Array.new
+  @avg_array = Array.new
+
+  @questions.each do |question|
+
+    @your_response = responses.select { |response| response.questions_id.to_i == question.id.to_i }
+
+    @resp_array.push(question.id.to_s)
+    @your_array.push(@your_response.blank? ? 0 :  @your_response.first.score.to_i)
+    @avg_array.push(self.get_average_score_from_other_companies(question.id,survey_id))
+
+  end
+
+  @data_table.push(@resp_array)
+  @data_table.push(@your_array)
+  @data_table.push(@avg_array)
+
+  return @data_table
+end
+
 
 
   #total response for a section

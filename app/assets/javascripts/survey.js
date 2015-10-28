@@ -134,11 +134,27 @@ $(window).load(function() {
 $(function () {
   if(location.href.indexOf("compare") > -1)
   {
-  $.getJSON('/surveys/overall_chart', function (data) {
+    var route
+    if(location.href.indexOf("strategy") > -1)
+    {
+      route = '/surveys/compare_strategy_chart';
 
+    }else if (location.href.indexOf("system") > -1) {
 
+      route = '/surveys/compare_systems_chart';
 
-    $('#compare-chart').highcharts({
+    }else if (location.href.indexOf("program") > -1) {
+
+      route = '/surveys/compare_programs_chart';
+
+    }else{
+
+      route = '/surveys/overall_chart';
+    }
+
+  $.getJSON(route, function (data) {
+    console.log(data);
+    var options = {
       title: {
           text: 'Your Score vs. Average Score',
           align: 'right',
@@ -209,7 +225,9 @@ $(function () {
             },
             data: data[2]
         }]
-    });
+    }
+
+    $('#compare-chart').highcharts(options);
   });
   }
 });

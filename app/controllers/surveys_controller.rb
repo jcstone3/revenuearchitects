@@ -597,6 +597,31 @@ def overall_chart
   render :json => @data_table, :status => :ok
 end
 
+
+def compare_strategy_chart
+  @all_sections = Section.order(:sequence)
+  @responses = Survey.get_result(@all_sections[0].id, session[:survey].id)
+  @data_table = Survey.get_section_chart(@all_sections[0].id, session[:survey].id, @responses)
+  render :json => @data_table, :status => :ok
+end
+
+
+def compare_systems_chart
+  @all_sections = Section.order(:sequence)
+  @responses = Survey.get_result(@all_sections[1].id, session[:survey].id)
+  @data_table = Survey.get_section_chart(@all_sections[1].id, session[:survey].id, @responses)
+  render :json => @data_table, :status => :ok
+end
+
+
+def compare_programs_chart
+  @all_sections = Section.order(:sequence)
+  @responses = Survey.get_result(@all_sections[2].id, session[:survey].id)
+  @data_table = Survey.get_section_chart(@all_sections[2].id, session[:survey].id, @responses)
+  render :json => @data_table, :status => :ok
+end
+
+
 def compare_strategy
   survey_id = params[:id]
   # @all_sections = get_all_sections

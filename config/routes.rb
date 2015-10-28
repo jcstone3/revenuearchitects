@@ -57,6 +57,9 @@ RevenueGrader::Application.routes.draw do
   resources :surveys do
     get :sub_section, on: :collection
     get :overall_chart, on: :collection
+    get :compare_strategy_chart, on: :collection
+    get :compare_systems_chart, on: :collection
+    get :compare_programs_chart, on: :collection
   end
   resources :industries
   resources :responses
