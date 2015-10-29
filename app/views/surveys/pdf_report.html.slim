@@ -144,8 +144,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -201,8 +206,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -257,8 +267,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -313,8 +328,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -329,8 +349,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -345,8 +370,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -361,8 +391,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -403,8 +438,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -419,8 +459,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -435,8 +480,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -493,8 +543,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -509,8 +564,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -525,8 +585,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -541,8 +606,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
@@ -583,8 +653,13 @@
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 Add to Plan
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
             td = response.score
