@@ -57,7 +57,7 @@ module RevenueGrader
     config.assets.version = '1.0'
 
     #for asset precompile
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = true
     #Devise Layout definition
     config.to_prepare do
         Devise::SessionsController.layout "website"

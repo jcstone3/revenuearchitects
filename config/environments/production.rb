@@ -49,7 +49,7 @@ RevenueGrader::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
-    config.assets.precompile += %w( 'pdf.css' )
+    config.assets.precompile += %w( 'pdf.css', 'javascripts/test.js', 'stylesheets/font-lato.css.erb' )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -67,9 +67,9 @@ RevenueGrader::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  config.assets.debug = true
+  config.assets.debug = false
   config.action_mailer.default_url_options = { :host => 'www.revenuegrader.com' }
-  config.action_mailer.perform_deliveries = true 
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   :enable_starttls_auto => true,
@@ -78,7 +78,7 @@ RevenueGrader::Application.configure do
   :domain => "www.revenuegrader.com",
   :authentication => :plain,
   :user_name => "noreply@revenuegrader.com",
-  :password => "survey$33" 
+  :password => "survey$33"
 }
 
   # For a full list of configurable options, see the gem's GitHub home page.

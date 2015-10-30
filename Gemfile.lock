@@ -317,7 +317,7 @@ DEPENDENCIES
   uuidtools
   wicked_pdf (= 0.11.0)
   will_paginate (~> 3.0)
-  wkhtmltopdf-binary (= 0.9.9.3)
+  wkhtmltopdf-binary
   wkhtmltopdf-heroku (~> 1.0.0)
 
 BUNDLED WITH
