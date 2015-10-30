@@ -8,83 +8,113 @@
     <%= wicked_pdf_javascript_include_tag 'test' %>
     <script type="text/javascript">
     $(function () {
-      data = jQuery.parseJSON('<%=raw @overall_pdf.to_json %>');
-      var options = {
-        title: {
-            text: 'Your Score vs. Average Score',
-            align: 'right',
-            x: 133,
-            y: 85
-        },
-          chart: {
-              type: 'line',
-              width: 650,
-              height: 300
-          },
-          xAxis: {
-            title: {
-              text: '',
-              align: 'left',
-              y: -18
-            },
-            categories: data[0],
-            gridLineColor: '#FFFFFF',
-            lineColor: '#8D969B',
-            lineWidth: 2
-          },
-          legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0,
-            itemMarginTop: 15,
-            itemMarginBottom: 5,
-            itemStyle: {
-                lineHeight: '20px'
-            }
-          },
-          yAxis: {
-            title: {
-              text: ''
-            },
-            gridLineColor: '#FFFFFF',
-            lineColor: '#8D969B',
-            lineWidth: 2
-          },
-          tooltip: {
-              crosshairs: true,
-              shared: true
-          },
-          series: [{
-              name: 'Your Response',
-              color: '#56C9F3',
-              marker: {
-                  symbol: 'circle',
-                  fill: 'red',
-                  radius: 7,
-                  fillColor: '#FFFFFF',
-                  lineColor: '#56C9F3',
-                  lineWidth: 2
-              },
-              data: data[1]
+      //data = jQuery.parseJSON('<%=raw @overall_pdf.to_json %>');
+      data_strategy = jQuery.parseJSON('<%=raw @chart_strategy.to_json %>');
+      data_systems = jQuery.parseJSON('<%=raw @chart_systems.to_json %>');
+      data_programs = jQuery.parseJSON('<%=raw @chart_programs.to_json %>');
 
-          }, {
-              name: 'Average Response',
-              color: '#EA722F',
-              marker: {
-                symbol: 'circle',
-                radius: 7,
-                fillColor: '#FFFFFF',
-                lineColor: '#EA722F',
-                lineWidth: 2
+      setData = function(data){
+        var options = {
+          title: {
+              text: 'Your Score vs. Average Score',
+              align: 'right',
+              style: {
+                color: '#CACACA',
               },
-              data: data[2]
-          }]
+              x: 80,
+              y: 35
+          },
+            chart: {
+                backgroundColor: '#2B2C2E',
+                type: 'line',
+                width: 650,
+                height: 200
+            },
+            plotOptions: {
+                series: {
+                    animation: false
+                }
+            },
+            xAxis: {
+              title: {
+                text: '',
+                align: 'left',
+                y: -18
+              },
+              categories: data[0],
+              labels: {
+                formatter: function () {
+                  return '<span style="fill: #CACACA;">' + this.value + '</span>';
+                }
+              },
+              gridLineColor: '#2B2C2E',
+              lineColor: '#CACACA',
+              lineWidth: 2
+            },
+            legend: {
+              layout: 'vertical',
+              align: 'right',
+              verticalAlign: 'middle',
+              borderWidth: 0,
+              itemMarginTop: 15,
+              itemMarginBottom: 5,
+              itemStyle: {
+                color: '#CACACA',
+                lineHeight: '20px'
+              }
+            },
+            yAxis: {
+              title: {
+                text: ''
+              },
+              labels: {
+                formatter: function () {
+                  return '<span style="fill: #CACACA;">' + this.value + '</span>';
+                }
+              },
+              gridLineColor: '#2B2C2E',
+              lineColor: '#CACACA',
+              lineWidth: 2
+            },
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            series: [{
+                name: 'Your Response',
+                color: '#56C9F3',
+                marker: {
+                    symbol: 'circle',
+                    fill: 'red',
+                    radius: 7,
+                    fillColor: '#2B2C2E',
+                    lineColor: '#56C9F3',
+                    lineWidth: 2
+                },
+                data: data[1]
+
+            }, {
+                name: 'Average Response',
+                color: '#EA722F',
+                marker: {
+                  symbol: 'circle',
+                  radius: 7,
+                  fillColor: '#2B2C2E',
+                  lineColor: '#EA722F',
+                  lineWidth: 2
+                },
+                data: data[2]
+            }]
+        }
+
+        return options;
       }
 
-      $('#compare-chart-strategy-pdf').highcharts(options);
-      //$('#compare-chart-systems').highcharts(options);
-      //$('#compare-chart-programs').highcharts(options);
+      $('#compare-chart-strategy-pdf').highcharts(setData(data_strategy));
+
+      $('#compare-chart-systems-pdf').highcharts(setData(data_systems));
+
+      $('#compare-chart-programs-pdf').highcharts(setData(data_programs));
     });
     </script>
     <meta charset="utf-8">
