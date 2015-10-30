@@ -430,6 +430,9 @@ def report
         @total_score_per_section = Survey.calculate_score_for_section(survey_id).sum()
         @total_all_sections_points = Section.total_points
 
+      @titulo = "titulo de prueba"
+
+      @overall_pdf = Survey.get_overall_data(session[:survey].id)
       respond_to do |format|
         format.html {render :layout => 'report2'}
         format.pdf do

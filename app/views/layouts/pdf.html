@@ -8,49 +8,83 @@
     <%= wicked_pdf_javascript_include_tag 'test' %>
     <script type="text/javascript">
     $(function () {
-        $('#compare-chart-strategy-pdf').highcharts({
-            chart: {
-                type: 'line',
-                width: 500,
-                height: 300
-            },
+      data = jQuery.parseJSON('<%=raw @overall_pdf.to_json %>');
+      var options = {
+        title: {
+            text: 'Your Score vs. Average Score',
+            align: 'right',
+            x: 133,
+            y: 85
+        },
+          chart: {
+              type: 'line',
+              width: 650,
+              height: 300
+          },
+          xAxis: {
             title: {
-                text: 'Monthly Average Temperature'
+              text: '',
+              align: 'left',
+              y: -18
             },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
+            categories: data[0],
+            gridLineColor: '#FFFFFF',
+            lineColor: '#8D969B',
+            lineWidth: 2
+          },
+          legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0,
+            itemMarginTop: 15,
+            itemMarginBottom: 5,
+            itemStyle: {
+                lineHeight: '20px'
+            }
+          },
+          yAxis: {
+            title: {
+              text: ''
             },
-            plotOptions: {
-              line: {
-                animation: false,
-                enableMouseTracking: false,
-                shadow: false,
+            gridLineColor: '#FFFFFF',
+            lineColor: '#8D969B',
+            lineWidth: 2
+          },
+          tooltip: {
+              crosshairs: true,
+              shared: true
+          },
+          series: [{
+              name: 'Your Response',
+              color: '#56C9F3',
+              marker: {
+                  symbol: 'circle',
+                  fill: 'red',
+                  radius: 7,
+                  fillColor: '#FFFFFF',
+                  lineColor: '#56C9F3',
+                  lineWidth: 2
               },
-            },
-            xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
-            yAxis: {
-                title: {
-                    text: 'Temperature (°C)'
-                }
-            },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                    enableMouseTracking: false
-                }
-            },
-            series: [{
-                name: 'Tokyo',
-                data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-            }, {
-                name: 'London',
-                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-            }]
-        });
+              data: data[1]
+
+          }, {
+              name: 'Average Response',
+              color: '#EA722F',
+              marker: {
+                symbol: 'circle',
+                radius: 7,
+                fillColor: '#FFFFFF',
+                lineColor: '#EA722F',
+                lineWidth: 2
+              },
+              data: data[2]
+          }]
+      }
+
+      $('#compare-chart-strategy-pdf').highcharts(options);
+      //$('#compare-chart-systems').highcharts(options);
+      //$('#compare-chart-programs').highcharts(options);
     });
     </script>
     <meta charset="utf-8">
