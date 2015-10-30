@@ -153,6 +153,8 @@ $(function () {
     }
 
   $.getJSON(route, function (data) {
+
+    setOptions = function(changes){
     var options = {
       title: {
           text: 'Your Score vs. Average Score',
@@ -162,7 +164,7 @@ $(function () {
       },
         chart: {
             type: 'line',
-            width: 950,
+            width: changes,
             height: 300
         },
         xAxis: {
@@ -226,10 +228,15 @@ $(function () {
         }]
     }
 
-    $('#compare-chart').highcharts(options);
-    $('#compare-chart-strategy').highcharts(options);
-    $('#compare-chart-systems').highcharts(options);
-    $('#compare-chart-programs').highcharts(options);
+    return options;
+    }
+
+    var changes = 1150;
+    $('#compare-chart').highcharts(setOptions(changes));
+    changes = 950;
+    $('#compare-chart-strategy').highcharts(setOptions(changes));
+    $('#compare-chart-systems').highcharts(setOptions(changes));
+    $('#compare-chart-programs').highcharts(setOptions(changes));
 
   });
   }

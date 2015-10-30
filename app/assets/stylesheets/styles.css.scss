@@ -462,8 +462,12 @@ circle {
   display: none;
 }
 
-#compare-chart, #compare-chart-strategy, #compare-chart-systems, #compare-chart-programs {
+#compare-chart-strategy, #compare-chart-systems, #compare-chart-programs {
   text-align: center;
+}
+
+#compare-chart{
+  text-align: left;
 }
 
 .highcharts-container{
@@ -498,7 +502,7 @@ circle {
 }
 
 svg {
-    width: 1100px !important;
+  width: 113% !important;
 }
 
 .no-margin-top{
