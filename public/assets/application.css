@@ -10488,65 +10488,60 @@ circle {
 }
 
 /* line 465, ../../app/assets/stylesheets/styles.css.scss */
-#compare-chart-strategy, #compare-chart-systems, #compare-chart-programs {
+#compare-chart, #compare-chart-strategy, #compare-chart-systems, #compare-chart-programs {
   text-align: center;
 }
 
 /* line 469, ../../app/assets/stylesheets/styles.css.scss */
-#compare-chart {
-  text-align: left;
-}
-
-/* line 473, ../../app/assets/stylesheets/styles.css.scss */
 .highcharts-container {
   display: inline-block;
   overflow: visible !important;
 }
 
-/* line 478, ../../app/assets/stylesheets/styles.css.scss */
+/* line 474, ../../app/assets/stylesheets/styles.css.scss */
 .highcharts-title {
   font-size: 22px !important;
   font-weight: bold;
 }
 
-/* line 483, ../../app/assets/stylesheets/styles.css.scss */
+/* line 479, ../../app/assets/stylesheets/styles.css.scss */
 .highcharts-legend-item text {
   font-size: 18px !important;
   font-weight: 500 !important;
 }
 
-/* line 487, ../../app/assets/stylesheets/styles.css.scss */
+/* line 483, ../../app/assets/stylesheets/styles.css.scss */
 .highcharts-axis-labels, .highcharts-yaxis-labels {
   font-weight: 700;
 }
 
-/* line 491, ../../app/assets/stylesheets/styles.css.scss */
+/* line 487, ../../app/assets/stylesheets/styles.css.scss */
 .highcharts-axis text {
   font-size: 10px !important;
   font-weight: 700;
 }
 
-/* line 496, ../../app/assets/stylesheets/styles.css.scss */
+/* line 492, ../../app/assets/stylesheets/styles.css.scss */
 .highcharts-axis path {
   display: none;
 }
 
-/* line 500, ../../app/assets/stylesheets/styles.css.scss */
+/* line 496, ../../app/assets/stylesheets/styles.css.scss */
 .highcharts-axis path:last-child {
   display: block;
 }
 
-/* line 504, ../../app/assets/stylesheets/styles.css.scss */
+/* line 500, ../../app/assets/stylesheets/styles.css.scss */
 svg {
-  width: 113% !important;
+  width: 1100px !important;
 }
 
-/* line 508, ../../app/assets/stylesheets/styles.css.scss */
+/* line 504, ../../app/assets/stylesheets/styles.css.scss */
 .no-margin-top {
   margin-top: 0px;
 }
 
-/* line 512, ../../app/assets/stylesheets/styles.css.scss */
+/* line 508, ../../app/assets/stylesheets/styles.css.scss */
 .tabGraph .box_compare {
   margin: -25px 0 -25px 20px;
 }
