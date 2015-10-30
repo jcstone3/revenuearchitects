@@ -8,7 +8,7 @@
     <%= wicked_pdf_javascript_include_tag 'test' %>
     <script type="text/javascript">
     $(function () {
-      //data = jQuery.parseJSON('<%=raw @overall_pdf.to_json %>');
+
       data_strategy = jQuery.parseJSON('<%=raw @chart_strategy.to_json %>');
       data_systems = jQuery.parseJSON('<%=raw @chart_systems.to_json %>');
       data_programs = jQuery.parseJSON('<%=raw @chart_programs.to_json %>');
@@ -21,7 +21,7 @@
               style: {
                 color: '#CACACA',
               },
-              x: 80,
+              x: 73,
               y: 35
           },
             chart: {
@@ -86,7 +86,7 @@
                 marker: {
                     symbol: 'circle',
                     fill: 'red',
-                    radius: 7,
+                    radius: 5,
                     fillColor: '#2B2C2E',
                     lineColor: '#56C9F3',
                     lineWidth: 2
@@ -98,7 +98,7 @@
                 color: '#EA722F',
                 marker: {
                   symbol: 'circle',
-                  radius: 7,
+                  radius: 5,
                   fillColor: '#2B2C2E',
                   lineColor: '#EA722F',
                   lineWidth: 2
