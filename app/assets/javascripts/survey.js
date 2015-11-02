@@ -159,7 +159,7 @@ $(function () {
       title: {
           text: 'Your Score vs. Average Score',
           align: 'right',
-          x: 133,
+          x: 163,
           y: 85
       },
         chart: {
@@ -202,7 +202,7 @@ $(function () {
             shared: true
         },
         series: [{
-            name: 'Your Response',
+            name: 'Your Score',
             color: '#56C9F3',
             marker: {
                 symbol: 'circle',
@@ -215,7 +215,7 @@ $(function () {
             data: data[1]
 
         }, {
-            name: 'Average Response',
+            name: 'Average Score',
             color: '#EA722F',
             marker: {
               symbol: 'circle',
