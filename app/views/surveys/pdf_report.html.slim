@@ -6,14 +6,12 @@
     .title-gray
       | Revenue Grader Diagnostic
     .title-gray.font-small
-      = @survey.created_at.strftime('%B %d th, %Y')
+      = @survey.created_at.strftime('%B %d, %Y')
     div.content-line-decorator
       hr.line-decorator
     div.center-logo
       table
         tr
-          td.width-50.td-by.font-small
-            div.logo-content-by by
           td.width-50
             = wicked_pdf_image_tag("logocolor.png", class: 'logo-content-img ' )
 
@@ -32,7 +30,7 @@
               .margin-bottom-10
                 span.title-2.font-blue
                   | REPORT
-                = @survey.date_format
+                = @survey.created_at.strftime('%B %d, %Y')
               .margin-bottom-10
                 span.title-2.font-blue
                   | DIAGNOSTIC COMPLETED BY
