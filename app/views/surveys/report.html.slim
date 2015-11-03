@@ -21,10 +21,10 @@
               tr
                 td.width-total
                   div.total-score-content
-                      p.title-black.title-total TOTAL SCORE
+                      p.title-black.title-total TOTAL POINTS
                       p.title-black.sub1 = @survey.company_name
                       p.title-super-1
-                        span.score-total.font-blue SCORE
+                        span.score-total.font-blue POINTS
                         span
                         = '%.2f' % (@score_per_section[0] + @score_per_section[1] + @score_per_section[2])
                         | /
@@ -36,7 +36,7 @@
                     p.title-black.sub2 STRATEGY
                     p.title-black Define your competitive advantage.
                     p.title-super-2
-                      span.font-blue.title-black SCORE
+                      span.font-blue.title-black POINTS
                       span
                       = @score_per_section[0]
                       | /
@@ -48,7 +48,7 @@
                     p.title-black.sub2 SYSTEMS
                     p.title-black Build an agile and durable platform.
                     p.title-super-2
-                      span.font-blue.title-black SCORE
+                      span.font-blue.title-black POINTS
                       span
                       = @score_per_section[1]
                       | /
@@ -60,7 +60,7 @@
                     p.title-black.sub2 PROGRAMS
                     p.title-black Launch integrated campaigns.
                     p.title-super-2
-                      span.font-blue.title-black SCORE
+                      span.font-blue.title-black POINTS
                       span
                       = @score_per_section[2]
                       | /

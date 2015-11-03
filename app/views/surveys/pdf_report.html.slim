@@ -55,7 +55,7 @@
                 br/
                 | Define your competitive advantage.
                 br/
-                span.font-blue.font-bold SCORE:
+                span.font-blue.font-bold POINTS:
                 span
                 = @score_per_section[0]
                 | /
@@ -68,7 +68,7 @@
                 br/
                 | Build an agile and durable platform.
                 br/
-                span.font-blue.font-bold SCORE:
+                span.font-blue.font-bold POINTS:
                 span
                 = @score_per_section[1]
                 | /
@@ -82,7 +82,7 @@
                 br/
                 | Launch integrated campaigns.
                 br/
-                span.font-blue.font-bold SCORE:
+                span.font-blue.font-bold POINTS:
                 span
                 = @score_per_section[2]
                 | /
@@ -95,10 +95,10 @@
               p Revenue Grader scores your performance potential by measuring 30 practices across three dimensions layers: Strategy, Systems and Programs.  Each dimension has points assigned. These points may change from time to time.
 
               div.total-score-content
-                  p.title-black TOTAL SCORE
+                  p.title-black TOTAL POINTS
                   p.title-black.sub1 = @survey.company_name
                   p.title-super-1
-                    span.font-blue SCORE
+                    span.font-blue POINTS
                     span
                     = '%.2f' % (@score_per_section[0] + @score_per_section[1] + @score_per_section[2])
                     | /
@@ -208,7 +208,7 @@
   #results-section.overall-chart-pdf
     #score-chart.total-score-content
       p.title-super-1
-        span.font-blue SCORE
+        span.font-blue POINTS
         span
         = '%.2f' % (@score_per_section[0] + @score_per_section[1] + @score_per_section[2])
         |  /
@@ -270,7 +270,7 @@
   #results-section
     #score-chart.total-score-content
       p.title-super-1
-        span.font-blue SCORE
+        span.font-blue POINTS
         span
         = @score_per_section[0]
         |  /
@@ -331,7 +331,7 @@
   #results-section
     #score-chart.total-score-content
       p.title-super-1
-        span.font-blue SCORE
+        span.font-blue POINTS
         span
         = @score_per_section[1]
         |  /
