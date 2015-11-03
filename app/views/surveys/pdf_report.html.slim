@@ -735,7 +735,49 @@
           th.center.td-10
             |AVG SCORE
       tbody
-        - @add_to_plan_responses.each do |response|
+        - @must_do_responses.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @should_do_responses.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.points
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+        - @could_do_responses.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
