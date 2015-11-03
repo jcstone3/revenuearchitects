@@ -439,6 +439,8 @@ def report
         @responses_prog = Survey.get_result(@all_sections[2].id, session[:survey].id)
         @chart_programs = Survey.get_section_chart(@all_sections[2].id, @survey.id, @responses_prog)
 
+        @overall_pdf = Survey.get_overall_data(session[:survey].id)
+
       respond_to do |format|
         format.html {render :layout => 'report2'}
         format.pdf do

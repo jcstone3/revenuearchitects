@@ -3,12 +3,13 @@
   <head>
     <%= javascript_include_tag "http://code.jquery.com/jquery-1.10.0.min.js" %>
     <%= javascript_include_tag "http://code.jquery.com/ui/1.10.3/jquery-ui.min.js" %>
-    <%= javascript_include_tag "https://code.highcharts.com/highcharts.js" %>
-    <%= javascript_include_tag "https://code.highcharts.com/modules/exporting.js" %>
+    <%= javascript_include_tag "http://code.highcharts.com/highcharts.js" %>
+    <%= javascript_include_tag "http://code.highcharts.com/modules/exporting.js" %>
     <%= wicked_pdf_javascript_include_tag 'test' %>
     <script type="text/javascript">
     $(function () {
 
+      data_overall = jQuery.parseJSON('<%=raw @overall_pdf.to_json %>');
       data_strategy = jQuery.parseJSON('<%=raw @chart_strategy.to_json %>');
       data_systems = jQuery.parseJSON('<%=raw @chart_systems.to_json %>');
       data_programs = jQuery.parseJSON('<%=raw @chart_programs.to_json %>');
@@ -109,6 +110,8 @@
 
         return options;
       }
+
+      $('#overall-chart-pdf').highcharts(setData(data_overall));
 
       $('#compare-chart-strategy-pdf').highcharts(setData(data_strategy));
 
