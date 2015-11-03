@@ -112,18 +112,6 @@
       span.header-left = @survey.company_name.upcase
       span.header-right OVERALL
 
-  #results-section.overall-chart-pdf
-    #score-chart.total-score-content
-      p.title-super-1
-        span.font-blue SCORE
-        span
-        = '%.2f' % (@score_per_section[0] + @score_per_section[1] + @score_per_section[2])
-        |  /
-        =  '%.2f' % @total_all_sections_points.to_f
-      span.section-score2 = '%.2f' % (((@score_per_section[0].to_f + @score_per_section[1].to_f + @score_per_section[2].to_f)/ @total_all_sections_points.to_f)*100)
-      span.section-score2 %
-    #overall-chart-pdf
-
   #overall-table.content-table
     table.table.table-report.table-condesed
       thead
@@ -136,13 +124,15 @@
             |PRACTICE
           th.td-10
             |PRIORITY
-          th.td-12
-            |IMPORTANCE
           th.td-10
+            |IMPORTANCE
+          th.td-8
             |POINTS
-          th.td-10.center
+          th.td-10
+            |CALCULATED SCORE
+          th.td-8.center
             |YOUR SCORE
-          th.center.td-10
+          th.center.td-8
             |AVG SCORE
       tbody
         - @all_responses_for_strategy.each do |response|
@@ -165,6 +155,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
           - @all_responses_for_system.each do |response|
@@ -187,6 +178,7 @@
                 td.font-bold2 = response.answer_3.try(:titleize)
               td = response.answer_4.blank? ? 0 : response.answer_4
               td = response.points
+              td = Survey.get_score_value(response.points, response.score)
               td = response.score
               td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             - @all_responses_for_program.each do |response|
@@ -209,8 +201,21 @@
                   td.font-bold2 = response.answer_3.try(:titleize)
                 td = response.answer_4.blank? ? 0 : response.answer_4
                 td = response.points
+                td = Survey.get_score_value(response.points, response.score)
                 td = response.score
                 td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+
+  #results-section.overall-chart-pdf
+    #score-chart.total-score-content
+      p.title-super-1
+        span.font-blue SCORE
+        span
+        = '%.2f' % (@score_per_section[0] + @score_per_section[1] + @score_per_section[2])
+        |  /
+        =  '%.2f' % @total_all_sections_points.to_f
+      span.section-score2 = '%.2f' % (((@score_per_section[0].to_f + @score_per_section[1].to_f + @score_per_section[2].to_f)/ @total_all_sections_points.to_f)*100)
+      span.section-score2 %
+    #overall-chart-pdf
 
 
 .content.page-break
@@ -229,13 +234,15 @@
             |PRACTICE
           th.td-10
             |PRIORITY
-          th.td-15
+          th.td-10
             |IMPORTANCE
           th.td-10
             |POINTS
-          th.td-10.center
+          th.td-10
+            |CALCULATED SCORE
+          th.td-8.center
             |YOUR SCORE
-          th.center.td-10
+          th.center.td-8
             |AVG SCORE
       tbody
         - @all_responses_for_strategy.each do |response|
@@ -257,6 +264,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
   #results-section
@@ -287,13 +295,15 @@
             |PRACTICE
           th.td-10
             |PRIORITY
-          th.td-15
+          th.td-10
             |IMPORTANCE
           th.td-10
             |POINTS
-          th.td-10.center
+          th.td-10
+            |CALCULATED SCORE
+          th.td-8.center
             |YOUR SCORE
-          th.center.td-10
+          th.center.td-8
             |AVG SCORE
       tbody
         - @all_responses_for_system.each do |response|
@@ -315,6 +325,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
   #results-section
@@ -344,13 +355,15 @@
             |PRACTICE
           th.td-10
             |PRIORITY
-          th.td-15
+          th.td-10
             |IMPORTANCE
           th.td-10
             |POINTS
-          th.td-10.center
+          th.td-10
+            |CALCULATED SCORE
+          th.td-8.center
             |YOUR SCORE
-          th.center.td-10
+          th.center.td-8
             |AVG SCORE
       tbody
         - @all_responses_for_program.each do |response|
@@ -372,6 +385,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
   #results-section
@@ -401,13 +415,15 @@
             |PRACTICE
           th.td-10
             |PRIORITY
-          th.td-15
+          th.td-10
             |IMPORTANCE
           th.td-10
             |POINTS
-          th.td-10.center
+          th.td-10
+            |CALCULATED SCORE
+          th.td-8.center
             |YOUR SCORE
-          th.center.td-10
+          th.center.td-8
             |AVG SCORE
       tbody
         - @must_do_responses_strategy.each do |response|
@@ -429,6 +445,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @should_do_responses_strategy.each do |response|
@@ -450,6 +467,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @could_do_responses_strategy.each do |response|
@@ -471,6 +489,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @not_applicable_responses_strategy.each do |response|
@@ -492,6 +511,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
 
@@ -511,13 +531,15 @@
             |PRACTICE
           th.td-10
             |PRIORITY
-          th.td-15
+          th.td-10
             |IMPORTANCE
           th.td-10
             |POINTS
-          th.td-10.center
+          th.td-10
+            |CALCULATED SCORE
+          th.td-8.center
             |YOUR SCORE
-          th.center.td-10
+          th.center.td-8
             |AVG SCORE
       tbody
         - @must_do_responses_system.each do |response|
@@ -539,6 +561,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @should_do_responses_system.each do |response|
@@ -560,6 +583,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @could_do_responses_system.each do |response|
@@ -581,6 +605,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @not_applicable_responses_system.each do |response|
@@ -597,6 +622,7 @@
               td.font-bold2 N/A
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
 
@@ -616,13 +642,15 @@
             |PRACTICE
           th.td-10
             |PRIORITY
-          th.td-15
+          th.td-10
             |IMPORTANCE
           th.td-10
             |POINTS
-          th.td-10.center
+          th.td-10
+            |CALCULATED SCORE
+          th.td-8.center
             |YOUR SCORE
-          th.center.td-10
+          th.center.td-8
             |AVG SCORE
       tbody
         - @must_do_responses_program.each do |response|
@@ -644,6 +672,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @should_do_responses_program.each do |response|
@@ -665,6 +694,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @could_do_responses_program.each do |response|
@@ -686,6 +716,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @not_applicable_responses_program.each do |response|
@@ -707,6 +738,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
 
@@ -726,13 +758,15 @@
             |PRACTICE
           th.td-10
             |PRIORITY
-          th.td-15
+          th.td-10
             |IMPORTANCE
           th.td-10
             |POINTS
-          th.td-10.center
+          th.td-10
+            |CALCULATED SCORE
+          th.td-8.center
             |YOUR SCORE
-          th.center.td-10
+          th.center.td-8
             |AVG SCORE
       tbody
         - @must_do_responses.each do |response|
@@ -754,6 +788,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @should_do_responses.each do |response|
@@ -775,6 +810,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
         - @could_do_responses.each do |response|
@@ -796,6 +832,7 @@
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
             td = response.points
+            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
 
