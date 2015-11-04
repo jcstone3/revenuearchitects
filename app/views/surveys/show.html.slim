@@ -9,10 +9,13 @@
         .span12
           .row-fluid
             .span4
-              .content = "Diagnostic for #{current_survey.created_at.strftime('%d %B  %Y')}"
+              .content = "Diagnostic for #{current_survey.created_at.strftime('%B %d, %Y')}"
             .span3.text-center
               div Completed Practices
-              div.type-btn.type-btn-red= "#{@response_count} / #{@total_question_total}"
+              - if (@response_count<@total_question_total)
+                div.type-btn.type-btn-red= "#{@response_count} / #{@total_question_total}"
+              - else
+                div.type-btn.type-btn-green= "#{@response_count} / #{@total_question_total}"
             .span2.pull-right
               =link_to "VIEW", "#{get_response_status_url(current_survey)}",class: "btn plane-btn"
   - else
@@ -30,10 +33,13 @@
           .span12
             .row-fluid
               .span4
-                .content = "Diagnostic for #{completed_survey.created_at.strftime('%d %B  %Y')}"
+                .content = "Diagnostic for #{completed_survey.created_at.strftime('%B %d, %Y')}"
               .span3.text-center
                 div Completed Practices
-                div.type-btn.type-btn-green= "#{@response_count} / #{@total_question_total}"
+                - if (@response_count<@total_question_total)
+                  div.type-btn.type-btn-red= "#{@response_count} / #{@total_question_total}"
+                - else
+                  div.type-btn.type-btn-green= "#{@response_count} / #{@total_question_total}"
 
               .span2.pull-right
                 =link_to "VIEW", "#{get_response_status_url(completed_survey)}",class: "btn plane-btn"
