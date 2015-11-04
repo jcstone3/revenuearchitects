@@ -215,8 +215,8 @@ def question
   if @question.blank?
     @question = get_question(question_id)
     if @survey.company.name.present? && @survey.company.industry.present?
-      redirect_to edit_survey_path(id: survey_id) and return
-      # redirect_to confirm_survey_path and return
+      #redirect_to edit_survey_path(id: survey_id) and return
+      redirect_to confirm_survey_path(id: survey_id) and return
     else
       redirect_to edit_company_path(id: @survey.company.id) and return
     end
