@@ -506,7 +506,7 @@ circle {
 }
 
 svg {
-  width: 114% !important;
+  width: 120% !important;
 }
 
 .no-margin-top{
@@ -515,4 +515,121 @@ svg {
 
 .tabGraph .box_compare{
   margin: -25px 0 -25px 20px;
+}
+
+.box_compare{
+  position: relative;
+  padding-bottom: 300px;
+}
+
+#compare-chart{
+  position: absolute;
+  width: 83%;
+  height: 100%;
+}
+
+div#compare_report {
+    margin-top: 10px;
+}
+
+@media(max-width:1125px){
+
+  .pull-right.action-btns {
+    position: absolute;
+    width: 100%;
+    margin-left: -15px;
+    text-align: right;
+  }
+
+  #Search_All {
+    border: 1px solid #848D94;
+    position: absolute;
+    margin-top: 60px;
+  }
+
+  .container-fluid.not_margin{
+    margin-top: 30px;
+  }
+}
+
+@media(min-width:1024px) and (max-width:1125px){
+  #Search_All {
+    right: -10px;
+  }
+}
+
+@media(max-width:1024px){
+
+  .content-gray .plane-btn {
+    margin: 0px;
+  }
+
+  svg {
+    width: 135% !important;
+  }
+
+  #compare-chart{
+    width: 82%;
+  }
+
+  .highcharts-legend-item text{
+    font-size: 16px !important;
+  }
+
+}
+
+@media(max-width:870px){
+
+  .pull-right.action-btns {
+    margin-top: 95px;
+    text-align: center;
+  }
+
+  svg {
+    width: 150% !important;
+  }
+
+  #compare-chart{
+    width: 78%;
+  }
+
+  .highcharts-legend-item text{
+    font-size: 13px !important;
+  }
+
+  .highcharts-title {
+    font-size: 19.5px !important;
+  }
+
+  #Search_All {
+    display: inline-block;
+    margin-top: 50px;
+    margin-left: 16%;
+  }
+
+  .container-fluid.not_margin{
+    margin-top: 85px;
+  }
+
+  .content-gray{
+    text-align: center;
+  }
+
+  .content-gray .list-tab {
+    margin-left: 0px;
+    margin-bottom: 0px;
+    display: inline-block;
+  }
+
+  .span12.not_margin2 {
+    text-align: center;
+    width: 100%;
+}
+
+  .list-tab-compare {
+    margin-top: 5px !important;
+    margin-left: 0px;
+    display: inline-block;
+  }
+
 }

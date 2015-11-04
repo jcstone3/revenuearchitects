@@ -10543,7 +10543,7 @@ circle {
 
 /* line 508, ../../app/assets/stylesheets/styles.css.scss */
 svg {
-  width: 114% !important;
+  width: 120% !important;
 }
 
 /* line 512, ../../app/assets/stylesheets/styles.css.scss */
@@ -10554,4 +10554,135 @@ svg {
 /* line 516, ../../app/assets/stylesheets/styles.css.scss */
 .tabGraph .box_compare {
   margin: -25px 0 -25px 20px;
+}
+
+/* line 520, ../../app/assets/stylesheets/styles.css.scss */
+.box_compare {
+  position: relative;
+  padding-bottom: 300px;
+}
+
+/* line 525, ../../app/assets/stylesheets/styles.css.scss */
+#compare-chart {
+  position: absolute;
+  width: 83%;
+  height: 100%;
+}
+
+/* line 531, ../../app/assets/stylesheets/styles.css.scss */
+div#compare_report {
+  margin-top: 10px;
+}
+
+@media (max-width: 1125px) {
+  /* line 537, ../../app/assets/stylesheets/styles.css.scss */
+  .pull-right.action-btns {
+    position: absolute;
+    width: 100%;
+    margin-left: -15px;
+    text-align: right;
+  }
+
+  /* line 544, ../../app/assets/stylesheets/styles.css.scss */
+  #Search_All {
+    border: 1px solid #848D94;
+    position: absolute;
+    margin-top: 60px;
+  }
+
+  /* line 550, ../../app/assets/stylesheets/styles.css.scss */
+  .container-fluid.not_margin {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1125px) {
+  /* line 556, ../../app/assets/stylesheets/styles.css.scss */
+  #Search_All {
+    right: -10px;
+  }
+}
+@media (max-width: 1024px) {
+  /* line 563, ../../app/assets/stylesheets/styles.css.scss */
+  .content-gray .plane-btn {
+    margin: 0px;
+  }
+
+  /* line 567, ../../app/assets/stylesheets/styles.css.scss */
+  svg {
+    width: 135% !important;
+  }
+
+  /* line 571, ../../app/assets/stylesheets/styles.css.scss */
+  #compare-chart {
+    width: 82%;
+  }
+
+  /* line 575, ../../app/assets/stylesheets/styles.css.scss */
+  .highcharts-legend-item text {
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 870px) {
+  /* line 583, ../../app/assets/stylesheets/styles.css.scss */
+  .pull-right.action-btns {
+    margin-top: 95px;
+    text-align: center;
+  }
+
+  /* line 588, ../../app/assets/stylesheets/styles.css.scss */
+  svg {
+    width: 150% !important;
+  }
+
+  /* line 592, ../../app/assets/stylesheets/styles.css.scss */
+  #compare-chart {
+    width: 78%;
+  }
+
+  /* line 596, ../../app/assets/stylesheets/styles.css.scss */
+  .highcharts-legend-item text {
+    font-size: 13px !important;
+  }
+
+  /* line 600, ../../app/assets/stylesheets/styles.css.scss */
+  .highcharts-title {
+    font-size: 19.5px !important;
+  }
+
+  /* line 604, ../../app/assets/stylesheets/styles.css.scss */
+  #Search_All {
+    display: inline-block;
+    margin-top: 50px;
+    margin-left: 16%;
+  }
+
+  /* line 610, ../../app/assets/stylesheets/styles.css.scss */
+  .container-fluid.not_margin {
+    margin-top: 85px;
+  }
+
+  /* line 614, ../../app/assets/stylesheets/styles.css.scss */
+  .content-gray {
+    text-align: center;
+  }
+
+  /* line 618, ../../app/assets/stylesheets/styles.css.scss */
+  .content-gray .list-tab {
+    margin-left: 0px;
+    margin-bottom: 0px;
+    display: inline-block;
+  }
+
+  /* line 624, ../../app/assets/stylesheets/styles.css.scss */
+  .span12.not_margin2 {
+    text-align: center;
+    width: 100%;
+  }
+
+  /* line 629, ../../app/assets/stylesheets/styles.css.scss */
+  .list-tab-compare {
+    margin-top: 5px !important;
+    margin-left: 0px;
+    display: inline-block;
+  }
 }
