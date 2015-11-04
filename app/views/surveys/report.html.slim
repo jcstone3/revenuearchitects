@@ -4,7 +4,7 @@
       = render partial: 'title.html.slim'
       .row-fluid
         .span12
-          .content-gray
+          .content-gray.one-menu
             .pull-right.action-btns
               input#Search_All type="text"
               = link_to "EXPORT PDF", reports_url(:format => :pdf), class: 'btn plane-btn'
@@ -12,7 +12,7 @@
               = link_to "DOWNLOAD EXCEL", import_excel_path(format: "xls"), class: 'btn plane-btn'
             = render partial: 'sections_nav2.html.slim'
 
-  #all_report.container-fluid.not_margin
+  #all_report.container-fluid.not_margin.one-menu
     #tab-content.tab-content.tab_content_report.dash
       #all.tab-pane.active style="height:auto;"
         #container-scores
