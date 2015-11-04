@@ -687,3 +687,27 @@ div#compare_report {
   }
 
 }
+
+@media (max-width: 767px){
+  body {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .content-gray, .without_margin{
+    margin-right: 0px;
+  }
+
+  #Search_All {
+    margin-left: 13%;
+  }
+
+}
+
+
+@media (max-width: 560px){
+  #Search_All {
+    margin-left: 16%;
+  }
+
+}

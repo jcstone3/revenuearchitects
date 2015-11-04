@@ -10751,3 +10751,26 @@ div#compare_report {
     display: inline-block;
   }
 }
+@media (max-width: 767px) {
+  /* line 692, ../../app/assets/stylesheets/styles.css.scss */
+  body {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  /* line 697, ../../app/assets/stylesheets/styles.css.scss */
+  .content-gray, .without_margin {
+    margin-right: 0px;
+  }
+
+  /* line 701, ../../app/assets/stylesheets/styles.css.scss */
+  #Search_All {
+    margin-left: 13%;
+  }
+}
+@media (max-width: 560px) {
+  /* line 709, ../../app/assets/stylesheets/styles.css.scss */
+  #Search_All {
+    margin-left: 16%;
+  }
+}
