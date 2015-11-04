@@ -122,24 +122,25 @@
             |DIMENSION
           th.td-25
             |PRACTICE
+          th.td-8
+            |POINTS
           th.td-10
             |PRIORITY
           th.td-10
             |IMPORTANCE
-          th.td-8
-            |POINTS
-          th.td-10
-            |YOUR POINTS
           th.td-8.center
             |YOUR SCORE
           th.center.td-8
             |AVG SCORE
+          th.td-10
+            |YOUR POINTS
       tbody
         - @all_responses_for_strategy.each do |response|
           tr
             td = response.section_name.try(:titleize)
             td = response.sub_sect_name.try(:titleize)
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -154,15 +155,15 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
           - @all_responses_for_system.each do |response|
             tr
               td = response.section_name.try(:titleize)
               td = response.sub_sect_name.try(:titleize)
               td.practice-column = response.name
+              td = response.points
               - if(response.answer_3.try(:titleize) == "Must Do")
                 td.priority-red = response.answer_3.try(:titleize)
               - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -177,15 +178,15 @@
               - else
                 td.font-bold2 = response.answer_3.try(:titleize)
               td = response.answer_4.blank? ? 0 : response.answer_4
-              td = response.points
-              td = Survey.get_score_value(response.points, response.score)
               td = response.score
               td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+              td = Survey.get_score_value(response.points, response.score)
             - @all_responses_for_program.each do |response|
               tr
                 td = response.section_name.try(:titleize)
                 td = response.sub_sect_name.try(:titleize)
                 td.practice-column = response.name
+                td = response.points
                 - if(response.answer_3.try(:titleize) == "Must Do")
                   td.priority-red = response.answer_3.try(:titleize)
                 - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -200,10 +201,9 @@
                 - else
                   td.font-bold2 = response.answer_3.try(:titleize)
                 td = response.answer_4.blank? ? 0 : response.answer_4
-                td = response.points
-                td = Survey.get_score_value(response.points, response.score)
                 td = response.score
                 td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+                td = Survey.get_score_value(response.points, response.score)
 
   #results-section.overall-chart-pdf
     #score-chart.total-score-content
@@ -233,22 +233,23 @@
           th.td-30
             |PRACTICE
           th.td-10
+            |POINTS
+          th.td-10
             |PRIORITY
           th.td-10
             |IMPORTANCE
-          th.td-10
-            |POINTS
-          th.td-10
-            |YOUR POINTS
           th.td-8.center
             |YOUR SCORE
           th.center.td-8
             |AVG SCORE
+          th.td-10
+            |YOUR POINTS
       tbody
         - @all_responses_for_strategy.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -263,10 +264,9 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
   #results-section
     #score-chart.total-score-content
       p.title-super-1
@@ -294,22 +294,23 @@
           th.td-30
             |PRACTICE
           th.td-10
+            |POINTS
+          th.td-10
             |PRIORITY
           th.td-10
             |IMPORTANCE
-          th.td-10
-            |POINTS
-          th.td-10
-            |YOUR POINTS
           th.td-8.center
             |YOUR SCORE
           th.center.td-8
             |AVG SCORE
+          th.td-10
+            |YOUR POINTS
       tbody
         - @all_responses_for_system.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -324,10 +325,9 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
   #results-section
     #score-chart.total-score-content
       p.title-super-1
@@ -354,22 +354,23 @@
           th.td-30
             |PRACTICE
           th.td-10
+            |POINTS
+          th.td-10
             |PRIORITY
           th.td-10
             |IMPORTANCE
-          th.td-10
-            |POINTS
-          th.td-10
-            |YOUR POINTS
           th.td-8.center
             |YOUR SCORE
           th.center.td-8
             |AVG SCORE
+          th.td-10
+            |YOUR POINTS
       tbody
         - @all_responses_for_program.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -384,10 +385,9 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
   #results-section
     #score-chart.total-score-content
       p.title-super-1
@@ -414,22 +414,23 @@
           th.td-30
             |PRACTICE
           th.td-10
+            |POINTS
+          th.td-10
             |PRIORITY
           th.td-10
             |IMPORTANCE
-          th.td-10
-            |POINTS
-          th.td-10
-            |YOUR POINTS
           th.td-8.center
             |YOUR SCORE
           th.center.td-8
             |AVG SCORE
+          th.td-10
+            |YOUR POINTS
       tbody
         - @must_do_responses_strategy.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -444,14 +445,14 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @should_do_responses_strategy.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -466,14 +467,14 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @could_do_responses_strategy.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -488,14 +489,14 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @not_applicable_responses_strategy.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -510,10 +511,9 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
 
 
 .content.page-break
@@ -530,22 +530,23 @@
           th.td-30
             |PRACTICE
           th.td-10
+            |POINTS
+          th.td-10
             |PRIORITY
           th.td-10
             |IMPORTANCE
-          th.td-10
-            |POINTS
-          th.td-10
-            |YOUR POINTS
           th.td-8.center
             |YOUR SCORE
           th.center.td-8
             |AVG SCORE
+          th.td-10
+            |YOUR POINTS
       tbody
         - @must_do_responses_system.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -560,14 +561,14 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @should_do_responses_system.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -582,14 +583,14 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @could_do_responses_system.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -604,27 +605,31 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @not_applicable_responses_system.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
               td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
               td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2 N/A
+              td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
 
 
 .content.page-break
@@ -641,22 +646,23 @@
           th.td-30
             |PRACTICE
           th.td-10
+            |POINTS
+          th.td-10
             |PRIORITY
           th.td-10
             |IMPORTANCE
-          th.td-10
-            |POINTS
-          th.td-10
-            |YOUR POINTS
           th.td-8.center
             |YOUR SCORE
           th.center.td-8
             |AVG SCORE
+          th.td-10
+            |YOUR POINTS
       tbody
         - @must_do_responses_program.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -671,14 +677,14 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @should_do_responses_program.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -693,14 +699,14 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @could_do_responses_program.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -715,14 +721,14 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @not_applicable_responses_program.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -737,10 +743,9 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
 
 
 .content.page-break
@@ -757,22 +762,23 @@
           th.td-30
             |PRACTICE
           th.td-10
+            |POINTS
+          th.td-10
             |PRIORITY
           th.td-10
             |IMPORTANCE
-          th.td-10
-            |POINTS
-          th.td-10
-            |YOUR POINTS
           th.td-8.center
             |YOUR SCORE
           th.center.td-8
             |AVG SCORE
+          th.td-10
+            |YOUR POINTS
       tbody
         - @must_do_responses.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -787,14 +793,14 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @should_do_responses.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -809,14 +815,14 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @could_do_responses.each do |response|
           tr
             td = response.sub_sect_name
             td.practice-column = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
               td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
@@ -831,10 +837,9 @@
             - else
               td.font-bold2 = response.answer_3.try(:titleize)
             td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.points
-            td = Survey.get_score_value(response.points, response.score)
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
 
 
 
