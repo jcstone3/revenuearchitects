@@ -22,11 +22,11 @@
     <% end %>
   </td>
   <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
+  <td><%= response.score.blank? ? 0 : response.score %></td>
   <td>
     <% average_score = get_average_score(response.questions_id, @survey.id) %>
     <%= average_score.present? ?
     average_score : 0 %>
   </td>
-  <td><%= response.score.blank? ? 0 : response.score %></td>
   <td><%= Survey.get_score_value(response.points, response.score) %></td>
 </tr>
