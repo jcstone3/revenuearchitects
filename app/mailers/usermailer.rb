@@ -3,7 +3,7 @@ class Usermailer < ActionMailer::Base
   def welcome(user)
     @user = user
     @url  = "http://www.revenuegrader.com/login"
-    mail(:to => user.email, :subject => "Welcome to Revenue Grader")
+    mail(:to => @user.email, :subject => "Welcome to Revenue Grader")
   end
 
   def reset_password_instructions(user)
@@ -15,7 +15,7 @@ class Usermailer < ActionMailer::Base
 
   def new_signup_details(user)
     @user = user unless user.blank?
-    mail(:to => "manuel@softwarecriollo.com", :subject => "New SignUp", :tag => 'new-signup-details') do |format|
+    mail(:to => "support.revenuegrader@icicletech.com, contact@revenuearchitects.com, admin@revenuegrader.com", :subject => "New SignUp", :tag => 'new-signup-details') do |format|
       format.html { render "usermailer/new_signup_details" }
     end
   end
@@ -24,7 +24,7 @@ class Usermailer < ActionMailer::Base
     @survey = survey unless survey.blank?
     @company = company unless company.blank?
     @user = user unless user.blank?
-    mail(:to => "manuel@softwarecriollo.com", :subject => "New Completed Survey Details", :tag => 'new-completed-survey') do |format|
+    mail(:to => @user.email, :subject => "New Completed Survey Details", :tag => 'new-completed-survey') do |format|
       format.html { render "usermailer/complete_survey_details" }
     end
   end
@@ -38,7 +38,7 @@ class Usermailer < ActionMailer::Base
     @phone_number = phone_number
     @your_message = your_message
 
-    mail(:to => "manuel@softwarecriollo.com", :subject => "RevenueGrader: Contact Request", :tag => 'contact-request') do |format|
+    mail(:to => "support.revenuegrader@icicletech.com, contact@revenuearchitects.com", :subject => "RevenueGrader: Contact Request", :tag => 'contact-request') do |format|
       format.html { render "usermailer/contactus" }
     end
   end
