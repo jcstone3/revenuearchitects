@@ -42,7 +42,7 @@
     .clearfix
   h3
     |DIAGNOSTIC SCORECARD:
-    = @survey.date_format
+    = @survey.created_at.strftime('%B %d, %Y').upcase
   .survey-content
     .container-fluid
       table.table-for-div
