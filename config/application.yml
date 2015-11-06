@@ -32,9 +32,9 @@ staging:
 production:
     <<: *defaults
     host: revenuegrader.com
-    facebook_app_id: '633909890083218'
-    facebook_secret_key: 'ba427dd5d6ac8d3879d0ed4b9973c77f'
+    facebook_app_id: '417073514990362'
+    facebook_secret_key: 'aba93b297245e2a257c5c145e8b374a5'
     twitter_api_id: 'yB7A8psK5qBUHVt3RDEjjw'
     twitter_secret_key: 'rb5GB4BqA8Ojg0kQUeG1qNxz9PKN0gtl0RKzGoN5H4'
-    google_api_id: '1032382413684-bcdq4mr8g2uemp82dhsgfj7av6sgu8bk.apps.googleusercontent.com'
-    google_secret_key: 'zSg2JG3H7Nuh7J7WoLYJQb6C'
+    google_api_id: '21247459892-6i4jd8suhj4ckhf54mm1440ehjcquqsd.apps.googleusercontent.com'
+    google_secret_key: 'x5unP9mwU_YMu3qkbncd2E91'
