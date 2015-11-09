@@ -41,7 +41,7 @@
 ######################################################################################################
 
 # Repository repository path
-set :repository,  "git@code.icicletech.com:rails/revenuegrader.git"
+set :repository,  "git@github.com:jcstone3/revenuearchitects.git"
 
 # Numbers of  releases for save
 #set :keep_releases, 1
