@@ -20,6 +20,14 @@ class Survey < ActiveRecord::Base
     :order => "created_at DESC"
     }}
 
+  def company_name
+    (company)? company.name : ''
+  end
+
+  def date_format
+    created_at.strftime('%^B %Y')
+  end
+
     def self.to_csv(options = {})
       CSV.generate(options) do |csv|
         csv << column_names
@@ -82,7 +90,7 @@ class Survey < ActiveRecord::Base
 
       @data_table = GoogleVisualr::DataTable.new
 
-      @data_table.new_column('string', 'Questions' )
+      @data_table.new_column('string', 'Practices' )
       @data_table.new_column('number', 'Your Score')
       @data_table.new_column('number', 'Average Score')
 
@@ -149,7 +157,7 @@ def self.get_overall_graph(survey_id)
 
     @data_table = GoogleVisualr::DataTable.new
 
-    @data_table.new_column('string', 'Questions' )
+    @data_table.new_column('string', 'Practices' )
     @data_table.new_column('number', 'Your Response')
     @data_table.new_column('number', 'Average Response')
 
@@ -179,6 +187,62 @@ def self.get_overall_graph(survey_id)
 
   return @data_table
 end
+
+
+# overall chart data
+def self.get_overall_data(survey_id)
+    @response = Response.get_response_for_all_sections(survey_id)
+    @questions = Question.find(:all, :select => "*", :order => "id ASC")
+
+    @data_table = Array.new
+    @resp_array = Array.new
+    @your_array = Array.new
+    @avg_array = Array.new
+
+    @questions.each do |question|
+
+      @your_response = @response.select { |response| response.id == question.id.to_i }
+
+      @resp_array.push(question.id.to_s)
+      @your_array.push(@your_response.blank? ? 0 :  @your_response.first.answer_1.to_i)
+      @avg_array.push(self.get_average_score_from_other_companies(question.id,survey_id))
+
+    end
+
+    @data_table.push(@resp_array)
+    @data_table.push(@your_array)
+    @data_table.push(@avg_array)
+
+  return @data_table
+end
+
+def self.get_section_chart(section_id, survey_id, responses)
+
+  @questions = Question.find_section_questions(section_id)
+
+  @data_table = Array.new
+  @resp_array = Array.new
+  @your_array = Array.new
+  @avg_array = Array.new
+
+  @questions.each do |question|
+
+    @your_response = responses.select { |response| response.questions_id.to_i == question.id.to_i }
+
+    @resp_array.push(question.id.to_s)
+    @your_array.push(@your_response.blank? ? 0 :  @your_response.first.score.to_i)
+    @avg_array.push(self.get_average_score_from_other_companies(question.id,survey_id))
+
+  end
+
+  @data_table.push(@resp_array)
+  @data_table.push(@your_array)
+  @data_table.push(@avg_array)
+
+  return @data_table
+end
+
+
 
   #total response for a section
   #TODO: Optimize this query
@@ -225,11 +289,12 @@ def self.calculate_score_for_section(survey_id)
     nums = 0
   else
     @point_per_question.each do |response|
-      if response.section.to_i == 1
+      @all_sections = Section.all
+      if response.section.to_i == @all_sections[0].id
         @score_strategy += get_score_value(response.points, response.answer_1)
-      elsif response.section.to_i == 2
+      elsif response.section.to_i == @all_sections[1].id
         @score_system += get_score_value(response.points, response.answer_1)
-      elsif response.section.to_i == 3
+      elsif response.section.to_i == @all_sections[2].id
         @score_program += get_score_value(response.points, response.answer_1)
       end
     end
@@ -394,4 +459,3 @@ end
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #
-

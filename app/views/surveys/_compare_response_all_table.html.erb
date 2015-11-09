@@ -1,0 +1,53 @@
+<%#= @add_to_plan_responses.inspect%>
+<div class="tabHead no-margin-top">
+  <h1>STRATEGY</h1>
+</div>
+<% if @compare_responses_for_strategy.present?%>
+<div class="table-responsive">
+  <table cellpadding="1" cellspacing="1" id="report_StrategyTable" class="report-body dataTable2 table table-hover">
+    <%= render :partial=>"table_header_compare"%>
+    <tbody>
+      <% @compare_responses_for_strategy.each_with_index do |response, index|%>
+        <% @index = index + 1 %>
+        <%= render "response_report_compare", {response: response} %>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+ <%else%>
+ <p>No Response avaiable for this search</p>
+ <%end%>
+
+ <div class="tabHead">
+   <h1>SYSTEMS</h1>
+ </div>
+ <% if @compare_responses_for_system.present?%>
+ <table cellpadding="1" cellspacing="1" id="report_SystemTable" class="report-body dataTable2">
+   <%= render :partial=>"table_header_compare"%>
+   <tbody>
+     <% @compare_responses_for_system.each_with_index do |response, index|%>
+       <% @index = index + 1 %>
+       <%= render "response_report_compare", {response: response} %>
+     <%end%>
+   </tbody>
+ </table>
+  <%else%>
+  <p>No Response avaiable for this search</p>
+  <%end%>
+
+  <div class="tabHead">
+    <h1>PROGRAMS</h1>
+  </div>
+  <% if @compare_responses_for_program.present?%>
+  <table cellpadding="1" cellspacing="1" id="report_ProgramTable" class="report-body dataTable2">
+    <%= render :partial=>"table_header_compare"%>
+    <tbody>
+      <% @compare_responses_for_program.each_with_index do |response, index|%>
+        <% @index = index + 1 %>
+        <%= render "response_report_compare", {response: response} %>
+      <%end%>
+    </tbody>
+  </table>
+   <%else%>
+   <p>No Response avaiable for this search</p>
+   <%end%>

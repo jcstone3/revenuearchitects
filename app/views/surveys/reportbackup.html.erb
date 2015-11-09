@@ -1,0 +1,180 @@
+<%#= render :partial=>"final_report"%>
+
+<% content_for :top_bar_content do  -%>
+        <%= render "sections_nav"%>
+<% end -%>
+
+<% content_for :main_content do -%>
+      <div class="row-fluid">
+        <div class="span12">
+
+                  <ul class="nav3-tabs3 usercompare">
+                                <li class="active"><a href="#all" data-toggle="tab">All</a></li>
+                                <li ><a href="#overall" data-toggle="tab">Add To Plan Summary</a></li>
+                                <li ><a href="#must" data-toggle="tab">Must Do</a></li>
+                                <li ><a href="#should" data-toggle="tab">Should Do</a></li>
+                                <li ><a href="#could" data-toggle="tab">Could Do</a></li>
+                                <div class="pull-right action-btns">
+                                  <%= link_to "Export to PDF", reports_url(:format => :pdf), class: 'btn' %>
+                                  <%= link_to "Download CSV", import_csv_path(format: "csv"), class: 'btn' %>
+                                  <%= link_to "Download Excel", import_excel_path(format: "xls"), class: 'btn' %>
+                                </div>
+                            </ul>
+
+                            <div class="tab-content tab_content_report dash" id="tab-content">
+                              <div class="tab-pane active" id="all" style="height:auto;">
+                                <div class="tabGraph">
+                                  <div class="tabHead">
+                                    <h1>Strategy</h1>
+                                  </div>
+                                  <table cellpadding="1" cellspacing="1"
+                                  id="report_StrategyTable" class="report-body dataTable2">
+                                    <%= render :partial=>"table_header"%>
+                                    <tbody>
+                                      <% @all_responses_for_strategy.each_with_index do |response, index|%>
+                                        <% @index = index + 1 %>
+                                        <%= render "response_report", {response: response} %>
+                                      <%end%>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="tabGraph">
+                                  <div class="tabHead">
+                                    <h1>System</h1>
+                                  </div>
+                                  <table cellpadding="1" cellspacing="1"
+                                  id="report_SystemTable" class="report-body dataTable2">
+                                    <%= render :partial=>"table_header"%>
+                                    <tbody>
+                                      <% @all_responses_for_system.each_with_index do |response, index|%>
+                                        <% @index = index + 1 %>
+                                        <%= render "response_report", {response: response} %>
+                                      <%end%>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="tabGraph">
+                                  <div class="tabHead">
+                                    <h1>Program</h1>
+                                  </div>
+                                  <table cellpadding="1" cellspacing="1"
+                                  id="report_ProgramTable" class="report-body dataTable2">
+                                    <%= render :partial=>"table_header"%>
+                                    <tbody>
+                                      <% @all_responses_for_program.each_with_index do |response, index|%>
+                                        <% @index = index + 1 %>
+                                        <%= render "response_report", {response: response} %>
+                                      <%end%>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <div class="tab-pane" id="overall" style="height:auto;">
+                                <div class="tabHead">
+                                  <h1>Add To Plan Summary</h1>
+                                </div>
+                                <div class="tabGraph">
+                                  <table cellpadding="1" cellspacing="1"
+                                  id="report_add_to_planTable" class="report-body dataTable2">
+                                    <%= render :partial=>"table_header"%>
+                                    <% @add_to_plan_responses.each_with_index do |response, index|%>
+                                      <% @index = index + 1 %>
+                                      <%= render :partial=>"response_report",
+                                      :locals=>{:response => response}%>
+                                      <%end%>
+                                  <%= render :partial=>"table_end"%>
+                                </div>
+                              </div>
+
+                              <div class="tab-pane" id="must" >
+                                <div class="tabHead">
+                                  <h1>Must Do</h1>
+                                </div>
+
+                                <div class="tabGraph">
+                                  <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2">
+                                    <%= render :partial=>"table_header"%>
+                                    <% @must_do_responses.each_with_index do |response, index|%>
+                                      <% @index = index + 1 %>
+                                      <%= render :partial=>"response_report",
+                                      :locals=> {:response =>response} %>
+                                    <%end%>
+                                  <%= render :partial=>"table_end"%>
+                                </div>
+                              </div>
+
+                              <div class="tab-pane" id="should" >
+                              	 <div class="tabHead">
+                                    <h1>Should Do</h1>
+                                  </div>
+
+                                  <div class="tabGraph">
+                                     <table cellpadding="1" cellspacing="1" id="report_should_doTable" class="report-body dataTable2">
+                                         <%= render :partial=>"table_header"%>
+                                          <% @should_do_responses.each_with_index do |response, index|%>
+                                            <% @index = index + 1 %>
+                                            <%= render :partial=>"response_report",
+                                            :locals=> {:response =>response} %>
+                                          <%end%>
+                                         <%= render :partial=>"table_end"%>
+                                      </div>
+                              </div>
+                              <div class="tab-pane" id="could" >
+                              	<div class="tabHead">
+                                    <h1>Could Do</h1>
+
+                                  </div>
+
+                                  <div class="tabGraph">
+                                      <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
+                                          <%= render :partial=>"table_header"%>
+                                          <% @could_do_responses.each_with_index do |response, index|%>
+                                            <% @index = index + 1 %>
+                                            <%= render :partial=>"response_report",
+                                            :locals=> {:response =>response} %>
+                                          <%end%>
+                                         <%= render :partial=>"table_end"%>
+                                      </div>
+                                  </div>
+          </div>
+      </div>
+    </div>
+  </br>
+
+
+<!-- Google Code for Tool Completion Conversion Page -->
+
+<script type="text/javascript">
+
+/* <![CDATA[ */
+
+var google_conversion_id = 998846885;
+
+var google_conversion_language = "en";
+
+var google_conversion_format = "3";
+
+var google_conversion_color = "ffffff";
+
+var google_conversion_label = "kaJnCNPirQQQpeOk3AM";
+
+var google_conversion_value = 1;
+
+/* ]]> */
+
+</script>
+
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+
+</script>
+
+<noscript>
+
+<div style="display:inline;">
+
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/998846885/?value=1&amp;label=kaJnCNPirQQQpeOk3AM&amp;guid=ON&amp;script=0"/>
+
+</div>
+
+</noscript>
+<% end %>

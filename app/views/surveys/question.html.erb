@@ -2,9 +2,9 @@
         <%= render "sections"%>
 <% end -%>
 
- <% content_for :main_content do%>
+ <% content_for :main_content do %>
     <h2 class = 'bread-crumb'>
-      <%= @section_name %> : <%= @sub_section_name %>
+      <%= @section_name %> : <%= @sub_section_name.upcase %>
     </h2>
     <div class="content">
        <h1 class="question"><span>Q<%= show_question_number(@question) %>. </span><%= @question.name%></h1>

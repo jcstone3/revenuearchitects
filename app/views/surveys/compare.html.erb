@@ -1,59 +1,81 @@
-<% content_for :top_bar_content do  -%>
-        <%= render "sections_nav"%>
-<% end -%>
-
 <% content_for :main_content do -%>
+  <div class="container-fluid " >
+    <div class="row-fluid">
+      <%= render :partial=>"title.html.slim"%>
       <div class="row-fluid">
         <div class="span12">
-                  <ul class="nav3-tabs3 usercompare">
-                                <li class="active"><a href="#overall" data-toggle="tab">Overall</a></li>
-                                <li><%= link_to(compare_strategy_url(params[:id])) do %>
-                                    Strategy
-                                     <% end %>
-                                 </li>
-                                 <li><%= link_to(compare_system_url(params[:id])) do %>
-                                    Systems
-                                     <% end %>
-                                 </li>
-                                 <li><%= link_to(compare_programs_url(params[:id])) do %>
-                                    Programs
-                                     <% end %>
-                                 </li>
-
-                            </ul>
-
-                            <div class="tab-content3 dash" style="height:auto;">
-                            <div class="tab-pane active" id="overall">
-                            <div class="tabHead">
-                                  <h1>Overall Report</h1>
-
-                                </div>
-
-                                <div class="tabGraph">
-                                    <div class="box_compare">
-                                        <h1>Response of the month :: <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1>
-
-                                       <div id='chart'></div>
-                                        <%= render_chart(@chart, 'chart') %>
-
-                                    </div>
-                                        <!--table goes here-->
-                                     <div class="container report-top">
-                                        <div class="row-fluid">
-
-                                         <%= render :partial=>"compare_response_table"%>
-
-                                        </div>
-                                      </div>
-                                  <!--end table-->
-
-                                </div>
-
-
-
-                            </div>
+          <div class="content-gray">
+            <div class="pull-right action-btns">
+              <input type="text" id="Search_All">
+              <%= link_to "EXPORT PDF", reports_url(:format => :pdf), target: "_blank", class: 'btn plane-btn' %>
+              <%= link_to "DOWNLOAD CSV", import_csv_path(format: "csv"), class: 'btn plane-btn' %>
+              <%= link_to "DOWNLOAD EXCEL", import_excel_path(format: "xls"), class: 'btn plane-btn' %>
+            </div>
+            <ul class="list-tab nav3-tabs3 usercompare">
+              <li>
+                <a href="/surveys/<%= params[:id] %>/report#all">ALL</a>
+              </li>
+              <li>
+                <a href="/surveys/<%= params[:id] %>/report#priorities">PRIORITIES</a>
+              </li>
+              <li>
+                <a href="/surveys/<%= params[:id] %>/report#overall">PLAN SUMMARY</a>
+              </li>
+              <li class="active on2">
+                <%= link_to(compare_path(params[:id])) do %>
+                  </i>&nbsp;COMPARE
+                <% end %>
+              </li>
+            </ul>
+          </div>
         </div>
-    </br>
       </div>
     </div>
+  </div>
+  <div class="container-fluid">
+    <div class="span12 not_margin2">
+      <ul class="list-tab list-tab-compare nav3-tabs3 usercompare">
+        <li class="active on2">
+          <%= link_to(compare_path(params[:id])) do %>
+            </i>&nbsp;OVERALL
+          <% end %>
+        </li>
+        <li><%= link_to(compare_strategy_url(params[:id])) do %>
+          STRATEGY
+           <% end %>
+        </li>
+        <li><%= link_to(compare_system_url(params[:id])) do %>
+          SYSTEMS
+           <% end %>
+        </li>
+        <li><%= link_to(compare_programs_url(params[:id])) do %>
+          PROGRAMS
+           <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid not_margin">
+    <div class="tab-content3 dash" style="height:auto;">
+      <div class="tab-pane active">
+        <div class="tabGraph">
+          <div class="box_compare">
+
+            <div id="compare-chart"> </div>
+
+          </div>
+
+          <!--table goes here-->
+          <div id="compare_report" class="report-top">
+            <div class="row-fluid">
+             <%= render :partial=>"compare_response_all_table"%>
+            </div>
+          </div>
+          <!--end table-->
+
+        </div>
+      </div>
+    </div>
+    </br>
+</div>
 <% end %>

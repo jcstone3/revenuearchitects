@@ -56,13 +56,17 @@ RevenueGrader::Application.routes.draw do
   resources :authorizations
   resources :surveys do
     get :sub_section, on: :collection
+    get :overall_chart, on: :collection
+    get :compare_strategy_chart, on: :collection
+    get :compare_systems_chart, on: :collection
+    get :compare_programs_chart, on: :collection
   end
   resources :industries
   resources :responses
 
   get 'surveys/:id/question/:question_id' => 'surveys#question', :as => 'questions'
   get 'surveys/:id/report/' => 'surveys#report', :as => 'reports'
-  post 'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
+  post'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
   put 'surveys/:id/question/:question_id' => 'surveys#create_response', :as=> 'reponses'
   post 'surveys/:id/update-question/:question_id' => 'surveys#update_response', :as=> 'reponses_update'
   get 'surveys/:id/download' => 'surveys#download_result', :as=>'download'
@@ -71,7 +75,8 @@ RevenueGrader::Application.routes.draw do
   get 'surveys/get-response-status/:id' => 'surveys#get_response_status', :as=>'get_response_status'
   get 'surveys/:id/report/detailed-view' => 'surveys#report_detailed', :as=>'detailed_report'
   get 'surveys/:id/confirm-survey' => 'surveys#confirm_survey', :as=>'confirm_survey'
-  get 'surveys/:id/close-survey' => 'surveys#close_survey', :as=>'close_survey'
+  # get 'surveys/:id/close-survey' => 'surveys#close_survey', :as=>'close_survey'
+  put 'surveys/:id/close-survey' => 'surveys#close_survey', :as=>'close_survey'
   get 'surveys/:id/compare' => 'surveys#compare', :as=>'compare'
   get 'surveys/:id/compare-strategy' => 'surveys#compare_strategy', :as=>'compare_strategy'
   get 'surveys/:id/compare-system' => 'surveys#compare_system', :as=>'compare_system'

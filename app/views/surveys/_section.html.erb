@@ -12,7 +12,7 @@
                   <%@all_sections.each_with_index do |section,i| %>
                     <li class="next dropdown" id="section_<%=section.id%>">
                       <%#= link_to() do %>
-                        <a id="drop" role="button" data-toggle="dropdown" href="#">
+                        <a id="drop" role="button" data-toggle="dropdown" href="menu1">
                           <%= image_tag "icon_cat.png" %>
                           <%= section.name.titleize %>
                         </a>
@@ -22,14 +22,14 @@
 
                           <% sorted_subsections.each_with_index do |sub_section,j| %>
                               <% subsection_done = check_subsection_all_ans(sub_section, @survey.id) %>
-                              <a class="sub-section-name" role="menuitem" tabindex="-1" href="#">
+                              <%= link_to questions_path(params[:id], sub_section.questions.first.position), class: 'sub-section-name', role: 'menuitem' do %>
                                 <span class="subsection-span"><%= sub_section.name %></span>
                                 <% if subsection_done == true %>
                                   <span role="menuitem" tabindex="-1" href="#">
                                     <img class="sub-section-done" src="/assets/icon_results.png" alt="done" width="22" height="22"/>
                                   </span>
                                 <% end %>
-                              </a>
+                              <% end %>
                           <% end %>
                         </ul>
                         <span id ="span_<%=section.id%>" class="red" title ="Total number of questions", rel="tooltip">

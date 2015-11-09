@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= javascript_include_tag "http://code.jquery.com/jquery-1.10.0.min.js" %>
+    <%= javascript_include_tag "http://code.jquery.com/ui/1.10.3/jquery-ui.min.js" %>
+    <%= javascript_include_tag "http://code.highcharts.com/highcharts.js" %>
+    <%= javascript_include_tag "http://code.highcharts.com/modules/exporting.js" %>
+    <%= wicked_pdf_javascript_include_tag 'test' %>
+    <script type="text/javascript">
+    $(function () {
+
+      data_overall = jQuery.parseJSON('<%=raw @overall_pdf.to_json %>');
+      data_strategy = jQuery.parseJSON('<%=raw @chart_strategy.to_json %>');
+      data_systems = jQuery.parseJSON('<%=raw @chart_systems.to_json %>');
+      data_programs = jQuery.parseJSON('<%=raw @chart_programs.to_json %>');
+
+      setData = function(data){
+        var options = {
+          title: {
+              text: 'Your Score vs. Average Score',
+              align: 'right',
+              style: {
+                color: '#CACACA',
+              },
+              x: 93,
+              y: 35
+          },
+            chart: {
+                backgroundColor: '#2B2C2E',
+                type: 'line',
+                width: 650,
+                height: 200
+            },
+            plotOptions: {
+                series: {
+                    animation: false
+                }
+            },
+            xAxis: {
+              title: {
+                text: '',
+                align: 'left',
+                y: -18
+              },
+              categories: data[0],
+              labels: {
+                formatter: function () {
+                  return '<span style="fill: #CACACA;">' + this.value + '</span>';
+                }
+              },
+              gridLineColor: '#2B2C2E',
+              lineColor: '#CACACA',
+              lineWidth: 2
+            },
+            legend: {
+              layout: 'vertical',
+              align: 'right',
+              verticalAlign: 'middle',
+              borderWidth: 0,
+              itemMarginTop: 15,
+              itemMarginBottom: 5,
+              itemStyle: {
+                color: '#CACACA',
+                lineHeight: '20px'
+              }
+            },
+            yAxis: {
+              title: {
+                text: ''
+              },
+              labels: {
+                formatter: function () {
+                  return '<span style="fill: #CACACA;">' + this.value + '</span>';
+                }
+              },
+              gridLineColor: '#2B2C2E',
+              lineColor: '#CACACA',
+              lineWidth: 2
+            },
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            series: [{
+                name: 'Your Score',
+                color: '#56C9F3',
+                marker: {
+                    symbol: 'circle',
+                    fill: 'red',
+                    radius: 5,
+                    fillColor: '#2B2C2E',
+                    lineColor: '#56C9F3',
+                    lineWidth: 2
+                },
+                data: data[1]
+
+            }, {
+                name: 'Average Score',
+                color: '#EA722F',
+                marker: {
+                  symbol: 'circle',
+                  radius: 5,
+                  fillColor: '#2B2C2E',
+                  lineColor: '#EA722F',
+                  lineWidth: 2
+                },
+                data: data[2]
+            }]
+        }
+
+        return options;
+      }
+
+      $('#overall-chart-pdf').highcharts(setData(data_overall));
+
+      $('#compare-chart-strategy-pdf').highcharts(setData(data_strategy));
+
+      $('#compare-chart-systems-pdf').highcharts(setData(data_systems));
+
+      $('#compare-chart-programs-pdf').highcharts(setData(data_programs));
+    });
+    </script>
+    <meta charset="utf-8">
+    <%= wicked_pdf_stylesheet_link_tag "font-lato" %>
+    <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+
+  </head>
+  <body onload="unaFuncion()">
+    <div id="header">
+    </div>
+    <div id="content">
+      <%= yield %>
+    </div>
+  </body>
+</html>

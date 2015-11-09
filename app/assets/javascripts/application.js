@@ -37,6 +37,8 @@ $(document).ready(function(){
             $('#google_click').css({'background-color' :'#bb2a0b'});
             $('#twitter_click').css({'background-color' :'#53b1f0'});
             $('#facebook_click').css({'background-color' :'#3b5998'});
+            $('#linkedin_click').css({'background-color' :'#006695'});
+            $('.social-btns a').hide();
           });
 
         $('#google_click').click(function(){
@@ -45,6 +47,9 @@ $(document).ready(function(){
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
+          $('#linkedin_click').css({'background-color' :'#006695'});
+          $('.social-btns a').hide();
+          $('.google-btn').show();
         });
 
         $('#twitter_click').click(function(){
@@ -53,6 +58,9 @@ $(document).ready(function(){
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#facebook_click').css({'background-color' :'#3b5998'});
           $('#google_click').css({'background-color' :'#bb2a0b'});
+          $('#linkedin_click').css({'background-color' :'#006695'});
+          $('.social-btns a').hide();
+          $('.twitter-btn').show();
         });
 
         $('#facebook_click').click(function(){
@@ -61,27 +69,21 @@ $(document).ready(function(){
           $('#home_click').css({'background-color' :'#e3e3e3'});
           $('#twitter_click').css({'background-color' :'#53b1f0'});
           $('#google_click').css({'background-color' :'#bb2a0b'});
+          $('#linkedin_click').css({'background-color' :'#006695'});
+          $('.social-btns a').hide();
+          $('.facebook-btn').show();
         });
 
-        // $('#google_click').click(function(){
-        //  $('#tab-content').css({'border' :'#bb2a0b', 'color': '#fff'});
-        //  }, function () {
-     //       var cssObj = {
-     //         'background-color' : '#bb2a0b',
-     //         'color': '#fff'
-     //         }
-     //       $('#tab-content').css(cssObj);
-      //    });
-
         $('#linkedin_click').click(function(){
-          $('#tab-content').css({'background-color' :'#006695', 'color': '#fff'});
-          }, function () {
-            var cssObj = {
-              'background-color' : '#006695',
-              'color': '#fff'
-            }
-            $('#tab-content').css(cssObj);
-          });
+          $('#facebook_click').css({'background-color' :'#3b5998'});
+          $('#home_click').css({'color' :'#555555'});
+          $('#home_click').css({'background-color' :'#e3e3e3'});
+          $('#twitter_click').css({'background-color' :'#53b1f0'});
+          $('#google_click').css({'background-color' :'#bb2a0b'});
+          $('#linkedin_click').css({'background-color' :'#fff'});
+          $('.social-btns a').hide();
+          $('.linkedin-btn').show();
+        });
       //--------end-of-login-click ------------//
       //---- question js ---------------------//
       //set defalut value for anwer1
@@ -126,9 +128,6 @@ $(document).ready(function(){
                 $('#priority_option').find('a#'+response_answer3+'').addClass('btn form btn-success priorityTip');
                 }
 
-               }
-               else{
-                $('#priority_option').hide();
                }
 
                //highlight the section currently on
@@ -209,10 +208,10 @@ $(document).ready(function(){
                     $('#option').find('a#'+e.target.id+'').addClass('btn form btn-success priorityTip');
                     //if Add to Plan is clicked the show the priority tab
                     if(e.target.id == "add_to_plan"){
-                      $('#priority_option').show();
+                      $('#priority_option').slideDown( "fast" );
                     }
                     else{
-                      $('#priority_option').hide();
+                      $('#priority_option').slideUp( "fast" );
                     }
                 });
 
@@ -345,6 +344,11 @@ $(document).ready(function(){
                   }
                 });
 
+                $('.important-slabels span').click(function(e){
+                  console.log($(this).data('value'));
+                  $( "#importance-slider" ).slider( "value", $(this).data('value') )
+                  $( "#response_answer_4" ).val( $( "#importance-slider" ).slider( "value" ));
+                });
 
                 // $("div#slider a.ui-slider-handle").tooltip({
                 //     //placement: 'bottom'
@@ -572,7 +576,7 @@ $(document).ready(function(){
         } );
 
        //-------report page table ids ------ //
-       $('#report_allTable').dataTable( {
+       $('#report_StrategyTable, #report_ProgramTable, #report_SystemTable').dataTable( {
             "bPaginate": false,
             "bLengthChange": false,
             "bFilter": true,
@@ -670,6 +674,16 @@ $(document).ready(function(){
             "bAutoWidth": true
         } );
 
+
+      $('#feed_table').dataTable( {
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        } );
+
       /* report Tables */
        $(".pageAccordion").accordion({
       autoHeight: false,
@@ -677,3 +691,183 @@ $(document).ready(function(){
     });
 
 });
+/* ============================================================
+ * bootstrap-dropdown.js v2.3.2
+ * http://twitter.github.com/bootstrap/javascript.html#dropdowns
+ * ============================================================
+ * Copyright 2012 Twitter, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============================================================ */
+
+
+
+!function ($) {
+
+  "use strict"; // jshint ;_;
+
+
+ /* DROPDOWN CLASS DEFINITION
+  * ========================= */
+
+  var toggle = '[data-toggle=dropdown]'
+    , Dropdown = function (element) {
+        var $el = $(element).on('click.dropdown.data-api', this.toggle)
+        $('html').on('click.dropdown.data-api', function () {
+          $el.parent().removeClass('open')
+        })
+      }
+
+  Dropdown.prototype = {
+
+    constructor: Dropdown
+
+  , toggle: function (e) {
+      var $this = $(this)
+        , $parent
+        , isActive
+
+      if ($this.is('.disabled, :disabled')) return
+
+      $parent = getParent($this)
+
+      isActive = $parent.hasClass('open')
+
+      clearMenus()
+
+      if (!isActive) {
+        if ('ontouchstart' in document.documentElement) {
+          // if mobile we we use a backdrop because click events don't delegate
+          $('<div class="dropdown-backdrop"/>').insertBefore($(this)).on('click', clearMenus)
+        }
+        $parent.toggleClass('open')
+      }
+
+      $this.focus()
+
+      return false
+    }
+
+  , keydown: function (e) {
+      var $this
+        , $items
+        , $active
+        , $parent
+        , isActive
+        , index
+
+      if (!/(38|40|27)/.test(e.keyCode)) return
+
+      $this = $(this)
+
+      e.preventDefault()
+      e.stopPropagation()
+
+      if ($this.is('.disabled, :disabled')) return
+
+      $parent = getParent($this)
+
+      isActive = $parent.hasClass('open')
+
+      if (!isActive || (isActive && e.keyCode == 27)) {
+        if (e.which == 27) $parent.find(toggle).focus()
+        return $this.click()
+      }
+
+      $items = $('[role=menu] li:not(.divider):visible a', $parent)
+
+      if (!$items.length) return
+
+      index = $items.index($items.filter(':focus'))
+
+      if (e.keyCode == 38 && index > 0) index--                                        // up
+      if (e.keyCode == 40 && index < $items.length - 1) index++                        // down
+      if (!~index) index = 0
+
+      $items
+        .eq(index)
+        .focus()
+    }
+
+  }
+
+  function clearMenus() {
+    $('.dropdown-backdrop').remove()
+    $(toggle).each(function () {
+      getParent($(this)).removeClass('open')
+    })
+  }
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+      , $parent
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
+    }
+
+    $parent = selector && $(selector)
+
+    if (!$parent || !$parent.length) $parent = $this.parent()
+
+    return $parent
+  }
+
+
+  /* DROPDOWN PLUGIN DEFINITION
+   * ========================== */
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown = function (option) {
+    return this.each(function () {
+      var $this = $(this)
+        , data = $this.data('dropdown')
+      if (!data) $this.data('dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  $.fn.dropdown.Constructor = Dropdown
+
+
+ /* DROPDOWN NO CONFLICT
+  * ==================== */
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  /* APPLY TO STANDARD DROPDOWN ELEMENTS
+   * =================================== */
+
+  $(document)
+    .on('click.dropdown.data-api', clearMenus)
+    .on('click.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.dropdown.data-api'  , toggle, Dropdown.prototype.toggle)
+    .on('keydown.dropdown.data-api', toggle + ', [role=menu]' , Dropdown.prototype.keydown)
+
+  $("a[data-toggle='dropdown']").on('click',function () {
+    var list = $(this).next('ul');
+    if(list.css('display') == 'none'){
+      $('.dropdown-menu').hide();
+      list.toggle();
+    }else{
+      $('.dropdown-menu').hide();
+    }
+  });
+
+}(window.jQuery);

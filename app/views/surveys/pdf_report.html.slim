@@ -1,0 +1,904 @@
+.page-break.cover-page
+  div
+    .title-cover-page
+      = @survey.company_name
+
+    .title-gray
+      | Revenue Grader Diagnostic
+    .title-gray.font-small
+      = @survey.created_at.strftime('%B %d, %Y')
+    div.content-line-decorator
+      hr.line-decorator
+    div.center-logo
+      table
+        tr
+          td.width-50
+            = wicked_pdf_image_tag("logocolor.png", class: 'logo-content-img ' )
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+  h3
+    | REVENUE GRADER DIAGNOSTIC
+  .container-fluid
+    table
+      tbody
+        tr
+          td.width-50
+            div
+              .margin-bottom-10
+                span.title-2.font-blue
+                  | REPORT
+                = @survey.created_at.strftime('%B %d, %Y')
+              .margin-bottom-10
+                span.title-2.font-blue
+                  | DIAGNOSTIC COMPLETED BY
+                div = @user.email
+          td.width-50
+            div
+              p.margin-top-none
+                | The Revenue Grader diagnostic helps you explore the best practice dimensions used by successful growth businesses. You can measure your current capability, the importance to your business and the priority to act.
+    .clearfix
+  h3
+    |DIAGNOSTIC SCORECARD:
+    = @survey.created_at.strftime('%B %d, %Y').upcase
+  .survey-content
+    .container-fluid
+      table.table-for-div
+        tbody
+          tr
+            td.width-50
+              .title-black.margin-bottom-10 SCORECARD
+              p
+                span.title-black.sub2.font-bold STRATEGY
+                br/
+                | Define your competitive advantage.
+                br/
+                span.font-blue.font-bold POINTS:
+                span
+                = @score_per_section[0]
+                | /
+                = @all_sections[0].total_points.to_i
+                br/
+                span.title-black.section-score = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
+                span.title-black.section-score %
+              p.margin-bottom-25
+                span.title-black.sub2.font-bold SYSTEMS
+                br/
+                | Build an agile and durable platform.
+                br/
+                span.font-blue.font-bold POINTS:
+                span
+                = @score_per_section[1]
+                | /
+                = @all_sections[1].total_points.to_i
+                br/
+                span.title-black.section-score = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
+                span.title-black.section-score %
+                br/
+              p.margin-bottom-25
+                span.title-black.sub2.font-bold PROGRAMS
+                br/
+                | Launch integrated campaigns.
+                br/
+                span.font-blue.font-bold POINTS:
+                span
+                = @score_per_section[2]
+                | /
+                = @all_sections[2].total_points.to_i
+                br/
+                span.title-black.section-score = '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100)
+                span.title-black.section-score %
+            td.width-50
+              .title-black SCORING METHODOGY
+              p Revenue Grader scores your performance potential by measuring 30 practices across three dimensions layers: Strategy, Systems and Programs.  Each dimension has points assigned. These points may change from time to time.
+
+              div.total-score-content
+                  p.title-black TOTAL POINTS
+                  p.title-black.sub1 = @survey.company_name
+                  p.title-super-1
+                    span.font-blue POINTS
+                    span
+                    = '%.2f' % (@score_per_section[0] + @score_per_section[1] + @score_per_section[2])
+                    | /
+                    = '%.2f' % @total_all_sections_points.to_f
+                  span.important-score = '%.2f' % (((@score_per_section[0].to_f + @score_per_section[1].to_f + @score_per_section[2].to_f)/ @total_all_sections_points.to_f)*100)
+                  span.important-score %
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right OVERALL
+
+  #overall-table.content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th.td-10
+            |CATEGORY
+          th.td-12
+            |DIMENSION
+          th.td-25
+            |PRACTICE
+          th.td-8
+            |POINTS
+          th.td-10
+            |PRIORITY
+          th.td-10
+            |IMPORTANCE
+          th.td-8.center
+            |YOUR SCORE
+          th.center.td-8
+            |AVG SCORE
+          th.td-10
+            |YOUR POINTS
+      tbody
+        - @all_responses_for_strategy.each do |response|
+          tr
+            td = response.section_name.try(:titleize)
+            td = response.sub_sect_name.try(:titleize)
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+          - @all_responses_for_system.each do |response|
+            tr
+              td = response.section_name.try(:titleize)
+              td = response.sub_sect_name.try(:titleize)
+              td.practice-column = response.name
+              td = response.points
+              - if(response.answer_3.try(:titleize) == "Must Do")
+                td.priority-red = response.answer_3.try(:titleize)
+              - elsif(response.answer_3.try(:titleize) == "Should Do")
+                td.priority-blue = response.answer_3.try(:titleize)
+              - elsif(response.answer_3.try(:titleize) == "Could Do")
+                td.priority-green = response.answer_3.try(:titleize)
+              - elsif(response.answer_3.blank?)
+                - if ((response.in_plan.humanize) == "Not applicable")
+                  td.font-bold2 N/A
+                - else
+                  td.font-bold2 = response.in_plan.humanize
+              - else
+                td.font-bold2 = response.answer_3.try(:titleize)
+              td = response.answer_4.blank? ? 0 : response.answer_4
+              td = response.score
+              td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+              td = Survey.get_score_value(response.points, response.score)
+            - @all_responses_for_program.each do |response|
+              tr
+                td = response.section_name.try(:titleize)
+                td = response.sub_sect_name.try(:titleize)
+                td.practice-column = response.name
+                td = response.points
+                - if(response.answer_3.try(:titleize) == "Must Do")
+                  td.priority-red = response.answer_3.try(:titleize)
+                - elsif(response.answer_3.try(:titleize) == "Should Do")
+                  td.priority-blue = response.answer_3.try(:titleize)
+                - elsif(response.answer_3.try(:titleize) == "Could Do")
+                  td.priority-green = response.answer_3.try(:titleize)
+                - elsif(response.answer_3.blank?)
+                  - if ((response.in_plan.humanize) == "Not applicable")
+                    td.font-bold2 N/A
+                  - else
+                    td.font-bold2 = response.in_plan.humanize
+                - else
+                  td.font-bold2 = response.answer_3.try(:titleize)
+                td = response.answer_4.blank? ? 0 : response.answer_4
+                td = response.score
+                td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+                td = Survey.get_score_value(response.points, response.score)
+
+  #results-section.overall-chart-pdf
+    #score-chart.total-score-content
+      p.title-super-1
+        span.font-blue POINTS
+        span
+        = '%.2f' % (@score_per_section[0] + @score_per_section[1] + @score_per_section[2])
+        |  /
+        =  '%.2f' % @total_all_sections_points.to_f
+      span.section-score2 = '%.2f' % (((@score_per_section[0].to_f + @score_per_section[1].to_f + @score_per_section[2].to_f)/ @total_all_sections_points.to_f)*100)
+      span.section-score2 %
+    #overall-chart-pdf
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right STRATEGY
+
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th.td-15
+            |DIMENSION
+          th.td-30
+            |PRACTICE
+          th.td-10
+            |POINTS
+          th.td-10
+            |PRIORITY
+          th.td-10
+            |IMPORTANCE
+          th.td-8.center
+            |YOUR SCORE
+          th.center.td-8
+            |AVG SCORE
+          th.td-10
+            |YOUR POINTS
+      tbody
+        - @all_responses_for_strategy.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+  #results-section
+    #score-chart.total-score-content
+      p.title-super-1
+        span.font-blue POINTS
+        span
+        = @score_per_section[0]
+        |  /
+        =  @all_sections[0].total_points.to_i
+      span.section-score2 = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
+      span.section-score2 %
+    #compare-chart-strategy-pdf
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right SYSTEMS
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th.td-15
+            |DIMENSION
+          th.td-30
+            |PRACTICE
+          th.td-10
+            |POINTS
+          th.td-10
+            |PRIORITY
+          th.td-10
+            |IMPORTANCE
+          th.td-8.center
+            |YOUR SCORE
+          th.center.td-8
+            |AVG SCORE
+          th.td-10
+            |YOUR POINTS
+      tbody
+        - @all_responses_for_system.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+  #results-section
+    #score-chart.total-score-content
+      p.title-super-1
+        span.font-blue POINTS
+        span
+        = @score_per_section[1]
+        |  /
+        =  @all_sections[1].total_points.to_i
+      span.section-score2 = '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)
+      span.section-score2 %
+    #compare-chart-systems-pdf
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right PROGRAMS
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th.td-15
+            |DIMENSION
+          th.td-30
+            |PRACTICE
+          th.td-10
+            |POINTS
+          th.td-10
+            |PRIORITY
+          th.td-10
+            |IMPORTANCE
+          th.td-8.center
+            |YOUR SCORE
+          th.center.td-8
+            |AVG SCORE
+          th.td-10
+            |YOUR POINTS
+      tbody
+        - @all_responses_for_program.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+  #results-section
+    #score-chart.total-score-content
+      p.title-super-1
+        span.font-blue SCORE
+        span
+        = @score_per_section[0]
+        |  /
+        =  @all_sections[0].total_points.to_i
+      span.section-score2 = '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)
+      span.section-score2 %
+    #compare-chart-programs-pdf
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right STRATEGY PRIORITIES
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th.td-15
+            |DIMENSION
+          th.td-30
+            |PRACTICE
+          th.td-10
+            |POINTS
+          th.td-10
+            |PRIORITY
+          th.td-10
+            |IMPORTANCE
+          th.td-8.center
+            |YOUR SCORE
+          th.center.td-8
+            |AVG SCORE
+          th.td-10
+            |YOUR POINTS
+      tbody
+        - @must_do_responses_strategy.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @should_do_responses_strategy.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @could_do_responses_strategy.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @not_applicable_responses_strategy.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right SYSTEMS PRIORITIES
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th.td-15
+            |DIMENSION
+          th.td-30
+            |PRACTICE
+          th.td-10
+            |POINTS
+          th.td-10
+            |PRIORITY
+          th.td-10
+            |IMPORTANCE
+          th.td-8.center
+            |YOUR SCORE
+          th.center.td-8
+            |AVG SCORE
+          th.td-10
+            |YOUR POINTS
+      tbody
+        - @must_do_responses_system.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @should_do_responses_system.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @could_do_responses_system.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @not_applicable_responses_system.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right PROGRAMS PRIORITIES
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th.td-15
+            |DIMENSION
+          th.td-30
+            |PRACTICE
+          th.td-10
+            |POINTS
+          th.td-10
+            |PRIORITY
+          th.td-10
+            |IMPORTANCE
+          th.td-8.center
+            |YOUR SCORE
+          th.center.td-8
+            |AVG SCORE
+          th.td-10
+            |YOUR POINTS
+      tbody
+        - @must_do_responses_program.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @should_do_responses_program.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @could_do_responses_program.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @not_applicable_responses_program.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right PLAN PRIORITIES SUMMARY
+  .content-table
+    table.table.table-report.table-condesed
+      thead
+        tr
+          th.td-15
+            |DIMENSION
+          th.td-30
+            |PRACTICE
+          th.td-10
+            |POINTS
+          th.td-10
+            |PRIORITY
+          th.td-10
+            |IMPORTANCE
+          th.td-8.center
+            |YOUR SCORE
+          th.center.td-8
+            |AVG SCORE
+          th.td-10
+            |YOUR POINTS
+      tbody
+        - @must_do_responses.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @should_do_responses.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @could_do_responses.each do |response|
+          tr
+            td = response.sub_sect_name
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right
+  h3 NEXT STEPS
+  p The Revenue Grader serves an early step in strategic planning for revenue growth. It helps identify top level areas that require additional focus. The next step is to analyze each of the priorities and develop a specific and detailed plan and timeline. A plan will reflect various dependencies and critical success factors. Revenue Architects can assist in plan development and implementation.
+  p
+    |Visit us at
+    a.font-bold2.font-white.clear-link href="http://revenuearchitects.com/" .
+    a.font-bold2.font-blue.clear-link href="http://revenuearchitects.com/" http://revenuearchitects.com
+  h3 ABOUT REVENUE GRADER
+  div
+    p.margin-extra Revenue Grader is a self-diagnostic for revenue performance. Tell us your practices across three dimensions: Revenue Strategy, Revenue Systems and Revenue Programs and gain a comprehensive view of your revenue performance potential.
+    p.margin-extra The Revenue Grader explores 30 dimensions of revenue growth across three layers:
+    ul.margin-extra.blue-list
+      li.font-bold2.font-blue - Revenue Strategy
+      li.font-bold2.font-blue - Revenue Systems
+      li.font-bold2.font-blue - Revenue Programs
+    p.margin-extra After completing the Revenue Grader diagnostic, the management teams can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation and enhancing sales team skills.
+
+
+
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right
+  h3 ABOUT REVENUE ARCHITECTS
+  p Revenue Architects helps businesses accelerate revenue growth with integrated marketing and sales programs. Our clients market and sell complex products and services to discerning buyers and recognize that success requires effective customer engagement across the customer lifecycle. We help clients build a 'Revenue Architecture' - implementing the strategies, systems and programs for top-line growth.
+  div.content-icons
+    table
+      tr
+        td.width-30
+          div
+            = wicked_pdf_image_tag("icon3.jpg")
+            p.font-bold2.priority-green STRATEGY
+            p Define competitive advantage and the integrated revenue marketing plan.
+            / wicked_pdf_image_tag
+        td.width-30
+          div
+            = wicked_pdf_image_tag("icon-windows.jpg")
+            p.font-bold2.priority-green SYSTEMS
+            p Build web presence and an agile and durable revenue platform.
+        td.width-30
+          div
+            = wicked_pdf_image_tag("icon-computer.jpg")
+            p.font-bold2.priority-green PROGRAMS
+            p  Envision, integrate and launch integrated campaigns and programs.
+
+
+
+  div
+    p.margin-extra Today, business need a new more integrated revenue marketing capability and success requires a complex range of skills and expertise. We blend strategy, design, media and technology skills to help clients differentiate their brand strategies, integrate digital and revenue systems, and launch innovative programs. As a trusted advisor and program delivery partner, we build agile marketing systems and  respond to dynamic growth opportunities. We are differentiated by our revenue architecture approach and flexible multi-affiliate resource model that allows us to respond to our client’s dynamic revenue initiatives.
+    p.margin-extra
+      |Learn more. Visit
+      a.font-bold2.font-white.clear-link href="http://revenuearchitects.com/" .
+      a.font-bold2.font-blue.clear-link href="http://revenuearchitects.com/" http://revenuearchitects.com

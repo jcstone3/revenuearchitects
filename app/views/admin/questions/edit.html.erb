@@ -3,7 +3,7 @@
         <div class="span12">
           <ul class="nav2 nav2-tabs2" style="margin: 0 0 0px 0px;padding: 0;">
             <li><%=link_to 'Feedbacks', admin_feedbacks_url %></li>
-              <li class="active"><%= link_to 'Questions', admin_questions_url%></a></li>
+              <li class="active"><%= link_to 'Practices', admin_questions_url%></a></li>
               <li><%=link_to 'Sections', admin_sections_url%>
               </li>
               <li><%= link_to 'Users', admin_users_url%></li>
@@ -13,17 +13,23 @@
           <div class="tab-content2" style="padding-top:0px;">
             <div class="tab-pane active" id="dashboard" >
               <div class="tabHead">
-                <h1>Questions--Questions for the Survey</h1>
-                <h3>Edit Question</h3>
+                <h1>Practices--Practices for the Survey</h1>
+                <h3>Edit Practice</h3>
               </div>
 
               <div class="content">
 
                 <%= simple_form_for(@question, :url=>{:action => 'update', :controller => 'admin/questions'}, :validate=>true, :method=>"post") do |f| %>
                         <br/>
+
+                        <%= f.input :sequence, :required => true,
+                          :label => "Sequence",
+                          :input_html => { :class => 'input-xlarge', :min => '1', :max => '100', :type => 'text' }, 
+                          :label_html => { :class => '' } -%> 
+
                         <%= f.input :name, :as =>:text, :required => true,
-                                    :label => "Question",
-                                    :placeholder=>"Type new question here...",
+                                    :label => "Practice",
+                                    :placeholder=>"Type new practice here...",
                                     :input_html => { :class => 'input-xlarge textarea1' },
                                     :label_html => { :class => '' } -%>
 
@@ -31,7 +37,7 @@
 
                         <%= f.input :description, :required => true,
                             :label => "Description",
-                            :placeholder => "Type description for question here...",
+                            :placeholder => "Type description for practice here...",
                             :as => :text,
                             :input_html => {:class => 'input-xxlarge' , :cols => 50, :rows => 3 },
                             :label_html => { :class => '' } -%>
@@ -49,7 +55,7 @@
                         <span id="section_error" class="custom_error"></span>
 
                         <%= f.input :points, :required => true,
-                                      :collection => [['5'],['10'],['15'],['20'],['25'],['30'],['35'],['40'],['45']],
+                                      :collection => [['5'],['10'],['15'],['20'],['25'],['30'],['35'],['40'],['45'],['50'],['55'],['60'],['65'],['70'],['75'],['80'],['85'],['90'], ['95'], [100]],
                                       :prompt => "Select Points",
                                       :label => "Points",
                                       :input_html => { :class => 'input-xlarge' },

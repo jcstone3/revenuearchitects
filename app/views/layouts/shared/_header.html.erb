@@ -1,41 +1,36 @@
-   <div class="span6">
-           <% logo_link_path =( user_signed_in? ?  new_user_session_path : root_path )%>
-            <%= link_to image_tag('logo.png', :alt=>"Revenue Grader", :class=>"pull-left" ) %>
-            <div class="pull-left brand-name">
-              brought to you by&nbsp;<%= link_to image_tag("ra_icon.png", :alt=>"Revenue Architects Logo", :title => "Revenue Architects Website"),"http://www.revenuearchitects.com/", :target => "_blank" %>
-              <a href="http://www.revenuearchitects.com/", target="_blank" class="ra_logo">Revenue Architects</a>
-            </div>
+<div class="span6">
+  <%= link_to image_tag('logo.png', :alt=>"Revenue Grader", :class=>"pull-left" ), root_path %>
+  <div class="pull-left brand-name">
+    brought to you by&nbsp;<%= link_to image_tag("ra_icon.png", :alt=>"Revenue Architects Logo", :title => "Revenue Architects Website"),"http://www.revenuearchitects.com/", :target => "_blank" %>
+    <a href="http://www.revenuearchitects.com/", target="_blank" class="ra_logo">Revenue Architects</a>
+  </div>
+</div>
+<div class="span6">
+    <% if user_signed_in? %>
+      <div class="pull-right button-signin">
+        <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
+      </div>
+      <div class="pull-right visible-desktop data-user-header">
+        <i class="icon-home "></i>
+        <span><%= "#{current_user.name_for_show.upcase}"%></span>
+      </div>
+      <div class="pull-right data-user-header">
+        <i class="icon-user "></i>
+        <span><%= "#{current_user.email}" %></span>
+      </div>
+    <%else%>
 
-        </div>
-        <div class="span6">
-             <% if user_signed_in? %>
-             <div class="pull-right">
-                <i class="icon-user "></i>&nbsp;
-                <%= "#{current_user.email}" %>&nbsp;<br/>
-                <% if current_user.companies.first.name.present? %>
-                <i class="icon-home "></i>&nbsp;
-                 <%= "#{current_user.companies.first.name}"%>
-                  <%end%>
-              </div>
+      <ul class="nav nav-pills top-links">
+        <!-- #TODO: Find active path -->
 
-                 <div class="pull-right button-signin">
-                <%= link_to "Logout", destroy_user_session_path, :class=>"btn" %>
-              </div>
+        <li class="<%#= current_page?(:controller => 'site', :action => 'index') ? "active" : "" -%>"><%= link_to "Home", root_path  %></li>
+        <li class="<%#= current_page?(:controller => 'site', :action => 'aboutus') ? "active" : "" -%>"><%= link_to "About Us", aboutus_path %></li>
+        <li class="<%#= current_page?(:controller => 'site', :action => 'contactus') ? "active" : "" -%>"><%= link_to "Contact Us", contactus_path %></li>
+      </ul><!-- / -->
+      <div class="nav pull-right button-bar">
+          <%= link_to "Login", new_user_session_path, :class=>"btn btn-primary" %>
+          <%= link_to "Sign Up", new_user_registration_path, :class=>"btn btn-primary"%>
+      </div><!-- / -->
 
-              <%else%>
-
-              <ul class="nav nav-pills top-links">
-                <!-- #TODO: Find active path -->
-
-                <li class="<%#= current_page?(:controller => 'site', :action => 'index') ? "active" : "" -%>"><%= link_to "Home", root_path  %></li>
-                <li class="<%#= current_page?(:controller => 'site', :action => 'aboutus') ? "active" : "" -%>"><%= link_to "About Us", aboutus_path %></li>
-                <li class="<%#= current_page?(:controller => 'site', :action => 'contactus') ? "active" : "" -%>"><%= link_to "Contact Us", contactus_path %></li>
-              </ul><!-- / -->
-              <div class="nav pull-right button-bar">
-                  <%= link_to "Login", new_user_session_path, :class=>"btn btn-primary" %>
-                  <%= link_to "Sign Up", new_user_registration_path, :class=>"btn btn-primary"%>
-              </div><!-- / -->
-
-              <%end%>
-
-        </div><!-- /  end of right span6-->
+    <%end%>
+</div><!-- /  end of right span6-->

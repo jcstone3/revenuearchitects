@@ -1,42 +1,58 @@
     
-<% content_for :top_bar_content do  -%> 
-    <%= render "sections"%>
-<% end -%> 
+<% content_for :top_bar_content do  -%>
+<%= render "sections"%>
+<% end -%>
 
-<%content_for :main_content do%> 
-          <div class="content">
-                                             
-                  <h1 class="question">Thank you for successfully completing the Diagnostic  </h1>          
-                  <p class="question">Number of questions attempted in each section</p>
-                      <table class="table table-bordered" >
-                         <%@all_sections.each_with_index do |section,i| %>
-                            <tr>
-                              <td><%= section.name.try(:titleize)%></td><td><span class="tblendstyle">
-                                 <%= @section_questions[i].question_attempted%>/
-                                 <%= @section_questions_total[i].question_total %>
-                                 </span>
-                              </td>
-                            </tr>
-                          <%end%>
-                          <tr>
-                            <td>Total</td>
-                            <td><span class="tblendstyle">
-                              <%=  @final_score %>/
-                              <%= @total_question_total %></span>
-                            </td>
-                          </tr> 
-                       </table>     
-            <div class="footerconfirm" >
-           <%= link_to 'Go back', continue_survey_path ,:class=>"btn questionsattemted"%>
-           <%= link_to 'Complete Diagnostic', close_survey_path(@survey) ,:class=>"btn btn-primary questionsattemted"%></div>
-          </div>
-  <% end -%> 
+<%content_for :main_content do%>
+  <div class="content">
+
+    <h1 class="question">Thank you for successfully completing the Diagnostic  </h1>
+    <p class="question">Number of practices attempted in each section</p>
+    <%= form_for(@survey, url: close_survey_path(@survey) ) do |f| %>
+      <%= f.hidden_field :size, { :value => @survey.size } %>
+      <%= f.hidden_field :revenue, { :value => @survey.revenue } %>
+      <%= f.hidden_field :industry, { :value => @survey.company.industry.name } %>
+      <%= f.hidden_field :company, { :value => @survey.company.name } %>
+      <%= f.hidden_field :email, { :value => @survey.company.user.email } %>
+      <%= f.hidden_field :username, { :value => @survey.company.user.username} %>
+      <%= f.hidden_field :final_score, { :value => @final_score} %>
+      <%= f.hidden_field :total_question_total, { :value => @total_question_total} %>
 
 
-  <% content_for :side_content do -%>
-    <%= render "confirm_side_details" -%> 
-<% end  -%>  
-      
+      <table class="table table-bordered" >
+        <%@all_sections.each_with_index do |section,i| %>
+          <tr>
+            <td><%= section.name.try(:titleize)%></td><td><span class="tblendstyle">
+              <%= @section_questions[i].question_attempted%>/
+              <%= @section_questions_total[i].question_total %>
+            </span>
+            </td>
+          </tr>
+        <%end%>
+        <tr>
+          <td>Total</td>
+          <td><span class="tblendstyle">
+            <%=  @final_score %>/
+            <%= @total_question_total %></span>
+          </td>
+        </tr>
+      </table>
+      <div class="footerconfirm" >
+        <%= link_to 'Go back', continue_survey_path ,:class=>"btn questionsattemted"%>
+        <%= f.submit  'Complete Diagnostic' ,:class=>"btn btn-primary questionsattemted" %>
+      </div>
+    <% end %>
+    <script type="text/javascript">
+      var __ss_noform = __ss_noform || [];
+      __ss_noform.push(['baseURI', 'https://app-HSIR8I.marketingautomation.services/webforms/receivePostback/szAzBwA/']);
+      __ss_noform.push(['endpoint', 'b6532bdc-8ad5-449c-b522-95c2f01dedfe']);
+    </script>
+    <script type="text/javascript" src="https://koi-HSIR8I.marketingautomation.services/client/noform.js?ver=1.24" ></script>
 
-          
-         
+    </div>
+  <% end -%>
+
+
+<% content_for :side_content do -%>
+<%= render "confirm_side_details" -%>
+<% end  -%>

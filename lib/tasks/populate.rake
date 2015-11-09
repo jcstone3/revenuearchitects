@@ -123,9 +123,9 @@ namespace :app do
           sub_section.updated_at = Time.now    
             puts "SubSection '#{sub_section.name}' has been created"
          
-    #Create Questions in the Database
+    #Create Practices in the Database
       Question.reset_column_information
-      puts "Adding Questions for Application"
+      puts "Adding Practices for Application"
         Question.populate(25) do |question|
           question.name = Populator.words(3)          
           question.sequence = Random.number(1..100)                   
@@ -134,7 +134,7 @@ namespace :app do
           question.points = ["5","10","20"]
           question.created_at = Time.now
           question.updated_at = Time.now    
-            puts "Questions '#{question.name}' has been created"
+            puts "Practices '#{question.name}' has been created"
          end
         end
        end

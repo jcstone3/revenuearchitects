@@ -6,10 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
-        <script src='http://www.google.com/jsapi'></script>
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
         </head> 
-       
+
         <!-- Le styles -->
 <%#= content_for :main_content do%>
        <link rel="stylesheet" media="all" href="#{Rails.root}/assets/stylesheets/jquery.dataTables.css" />
@@ -17,9 +16,9 @@
         <div class="content" style="page-break-after:always;">
         <div style="display:inline;">
                 <span style="margin-right:5px;"><img src="http://stage.revenuegrader.com/assets/logo.png" alt = "Revenue Grader"><span>
-                <span style="font-size:60px;color: #0086AC;"> <%= "Revenue Grader" %> </span>  
+                <span style="font-size:60px;color: #0086AC;"> <%= "Revenue Grader" %> </span>
         </div>
-        <div class="content1">             
+        <div class="content1">
              <h3 style="text-align:center"><%= "#{current_user.companies.first.name}"%></h2></br>
              <h3 style="text-align:center"><%= @survey.created_at.strftime("%B  %Y")%></h2></br>
         </div>
@@ -29,46 +28,46 @@
             <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>  
+              </div>
             </div>
             <h1>Overall Diagnostic for month  <strong><%= @survey.created_at.strftime("%B  %Y")%></strong></h1></br>
               <p>&nbsp;</p>
                <div class="survey-content">
-            
+
               <div class="stats">
-              
+
                 <div class="stat">
-                  <span class="stat-value"><%= @sections[0].total_points%></span>     
+                  <span class="stat-value"><%= @sections[0].total_points%></span>
                         System
                 </div> <!-- /stat -->
-              
+
                   <div class="stat">
-                    <span class="stat-value"><%= @sections[1].total_points%></span>                 
+                    <span class="stat-value"><%= @sections[1].total_points%></span>
                         Strategy
                   </div> <!-- /stat -->
-              
+
                   <div class="stat">
                     <span class="stat-value"><%= @sections[2].total_points%></span>     Program
                   </div> <!-- /stat -->
-              
+
               </div> <!-- /stats -->
-            </div></br></br>    
+            </div></br></br>
                 <div style="clear:both"></div>
-                
+
                  <div id='chart'></div>
                   <%= render_chart(@chart, 'chart') %>
-                  
+
             <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div>
           </div>
-         
+
         <% if !@must_do_responses.blank? %>
         <div class="content" style="page-break-after:always;">
             <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>  
+              </div>
             </div>
 
              <h1>Must Do Items</h1>
@@ -77,25 +76,25 @@
                <table cellpadding="1" cellspacing="1" id="report_must_doTable" class="report-body dataTable2" >
                <%= render :partial=>"pdf_table_header"%>
                     <% @must_do_responses.each do |response|%>
-                      <%= render :partial=>"pdf_report", 
-                      :locals=> {:response =>response} %> 
+                      <%= render :partial=>"pdf_report",
+                      :locals=> {:response =>response} %>
                     <%end%>
                 <%= render :partial=>"table_end"%>
-                  </div>        
+                  </div>
                   <!-- <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div>  -->
             </div>
-            
-        </div>  
+
+        </div>
         <% end %>
-       
+
        <% if !@should_do_responses.blank? %>
         <div class="content" style="page-break-after:always;">
          <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>  
+              </div>
             </div>
 
              <h1>Should Do Items</h1>
@@ -103,23 +102,23 @@
                <table cellpadding="1" cellspacing="1" id="report_should_doTable" class="report-body dataTable2">
                 <%= render :partial=>"pdf_table_header"%>
                     <% @should_do_responses.each do |response|%>
-                      <%= render :partial=>"pdf_report", 
-                      :locals=> {:response =>response} %> 
+                      <%= render :partial=>"pdf_report",
+                      :locals=> {:response =>response} %>
                     <%end%>
-                <%= render :partial=>"table_end"%>               
-            </div> 
+                <%= render :partial=>"table_end"%>
+            </div>
            <!-- <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div> -->
         </div>
-        <% end %>  
+        <% end %>
 
        <% if !@could_do_responses.blank? %>
         <div class="content" style="page-break-after:always;">
             <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>  
+              </div>
             </div>
 
              <h1>Could Do Items</h1>
@@ -127,15 +126,15 @@
             <table cellpadding="1" cellspacing="1" id="report_could_doTable" class="report-body dataTable2">
              <%= render :partial=>"pdf_table_header"%>
               <% @could_do_responses.each do |response|%>
-                <%= render :partial=>"pdf_report", 
-                :locals=> {:response =>response} %> 
+                <%= render :partial=>"pdf_report",
+                :locals=> {:response =>response} %>
               <%end%>
-             <%= render :partial=>"table_end"%>            
-            </div> 
+             <%= render :partial=>"table_end"%>
+            </div>
            <!--  <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div> -->
-        </div> 
+        </div>
         <% end %>
 
         <% if !@in_plan_responses.blank? %>
@@ -143,7 +142,7 @@
             <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>  
+              </div>
             </div>
 
              <h1>Planned Items</h1>
@@ -151,14 +150,14 @@
                <table cellpadding="1" cellspacing="1" id="report_in_planTable" class="report-body dataTable2">
              <%= render :partial=>"pdf_table_header"%>
                     <% @in_plan_responses.each do |response|%>
-                      <%= render :partial=>"pdf_report", 
-                      :locals=> {:response =>response} %> 
+                      <%= render :partial=>"pdf_report",
+                      :locals=> {:response =>response} %>
                     <%end%>
               <%= render :partial=>"table_end"%>
             <!--  <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div> -->
-        </div> 
+        </div>
       </div>
       <% end %>
 
@@ -167,7 +166,7 @@
             <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>  
+              </div>
             </div>
 
              <h1>Not Applicable Items</h1>
@@ -175,26 +174,26 @@
                <table cellpadding="1" cellspacing="1" id="report_not_applicableTable" class="report-body dataTable2">
                <%= render :partial=>"pdf_table_header"%>
                     <% @not_applicable_responses.each do |response|%>
-                      <%= render :partial=>"pdf_report", 
-                      :locals=> {:response =>response} %> 
+                      <%= render :partial=>"pdf_report",
+                      :locals=> {:response =>response} %>
                     <%end%>
-                <%= render :partial=>"table_end"%>                      
-            </div> 
+                <%= render :partial=>"table_end"%>
+            </div>
             <!-- <div class="footer1">
                <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div> -->
-        </div> 
+        </div>
         <% end %>
 
-       
+
 
         <div class="content" style="page-break-after:always;">
           <div class="header">
               <div style="font-size: 14px">
                 <span style="text-align:left"> <%= "#{current_user.companies.first.name}"%></span>
-              </div>  
+              </div>
             </div>
-            <div id="about">  
+            <div id="about">
              <h2>About Revenue Grader</h2>
             <p>Revenue Grader is a Revenue Architects application. It is a diagnostic tool to help businesses leaders rapidly assess revenue performance potential and develop a prioritized top-level plan – all in minutes. Revenue Grader complements other grader apps by taking a broad and strategic view of the critical elements of revenue performance. </p>
 
@@ -203,30 +202,30 @@
             <li><p>Revenue Strategy</p></li>
             <li><p>Revenue Systems</p></li>
             <li><p>Revenue Programs</p></li></ul></br>
-            
+
             <p>After completing the Revenue Grader diagnostic, the executive can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation and enhancing sales team skills.</p></br>
-          
+
           <h2>About Revenue Architects</h2>
 
           <p>Integrated consulting and agency services for revenue growth</p>
 
           <p>Revenue Architects delivers adaptive services for revenue growth. We combine marketing, sales, PR and communications skills in a flexible model to address the diverse and changing requirements of marketing and sales leaders. By combining our core team of trusted advisors and our independent network, we flexibly deliver comprehensive services for revenue growth:</p>
-          
+
           <ul>
           <li><p>Revenue Strategy: Envisioning opportunities, assessing capabilities and prioritizing initiatives</p></li>
           <li><p>Revenue Systems: Deploying technology, mapping processes, and building skills</p></li>
           <li><p>Revenue Programs: Creating and delivering innovative campaigns and programs.</p></li></ul></br>
-          
+
          <p>Growing the top-line is more challenging than ever. The web, social media and mobile technologies have transformed the buyer-seller relationship. Buyers are more in control.  Businesses must integrate marketing and sales and effectively engage the web to capture, deepen and expand relationships. Yet, executing successfully requires both a solid strategy and diverse talent  – from creative design and branding to content creation and technology.  And needs continuously evolve.</p>
        </div>
-        
+
           <!-- <div class="footer1">
               <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div>  -->
         </div>
 <%#end%>
       <div style="align:right">
-            <span style="margin-right:5px;"><img src="http://stage.revenuegrader.com/assets/logo.png" alt = "Revenue Grader"><span>    
+            <span style="margin-right:5px;"><img src="http://stage.revenuegrader.com/assets/logo.png" alt = "Revenue Grader"><span>
              <h2>Contact Details</h1>
              <h4>Email</h4>
              <p>contact@revenuearchitects.com</p>
@@ -236,7 +235,7 @@
             <!-- <div class="footer1">
                <img src="http://dev.revenuegrader.com/assets/logo.png">
             </div> -->
-        </div> 
-   
+        </div>
+
     </body>
 </html>

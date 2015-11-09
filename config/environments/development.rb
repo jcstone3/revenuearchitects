@@ -32,8 +32,10 @@ RevenueGrader::Application.configure do
   # Do not compress assets
   config.assets.compress = false
 
+  config.assets.precompile += %w( 'javascripts/test.js', 'stylesheets/font-lato.css.erb' )
+
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
   config.action_mailer.default_url_options = { :host => 'localhost' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp

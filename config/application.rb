@@ -57,7 +57,7 @@ module RevenueGrader
     config.assets.version = '1.0'
 
     #for asset precompile
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = true
     #Devise Layout definition
     config.to_prepare do
         Devise::SessionsController.layout "website"
@@ -69,9 +69,9 @@ module RevenueGrader
 
     # For Exception Notification.
 
-  config.middleware.use ExceptionNotifier,
-  :email_prefix => "[RevenueGrader Exception]",
-  :sender_address => %{ "RevenueGrader" <admin@revenuegrader.com> },
-  :exception_recipients => %{"admin@revenuegrader.com"}
+  # config.middleware.use ExceptionNotifier,
+  # :email_prefix => "[RevenueGrader Exception]",
+  # :sender_address => %{ "RevenueGrader" <admin@revenuegrader.com> },
+  # :exception_recipients => %{"admin@revenuegrader.com"}
   end
 end

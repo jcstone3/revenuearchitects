@@ -16,7 +16,7 @@ table.dataTable thead th {
   	background-image: -o-linear-gradient(top, #4e5960, #647077);
   	background-image: linear-gradient(top, #4e5960, #647077);*/
   	background-color:#909090;
-	padding: 3px 18px 3px 10px;
+	padding: 6px 18px 6px 10px;
 	border-bottom: 1px solid black;
 	color:#ffffff;
 	font-weight: bold;
@@ -71,7 +71,13 @@ table.dataTable2 tfoot th {
 }
 
 table.dataTable2 td {
-	padding: 3px 10px;
+	padding: 5px 3px;
+	text-align: center;
+}
+
+table.dataTable2 td.question-column {
+	width: 100%;
+	text-align: left;
 }
 
 table.dataTable2 td.center,
@@ -115,9 +121,14 @@ table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
 /*
  * Filter
  */
-.dataTables_filter {
-	float: right;
-	text-align: left;
+#question_table_filter {
+	position: absolute;
+	top: -40px;
+}
+
+#user_table_filter{
+	position: absolute;
+	top: -45px;
 }
 
 
@@ -260,7 +271,7 @@ table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
 
 .sorting_asc_disabled { background: url('/assets/sort_asc_disabled.png') no-repeat center right; }
 .sorting_desc_disabled { background: url('/assets/sort_desc_disabled.png') no-repeat center right; }
- 
+
 table.dataTable th:active {
 	outline: none;
 }
@@ -276,4 +287,3 @@ table.dataTable th:active {
 .dataTables_scrollBody {
 	*margin-top: -1px;
 }
-

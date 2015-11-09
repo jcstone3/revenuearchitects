@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-#ruby "1.9.3"
+# ruby "1.9.3"
 gem 'rails', '3.2.19'
 gem 'pg'
 gem "devise", "~> 2.1.3"
@@ -12,6 +12,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 #gem 'omniauth-google'
 gem 'omniauth-google-oauth2', '~> 0.2.2'
+gem 'omniauth-linkedin'
 gem 'oauth2'
 #gem 'omniauth-google-apps'
 #gem "oa-openid"
@@ -51,6 +52,7 @@ gem "google_visualr", ">= 2.1"
 gem "less-rails"
 gem 'twitter-bootstrap-rails'
 gem 'taps'
+gem 'slim'
 gem 'exception_notification', :git => "git://github.com/rails/exception_notification.git",
         :require => "exception_notifier"
 gem "permanent_records", "~> 2.1.2"
@@ -58,21 +60,21 @@ gem "acts_as_list", "~> 0.1.6"
 #gem "ordered-active-record", "~> 0.9.7"
 
 #PDF generation plugin
-gem 'wicked_pdf'
-
+gem 'wicked_pdf', '0.11.0'
+gem 'wkhtmltopdf-binary'
 # Raven Setup
 gem "sentry-raven"
 
 group :development do
 gem "annotate", "~>2.4.1.beta1"
 gem "rails_best_practices"
-gem 'wkhtmltopdf-binary'
+gem 'byebug'
 # gem 'unicorn'
 end
 
 #wkhtmltopdf for test, stage and production enviornments
 group :test, :staging, :production do
-	gem "wkhtmltopdf-heroku"
+	gem 'wkhtmltopdf-heroku', '~> 1.0.0'
 	gem 'newrelic_rpm'
 end
 # Gems used only for assets and not required
@@ -97,7 +99,7 @@ end
 # gem 'capistrano'
 gem 'capistrano', '2.15.5'
 gem 'net-ssh', '2.7.0'
-gem 'rvm-capistrano', require: false
+gem  'rvm-capistrano',  require: false
 gem 'capistrano-ext'
 
 # To use debugger

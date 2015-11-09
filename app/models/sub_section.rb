@@ -8,6 +8,11 @@ class SubSection < ActiveRecord::Base
 
 	belongs_to :section
 	has_many :questions, :dependent => :destroy
+
+  def self.last_secuence
+    (SubSection.last.nil? )? 1 :  SubSection.last.sequence.to_i + 1 
+  end
+
 end
 # == Schema Information
 #

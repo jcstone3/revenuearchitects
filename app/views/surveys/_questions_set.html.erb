@@ -22,12 +22,12 @@
   <div class="option">
     <h2>How important is this?</h2>
     <div style="clear:both"></div>
-    <div class="slabels">
-      <span>1-Low</span>
-      <span class="second">2</span>
-      <span class="third">3</span>
-      <span class="fourth">4</span>
-      <span class="fifth">5-High</span>
+    <div class="slabels important-slabels">
+      <span class="first" data-value="1">1-Low</span>
+      <span class="second" data-value="2">2</span>
+      <span class="third" data-value="3">3</span>
+      <span class="fourth" data-value="4">4</span>
+      <span class="fifth" data-value="5">5-High</span>
     </div>
 
     <div id="importance-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" >
@@ -40,26 +40,28 @@
   </div>
 </div>
 <br>
-<div class="points1 qseth2">
+<div class="points1 qseth2 span6" style="margin-left: 0;">
     <div class="option" id="option">
     <h2>Add to Plan?</h2>
 
-    <a rel="tooltip" id ="add_to_plan" class="btn priorityTip plan_option" style="margin-left:18px;" data-original-title="Add this item to our plan for prioritization"><span><i class="icon-plus icon-white" id ="add_to_plan"></i></span> <strong id ="add_to_plan">Add to Plan</strong></a>
+    <a rel="tooltip" id ="add_to_plan" class="btn priorityTip plan_option btn-success" data-original-title="Add this item to our plan for prioritization"><span><i class="icon-plus icon-white" id ="add_to_plan"></i></span> <strong id ="add_to_plan">Add to Plan</strong></a>
 
     <a rel="tooltip" id ="in_our_plan" class="btn priorityTip plan_option"  data-original-title="This item is already established in our plan"><span><i class="icon-ok icon-white" id ="in_our_plan"></i></span> <strong id ="in_our_plan">In Our Plan</strong></a>
 
     <a rel="tooltip" id ="not_applicable" class="btn form priorityTip plan_option"  data-original-title="This item does not apply as a priority for our business"><span><i class="icon-remove icon-white" id ="not_applicable"></i></span> <strong id ="not_applicable">Not Applicable</strong></a>
-    <%= f.hidden_field :answer_2%>
+    <%= f.hidden_field :answer_2, value: 'add_to_plan', required: true%>
     </div>
 </div>
 <div class="points1 priority">
-    <div class="option" id="priority_option">
+  <div class="option" id="priority_option">
     <h2>Priority</h2>
-    <a rel="tooltip" class="btn priorityTip priority_option" id ="must_do" style="margin-left:18px;"data-original-title="This is among our highest priorities" data-placement="right" ><span><i class="icon-ok icon-white" id ="must_do"></i></span> <strong id ="must_do">Must Do</strong></a>
-    <a rel="tooltip" class="btn form priorityTip priority_option" id ="should_do" data-original-title="This is an important element of our plan"><span><i class="icon-plus icon-white" id ="should_do"></i></span> <strong id ="should_do">Should Do</strong></a>
-    <a rel="tooltip" class="btn form priorityTip priority_option" id="could_do" data-original-title="We will do this opportunistically"><span><i class="icon-check icon-white" id="could_do"></i></span> <strong id="could_do">Could Do</strong></a>
+    <a rel="tooltip" class="btn btn-danger form priorityTip priority_option" id="could_do" data-original-title="We will do this opportunistically"><span><i class="icon-check icon-white" id="could_do"></i></span> <strong id="could_do">Could Do</strong></a>
+
+    <a rel="tooltip" class="btn btn-warning form priorityTip priority_option" id ="should_do" data-original-title="This is an important element of our plan"><span><i class="icon-plus icon-white" id ="should_do"></i></span> <strong id ="should_do">Should Do</strong></a>
+
+    <a rel="tooltip" class="btn btn-success priorityTip priority_option" id ="must_do" data-original-title="This is among our highest priorities"><span><i class="icon-ok icon-white" id ="must_do"></i></span> <strong id ="must_do">Must Do</strong></a>
     <%= f.hidden_field :answer_3%>
-    </div>
+  </div>
 </div>
 <p class="prevconf">
 
@@ -70,10 +72,10 @@
    <% if(@question.position > 1)%>
     <%= link_to(questions_path(params[:id],@question.position - 1 ), :class=>"btn confprev") do %>
        <i class="icon-chevron-left">
-        </i> &nbsp;Previous Question
+        </i> &nbsp;Previous Practice
    <% end %>
    <%else%>
-    <a rel="tooltip" class="btn large disabled confprev"><i class="icon-chevron-left"></i>&nbsp;Previous Question</a>
+    <a rel="tooltip" class="btn large disabled confprev"><i class="icon-chevron-left"></i>&nbsp;Previous Practice</a>
     <%end%>
     <!--<a href="#" class="btn btn-small btn-info" style="float:right; margin-right:20px;"><i class="icon-chevron-left"></i> Save Work</a>-->
   </p>

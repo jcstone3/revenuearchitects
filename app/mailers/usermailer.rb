@@ -1,9 +1,9 @@
 class Usermailer < ActionMailer::Base
-  default from: '"Revenue Grader Lead" <noreply@revenuegrader.com>'
+  default from: '"Revenue Grader" <noreply@revenuegrader.com>'
   def welcome(user)
     @user = user
     @url  = "http://www.revenuegrader.com/login"
-    mail(:to => user.email, :subject => "Welcome to Revenue Grader")
+    mail(:to => @user.email, :subject => "Welcome to Revenue Grader")
   end
 
   def reset_password_instructions(user)
@@ -13,12 +13,19 @@ class Usermailer < ActionMailer::Base
     end
   end
 
-  def new_signup_details(user,company,survey)
+  def new_signup_details(user)
+    @user = user unless user.blank?
+    mail(:to => "support.revenuegrader@icicletech.com, contact@revenuearchitects.com, admin@revenuegrader.com", :subject => "New SignUp", :tag => 'new-signup-details') do |format|
+      format.html { render "usermailer/new_signup_details" }
+    end
+  end
+
+  def complete_survey_details(user,company,survey)
     @survey = survey unless survey.blank?
     @company = company unless company.blank?
     @user = user unless user.blank?
-    mail(:to => "support.revenuegrader@icicletech.com, contact@revenuearchitects.com, admin@revenuegrader.com", :subject => "New Survey Details", :tag => 'new-signup-details') do |format|
-      format.html { render "usermailer/new_signup_details" }
+    mail(:to => @user.email, :subject => "New Completed Survey Details", :tag => 'new-completed-survey') do |format|
+      format.html { render "usermailer/complete_survey_details" }
     end
   end
 

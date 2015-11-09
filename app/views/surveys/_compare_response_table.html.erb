@@ -1,65 +1,14 @@
 <%#= @add_to_plan_responses.inspect%>
-<% if @responses.present?%>
- <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2">
-                                               <thead>
-                                                  <tr>
-                                                    <th><h3>#</h3></th>
-                                                    <th><h3 title ="Questions">Questions</h3></th>
-                                                    <th><h3 title ="Subcategory of questions">Dimension</h3></th>
-                                                    <th><h3 title ="Points for questions">Points</h3></th>
-                                                    <th><h3 title ="Your Score for Questions">Score</h3></th>
-                                                    <th><h3 title ="Your importance for questions">Importance</h3></th>
-                                                    <th><h3 title ="Gap between importance and maturity level for questions">Gap</h3></th>
-                                                    <th><h3 title ="Average score for questions">Avg Score</h3></th>
-                                                    <th><h3 title ="Calculated score for questions">Cal Score</h3></th>
-                                                     <th><h3 title ="Average calculated score for questions">Avg Cal Score</h3></th>
-                                                    <th><h3  title ="Is this questions are in our plan">In Plan</h3></th>
-                                                    <th><h3 title ="Priority for questions">Priority</h3></th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
+ <% if @responses.present?%>
+  <table cellpadding="1" cellspacing="1" id="resultTable" class="report-body dataTable2">
+    <%= render :partial=>"table_header_compare"%>
+  <tbody>
+    <% @responses.each do |response| %>
+      <%= render "response_report_compare", {response: response} %>
+    <% end %>
+  </tbody>
+ </table>
 
-                                        <% @responses.each do |response| %>
-                                            <tr>
-                                                <td><%= response.questions_id %></td>
-                                                <td><%= response.name %></td>
-                                                <td><%= response.sub_sect_name%></td>
-                                                <td><%= response.points %></td>
-                                                <td><%= response.score.blank? ? 0 : response.score %></td>
-                                                <!-- <td><%= response.avg_score.to_f()%> </td> -->
-                                                <td><%= response.answer_4.blank? ? 0 : response.answer_4 %></td>
-                                                <td>
-                                                  <% performance_gap = get_performance_gap(response.answer_4, response.score) %>
-                                                  <%= performance_gap.present? ?
-                                                  performance_gap : 0 %>
-                                                </td>
-                                                <td>
-                                                  <% average_score = get_average_score(response.questions_id, @survey.id) %>
-                                                  <%= average_score.present? ?
-                                                  average_score : 0 %>
-
-                                                </td>
-
-                                                <td>
-
-                                                  <%= response.response_id.present? ?
-                                                  get_calculated_score(response.response_id, response.questions_id) : 0 %></td>
-
-                                                <td>
-                                                  <% avg_calculated_score = get_avg_calculated_score(@survey.id, response.questions_id, response.section_id) %>
-                                                  <%= avg_calculated_score.present? ? avg_calculated_score : 0 %>
-                                                 </td>
-                                                <% if(response.in_plan == "in_our_plan") %>
-                                                    <td><%= 'Yes'%></td>
-                                               <%else%>
-                                                    <td><%= 'No'%></td>
-                                               <%end %>
-                                                <td><%= response.answer_3.try(:titleize) %></td>
-                                                </tr>
-                                        <% end %>
-
-                                                </tbody>
-                                          </table>
  <%else%>
  <p>No Response avaiable for this search</p>
  <%end%>

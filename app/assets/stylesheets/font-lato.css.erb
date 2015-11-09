@@ -1,0 +1,53 @@
+/* latin-ext */
+@font-face {
+  font-family: 'Lato2';
+  font-style: normal;
+  font-weight: normal;
+  src: url('file:///<%= Rails.root.join('app', 'assets', 'font', 'Lato-Regular.ttf') %>') format('truetype');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'LatoBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('file:///<%= Rails.root.join('app', 'assets', 'font', 'Lato-Bold.ttf') %>') format('truetype');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'LatoBlack';
+  font-style: normal;
+  font-weight: normal;
+  src: url('file://<%= Rails.root.join('app', 'assets', 'font', 'Lato-Black.ttf') %>') format('truetype');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'LatoSemiBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('file:///<%= Rails.root.join('app', 'assets', 'font', 'Lato-Semibold.ttf') %>') format('truetype');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: normal;
+  src: url('file:///<%= Rails.root.join('app', 'assets', 'font', 'MDadn8DQ_3oT6kvnUq_2r_esZW2xOQ-xsNqO47m55DA.woff2') %>') format('woff2')
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+@font-face {
+    font-family: 'LatoWebBlack';
+    src: url('file:///<%= Rails.root.join('app', 'assets', 'font','Lato-Black.eot') %>'); /* IE9 Compat Modes */
+    src: url('file:///<%= Rails.root.join('app', 'assets', 'font','Lato-Black.eot?#iefix') %>') format('embedded-opentype'),
+         url('file:///<%= Rails.root.join('app', 'assets', 'font','Lato-Black.woff2') %>') format('woff2'),
+         url('file:///<%= Rails.root.join('app', 'assets', 'font','Lato-Black.woff') %>') format('woff'),
+         url('file:///<%= Rails.root.join('app', 'assets', 'font','Lato-Black.ttf') %>') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}

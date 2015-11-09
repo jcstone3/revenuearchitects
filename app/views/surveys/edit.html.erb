@@ -6,7 +6,7 @@
       <%= simple_form_for(@survey, :validate => true, :class => "well") do |f| %>
 
         <%= f.input :size,
-                      :collection => [ ['1 -99'],['100 - 499'],['500-5000'],['5000 and above'] ] ,
+                      :collection => @sizes,
                       :prompt => "Select Company Size",
                       :label => "Company Size",
                       :input_html => { :class => 'input-xlarge' },

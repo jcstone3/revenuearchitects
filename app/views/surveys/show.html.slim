@@ -1,0 +1,77 @@
+- content_for :main_content do
+  .row-fluid
+    .span12
+      h2.title1.without_margin DIAGNOSTIC SURVEY
+  - if @current_surveys.present?
+    - @current_surveys.each do |current_survey|
+      -@response_count= current_survey.responses.present? ? current_survey.responses.count : 0
+      .row-fluid.without_margin.content-survey
+        .span12
+          .row-fluid
+            .span4
+              .content = "Diagnostic for #{current_survey.created_at.strftime('%B %d, %Y')}"
+            .span3.text-center
+              div Completed Practices
+              - if (@response_count<@total_question_total)
+                div.type-btn.type-btn-red= "#{@response_count} / #{@total_question_total}"
+              - else
+                div.type-btn.type-btn-green= "#{@response_count} / #{@total_question_total}"
+            .span2.pull-right
+              =link_to "VIEW", "#{get_response_status_url(current_survey)}",class: "btn plane-btn"
+  - else
+    h1.question.without_margin Start a new Diagnostic
+    div
+      = link_to 'Start Diagnostic', create_survey_path, method: :post, class: 'without_margin'
+  .row-fluid
+    .span12
+      h3.title2.without_margin PREVIOUS DIAGNOSTICS
+  -if @completed_surveys.present?
+    - @completed_surveys.each_with_index do |completed_survey, i|
+      -@response_count= completed_survey.responses.present? ? completed_survey.responses.count : 0
+      -if i < 2
+        .row-fluid.without_margin.content-survey
+          .span12
+            .row-fluid
+              .span4
+                .content = "Diagnostic for #{completed_survey.created_at.strftime('%B %d, %Y')}"
+              .span3.text-center
+                div Completed Practices
+                - if (@response_count<@total_question_total)
+                  div.type-btn.type-btn-red= "#{@response_count} / #{@total_question_total}"
+                - else
+                  div.type-btn.type-btn-green= "#{@response_count} / #{@total_question_total}"
+
+              .span2.pull-right
+                =link_to "VIEW", "#{get_response_status_url(completed_survey)}",class: "btn plane-btn"
+
+  - else
+    h3 No previous Surveys
+
+  .row-fluid
+    .span12
+      h3.title2.without_margin NEXT STEPS
+      .row-fluid
+        .span12
+          p.margin-10 The Revenue Grader Serves an early step in strategic planning for revenue growth. It help identify top level areas that require additional focus. The next step is to analyze each of the priorities and develop a specific and detailed plan and timeline. A plan will reflect various dependencies and critical success factors. Revenue Architects can assist in plan development and implementation.
+
+  .row-fluid
+    .span12
+      h3.title2.without_margin ABOUT REVENUE GRADER
+
+  .row-fluid
+      .span8
+        p.margin-extra.without_margin Revenue Grader is a self-diagnostic for revenue performance. Tell us your practices across three dimensions: Revenue Strategy, Revenue Systems and Revenue Programs and gain a comprehensive view of your revenue performance potential.
+        p.margin-extra.without_margin The Revenue Grader explores 30 dimensions of revenue growth across three layers:
+        ul.margin-extra.without_margin.blue-list.font-blue
+          li
+            a href="http://www.revenuearchitects.com/services/revenue-strategy/" - Revenue Strategy
+          li
+            a href="http://www.revenuearchitects.com/services/revenue-systems/" - Revenue Systems
+          li
+            a href="http://www.revenuearchitects.com/services/revenue-programs/" - Revenue Programs
+        p.margin-extra.without_margin After completing the Revenue Grader, teams can quickly identify priorities. Priorities can range widely - from developing market segmentation and crafting better value propositions to deploying marketing automation, closed loop marketing programs and enhancing account based marketing and sales.
+
+
+      .span4.center-image
+        a href="http://revenuearchitects.com/resources/revenue-architecture/"
+          img src="http://revenuearchitects.com/wp-content/uploads/2013/08/RA_Architecture-300x241.png" alt=""/

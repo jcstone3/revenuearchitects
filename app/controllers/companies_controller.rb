@@ -9,6 +9,7 @@ class CompaniesController < ApplicationController
 
     #new#company
 	def new
+    @user = current_user;
 		@company = Company.new
 		#@industries = Industry.all
 	end
@@ -17,7 +18,9 @@ class CompaniesController < ApplicationController
 	def create
   	@company = Company.new(params[:company])
     @company.user = current_user
-  	if @company.save
+    @user = current_user
+  	if @company.valid? && @user.update_attributes(params[:user])
+      @company.save
   		flash[:success] = "Company #{@company.name} created successfully"
   		redirect_to new_survey_url
   	else
@@ -32,13 +35,20 @@ class CompaniesController < ApplicationController
   #edit#company
   def edit
     @company = Company.find_by_id(params[:id])
+    @user = current_user;
   end
 
   def update
     @company = Company.find_by_id(params[:id])
-    if @company.update_attributes(params[:company])
+    @user = current_user
+    
+    if @user.update_attributes(params[:user] && @company.update_attributes(params[:company]))
       # On comapany updation redirects to the update survey
-      redirect_to edit_survey_path(id: session[:survey])
+      if @user.is_permanent?
+        redirect_to edit_survey_path(id: session[:survey])
+      else
+        render :new
+      end
     else
       render :edit
     end

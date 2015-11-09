@@ -1,6 +1,6 @@
 <table cellpadding="1" cellspacing="1" id="user_table" class="report-body dataTable2"> 
           <thead>
-                <tr>              
+                <tr>
                   <th><h3>Name</h3></th>
                   <th><h3>Company</h3></th>
                   <th><h3>Email</h3></th>
@@ -13,7 +13,7 @@
           </thead>
           <tbody>
             <% @user_surveys.each do |user_survey| %>
-                <tr>                 
+                <tr>
                     <td><%= user_survey.username %></td>
                     <td><%= user_survey.company_name %></td>
                     <td><%= user_survey.email %></td>
@@ -21,10 +21,15 @@
                     <td><%= user_survey.industry_name %></td>
                     <td><%= user_survey.size %></td>
                     <td><%= user_survey.revenue %></td>
-                    <td><%= link_to user_survey.start_date.to_date.strftime("%d %B %Y"), admin_users_survey_report_url(user_survey.id, user_survey.survey_id) if !user_survey.start_date.blank? %></td>
-                    <td><%= user_survey.start_date.to_date.strftime("%Y%m%d") if !user_survey.start_date.blank? %></td>                     
+                    <td>
+                      <span style="visibility: hidden; position: absolute;">
+                        <%= user_survey.start_date ? user_survey.start_date.to_time.to_i : 0 %>
+                      </span>
+                      <%= link_to user_survey.start_date.to_date.strftime("%d %B %Y"), admin_users_survey_report_url(user_survey.id, user_survey.survey_id) if !user_survey.start_date.blank? %>
+                    </td>
+                    <td><%= user_survey.start_date.to_time.to_i if !user_survey.start_date.blank? %></td>
                 </tr>
             <% end %>
 
-          </tbody>        
-</table>      
+          </tbody>
+</table>

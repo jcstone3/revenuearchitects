@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RevenueGrader.com - Assess your Revenue Potential</title>
+    <%#= csrf_meta_tags %>
+
+    <meta name="description" content="Revenue Grader is a self-diagnostic for revenue performance. Tell us your practices across three dimensions: Revenue Strategy, Revenue Systems and Revenue Programs and gain a comprehensive view of your revenue performance potential."/>
+    <meta name="keywords" content="revenue, survey, revenue strategy, revenue systems, revenue programs, revenue grading, revenue architects, increase revenue, diagnostic tool, revenue performance, revenue growth"/>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 7]>
+        <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
+      <!--[endif]-->
+      <!--[if lt IE 8]>
+      <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+      <![endif]-->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+    <link href="/assets/rg_icon.png" type="image/png" rel="shortcut icon">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <!-- Le fav and touch icons -->
+    <!-- <link href="assets/rg_icon.png" rel="shortcut icon"> -->
+    <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+  </head>
+
+  <body style="background-image:none;background-color:#fff;" class="<%= controller_name %> <%= action_name %>">
+    <div class="container-fluid " >
+      <div class="row-fluid top-bar">
+        <%= render  "/layouts/shared/header" -%>
+      </div><!-- / end of row -->
+      <%= yield :top_bar_content %>
+      <% if !flash.blank? -%>
+        <div class="row-fluid">
+          <% flash.each do |key, value| %>
+            <%= content_tag :div, :id=>'flash_msg', :class => "alert alert-#{key}" do %>
+              <%= value unless value.blank? %>
+              <a class="close" data-dismiss="alert">×</a>
+            <% end %>
+          <% end %>
+        </div><!-- / -->
+      <% end -%>
+    </div>
+    <div class="container-fluid " >
+      <%= yield :main_content %>
+    </div>
+    <div class="container-fluid " >
+      <div id="popup-notice" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <%= yield :popup_notice %>
+      </div>
+
+      <div class="row-fluid footer" >
+        <%= render '/layouts/shared/footer'%>
+      </div> <!-- / End of footer -->
+    </div> <!-- end on container - main -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <%= javascript_include_tag "application" %>
+    <%= feedback_tab(:position => 'left') %>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-35248979-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+    <script type="text/javascript">
+      // This tracking is for http://www.revenuegrader.com only.
+      var _ss = _ss || [];
+      _ss.push(['_setDomain', 'https://koi-HSIR8I.sharpspring.com/net']);
+      _ss.push(['_setAccount', 'KOI-HTZJME']);
+      _ss.push(['_trackPageView']);
+      (function() {
+        var ss = document.createElement('script');
+        ss.type = 'text/javascript'; ss.async = true;
+        ss.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'koi-HSIR8I.sharpspring.com/client/ss.js?ver=1.1.1';
+        var scr = document.getElementsByTagName('script')[0];
+        scr.parentNode.insertBefore(ss, scr);
+      })();
+    </script>
+
+  <!--  previous tracking code -->
+  <!--//   <script type="text/javascript">
+  // /* <![CDATA[ */
+  // document.write (
+  //   '<img src="http://engage.revenuearchitects.com/acton/bn/2488/visitor.gif?ts='+
+  //   new Date().getTime()+
+  //   '&ref='+escape(document.referrer) + '">'
+  // );
+  // /* ]]> */
+  // </script> -->
+
+  </body>
+</html>

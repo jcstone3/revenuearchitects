@@ -212,10 +212,13 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   require "omniauth-facebook"
-  config.omniauth :facebook, Settings.facebook_app_id, Settings.facebook_secret_key,  {:scope => 'email,offline_access',
+  config.omniauth :facebook, Settings.facebook_app_id, Settings.facebook_secret_key,  
+                {:scope => 'public_profile, email',
+                  info_fields: 'email,first_name,name,id,gender,link,locale',
                   :client_options => {:ssl => {:ca_path => "/etc/ssl/certs"}}}
   require "omniauth-twitter"
-  config.omniauth :twitter, Settings.twitter_api_id, Settings.twitter_secret_key
+  config.omniauth :twitter, Settings.twitter_api_id, Settings.twitter_secret_key,
+  {:scope => 'include_email'}
   require 'omniauth-google-oauth2'
  # require 'omniauth-google'
  # require 'omniauth-google-apps'
@@ -227,9 +230,11 @@ Devise.setup do |config|
                   Settings.google_api_id,
                   Settings.google_secret_key
 
-  #require 'omniauth-linkedin'
   #require 'oauth'
- # config.omniauth :linkedin, Settings.linkedin_api_key, Settings.linkedin_secret_key
+  require 'omniauth-linkedin'
+  config.omniauth :linkedin, Settings.linkedin_api_key, Settings.linkedin_secret_key, 
+  :scope => 'r_basicprofile r_emailaddress', 
+  :fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location"]
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

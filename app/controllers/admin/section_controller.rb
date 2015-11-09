@@ -15,8 +15,7 @@ class Admin::SectionController < ApplicationController
 
     def create
       @section = Section.new(params[:section])
-      @last_section = Section.last
-      @section.sequence = @last_section.sequence.to_i + 1
+      @section.sequence = Section.last_secuence
       if @section.save
       	flash[:success] = "Section Added successfully!"
       	redirect_to admin_sections_url
@@ -31,8 +30,7 @@ class Admin::SectionController < ApplicationController
     end
 
     def create_subsection
-      sequence = SubSection.last.id+1
-    	params[:sub_section].merge!(:is_active => true, :sequence => sequence)
+    	params[:sub_section].merge!(:is_active => true, :sequence => SubSection.last_secuence)
     	@subsection = SubSection.new(params[:sub_section])
     	if @subsection.save
       	 flash[:success] = "Sub Section created successfully!"

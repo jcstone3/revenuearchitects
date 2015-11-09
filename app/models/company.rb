@@ -1,10 +1,7 @@
 class Company < ActiveRecord::Base
-	validates :name, :presence => {:message => "Company name can't be blank"}, :format => { :with => /\A[a-z A-Z -]+\z/, :message => "Only letters allowed" }, :length => { :maximum => 40 }, on: :update
-
-
+	validates :name, :presence => {:message => "Company name can't be blank"}, :format => { :with => /\A[a-z A-Z -]+\z/, :message => "Only letters allowed" }, :length => { :maximum => 40 }
 	validates :website, :presence => {:message => "Website url can't be blank"}, :length => { :maximum => 40 },
-			  :format => {:with => /^(http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)*$/i,:message =>"Invalid url"}, on: :update
-
+			  :format => {:with => /^(http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)*$/i,:message =>"Invalid url"}
 	validates :user_id, :presence => true
   validates :industry_id, :presence => {:message => "Industry can't be blank"}, :numericality => true, on: :update
 
