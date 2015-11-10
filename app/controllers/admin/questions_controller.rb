@@ -70,7 +70,7 @@ class Admin::QuestionsController < ApplicationController
         end
       Question.fix_order_to_check
       flash[:success] = "Question Updated successfully"
-      redirect_to :action => 'index'
+      redirect_to admin_questions_url
     #format.html (redirect_to (@question))
     else
       @subsection = SubSection.find(:all, :order=>"id ASC")
