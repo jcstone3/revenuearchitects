@@ -9,21 +9,21 @@ class Admin::QuestionsController < ApplicationController
                                   sections on sections.id = sub_sections.section_id",
                        :order => "questions.position ASC")
 
-				
-	end	
+
+	end
 
   def new
-    @question = Question.new	
-    @subsections = SubSection.all    
-  end	
+    @question = Question.new
+    @subsections = SubSection.all
+  end
 
-	def create	
+	def create
     params[:question].merge!(:sequence => Question.last_secuence)
-		@question = Question.new(params[:question])	
+		@question = Question.new(params[:question])
 
         if @question.save
-          #find the section for the subsection to increase the count of the 
-          #the questions added to that section          
+          #find the section for the subsection to increase the count of the
+          #the questions added to that section
           logger.debug @question
           @section = Section.find_by_sql("select sections.id, sections.name , sections.questionnaire_id, question_count, total_points, sub_sections.id as sub_section_id from sections inner join sub_sections on sections.id = sub_sections.section_id and sub_sections.id = #{@question.sub_section_id}")
 
@@ -33,31 +33,31 @@ class Admin::QuestionsController < ApplicationController
           if @section.first.update_attributes(:question_count => @section_question_count ,:total_points => @section_total_points)
           Question.fix_order_to_check
           flash[:success] = "Question Created successfully"
-          redirect_to :action => 'index'
+          redirect_to admin_questions_url
           else
            flash[:success] = "Question could not be created successfully"
            redirect_to :action => 'index'
-          end  
+          end
         else
           flash[:error] = "Question could not be created"
           render 'new'
-        end 
-	end	
- 
- def edit  
-    @question = Question.find_by_id(params[:id])    
+        end
+	end
+
+ def edit
+    @question = Question.find_by_id(params[:id])
     respond_to do |format|
       format.html
-    end  
+    end
   end
 
   def update
    @question = Question.find(params[:id])
-   
+
     if @question.update_attr_with_previos_sequence(params[:question])
-      #get questions count and questions total point for each section 
+      #get questions count and questions total point for each section
        @questions =   Question.find(:all,
-                                    :select => "sum(questions.points) as question_points, count(*) as question_count, sections.name", 
+                                    :select => "sum(questions.points) as question_points, count(*) as question_count, sections.name",
                                     :joins => "left join sub_sections on questions.sub_section_id = sub_sections.id right outer join sections on sections.id = sub_sections.section_id",
                                     :group => "sections.name,sections.id",
                                     :order => "sections.id")
@@ -67,17 +67,17 @@ class Admin::QuestionsController < ApplicationController
         @sections.each_with_index do |section, i|
           section.update_attributes(:total_points=> @questions[i].question_points, :question_count=>@questions[i].question_count)
           logger.debug section
-        end 
+        end
       Question.fix_order_to_check
       flash[:success] = "Question Updated successfully"
-          redirect_to :action => 'index'
+      redirect_to :action => 'index'
     #format.html (redirect_to (@question))
-    else 
+    else
       @subsection = SubSection.find(:all, :order=>"id ASC")
       flash[:error] = "Question could not updated"
       render :action => 'edit'
-   
-   end 
+
+   end
   end
 
   def destroy
@@ -85,12 +85,12 @@ class Admin::QuestionsController < ApplicationController
 
     if @question.destroy
       Question.fix_order_to_check
-      flash[:success] = "Question Deleted successfully"         
+      flash[:success] = "Question Deleted successfully"
     else
-      flash[:success] = "Question couldn't be deleted"          
-    end   
-     redirect_to :action => 'index'   
+      flash[:success] = "Question couldn't be deleted"
+    end
+     redirect_to :action => 'index'
   end
 
- 
+
 end
