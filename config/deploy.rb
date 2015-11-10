@@ -23,7 +23,12 @@ set :rvm_ruby_string, 'ruby-1.9.3-p125'
 # set :rvm_type, :user
 # Load RVM's capistrano plugin
 load "deploy/assets"
-
+set :branch do
+  default_tag = `git tag`.split("\n").last
+  tag = Capistrano::CLI.ui.ask "Tag to deploy (make sure to push the tag first): [#{default_tag}] "
+  tag = default_tag if tag.empty?
+  tag
+end
 # set :deploy_to, "/home/icicle/sites/revenuegrader"
 # set :scm, :git
 # set :branch, "ss_capistrano"
