@@ -170,7 +170,8 @@ $(function () {
           title: {
             text: 'PRACTICE',
             align: 'left',
-            y: -18
+            y: 0,
+            x: 30
           },
           categories: data[0],
           gridLineColor: '#FFFFFF',
