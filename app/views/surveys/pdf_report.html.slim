@@ -158,52 +158,52 @@
             td = response.score
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
-          - @all_responses_for_system.each do |response|
-            tr
-              td = response.section_name.try(:titleize)
-              td = response.sub_sect_name.try(:titleize)
-              td.practice-column = response.name
-              td = response.points
-              - if(response.answer_3.try(:titleize) == "Must Do")
-                td.priority-red = response.answer_3.try(:titleize)
-              - elsif(response.answer_3.try(:titleize) == "Should Do")
-                td.priority-blue = response.answer_3.try(:titleize)
-              - elsif(response.answer_3.try(:titleize) == "Could Do")
-                td.priority-green = response.answer_3.try(:titleize)
-              - elsif(response.answer_3.blank?)
-                - if ((response.in_plan.humanize) == "Not applicable")
-                  td.font-bold2 N/A
-                - else
-                  td.font-bold2 = response.in_plan.humanize
+        - @all_responses_for_system.each do |response|
+          tr
+            td = response.section_name.try(:titleize)
+            td = response.sub_sect_name.try(:titleize)
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
               - else
-                td.font-bold2 = response.answer_3.try(:titleize)
-              td = response.answer_4.blank? ? 0 : response.answer_4
-              td = response.score
-              td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-              td = Survey.get_score_value(response.points, response.score)
-            - @all_responses_for_program.each do |response|
-              tr
-                td = response.section_name.try(:titleize)
-                td = response.sub_sect_name.try(:titleize)
-                td.practice-column = response.name
-                td = response.points
-                - if(response.answer_3.try(:titleize) == "Must Do")
-                  td.priority-red = response.answer_3.try(:titleize)
-                - elsif(response.answer_3.try(:titleize) == "Should Do")
-                  td.priority-blue = response.answer_3.try(:titleize)
-                - elsif(response.answer_3.try(:titleize) == "Could Do")
-                  td.priority-green = response.answer_3.try(:titleize)
-                - elsif(response.answer_3.blank?)
-                  - if ((response.in_plan.humanize) == "Not applicable")
-                    td.font-bold2 N/A
-                  - else
-                    td.font-bold2 = response.in_plan.humanize
-                - else
-                  td.font-bold2 = response.answer_3.try(:titleize)
-                td = response.answer_4.blank? ? 0 : response.answer_4
-                td = response.score
-                td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-                td = Survey.get_score_value(response.points, response.score)
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
+        - @all_responses_for_program.each do |response|
+          tr
+            td = response.section_name.try(:titleize)
+            td = response.sub_sect_name.try(:titleize)
+            td.practice-column = response.name
+            td = response.points
+            - if(response.answer_3.try(:titleize) == "Must Do")
+              td.priority-red = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Should Do")
+              td.priority-blue = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.try(:titleize) == "Could Do")
+              td.priority-green = response.answer_3.try(:titleize)
+            - elsif(response.answer_3.blank?)
+              - if ((response.in_plan.humanize) == "Not applicable")
+                td.font-bold2 N/A
+              - else
+                td.font-bold2 = response.in_plan.humanize
+            - else
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
 
   #results-section.overall-chart-pdf
     #score-chart.total-score-content
