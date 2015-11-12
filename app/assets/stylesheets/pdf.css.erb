@@ -513,15 +513,13 @@ svg {
 table tr, table tr td, table tr th, #results-section, .avoid-break {
   page-break-inside: avoid !important;
   position: relative;
-}
-
-.avoid-break{
-  display: block;
+  -webkit-region-break-inside: avoid;
 }
 
 @media print {
   table tr, table tr td, table tr th, #results-section, .avoid-break {
     page-break-inside:avoid;
     position:relative;
+    -webkit-region-break-inside: avoid;
   }
 }
