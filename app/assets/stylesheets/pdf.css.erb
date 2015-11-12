@@ -510,14 +510,14 @@ svg {
   display: none;
 }
 
-table tr, table tr td, table tr th, #results-section, .avoid-break {
+table, #results-section {
   page-break-inside: avoid !important;
   position: relative;
   -webkit-region-break-inside: avoid;
 }
 
 @media print {
-  table tr, table tr td, table tr th, #results-section, .avoid-break {
+  table, #results-section {
     page-break-inside:avoid;
     position:relative;
     -webkit-region-break-inside: avoid;
