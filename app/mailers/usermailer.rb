@@ -15,7 +15,7 @@ class Usermailer < ActionMailer::Base
 
   def new_signup_details(user)
     @user = user unless user.blank?
-    mail(:to => "support.revenuegrader@icicletech.com, contact@revenuearchitects.com, admin@revenuegrader.com", :subject => "New SignUp", :tag => 'new-signup-details') do |format|
+    mail(:to => "contact@revenuearchitects.com", :subject => "New SignUp", :tag => 'new-signup-details') do |format|
       format.html { render "usermailer/new_signup_details" }
     end
   end

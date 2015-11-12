@@ -136,7 +136,7 @@
             |YOUR POINTS
       tbody
         - @all_responses_for_strategy.each do |response|
-          tr
+          tr.avoid-break
             td = response.section_name.try(:titleize)
             td = response.sub_sect_name.try(:titleize)
             td.practice-column = response.name
@@ -159,7 +159,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @all_responses_for_system.each do |response|
-          tr
+          tr.avoid-break
             td = response.section_name.try(:titleize)
             td = response.sub_sect_name.try(:titleize)
             td.practice-column = response.name
@@ -182,7 +182,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @all_responses_for_program.each do |response|
-          tr
+          tr.avoid-break
             td = response.section_name.try(:titleize)
             td = response.sub_sect_name.try(:titleize)
             td.practice-column = response.name
@@ -246,7 +246,7 @@
             |YOUR POINTS
       tbody
         - @all_responses_for_strategy.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -307,7 +307,7 @@
             |YOUR POINTS
       tbody
         - @all_responses_for_system.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -367,7 +367,7 @@
             |YOUR POINTS
       tbody
         - @all_responses_for_program.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -427,7 +427,7 @@
             |YOUR POINTS
       tbody
         - @must_do_responses_strategy.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -449,7 +449,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @should_do_responses_strategy.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -471,7 +471,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @could_do_responses_strategy.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -493,7 +493,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @not_applicable_responses_strategy.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -543,7 +543,7 @@
             |YOUR POINTS
       tbody
         - @must_do_responses_system.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -565,7 +565,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @should_do_responses_system.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -587,7 +587,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @could_do_responses_system.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -609,7 +609,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @not_applicable_responses_system.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -659,7 +659,7 @@
             |YOUR POINTS
       tbody
         - @must_do_responses_program.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -681,7 +681,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @should_do_responses_program.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -703,7 +703,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @could_do_responses_program.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -725,7 +725,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @not_applicable_responses_program.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -775,7 +775,7 @@
             |YOUR POINTS
       tbody
         - @must_do_responses.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -797,7 +797,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @should_do_responses.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
@@ -819,7 +819,7 @@
             td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
             td = Survey.get_score_value(response.points, response.score)
         - @could_do_responses.each do |response|
-          tr
+          tr.avoid-break
             td = response.sub_sect_name
             td.practice-column = response.name
             td = response.points
