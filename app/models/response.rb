@@ -9,7 +9,7 @@ class Response < ActiveRecord::Base
 	belongs_to :survey
 
 	scope :get_response, lambda{ |section_id, surveyid| {
-				:select => "questions.id as questions_id,responses.id as response_id, sections.id as section_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, responses.answer_4, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score, responses.survey_id as survey_id ",
+				:select => "questions.id as questions_id, questions.sequence as sequence, responses.id as response_id, sections.id as section_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, responses.answer_4, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score, responses.survey_id as survey_id ",
 				:joins => "right outer join questions on (responses.question_id = questions.id and responses.survey_id =#{surveyid})
 				             left outer join sub_sections on questions.sub_section_id = sub_sections.id
 				             left outer join sections on sections.id = sub_sections.section_id",
@@ -51,7 +51,7 @@ scope :get_response_for_options, lambda{ |surveyid, action| {
 }}
 
 scope :get_all_responses, lambda{ |surveyid| {
-    :select => "questions.id as questions_id,responses.id as response_id, sections.id as section_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, responses.answer_4, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score, responses.survey_id as survey_id ",
+    :select => "questions.id as questions_id, questions.sequence as sequence,responses.id as response_id, sections.id as section_id, questions.name,responses.answer_1 as score, responses.answer_2 as in_plan, responses.answer_3, responses.answer_4, questions.points, sections.name as section_name, sub_sections.name as sub_sect_name, avg(responses.answer_1) as avg_score, responses.survey_id as survey_id ",
       :joins => "left outer join questions on responses.question_id = questions.id
              left outer join sub_sections on questions.sub_section_id = sub_sections.id
              left outer join sections on sections.id = sub_sections.section_id",
