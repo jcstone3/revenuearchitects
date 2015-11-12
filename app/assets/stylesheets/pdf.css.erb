@@ -512,5 +512,12 @@ svg {
 
 table tr, table tr td, table tr th, #results-section, .avoid-break {
   page-break-inside: avoid !important;
-  display: block !important;
+  position: relative;
+}
+
+@media print {
+  table tr, table tr td, table tr th, #results-section, .avoid-break {
+    page-break-inside:avoid;
+    position:relative;
+  }
 }
