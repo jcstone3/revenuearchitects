@@ -203,7 +203,7 @@ def self.get_overall_data(survey_id)
 
       @your_response = @response.select { |response| response.id == question.id.to_i }
 
-      @resp_array.push(question.id.to_s)
+      @resp_array.push(question.sequence.to_s)
       @your_array.push(@your_response.blank? ? 0 :  @your_response.first.answer_1.to_i)
       @avg_array.push(self.get_average_score_from_other_companies(question.id,survey_id))
 
@@ -229,7 +229,7 @@ def self.get_section_chart(section_id, survey_id, responses)
 
     @your_response = responses.select { |response| response.questions_id.to_i == question.id.to_i }
 
-    @resp_array.push(question.id.to_s)
+    @resp_array.push(question.sequence.to_s)
     @your_array.push(@your_response.blank? ? 0 :  @your_response.first.score.to_i)
     @avg_array.push(self.get_average_score_from_other_companies(question.id,survey_id))
 

@@ -5,11 +5,11 @@ class Question < ActiveRecord::Base
 
   acts_as_list
   #acts_as_ordered :order => 'position'
-  
+
   #Relationships
   belongs_to :sub_section
   has_one :response
-  
+
   #attr_accessible :name, :description, :position, :sequence, :is_active, :sub_section_id, :points
 
   #Validations
@@ -20,14 +20,14 @@ class Question < ActiveRecord::Base
   #Scopes
 
   validates :sequence, :numericality => {greater_than_or_equal_to: 1, :less_than_or_equal_to => 100 }
-  # default_scope :order => :sequence  
+  # default_scope :order => :sequence
 
   # Configurations
 	self.per_page = 10
 
   scope :find_section_questions, lambda{|section_id| {
-    :select=>"questions.id",
-    :joins=>"left outer join sub_sections on questions.sub_section_id = sub_sections.id 
+    :select=>"questions.id, questions.sequence",
+    :joins=>"left outer join sub_sections on questions.sub_section_id = sub_sections.id
              inner join sections on sections.id = sub_sections.section_id",
     :conditions=>"sections.id =#{section_id}",
     :order => "questions.id ASC"
@@ -36,7 +36,7 @@ class Question < ActiveRecord::Base
 
 scope :find_question_count, lambda{|section_id| {
     :select=>"count(*) as question_count",
-    :joins=>"right outer join sub_sections on questions.sub_section_id = sub_sections.id 
+    :joins=>"right outer join sub_sections on questions.sub_section_id = sub_sections.id
              inner join sections on sections.id = sub_sections.section_id",
     :conditions=>"sections.id =#{section_id} "
 }}
@@ -56,11 +56,11 @@ def self.fix_order_to_check
 end
 
 def self.last_secuence
-  (last.nil? )? 1 :  last.sequence.to_i + 1 
+  (last.nil? )? 1 :  last.sequence.to_i + 1
 end
 
 def self.id_by_sequence(sequence_id)
-  (find_by_sequence(sequence_id))? find_by_sequence(sequence_id).id : nil  
+  (find_by_sequence(sequence_id))? find_by_sequence(sequence_id).id : nil
 end
 
 def self.next_secuence(sequence_id)
@@ -93,4 +93,3 @@ end
 #  updated_at     :datetime        not null
 #  description    :string(255)
 #
-
