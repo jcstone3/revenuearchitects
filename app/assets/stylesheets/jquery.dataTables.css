@@ -122,13 +122,15 @@ table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
  * Filter
  */
 #question_table_filter {
-	position: absolute;
+	position: relative;
 	top: -40px;
+	float: right;
 }
 
 #user_table_filter{
-	position: absolute;
+	position: relative;
 	top: -45px;
+	float: right;
 }
 
 

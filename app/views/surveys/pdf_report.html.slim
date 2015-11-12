@@ -775,110 +775,71 @@
             |YOUR POINTS
       tbody
         - @must_do_responses.each do |response|
-          tr
-            td
-              .avoid-break = response.sub_sect_name
-            td
-              .avoid-break = response.name
-            td
-              .avoid-break = response.points
+          tr.avoid-break
+            td = response.sub_sect_name
+            td = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red
-                .avoid-break = response.answer_3.try(:titleize)
+              td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue
-                .avoid-break = response.answer_3.try(:titleize)
+              td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green
-                .avoid-break = response.answer_3.try(:titleize)
+              td.priority-green = response.answer_3.try(:titleize)
             - elsif(response.answer_3.blank?)
               - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2
-                  .avoid-break N/A
+                td.font-bold2 N/A
               - else
-                td.font-bold2
-                  .avoid-break = response.in_plan.humanize
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2
-                .avoid-break = response.answer_3.try(:titleize)
-            td
-              .avoid-break = response.answer_4.blank? ? 0 : response.answer_4
-            td
-              .avoid-break = response.score
-            td
-              .avoid-break = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td
-              .avoid-break = Survey.get_score_value(response.points, response.score)
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @should_do_responses.each do |response|
-          tr
-            td
-              .avoid-break = response.sub_sect_name
-            td
-              .avoid-break = response.name
-            td
-              .avoid-break = response.points
+          tr.avoid-break
+            td = response.sub_sect_name
+            td = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red
-                .avoid-break = response.answer_3.try(:titleize)
+              td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue
-                .avoid-break = response.answer_3.try(:titleize)
+              td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green
-                .avoid-break = response.answer_3.try(:titleize)
+              td.priority-green = response.answer_3.try(:titleize)
             - elsif(response.answer_3.blank?)
               - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2
-                  .avoid-break N/A
+                td.font-bold2 N/A
               - else
-                td.font-bold2
-                  .avoid-break = response.in_plan.humanize
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2
-                .avoid-break = response.answer_3.try(:titleize)
-            td
-              .avoid-break = response.answer_4.blank? ? 0 : response.answer_4
-            td
-              .avoid-break = response.score
-            td
-              .avoid-break = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td
-              .avoid-break = Survey.get_score_value(response.points, response.score)
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
         - @could_do_responses.each do |response|
-          tr
-            td
-              .avoid-break = response.sub_sect_name
-            td
-              .avoid-break = response.name
-            td
-              .avoid-break = response.points
+          tr.avoid-break
+            td = response.sub_sect_name
+            td = response.name
+            td = response.points
             - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red
-                .avoid-break = response.answer_3.try(:titleize)
+              td.priority-red = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue
-                .avoid-break = response.answer_3.try(:titleize)
+              td.priority-blue = response.answer_3.try(:titleize)
             - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green
-                .avoid-break = response.answer_3.try(:titleize)
+              td.priority-green = response.answer_3.try(:titleize)
             - elsif(response.answer_3.blank?)
               - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2
-                  .avoid-break N/A
+                td.font-bold2 N/A
               - else
-                td.font-bold2
-                  .avoid-break = response.in_plan.humanize
+                td.font-bold2 = response.in_plan.humanize
             - else
-              td.font-bold2
-                .avoid-break = response.answer_3.try(:titleize)
-            td
-              .avoid-break = response.answer_4.blank? ? 0 : response.answer_4
-            td
-              .avoid-break = response.score
-            td
-              .avoid-break = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td
-              .avoid-break = Survey.get_score_value(response.points, response.score)
+              td.font-bold2 = response.answer_3.try(:titleize)
+            td = response.answer_4.blank? ? 0 : response.answer_4
+            td = response.score
+            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
+            td = Survey.get_score_value(response.points, response.score)
 
 
 

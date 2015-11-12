@@ -510,18 +510,17 @@ svg {
   display: none;
 }
 
-table tr td .avoid-break, #results-section {
+#results-section {
   position: relative;
   page-break-inside: avoid !important;
   -webkit-region-break-inside: avoid;
+}
+
+thead, tr, td, th {
+  page-break-inside: avoid;
   page-break-before: always;
 }
 
-@media print {
-  table tr td .avoid-break, #results-section {
-    position: relative;
-    page-break-inside: avoid;
-    -webkit-region-break-inside: avoid;
-    page-break-before: always;
-  }
+thead {
+  display: table-header-group;
 }
