@@ -114,96 +114,36 @@
 
   #overall-table.content-table
     table.table.table-report.table-condesed
-      thead
-        tr
-          th.td-10
-            |CATEGORY
-          th.td-12
-            |DIMENSION
-          th.td-29
-            |PRACTICE
-          th.td-8
-            |POINTS
-          th.td-9
-            |PRIORITY
-          th.td-9
-            |IMPORTANCE
-          th.td-8.center
-            |YOUR SCORE
-          th.center.td-8
-            |AVG SCORE
-          th.td-8
-            |YOUR POINTS
+      = render partial: 'pdf_table_header_cat.html.slim'
       tbody
         - @all_responses_for_strategy.each do |response|
-          tr.avoid-break
-            td = response.section_name.try(:titleize)
-            td = response.sub_sect_name.try(:titleize)
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body_cat.html.slim", {response: response}
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right OVERALL
+
+  #overall-table.content-table
+    table.table.table-report.table-condesed
+      = render partial: 'pdf_table_header_cat.html.slim'
+      tbody
         - @all_responses_for_system.each do |response|
-          tr.avoid-break
-            td = response.section_name.try(:titleize)
-            td = response.sub_sect_name.try(:titleize)
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body_cat.html.slim", {response: response}
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right OVERALL
+
+  #overall-table.content-table
+    table.table.table-report.table-condesed
+      = render partial: 'pdf_table_header_cat.html.slim'
+      tbody
         - @all_responses_for_program.each do |response|
-          tr.avoid-break
-            td = response.section_name.try(:titleize)
-            td = response.sub_sect_name.try(:titleize)
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body_cat.html.slim", {response: response}
 
   #results-section.overall-chart-pdf
     #score-chart.total-score-content
@@ -226,47 +166,11 @@
 
   .content-table
     table.table.table-report.table-condesed
-      thead
-        tr
-          th.td-15
-            |DIMENSION
-          th.td-30
-            |PRACTICE
-          th.td-10
-            |POINTS
-          th.td-10
-            |PRIORITY
-          th.td-10
-            |IMPORTANCE
-          th.td-8.center
-            |YOUR SCORE
-          th.center.td-8
-            |AVG SCORE
-          th.td-10
-            |YOUR POINTS
+      = render partial: 'pdf_table_header.html.slim'
       tbody
         - @all_responses_for_strategy.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
   #results-section
     #score-chart.total-score-content
       p.title-super-1
@@ -287,47 +191,11 @@
       span.header-right SYSTEMS
   .content-table
     table.table.table-report.table-condesed
-      thead
-        tr
-          th.td-15
-            |DIMENSION
-          th.td-30
-            |PRACTICE
-          th.td-10
-            |POINTS
-          th.td-10
-            |PRIORITY
-          th.td-10
-            |IMPORTANCE
-          th.td-8.center
-            |YOUR SCORE
-          th.center.td-8
-            |AVG SCORE
-          th.td-10
-            |YOUR POINTS
+      = render partial: 'pdf_table_header.html.slim'
       tbody
         - @all_responses_for_system.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
   #results-section
     #score-chart.total-score-content
       p.title-super-1
@@ -347,47 +215,10 @@
       span.header-right PROGRAMS
   .content-table
     table.table.table-report.table-condesed
-      thead
-        tr
-          th.td-15
-            |DIMENSION
-          th.td-30
-            |PRACTICE
-          th.td-10
-            |POINTS
-          th.td-10
-            |PRIORITY
-          th.td-10
-            |IMPORTANCE
-          th.td-8.center
-            |YOUR SCORE
-          th.center.td-8
-            |AVG SCORE
-          th.td-10
-            |YOUR POINTS
+      = render partial: 'pdf_table_header.html.slim'
       tbody
         - @all_responses_for_program.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
   #results-section
     #score-chart.total-score-content
       p.title-super-1
@@ -407,113 +238,19 @@
       span.header-right STRATEGY PRIORITIES
   .content-table
     table.table.table-report.table-condesed
-      thead
-        tr
-          th.td-15
-            |DIMENSION
-          th.td-30
-            |PRACTICE
-          th.td-10
-            |POINTS
-          th.td-10
-            |PRIORITY
-          th.td-10
-            |IMPORTANCE
-          th.td-8.center
-            |YOUR SCORE
-          th.center.td-8
-            |AVG SCORE
-          th.td-10
-            |YOUR POINTS
+      = render partial: 'pdf_table_header.html.slim'
       tbody
         - @must_do_responses_strategy.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @should_do_responses_strategy.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @could_do_responses_strategy.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @not_applicable_responses_strategy.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
 
 
 .content.page-break
@@ -523,113 +260,19 @@
       span.header-right SYSTEMS PRIORITIES
   .content-table
     table.table.table-report.table-condesed
-      thead
-        tr
-          th.td-15
-            |DIMENSION
-          th.td-30
-            |PRACTICE
-          th.td-10
-            |POINTS
-          th.td-10
-            |PRIORITY
-          th.td-10
-            |IMPORTANCE
-          th.td-8.center
-            |YOUR SCORE
-          th.center.td-8
-            |AVG SCORE
-          th.td-10
-            |YOUR POINTS
+      = render partial: 'pdf_table_header.html.slim'
       tbody
         - @must_do_responses_system.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @should_do_responses_system.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @could_do_responses_system.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @not_applicable_responses_system.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
 
 
 .content.page-break
@@ -639,113 +282,19 @@
       span.header-right PROGRAMS PRIORITIES
   .content-table
     table.table.table-report.table-condesed
-      thead
-        tr
-          th.td-15
-            |DIMENSION
-          th.td-30
-            |PRACTICE
-          th.td-10
-            |POINTS
-          th.td-10
-            |PRIORITY
-          th.td-10
-            |IMPORTANCE
-          th.td-8.center
-            |YOUR SCORE
-          th.center.td-8
-            |AVG SCORE
-          th.td-10
-            |YOUR POINTS
+      = render partial: 'pdf_table_header.html.slim'
       tbody
         - @must_do_responses_program.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @should_do_responses_program.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @could_do_responses_program.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @not_applicable_responses_program.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
 
 
 .content.page-break
@@ -755,91 +304,16 @@
       span.header-right PLAN PRIORITIES SUMMARY
   .content-table
     table.table.table-report.table-condesed
-      thead
-        tr
-          th.td-15
-            |DIMENSION
-          th.td-30
-            |PRACTICE
-          th.td-10
-            |POINTS
-          th.td-10
-            |PRIORITY
-          th.td-10
-            |IMPORTANCE
-          th.td-8.center
-            |YOUR SCORE
-          th.center.td-8
-            |AVG SCORE
-          th.td-10
-            |YOUR POINTS
+      = render partial: 'pdf_table_header.html.slim'
       tbody
         - @must_do_responses.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @should_do_responses.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
+
         - @could_do_responses.each do |response|
-          tr.avoid-break
-            td = response.sub_sect_name
-            td = response.name
-            td = response.points
-            - if(response.answer_3.try(:titleize) == "Must Do")
-              td.priority-red = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Should Do")
-              td.priority-blue = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.try(:titleize) == "Could Do")
-              td.priority-green = response.answer_3.try(:titleize)
-            - elsif(response.answer_3.blank?)
-              - if ((response.in_plan.humanize) == "Not applicable")
-                td.font-bold2 N/A
-              - else
-                td.font-bold2 = response.in_plan.humanize
-            - else
-              td.font-bold2 = response.answer_3.try(:titleize)
-            td = response.answer_4.blank? ? 0 : response.answer_4
-            td = response.score
-            td = response.response_id.present? ? get_average_score(response.questions_id, response.survey_id) : 0
-            td = Survey.get_score_value(response.points, response.score)
+          = render "pdf_table_body.html.slim", {response: response}
 
 
 
