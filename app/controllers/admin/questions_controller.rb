@@ -33,7 +33,7 @@ class Admin::QuestionsController < ApplicationController
           if @section.first.update_attributes(:question_count => @section_question_count ,:total_points => @section_total_points)
           Question.fix_order_to_check
           flash[:success] = "Question Created successfully"
-          redirect_to admin_questions_url
+          redirect_to :action => 'index'
           else
            flash[:success] = "Question could not be created successfully"
            redirect_to :action => 'index'
@@ -70,7 +70,7 @@ class Admin::QuestionsController < ApplicationController
         end
       Question.fix_order_to_check
       flash[:success] = "Question Updated successfully"
-      redirect_to admin_questions_url
+      redirect_to :action => 'index'
     #format.html (redirect_to (@question))
     else
       @subsection = SubSection.find(:all, :order=>"id ASC")

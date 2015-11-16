@@ -41,14 +41,18 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find_by_id(params[:id])
     @user = current_user
-    
-    if @user.update_attributes(params[:user] && @company.update_attributes(params[:company]))
+
+    if @user.update_attributes!(params[:user]) && @company.update_attributes!(params[:company])
       # On comapany updation redirects to the update survey
-      if @user.is_permanent?
-        redirect_to edit_survey_path(id: session[:survey])
-      else
-        render :new
-      end
+    #  if @user.is_permanent?
+				if session[:survey]
+        	redirect_to edit_survey_path(id: session[:survey])
+				else
+					redirect_to new_survey_url
+				end
+    #  else
+    #    render :new
+    #  end
     else
       render :edit
     end

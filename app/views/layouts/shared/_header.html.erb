@@ -12,7 +12,9 @@
       </div>
       <div class="pull-right visible-desktop data-user-header">
         <i class="icon-home "></i>
-        <span><%= "#{current_user.name_for_show.upcase}"%></span>
+        <% if(current_user.name_for_show) %>
+          <span><%= "#{current_user.name_for_show.upcase}"%></span>
+        <% end %>
       </div>
       <div class="pull-right data-user-header">
         <i class="icon-user "></i>
