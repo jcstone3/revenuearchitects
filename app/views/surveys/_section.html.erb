@@ -40,9 +40,16 @@
                     </li>
                   <%end%>
                    <li class="next" id ="final_result">
-                          <%= link_to(reports_url) do %>
-                          <%= image_tag "icon_results.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;
-                            Report
+
+                          <% if (@section_questions[0].question_attempted +  @section_questions[1].question_attempted + @section_questions[2].question_attempted) == (@section_questions_total[0].question_total + @section_questions_total[1].question_total + @section_questions_total[2].question_total)%>
+                            <%= link_to(reports_url) do %>
+                            <%= image_tag "icon_results.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;
+                              Report
+                            <%end%>
+                          <%else%>
+                            <a title="Please complete all the practices to view the Report.", rel="tooltip">
+                              <%= image_tag "icon_results.png", :width=>"16px", :height=>"16px", :class=>"finalitem" %>&nbsp;
+                                Report
+                            </a>
                           <%end%>
                    </li>
-
