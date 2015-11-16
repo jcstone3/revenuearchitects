@@ -1,4 +1,4 @@
-    
+
 <% content_for :top_bar_content do  -%>
 <%= render "sections"%>
 <% end -%>
@@ -39,7 +39,11 @@
       </table>
       <div class="footerconfirm" >
         <%= link_to 'Go back', continue_survey_path ,:class=>"btn questionsattemted"%>
-        <%= f.submit  'Complete Diagnostic' ,:class=>"btn btn-primary questionsattemted" %>
+        <% if @final_score == @total_question_total %>
+          <%= f.submit  'Complete Diagnostic' ,:class=>"btn btn-primary questionsattemted" %>
+        <% else %>
+          <input type="button" class="btn btn-default questionsattemted" value="Complete Diagnostic" disabled="true">
+        <% end %>
       </div>
     <% end %>
     <script type="text/javascript">
