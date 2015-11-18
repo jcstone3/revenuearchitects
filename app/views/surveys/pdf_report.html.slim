@@ -111,7 +111,6 @@
     .title-header
       span.header-left = @survey.company_name.upcase
       span.header-right OVERALL
-
   #overall-table.content-table
     table.table.table-report.table-condesed
       = render partial: 'pdf_table_header_cat.html.slim'
@@ -124,7 +123,6 @@
     .title-header
       span.header-left = @survey.company_name.upcase
       span.header-right OVERALL
-
   #overall-table.content-table
     table.table.table-report.table-condesed
       = render partial: 'pdf_table_header_cat.html.slim'
@@ -137,7 +135,6 @@
     .title-header
       span.header-left = @survey.company_name.upcase
       span.header-right OVERALL
-
   #overall-table.content-table
     table.table.table-report.table-condesed
       = render partial: 'pdf_table_header_cat.html.slim'
@@ -145,6 +142,11 @@
         - @all_responses_for_program.each do |response|
           = render "pdf_table_body_cat.html.slim", {response: response}
 
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right OVERALL
   #results-section.overall-chart-pdf
     #score-chart.total-score-content
       p.title-super-1
@@ -163,7 +165,6 @@
     .title-header
       span.header-left = @survey.company_name.upcase
       span.header-right STRATEGY
-
   .content-table
     table.table.table-report.table-condesed
       = render partial: 'pdf_table_header.html.slim'
@@ -171,6 +172,11 @@
         - @all_responses_for_strategy.each do |response|
           = render "pdf_table_body.html.slim", {response: response}
 
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right STRATEGY
   #results-section
     #score-chart.total-score-content
       p.title-super-1
@@ -196,6 +202,11 @@
         - @all_responses_for_system.each do |response|
           = render "pdf_table_body.html.slim", {response: response}
 
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right SYSTEMS
   #results-section
     #score-chart.total-score-content
       p.title-super-1
@@ -219,6 +230,12 @@
       tbody
         - @all_responses_for_program.each do |response|
           = render "pdf_table_body.html.slim", {response: response}
+
+.content.page-break
+  .header
+    .title-header
+      span.header-left = @survey.company_name.upcase
+      span.header-right PROGRAMS
   #results-section
     #score-chart.total-score-content
       p.title-super-1
@@ -306,15 +323,34 @@
     table.table.table-report.table-condesed
       = render partial: 'pdf_table_header.html.slim'
       tbody
-        - @must_do_responses.each do |response|
+        - @add_to_plan_responses[0, 10].each do |response|
           = render "pdf_table_body.html.slim", {response: response}
 
-        - @should_do_responses.each do |response|
-          = render "pdf_table_body.html.slim", {response: response}
+- if @add_to_plan_responses[10]
+  .content.page-break
+    .header
+      .title-header
+        span.header-left = @survey.company_name.upcase
+        span.header-right PLAN PRIORITIES SUMMARY
+    .content-table
+      table.table.table-report.table-condesed
+        = render partial: 'pdf_table_header.html.slim'
+        tbody
+          - @add_to_plan_responses[10, 10].each do |response|
+            = render "pdf_table_body.html.slim", {response: response}
 
-        - @could_do_responses.each do |response|
-          = render "pdf_table_body.html.slim", {response: response}
-
+- if @add_to_plan_responses[20]
+  .content.page-break
+    .header
+      .title-header
+        span.header-left = @survey.company_name.upcase
+        span.header-right PLAN PRIORITIES SUMMARY
+    .content-table
+      table.table.table-report.table-condesed
+        = render partial: 'pdf_table_header.html.slim'
+        tbody
+          - @add_to_plan_responses[20, 10].each do |response|
+            = render "pdf_table_body.html.slim", {response: response}
 
 
 .content.page-break
