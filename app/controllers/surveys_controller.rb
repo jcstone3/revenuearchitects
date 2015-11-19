@@ -822,9 +822,6 @@ end
       current_survey = nil
     end
 
-    sub_section.map{|sub| sub.force_encoding('UTF-8')}
-    current_survey.map{|current| current.force_encoding('UTF-8')}
-
     respond_to do |format|
       format.json {render json: {current_survey: current_survey, question_id: sub_section.questions.first.id}}
     end
