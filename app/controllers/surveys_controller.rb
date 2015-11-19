@@ -184,6 +184,8 @@ end
 #Show the question and capture the reponse
 def question
   survey_id = params[:id]
+  puts 'survey_id: '*10
+  puts survey_id.inspect
   question_id = Question.id_by_sequence(params[:question_id])
   #question_id  =  Question.where(:id => question_id).pluck("position")[0]
 
@@ -817,11 +819,18 @@ end
 
   def sub_section
     sub_section = SubSection.find_by_name(params[:sub_section_name].strip)
+    puts 'sub_section: '*10
+    puts sub_section.inspect
     current_survey = session[:survey]
+    puts 'current_survey: '*10
+    puts current_survey.inspect
     if current_survey.is_active == false
+      puts 'if: '*10
       current_survey = nil
     end
 
+    puts 'current_survey2: '*10
+    puts current_survey.inspect
     respond_to do |format|
       format.json {render json: {current_survey: current_survey, question_id: sub_section.questions.first.id}}
     end
