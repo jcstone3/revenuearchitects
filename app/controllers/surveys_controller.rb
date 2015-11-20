@@ -183,7 +183,7 @@ end
 
 #Show the question and capture the reponse
 def question
-  survey_id = params[:id]
+  survey_id = 217
   puts 'survey_id: '*10
   puts survey_id.inspect
   question_id = Question.id_by_sequence(params[:question_id])
