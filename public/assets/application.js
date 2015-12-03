@@ -13132,9 +13132,12 @@ $(window).load(function() {
         $("#Search_All").val('');
       });
 
-      var hash = location.hash
-      $('a[href$="'+hash+'"]').trigger( "click" );
-      location.hash='';
+      if(location.href.indexOf("compare") > -1)
+      {
+        var hash = location.hash
+        $('a[href$="'+hash+'"]').trigger( "click" );
+        location.hash='';
+      }
   });
 });
 
