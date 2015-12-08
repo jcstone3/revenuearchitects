@@ -18,7 +18,7 @@ class SubSection < ActiveRecord::Base
     :select => "sub_sections.*",
     :joins => "inner join questions on questions.sub_section_id = sub_sections.id",
     :conditions=>"sub_sections.section_id =#{section_id}",
-    :order => "questions.iq ASC" )
+    :order => "questions.id ASC" )
   end
 
 end
