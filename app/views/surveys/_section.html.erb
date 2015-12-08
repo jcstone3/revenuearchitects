@@ -12,7 +12,7 @@
                   <%@all_sections.each_with_index do |section,i| %>
                     <li class="next dropdown" id="section_<%=section.id%>">
                       <%#= link_to() do %>
-                        <a id="drop" role="button" data-toggle="dropdown" href="menu1">
+                        <a id="drop" role="button" data-toggle="dropdown">
                           <%= image_tag "icon_cat.png" %>
                           <%= section.name.titleize %>
                         </a>

@@ -1,6 +1,6 @@
 class SubSection < ActiveRecord::Base
 
-    default_scope where(:deleted_at => nil)
+  default_scope where(:deleted_at => nil).order('sequence')
 
 	validates :name, :presence => {:message=> "Name can't be blank"}
 	validates :section_id, :presence => {:message=> "Select Section"}
@@ -10,7 +10,7 @@ class SubSection < ActiveRecord::Base
 	has_many :questions, :dependent => :destroy
 
   def self.last_secuence
-    (SubSection.last.nil? )? 1 :  SubSection.last.sequence.to_i + 1 
+    (SubSection.last.nil? )? 1 :  SubSection.last.sequence.to_i + 1
   end
 
 end
@@ -27,4 +27,3 @@ end
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
 #
-

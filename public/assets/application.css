@@ -6119,6 +6119,9 @@ p.question {
   font-size: 23px;
   width: 100%;
 }
+#drop {
+  cursor: pointer;
+}
 .adminpage {
   height: auto;
 }
