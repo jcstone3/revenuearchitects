@@ -184,8 +184,6 @@ end
 #Show the question and capture the reponse
 def question
   survey_id = params[:id]
-  puts 'survey_id: '*10
-  puts survey_id.inspect
   question_id = Question.id_by_sequence(params[:question_id])
   #question_id  =  Question.where(:id => question_id).pluck("position")[0]
 
@@ -207,7 +205,7 @@ def question
   # - Array for Pagination of Practices
   # - All Sections
   # - All Subsections
-  @question = get_question(question_id)
+  @question = get_question(params[:question_id])
 
   if @survey.blank?
     flash[:warning] = "Could not form the question. Please try again"
@@ -928,8 +926,8 @@ end
 
 #Get the current question from Session
 # If Current Question is not found, run the query
-def get_question(question_id)
-  question = Question.select("questions.id, questions.position, questions.name, questions.points, questions.description as description, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).where(:id => question_id).order("questions.sequence ASC")
+def get_question(id)
+  question = Question.select("questions.id, questions.position, questions.name, questions.points, questions.description as description, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).where(:sequence => id).order("questions.sequence ASC")
   if question.present?
     return question.first
   else
