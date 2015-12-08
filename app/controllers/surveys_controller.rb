@@ -248,7 +248,7 @@ def question
   end
 
   if params[:question_id].present?
-    @survey_question = Question.find_by_position(params[:question_id])
+    @survey_question = Question.find_by_sequence(params[:question_id])
     if @survey_question.present?
       @sub_section = SubSection.includes(:section).where(:id => @survey_question.sub_section_id).first
       @section = Section.select(:name).where(:id => @sub_section.section_id).first
@@ -927,7 +927,7 @@ end
 #Get the current question from Session
 # If Current Question is not found, run the query
 def get_question(id)
-  question = Question.select("questions.id, questions.position, questions.name, questions.points, questions.description as description, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).where(:sequence => id).order("questions.sequence ASC")
+  question = Question.select("questions.id, questions.position, questions.name, questions.sequence, questions.points, questions.description as description, sections.name as section_name, sub_sections.name as sub_section_name, sections.id as section_id, sections.total_points as total_points").joins(:sub_section => :section).where(:sequence => id).order("questions.sequence ASC")
   if question.present?
     return question.first
   else
