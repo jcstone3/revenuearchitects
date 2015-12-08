@@ -1,6 +1,6 @@
 class SubSection < ActiveRecord::Base
 
-  default_scope where(:deleted_at => nil).order('sequence')
+  default_scope where(:deleted_at => nil)
 
 	validates :name, :presence => {:message=> "Name can't be blank"}
 	validates :section_id, :presence => {:message=> "Select Section"}
@@ -18,7 +18,7 @@ class SubSection < ActiveRecord::Base
     :select => "sub_sections.*",
     :joins => "inner join questions on questions.sub_section_id = sub_sections.id",
     :conditions=>"sub_sections.section_id =#{section_id}",
-    :order => "questions.id ASC" )
+    :order => "questions.sequence ASC" )
   end
 
 end
