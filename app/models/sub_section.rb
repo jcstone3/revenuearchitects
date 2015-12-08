@@ -13,6 +13,14 @@ class SubSection < ActiveRecord::Base
     (SubSection.last.nil? )? 1 :  SubSection.last.sequence.to_i + 1
   end
 
+  def self.find_section_subsections(section_id)
+    SubSection.find(:all,
+    :select => "sub_sections.*",
+    :joins => "inner join questions on questions.sub_section_id = sub_sections.id",
+    :conditions=>"sub_sections.section_id =#{section_id}",
+    :order => "questions.sequence ASC" )
+  end
+
 end
 # == Schema Information
 #

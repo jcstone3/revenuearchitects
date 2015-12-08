@@ -18,7 +18,7 @@
                         </a>
                         <ul id="menu1" class="dropdown-menu" role="menu"
                            aria-labelledby="drop" >
-                          <% sorted_subsections = subsection_sorting(section.sub_sections, @survey.id ) %>
+                          <% sorted_subsections = subsection_sorting(SubSection.find_section_subsections(section.id), @survey.id ) %>
 
                           <% sorted_subsections.each_with_index do |sub_section,j| %>
                               <% subsection_done = check_subsection_all_ans(sub_section, @survey.id) %>
