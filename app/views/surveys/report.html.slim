@@ -9,7 +9,6 @@
               input#Search_All type="text"
               = link_to "EXPORT PDF", reports_url(:format => :pdf), target: "_blank", class: 'btn plane-btn'
               = link_to "DOWNLOAD CSV", import_csv_path(format: "csv"), class: 'btn plane-btn'
-              = link_to "DOWNLOAD EXCEL", import_excel_path(format: "xls"), class: 'btn plane-btn'
             = render partial: 'sections_nav2.html.slim'
 
   #all_report.container-fluid.not_margin.one-menu
