@@ -1,6 +1,6 @@
 class SurveysController < ApplicationController
 
-before_filter :authenticate_user!, :check_company #check current_user & company
+before_filter :authenticate_user!, :check_company, except: [:report] #check current_user & company
 require 'csv'
 include SurveysHelper
 
@@ -358,10 +358,10 @@ end
 #report of a particular survey
 def report
   survey_id = params[:id]
-  @user = current_user
 
   #scoping the survey
-  @survey = current_user.companies.first.surveys.find_by_id(survey_id)
+  @survey = Survey.find(survey_id)
+  @user = Company.find_by_user_id(@survey.company_id).user
   session[:survey] = @survey
 
   company = Company.find(@survey.company_id)
