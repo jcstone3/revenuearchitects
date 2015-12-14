@@ -127,8 +127,8 @@ table.dataTable2 tr.even td.sorting_3 { background-color: #80C2D6; }
 	float: right;
 }
 
-#user_table_filter, #report_add_to_planTable_filter, #report_must_doTable_filter, #report_should_doTable_filter, #report_could_doTable_filter{
-	position: relative;
+#user_table_filter, #report_add_to_planTable_filter, #report_must_doTable_filter, #report_should_doTable_filter, #report_could_doTable_filter, #report_StrategyTable_filter, #report_SystemTable_filter, #report_ProgramTable_filter{
+  right: 5px;
 	top: -45px;
 	float: right;
 }
