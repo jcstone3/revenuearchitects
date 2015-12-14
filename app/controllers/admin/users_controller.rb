@@ -74,6 +74,15 @@ class Admin::UsersController < ApplicationController
     #for could do responses
      @could_do_responses = @add_to_plan_responses.select{|response| response.answer_3 == 'could_do'}
 
+     @all_responses = Response.get_all_responses(@survey.id)
+     @all_responses_for_strategy = Response.get_response(@all_sections.first.id, @survey.id)
+     @all_responses_for_system = Response.get_response(@all_sections[1].id, @survey.id)
+     @all_responses_for_program = Response.get_response(@all_sections.last.id, @survey.id)
+
+     @score_per_section = Survey.calculate_score_for_section(@survey.id)
+     @total_score_per_section = Survey.calculate_score_for_section(@survey.id).sum()
+     @total_all_sections_points = Section.total_points
+
     #render :layout =>"report"
 
   end

@@ -1,8 +1,9 @@
  <div class="row-fluid">
   <div class="span12">
     <ul class="nav3-tabs3 usercompare">
-      <li class="active"><a href="#overall" data-toggle="tab">Add To Plan Summary</a></li>
-      <li ><a href="#priorities" data-toggle="tab">Priorities</a></li>
+      <li class="active"><a href="#overall" data-toggle="tab">All</a></li>
+      <li><a href="#plan" data-toggle="tab">Add To Plan Summary</a></li>
+      <li><a href="#priorities" data-toggle="tab">Priorities</a></li>
       <div class="pull-right action-btns">
         <%= link_to "EXPORT PDF", reports_url(params[:survey_id], :format => :pdf), target: "_blank", class: 'btn plane-btn' %>
         <%= link_to "DOWNLOAD CSV", import_csv_path(params[:survey_id],format: "csv"), class: 'btn plane-btn' %>
@@ -10,6 +11,111 @@
     </ul>
     <div class="tab-content tab_content_report dash" id="tab-content">
       <div class="tab-pane active" id="overall" style="height:auto;">
+        <div id="container-scores">
+          <table class="table-for-div">
+            <tbody>
+              <tr>
+                <td class="width-total">
+                  <div class="total-score-content">
+                    <p class="title-black title-total"> TOTAL POINTS</p>
+                    <p class="title-black sub1"> <%=@survey.company_name%> </p>
+                    <p class="title-super-1">
+                      <span class="score-total font-blue"> POINTS</span>
+                      <span>
+                        <%= '%.2f' % (@score_per_section[0] + @score_per_section[1] + @score_per_section[2])%>
+                        /
+                        <%= '%.2f' % @total_all_sections_points.to_f%>
+                      </span>
+                    </p>
+                    <span class="important-score"> <%= '%.2f' % (((@score_per_section[0].to_f + @score_per_section[1].to_f + @score_per_section[2].to_f)/ @total_all_sections_points.to_f)*100)%> </span>
+                    <span class="important-score"> %<span>
+                  </div>
+                </td>
+                <td class="width-50">
+                  <p class="margin-bottom-30">
+                    <p class="title-black sub2"> STRATEGY </p>
+                    <p class="title-black"> Define your competitive advantage. </p>
+                    <p class="title-super-2">
+                      <span class="font-blue title-black"> POINTS</span>
+                      <span>
+                        <%= @score_per_section[0]%>
+                        /
+                        <%= @all_sections[0].total_points.to_i%>
+                      </span>
+                    </p>
+                    <span class="title-black section-score"> <%= '%.2f' % ((@score_per_section[0].to_f / @all_sections[0].total_points.to_f) * 100)%> </span>
+                    <span class="title-black section-score"> %</span>
+                  </p>
+                </td>
+                <td class="width-50">
+                  <p class="margin-bottom-30">
+                    <p class="title-black sub2"> SYSTEMS </p>
+                    <p class="title-black"> Build an agile and durable platform. </p>
+                    <p class="title-super-2">
+                      <span class="font-blue title-black"> POINTS</span>
+                      <span>
+                        <%= @score_per_section[1]%>
+                        /
+                        <%= @all_sections[1].total_points.to_i%>
+                      </span>
+                    </p>
+                    <span class="title-black section-score"> <%= '%.2f' % ((@score_per_section[1].to_f / @all_sections[1].total_points.to_f) * 100)%> </span>
+                    <span class="title-black section-score"> %</span>
+                  </p>
+                </td>
+                <td class="width-50">
+                  <p class="margin-bottom-30">
+                    <p class="title-black sub2"> PROGRAMS </p>
+                    <p class="title-black"> Launch integrated campaigns. </p>
+                    <p class="title-super-2">
+                      <span class="font-blue title-black"> POINTS</span>
+                      <span>
+                        <%= @score_per_section[2]%>
+                        /
+                        <%= @all_sections[2].total_points.to_i%>
+                      </span>
+                    </p>
+                    <span class="title-black section-score"> <%= '%.2f' % ((@score_per_section[2].to_f / @all_sections[2].total_points.to_f) * 100)%> </span>
+                    <span class="title-black section-score"> %</span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tabHead">
+          <h1> STRATEGY </h1>
+        </div>
+        <table id="report_StrategyTable" class="report-body dataTable2" cellpadding="1" cellspacing="1">
+          <%= render partial: '/surveys/table_header_all.html.slim' %>
+          <% @all_responses_for_strategy.each_with_index do |response, index| %>
+            <% @index = index + 1 %>
+            <%= render "/surveys/response_report_all", {response: response} %>
+          <%end%>
+        </table>
+        <div class="tabHead">
+          <h1> SYSTEMS </h1>
+        </div>
+        <table id="report_SystemTable" class="report-body dataTable2" cellpadding="1" cellspacing="1">
+          <%= render partial: '/surveys/table_header_all.html.slim' %>
+          <% @all_responses_for_system.each_with_index do |response, index| %>
+            <% @index = index + 1 %>
+            <%= render "/surveys/response_report_all", {response: response} %>
+          <%end%>
+        </table>
+        <div class="tabHead">
+          <h1> PROGRAMS </h1>
+        </div>
+        <table id="report_ProgramTable" class="report-body dataTable2" cellpadding="1" cellspacing="1">
+          <%= render partial: '/surveys/table_header_all.html.slim' %>
+          <% @all_responses_for_program.each_with_index do |response, index| %>
+            <% @index = index + 1 %>
+            <%= render "/surveys/response_report_all", {response: response} %>
+          <%end%>
+        </table>
+      </div>
+
+      <div class="tab-pane" id="plan" style="height:auto;">
         <div class="tabHead">
           <h1>Add To Plan Summary</h1>
         </div>
